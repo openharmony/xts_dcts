@@ -15,12 +15,12 @@
 
 ## 简介<a name="section465982318513"></a>
 
-XTS子系统是OpenHarmony生态认证测试套件的集合，当前包括hats（hardware abstract test suite）HAL兼容性测试套件。
+XTS子系统是OpenHarmony生态认证测试套件的集合，当前包括dcts（distributed compatibility test suite）分布式兼容性测试套件。
 
-XTS子系统当前包括hats与tools软件包：
+XTS子系统当前包括dcts与tools软件包：
 
--   hats，存放hats相关测试用例源码与配置文件，其目的是帮助终端设备厂商尽早发现HAL层软件与OpenHarmony的不兼容性，确保软件在整个开发过程中满足OpenHarmony的兼容性要求。
--   tools，存放hats相关测试用例开发框架。
+-   dcts，存放dcts相关测试用例源码与配置文件，其目的是帮助终端设备厂商尽早发现在分布式场景下与OpenHarmony的不兼容性，确保软件在整个开发过程中满足OpenHarmony的兼容性要求。
+-   tools，存放dcts相关测试用例开发框架。
 
 ## 系统类型<a name="section125090457443"></a>
 
@@ -43,9 +43,10 @@ OpenHarmony支持如下几种系统类型：
 
 ```
 /test/xts
-├── hats                # 测试代码存放目录
+├── dcts                # 测试代码存放目录
 │   └── subsystem       # 标准系统子系统测试用例源码存放目录
 │   └── subsystem_lite  # 轻量系统、小型系统子系统测试用例源码存放目录
+│   └── common          # 测试用例依赖共享内存源码存放目录
 │   └── BUILD.gn        # 标准系统测试用例编译配置
 │   └── build_lite      # 轻量系统、小型系统测试用例编译配置存放目录
 │       └── BUILD.gn    # 轻量系统、小型系统测试用例编译配置
@@ -254,10 +255,10 @@ OpenHarmony支持如下几种系统类型：
 
 当前使用的测试框架是hctest，hctest测试框架支持使用C语言编写测试用例，是在开源测试框架unity的基础上进行增强和适配。
 
-1.  用例目录规范：测试用例存储到test/xts/hats仓中
+1.  用例目录规范：测试用例存储到test/xts/dcts仓中
 
     ```
-    ├── hats
+    ├── dcts
     │ └──subsystem_lite
     │ │ └── module_hal
     │ │ │ └── BUILD.gn
@@ -315,8 +316,8 @@ OpenHarmony支持如下几种系统类型：
 
     ```
     import("//test/xts/tools/lite/build/suite_lite.gni")
-    hctest_suite("HatsDemoTest") {
-        suite_name = "hats"
+    hctest_suite("DctsDemoTest") {
+        suite_name = "dcts"
         sources = [
             "src/test_demo.c",
         ]
@@ -325,17 +326,17 @@ OpenHarmony支持如下几种系统类型：
     }
     ```
 
-4.  hats下BUILD.gn增加编译选项。
+4.  dcts下BUILD.gn增加编译选项。
 
-    需要将测试模块加入到hats目录下的编译脚本中，编译脚本路径：test/xts/hats/build\_lite/BUILD.gn。
+    需要将测试模块加入到dcts目录下的编译脚本中，编译脚本路径：test/xts/dcts/build\_lite/BUILD.gn。
 
     ```
-    lite_component("hats") {  
+    lite_component("dcts") {  
         ...
         if(board_name == "liteos_m") {
             features += [    
                 ...
-                "//xts/hats/subsystem_lite/module_hal:HatsDemoTest"
+                "//xts/dcts/subsystem_lite/module_hal:DctsDemoTest"
             ]    
         }
     }
@@ -343,10 +344,10 @@ OpenHarmony支持如下几种系统类型：
 
 5.  测试套件编译命令。
 
-    随版本编译，debug版本编译时会同步编译hats测试套件
+    随版本编译，debug版本编译时会同步编译dcts测试套件
 
     >![](figures/icon-note.gif) **说明：** 
-    >hats测试套件编译中间件为静态库，最终链接到版本镜像中 。
+    >dcts测试套件编译中间件为静态库，最终链接到版本镜像中 。
 
 
 ### C语言用例执行指导（适用于轻量系统产品用例开发）<a name="section13820233175418"></a>
@@ -372,10 +373,10 @@ OpenHarmony支持如下几种系统类型：
 
 当前使用的测试框架是hcpptest，hcpptest测试框架是在开源的googletest测试框架的基础上进行的增强和适配。
 
-1.  规范用例目录：测试用例存储到test/xts/hats仓中。
+1.  规范用例目录：测试用例存储到test/xts/dcts仓中。
 
     ```
-    ├── hats
+    ├── dcts
     │ └──subsystem_lite
     │ │ └── module_posix
     │ │ │ └── BUILD.gn
@@ -440,8 +441,8 @@ OpenHarmony支持如下几种系统类型：
 
     ```
     import("//test/xts/tools/lite/build/suite_lite.gni")
-    hcpptest_suite("HatsDemoTest") {
-        suite_name = "hats"
+    hcpptest_suite("DctsDemoTest") {
+        suite_name = "dcts"
         sources = [
             "src/TestDemo.cpp"
         ]
@@ -458,17 +459,17 @@ OpenHarmony支持如下几种系统类型：
     
     ```
 
-4.  hats目录下增加编译选项（BUILD.gn）样例：
+4.  dcts目录下增加编译选项（BUILD.gn）样例：
 
-    将测试模块加入到hats目录下的编译脚本中，编译脚本为：test/xts/hats/build\_lite/BUILD.gn。
+    将测试模块加入到dcts目录下的编译脚本中，编译脚本为：test/xts/dcts/build\_lite/BUILD.gn。
 
     ```
-     lite_component("hats") {  
+     lite_component("dcts") {  
     ...
     else if(board_name == "liteos_a") {
             features += [
                 ...
-                "//xts/hats/subsystem_lite/module_posix:HatsDemoTest"
+                "//xts/dcts/subsystem_lite/module_posix:DctsDemoTest"
             ]
         }
     }
@@ -476,10 +477,10 @@ OpenHarmony支持如下几种系统类型：
 
 5.  测试套件编译命令。
 
-    随版本编译，debug版本编译时会同步编译hats测试套件
+    随版本编译，debug版本编译时会同步编译dcts测试套件
 
     >![](figures/icon-note.gif) **说明：** 
-    >小型系统hats独立编译成可执行文件（bin格式）， 在编译产物的suites\\hats目录下归档。
+    >小型系统dcts独立编译成可执行文件（bin格式）， 在编译产物的suites\\dcts目录下归档。
 
 
 ### C++语言用例执行指导（适用于小型系统、标准系统用例开发）<a name="section128222336544"></a>
@@ -506,21 +507,21 @@ OpenHarmony支持如下几种系统类型：
 
 **用例执行**
 
-测试套件执行 HatsDemoTest.bin 触发用例执行，基于串口打印日志进行分析。
+测试套件执行 DctsDemoTest.bin 触发用例执行，基于串口打印日志进行分析。
 
 ### 全量编译指导（适用于标准系统）<a name="section128222336544"></a>
 
-全量编译test/xts/hats目录下执行编译命令: ./build.sh suite=hats system_size=standard
+全量编译test/xts/dcts目录下执行编译命令: ./build.sh suite=dcts system_size=standard
 
-测试用例输出目录：out/release/suites/hats/testcases
+测试用例输出目录：out/release/suites/dcts/testcases
 
-测试框架&用例整体输出目录：out/release/suites/hats(编译用例时会同步编译测试套执行框架)
+测试框架&用例整体输出目录：out/release/suites/dcts(编译用例时会同步编译测试套执行框架)
 
 ### 全量用例执行指导（适用于小型系统、标准系统）<a name="section128222336544"></a>
 
 搭建测试环境 Windows工作台下安装python3.7及以上版本，确保工作台和测试设备正常连接。
 
-测试执行目录（对应编译生成的out/release/suites/hats目录）
+测试执行目录（对应编译生成的out/release/suites/dcts目录）
 
   ```
 ├── testcase                       # 测试套文件存放目录 
@@ -533,20 +534,20 @@ OpenHarmony支持如下几种系统类型：
   ```
 用例执行
 
-在Windows工作台上，找到从Linux服务器上拷贝下来的测试套件用例目录，在Windows命令窗口进入对应目录，直接执行hats\run.bat。
+在Windows工作台上，找到从Linux服务器上拷贝下来的测试套件用例目录，在Windows命令窗口进入对应目录，直接执行dcts\run.bat。
 
 界面启动后，输入用例执行指令。
 
-全量执行：run hats
+全量执行：run dcts
 
-模块执行(具体模块可以查看\hats\testcases)：run –l ActsSamgrTest
+模块执行(具体模块可以查看\dcts\testcases)：run –l DctsSamgrTest
 
-查看测试报告。 进入hats\reports\，获取当前的执行记录，打开“summary_report.html”可以获取到测试报告。
+查看测试报告。 进入dcts\reports\，获取当前的执行记录，打开“summary_report.html”可以获取到测试报告。
 
 
 ## 相关仓<a name="section1371113476307"></a>
 
-xts\_hats
+xts\_dcts
 
 xts\_tools
 

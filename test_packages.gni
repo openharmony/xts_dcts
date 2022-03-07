@@ -18,18 +18,18 @@ _all_test_packages = [ "${DCTS_ROOT}/distributeddatamgr:distributeddatatest",
                        ]
 
 _all_test_packages_ivi = [
-  # add hats for ivi here
-  # "${HATS_ROOT}/multimedia:multimedia_ivi",
+  # add dcts for ivi here
+  # "${DCTS_ROOT}/multimedia:multimedia_ivi",
 ]
 
 _all_test_packages_intellitv = [
-  # add hats for intellitv here
-  #"${HATS_ROOT}/multimedia:multimedia_intellitv",
+  # add dcts for intellitv here
+  #"${DCTS_ROOT}/multimedia:multimedia_intellitv",
 ]
 
 _all_test_packages_wearable = [
-  # add hats for wearable here
-  #"${HATS_ROOT}/multimedia:multimedia_wearable",
+  # add dcts for wearable here
+  #"${DCTS_ROOT}/multimedia:multimedia_wearable",
 ]
 
 selected_packages_wearable = []
@@ -77,5 +77,5 @@ if (build_xts == true && XTS_SUITENAME == "dcts") {
   selected_packages_intellitv += [ "testtools:deploy_testtools" ]
   selected_packages_wearable += [ "testtools:deploy_testtools" ]
 } else {
-  print("HATS build is not enabled")
+  print("DCTS build is not enabled")
 }

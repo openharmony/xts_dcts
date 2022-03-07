@@ -14,12 +14,12 @@
 
 ## Introduction<a name="section465982318513"></a>
 
-The X test suite \(XTS\) subsystem contains a set of OpenHarmony certification test suites, including the currently supported hardware abstract test suite \(HATS\).
+The X test suite \(XTS\) subsystem contains a set of OpenHarmony certification test suites, including the currently supported distributed compatibility test suite \(DCTS\).
 
-This subsystem contains the HATS and  **tools**  software package.
+This subsystem contains the DCTS and  **tools**  software package.
 
--   The  **hats**  directory stores the source code and configuration files of HATS test cases. The HATS helps device vendors detect the HAL software incompatibility as early as possible and ensures that the software is compatible to OpenHarmony during the entire development process.
--   The  **tools**  software package stores the test case development framework related to  **hats**.
+-   The  **dcts**  directory stores the source code and configuration files of DCTS test cases. The DCTS helps device vendors detect the distributed scenario incompatibility as early as possible and ensures that the software is compatible to OpenHarmony during the entire development process.
+-   The  **tools**  software package stores the test case development framework related to  **dcts**.
 
 ## System Types<a name="section125090457443"></a>
 
@@ -42,9 +42,10 @@ OpenHarmony supports the following system types:
 
 ```
 /test/xts
-├── hats                # Test code
+├── dcts                # Test code
 │   └── subsystem       # Source code of subsystem test cases for the standard system
 │   └── subsystem_lite  # Source code of subsystems test cases for mini and small systems
+│   └── common          # Source code of Test cases rely on shared memory for mini and small systems
 │   └── BUILD.gn        # Build configuration of test cases for the standard system
 │   └── build_lite      
 │       └── BUILD.gn    # Build configuration of test cases for mini and small systems
@@ -253,10 +254,10 @@ You should select the appropriate programming language and your target test fram
 
 The HCTest framework is used to support test cases developed with the C language. HCTest is enhanced and adapted based on the open-source test framework Unity.
 
-1.  Access the  **test/xts/hats**  repository where the test cases will be stored.
+1.  Access the  **test/xts/dcts**  repository where the test cases will be stored.
 
     ```
-    ├── hats
+    ├── dcts
     │ └──subsystem_lite
     │ │ └── module_hal
     │ │ │ └── BUILD.gn
@@ -314,8 +315,8 @@ The HCTest framework is used to support test cases developed with the C language
 
     ```
     import("//test/xts/tools/lite/build/suite_lite.gni")
-    hctest_suite("HatsDemoTest") {
-        suite_name = "hats"
+    hctest_suite("DctsDemoTest") {
+        suite_name = "dcts"
         sources = [
             "src/test_demo.c",
         ]
@@ -324,17 +325,17 @@ The HCTest framework is used to support test cases developed with the C language
     }
     ```
 
-4.  Add build options to the  **BUILD.gn**  file in the  **hats**  directory.
+4.  Add build options to the  **BUILD.gn**  file in the  **dcts**  directory.
 
-    You need to add the test module to the  **test/xts/hats/build\_lite/BUILD.gn**  script in the  **hats**  directory.
+    You need to add the test module to the  **test/xts/dcts/build\_lite/BUILD.gn**  script in the  **dcts**  directory.
 
     ```
-    lite_component("hats") {  
+    lite_component("dcts") {  
         ...
         if(board_name == "liteos_m") {
             features += [    
                 ...
-                "//xts/hats/subsystem_lite/module_hal:HatsDemoTest"
+                "//xts/dcts/subsystem_lite/module_hal:DctsDemoTest"
             ]    
         }
     }
@@ -342,10 +343,10 @@ The HCTest framework is used to support test cases developed with the C language
 
 5.  Run build commands.
 
-    Test suites are built along with version build. The HATS is built together with the debug version.
+    Test suites are built along with version build. The DCTS is built together with the debug version.
 
     >![](figures/icon-note.gif) **NOTE:** 
-    >The HATS build middleware is a static library, which will be linked to the image.
+    >The DCTS build middleware is a static library, which will be linked to the image.
 
 
 ### C-based Test Case Execution \(for the Mini System\)<a name="section13820233175418"></a>
@@ -371,10 +372,10 @@ The log for each test suite starts with  **Start to run test suite:**  and ends 
 
 The HCPPTest framework is enhanced and adapted based on the open-source framework Googletest.
 
-1.  Access the  **test/xts/hats**  repository where the test cases will be stored.
+1.  Access the  **test/xts/dcts**  repository where the test cases will be stored.
 
     ```
-    ├── hats
+    ├── dcts
     │ └──subsystem_lite
     │ │ └── module_posix
     │ │ │ └── BUILD.gn
@@ -439,8 +440,8 @@ The HCPPTest framework is enhanced and adapted based on the open-source framewor
 
     ```
     import("//test/xts/tools/lite/build/suite_lite.gni")
-    hcpptest_suite("HatsDemoTest") {
-        suite_name = "hats"
+    hcpptest_suite("DctsDemoTest") {
+        suite_name = "dcts"
         sources = [
             "src/TestDemo.cpp"
         ]
@@ -456,17 +457,17 @@ The HCPPTest framework is enhanced and adapted based on the open-source framewor
     }
     ```
 
-4.  Add build options to the  **BUILD.gn**  file in the  **hats**  directory.
+4.  Add build options to the  **BUILD.gn**  file in the  **dcts**  directory.
 
-    Add the test module to the  **test/xts/hats/build\_lite/BUILD.gn**  script in the  **hats**  directory.
+    Add the test module to the  **test/xts/dcts/build\_lite/BUILD.gn**  script in the  **dcts**  directory.
 
     ```
-     lite_component("hats") {  
+     lite_component("dcts") {  
     ...
     else if(board_name == "liteos_a") {
             features += [
                 ...
-                "//xts/hats/subsystem_lite/module_posix:HatsDemoTest"
+                "//xts/dcts/subsystem_lite/module_posix:DctsDemoTest"
             ]
         }
     }
@@ -474,10 +475,10 @@ The HCPPTest framework is enhanced and adapted based on the open-source framewor
 
 5.  Run build commands.
 
-    Test suites are built along with the version build. The HATS is built together with the debug version.
+    Test suites are built along with the version build. The DCTS is built together with the debug version.
 
     >![](figures/icon-note.gif) **NOTE:** 
-    >The HATS for the small system is independently built to an executable file \(.bin\) and archived in the  **suites\\hats**  directory of the build result.
+    >The DCTS for the small system is independently built to an executable file \(.bin\) and archived in the  **suites\\dcts**  directory of the build result.
 
 
 ### C++-based Test Case Execution \(for Standard and Small Systems\)<a name="section128222336544"></a>
@@ -504,4 +505,4 @@ Currently, test cases are shared by the NFS and mounted to the development board
 
 **Executing test cases**
 
-Execute  **HatsDemoTest.bin**  to trigger test case execution, and analyze serial port logs generated after the execution is complete.
+Execute  **DctsDemoTest.bin**  to trigger test case execution, and analyze serial port logs generated after the execution is complete.
