@@ -15,7 +15,7 @@ group("distributeddatatest") {
     testonly = true
     if (is_standard_system) {
         deps = [
-            "distributed_kv_store:disDataTest",
+            "distributed_kv_store:DctsdisDataTest",
             ":disDataProcess",
         ]
     }
@@ -57,12 +57,5 @@ shared_library("disDataProcess") {
                                         "//utils/native/base:utils",
                                         ]
 
-                                        # external_deps = [
-                                        #    "hiviewdfx_hilog_native:libhilog",
-                                        #        "ipc:ipc_core",
-                                        #            "permission_standard:libpermissionsdk_standard",
-                                        #             ]
-
-                                                    #        subsystem_name = "distributeddatamgr"
 }
 
