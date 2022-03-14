@@ -36,7 +36,7 @@ config("module_private_config") {
         ]
 }
 
-ohos_moduletest_suite("disDataTest") {
+ohos_moduletest_suite("DctsdisDataTest") {
     module_out_path = module_output_path
 
     sources = [
