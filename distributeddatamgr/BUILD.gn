@@ -12,57 +12,45 @@
 # limitations under the License.
 import("//build/ohos_var.gni")
 group("distributeddatatest") {
-    testonly = true
-    if (is_standard_system) {
-        deps = [
-            "distributed_kv_store:disDataTest",
-            ":disDataProcess",
-        ]
-    }
+  testonly = true
+  if (is_standard_system) {
+    deps = [
+      ":disDataProcess",
+      "distributed_kv_store:DctsdisDataTest",
+    ]
+  }
 }
 
 shared_library("disDataProcess") {
-    #module_out_path = module_output_path
-    #
-        sources = [
-                "./process_common/process_msg.cpp",
+  #module_out_path = module_output_path
+  #
+  sources = [ "./process_common/process_msg.cpp" ]
 
-                ]
+  visibility = [ ":*" ]
 
-        visibility = [ ":*" ]
+  include_dirs = [
+    "//foundation/distributeddatamgr/distributeddatamgr/frameworks/innerkitsimpl/distributeddatafwk/include",
+    "//foundation/distributeddatamgr/distributeddatamgr/frameworks/innerkitsimpl/distributeddatafwk/src",
+    "//foundation/distributeddatamgr/distributeddatamgr/interfaces/innerkits/app_distributeddata/include",
+    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/permission",
+    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/account",
+    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include",
+    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/broadcaster",
+    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/utils",
+    "//utils/native/base/include",
+    "//utils/system/safwk/native/ include",
+    "../include",
+    "../../../../interfaces/innerkits/distributeddata",
+    "//third_party/json/single_include",
+    "//base/powermgr/power_manager/interfaces/innerkits/native/include",
+    "../../common",
+    "../common",
+  ]
 
-        include_dirs = [
-            "//foundation/distributeddatamgr/distributeddatamgr/frameworks/innerkitsimpl/distributeddatafwk/include",
-            "//foundation/distributeddatamgr/distributeddatamgr/frameworks/innerkitsimpl/distributeddatafwk/src",
-            "//foundation/distributeddatamgr/distributeddatamgr/interfaces/innerkits/app_distributeddata/include",
-            "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/permission",
-            "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/account",
-            "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include",
-            "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/broadcaster",
-            "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/utils",
-            "//utils/native/base/include",
-            "//utils/system/safwk/native/ include",
-            "../include",
-            "../../../../interfaces/innerkits/distributeddata",
-            "//third_party/json/single_include",
-            "//base/powermgr/power_manager/interfaces/innerkits/native/include",
-            "../../common",
-            "../common",
-        ]
-   
-                        deps = [
-                            "//foundation/distributeddatamgr/distributeddatamgr/interfaces/innerkits/distributeddata:distributeddata_inner",
-                                "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter:distributeddata_adapter",
-                                    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/libs/distributeddb:distributeddb",
-                                        "//utils/native/base:utils",
-                                        ]
-
-                                        # external_deps = [
-                                        #    "hiviewdfx_hilog_native:libhilog",
-                                        #        "ipc:ipc_core",
-                                        #            "permission_standard:libpermissionsdk_standard",
-                                        #             ]
-
-                                                    #        subsystem_name = "distributeddatamgr"
+  deps = [
+    "//foundation/distributeddatamgr/distributeddatamgr/interfaces/innerkits/distributeddata:distributeddata_inner",
+    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter:distributeddata_adapter",
+    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/libs/distributeddb:distributeddb",
+    "//utils/native/base:utils",
+  ]
 }
-
