@@ -48,10 +48,6 @@ do                                                 \
     char strTime[10];                              \
     strftime(strTime, sizeof(strTime), "%H:%M:%S", &tmRst);              \
     fprintf(stdout, "[shm-utils] %s " format "\n",strTime, ##__VA_ARGS__);   \
-    FILE* fp;   \
-    fp = fopen("/data/disTestSuiteLog" , "a+"); \
-    fprintf(fp, "[shm-utils] %s " format "\n",strTime, ##__VA_ARGS__);   \
-    fclose(fp); \
 } while(0)
 
 int createShm(int key);
