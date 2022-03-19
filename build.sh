@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2021 Huawei Device Co., Ltd.
+# Copyright (C) 2022 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -23,10 +23,10 @@ usage()
     echo "                  target_platform  : TARGET_PLATFORM  the target platform, such as phone or ivi; Default to phone"
     echo "                  suite            : BUILD_TARGET       cts/hit/vts and so on, default value is hit"
     echo "                  target_arch      : TARGET_ARCH      arm64 or arm32, default value is arm64"
-    echo "                  variant          : BUILD_VARIANT    release or debug, default value is debug"
+    echo "                  variant          : BUILD_VARIANT    release or debug. The default value is debug."
     echo "                  target_subsystem : TARGET_SUBSYSTEM the target subsystem to build"
-    echo "                  system_size      : SYSTEM_SIZE      standard, large and son on, large is for L3-L5, standard is for L2 default value is large"
-    echo "                  product_name     : PRODUCT_NAME     the name of product. such as hikey960, Hi3516DV300, and so on."
+    echo "                  system_size      : SYSTEM_SIZE      standard, large, and son on. Wherein,large is for L3-L5, and standard is for L2. The default value is large."
+    echo "                  product_name     : PRODUCT_NAME     product name,for example,hikey960,Hi3516DV300,and so on."
     echo
     exit 1
 }
