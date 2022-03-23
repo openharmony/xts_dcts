@@ -25,8 +25,14 @@
 #include "softbus_errcode.h"
 #include "softbus_utils.h"
 
+#include <errno.h>
 #include <pthread.h>
 #include <securec.h>
+#include <stdarg.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/time.h>
 #include <unistd.h>
 
@@ -79,7 +85,13 @@ extern "C" {
 #define WAIT_SUCCESS_VALUE 1
 #define WAIT_FAIL_VALUE 0
 #define SESSION_ID_MIN 1
+#define GROUP_ID_LEN 4
 #define MAX_SESSION_NUM 16
+#define ONE_SECOND 1
+#define TWO_SECOND 2
+#define THEER_SECOND 3
+#define FIVE_SECOND 5
+#define TEN_SECOND 10
 #define BOOL_TRUE 1
 #define BOOL_FALSE 0
 #define OPEN_SESSION_TIMEOUT 19
@@ -117,228 +129,161 @@ extern "C" {
 const char* const def_ssid = "OpenHarmony_Private_Net_01";
 const char* const slave_ssid = "OpenHarmony_Private_Net_02";
 const char* const def_passwd = "OH2022@xa";
-const int GROUP_ID_LEN = 4;
-const int ONE_SECOND = 1;
-const int TWO_SECOND = 2;
-const int THEER_SECOND = 3;
-const int FIVE_SECOND = 5;
-const int TEN_SECOND = 10;
 
 typedef enum {
-  SESSION_4DATA = 1,
-  SESSION_4CTL,
+    SESSION_4DATA = 1,
+    SESSION_4CTL,
 } WaitSessionType;
 
 typedef enum {
-  DATA_TYPE_MSG = 1,
-  DATA_TYPE_BYTE,
+    DATA_TYPE_MSG = 1,
+    DATA_TYPE_BYTE,
 } DataType;
 
 typedef enum {
-  STATE_ONLINE = 1,
-  STATE_OFFLINE,
+    STATE_ONLINE = 1,
+    STATE_OFFLINE,
 } WaitNodeStateType;
 
 typedef enum {
-  CONC_CLOSE_SESSION = 1,
-  CONC_LEAVE_NET,
-  CONC_DIS_NET_RECOVERY,
-  CONC_DIS_NET_NOT_RECOVERY,
-  CONC_DOWN_NET,
-  CONC_SEND_DATA_ONLY,
-  CONC_CLOSE_SESSION_REMOTE,
+    CONC_CLOSE_SESSION = 1,
+    CONC_LEAVE_NET,
+    CONC_DIS_NET_RECOVERY,
+    CONC_DIS_NET_NOT_RECOVERY,
+    CONC_DOWN_NET,
+    CONC_SEND_DATA_ONLY,
+    CONC_CLOSE_SESSION_REMOTE,
 } ConcurrentType;
 
 typedef enum {
-  CTRL_CODE_CLOSE_WIFI_TEN_SEC = 1,
-  CTRL_CODE_CLOSE_WIFI_TEN_MIN,
-  CTRL_CODE_CLOSE_WIFI_FIVE_MIN,
-  CTRL_CODE_CLOSE_WIFI_THREE_SEC,
-  CTRL_CODE_CHANGE_WIFI_TEN_SEC,
-  CTRL_CODE_CHANGE_WIFI_SIXTY_SEC,
-  CTRL_CODE_CHANGE_WIFI_LOOP20,
-  CTRL_CODE_CLOSE_WIFI_LOOP20,
-  CTRL_CODE_CHANGE_WIFI_LOOP100,
-  CTRL_CODE_CLOSE_WIFI_LOOP100,
-  CTRL_CODE_OPEN_SESSION,
-  CTRL_CODE_OPEN_SESSION_MSG,
-  CTRL_CODE_OPEN_SESSION_FAIL,
-  CTRL_CODE_OPEN_SESSION_NOT_EXIST,
-  CTRL_CODE_CLOSE_SESSION,
-  CTRL_CODE_CLOSE_BR,
-  CTRL_CODE_CLOSE_OPEN_BR,
-  CTRL_CODE_CLOSE_AIR,
-  CTRL_CODE_CLOSE_OPEN_AIR,
-  CTRL_CODE_SEND_BIG_DATA,
+    CTRL_CODE_CLOSE_WIFI_TEN_SEC = 1,
+    CTRL_CODE_CLOSE_WIFI_TEN_MIN,
+    CTRL_CODE_CLOSE_WIFI_FIVE_MIN,
+    CTRL_CODE_CLOSE_WIFI_THREE_SEC,
+    CTRL_CODE_CHANGE_WIFI_TEN_SEC,
+    CTRL_CODE_CHANGE_WIFI_SIXTY_SEC,
+    CTRL_CODE_CHANGE_WIFI_LOOP20,
+    CTRL_CODE_CLOSE_WIFI_LOOP20,
+    CTRL_CODE_CHANGE_WIFI_LOOP100,
+    CTRL_CODE_CLOSE_WIFI_LOOP100,
+    CTRL_CODE_OPEN_SESSION,
+    CTRL_CODE_OPEN_SESSION_MSG,
+    CTRL_CODE_OPEN_SESSION_FAIL,
+    CTRL_CODE_OPEN_SESSION_NOT_EXIST,
+    CTRL_CODE_CLOSE_SESSION,
+    CTRL_CODE_CLOSE_BR,
+    CTRL_CODE_CLOSE_OPEN_BR,
+    CTRL_CODE_CLOSE_AIR,
+    CTRL_CODE_CLOSE_OPEN_AIR,
+    CTRL_CODE_SEND_BIG_DATA,
 } CtrlCodeType;
 
-#define LOG(format, ...)                                                       \
-  do {                                                                         \
-    time_t timeSec;                                                            \
-    time(&timeSec);                                                            \
-    struct tm tmRst;                                                           \
-    localtime_r(&timeSec, &tmRst);                                             \
-    char strTime[10];                                                          \
-    strftime(strTime, sizeof(strTime), "%H:%M:%S", &tmRst);                    \
-    fprintf(stdout, "[Test-softbus] %s " format "\n", strTime, ##__VA_ARGS__); \
-  } while (0)
+#define LOG(format, ...)                                           \
+    do {                                                           \
+        time_t timeSec;                                            \
+        time(&timeSec);                                            \
+        struct tm tmRst;                                           \
+        localtime_r(&timeSec, &tmRst);                             \
+        char strTime[10];                                          \
+        strftime(strTime, sizeof(strTime), "%H:%M:%S", &tmRst);    \
+        fprintf(stdout, "[Test-softbus] %s " format "\n", strTime, \
+                ##__VA_ARGS__);                                    \
+    } while (0)
 
 int Wait(int timeout);
-
 int Wait4Session(int timeout, WaitSessionType type);
-
 int WaitNodeCount(int timeout, WaitNodeStateType state, int expectCount);
 
 void TestSetUp(void);
-
 void TestTearDown(void);
 
 int StartDiscoveryDevice(void);
 
 int JoinNetwork(void);
-
 int LeaveNetWork(void);
-
 int RegisterDeviceStateDefCallback(void);
-
 int UnRegisterDeviceStateDefCallback(void);
-
 int DiscoverAndJoinNetwork(void);
-
 int CheckRemoteDeviceIsNull(int isSetNetId);
-
 int GetRemoteDeviceNetId(char** netId);
-
 int SetCurrentNetworkId(int index);
-
 int SetRemoteDeviceNetIdToGarray(void);
 
 uint64_t GetCurrentTimeOfMs(void);
 
 void ResetWaitFlag(void);
-
 void ResetWaitFlag4Data(void);
-
 void ResetWaitFlag4Ctl(void);
-
 void ResetWaitCount4Offline(void);
-
 void ResetWaitCount4Online(void);
 
 int SendData4Data(DataType type, int size);
-
 int SendCtrlMsgToRemote(CtrlCodeType code);
 
 int CreateSsAndOpenSession4Data(void);
-
 int CreateSsAndOpenSession4Ctl(void);
-
 int OpenSession4Ctl(void);
-
 int OpenSession4Data(void);
-
 int OpenSessionBatch4Data(char groupId[][GROUP_ID_LEN],
                           int* sessionId,
                           int count);
-
 int OpenSessionBatch4Ctl(char groupId[][GROUP_ID_LEN],
                          int* sessionId,
                          int count);
-
 int CloseSessionBatch4Data(int* sessionId, int count);
-
 int CloseSessionBatch4Ctl(int* sessionId, int count);
-
 void* OpenSessionTask4Data(void* param);
-
 void* OpenSessionTask4Ctl(void* param);
 
 int OpenSession4Perf(void);
-
 int OpenSession4PerfWithParam(const char* sessionName,
                               const char* groupId,
                               char* netId);
-
 int SendData4Perf(int sessionId, char* dataMsg, char* dataByte);
-
 void SetTransStartTime(void);
 
 void* SendDataTask1(void* param);
-
 void* SendDataTask2(void* param);
-
 void* SendDataTask3(void* param);
 
 char* GetSoftbusPid(void);
-
 char* GetNetworkId(void);
-
 int GetCurrentSessionId4Data(void);
-
 int GetCurrentSessionId4Ctl(void);
-
 void SetCurrentSessionId4Data(int sessionId);
-
 void SetCurrentSessionId4Ctl(int sessionId);
-
 ISessionListener* GetSessionListenser4Data(void);
-
 ISessionListener* GetSessionListenser4Ctl(void);
-
 ISessionListener* GetSessionListenser4Pass(void);
-
 ISessionListener* GetSessionListenser4Perf(void);
-
 ISessionListener* GetSessionListenser4Proxy(void);
-
 SessionAttribute* GetSessionAttr4Pass(void);
-
 SessionAttribute* GetSessionAttr4Ctl(void);
-
 SessionAttribute* GetSessionAttr4Data(void);
-
 SessionAttribute* GetSessionAttr4Perf(void);
-
 SessionAttribute* GetSessionAttr4Proxy(void);
-
 IFileReceiveListener* GetRecvFileListener(void);
-
 IFileSendListener* GetSendFileListener(void);
 
 pthread_barrier_t* GetThreadBarrier(void);
-
 int GetThreadResult4Data(void);
-
 int GetThreadResult4Ctl(void);
-
 int* GetSid4Task2(void);
-
 int* GetSid4Task3(void);
-
 void ResetMsgStat4Control(void);
-
 void ResetByteStat4Control(void);
-
 ConnectionAddr* GetConnectAddr(void);
 
 void ResetClosedSessionCount4Data(void);
-
 void ResetClosedSessionCount4Ctrl(void);
-
 int GetClosedSessionCount4Data(void);
-
 int GetClosedSessionCount4Ctrl(void);
-
 void ResetOpenSessionCount4Data(void);
-
 void ResetOpenSessionCount4Ctrl(void);
-
 int GetOpenSessionCount4Data(void);
-
 int GetOpenSessionCount4Ctrl(void);
 
 int CloseSessionAndRemoveSs4Data(void);
-
 int CloseSessionAndRemoveSs4Ctl(void);
 
 #ifdef __cplusplus
