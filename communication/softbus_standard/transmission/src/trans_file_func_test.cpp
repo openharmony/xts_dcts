@@ -15,7 +15,7 @@
 
 #include <gtest/gtest.h>
 #include "net_trans_common.h"
-#include "softbus_test_permission.h"
+#include "SoftBus_Test_Permission.h"
 #include "wifi_utils.h"
 
 static int g_waitFlag = WAIT_DEF_VALUE;

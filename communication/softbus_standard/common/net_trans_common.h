@@ -25,14 +25,8 @@
 #include "softbus_errcode.h"
 #include "softbus_utils.h"
 
-#include <errno.h>
 #include <pthread.h>
 #include <securec.h>
-#include <stdarg.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <sys/time.h>
 #include <unistd.h>
 
@@ -87,11 +81,6 @@ extern "C" {
 #define SESSION_ID_MIN 1
 #define GROUP_ID_LEN 4
 #define MAX_SESSION_NUM 16
-#define ONE_SECOND 1
-#define TWO_SECOND 2
-#define THEER_SECOND 3
-#define FIVE_SECOND 5
-#define TEN_SECOND 10
 #define BOOL_TRUE 1
 #define BOOL_FALSE 0
 #define OPEN_SESSION_TIMEOUT 19
@@ -129,6 +118,11 @@ extern "C" {
 const char* const def_ssid = "OpenHarmony_Private_Net_01";
 const char* const slave_ssid = "OpenHarmony_Private_Net_02";
 const char* const def_passwd = "OH2022@xa";
+const int ONE_SECOND = 1;
+const int TWO_SECOND = 2;
+const int THEER_SECOND = 3;
+const int FIVE_SECOND = 5;
+const int TEN_SECOND = 10;
 
 typedef enum {
     SESSION_4DATA = 1,

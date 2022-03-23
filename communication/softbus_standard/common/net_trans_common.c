@@ -403,8 +403,10 @@ static void OnJoinNetCallBack(ConnectionAddr* addr,
             return;
     }
 
-    (void)strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, networkId,
-                    NETWORK_ID_BUF_LEN);
+    if(strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, networkId,
+                    NETWORK_ID_BUF_LEN) != SOFTBUS_OK) {
+                        return;
+                    }
     g_waitFlag = WAIT_SUCCESS_VALUE;
 }
 
@@ -493,7 +495,7 @@ static void DataBytesReceived(int sessionId,
 
 static void DataMessageReceived(int sessionId,
                                 const void* data,
-                                unsigned int dataLen) 
+                                unsigned int dataLen)
 {
     LOG("[cb][data]MessageRec start");
     CheckReceiveData(sessionId, data, dataLen);
@@ -1557,10 +1559,9 @@ int SetCurrentNetworkId(int index)
         LOG("input index is error");
         return SOFTBUS_ERR;
     }
-    int ret = strncpy_s(g_networkId, NETWORK_ID_BUF_LEN,
-                        g_networkIdArray[index], NETWORK_ID_BUF_LEN);
-    if (ret != SOFTBUS_OK) {
-        LOG("set netId fail(str copy), ret:%d", ret);
+    if(strncpy_s(g_networkId, NETWORK_ID_BUF_LEN,
+                        g_networkIdArray[index], NETWORK_ID_BUF_LEN) != SOFTBUS_OK) {
+        LOG("set netId fail(str copy)");
         return SOFTBUS_ERR;
     }
     return SOFTBUS_OK;

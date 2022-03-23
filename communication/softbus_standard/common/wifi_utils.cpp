@@ -20,7 +20,7 @@ using std::unique_ptr;
 using namespace OHOS::Wifi;
 
 const static int WIFI_SA_ID = 1125;
-unique_ptr<WifiDevice> wifiDevicePtr = WifiDevice::GetInstance(WIFI_SA_ID);
+static unique_ptr<WifiDevice> wifiDevicePtr = WifiDevice::GetInstance(WIFI_SA_ID);
 
 int WiFiUtils::EnableWifi()
 {
@@ -110,8 +110,7 @@ int WiFiUtils::DisableWifi()
 
 int WiFiUtils::DisableThenEnable(int delaySeconds)
 {
-    int ret;
-    ret = DisableWifi();
+    int ret = DisableWifi();
     if (ret != SOFTBUS_OK) {
         LOG("[wifi]DisableWifi fail");
         return ret;
@@ -274,8 +273,7 @@ int WiFiUtils::DisableThenEnableAndConnect(int delaySeconds,
                                            const std::string& ssid,
                                            const std::string& passwd)
 {
-    int ret;
-    ret = DisableWifi();
+    int ret = DisableWifi();
     if (ret != SOFTBUS_OK) {
         LOG("[wifi]DisableWifi fail");
         return ret;

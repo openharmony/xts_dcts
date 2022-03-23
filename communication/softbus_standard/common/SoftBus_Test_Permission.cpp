@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-#include "softbus_test_permission.h"
+#include "SoftBus_Test_Permission.h"
 #include "permission/permission.h"
 #include "permission/permission_kit.h"
 

@@ -18,7 +18,7 @@ ohos_moduletest_suite("SoftBusTransFunTest") {
   module_out_path = module_output_path
   sources = [
     "../common/net_trans_common.c",
-    "../common/softbus_test_permission.cpp",
+    "../common/SoftBus_Test_Permission.cpp",
     "../common/wifi_utils.cpp",
     "src/trans_func_test.cpp",
   ]
@@ -53,7 +53,7 @@ ohos_moduletest_suite("SoftBusTransSessionFunTest") {
   module_out_path = module_output_path
   sources = [
     "../common/net_trans_common.c",
-    "../common/softbus_test_permission.cpp",
+    "../common/SoftBus_Test_Permission.cpp",
     "../common/wifi_utils.cpp",
     "src/trans_session_func_test.cpp",
   ]
@@ -89,7 +89,7 @@ ohos_moduletest_suite("SoftBusTransFileFunTest") {
   module_out_path = module_output_path
   sources = [
     "../common/net_trans_common.c",
-    "../common/softbus_test_permission.cpp",
+    "../common/SoftBus_Test_Permission.cpp",
     "../common/wifi_utils.cpp",
     "src/trans_file_func_test.cpp",
   ]

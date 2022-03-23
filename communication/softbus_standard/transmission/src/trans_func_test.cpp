@@ -15,7 +15,7 @@
 
 #include <gtest/gtest.h>
 #include "net_trans_common.h"
-#include "softbus_test_permission.h"
+#include "SoftBus_Test_Permission.h"
 #include "wifi_utils.h"
 
 using namespace testing::ext;
@@ -51,7 +51,7 @@ void TransFuncTest::SetUpTestCase()
     LOG("SetUp end");
 }
 
-void TransFuncTest::TearDownTestCase() 
+void TransFuncTest::TearDownTestCase()
 {
     int ret = UnRegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
