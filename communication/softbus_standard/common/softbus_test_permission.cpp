@@ -31,49 +31,49 @@ const static std::string TEST_DESCRIPTION = "test description";
 const static int TEST_LABEL_ID = 9527;
 const static int TEST_DESCRIPTION_ID = 9528;
 
-void SoftBus_Test_Permission::AddPermission(const string &pkgName)
+void SoftBus_Test_Permission::AddPermission(const string& pkgName) 
 {
-    std::vector<PermissionDef> permDefList;
-    PermissionDef permissionDefAlpha = {.permissionName = SYSTEM_APP_PERMISSION,
-                                        .bundleName = pkgName,
-                                        .grantMode = GrantMode::SYSTEM_GRANT,
-                                        .availableScope = AVAILABLE_SCOPE_ALL,
-                                        .label = TEST_LABEL,
-                                        .labelId = TEST_LABEL_ID,
-                                        .description = TEST_DESCRIPTION,
-                                        .descriptionId = TEST_DESCRIPTION_ID};
-    PermissionDef permissionDefBeta = {.permissionName = DANGER_APP_PERMISSION,
-                                       .bundleName = pkgName,
-                                       .grantMode = GrantMode::SYSTEM_GRANT,
-                                       .availableScope = AVAILABLE_SCOPE_ALL,
-                                       .label = TEST_LABEL,
-                                       .labelId = TEST_LABEL_ID,
-                                       .description = TEST_DESCRIPTION,
-                                       .descriptionId = TEST_DESCRIPTION_ID};
-    PermissionDef permissionDefGamma = {.permissionName = BIND_DISCOVER_SERVICE,
-                                        .bundleName = pkgName,
-                                        .grantMode = GrantMode::SYSTEM_GRANT,
-                                        .availableScope = AVAILABLE_SCOPE_ALL,
-                                        .label = TEST_LABEL,
-                                        .labelId = TEST_LABEL_ID,
-                                        .description = TEST_DESCRIPTION,
-                                        .descriptionId = TEST_DESCRIPTION_ID};
-    permDefList.emplace_back(permissionDefAlpha);
-    permDefList.emplace_back(permissionDefBeta);
-    permDefList.emplace_back(permissionDefGamma);
-    PermissionKit::AddDefPermissions(permDefList);
-    std::vector<std::string> permList;
-    permList.push_back(SYSTEM_APP_PERMISSION);
-    permList.push_back(DANGER_APP_PERMISSION);
-    permList.push_back(BIND_DISCOVER_SERVICE);
-    PermissionKit::AddSystemGrantedReqPermissions(pkgName, permList);
-    PermissionKit::GrantSystemGrantedPermission(pkgName, SYSTEM_APP_PERMISSION);
-    PermissionKit::GrantSystemGrantedPermission(pkgName, DANGER_APP_PERMISSION);
-    PermissionKit::GrantSystemGrantedPermission(pkgName, BIND_DISCOVER_SERVICE);
+  std::vector<PermissionDef> permDefList;
+  PermissionDef permissionDefAlpha = {.permissionName = SYSTEM_APP_PERMISSION,
+                                      .bundleName = pkgName,
+                                      .grantMode = GrantMode::SYSTEM_GRANT,
+                                      .availableScope = AVAILABLE_SCOPE_ALL,
+                                      .label = TEST_LABEL,
+                                      .labelId = TEST_LABEL_ID,
+                                      .description = TEST_DESCRIPTION,
+                                      .descriptionId = TEST_DESCRIPTION_ID};
+  PermissionDef permissionDefBeta = {.permissionName = DANGER_APP_PERMISSION,
+                                     .bundleName = pkgName,
+                                     .grantMode = GrantMode::SYSTEM_GRANT,
+                                     .availableScope = AVAILABLE_SCOPE_ALL,
+                                     .label = TEST_LABEL,
+                                     .labelId = TEST_LABEL_ID,
+                                     .description = TEST_DESCRIPTION,
+                                     .descriptionId = TEST_DESCRIPTION_ID};
+  PermissionDef permissionDefGamma = {.permissionName = BIND_DISCOVER_SERVICE,
+                                      .bundleName = pkgName,
+                                      .grantMode = GrantMode::SYSTEM_GRANT,
+                                      .availableScope = AVAILABLE_SCOPE_ALL,
+                                      .label = TEST_LABEL,
+                                      .labelId = TEST_LABEL_ID,
+                                      .description = TEST_DESCRIPTION,
+                                      .descriptionId = TEST_DESCRIPTION_ID};
+  permDefList.emplace_back(permissionDefAlpha);
+  permDefList.emplace_back(permissionDefBeta);
+  permDefList.emplace_back(permissionDefGamma);
+  PermissionKit::AddDefPermissions(permDefList);
+  std::vector<std::string> permList;
+  permList.push_back(SYSTEM_APP_PERMISSION);
+  permList.push_back(DANGER_APP_PERMISSION);
+  permList.push_back(BIND_DISCOVER_SERVICE);
+  PermissionKit::AddSystemGrantedReqPermissions(pkgName, permList);
+  PermissionKit::GrantSystemGrantedPermission(pkgName, SYSTEM_APP_PERMISSION);
+  PermissionKit::GrantSystemGrantedPermission(pkgName, DANGER_APP_PERMISSION);
+  PermissionKit::GrantSystemGrantedPermission(pkgName, BIND_DISCOVER_SERVICE);
 }
 
-void SoftBus_Test_Permission::RemovePermission(const string &pkgName)
+void SoftBus_Test_Permission::RemovePermission(const string& pkgName) 
 {
-    PermissionKit::RemoveDefPermissions(pkgName);
-    PermissionKit::RemoveSystemGrantedReqPermissions(pkgName);
+  PermissionKit::RemoveDefPermissions(pkgName);
+  PermissionKit::RemoveSystemGrantedReqPermissions(pkgName);
 }

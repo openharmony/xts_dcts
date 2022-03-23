@@ -19,21 +19,20 @@
 #include "net_trans_common.h"
 #include "wifi_device.h"
 
-class WiFiUtils
-{
-public:
-    static int EnableWifi();
-    static int DisableWifi();
-    static int DisableThenEnable(int delaySeconds);
-    static int ConnectTo(const std::string &ssid, const std::string &passwd);
-    static int ConnectToNew(const std::string &ssid, const std::string &passwd);
-    static int ConnectToOpenAP(const std::string &ssid);
-    static int EnableThenConnect(const std::string &ssid,
-                                 const std::string &passwd);
-    static int DisableThenEnableAndConnect(int delaySeconds,
-                                           const std::string &ssid,
-                                           const std::string &passwd);
-    static int CheckIsConnectToDefault(void);
+class WiFiUtils {
+ public:
+  static int EnableWifi();
+  static int DisableWifi();
+  static int DisableThenEnable(int delaySeconds);
+  static int ConnectTo(const std::string& ssid, const std::string& passwd);
+  static int ConnectToNew(const std::string& ssid, const std::string& passwd);
+  static int ConnectToOpenAP(const std::string& ssid);
+  static int EnableThenConnect(const std::string& ssid,
+                               const std::string& passwd);
+  static int DisableThenEnableAndConnect(int delaySeconds,
+                                         const std::string& ssid,
+                                         const std::string& passwd);
+  static int CheckIsConnectToDefault(void);
 };
 
 #endif

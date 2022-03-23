@@ -18,11 +18,10 @@
 
 #include <string>
 
-class SoftBus_Test_Permission
-{
-public:
-    static void AddPermission(const std::string &pkgName);
-    static void RemovePermission(const std::string &pkgName);
+class SoftBus_Test_Permission {
+ public:
+  static void AddPermission(const std::string& pkgName);
+  static void RemovePermission(const std::string& pkgName);
 };
 
 #endif
