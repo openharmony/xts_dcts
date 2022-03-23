@@ -20,7 +20,7 @@
 #include "wifi_device.h"
 
 class WiFiUtils {
-   public:
+public:
     static int EnableWifi();
     static int DisableWifi();
     static int DisableThenEnable(int delaySeconds);

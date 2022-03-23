@@ -21,7 +21,7 @@
 using namespace testing::ext;
 
 class TransSessionFuncTest : public testing::Test {
-   public:
+public:
     // 测试套前置和后置操作
     static void SetUpTestCase();
     static void TearDownTestCase();
@@ -35,7 +35,8 @@ void TransSessionFuncTest::SetUp() {}
 
 void TransSessionFuncTest::TearDown() {}
 
-void TransSessionFuncTest::SetUpTestCase() {
+void TransSessionFuncTest::SetUpTestCase() 
+{
     LOG("SetUp begin");
     TestSetUp();
     SoftBus_Test_Permission::AddPermission(DEF_PKG_NAME);
@@ -53,7 +54,8 @@ void TransSessionFuncTest::SetUpTestCase() {
     LOG("SetUp end");
 }
 
-void TransSessionFuncTest::TearDownTestCase() {
+void TransSessionFuncTest::TearDownTestCase() 
+{
     int ret = UnRegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
 
@@ -73,7 +75,8 @@ void TransSessionFuncTest::TearDownTestCase() {
  */
 HWTEST_F(TransSessionFuncTest,
          SUB_Softbus_Trans_Session_Func_0100,
-         TestSize.Level3) {
+         TestSize.Level3) 
+{
     int ret;
     char sessionNames[][SESSION_NAME_SIZE_MAX] = {
         "com.communication.demo1.1", "com.communication.demo1.2",
@@ -109,7 +112,8 @@ HWTEST_F(TransSessionFuncTest,
  */
 HWTEST_F(TransSessionFuncTest,
          SUB_Softbus_Trans_Session_Func_0200,
-         TestSize.Level3) {
+         TestSize.Level3) 
+{
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA,
                               GetSessionListenser4Data());
@@ -158,7 +162,8 @@ HWTEST_F(TransSessionFuncTest,
  */
 HWTEST_F(TransSessionFuncTest,
          SUB_Softbus_Trans_Session_Func_0300,
-         TestSize.Level3) {
+         TestSize.Level3) 
+{
     int ret;
     ret = CreateSsAndOpenSession4Data();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
@@ -190,7 +195,8 @@ HWTEST_F(TransSessionFuncTest,
  */
 HWTEST_F(TransSessionFuncTest,
          SUB_Softbus_Trans_Session_Func_0400,
-         TestSize.Level3) {
+         TestSize.Level3) 
+{
     int ret;
     ret = CreateSsAndOpenSession4Ctl();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[ctl] fail";

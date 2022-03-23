@@ -20,7 +20,8 @@
 
 static int g_waitFlag = WAIT_DEF_VALUE;
 
-static int FileSessionOpened(int sessionId, int result) {
+static int FileSessionOpened(int sessionId, int result) 
+{
     LOG("[cb][file]open session sid[%d],rst[%d]", sessionId, result);
     if (result == SOFTBUS_OK) {
         g_waitFlag = WAIT_SUCCESS_VALUE;
@@ -30,13 +31,15 @@ static int FileSessionOpened(int sessionId, int result) {
     return SOFTBUS_OK;
 }
 
-static void FileSessionClosed(int sessionId) {
+static void FileSessionClosed(int sessionId) 
+{
     LOG("[cb][file]close session sid[%d]", sessionId);
 }
 
 static void FileBytesReceived(int sessionId,
                               const void* data,
-                              unsigned int dataLen) {
+                              unsigned int dataLen) 
+{
     LOG("[cb][file]ByteRec sid:%d, data len:%d", sessionId, dataLen);
     if (data == NULL) {
         LOG("[cb][file]ByteRec invalid data=null sid[%d]", sessionId);
@@ -48,7 +51,8 @@ static void FileBytesReceived(int sessionId,
 
 static void FileMessageReceived(int sessionId,
                                 const void* data,
-                                unsigned int dataLen) {
+                                unsigned int dataLen) 
+{
     LOG("[cb][file]MessageRec sid:%d, data len:%d", sessionId, dataLen);
     if (data == NULL) {
         LOG("[cb][file]MessageRec invalid data=null sid[%d]", sessionId);
@@ -75,7 +79,7 @@ static const char* g_fileOne[] = {
 using namespace testing::ext;
 
 class TransFileFuncTest : public testing::Test {
-   public:
+public:
     // 测试套前置和后置操作
     static void SetUpTestCase();
     static void TearDownTestCase();
@@ -89,7 +93,8 @@ void TransFileFuncTest::SetUp() {}
 
 void TransFileFuncTest::TearDown() {}
 
-void TransFileFuncTest::SetUpTestCase() {
+void TransFileFuncTest::SetUpTestCase() 
+{
     LOG("SetUp begin");
     TestSetUp();
     SoftBus_Test_Permission::AddPermission(DEF_PKG_NAME);
@@ -110,7 +115,8 @@ void TransFileFuncTest::SetUpTestCase() {
     LOG("SetUp end");
 }
 
-void TransFileFuncTest::TearDownTestCase() {
+void TransFileFuncTest::TearDownTestCase() 
+{
     int ret = UnRegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
 
@@ -118,7 +124,8 @@ void TransFileFuncTest::TearDownTestCase() {
     SoftBus_Test_Permission::RemovePermission(DEF_PKG_NAME);
 }
 
-int WaitFile(int timeout) {
+int WaitFile(int timeout) 
+{
     LOG("start waitfile,timeout:%d", timeout);
     int count = 0;
     int t = timeout;
@@ -148,7 +155,8 @@ int WaitFile(int timeout) {
  */
 HWTEST_F(TransFileFuncTest,
          SUB_Softbus_Trans_SendFile_Func_0100,
-         TestSize.Level2) {
+         TestSize.Level2) 
+{
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE,
                               &g_fileSessionListener);

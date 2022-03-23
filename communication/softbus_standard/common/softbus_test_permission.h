@@ -19,7 +19,7 @@
 #include <string>
 
 class SoftBus_Test_Permission {
-   public:
+public:
     static void AddPermission(const std::string& pkgName);
     static void RemovePermission(const std::string& pkgName);
 };

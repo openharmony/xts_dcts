@@ -22,7 +22,8 @@ using namespace OHOS::Wifi;
 const static int WIFI_SA_ID = 1125;
 unique_ptr<WifiDevice> wifiDevicePtr = WifiDevice::GetInstance(WIFI_SA_ID);
 
-int WiFiUtils::EnableWifi() {
+int WiFiUtils::EnableWifi() 
+{
     bool isActive = false;
     int ret = wifiDevicePtr->IsWifiActive(isActive);
     if (ret != SOFTBUS_OK) {
@@ -64,7 +65,8 @@ int WiFiUtils::EnableWifi() {
     }
 }
 
-int WiFiUtils::DisableWifi() {
+int WiFiUtils::DisableWifi() 
+{
     bool isActive = false;
     int ret = wifiDevicePtr->IsWifiActive(isActive);
     if (ret != SOFTBUS_OK) {
@@ -106,7 +108,8 @@ int WiFiUtils::DisableWifi() {
     }
 }
 
-int WiFiUtils::DisableThenEnable(int delaySeconds) {
+int WiFiUtils::DisableThenEnable(int delaySeconds) 
+{
     int ret;
     ret = DisableWifi();
     if (ret != SOFTBUS_OK) {
@@ -121,7 +124,8 @@ int WiFiUtils::DisableThenEnable(int delaySeconds) {
     return ret;
 }
 
-int WiFiUtils::CheckIsConnectToDefault(void) {
+int WiFiUtils::CheckIsConnectToDefault(void) 
+{
     WifiLinkedInfo linkInfo;
     int ret = wifiDevicePtr->GetLinkedInfo(linkInfo);
     if (ret != SOFTBUS_OK) {
@@ -144,7 +148,8 @@ int WiFiUtils::CheckIsConnectToDefault(void) {
     return SOFTBUS_ERR;
 }
 
-int WiFiUtils::ConnectTo(const std::string& ssid, const std::string& passwd) {
+int WiFiUtils::ConnectTo(const std::string& ssid, const std::string& passwd) 
+{
     WifiDeviceConfig deviceConfig;
     deviceConfig.ssid = ssid;
     deviceConfig.preSharedKey = passwd;
@@ -199,14 +204,16 @@ int WiFiUtils::ConnectTo(const std::string& ssid, const std::string& passwd) {
 }
 
 int WiFiUtils::ConnectToNew(const std::string& ssid,
-                            const std::string& passwd) {
+                            const std::string& passwd) 
+{
     int ret = wifiDevicePtr->Disconnect();
     LOG("[wifi]call Disconnect ret:%d", ret);
     ret = ConnectTo(ssid, passwd);
     return ret;
 }
 
-int WiFiUtils::ConnectToOpenAP(const std::string& ssid) {
+int WiFiUtils::ConnectToOpenAP(const std::string& ssid) 
+{
     WifiDeviceConfig deviceConfig;
     deviceConfig.ssid = ssid;
     deviceConfig.keyMgmt = "NONE";
@@ -249,7 +256,8 @@ int WiFiUtils::ConnectToOpenAP(const std::string& ssid) {
 }
 
 int WiFiUtils::EnableThenConnect(const std::string& ssid,
-                                 const std::string& passwd) {
+                                 const std::string& passwd) 
+{
     int ret = EnableWifi();
     if (ret != SOFTBUS_OK) {
         LOG("[wifi]EnableWifi fail");
@@ -264,7 +272,8 @@ int WiFiUtils::EnableThenConnect(const std::string& ssid,
 
 int WiFiUtils::DisableThenEnableAndConnect(int delaySeconds,
                                            const std::string& ssid,
-                                           const std::string& passwd) {
+                                           const std::string& passwd) 
+{
     int ret;
     ret = DisableWifi();
     if (ret != SOFTBUS_OK) {

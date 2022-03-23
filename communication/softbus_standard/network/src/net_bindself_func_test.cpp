@@ -21,7 +21,7 @@
 using namespace testing::ext;
 
 class Net_Bindself_Func_Test : public testing::Test {
-   public:
+public:
     static void SetUpTestCase();
     static void TearDownTestCase();
     void SetUp();
@@ -32,7 +32,8 @@ void Net_Bindself_Func_Test::SetUp() {}
 
 void Net_Bindself_Func_Test::TearDown() {}
 
-void Net_Bindself_Func_Test::SetUpTestCase() {
+void Net_Bindself_Func_Test::SetUpTestCase() 
+{
     LOG("[SetUp] begin");
     TestSetUp();
     SoftBus_Test_Permission::AddPermission(DEF_PKG_NAME);
@@ -43,7 +44,8 @@ void Net_Bindself_Func_Test::SetUpTestCase() {
     LOG("[SetUp] end");
 }
 
-void Net_Bindself_Func_Test::TearDownTestCase() {
+void Net_Bindself_Func_Test::TearDownTestCase() 
+{
     int ret = UnRegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
 
@@ -51,7 +53,8 @@ void Net_Bindself_Func_Test::TearDownTestCase() {
     SoftBus_Test_Permission::RemovePermission(DEF_PKG_NAME);
 }
 
-static void WaitOnly(int seconds) {
+static void WaitOnly(int seconds) 
+{
     if (seconds < TEN_SECOND) {
         sleep(seconds);
     } else {
@@ -72,7 +75,8 @@ static void WaitOnly(int seconds) {
  */
 HWTEST_F(Net_Bindself_Func_Test,
          SUB_Softbus_Net_Bind_Func_0100,
-         TestSize.Level3) {
+         TestSize.Level3) 
+{
     char* netId = NULL;
     int count = GetRemoteDeviceNetId(&netId);
     LOG("GetRemoteDeviceNetId count:%d", count);
@@ -93,7 +97,8 @@ HWTEST_F(Net_Bindself_Func_Test,
  */
 HWTEST_F(Net_Bindself_Func_Test,
          SUB_Softbus_Net_Bind_Func_0200,
-         TestSize.Level3) {
+         TestSize.Level3) 
+{
     int ret = StartDiscoveryDevice();
     EXPECT_EQ(SOFTBUS_OK, ret) << "Discover fail";
 }
@@ -107,7 +112,8 @@ HWTEST_F(Net_Bindself_Func_Test,
  */
 HWTEST_F(Net_Bindself_Func_Test,
          SUB_Softbus_Net_Bind_Func_0300,
-         TestSize.Level3) {
+         TestSize.Level3) 
+{
     int ret = CheckRemoteDeviceIsNull(BOOL_FALSE);
     EXPECT_EQ(SOFTBUS_OK, ret) << "check node fail";
 }
@@ -121,7 +127,8 @@ HWTEST_F(Net_Bindself_Func_Test,
  */
 HWTEST_F(Net_Bindself_Func_Test,
          SUB_Softbus_Net_Bind_Func_0400,
-         TestSize.Level3) {
+         TestSize.Level3) 
+{
     int nodeCount = SetRemoteDeviceNetIdToGarray();
     LOG("######node count:%d", nodeCount);
     EXPECT_TRUE(nodeCount >= DEF_REMOTE_DEV_COUNT)
@@ -137,7 +144,8 @@ HWTEST_F(Net_Bindself_Func_Test,
  */
 HWTEST_F(Net_Bindself_Func_Test,
          SUB_Softbus_Net_Bind_Func_0500,
-         TestSize.Level3) {
+         TestSize.Level3) 
+{
     int ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
     EXPECT_EQ(SOFTBUS_OK, ret) << "check node fail";
 
@@ -177,7 +185,8 @@ HWTEST_F(Net_Bindself_Func_Test,
  */
 HWTEST_F(Net_Bindself_Func_Test,
          SUB_Softbus_Net_Bind_Func_0600,
-         TestSize.Level2) {
+         TestSize.Level2) 
+{
     int ret;
     int size = 1024;
     ret = LeaveNetWork();
