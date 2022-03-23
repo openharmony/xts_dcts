@@ -31,7 +31,7 @@ const static std::string TEST_DESCRIPTION = "test description";
 const static int TEST_LABEL_ID = 9527;
 const static int TEST_DESCRIPTION_ID = 9528;
 
-void SoftBus_Test_Permission::AddPermission(const string& pkgName) 
+void SoftBus_Test_Permission::AddPermission(const string& pkgName)
 {
     std::vector<PermissionDef> permDefList;
     PermissionDef permissionDefAlpha = {.permissionName = SYSTEM_APP_PERMISSION,
@@ -72,7 +72,7 @@ void SoftBus_Test_Permission::AddPermission(const string& pkgName)
     PermissionKit::GrantSystemGrantedPermission(pkgName, BIND_DISCOVER_SERVICE);
 }
 
-void SoftBus_Test_Permission::RemovePermission(const string& pkgName) 
+void SoftBus_Test_Permission::RemovePermission(const string& pkgName)
 {
     PermissionKit::RemoveDefPermissions(pkgName);
     PermissionKit::RemoveSystemGrantedReqPermissions(pkgName);

@@ -15,7 +15,7 @@
 
 #ifndef TEST_PERMISSION_H
 #define TEST_PERMISSION_H
-
+ 
 #include <string>
 
 class SoftBus_Test_Permission {

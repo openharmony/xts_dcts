@@ -20,7 +20,7 @@
 
 static int g_waitFlag = WAIT_DEF_VALUE;
 
-static int FileSessionOpened(int sessionId, int result) 
+static int FileSessionOpened(int sessionId, int result)
 {
     LOG("[cb][file]open session sid[%d],rst[%d]", sessionId, result);
     if (result == SOFTBUS_OK) {
@@ -31,14 +31,14 @@ static int FileSessionOpened(int sessionId, int result)
     return SOFTBUS_OK;
 }
 
-static void FileSessionClosed(int sessionId) 
+static void FileSessionClosed(int sessionId)
 {
     LOG("[cb][file]close session sid[%d]", sessionId);
 }
 
 static void FileBytesReceived(int sessionId,
                               const void* data,
-                              unsigned int dataLen) 
+                              unsigned int dataLen)
 {
     LOG("[cb][file]ByteRec sid:%d, data len:%d", sessionId, dataLen);
     if (data == NULL) {
@@ -51,7 +51,7 @@ static void FileBytesReceived(int sessionId,
 
 static void FileMessageReceived(int sessionId,
                                 const void* data,
-                                unsigned int dataLen) 
+                                unsigned int dataLen)
 {
     LOG("[cb][file]MessageRec sid:%d, data len:%d", sessionId, dataLen);
     if (data == NULL) {
@@ -93,7 +93,7 @@ void TransFileFuncTest::SetUp() {}
 
 void TransFileFuncTest::TearDown() {}
 
-void TransFileFuncTest::SetUpTestCase() 
+void TransFileFuncTest::SetUpTestCase()
 {
     LOG("SetUp begin");
     TestSetUp();
@@ -115,7 +115,7 @@ void TransFileFuncTest::SetUpTestCase()
     LOG("SetUp end");
 }
 
-void TransFileFuncTest::TearDownTestCase() 
+void TransFileFuncTest::TearDownTestCase()
 {
     int ret = UnRegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
@@ -124,7 +124,7 @@ void TransFileFuncTest::TearDownTestCase()
     SoftBus_Test_Permission::RemovePermission(DEF_PKG_NAME);
 }
 
-int WaitFile(int timeout) 
+int WaitFile(int timeout)
 {
     LOG("start waitfile,timeout:%d", timeout);
     int count = 0;
@@ -155,7 +155,7 @@ int WaitFile(int timeout)
  */
 HWTEST_F(TransFileFuncTest,
          SUB_Softbus_Trans_SendFile_Func_0100,
-         TestSize.Level2) 
+         TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE,

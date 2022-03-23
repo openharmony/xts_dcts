@@ -35,7 +35,7 @@ void TransFuncTest::SetUp() {}
 
 void TransFuncTest::TearDown() {}
 
-void TransFuncTest::SetUpTestCase() 
+void TransFuncTest::SetUpTestCase()
 {
     LOG("SetUp begin");
     TestSetUp();
@@ -67,7 +67,7 @@ void TransFuncTest::TearDownTestCase()
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0100, TestSize.Level3) 
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0100, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
@@ -90,7 +90,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0100, TestSize.Level3)
  */
 HWTEST_F(TransFuncTest,
          SUB_Softbus_Trans_SendMessage_Func_0100,
-         TestSize.Level3) 
+         TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
