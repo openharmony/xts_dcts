@@ -403,11 +403,7 @@ static void OnJoinNetCallBack(ConnectionAddr* addr,
             return;
     }
 
-    if (strncpy_s(g_networkId, NETWORK_ID_BUF_LEN,
-                 networkId, NETWORK_ID_BUF_LEN) !=
-                 SOFTBUS_OK) {
-        return;
-    }
+    (void)strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, networkId, NETWORK_ID_BUF_LEN);
     g_waitFlag = WAIT_SUCCESS_VALUE;
 }
 
@@ -1560,13 +1556,7 @@ int SetCurrentNetworkId(int index)
         LOG("input index is error");
         return SOFTBUS_ERR;
     }
-    if (strncpy_s(g_networkId, NETWORK_ID_BUF_LEN,
-                 g_networkIdArray[index],
-                 NETWORK_ID_BUF_LEN) != 
-                 SOFTBUS_OK) {
-        LOG("set netId fail(str copy)");
-        return SOFTBUS_ERR;
-    }
+    (void)strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, g_networkIdArray[index], NETWORK_ID_BUF_LEN);
     return SOFTBUS_OK;
 }
 
