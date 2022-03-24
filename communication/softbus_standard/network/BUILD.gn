@@ -16,8 +16,8 @@ module_output_path = "dct/softbus_base/SoftBusNetTest"
 ohos_moduletest_suite("SoftBusNetTest") {
   module_out_path = module_output_path
   sources = [
-    "../common/net_trans_common.c",
     "../common/SoftBus_Test_Permission.cpp",
+    "../common/net_trans_common.c",
     "../common/wifi_utils.cpp",
     "src/Net_Bindself_Func_Test.cpp",
   ]
