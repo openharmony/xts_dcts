@@ -78,9 +78,8 @@ char* getRealData(char* str, char* delims)
     }
     char *result = strtok( str, delims );
     char *second = NULL;
-   // result = strtok( str, delims );
+
     while( result != NULL ) {
-        //printf( "result is \"%s\"\n", result );
       second = result;
         result = strtok( NULL,delims );
     }
@@ -97,20 +96,15 @@ void getParam(char* putData, char ret[] [MAX_DATA_LENGTH])
     }
     strcpy_s(str, strlen(putData)+1, putData);
     char delims[2] = {":"};
-    //memset_s(delims,0,2);
-    //strcpy_s(delims,strlen()+1, ":");
 
     char *result = strtok( str, delims );
-    //char *second = NULL;
-   // result = strtok( str, delims );
+
     int i = 0;
     while( result != NULL ) {
         printf( "result is \"%s\"\n", result);
         strcpy_s(ret[i], strlen(result)+1, result);
-        //second = result;
         result = strtok( NULL, delims );
         i++;
-       // printf("i= %d", i);
         if(i==3)
         {
             return;
@@ -255,7 +249,7 @@ int processPutData(char* putData)
         // result[2]解析的不完整
         string ss ;
         string ss2 ;
-        //strcpy_s(ss,str);
+
         ss=putData;
         ss2 = ss.substr(23);
         cout<<"LOGdisDataTest2--ss = "<< ss<<endl;
@@ -289,7 +283,7 @@ int processGetData(char* putData)
     char result[3][MAX_DATA_LENGTH] = {{0}, {0}, {0}};
     memset_s(result,3*MAX_DATA_LENGTH,0,3*MAX_DATA_LENGTH);
     getParam(putData, result);
-   // LOG("LOGdisDataTest--putData= %s", putData);
+
     for(int i=0;i<3;i++)
     {
         LOG("for result[i] %s", result[i]);
@@ -316,7 +310,7 @@ int processGetData(char* putData)
         int i2 = atoi(result[2]); 
         LOG("LOGdisDataTest--iaaa=  %d", iaaa);
         LOG("LOGdisDataTest--i2 =  %d", i2);
-        if ( iaaa == i2)
+        if (iaaa == i2)
         {
             return RESULT_OK; 
         }
@@ -327,7 +321,6 @@ int processGetData(char* putData)
         LOG("LOGdisDataTest--math_score_float ");
         float faaa = TransferByteArrayToType<float>(valueRetInt.Data());
        
-       // float fret = atof(ret.c_str());
         float f2 = atof(result[2]); 
         float fdelta = f2 - faaa;
         LOG("LOGdisDataTest--faaa=  %f", faaa);
@@ -352,36 +345,34 @@ int processGetData(char* putData)
             return RESULT_OK; 
         }
       }
-    else   if(strcmp(result[1], "math_score_int64_t") == 0)
+    else if(strcmp(result[1], "math_score_int64_t") == 0)
     {
         LOG("LOGdisDataTest--math_score_int64_t ");
         int64_t iaaa_t = TransferByteArrayToType<int64_t>(valueRetInt.Data());
         int64_t i2_t = atoi(result[2]); 
-       //LOG("LOGdisDataTest--iaaa_t=  %ld", iaaa_t);
-       // LOG("LOGdisDataTest--i2_t =  %ld", i2_t);
+
         if ( iaaa_t == i2_t)
         {
             return RESULT_OK; 
         }
     }
-    else   if(strcmp(result[1], "math_score_size_t") == 0)
+    else if(strcmp(result[1], "math_score_size_t") == 0)
     {
         LOG("LOGdisDataTest--math_score_size_t ");
         size_t sizeaaa = TransferByteArrayToType<size_t>(valueRetInt.Data());
         size_t size2 = atoi(result[2]); 
-       // LOG("LOGdisDataTest--sizeaaa=  %lu", sizeaaa);
-       // LOG("LOGdisDataTest--size2 =  %lu", size2);
+   
         if ( sizeaaa == size2)
         {
             return RESULT_OK; 
         }
     }
-    else  if(strcmp(result[1], "math_score_string") == 0)
+    else if(strcmp(result[1], "math_score_string") == 0)
     { 
         // result[2]解析的不完整
         string ss ;
         string ss2 ;
-        //strcpy_s(ss,str);
+    
         ss=putData;
         ss2 = ss.substr(23);
         cout<<"LOGdisDataTest--ss = "<< ss<<endl;
@@ -393,7 +384,7 @@ int processGetData(char* putData)
             return RESULT_OK;
         }
     }
-    else  if(strcmp(result[1], "math_score_vector") == 0)
+    else if(strcmp(result[1], "math_score_vector") == 0)
     { 
        LOG("LOGdisDataTest--result[2]=  %s", result[2]);
        LOG("LOGdisDataTest--ret.c_str() =  %s", ret.c_str());  
@@ -410,7 +401,7 @@ int processCreateKv(char* putData)
 {
 
     LOG("processCreateKv,  begin");
-    //initKvstoreId();
+ 
     std::cout << "create status=" << static_cast<int>(DisKvTest::statusGetKvStore) << std::endl;
     if ( Status::SUCCESS == DisKvTest::statusGetKvStore)
     {
@@ -429,10 +420,10 @@ int processDeleteKv(char* putData)
 {
 
     LOG("processDeleteKv,  begin");
-    //initKvstoreId();
+  
     DisKvTest::statusCloseKvStore = DisKvTest::manager.CloseAllKvStore(DisKvTest::appId);
     DisKvTest::statusDeleteKvStore = DisKvTest::manager.DeleteAllKvStore(DisKvTest::appId);
-    if ( (Status::SUCCESS == DisKvTest::statusCloseKvStore)  && (Status::SUCCESS == DisKvTest::statusDeleteKvStore) )
+    if ((Status::SUCCESS == DisKvTest::statusCloseKvStore) && (Status::SUCCESS == DisKvTest::statusDeleteKvStore))
     {
         std::cout << "SUCCESS：statusDeleteKvStore"<< std::endl;
         return RESULT_OK;

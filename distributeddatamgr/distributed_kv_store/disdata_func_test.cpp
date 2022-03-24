@@ -144,7 +144,7 @@ void DistributedKvDataManagerTest::SetUp(void)
     {
         return ;
     }
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
 
@@ -170,7 +170,7 @@ void DistributedKvDataManagerTest::SetUp(void)
     {
         return ;
     }
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     waitDataWithCode(code, str);
     free(str);
 
@@ -255,7 +255,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -315,7 +315,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -379,7 +379,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -436,7 +436,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -497,7 +497,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -555,7 +555,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -629,7 +629,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char code[10]={"9999"};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -689,7 +689,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -747,7 +747,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -815,7 +815,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -872,7 +872,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -937,7 +937,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -995,7 +995,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1059,7 +1059,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0400, 
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1113,7 +1113,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0400, 
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1176,7 +1176,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0500, 
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1229,7 +1229,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0500, 
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1287,7 +1287,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0600, 
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1343,7 +1343,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0600, 
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1416,7 +1416,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1470,7 +1470,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1528,7 +1528,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete int result=" << str<< std::endl;
@@ -1577,7 +1577,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get int  result=" << str<< std::endl;
@@ -1638,7 +1638,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete float get result=" << str<< std::endl;
@@ -1687,7 +1687,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get result=" << str<< std::endl;
@@ -1745,7 +1745,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "delete double result=" << str<< std::endl;
@@ -1797,7 +1797,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "get result=" << str<< std::endl;
@@ -1855,7 +1855,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete int64_t result=" << str<< std::endl;
@@ -1904,7 +1904,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "get  result=" << str<< std::endl;
@@ -1964,7 +1964,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete size_t result=" << str<< std::endl;
@@ -2013,7 +2013,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get  result=" << str<< std::endl;
@@ -2072,7 +2072,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     char code[10]={0};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "delete string result=" << str<< std::endl;
@@ -2122,7 +2122,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get result=" << str<< std::endl;
@@ -2180,7 +2180,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     char code[10]={"9999"};
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete vector result=" << str<< std::endl;
@@ -2229,7 +2229,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get result=" << str<< std::endl;
@@ -2276,7 +2276,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2348,7 +2348,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2419,7 +2419,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2493,7 +2493,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2564,7 +2564,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2634,7 +2634,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2720,7 +2720,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-vector<uint8_t>  get result=" << str<< std::endl;
@@ -2790,7 +2790,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2858,7 +2858,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2924,7 +2924,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2995,7 +2995,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -3061,7 +3061,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -3126,7 +3126,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -3206,7 +3206,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(code,10,0,10);
 	Int2String(CTRL_CODE_RESULT_TYPE, str);
 	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str); //9999
+    strcpy_s(code, strlen(str)+1, str);
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
