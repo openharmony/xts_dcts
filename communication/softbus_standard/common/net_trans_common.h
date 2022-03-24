@@ -101,6 +101,7 @@ extern "C" {
 #define TRANS_PROXY_BYTES_LENGTH_MAX (4 * 1024)
 #define TRANS_PROXY_MESSAGE_LENGTH_MAX 1024
 #define DEF_SEND_DATA_SID_COUNT 4
+#define GROUP_ID_LEN 4
 
 #define CASE_0 0
 #define CASE_1 1
@@ -114,7 +115,7 @@ extern "C" {
 #define CASE_9 9
 #define CASE_10 10
 
-const static int GROUP_ID_LEN = 4;
+
 
 typedef enum {
     SESSION_4DATA = 1,

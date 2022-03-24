@@ -125,7 +125,7 @@ HWTEST_F(TransSessionFuncTest,
     int count = MAX_SESSION_NUM / 2;
     int sessionId4Data[count];
     int sessionId4Ctrl[count];
-    char groupId[][GROUP_ID_LEN] = {"g1", "g2", "g3", "g4",
+    char groupId[][4] = {"g1", "g2", "g3", "g4",
                                     "g5", "g6", "g7", "g8"};
     ret = OpenSessionBatch4Data(groupId, sessionId4Data, count);
     EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSessionWithDiffGroupId4Data fail";
