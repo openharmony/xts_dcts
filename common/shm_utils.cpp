@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Huawei Device Co., Ltd.
+ * Copyright (C) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -45,6 +45,10 @@ int createShm(int key)
 void initShm(void)
 {
     memset_s(shm, sizeof(struct shared_use_st), 0, sizeof(struct shared_use_st));
+    if(shared == NULL)
+    {
+        return;
+    }
     shared->written = 0;
     memset_s(shared->data, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     return;
@@ -53,6 +57,11 @@ void initShm(void)
 int readDataFromShm(char* buf)
 {
     //LOG("readDataFormShm, begin");
+    if(shared == NULL)
+    {
+        return -1;
+    }
+
     if(shared->written !=0)
     {
         strcpy_s(buf , strlen(shared->data)+1, shared->data);
@@ -73,6 +82,11 @@ int waitDataWithCode(char* code, char* data)
     int timeout = 10;
     char str[1024] = {0};
     memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    
+    if(code == NULL || data == NULL )
+    {
+        return -1;
+    }
     while(i<timeout)
     {
         if(readDataFromShm(str) ==0)
@@ -98,16 +112,32 @@ int writeCodeDataToShm(int code, char*buf)
     memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char codeStr[5] = {0};
     memset_s(codeStr, 5, 0, 5);
-    Int2String(code, codeStr);
+    char* str2 = Int2String(code, codeStr);
+    if (str2 == NULL)
+    {
+        return -1;
+    }
     strcpy_s(str, strlen(codeStr)+1, codeStr);
     strcat(str, ":");
+    if(buf == NULL)
+    {
+        return -1;
+    }
     strcat(str, buf);
-    writeDataToShm(str);
+    int nres = writeDataToShm(str);
+    if (nres == -1)
+    {
+        return -1;
+    }
     return 0;
 }
 int writeDataToShm(char* buf)
 {
     LOG("writeDataToShm, begin");
+    if(shared == NULL || buf == NULL)
+    {
+        return -1;
+    }
     while(shared->written == 1)
     {
         sleep(1);
@@ -142,6 +172,10 @@ int deleteShm(void)
 
 char* Int2String(int num,char *str)//10进制
 {
+    if(str == NULL )
+    {
+        return NULL;
+    }
     int i = 0;//指示填充str
     if (num<0)//如果num为负数，将num变正
     {

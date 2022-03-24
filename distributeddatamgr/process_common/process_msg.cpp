@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Huawei Device Co., Ltd.
+ * Copyright (C) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -42,7 +42,7 @@ public:
 };
 
 DistributedKvDataManager DisKvTest::manager;
-std::shared_ptr<SingleKvStore> DisKvTest::KvStorePtr = nullptr; // declare kvstore instance.
+std::shared_ptr<SingleKvStore> DisKvTest::KvStorePtr = NULL; // declare kvstore instance.
 Status DisKvTest::statusGetKvStore = Status::ERROR;
 Status DisKvTest::statusCloseKvStore = Status::ERROR;
 Status DisKvTest::statusDeleteKvStore = Status::ERROR;
@@ -72,6 +72,10 @@ void initKvstoreId()
 
 char* getRealData(char* str, char* delims)
 {
+    if(str==NULL || delims==NULL)
+    {
+        return NULL;
+    }
     char *result = strtok( str, delims );
     char *second = NULL;
    // result = strtok( str, delims );
@@ -87,6 +91,10 @@ void getParam(char* putData, char ret[] [MAX_DATA_LENGTH])
 {
     char str[1024] = {":"};
     memset_s(str,1024,0,1024);
+    if(putData==NULL)
+    {
+        return;
+    }
     strcpy_s(str, strlen(putData)+1, putData);
     char delims[2] = {":"};
     //memset_s(delims,0,2);
@@ -112,52 +120,6 @@ void getParam(char* putData, char ret[] [MAX_DATA_LENGTH])
     return;
 }
 
-int str2int(char *str, int base) {
-    char sign;
-    int rv = 0;
-    int newbase = -1;
-
-    if ((base < 2 && base !=0) || base > 36)
-        return 0;
-
-    //跳过str开头的空白字符
-    while(*str && isspace(*str))
-        str++;
-
-    //取得符号位
-    sign = (*str == '-' || *str == '+') ? *str++ : '+';
-
-    //猜测需要转换的类型
-    if (*str == '0' && ++str) {
-        if ((*str == 'x' || *str == 'X') && ++str) {
-            newbase = 16;
-        } else if ((*str == 'b' || *str == 'B') &&++str) {
-            newbase = 2;
-        } else {
-            newbase = 8;
-        }
-    }
-
-    //默认10进制
-    if (base == 0) {
-        base = newbase == -1 ? 10 : newbase;
-    }
-
-    for (;*str; str++) {
-        //大写转小写
-        char c = *str | 0x20;
-        if (c >= 'a' && c<= 'z') {
-            rv = rv * base + c - 'a' + 10;
-        } else if (c >= '0' && c <= '9') {
-            rv = rv * base + c - '0';
-        } else {
-            break;
-        }
-        //printf("rv = %d\n", rv);
-    }
-
-    return sign == '-' ? -rv : rv;
-}
 
 int ProcessSoftBus(int code, char* recvData)
 {
@@ -169,6 +131,11 @@ int ProcessDataMgr(int code, char* recvData)
     LOG("ProcessDataMgr, begin");
 
     initKvstoreId();
+    if (DisKvTest::KvStorePtr == NULL)
+    {
+        std::cout << "ERR：DisKvTest::KvStorePtr == NULL"<< std::endl;
+        return RESULT_ERR; 
+    }
     std::cout << "create status=" << static_cast<int>(DisKvTest::statusGetKvStore) << std::endl;
     if ( Status::SUCCESS != DisKvTest::statusGetKvStore)
     {
@@ -218,8 +185,8 @@ int processDeletetData(char* putData)
 {
     LOG("LOGdisDataTest---processDeletetData,  begin");
     //解析远端发来的数据 result[0]=code result[1]=key result[2]=value
-    char result[5][MAX_DATA_LENGTH];
-    memset_s(result,5*MAX_DATA_LENGTH,0,5*MAX_DATA_LENGTH);
+    char result[3][MAX_DATA_LENGTH] = {{0}, {0}, {0}};
+    memset_s(result,3*MAX_DATA_LENGTH,0,3*MAX_DATA_LENGTH);
     getParam(putData, result);
     for(int i=0;i<3;i++)
     {
@@ -245,14 +212,13 @@ int processPutData(char* putData)
 {
     LOG("LOGdisDataTest-processPutData,  begin");
     //解析远端发来的数据 result[0]=code result[1]=key result[2]=value
-    char result[3][MAX_DATA_LENGTH];
+    char result[3][MAX_DATA_LENGTH] = {{0}, {0}, {0}};
     memset_s(result,3*MAX_DATA_LENGTH,0,3*MAX_DATA_LENGTH);
     getParam(putData, result);
     for(int i=0;i<3;i++)
     {
         LOG("LOGdisDataTest-processPutData %s", result[i]);
     }
-
 
     //put data修改数据
     Value valueInt;
@@ -279,8 +245,8 @@ int processPutData(char* putData)
     }
     else  if(strcmp(result[1], "math_score_size_t") == 0)
     {
-        size_t numInt = atoi(result[2]);
-        valueInt =  Value(TransferTypeToByteArray<size_t>(numInt));
+        size_t numSize = atoi(result[2]);
+        valueInt =  Value(TransferTypeToByteArray<size_t>(numSize));
     }
 
     else  if(strcmp(result[1], "math_score_string") == 0)
@@ -320,7 +286,7 @@ int processGetData(char* putData)
     LOG("LOGdisDataTest-processGetData,  begin");
 
     //解析远端发来的数据 result[0]=code result[1]=key result[2]=value
-    char result[3][MAX_DATA_LENGTH];
+    char result[3][MAX_DATA_LENGTH] = {{0}, {0}, {0}};
     memset_s(result,3*MAX_DATA_LENGTH,0,3*MAX_DATA_LENGTH);
     getParam(putData, result);
    // LOG("LOGdisDataTest--putData= %s", putData);
@@ -328,7 +294,6 @@ int processGetData(char* putData)
     {
         LOG("for result[i] %s", result[i]);
     }
-
 
     //获取到本端数据
     Value valueRetInt;
@@ -347,11 +312,11 @@ int processGetData(char* putData)
     if(strcmp(result[1], "math_score_int") == 0)
     {
         LOG("LOGdisDataTest--math_score_int ");
-        int aaa = TransferByteArrayToType<int>(valueRetInt.Data());
+        int iaaa = TransferByteArrayToType<int>(valueRetInt.Data());
         int i2 = atoi(result[2]); 
-        LOG("LOGdisDataTest--aaa=  %d", aaa);
+        LOG("LOGdisDataTest--iaaa=  %d", iaaa);
         LOG("LOGdisDataTest--i2 =  %d", i2);
-        if ( aaa == i2)
+        if ( iaaa == i2)
         {
             return RESULT_OK; 
         }
@@ -360,15 +325,15 @@ int processGetData(char* putData)
       else  if(strcmp(result[1], "math_score_float") == 0)
       {
         LOG("LOGdisDataTest--math_score_float ");
-        float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
+        float faaa = TransferByteArrayToType<float>(valueRetInt.Data());
        
        // float fret = atof(ret.c_str());
         float f2 = atof(result[2]); 
-        float delta = f2 - aaa;
-        LOG("LOGdisDataTest--aaa=  %f", aaa);
+        float fdelta = f2 - faaa;
+        LOG("LOGdisDataTest--faaa=  %f", faaa);
         LOG("LOGdisDataTest--f2 =  %f", f2);
-        LOG("LOGdisDataTest--delta =  %f", delta);
-        if ( std::abs(delta) <= 0.00001)
+        LOG("LOGdisDataTest--fdelta =  %f", fdelta);
+        if ( std::abs(fdelta) <= 0.00001)
         {
             return RESULT_OK; 
         }
@@ -376,10 +341,10 @@ int processGetData(char* putData)
       else  if(strcmp(result[1], "math_score_double") == 0)
       {
         LOG("LOGdisDataTest--math_score_double ");
-        double aaa = TransferByteArrayToType<double>(valueRetInt.Data());
+        double daaa = TransferByteArrayToType<double>(valueRetInt.Data());
         double d2 = atof(result[2]); 
-        double delta = d2 - aaa;
-       LOG("LOGdisDataTest--aaa=  %f", aaa);
+        double delta = d2 - daaa;
+       LOG("LOGdisDataTest--daaa=  %f", daaa);
        LOG("LOGdisDataTest--d2 =  %f", d2);
        LOG("LOGdisDataTest--delta =  %f", delta);
         if ( std::abs(delta) <= 0.00001)
@@ -390,11 +355,11 @@ int processGetData(char* putData)
     else   if(strcmp(result[1], "math_score_int64_t") == 0)
     {
         LOG("LOGdisDataTest--math_score_int64_t ");
-        int64_t aaa = TransferByteArrayToType<int64_t>(valueRetInt.Data());
-        int64_t i2 = atoi(result[2]); 
-       //LOG("LOGdisDataTest--aaa=  %ld", aaa);
-       // LOG("LOGdisDataTest--i2 =  %ld", i2);
-        if ( aaa == i2)
+        int64_t iaaa_t = TransferByteArrayToType<int64_t>(valueRetInt.Data());
+        int64_t i2_t = atoi(result[2]); 
+       //LOG("LOGdisDataTest--iaaa_t=  %ld", iaaa_t);
+       // LOG("LOGdisDataTest--i2_t =  %ld", i2_t);
+        if ( iaaa_t == i2_t)
         {
             return RESULT_OK; 
         }
@@ -402,11 +367,11 @@ int processGetData(char* putData)
     else   if(strcmp(result[1], "math_score_size_t") == 0)
     {
         LOG("LOGdisDataTest--math_score_size_t ");
-        size_t aaa = TransferByteArrayToType<size_t>(valueRetInt.Data());
-        size_t i2 = atoi(result[2]); 
-       // LOG("LOGdisDataTest--aaa=  %lu", aaa);
-       // LOG("LOGdisDataTest--i2 =  %lu", i2);
-        if ( aaa == i2)
+        size_t sizeaaa = TransferByteArrayToType<size_t>(valueRetInt.Data());
+        size_t size2 = atoi(result[2]); 
+       // LOG("LOGdisDataTest--sizeaaa=  %lu", sizeaaa);
+       // LOG("LOGdisDataTest--size2 =  %lu", size2);
+        if ( sizeaaa == size2)
         {
             return RESULT_OK; 
         }

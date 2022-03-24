@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Huawei Device Co., Ltd.
+ * Copyright (C) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -77,7 +77,6 @@ int processPutData(char* putData);
 int processCreateKv(char* putData);
 int processDeleteKv(char* putData);
 char* getRealData(char* str, char* delims);
-int str2int(char *str, int base);
 void getParam(char* str, char ret[] [MAX_DATA_LENGTH]);
 void initKvstoreId();
 #endif

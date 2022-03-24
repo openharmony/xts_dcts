@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Huawei Device Co., Ltd.
+ * Copyright (C) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -131,19 +131,24 @@ void DistributedKvDataManagerTest::SetUp(void)
     RemoveAllStore(DisKvTest::manager);
    
     //2.远端删除数据库
-    char* str1 =(char *)malloc(MAX_DATA_LENGTH);
-    memset_s(str1,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    strcpy_s(str1, strlen("")+1,"");
-    writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_KV, str1);
+    char* str =(char *)malloc(MAX_DATA_LENGTH);
+    memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
+    strcpy_s(str, strlen("")+1,"");
+    writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_KV, str);
 
     char code[10]={"9999"};
-    memset_s(str1,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
+    memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE,str1))+1, Int2String(CTRL_CODE_RESULT_TYPE,str1));
-    memset_s(str1,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    waitDataWithCode(code, str1);
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	if(str == nullptr )
+    {
+        return ;
+    }
+    strcpy_s(code, strlen(str)+1, str); //9999
+    memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
+    waitDataWithCode(code, str);
 
-    free(str1);
+    free(str);
 
    //1.本地创建数据库
     auto deathRecipient = std::make_shared<DeathRecipient>();
@@ -153,39 +158,26 @@ void DistributedKvDataManagerTest::SetUp(void)
  
 
     //2. 远端创建数据库
-    str1 =(char *)malloc(MAX_DATA_LENGTH);
-    memset_s(str1,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    strcpy_s(str1, strlen("")+1,"");
-    writeCodeDataToShm(CTRL_CODE_DATAMGR_CREATE_KV, str1);
+    str =(char *)malloc(MAX_DATA_LENGTH);
+    memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
+    strcpy_s(str, strlen("")+1,"");
+    writeCodeDataToShm(CTRL_CODE_DATAMGR_CREATE_KV, str);
 
-    memset_s(str1,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
+    memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE,str1))+1, Int2String(CTRL_CODE_RESULT_TYPE,str1));
-    waitDataWithCode(code, str1);
-    free(str1);
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	if(str == nullptr )
+    {
+        return ;
+    }
+    strcpy_s(code, strlen(str)+1, str); //9999
+    waitDataWithCode(code, str);
+    free(str);
 
 }
 
 void DistributedKvDataManagerTest::TearDown(void)
-{
-    // //1.本地删除数据库
-    // RemoveAllStore(DisKvTest::manager);
-
-    // //2.远端删除数据库
-    //  char* str1 =(char *)malloc(MAX_DATA_LENGTH);
-    // memset_s(str1,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    // strcpy_s(str1,"");
-    // writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_KV, str1);
-
-    // char code[10]={"9999"};
-    // memset_s(str1,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    // strcpy_s(code, Int2String(CTRL_CODE_RESULT_TYPE,str1));
-    // memset_s(str1,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    // waitDataWithCode(code, str1);
-
-    // free(str1);
-
-}
+{}
 
 void DistributedKvDataManagerTest::RemoveAllStore(DistributedKvDataManager manager)
 {
@@ -226,7 +218,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
  {
     ZLOGI("DistribitedKvDataManager_Sync_Push_0100 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 
 
     //本地数据库添加数据 100
@@ -261,7 +253,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -284,7 +278,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
  {
     ZLOGI("DistribitedKvDataManager_Sync_Push_0200 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     //本地数据库添加数据 3.14f
@@ -319,7 +313,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -344,7 +340,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
  {
     ZLOGI("DistribitedKvDataManager_Sync_Push_0300 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -381,7 +377,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -404,7 +402,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
  {
      ZLOGI("DistribitedKvDataManager_Sync_Push_0400 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //本地数据库添加数据 12345678
     Key keyInt = "math_score_int64_t";
@@ -436,7 +434,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -462,7 +462,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
  {
     ZLOGI("DistribitedKvDataManager_Sync_Push_0500 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
 
     //本地数据库添加数据 28
@@ -495,7 +495,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -519,7 +521,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
  {
     ZLOGI("DistribitedKvDataManager_Sync_Push_0600 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
 
     //本地数据库添加数据string 
@@ -551,7 +553,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -576,7 +580,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
  {
     ZLOGI("DistribitedKvDataManager_Sync_Push_0700 begin.");    
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
 
     //1.///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -623,7 +627,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -648,7 +654,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     ZLOGI("DistribitedKvDataManager_Sync_Pull_0100 begin."); 
    //1.本端创建KV
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 
     //2.创建远端KV
     //3. 本地数据库添加数据 100 
@@ -681,7 +687,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -699,9 +707,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
 
    // std::vector<std::string> deviceList;
    deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PULL); //PUSH_PULL
     EXPECT_EQ(status, Status::SUCCESS);
@@ -737,7 +745,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -765,7 +775,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
  {
      ZLOGI("DistribitedKvDataManager_Sync_Pull_0200 begin."); 
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //2.创建远端Lv
     //3. 本地数据库添加数据 100
@@ -803,7 +813,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -822,9 +834,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
 
    // std::vector<std::string> deviceList;
     deviceList.clear();  
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PULL);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -858,7 +870,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -885,7 +899,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
  {
     ZLOGI("DistribitedKvDataManager_Sync_Pull_0300 begin."); 
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //2.创建远端Lv
     //3. 本地数据库添加数据28.288f
@@ -921,7 +935,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -939,9 +955,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
 
    // std::vector<std::string> deviceList;
    deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }    
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PULL);
     EXPECT_EQ(status, Status::SUCCESS); 
@@ -977,7 +993,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     // char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1006,7 +1024,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0400, 
 {
     ZLOGI("DistribitedKvDataManager_Sync_Pull_0400 begin."); 
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //2.创建远端Lv
     //3. 本地数据库添加数据 100
@@ -1039,7 +1057,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0400, 
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1057,9 +1077,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0400, 
 
    // std::vector<std::string> deviceList;
    deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }    
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PULL);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -1091,7 +1111,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0400, 
     //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1120,7 +1142,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0500, 
 {
     ZLOGI("DistribitedKvDataManager_Sync_Pull_0100 begin."); 
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //2.创建远端Lv
     //3. 本地数据库添加数据 100
@@ -1152,7 +1174,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0500, 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str));//9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1169,9 +1193,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0500, 
 
     //std::vector<std::string> deviceList;
     deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }   
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PULL);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -1203,7 +1227,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0500, 
     // char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1231,7 +1257,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0600, 
 {
     ZLOGI("DistribitedKvDataManager_Sync_Pull_0600 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //2.创建远端Lv
     //3. 本地数据库添加数据 100
@@ -1259,7 +1285,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0600, 
    char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1277,9 +1305,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0600, 
 
    // std::vector<std::string> deviceList;
    deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }    
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PULL);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -1313,7 +1341,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0600, 
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     //char code[10]={0};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1340,7 +1370,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
 {
     ZLOGI("DistribitedKvDataManager_Sync_Pull_0700 begin."); 	
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //2.创建远端Lv
     //3.本地数据库添加数据 vector<int>
@@ -1384,7 +1414,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1402,9 +1434,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
 
    // std::vector<std::string> deviceList;
    deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }    
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PULL);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -1436,7 +1468,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1463,7 +1497,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
  {
     ZLOGI("DistribitedKvDataManager_Sync_PUSH_PULL_0100 begin."); 	
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //2.创建远端Lv
     //3. 本地数据库添加数据 100
@@ -1492,7 +1526,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete int result=" << str<< std::endl;
@@ -1508,9 +1544,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
 
     // std::vector<std::string> deviceList;
     deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }    
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PUSH_PULL);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -1539,7 +1575,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get int  result=" << str<< std::endl;
@@ -1569,7 +1607,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     ZLOGI("DistribitedKvDataManager_Sync_PUSH_PULL_0200 begin.");
  
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //2.创建远端Lv
     //3. 本地数据库添加数据 100
@@ -1598,7 +1636,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete float get result=" << str<< std::endl;
@@ -1613,9 +1653,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     EXPECT_EQ(status, Status::SUCCESS);
     // std::vector<std::string> deviceList;
     deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }       
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PUSH_PULL);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -1645,7 +1685,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get result=" << str<< std::endl;
@@ -1673,7 +1715,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     ZLOGI("DistribitedKvDataManager_Sync_PUSH_PULL_0300 begin.");
     
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //2.创建远端Lv
     //3. 本地数据库添加数据 100
@@ -1701,7 +1743,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "delete double result=" << str<< std::endl;
@@ -1717,9 +1761,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
 
     // std::vector<std::string> deviceList;
     deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }    
 
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PUSH_PULL);
@@ -1751,7 +1795,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "get result=" << str<< std::endl;
@@ -1779,7 +1825,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     ZLOGI("DistribitedKvDataManager_Sync_PUSH_PULL_0400 begin.");
    
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //2.创建远端Lv
     //3. 本地数据库添加数据 100
@@ -1807,7 +1853,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete int64_t result=" << str<< std::endl;
@@ -1823,9 +1871,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
    // std::vector<std::string> deviceList;
    deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }       
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PUSH_PULL);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -1854,7 +1902,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "get  result=" << str<< std::endl;
@@ -1883,7 +1933,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     ZLOGI("DistribitedKvDataManager_Sync_PUSH_PULL_0500 begin.");
   
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //2.创建远端Lv
     //3. 本地数据库添加数据 100
@@ -1912,7 +1962,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete size_t result=" << str<< std::endl;
@@ -1929,9 +1981,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
    // std::vector<std::string> deviceList;
    deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }       
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PUSH_PULL);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -1959,7 +2011,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get  result=" << str<< std::endl;
@@ -1987,7 +2041,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     ZLOGI("DistribitedKvDataManager_Sync_PUSH_PULL_0600 begin.");
    
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
 	
     //2.创建远端Lv
     //3. 本地数据库添加数据 100
@@ -2016,7 +2070,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={0};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "delete string result=" << str<< std::endl;
@@ -2033,9 +2089,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
    // std::vector<std::string> deviceList;
    deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }    
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PUSH_PULL);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -2064,7 +2120,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get result=" << str<< std::endl;
@@ -2091,7 +2149,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("DistribitedKvDataManager_Sync_PUSH_PULL_0700 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //2.创建远端Lv
     //3. 本地数据库添加数据 100
     Key keyInt = "math_score_int";
@@ -2120,7 +2178,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete vector result=" << str<< std::endl;
@@ -2136,9 +2196,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
    // std::vector<std::string> deviceList;
    deviceList.clear();
-    for (const auto& device : remoteDevice) {
-        std::cout << "start sync" << device.deviceId << std::endl;        
-        deviceList.push_back(device.deviceId);
+    for (const auto& device2 : remoteDevice) {
+        std::cout << "start sync" << device2.deviceId << std::endl;        
+        deviceList.push_back(device2.deviceId);
     }    
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PUSH_PULL);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -2167,7 +2227,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get result=" << str<< std::endl;
@@ -2197,7 +2259,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("SubscribeWithQuery_0100 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -2212,7 +2274,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2270,7 +2334,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("SubscribeWithQuery_0200 begin.");
    EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -2282,7 +2346,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2339,7 +2405,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("SubscribeWithQuery_0300 begin.");
    EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -2351,7 +2417,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2411,7 +2479,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("SubscribeWithQuery_0400 begin.");
    EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -2423,7 +2491,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2480,7 +2550,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("SubscribeWithQuery_0500 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -2492,7 +2562,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2548,7 +2620,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("SubscribeWithQuery_0600 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -2560,7 +2632,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2616,7 +2690,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
  {
     ZLOGI("SubscribeWithQuery_0700 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -2644,7 +2718,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-vector<uint8_t>  get result=" << str<< std::endl;
@@ -2697,7 +2773,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("SyncWithCondition_0100 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -2712,7 +2788,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2766,7 +2844,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("SyncWithCondition_0200 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -2778,7 +2856,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2830,7 +2910,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("SyncWithCondition_0300 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -2842,7 +2922,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2899,7 +2981,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("SyncWithCondition_0400 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -2911,7 +2993,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2963,7 +3047,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("SyncWithCondition_0500 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -2975,7 +3059,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -3026,7 +3112,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     ZLOGI("SyncWithCondition_0600 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -3038,7 +3124,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -3089,7 +3177,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
  {
     ZLOGI("SyncWithCondition_0700 begin.");
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
-    EXPECT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+    ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     //1.本端创建Lv
     //2.远端创建kv
 
@@ -3116,7 +3204,9 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     char code[10]={"9999"};
     memset_s(code,10,0,10);
-    strcpy_s(code, strlen(Int2String(CTRL_CODE_RESULT_TYPE, str))+1, Int2String(CTRL_CODE_RESULT_TYPE, str)); //9999
+	Int2String(CTRL_CODE_RESULT_TYPE, str);
+	ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str); //9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
