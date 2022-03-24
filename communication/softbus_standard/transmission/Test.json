@@ -1,0 +1,21 @@
+{
+    "kits": [
+        {
+            "push": [
+                "SoftBusTransFunTest ->/data/local/tmp/SoftBusTransFunTest"
+            ],
+            "temp": "PushKit",
+            "post-push": [
+                "chmod -R 777 /data/local/tmp/*"
+            ]
+        }
+    ],
+    "dirver": {
+        "native-test-timeout": "120000",
+        "type": "CppTest",
+        "module-name": "SoftBusTransFunTest",
+        "runtime-hint": "ls",
+        "native-test-device-path": "/data/local/tmp/"
+    },
+    "description": "configuration for SoftBusTransFunTest Tests"
+}
