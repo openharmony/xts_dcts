@@ -114,15 +114,7 @@ extern "C" {
 #define CASE_9 9
 #define CASE_10 10
 
-const char* const def_ssid = "OpenHarmony_Private_Net_01";
-const char* const slave_ssid = "OpenHarmony_Private_Net_02";
-const char* const def_passwd = "OH2022@xa";
-const int ONE_SECOND = 1;
-const int TWO_SECOND = 2;
-const int THEER_SECOND = 3;
-const int FIVE_SECOND = 5;
-const int TEN_SECOND = 10;
-const int GROUP_ID_LEN = 4;
+const static int GROUP_ID_LEN = 4;
 
 typedef enum {
     SESSION_4DATA = 1,

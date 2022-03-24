@@ -20,6 +20,9 @@ using std::unique_ptr;
 using namespace OHOS::Wifi;
 
 const static int WIFI_SA_ID = 1125;
+const static int TWO_SECOND = 2;
+const static int FIVE_SECOND = 5;
+const static char* const def_ssid = "OpenHarmony_Private_Net_01";
 static unique_ptr<WifiDevice> wifiDevicePtr = WifiDevice::GetInstance(WIFI_SA_ID);
 
 int WiFiUtils::EnableWifi()
@@ -91,7 +94,7 @@ int WiFiUtils::DisableWifi()
                 LOG("[wifi]not active, timeout:%d", timeout);
                 break;
             }
-            sleep(ONE_SECOND);
+            sleep(1);
             timeout--;
         } while (timeout > 0);
 

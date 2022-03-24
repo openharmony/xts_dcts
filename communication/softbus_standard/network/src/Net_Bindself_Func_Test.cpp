@@ -20,6 +20,8 @@
 
 using namespace testing::ext;
 
+const static int TEN_SECOND = 10;
+
 class Net_Bindself_Func_Test : public testing::Test {
 public:
     static void SetUpTestCase();

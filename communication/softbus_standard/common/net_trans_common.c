@@ -98,7 +98,7 @@ int Wait(int timeout)
     int count = 0;
     int t = timeout;
     while (t > 0) {
-        sleep(ONE_SECOND);
+        sleep(1);
         if (g_waitFlag != WAIT_DEF_VALUE) {
             LOG("Wait success[flag:%d] [time:%d]", g_waitFlag, count);
             break;
@@ -121,7 +121,7 @@ int WaitNodeCount(int timeout, WaitNodeStateType state, int expectCount)
     int hitFlag = -1;
     int t = timeout;
     while (t > 0) {
-        sleep(ONE_SECOND);
+        sleep(1);
         switch (state) {
             case STATE_ONLINE:
                 if (g_nodeOnlineCount == expectCount) {
@@ -171,7 +171,7 @@ int Wait4Session(int timeout, WaitSessionType type)
     int hitFlag = -1;
     int t = timeout;
     while (t > 0) {
-        sleep(ONE_SECOND);
+        sleep(1);
         switch (type) {
             case SESSION_4CTL:
                 if (g_waitFlag4Ctl != WAIT_DEF_VALUE) {
@@ -422,7 +422,7 @@ static void OnLeaveNetCallBack(const char* networkId, int32_t ret)
 static int DataSessionOpened(int sessionId, int result)
 {
     // wait 1s, ensure set current session id
-    sleep(ONE_SECOND);
+    sleep(1);
     g_sessionOpenCount4Data++;
     if (result == SOFTBUS_OK) {
         if (sessionId == g_currentSessionId4Data) {
@@ -503,7 +503,7 @@ static void DataMessageReceived(int sessionId,
 static int ControlSessionOpened(int sessionId, int result)
 {
     // wait 1s, ensure set current session id
-    sleep(ONE_SECOND);
+    sleep(1);
     g_sessionOpenCount4Ctrl++;
     if (result == SOFTBUS_OK) {
         if (sessionId == g_currentSessionId4Ctl) {
@@ -801,7 +801,7 @@ int DiscoverAndJoinNetwork(void)
     if (ret != SOFTBUS_OK) {
         return ret;
     }
-    sleep(ONE_SECOND);
+    sleep(1);
 
     return JoinNetwork();
 }

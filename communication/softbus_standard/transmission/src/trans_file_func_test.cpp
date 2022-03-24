@@ -130,7 +130,7 @@ static int WaitFile(int timeout)
     int count = 0;
     int t = timeout;
     while (t > 0) {
-        sleep(ONE_SECOND);
+        sleep(1);
         if (g_waitFlag != WAIT_DEF_VALUE) {
             LOG("waitfile success[flag:%d][time:%d]", g_waitFlag, count);
             break;
