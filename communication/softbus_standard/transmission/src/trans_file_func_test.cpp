@@ -124,7 +124,7 @@ void TransFileFuncTest::TearDownTestCase()
     SoftBus_Test_Permission::RemovePermission(DEF_PKG_NAME);
 }
 
-int WaitFile(int timeout)
+static int WaitFile(int timeout)
 {
     LOG("start waitfile,timeout:%d", timeout);
     int count = 0;

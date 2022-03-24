@@ -79,7 +79,6 @@ extern "C" {
 #define WAIT_SUCCESS_VALUE 1
 #define WAIT_FAIL_VALUE 0
 #define SESSION_ID_MIN 1
-#define GROUP_ID_LEN 4
 #define MAX_SESSION_NUM 16
 #define BOOL_TRUE 1
 #define BOOL_FALSE 0
@@ -123,6 +122,7 @@ const int TWO_SECOND = 2;
 const int THEER_SECOND = 3;
 const int FIVE_SECOND = 5;
 const int TEN_SECOND = 10;
+const int GROUP_ID_LEN = 4;
 
 typedef enum {
     SESSION_4DATA = 1,
