@@ -18,6 +18,15 @@
 #include <cstring>
 using namespace std;
 
+#define PERMISSION 0666
+#define CODE_HEAD 4
+#define STR_KEY 5
+#define CODE_LEN 5
+#define SHARED_DATA_LEN 5
+#define WAITTIME 2
+#define DECIM_TEN 10
+#define CALCU_TWO 2
+
 static void *shm = NULL; //分配的共享内存的原始首地址
 static struct shared_use_st *shared; //指向shm
 static int shmid; //共享内存标识符
@@ -25,7 +34,7 @@ static int shmid; //共享内存标识符
 int createShm(int key)
 {
     //创建共享内存
-    shmid = shmget((key_t)key,sizeof(struct shared_use_st), 0666|IPC_CREAT);
+    shmid = shmget((key_t)key,sizeof(struct shared_use_st), PERMISSION|IPC_CREAT);
     if(shmid == -1)
     {
         return -1;
@@ -56,8 +65,7 @@ void initShm(void)
 
 int readDataFromShm(char* buf)
 {
-    //LOG("readDataFormShm, begin");
-    if(shared == NULL)
+    if (shared == NULL)
     {
         return -1;
     }
@@ -83,7 +91,7 @@ int waitDataWithCode(char* code, char* data)
     char str[1024] = {0};
     memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     
-    if(code == NULL || data == NULL )
+    if (code == NULL || data == NULL)
     {
         return -1;
     }
@@ -91,10 +99,9 @@ int waitDataWithCode(char* code, char* data)
     {
         if(readDataFromShm(str) ==0)
         {
-            if(strncmp(code, str, 4) == 0)
+            if(strncmp(code, str, CODE_HEAD) == 0)
             {
-                //char* pNext = (char*)strtok(str,":");
-                strncpy(data,str+5,1);
+                strncpy(data,str+STR_KEY,1);
                 return 0;
             }
 
@@ -111,7 +118,7 @@ int writeCodeDataToShm(int code, char*buf)
     char str[1024] = {0};
     memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char codeStr[5] = {0};
-    memset_s(codeStr, 5, 0, 5);
+    memset_s(codeStr, CODE_LEN, 0, CODE_LEN);
     char* str2 = Int2String(code, codeStr);
     if (str2 == NULL)
     {
@@ -119,7 +126,7 @@ int writeCodeDataToShm(int code, char*buf)
     }
     strcpy_s(str, strlen(codeStr)+1, codeStr);
     strcat(str, ":");
-    if(buf == NULL)
+    if (buf == NULL)
     {
         return -1;
     }
@@ -134,7 +141,7 @@ int writeCodeDataToShm(int code, char*buf)
 int writeDataToShm(char* buf)
 {
     LOG("writeDataToShm, begin");
-    if(shared == NULL || buf == NULL)
+    if (shared == NULL || buf == NULL)
     {
         return -1;
     }
@@ -144,10 +151,10 @@ int writeDataToShm(char* buf)
     }
 
     LOG("writeDataToShm %s", buf);
-    memset_s(shared->data, 5, 0, 5);
+    memset_s(shared->data, SHARED_DATA_LEN, 0, SHARED_DATA_LEN);
     strcpy_s(shared->data, strlen(buf)+1, buf);
     shared->written = 1;
-    sleep(2);
+    sleep(WAITTIME);
     return 0; 
 }
 
@@ -172,7 +179,7 @@ int deleteShm(void)
 
 char* Int2String(int num,char *str)//10进制
 {
-    if(str == NULL )
+    if (str == NULL)
     {
         return NULL;
     }
@@ -185,8 +192,8 @@ char* Int2String(int num,char *str)//10进制
     //转换
     do
     {
-        str[i++] = num%10+48;//取num最低位 字符0~9的ASCII码是48~57：简单来说数字0+48=48，ASCII码对应字符'0'
-        num /=10;//去掉最低位
+        str[i++] = num%DECIM_TEN+48;//取num最低位 字符0~9的ASCII码是48~57：简单来说数字0+48=48，ASCII码对应字符'0'
+        num /=DECIM_TEN;//去掉最低位
     }while(num);//num不为0继续循环
 
     str[i] = '\0';
@@ -199,7 +206,7 @@ char* Int2String(int num,char *str)//10进制
         ++i;//由于有负号，所以交换的对称轴也要后移一位
     }
     //对称交换
-    for(;j<i/2;j++)
+    for(;j<i/CALCU_TWO;j++)
     {
         //对称交换两端的值 其实就是省下中间变量交换a+b的值：a=a+b;b=a-b;a=a-b;
         str[j] = str[j] + str[i-1-j];

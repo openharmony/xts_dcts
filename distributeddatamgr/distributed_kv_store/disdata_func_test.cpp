@@ -48,7 +48,7 @@ typedef enum{
 } CtrlCodeType;
 
 #define MAX_DATA_LENGTH 1024
-
+#define DEFDELTA 0.00001
 using namespace testing::ext;
 using namespace OHOS::DistributedKv;
 namespace {
@@ -74,7 +74,7 @@ public:
     static const uint32_t CHECK_WAITING_TIME = 50000; //50ms
     static void RemoveAllStore(DistributedKvDataManager manager);
 
-   DistributedKvDataManagerTest();
+    DistributedKvDataManagerTest();
 };
 
 class DisKvTest {
@@ -108,8 +108,8 @@ void DistributedKvDataManagerTest::SetUpTestCase(void)
 
 void DistributedKvDataManagerTest::TearDownTestCase(void)
 {
-     //解关联共享内存
-     disconnectShm();
+    //解关联共享内存
+    disconnectShm();
 }
 
 void DistributedKvDataManagerTest::SetUp(void)
@@ -136,11 +136,11 @@ void DistributedKvDataManagerTest::SetUp(void)
     strcpy_s(str, strlen("")+1,"");
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_KV, str);
 
-    char code[10]={"9999"};
+    char code[CODE_LEN_TEN]={"9999"};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	if(str == nullptr )
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    if (str == nullptr)
     {
         return ;
     }
@@ -164,9 +164,9 @@ void DistributedKvDataManagerTest::SetUp(void)
     writeCodeDataToShm(CTRL_CODE_DATAMGR_CREATE_KV, str);
 
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	if(str == nullptr )
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    if (str == nullptr)
     {
         return ;
     }
@@ -198,7 +198,6 @@ public:
 
 void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Status> &results)
 {
-    //std::cout<<"KvStoreSyncCallbackTestImpl timestamp:"<< getCurrentLocalTimeStamp() << std::endl;
     std::cout<<"KvStoreSyncCallbackTestImpl timestamp:" << std::endl;
     for (const auto& result : results)
     {
@@ -252,10 +251,10 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); //2001:math_score_int:10
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -263,7 +262,6 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
 
     //检查远端是否返回成功
     int ret = strcmp(str,"0");
-    // ret = 0;
     EXPECT_EQ(ret, 0);
 }
 
@@ -284,7 +282,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     //本地数据库添加数据 3.14f
     std::string stringKey = "math_score_float";
     Key keyInt = stringKey;
-    //float nfloat = 3.14f;
+    
     Value valueInt = Value(TransferTypeToByteArray<float>(3.14f));
     Status status = DisKvTest::KvStorePtr->Put(keyInt, valueInt);
     EXPECT_EQ(Status::SUCCESS, status);
@@ -312,10 +310,10 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); //2001:math_score_int:10
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -347,7 +345,6 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     //本地数据库添加数据 28.288f
     std::string stringKey = "math_score_double";
     Key keyInt = stringKey;
-    //double nfloat = 28.288f;
     Value valueInt = Value(TransferTypeToByteArray<double>(28.288f));
     Status status = DisKvTest::KvStorePtr->Put(keyInt, valueInt);
     EXPECT_EQ(Status::SUCCESS, status);
@@ -376,10 +373,10 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); //2001:math_score_int:10
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -433,10 +430,10 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); //2001:math_score_int:10
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -494,10 +491,10 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); //2001:math_score_int:10
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -550,12 +547,12 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     //strcpy_s(str, strlen("math_score_int:d")+1, "math_score_int:d");
 
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, str); //2001:math_score_int:10
-    //char str[MAX_DATA_LENGTH] = {0};
+    
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -626,10 +623,10 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
 
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -677,7 +674,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     ASSERT_EQ(status, Status::SUCCESS);
 
     //5.远端修改数据200
-    //char strPut[MAX_DATA_LENGTH] = {"math_score_int:200"};
+    
     char strKV[MAX_DATA_LENGTH] = {"math"};
     memset_s(strKV,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     strcpy_s(strKV, strlen("math_score_int:200")+1, "math_score_int:200");
@@ -685,11 +682,11 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -700,12 +697,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     EXPECT_EQ(ret, 0);
 
    //6.本地pull远端数据
-   // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
-
-   // std::vector<std::string> deviceList;
    deviceList.clear();
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -742,12 +736,12 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     //8.数据发送到远端并等待返回结果
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
     
-    //char str[MAX_DATA_LENGTH] = {0};
+    
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -781,7 +775,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     //3. 本地数据库添加数据 100
     std::string stringKey = "math_score_float";
     Key keyInt = stringKey;
-    //float nfloat = 3.14f;
+    
     Value valueInt = Value(TransferTypeToByteArray<float>(3.14f));
 
     Status status = DisKvTest::KvStorePtr->Put(keyInt, valueInt);
@@ -811,11 +805,11 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -827,12 +821,12 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
 
 
     //6.本地pull远端数据
-       // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
+       
     remoteDevice.clear();  
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
 
-   // std::vector<std::string> deviceList;
+   
     deviceList.clear();  
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -862,17 +856,17 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     EXPECT_EQ(status, Status::SUCCESS);
     float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
     float delta = aaa - 9.99f;
-    EXPECT_LE( std::abs(delta), 0.00001);
+    EXPECT_LE( std::abs(delta), DEFDELTA);
 
     //8.数据发送到远端并等待返回结果
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
     
-    //char str[MAX_DATA_LENGTH] = {0};
+    
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -905,7 +899,6 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     //3. 本地数据库添加数据28.288f
     std::string stringKey = "math_score_double";
     Key keyInt = stringKey;
-    //double nfloat = 28.288;
     Value valueInt = Value(TransferTypeToByteArray<double>(28.288));
 
     Status status = DisKvTest::KvStorePtr->Put(keyInt, valueInt);
@@ -933,11 +926,11 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strKV);
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -948,12 +941,12 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     EXPECT_EQ(ret, 0);
 
     //6.本地pull远端数据
-    // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
+    
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
 
-   // std::vector<std::string> deviceList;
+   
    deviceList.clear();
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -984,18 +977,15 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     double delta = aaa - 999.999;
     std::cout<<"aaa = "<< aaa <<std::endl;
     std::cout<<"delta = "<< delta <<std::endl;
-    EXPECT_LE( std::abs(delta), 0.00001);
+    EXPECT_LE( std::abs(delta), DEFDELTA);
 
     //8.数据发送到远端并等待返回结果
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
-    
-    // char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    // char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1047,7 +1037,6 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0400, 
     ASSERT_EQ(status, Status::SUCCESS);
 
     //5.远端修改数据200
-    //char strPut[MAX_DATA_LENGTH] = {"math_score_int:99889988"};
     char strKV[MAX_DATA_LENGTH] = {"math"};
     memset_s(strKV,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     strcpy_s(strKV, strlen("math_score_int64_t:99889988")+1, "math_score_int64_t:99889988");
@@ -1055,11 +1044,11 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0400, 
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strKV);
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1070,12 +1059,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0400, 
     EXPECT_EQ(ret, 0);
 
     //6.本地pull远端数据
-    // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
+    
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
 
-   // std::vector<std::string> deviceList;
+   
    deviceList.clear();
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -1108,12 +1097,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0400, 
     //8.数据发送到远端并等待返回结果
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
     
-    //char str[MAX_DATA_LENGTH] = {0};
+    
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1165,7 +1154,6 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0500, 
     ASSERT_EQ(status, Status::SUCCESS);
 
     //5.远端修改数据200
-    //char strPut[MAX_DATA_LENGTH] = {"math_score_int:88"};
     char strKV[MAX_DATA_LENGTH] = {"math"};
     memset_s(strKV,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     strcpy_s(strKV, strlen("math_score_size_t:88")+1, "math_score_size_t:88");
@@ -1173,10 +1161,10 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0500, 
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strKV);
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1223,13 +1211,11 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0500, 
 
     //8.数据发送到远端并等待返回结果
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
-    
-    // char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1284,10 +1270,10 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0600, 
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strPut);
    char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1298,12 +1284,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0600, 
     EXPECT_EQ(ret, 0);
 
     //6.本地pull远端数据
-   // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
+   
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
 
-   // std::vector<std::string> deviceList;
+   
    deviceList.clear();
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -1337,13 +1323,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0600, 
     //8.数据发送到远端并等待返回结果
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strPut); 
     
-    //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    //char code[10]={0};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    //char code[CODE_LEN_TEN]={0};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1412,11 +1397,11 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strKV);
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1427,12 +1412,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     EXPECT_EQ(ret, 0);
 
     //6.本地pull远端数据
-    // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
+    
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
 
-   // std::vector<std::string> deviceList;
+   
    deviceList.clear();
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -1465,12 +1450,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     //8.数据发送到远端并等待返回结果
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
     
-    //char str[MAX_DATA_LENGTH] = {0};
+    
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
    
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -1525,10 +1510,10 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete int result=" << str<< std::endl;
@@ -1537,12 +1522,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     EXPECT_EQ(ret, 0);
 
     //6.本地push_pull远端数据
-    // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
+    
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
 
-    // std::vector<std::string> deviceList;
+    
     deviceList.clear();
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -1572,12 +1557,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     //8.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
     
-    //char str[MAX_DATA_LENGTH] = {0};
+    
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get int  result=" << str<< std::endl;
@@ -1635,10 +1620,10 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete float get result=" << str<< std::endl;
@@ -1647,11 +1632,11 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     EXPECT_EQ(ret, 0);
 
     //6.本地push_pull远端数据
-    // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
+    
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
-    // std::vector<std::string> deviceList;
+    
     deviceList.clear();
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -1682,12 +1667,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     //8.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
     
-    //char str[MAX_DATA_LENGTH] = {0};
+    
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get result=" << str<< std::endl;
@@ -1742,10 +1727,10 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_DATA, strKV);
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "delete double result=" << str<< std::endl;
@@ -1754,12 +1739,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     EXPECT_EQ(ret, 0);
 
     //6.本地push_pull远端数据
-    // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
+    
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
 
-    // std::vector<std::string> deviceList;
+    
     deviceList.clear();
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -1792,12 +1777,12 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     //8.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
     
-    //char str[MAX_DATA_LENGTH] = {0};
+    
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "get result=" << str<< std::endl;
@@ -1852,10 +1837,10 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_DATA, strKV);
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete int64_t result=" << str<< std::endl;
@@ -1864,12 +1849,12 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     EXPECT_EQ(ret, 0);
 
     //6.本地push_pull远端数据
-    // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
+    
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
 
-   // std::vector<std::string> deviceList;
+   
    deviceList.clear();
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -1899,12 +1884,12 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     //8.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
     
-    //char str[MAX_DATA_LENGTH] = {0};
+    
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "get  result=" << str<< std::endl;
@@ -1961,10 +1946,10 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete size_t result=" << str<< std::endl;
@@ -1974,12 +1959,12 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
 
     //6.本地push_pull远端数据
-   // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
+   
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
 
-   // std::vector<std::string> deviceList;
+   
    deviceList.clear();
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -2008,12 +1993,12 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
      //8.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);    
-    //char str[MAX_DATA_LENGTH] = {0};
+    
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get  result=" << str<< std::endl;
@@ -2069,10 +2054,10 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={0};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={0};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "delete string result=" << str<< std::endl;
@@ -2082,12 +2067,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
 
     //6.本地push_pull远端数据
-       // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
+       
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
 
-   // std::vector<std::string> deviceList;
    deviceList.clear();
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -2117,12 +2101,12 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
    //8.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
     
-    //char str[MAX_DATA_LENGTH] = {0};
+    
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get result=" << str<< std::endl;
@@ -2177,10 +2161,10 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " delete vector result=" << str<< std::endl;
@@ -2188,13 +2172,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     int ret = strcmp(str,"0");
     EXPECT_EQ(ret, 0);
 
-    //6.本地push_pull远端数据
-       // std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
+    //6.本地push_pull远端数据   
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
-
-   // std::vector<std::string> deviceList;
+   
    deviceList.clear();
     for (const auto& device2 : remoteDevice) {
         std::cout << "start sync" << device2.deviceId << std::endl;        
@@ -2223,13 +2205,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     //8.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
-    
-    //char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << " get result=" << str<< std::endl;
@@ -2264,7 +2244,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     //2.远端创建kv
 
     //3. 远端put int 
-    //char strPut[MAX_DATA_LENGTH] = {"math_score_int:200"};
+    
     char strKV[MAX_DATA_LENGTH] = {"math_score_int"};
     memset_s(strKV,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     strcpy_s(strKV, strlen("math_score_int:200")+1, "math_score_int:200");
@@ -2272,11 +2252,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2344,11 +2324,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2385,7 +2365,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     EXPECT_EQ(status, Status::SUCCESS) << "LOGdisDataTest--ERR:Get(keyInt, valueRetInt)";
     float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
     float delta = aaa - 9.99f;
-    EXPECT_LE( std::abs(delta), 0.00001);
+    EXPECT_LE( std::abs(delta), DEFDELTA);
 
     //////取消订阅
     auto unSubscribeStatus = DisKvTest::KvStorePtr->UnsubscribeWithQuery(deviceList, dataQuery);
@@ -2415,11 +2395,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2458,7 +2438,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     double delta = aaa - 999.999;
     std::cout<<"aaa = "<< aaa <<std::endl;
     std::cout<<"delta = "<< delta <<std::endl;
-    EXPECT_LE( std::abs(delta), 0.00001);
+    EXPECT_LE( std::abs(delta), DEFDELTA);
 
     //////取消订阅
     auto unSubscribeStatus = DisKvTest::KvStorePtr->UnsubscribeWithQuery(deviceList, dataQuery);
@@ -2489,11 +2469,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2560,11 +2540,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2630,11 +2610,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2716,11 +2696,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-vector<uint8_t>  get result=" << str<< std::endl;
@@ -2778,7 +2758,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     //2.远端创建kv
 
     //3. 远端put int 
-    //char strPut[MAX_DATA_LENGTH] = {"math_score_int:200"};
+    
     char strKV[MAX_DATA_LENGTH] = {"math_score_int"};
     memset_s(strKV,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     strcpy_s(strKV, strlen("math_score_int:200")+1, "math_score_int:200");
@@ -2786,11 +2766,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2854,11 +2834,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2895,7 +2875,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     EXPECT_EQ(status, Status::SUCCESS) << "LOGdisDataTest--ERR:Get(keyInt, valueRetInt)";
     float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
     float delta = aaa - 9.99f;
-    EXPECT_LE( std::abs(delta), 0.00001);
+    EXPECT_LE( std::abs(delta), DEFDELTA);
  }
 
  
@@ -2920,11 +2900,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -2963,7 +2943,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     double delta = aaa - 999.999;
     std::cout<<"aaa = "<< aaa <<std::endl;
     std::cout<<"delta = "<< delta <<std::endl;
-    EXPECT_LE( std::abs(delta), 0.00001);
+    EXPECT_LE( std::abs(delta), DEFDELTA);
 
   
  }
@@ -2991,11 +2971,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -3057,11 +3037,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -3122,11 +3102,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;
@@ -3202,11 +3182,11 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
 
     char str[MAX_DATA_LENGTH] = {0};
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    char code[10]={"9999"};
-    memset_s(code,10,0,10);
-	Int2String(CTRL_CODE_RESULT_TYPE, str);
-	ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str)+1, str);
+    char code[CODE_LEN_TEN]={"9999"};
+    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    Int2String(CTRL_CODE_RESULT_TYPE, str);
+    ASSERT_NE(nullptr, str);
+    strcpy_s(code, strlen(str)+1, str);  // 9999
     memset_s(str,MAX_DATA_LENGTH, 0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout  << "yput-200  get result=" << str<< std::endl;

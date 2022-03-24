@@ -80,5 +80,3 @@ char* getRealData(char* str, char* delims);
 void getParam(char* str, char ret[] [MAX_DATA_LENGTH]);
 void initKvstoreId();
 #endif
-
-
