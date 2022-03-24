@@ -109,7 +109,7 @@ void getParam(char* putData, char ret[] [MAX_DATA_LENGTH])
         strcpy_s(ret[i], strlen(result)+1, result);
         result = strtok( NULL, delims );
         i++;
-        if(i==NUMTHREE)
+        if(i == NUMTHREE)
         {
             return;
         }
@@ -182,7 +182,7 @@ int ProcessDataMgr(int code, char* recvData)
 int processDeletetData(char* putData)
 {
     LOG("LOGdisDataTest---processDeletetData,  begin");
-    //解析远端发来的数据 result[0]=code result[1]=key result[RESULR_TWO]=value
+    // 解析远端发来的数据 result[0]=code result[1]=key result[RESULR_TWO]=value
     char result[NUMTHREE][MAX_DATA_LENGTH] = {{0}, {0}, {0}};
     memset_s(result, NUMTHREE*MAX_DATA_LENGTH, 0, NUMTHREE*MAX_DATA_LENGTH);
     getParam(putData, result);
@@ -341,7 +341,7 @@ int processGetData(char* putData)
         LOG("LOGdisDataTest--daaa=  %f", daaa);
         LOG("LOGdisDataTest--d2 =  %f", d2);
         LOG("LOGdisDataTest--delta =  %f", delta);
-        if ( std::abs(delta) <= DEFDELTA)
+        if (std::abs(delta) <= DEFDELTA)
         {
             return RESULT_OK; 
         }

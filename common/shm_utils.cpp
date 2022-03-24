@@ -34,7 +34,7 @@ static int shmid; //共享内存标识符
 int createShm(int key)
 {
     //创建共享内存
-    shmid = shmget((key_t)key,sizeof(struct shared_use_st), PERMISSION|IPC_CREAT);
+    shmid = shmget((key_t)key,sizeof(struct shared_use_st),PERMISSION|IPC_CREAT);
     if(shmid == -1)
     {
         return -1;
@@ -192,8 +192,8 @@ char* Int2String(int num,char *str)//10进制
     //转换
     do
     {
-        str[i++] = num%DECIM_TEN+48;//取num最低位 字符0~9的ASCII码是48~57：简单来说数字0+48=48，ASCII码对应字符'0'
-        num /=DECIM_TEN;//去掉最低位
+        str[i++] = num%DECIM_TEN+48;
+        num /=DECIM_TEN;
     }while(num);//num不为0继续循环
 
     str[i] = '\0';
