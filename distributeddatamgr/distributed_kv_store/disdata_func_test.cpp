@@ -48,8 +48,8 @@ typedef enum{
 } CtrlCodeType;
 
 const int MAX_DATA_LENGTH = 1024;
-const int DEFDELTA = 0.00001;
-const int ERRNOT_OK = 0;
+const double DEFDELTA = 0.00001;
+const int CODE_LEN_TEN = 10;
 
 using namespace testing::ext;
 using namespace OHOS::DistributedKv;
@@ -133,8 +133,13 @@ void DistributedKvDataManagerTest::SetUp(void)
     RemoveAllStore(DisKvTest::manager);
     // 2.远端删除数据库
     char* str =(char *)malloc(MAX_DATA_LENGTH);
-    memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    strcpy_s(str, strlen("")+1,"");
+    if (str==nullptr)
+    {
+        std::cout <<"ERROR: str malloc failed"<< std::endl;
+        return;
+    }
+    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    strcpy_s(str, strlen("") + 1, "");
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_KV, str);
 
     char code[CODE_LEN_TEN] = {"9999"};
@@ -145,9 +150,11 @@ void DistributedKvDataManagerTest::SetUp(void)
     {
         return ;
     }
-    errno_t errRes = strcpy_s(code, strlen(str)+1, str);
-    if (errRes != ERRNOT_OK){
-        return
+    errno_t eret = strcpy_s(code, strlen(str)+1, str);
+    if (eret!=EOK)
+    {
+        std::cout <<"ERROR: memcpy_s failed, eret = "<< eret << std::endl;
+        return;
     }
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
@@ -161,7 +168,7 @@ void DistributedKvDataManagerTest::SetUp(void)
     // 2. 远端创建数据库
     str =(char *)malloc(MAX_DATA_LENGTH);
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    strcpy_s(str, strlen("")+1,"");
+    strcpy_s(str, strlen("") + 1, "");
     writeCodeDataToShm(CTRL_CODE_DATAMGR_CREATE_KV, str);
 
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
@@ -171,9 +178,11 @@ void DistributedKvDataManagerTest::SetUp(void)
     {
         return ;
     }
-    errno_t errRes = strcpy_s(code, strlen(str)+1, str);
-    if (errRes != ERRNOT_OK){
-        return
+    eret = strcpy_s(code, strlen(str)+1, str);
+    if (eret!=EOK)
+    {
+        std::cout << "ERROR: memcpy_s failed, eret = " << eret << std::endl; 
+        return;
     }
     waitDataWithCode(code, str);
     free(str);

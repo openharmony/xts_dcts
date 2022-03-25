@@ -28,12 +28,13 @@
 using namespace OHOS::DistributedKv;
 using namespace std;
 
-const int DEFDELTA = 0.00001;
+const double DEFDELTA = 0.00001;
 const int MAX_DATA_LENGTH = 1024;
 const int NUMTHREE = 3;
 const int STR_VALUE = 23;
 const int RESULR_TWO = 2;
-const int CODE_LEN_TEN = 10;
+const int RESULT_OK = 0;
+const int RESULT_ERR = 1;
 
 class DisKvTest {
 public:
@@ -94,8 +95,7 @@ char* getRealData(char* str, char* delims)
 
 void getParam(char* putData, char ret[] [MAX_DATA_LENGTH])
 {
-    char str[MAX_DATA_LENGTH] = {":"};
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    char str[MAX_DATA_LENGTH] = {0};
     if (putData == nullptr)
     {
         return;
@@ -286,7 +286,7 @@ int processGetData(char* putData)
     char result[NUMTHREE][MAX_DATA_LENGTH] = {{0}, {0}, {0}};
     memset_s(result, NUMTHREE*MAX_DATA_LENGTH, 0, NUMTHREE*MAX_DATA_LENGTH);
     getParam(putData, result);
-    for (int i=0; i<NUMTHREE; i++)
+    for (int i = 0; i<NUMTHREE; i++)
     {
         LOG("for result[i] %s", result[i]);
     }

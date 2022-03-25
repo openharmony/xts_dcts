@@ -27,7 +27,6 @@
 #include <sys/time.h>
 #include <sys/shm.h>
 
-const int MAX_DATA_LENGTH =1024;
 #define MAX_WAIT_TIMEOUT      10
 #define SHM_SEND_KEY              123456
 #define SHM_RECV_KEY              123466
@@ -35,7 +34,7 @@ const int MAX_DATA_LENGTH =1024;
 struct shared_use_st
 {
     int written;//作为一个标志，非0：表示可读，0表示可写
-    char data[MAX_DATA_LENGTH];//记录写入和读取的文本
+    char data[1024];//记录写入和读取的文本
 };
 
 #define LOG(format, ...)                           \

@@ -27,10 +27,6 @@
 #include "distributed_kv_data_manager.h"
 #include <sys/time.h>
 
-const int MAX_DATA_LENGTH = 1024;
-const int RESULT_OK = 0;
-const int RESULT_ERR = 1;
-
 typedef enum{
     CTRL_CODE_SOFTBUS_TYPE = 1000,
     CTRL_CODE_SOFTBUS_OPEN_SESSION,
@@ -77,6 +73,6 @@ int processPutData(char* putData);
 int processCreateKv(char* putData);
 int processDeleteKv(char* putData);
 char* getRealData(char* str, char* delims);
-void getParam(char* str, char ret[] [MAX_DATA_LENGTH]);
+void getParam(char* str, char ret[] [1024]);
 void initKvstoreId(void);
 #endif

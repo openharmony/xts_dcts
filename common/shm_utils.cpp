@@ -16,11 +16,10 @@
 #include "shm_utils.h"
 #include <cstring>
 using namespace std;
-
+const int MAX_DATA_LENGTH = 1024;
 const int PERMISSION = 0666;
 const int CODE_HEAD = 4;
 const int STR_KEY = 5;
-const int CODE_LEN = 5;
 const int SHARED_DATA_LEN = 5;
 const int WAITTIME = 2;
 const int DECIM_TEN = 10;
@@ -34,14 +33,14 @@ static int shmid; //共享内存标识符
 int createShm(int key)
 {
     //创建共享内存
-    shmid = shmget(static_cast(key_t)key, sizeof(struct shared_use_st), PERMISSION|IPC_CREAT);
+    shmid = shmget(static_cast<key_t>(key), sizeof(struct shared_use_st), PERMISSION|IPC_CREAT);
     if(shmid == -1)
     {
         return -1;
     }
     //将共享内存连接到当前进程的地址空间
     shm = shmat(shmid,nullptr,0);
-    if(shm == reinterpret_cast(void*)-1)
+    if(shm == reinterpret_cast<void*>(-1))
     {
         return -1;
     }
@@ -88,9 +87,7 @@ int waitDataWithCode(char* code, char* data)
 {
     int i = 0;
     int timeout = 10;
-    char str[1024] = {0};
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    
+    char str[MAX_DATA_LENGTH] = {0};
     if (code == nullptr || data == nullptr)
     {
         return -1;
@@ -116,9 +113,7 @@ int waitDataWithCode(char* code, char* data)
 int writeCodeDataToShm(int code, char*buf)
 {
     char str[1024] = {0};
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char codeStr[5] = {0};
-    memset_s(codeStr, CODE_LEN, 0, CODE_LEN);
     char* str2 = Int2String(code, codeStr);
     if (str2 == nullptr)
     {
