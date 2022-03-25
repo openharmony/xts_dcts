@@ -362,7 +362,6 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
         deviceList.push_back(device.deviceId);
     }
 
-
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PUSH);
     ASSERT_EQ(status, Status::SUCCESS);
 
@@ -856,7 +855,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     EXPECT_EQ(status, Status::SUCCESS);
     float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
     float delta = aaa - 9.99f;
-    EXPECT_LE( std::abs(delta), DEFDELTA);
+    EXPECT_LE(std::abs(delta), DEFDELTA);
 
     //8.数据发送到远端并等待返回结果
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
@@ -977,7 +976,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     double delta = aaa - 999.999;
     std::cout<<"aaa = "<< aaa <<std::endl;
     std::cout<<"delta = "<< delta <<std::endl;
-    EXPECT_LE( std::abs(delta), DEFDELTA);
+    EXPECT_LE(std::abs(delta), DEFDELTA);
 
     //8.数据发送到远端并等待返回结果
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); 
@@ -1324,7 +1323,6 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0600, 
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strPut); 
     
     memset_s(str,MAX_DATA_LENGTH,0,MAX_DATA_LENGTH);
-    //char code[CODE_LEN_TEN] = {0};
     memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
@@ -2172,7 +2170,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     int ret = strcmp(str,"0");
     EXPECT_EQ(ret, 0);
 
-    //6.本地push_pull远端数据   
+    // 6.本地push_pull远端数据   
     remoteDevice.clear();
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -2365,7 +2363,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     EXPECT_EQ(status, Status::SUCCESS) << "LOGdisDataTest--ERR:Get(keyInt, valueRetInt)";
     float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
     float delta = aaa - 9.99f;
-    EXPECT_LE( std::abs(delta), DEFDELTA);
+    EXPECT_LE(std::abs(delta), DEFDELTA);
 
     //////取消订阅
     auto unSubscribeStatus = DisKvTest::KvStorePtr->UnsubscribeWithQuery(deviceList, dataQuery);
@@ -2438,7 +2436,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     double delta = aaa - 999.999;
     std::cout<<"aaa = "<< aaa <<std::endl;
     std::cout<<"delta = "<< delta <<std::endl;
-    EXPECT_LE( std::abs(delta), DEFDELTA);
+    EXPECT_LE(std::abs(delta), DEFDELTA);
 
     //////取消订阅
     auto unSubscribeStatus = DisKvTest::KvStorePtr->UnsubscribeWithQuery(deviceList, dataQuery);
@@ -2875,7 +2873,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     EXPECT_EQ(status, Status::SUCCESS) << "LOGdisDataTest--ERR:Get(keyInt, valueRetInt)";
     float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
     float delta = aaa - 9.99f;
-    EXPECT_LE( std::abs(delta), DEFDELTA);
+    EXPECT_LE(std::abs(delta), DEFDELTA);
  }
 
  
@@ -2943,9 +2941,7 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     double delta = aaa - 999.999;
     std::cout<<"aaa = "<< aaa <<std::endl;
     std::cout<<"delta = "<< delta <<std::endl;
-    EXPECT_LE( std::abs(delta), DEFDELTA);
-
-  
+    EXPECT_LE(std::abs(delta), DEFDELTA);
  }
  
 
@@ -3222,8 +3218,3 @@ auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
     std::string strValueRet = valueRetInt.ToString();
     EXPECT_EQ( strvc, strValueRet.c_str());
  }
-
-
-
-
-

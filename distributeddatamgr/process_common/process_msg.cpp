@@ -33,7 +33,7 @@ using namespace std;
 #define NUMTHREE 3
 #define STR_VALUE 23
 #define RESULR_TWO 2
-#define CODE_LEN_TEN 10 
+#define CODE_LEN_TEN 10
 
 class DisKvTest {
 public:
@@ -360,7 +360,7 @@ int processGetData(char* putData)
     {
         LOG("LOGdisDataTest--math_score_size_t ");
         size_t sizeaaa = TransferByteArrayToType<size_t>(valueRetInt.Data());
-        size_t size2 = atoi(result[RESULR_TWO]); 
+        size_t size2 = atoi(result[RESULR_TWO]);
         if (sizeaaa == size2)
         {
             return RESULT_OK; 

@@ -65,7 +65,7 @@ void initShm(void)
 
 int readDataFromShm(char* buf)
 {
-    if (shared == NULL)
+    if (shared == nullptr)
     {
         return -1;
     }
@@ -91,7 +91,7 @@ int waitDataWithCode(char* code, char* data)
     char str[1024] = {0};
     memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     
-    if (code == NULL || data == NULL)
+    if (code == nullptr || data == nullptr)
     {
         return -1;
     }
@@ -120,13 +120,13 @@ int writeCodeDataToShm(int code, char*buf)
     char codeStr[5] = {0};
     memset_s(codeStr, CODE_LEN, 0, CODE_LEN);
     char* str2 = Int2String(code, codeStr);
-    if (str2 == NULL)
+    if (str2 == nullptr)
     {
         return -1;
     }
     strcpy_s(str, strlen(codeStr)+1, codeStr);
     strcat(str, ":");
-    if (buf == NULL)
+    if (buf == nullptr)
     {
         return -1;
     }
@@ -141,7 +141,7 @@ int writeCodeDataToShm(int code, char*buf)
 int writeDataToShm(char* buf)
 {
     LOG("writeDataToShm, begin");
-    if (shared == NULL || buf == NULL)
+    if (shared == nullptr || buf == nullptr)
     {
         return -1;
     }
@@ -179,9 +179,9 @@ int deleteShm(void)
 
 char* Int2String(int num,char *str)//10进制
 {
-    if (str == NULL)
+    if (str == nullptr)
     {
-        return NULL;
+        return nullptr;
     }
     int i = 0;//指示填充str
     if (num<0)//如果num为负数，将num变正
