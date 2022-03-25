@@ -15,7 +15,7 @@ import("//test/xts/tools/build/suite.gni")
 
 _all_test_packages = [
   "${DCTS_ROOT}/distributeddatamgr:distributeddatatest",
-  #"${DCTS_ROOT}/distributedschedule:distributedschetest",
+  "${DCTS_ROOT}/communication:communication",
 ]
 
 _all_test_packages_ivi = [
