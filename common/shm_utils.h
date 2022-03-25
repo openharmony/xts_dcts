@@ -17,37 +17,35 @@
 #define SHM_UTILS_H
 
 #include <cerrno>
-#include <securec.h>
+#include <cstdarg>
+#include <cstdint>
 #include <cstdio>
 #include <cstdlib>
-#include <unistd.h>
-#include <cstdint>
-#include <cstdarg>
 #include <pthread.h>
-#include <sys/time.h>
+#include <securec.h>
 #include <sys/shm.h>
+#include <sys/time.h>
+#include <unistd.h>
 
-#define MAX_WAIT_TIMEOUT      10
-#define SHM_SEND_KEY              123456
-#define SHM_RECV_KEY              123466
+#define MAX_WAIT_TIMEOUT 10
+#define SHM_SEND_KEY 123456
+#define SHM_RECV_KEY 123466
 
-struct shared_use_st
-{
-    int written;//作为一个标志，非0：表示可读，0表示可写
-    char data[1024];//记录写入和读取的文本
+struct shared_use_st {
+    int written;     // 作为一个标志，非0：表示可读，0表示可写
+    char data[1024]; // 记录写入和读取的文本
 };
 
-#define LOG(format, ...)                           \
-do                                                 \
-{                                                  \
-    time_t timeSec;                                \
-    time(&timeSec);                                \
-    struct tm tmRst;                               \
-    localtime_r(&timeSec, &tmRst);                 \
-    char strTime[10];                              \
-    strftime(strTime, sizeof(strTime), "%H:%M:%S", &tmRst);              \
-    fprintf(stdout, "[shm-utils] %s " format "\n",strTime, ##__VA_ARGS__);   \
-} while(0)
+#define LOG(format, ...)                                                        \
+    do {                                                                        \
+        time_t timeSec;                                                         \
+        time(&timeSec);                                                         \
+        struct tm tmRst;                                                        \
+        localtime_r(&timeSec, &tmRst);                                          \
+        char strTime[10];                                                       \
+        strftime(strTime, sizeof(strTime), "%H:%M:%S", &tmRst);                 \
+        fprintf(stdout, "[shm-utils] %s " format "\n", strTime, ##__VA_ARGS__); \
+    } while (0)
 
 int createShm(int key);
 int disconnectShm(void);
@@ -55,7 +53,7 @@ int writeCodeDataToShm(int code, char* buf);
 int waitDataWithCode(char* code, char* data);
 int writeDataToShm(char* buf);
 int deleteShm(void);
-char* Int2String(int num,char *str);
+char* Int2String(int num, char* str);
 void initShm(void);
 int readDataFromShm(char* buf);
 

@@ -17,17 +17,18 @@
 #define TEST_PROCESS_MSG_H
 
 #include <cerrno>
+#include <cstdarg>
+#include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <unistd.h>
-#include <cstdint>
 #include <pthread.h>
-#include <cstdarg>
-#include "distributed_kv_data_manager.h"
 #include <sys/time.h>
+#include <unistd.h>
 
-typedef enum{
+#include "distributed_kv_data_manager.h"
+
+typedef enum {
     CTRL_CODE_SOFTBUS_TYPE = 1000,
     CTRL_CODE_SOFTBUS_OPEN_SESSION,
     CTRL_CODE_DATAMGR_TYPE = 2000,
@@ -45,19 +46,16 @@ typedef enum{
     CTRL_CODE_RESULT_TYPE = 9999,
 } CtrlCodeType;
 
-
-#define LOG(format, ...)                           \
-do                                                 \
-{                                                  \
-    time_t timeSec;                                \
-    time(&timeSec);                                \
-    struct tm tmRst;                               \
-    localtime_r(&timeSec, &tmRst);                 \
-    char strTime[10];                              \
-    strftime(strTime, sizeof(strTime), "%H:%M:%S", &tmRst);              \
-    fprintf(stdout, "[process-dataMsg] %s " format "\n", strTime, ##__VA_ARGS__);   \
-} while(0)
-
+#define LOG(format, ...)                                                              \
+    do {                                                                              \
+        time_t timeSec;                                                               \
+        time(&timeSec);                                                               \
+        struct tm tmRst;                                                              \
+        localtime_r(&timeSec, &tmRst);                                                \
+        char strTime[10];                                                             \
+        strftime(strTime, sizeof(strTime), "%H:%M:%S", &tmRst);                       \
+        fprintf(stdout, "[process-dataMsg] %s " format "\n", strTime, ##__VA_ARGS__); \
+    } while (0)
 
 int ProcessSoftBus(int code, char* recvData);
 int ProcessDataMgr(int code, char* recvData);
@@ -73,6 +71,6 @@ int processPutData(char* putData);
 int processCreateKv(char* putData);
 int processDeleteKv(char* putData);
 char* getRealData(char* str, char* delims);
-void getParam(char* str, char ret[] [1024]);
+void getParam(char* str, char ret[][1024]);
 void initKvstoreId(void);
 #endif
