@@ -16,20 +16,20 @@
 #ifndef TEST_PROCESS_MSG_H
 #define TEST_PROCESS_MSG_H
 
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cerrno>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <unistd.h>
-#include <stdint.h>
+#include <cstdint>
 #include <pthread.h>
-#include <stdarg.h>
+#include <cstdarg>
 #include "distributed_kv_data_manager.h"
 #include <sys/time.h>
 
-#define MAX_DATA_LENGTH 1024
-#define RESULT_OK  0
-#define RESULT_ERR 1
+const int MAX_DATA_LENGTH = 1024;
+const int RESULT_OK = 0;
+const int RESULT_ERR = 1;
 
 typedef enum{
     CTRL_CODE_SOFTBUS_TYPE = 1000,
@@ -78,5 +78,5 @@ int processCreateKv(char* putData);
 int processDeleteKv(char* putData);
 char* getRealData(char* str, char* delims);
 void getParam(char* str, char ret[] [MAX_DATA_LENGTH]);
-void initKvstoreId();
+void initKvstoreId(void);
 #endif

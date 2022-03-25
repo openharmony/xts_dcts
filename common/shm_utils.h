@@ -16,18 +16,18 @@
 #ifndef SHM_UTILS_H
 #define SHM_UTILS_H
 
-#include <errno.h>
+#include <cerrno>
 #include <securec.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include <unistd.h>
-#include <stdint.h>
-#include <stdarg.h>
+#include <cstdint>
+#include <cstdarg>
 #include <pthread.h>
 #include <sys/time.h>
 #include <sys/shm.h>
 
-#define MAX_DATA_LENGTH      1024
+const int MAX_DATA_LENGTH =1024;
 #define MAX_WAIT_TIMEOUT      10
 #define SHM_SEND_KEY              123456
 #define SHM_RECV_KEY              123466

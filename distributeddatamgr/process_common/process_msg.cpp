@@ -14,26 +14,26 @@
  */
 
 #include "process_msg.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 #include <cstdint>
 #include <iostream>
 #include "types.h"
 #include "distributed_kv_data_manager.h"
-#include "string.h"
+#include "cstring"
 #include<sstream> // 使用stringstream
-#include <string.h>
+#include <cstring>
 #include <cstring>
 #include <securec.h>
 using namespace OHOS::DistributedKv;
 using namespace std;
 
-#define DEFDELTA 0.00001
-#define MAX_DATA_LENGTH 1024
-#define NUMTHREE 3
-#define STR_VALUE 23
-#define RESULR_TWO 2
-#define CODE_LEN_TEN 10
+const int DEFDELTA = 0.00001;
+const int MAX_DATA_LENGTH = 1024;
+const int NUMTHREE = 3;
+const int STR_VALUE = 23;
+const int RESULR_TWO = 2;
+const int CODE_LEN_TEN = 10;
 
 class DisKvTest {
 public:
@@ -49,7 +49,7 @@ public:
 };
 
 DistributedKvDataManager DisKvTest::manager;
-std::shared_ptr<SingleKvStore> DisKvTest::KvStorePtr = NULL; // declare kvstore instance.
+std::shared_ptr<SingleKvStore> DisKvTest::KvStorePtr = nullptr; // declare kvstore instance.
 Status DisKvTest::statusGetKvStore = Status::ERROR;
 Status DisKvTest::statusCloseKvStore = Status::ERROR;
 Status DisKvTest::statusDeleteKvStore = Status::ERROR;
@@ -57,13 +57,13 @@ UserId DisKvTest::userId;
 AppId DisKvTest::appId;
 StoreId DisKvTest::storeIdTest;
 
-void initKvstoreId()
+void initKvstoreId(void)
 {
    DisKvTest::userId.userId = "account0";
     DisKvTest::appId.appId = "com.ohos.kvdatamanager3.test";
     DisKvTest::storeIdTest.storeId = "test3";
 
-    //1.创建数据库
+    // 1.创建数据库
     Options options {
         .createIfMissing = true,
             .encrypt = false,     //   .persistant = true,
@@ -79,15 +79,15 @@ void initKvstoreId()
 
 char* getRealData(char* str, char* delims)
 {
-    if(str==NULL || delims==NULL)
+    if(str==nullptr || delims==nullptr)
     {
-        return NULL;
+        return nullptr;
     }
     char *result = strtok( str, delims );
-    char *second = NULL;
-    while( result != NULL ) {
+    char *second = nullptr;
+    while( result != nullptr ) {
       second = result;
-        result = strtok( NULL,delims );
+        result = strtok( nullptr,delims );
     }
     return second;
 }
@@ -96,7 +96,7 @@ void getParam(char* putData, char ret[] [MAX_DATA_LENGTH])
 {
     char str[MAX_DATA_LENGTH] = {":"};
     memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    if (putData == NULL)
+    if (putData == nullptr)
     {
         return;
     }
@@ -104,12 +104,12 @@ void getParam(char* putData, char ret[] [MAX_DATA_LENGTH])
     char delims[2] = {":"};
     char *result = strtok( str, delims );
     int i = 0;
-    while( result != NULL ) {
+    while( result != nullptr ) {
         printf( "result is \"%s\"\n", result);
         strcpy_s(ret[i], strlen(result)+1, result);
-        result = strtok( NULL, delims );
+        result = strtok( nullptr, delims );
         i++;
-        if(i == NUMTHREE)
+        if (i == NUMTHREE)
         {
             return;
         }
@@ -129,9 +129,9 @@ int ProcessDataMgr(int code, char* recvData)
     LOG("ProcessDataMgr, begin");
 
     initKvstoreId();
-    if (DisKvTest::KvStorePtr == NULL)
+    if (DisKvTest::KvStorePtr == nullptr)
     {
-        std::cout << "ERR：DisKvTest::KvStorePtr == NULL"<< std::endl;
+        std::cout << "ERR：DisKvTest::KvStorePtr == nullptr"<< std::endl;
         return RESULT_ERR; 
     }
     std::cout << "create status=" << static_cast<int>(DisKvTest::statusGetKvStore) << std::endl;
@@ -186,7 +186,7 @@ int processDeletetData(char* putData)
     char result[NUMTHREE][MAX_DATA_LENGTH] = {{0}, {0}, {0}};
     memset_s(result, NUMTHREE*MAX_DATA_LENGTH, 0, NUMTHREE*MAX_DATA_LENGTH);
     getParam(putData, result);
-    for(int i=0; i<NUMTHREE; i++)
+    for (int i=0; i<NUMTHREE; i++)
     {
         LOG("LOGdisDataTest---processGetData %s", result[i]);
     }
@@ -209,11 +209,11 @@ int processDeletetData(char* putData)
 int processPutData(char* putData)
 {
     LOG("LOGdisDataTest-processPutData,  begin");
-    //解析远端发来的数据 result[0]=code result[1]=key result[RESULR_TWO]=value
+    // 解析远端发来的数据 result[0]=code result[1]=key result[RESULR_TWO]=value
     char result[NUMTHREE][MAX_DATA_LENGTH] = {{0}, {0}, {0}};
     memset_s(result, NUMTHREE*MAX_DATA_LENGTH, 0, NUMTHREE*MAX_DATA_LENGTH);
     getParam(putData, result);
-    for(int i=0; i<NUMTHREE; i++)
+    for (int i=0; i<NUMTHREE; i++)
     {
         LOG("LOGdisDataTest-processPutData %s", result[i]);
     }
@@ -228,12 +228,12 @@ int processPutData(char* putData)
     }
     else  if(strcmp(result[1], "math_score_float") == 0)
     {
-        float f2 = atof(result[RESULR_TWO]); 
+        float f2 = atof(result[RESULR_TWO]);
         valueInt =  Value(TransferTypeToByteArray<float>(f2));
     }
     else  if(strcmp(result[1], "math_score_double") == 0)
     {
-        double f2 = atof(result[RESULR_TWO]); 
+        double f2 = atof(result[RESULR_TWO]);
         valueInt =  Value(TransferTypeToByteArray<double>(f2));
     }
     else  if(strcmp(result[1], "math_score_int64_t") == 0)
@@ -256,8 +256,8 @@ int processPutData(char* putData)
         ss=putData;
         ss2 = ss.substr(STR_VALUE);
         cout<<"LOGdisDataTest2--ss = "<< ss<<endl;
-       cout<<"LOGdisDataTest2--ss2 = "<< ss2<<endl;
-       LOG("LOGdisDataTest2--ss2.c_str() =  %s", ss2.c_str());
+        cout<<"LOGdisDataTest2--ss2 = "<< ss2<<endl;
+        LOG("LOGdisDataTest2--ss2.c_str() =  %s", ss2.c_str());
         valueInt =  Value(ss2);
 
     }
@@ -282,16 +282,16 @@ int processGetData(char* putData)
 {
     LOG("LOGdisDataTest-processGetData,  begin");
 
-    //解析远端发来的数据 result[0]=code result[1]=key result[RESULR_TWO]=value
+    // 解析远端发来的数据 result[0]=code result[1]=key result[RESULR_TWO]=value
     char result[NUMTHREE][MAX_DATA_LENGTH] = {{0}, {0}, {0}};
     memset_s(result, NUMTHREE*MAX_DATA_LENGTH, 0, NUMTHREE*MAX_DATA_LENGTH);
     getParam(putData, result);
-    for(int i=0; i<NUMTHREE; i++)
+    for (int i=0; i<NUMTHREE; i++)
     {
         LOG("for result[i] %s", result[i]);
     }
 
-    //获取到本端数据
+    // 获取到本端数据
     Value valueRetInt;
     Key keyInt=result[1];
     Status status = DisKvTest::KvStorePtr->Get(keyInt, valueRetInt);
@@ -309,7 +309,7 @@ int processGetData(char* putData)
     {
         LOG("LOGdisDataTest--math_score_int ");
         int iaaa = TransferByteArrayToType<int>(valueRetInt.Data());
-        int i2 = atoi(result[RESULR_TWO]); 
+        int i2 = atoi(result[RESULR_TWO]);
         LOG("LOGdisDataTest--iaaa=  %d", iaaa);
         LOG("LOGdisDataTest--i2 =  %d", i2);
         if (iaaa == i2)
@@ -322,7 +322,7 @@ int processGetData(char* putData)
       {
         LOG("LOGdisDataTest--math_score_float ");
         float faaa = TransferByteArrayToType<float>(valueRetInt.Data());
-        float f2 = atof(result[RESULR_TWO]); 
+        float f2 = atof(result[RESULR_TWO]);
         float fdelta = f2 - faaa;
         LOG("LOGdisDataTest--faaa=  %f", faaa);
         LOG("LOGdisDataTest--f2 =  %f", f2);
@@ -336,7 +336,7 @@ int processGetData(char* putData)
       {
         LOG("LOGdisDataTest--math_score_double ");
         double daaa = TransferByteArrayToType<double>(valueRetInt.Data());
-        double d2 = atof(result[RESULR_TWO]); 
+        double d2 = atof(result[RESULR_TWO]);
         double delta = d2 - daaa;
         LOG("LOGdisDataTest--daaa=  %f", daaa);
         LOG("LOGdisDataTest--d2 =  %f", d2);
@@ -384,9 +384,9 @@ int processGetData(char* putData)
     }
     else  if(strcmp(result[1], "math_score_vector") == 0)
     { 
-       LOG("LOGdisDataTest--result[RESULR_TWO]=  %s", result[RESULR_TWO]);
-       LOG("LOGdisDataTest--ret.c_str() =  %s", ret.c_str());  
-        if(strcmp(result[RESULR_TWO], ret.c_str()) == 0)
+        LOG("LOGdisDataTest--result[RESULR_TWO]=  %s", result[RESULR_TWO]);
+        LOG("LOGdisDataTest--ret.c_str() =  %s", ret.c_str());  
+        if (strcmp(result[RESULR_TWO], ret.c_str()) == 0)
         {
             return RESULT_OK;
         }

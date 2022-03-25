@@ -14,34 +14,34 @@
  */
 
 #include "shm_utils.h"
-#include <string.h>
 #include <cstring>
 using namespace std;
 
-#define PERMISSION 0666
-#define CODE_HEAD 4
-#define STR_KEY 5
-#define CODE_LEN 5
-#define SHARED_DATA_LEN 5
-#define WAITTIME 2
-#define DECIM_TEN 10
-#define CALCU_TWO 2
+const int PERMISSION = 0666;
+const int CODE_HEAD = 4;
+const int STR_KEY = 5;
+const int CODE_LEN = 5;
+const int SHARED_DATA_LEN = 5;
+const int WAITTIME = 2;
+const int DECIM_TEN = 10;
+const int CALCU_TWO = 2;
+const int CALCU_FOUR_AIGHT = 48;
 
-static void *shm = NULL; //分配的共享内存的原始首地址
+static void *shm = nullptr; //分配的共享内存的原始首地址
 static struct shared_use_st *shared; //指向shm
 static int shmid; //共享内存标识符
 
 int createShm(int key)
 {
     //创建共享内存
-    shmid = shmget((key_t)key,sizeof(struct shared_use_st),PERMISSION|IPC_CREAT);
+    shmid = shmget(static_cast(key_t)key, sizeof(struct shared_use_st), PERMISSION|IPC_CREAT);
     if(shmid == -1)
     {
         return -1;
     }
     //将共享内存连接到当前进程的地址空间
-    shm = shmat(shmid,NULL,0);
-    if(shm == (void*)-1)
+    shm = shmat(shmid,nullptr,0);
+    if(shm == reinterpret_cast(void*)-1)
     {
         return -1;
     }
@@ -54,7 +54,7 @@ int createShm(int key)
 void initShm(void)
 {
     memset_s(shm, sizeof(struct shared_use_st), 0, sizeof(struct shared_use_st));
-    if(shared == NULL)
+    if (shared == nullptr)
     {
         return;
     }
@@ -70,7 +70,7 @@ int readDataFromShm(char* buf)
         return -1;
     }
 
-    if(shared->written !=0)
+    if (shared->written !=0)
     {
         strcpy_s(buf , strlen(shared->data)+1, shared->data);
         shared->written = 0;
@@ -99,9 +99,9 @@ int waitDataWithCode(char* code, char* data)
     {
         if(readDataFromShm(str) ==0)
         {
-            if(strncmp(code, str, CODE_HEAD) == 0)
+            if (strncmp(code, str, CODE_HEAD) == 0)
             {
-                strncpy(data,str+STR_KEY,1);
+                strncpy(data, str+STR_KEY, 1);
                 return 0;
             }
 
@@ -192,7 +192,7 @@ char* Int2String(int num,char *str)//10进制
     //转换
     do
     {
-        str[i++] = num%DECIM_TEN+48;
+        str[i++] = num%DECIM_TEN+CALCU_FOUR_AIGHT;
         num /=DECIM_TEN;
     }while(num);//num不为0继续循环
 
@@ -206,7 +206,7 @@ char* Int2String(int num,char *str)//10进制
         ++i;//由于有负号，所以交换的对称轴也要后移一位
     }
     //对称交换
-    for(;j<i/CALCU_TWO;j++)
+    for (; j<i/CALCU_TWO; j++)
     {
         //对称交换两端的值 其实就是省下中间变量交换a+b的值：a=a+b;b=a-b;a=a-b;
         str[j] = str[j] + str[i-1-j];
