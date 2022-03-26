@@ -22,7 +22,7 @@ using namespace OHOS::Wifi;
 const static int WIFI_SA_ID = 1125;
 const static int TWO_SECOND = 2;
 const static int FIVE_SECOND = 5;
-static char* const def_ssid = "OpenHarmony_Private_Net_01";
+static const char* def_ssid = "OpenHarmony_Private_Net_01";
 static unique_ptr<WifiDevice> wifiDevicePtr = WifiDevice::GetInstance(WIFI_SA_ID);
 
 int WiFiUtils::EnableWifi()
