@@ -824,7 +824,7 @@ int LeaveNetWork(void)
 
     ResetWaitFlag();
     g_leaveNetTimeStart = GetCurrentTimeOfMs();
-    ret = LeaveLNN(g_networkId, OnLeaveNetCallBack);
+    ret = LeaveLNN(DEF_PKG_NAME, g_networkId, OnLeaveNetCallBack);
     if (ret != SOFTBUS_OK) {
         LOG("call LeaveLNN fail, ret:%d", ret);
         return ret;
