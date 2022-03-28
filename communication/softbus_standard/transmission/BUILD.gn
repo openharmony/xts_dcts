@@ -13,8 +13,8 @@
 
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "dct/softbus_base/SoftBusTransTest"
-ohos_moduletest_suite("SoftBusTransFunTest") {
+module_output_path = "dcts/softbus_base/transmission"
+ohos_moduletest_suite("DctsSoftBusTransFunTest") {
   module_out_path = module_output_path
   sources = [
     "../common/SoftBus_Test_Permission.cpp",
@@ -49,7 +49,7 @@ ohos_moduletest_suite("SoftBusTransFunTest") {
   ]
   external_deps = [ "dsoftbus_standard:softbus_client" ]
 }
-ohos_moduletest_suite("SoftBusTransSessionFunTest") {
+ohos_moduletest_suite("DctsSoftBusTransSessionFunTest") {
   module_out_path = module_output_path
   sources = [
     "../common/SoftBus_Test_Permission.cpp",
@@ -85,7 +85,7 @@ ohos_moduletest_suite("SoftBusTransSessionFunTest") {
   external_deps = [ "dsoftbus_standard:softbus_client" ]
 }
 
-ohos_moduletest_suite("SoftBusTransFileFunTest") {
+ohos_moduletest_suite("DctsSoftBusTransFileFunTest") {
   module_out_path = module_output_path
   sources = [
     "../common/SoftBus_Test_Permission.cpp",

@@ -12,8 +12,8 @@
 # limitations under the License.
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "dct/softbus_base/SoftBusNetTest"
-ohos_moduletest_suite("SoftBusNetTest") {
+module_output_path = "dcts/softbus_base/DctsSoftBusNetTest"
+ohos_moduletest_suite("DctsSoftBusNetTest") {
   module_out_path = module_output_path
   sources = [
     "../common/SoftBus_Test_Permission.cpp",
