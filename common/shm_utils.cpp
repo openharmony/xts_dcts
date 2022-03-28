@@ -90,7 +90,7 @@ int waitDataWithCode(char* code, char* data)
     while (i < timeout) {
         if (readDataFromShm(str) == 0) {
             if (strncmp(code, str, CODE_HEAD) == 0) {
-                if (strncpy_s(data, strlen(data), str + STR_KEY, 1) != EOK) {
+                if (strncpy_s(data, 2, str + STR_KEY, 1) != EOK) {
                     return -1;
                 }
                 return 0;

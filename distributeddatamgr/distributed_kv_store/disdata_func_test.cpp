@@ -87,7 +87,6 @@ public:
     static Status statusGetKvStore;
     static Status statusCloseKvStore;
     static Status statusDeleteKvStore;
-    static Options create;
     static UserId userId;
     static AppId appId;
     static StoreId storeIdTest;
@@ -104,7 +103,7 @@ StoreId DisKvTest::storeIdTest;
 
 void DistributedKvDataManagerTest::SetUpTestCase(void)
 {
-    //连接共享内存
+    // 连接共享内存
     createShm(SHM_SEND_KEY);
 }
 
@@ -213,7 +212,6 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0100, 
     // 本地数据库添加数据 100
     std::string stringKey = "math_score_int";
     Key keyInt = stringKey;
-    // int nint = 100;
     Value valueInt = Value(TransferTypeToByteArray<int>(100));
     Status status = DisKvTest::KvStorePtr->Put(keyInt, valueInt);
     EXPECT_EQ(Status::SUCCESS, status);
@@ -490,8 +488,6 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0600, 
 
     // 数据发送到远端并等待返回结果
     char str[MAX_DATA_LENGTH] = { "math_score_string:{\"class\":20, \"age\":18, \"gradle\":\"good\"}" };
-    // strcpy_s(str, strlen("math_score_int:d")+1, "math_score_int:d");
-
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, str); // 2001:math_score_int:10
     memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };

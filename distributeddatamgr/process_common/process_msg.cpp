@@ -36,33 +36,24 @@ const int STR_VALUE = 23;
 const int RESULR_TWO = 2;
 const int RESULT_OK = 0;
 const int RESULT_ERR = 1;
-namespace disTest {
-class DisKvTest {
-public:
-    static DistributedKvDataManager manager;
-    static std::shared_ptr<SingleKvStore> KvStorePtr; // declare kvstore instance.
-    static Status statusGetKvStore;
-    static Status statusCloseKvStore;
-    static Status statusDeleteKvStore;
-    static Options create;
-    static UserId userId;
-    static AppId appId;
-    static StoreId storeIdTest;
-};
-}; // namespace disTest
-
-using namespace disTest;
-DistributedKvDataManager DisKvTest::manager;
-std::shared_ptr<SingleKvStore> DisKvTest::KvStorePtr = nullptr; // declare kvstore instance.
-Status DisKvTest::statusGetKvStore = Status::ERROR;
-Status DisKvTest::statusCloseKvStore = Status::ERROR;
-Status DisKvTest::statusDeleteKvStore = Status::ERROR;
-UserId DisKvTest::userId;
-AppId DisKvTest::appId;
-StoreId DisKvTest::storeIdTest;
+namespace DisKvTest {
+DistributedKvDataManager manager;
+std::shared_ptr<SingleKvStore> KvStorePtr;
+Status statusGetKvStore;
+Status statusCloseKvStore;
+Status statusDeleteKvStore;
+UserId userId;
+AppId appId;
+StoreId storeIdTest;
+}; // namespace DisKvTest
 
 void initKvstoreId(void)
 {
+    DisKvTest::KvStorePtr = nullptr; // declare kvstore instance.
+    DisKvTest::statusGetKvStore = Status::ERROR;
+    DisKvTest::statusCloseKvStore = Status::ERROR;
+    DisKvTest::statusDeleteKvStore = Status::ERROR;
+
     DisKvTest::userId.userId = "account0";
     DisKvTest::appId.appId = "com.ohos.kvdatamanager3.test";
     DisKvTest::storeIdTest.storeId = "test3";
