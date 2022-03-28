@@ -90,10 +90,7 @@ int waitDataWithCode(char* code, char* data)
     while (i < timeout) {
         if (readDataFromShm(str) == 0) {
             if (strncmp(code, str, CODE_HEAD) == 0) {
-                errno_t ret = 1;
-                ret = strncpy_s(data, strlen(data), str + STR_KEY, 1);
-                if (ret != EOK)
-                {
+                if (strncpy_s(data, 2, str + STR_KEY, 1) != EOK) {
                     return -1;
                 }
                 return 0;
@@ -168,7 +165,8 @@ char* Int2String(int num, char* str) // 10进制
         return nullptr;
     }
     int i = 0;   // 指示填充str
-    if (num < 0){
+    if (num < 0) // 如果num为负数，将num变正
+    {
         num = -num;
         str[i++] = '-';
     }
@@ -182,7 +180,8 @@ char* Int2String(int num, char* str) // 10进制
 
     // 确定开始调整的位置
     int j = 0;
-    if (str[0] == '-') {
+    if (str[0] == '-') // 如果有负号，负号不用调整
+    {
         j = 1; // 从第二位开始调整
         ++i;   // 由于有负号，所以交换的对称轴也要后移一位
     }
