@@ -2336,12 +2336,9 @@ HWTEST_F(DistributedKvDataManagerTest, SubscribeWithQuery_0700, TestSize.Level1)
     ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
     // 1.本端创建Lv
     // 2.远端创建kv
-
     // 3. 远端put int
-
     std::string stringKey = "math_score_vector";
     Key keyInt = stringKey;
-
     std::vector<uint8_t> vect2 = { 9, 9, 8, 8, 7, 7, 6, 6 };
     std::string strvc;
     strvc.assign(vect2.begin(), vect2.end());
@@ -2350,11 +2347,6 @@ HWTEST_F(DistributedKvDataManagerTest, SubscribeWithQuery_0700, TestSize.Level1)
     strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
     strcat(strKV, ":");
     strcat(strKV, strvc.c_str());
-
-    std::cout << "strvc = " << strvc << std::endl;
-    std::cout << "strvc.c_str() = " << strvc.c_str() << std::endl;
-    std::cout << "strKV = " << strKV << std::endl;
-
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strKV);
 
     char str[MAX_DATA_LENGTH] = { 0 };
@@ -2366,7 +2358,6 @@ HWTEST_F(DistributedKvDataManagerTest, SubscribeWithQuery_0700, TestSize.Level1)
     strcpy_s(code, strlen(str) + 1, str); // 9999
     memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
-    std::cout << "yput-vector<uint8_t>  get result=" << str << std::endl;
     // 检查远端是否返回成功
     int ret = strcmp(str, "0");
     EXPECT_EQ(ret, 0);

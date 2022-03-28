@@ -23,8 +23,8 @@
 
 #include "cstring"
 #include "distributed_kv_data_manager.h"
-#include "process_msg.h"
 #include "types.h"
+#include "process_msg.h"
 
 using namespace OHOS::DistributedKv;
 using namespace std;
@@ -304,7 +304,7 @@ int processGetData(char* putData)
         cout << "LOGdisDataTest--ss = " << ss << endl;
         cout << "LOGdisDataTest--ss2 = " << ss2 << endl;
         LOG("LOGdisDataTest--ss2.c_str() =  %s", ss2.c_str());
-        LOG("LOGdisDataTest--ret.c_str() =  %s", ret.c_str()); //数据库
+        LOG("LOGdisDataTest--ret.c_str() =  %s", ret.c_str());
         if (strcmp(ss2.c_str(), ret.c_str()) == 0) {
             return RESULT_OK;
         }
