@@ -1,21 +1,23 @@
 {
-    "kits": [
-        {
-            "push": [
-                "SoftBusTransFunTest ->/data/local/tmp/SoftBusTransFunTest"
-            ],
-            "temp": "PushKit",
-            "post-push": [
-                "chmod -R 777 /data/local/tmp/*"
-            ]
-        }
-    ],
-    "dirver": {
+    "description": "Config for DctsSoftBusTransFun test cases",
+    "driver": {
+        "module-name": "DctsSoftBusTransTest",
         "native-test-timeout": "120000",
-        "type": "CppTest",
-        "module-name": "SoftBusTransFunTest",
-        "runtime-hint": "ls",
-        "native-test-device-path": "/data/local/tmp/"
+        "native-test-device-path": "/data/local/tmp",
+        "runtime-hint": "1s",
+        "type": "CppTest"
     },
-    "description": "configuration for SoftBusTransFunTest Tests"
+    "kits": [
+     {
+        "post-push" : [
+        "chmod -R 777 /data/local/tmp/*"
+     ],
+        "push": [
+          "DctsSoftBusTransFunTest->/data/local/tmp/DctsSoftBusTransFunTest",
+          "DctsSoftBusTransSessionFunTest->/data/local/tmp/DctsSoftBusTransSessionFunTest",
+          "DctsSoftBusTransFileFunTest->/data/local/tmp/DctsSoftBusTransFileFunTest"
+	],
+      "type": "PushKit"
+       }
+    ]
 }
