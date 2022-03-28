@@ -16,10 +16,10 @@ group("communication") {
   testonly = true
   if (is_standard_system) {
     deps = [
-      "softbus_standard/network:SoftBusNetTest",
-      "softbus_standard/transmission:SoftBusTransFileFunTest",
-      "softbus_standard/transmission:SoftBusTransFunTest",
-      "softbus_standard/transmission:SoftBusTransSessionFunTest",
+      "softbus_standard/network:DctsSoftBusNetTest",
+      "softbus_standard/transmission:DctsSoftBusTransFileFunTest",
+      "softbus_standard/transmission:DctsSoftBusTransFunTest",
+      "softbus_standard/transmission:DctsSoftBusTransSessionFunTest",
     ]
   } else {
     deps = [ "wifi_standard:ActsWifiJSTest" ]
