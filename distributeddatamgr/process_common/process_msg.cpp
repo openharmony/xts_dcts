@@ -36,7 +36,7 @@ const int STR_VALUE = 23;
 const int RESULR_TWO = 2;
 const int RESULT_OK = 0;
 const int RESULT_ERR = 1;
-
+namespace disTest {
 class DisKvTest {
 public:
     static DistributedKvDataManager manager;
@@ -49,7 +49,9 @@ public:
     static AppId appId;
     static StoreId storeIdTest;
 };
+}; // namespace disTest
 
+using namespace disTest;
 DistributedKvDataManager DisKvTest::manager;
 std::shared_ptr<SingleKvStore> DisKvTest::KvStorePtr = nullptr; // declare kvstore instance.
 Status DisKvTest::statusGetKvStore = Status::ERROR;
@@ -90,7 +92,7 @@ char* getRealData(char* str, char* delims)
     return second;
 }
 
-void getParam(char* putData, char ret[][MAX_DATA_LENGTH])
+void getParam(char* putData, char ret[][1024])
 {
     char str[MAX_DATA_LENGTH] = { 0 };
     if (putData == nullptr) {
@@ -133,24 +135,18 @@ int ProcessDataMgr(int code, char* recvData)
     }
 
     switch (code) {
-        case CTRL_CODE_DATAMGR_GET_DATA: {
+        case CTRL_CODE_DATAMGR_GET_DATA:
             return processGetData(recvData);
-        } break;
-        case CTRL_CODE_DATAMGR_GET_DATA_REPLY: {
+        case CTRL_CODE_DATAMGR_GET_DATA_REPLY:
             return RESULT_OK;
-        } break;
-        case CTRL_CODE_DATAMGR_CREATE_KV: {
+        case CTRL_CODE_DATAMGR_CREATE_KV:
             return processCreateKv(recvData);
-        } break;
-        case CTRL_CODE_DATAMGR_DELETE_KV: {
+        case CTRL_CODE_DATAMGR_DELETE_KV:
             return processDeleteKv(recvData);
-        } break;
-        case CTRL_CODE_DATAMGR_PUT_DATA: {
+        case CTRL_CODE_DATAMGR_PUT_DATA:
             return processPutData(recvData);
-        }
-        case CTRL_CODE_DATAMGR_DELETE_DATA: {
+        case CTRL_CODE_DATAMGR_DELETE_DATA:
             return processDeletetData(recvData);
-        } break;
         default:
             break;
     }

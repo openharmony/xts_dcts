@@ -144,9 +144,10 @@ void DistributedKvDataManagerTest::SetUp(void)
     if (str == nullptr) {
         return;
     }
-    errno_t eret = strcpy_s(code, strlen(str) + 1, str);
-    EXPECT_EQ(eret, EOK);
 
+    if (strcpy_s(code, strlen(str) + 1, str) != EOK) {
+        return;
+    }
     memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     free(str);
@@ -164,13 +165,16 @@ void DistributedKvDataManagerTest::SetUp(void)
     writeCodeDataToShm(CTRL_CODE_DATAMGR_CREATE_KV, str);
 
     memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, sizeof(code), 0, CODE_LEN_TEN);
+    if (memset_s(code, strlen(code), 0, CODE_LEN_TEN) != EOK) {
+        return;
+    }
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     if (str == nullptr) {
         return;
     }
-    eret = strcpy_s(code, strlen(str) + 1, str);
-    EXPECT_EQ(eret, EOK);
+    if (strcpy_s(code, strlen(str) + 1, str) != EOK) {
+        return;
+    }
     waitDataWithCode(code, str);
     free(str);
 }
@@ -222,6 +226,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0100, 
     std::vector<std::string> deviceList;
     for (const auto& device : remoteDevice) {
         std::cout << "start sync" << device.deviceId << std::endl;
+        LOG("start sync device.deviceId = %s", device.deviceId.c_str());
         deviceList.push_back(device.deviceId);
     }
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PUSH);

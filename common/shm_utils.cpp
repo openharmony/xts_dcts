@@ -90,7 +90,9 @@ int waitDataWithCode(char* code, char* data)
     while (i < timeout) {
         if (readDataFromShm(str) == 0) {
             if (strncmp(code, str, CODE_HEAD) == 0) {
-                strncpy_s(data, sizeof(data), str + STR_KEY, 1);
+                if (strncpy_s(data, strlen(data), str + STR_KEY, 1) != EOK) {
+                    return -1;
+                }
                 return 0;
             }
         }
@@ -109,8 +111,7 @@ int writeCodeDataToShm(int code, char* buf)
     if (str2 == nullptr) {
         return -1;
     }
-    errno_t eret = strcpy_s(str, strlen(codeStr) + 1, codeStr);
-    if (eret != EOK) {
+    if (strcpy_s(str, strlen(codeStr) + 1, codeStr) != EOK) {
         return -1;
     }
     strcat(str, ":");
@@ -152,7 +153,7 @@ int disconnectShm(void)
 
 int deleteShm(void)
 {
-    if (shmctl(shmid, IPC_RMID, 0) == -1) {
+    if (shmctl(shmid, IPC_RMID, nullptr) == -1) {
         return -1;
     }
     return 0;

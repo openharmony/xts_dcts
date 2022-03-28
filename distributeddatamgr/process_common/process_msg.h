@@ -71,6 +71,6 @@ int processPutData(char* putData);
 int processCreateKv(char* putData);
 int processDeleteKv(char* putData);
 char* getRealData(char* str, char* delims);
-void getParam(char* str, char ret[][1024]);
+void getParam(char* putData, char ret[][1024]);
 void initKvstoreId(void);
 #endif
