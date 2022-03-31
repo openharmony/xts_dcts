@@ -1,7 +1,7 @@
 {
-    "description": "Config for DctsSoftBusTransFun test cases",
+    "description": "Config for DctsSoftBusTransFileFunTest test cases",
     "driver": {
-        "module-name": "DctsSoftBusTransTest",
+        "module-name": "DctsSoftBusTransFileFunTest",
         "native-test-timeout": "120000",
         "native-test-device-path": "/data/local/tmp",
         "runtime-hint": "1s",
@@ -13,8 +13,6 @@
         "chmod -R 777 /data/local/tmp/*"
      ],
         "push": [
-          "DctsSoftBusTransFunTest->/data/local/tmp/DctsSoftBusTransFunTest",
-          "DctsSoftBusTransSessionFunTest->/data/local/tmp/DctsSoftBusTransSessionFunTest",
           "DctsSoftBusTransFileFunTest->/data/local/tmp/DctsSoftBusTransFileFunTest"
 	],
       "type": "PushKit"

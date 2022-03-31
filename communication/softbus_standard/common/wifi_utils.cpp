@@ -13,8 +13,9 @@
  * limitations under the License.
  */
 
-#include "wifi_utils.h"
 #include <arpa/inet.h>
+
+#include "wifi_utils.h"
 
 using std::unique_ptr;
 using namespace OHOS::Wifi;
@@ -134,12 +135,11 @@ int WiFiUtils::CheckIsConnectToDefault(void)
         LOG("[wifi]call GetLinkedInfo fail, ret:%d", ret);
     } else {
         char rstBuff[16];
-        struct in_addr inputAddr = {0};
+        struct in_addr inputAddr = { 0 };
         inputAddr.s_addr = htonl(linkInfo.ipAddress);
         inet_ntop(AF_INET, &inputAddr, rstBuff, sizeof(rstBuff));
-        LOG("[wifi]link info,netid:%d, ssid:%s, state:%d, ip:%u,%s",
-            linkInfo.networkId, linkInfo.ssid.c_str(), linkInfo.connState,
-            linkInfo.ipAddress, rstBuff);
+        LOG("[wifi]link info,netid:%d, ssid:%s, state:%d, ip:%u,%s", linkInfo.networkId, linkInfo.ssid.c_str(),
+            linkInfo.connState, linkInfo.ipAddress, rstBuff);
         if (strncmp(linkInfo.ssid.c_str(), def_ssid, strlen(def_ssid)) == 0) {
             LOG("[wifi]check success");
             return SOFTBUS_OK;
@@ -174,21 +174,18 @@ int WiFiUtils::ConnectTo(const std::string& ssid, const std::string& passwd)
     int timeout = 10;
     char rstBuff[16];
     WifiLinkedInfo linkInfo;
-    struct in_addr inputAddr = {0};
+    struct in_addr inputAddr = { 0 };
     while (timeout > 0) {
         sleep(TWO_SECOND);
         ret = wifiDevicePtr->GetLinkedInfo(linkInfo);
         if (ret != SOFTBUS_OK) {
             LOG("[wifi]call GetLinkedInfo fail, ret:%d", ret);
         } else {
-            LOG("[wifi]call GetLinkedInfo success, now state:%d",
-                linkInfo.connState);
-            if (linkInfo.connState == ConnState::CONNECTED &&
-                linkInfo.ipAddress != 0) {
+            LOG("[wifi]call GetLinkedInfo success, now state:%d", linkInfo.connState);
+            if (linkInfo.connState == ConnState::CONNECTED && linkInfo.ipAddress != 0) {
                 inputAddr.s_addr = htonl(linkInfo.ipAddress);
                 inet_ntop(AF_INET, &inputAddr, rstBuff, sizeof(rstBuff));
-                LOG("[wifi]state OK,netid:%d, ssid:%s, state:%d, ip:%u,%s",
-                    linkInfo.networkId, linkInfo.ssid.c_str(),
+                LOG("[wifi]state OK,netid:%d, ssid:%s, state:%d, ip:%u,%s", linkInfo.networkId, linkInfo.ssid.c_str(),
                     linkInfo.connState, linkInfo.ipAddress, rstBuff);
                 break;
             }
@@ -198,15 +195,13 @@ int WiFiUtils::ConnectTo(const std::string& ssid, const std::string& passwd)
     if (timeout == 0) {
         inputAddr.s_addr = htonl(linkInfo.ipAddress);
         inet_ntop(AF_INET, &inputAddr, rstBuff, sizeof(rstBuff));
-        LOG("[wifi]state(timeout=0),netid:%d, ssid:%s, state:%d, ip:%u,%s",
-            linkInfo.networkId, linkInfo.ssid.c_str(), linkInfo.connState,
-            linkInfo.ipAddress, rstBuff);
+        LOG("[wifi]state(timeout=0),netid:%d, ssid:%s, state:%d, ip:%u,%s", linkInfo.networkId, linkInfo.ssid.c_str(),
+            linkInfo.connState, linkInfo.ipAddress, rstBuff);
     }
     return SOFTBUS_OK;
 }
 
-int WiFiUtils::ConnectToNew(const std::string& ssid,
-                            const std::string& passwd)
+int WiFiUtils::ConnectToNew(const std::string& ssid, const std::string& passwd)
 {
     int ret = wifiDevicePtr->Disconnect();
     LOG("[wifi]call Disconnect ret:%d", ret);
@@ -246,19 +241,17 @@ int WiFiUtils::ConnectToOpenAP(const std::string& ssid)
     } else {
         LOG("[wifi]call GetLinkedInfo success");
         char rstBuff[16];
-        struct in_addr inputAddr = {0};
+        struct in_addr inputAddr = { 0 };
         inputAddr.s_addr = htonl(linkInfo.ipAddress);
         inet_ntop(AF_INET, &inputAddr, rstBuff, sizeof(rstBuff));
 
-        LOG("[wifi]link info,netid:%d, ssid:%s, state:%d, ip:%u,%s",
-            linkInfo.networkId, linkInfo.ssid.c_str(), linkInfo.connState,
-            linkInfo.ipAddress, rstBuff);
+        LOG("[wifi]link info,netid:%d, ssid:%s, state:%d, ip:%u,%s", linkInfo.networkId, linkInfo.ssid.c_str(),
+            linkInfo.connState, linkInfo.ipAddress, rstBuff);
     }
     return SOFTBUS_OK;
 }
 
-int WiFiUtils::EnableThenConnect(const std::string& ssid,
-                                 const std::string& passwd)
+int WiFiUtils::EnableThenConnect(const std::string& ssid, const std::string& passwd)
 {
     int ret = EnableWifi();
     if (ret != SOFTBUS_OK) {
@@ -272,9 +265,7 @@ int WiFiUtils::EnableThenConnect(const std::string& ssid,
     return ret;
 }
 
-int WiFiUtils::DisableThenEnableAndConnect(int delaySeconds,
-                                           const std::string& ssid,
-                                           const std::string& passwd)
+int WiFiUtils::DisableThenEnableAndConnect(int delaySeconds, const std::string& ssid, const std::string& passwd)
 {
     int ret = DisableWifi();
     if (ret != SOFTBUS_OK) {
