@@ -14,8 +14,9 @@
  */
 
 #include <gtest/gtest.h>
-#include "net_trans_common.h"
+
 #include "SoftBus_Test_Permission.h"
+#include "net_trans_common.h"
 #include "wifi_utils.h"
 
 static int g_waitFlag = WAIT_DEF_VALUE;
@@ -36,9 +37,7 @@ static void FileSessionClosed(int sessionId)
     LOG("[cb][file]close session sid[%d]", sessionId);
 }
 
-static void FileBytesReceived(int sessionId,
-                              const void* data,
-                              unsigned int dataLen)
+static void FileBytesReceived(int sessionId, const void* data, unsigned int dataLen)
 {
     LOG("[cb][file]ByteRec sid:%d, data len:%d", sessionId, dataLen);
     if (data == NULL) {
@@ -49,9 +48,7 @@ static void FileBytesReceived(int sessionId,
     }
 }
 
-static void FileMessageReceived(int sessionId,
-                                const void* data,
-                                unsigned int dataLen)
+static void FileMessageReceived(int sessionId, const void* data, unsigned int dataLen)
 {
     LOG("[cb][file]MessageRec sid:%d, data len:%d", sessionId, dataLen);
     if (data == NULL) {
@@ -105,11 +102,9 @@ void TransFileFuncTest::SetUpTestCase()
     ASSERT_EQ(SOFTBUS_OK, ret) << "get node fail,please check network";
 
     // set listener
-    ret = SetFileSendListener(DEF_PKG_NAME, SESSION_NAME_FILE,
-                              GetSendFileListener());
+    ret = SetFileSendListener(DEF_PKG_NAME, SESSION_NAME_FILE, GetSendFileListener());
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
-    ret = SetFileReceiveListener(DEF_PKG_NAME, SESSION_NAME_FILE,
-                                 GetRecvFileListener(), RECV_FILE_PATH);
+    ret = SetFileReceiveListener(DEF_PKG_NAME, SESSION_NAME_FILE, GetRecvFileListener(), RECV_FILE_PATH);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
 
     LOG("SetUp end");
@@ -139,8 +134,7 @@ static int WaitFile(int timeout)
         count++;
     }
     if (g_waitFlag != WAIT_SUCCESS_VALUE) {
-        LOG("waitfile fail[exp:%d, real:%d][used time:%d]", WAIT_SUCCESS_VALUE,
-            g_waitFlag, count);
+        LOG("waitfile fail[exp:%d, real:%d][used time:%d]", WAIT_SUCCESS_VALUE, g_waitFlag, count);
         return SOFTBUS_ERR;
     }
     return SOFTBUS_OK;
@@ -153,20 +147,15 @@ static int WaitFile(int timeout)
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(TransFileFuncTest,
-         SUB_Softbus_Trans_SendFile_Func_0100,
-         TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_SendFile_Func_0100, TestSize.Level2)
 {
     int ret;
-    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE,
-                              &g_fileSessionListener);
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
     g_waitFlag = WAIT_DEF_VALUE;
-    int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(),
-                          DEF_GROUP_ID, &g_fileSessionAttr);
-    EXPECT_TRUE(sid >= SESSION_ID_MIN)
-        << "call OpenSession[file] fail, sid=" << sid;
+    int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttr);
+    EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
         ret = WaitFile(10);
         EXPECT_EQ(SOFTBUS_OK, ret) << "wait opensession fail[file]";

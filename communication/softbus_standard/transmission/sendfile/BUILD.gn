@@ -10,20 +10,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 import("//test/xts/tools/build/suite.gni")
 
-module_output_path = "dcts/softbus_base/DctsSoftBusNetTest"
-ohos_moduletest_suite("DctsSoftBusNetTest") {
+module_output_path = "dcts/softbus_base/transmission/sendfile"
+
+ohos_moduletest_suite("DctsSoftBusTransFileFunTest") {
   module_out_path = module_output_path
   sources = [
-    "../common/SoftBus_Test_Permission.cpp",
-    "../common/net_trans_common.c",
-    "../common/wifi_utils.cpp",
-    "./Net_Bindself_Func_Test.cpp",
+    "../../common/SoftBus_Test_Permission.cpp",
+    "../../common/net_trans_common.c",
+    "../../common/wifi_utils.cpp",
+    "./trans_file_func_test.cpp",
   ]
 
   include_dirs = [
-    "../common",
+    "../../common",
     "//third_party/cJSON",
     "//utils/native/base/include",
     "//foundation/communication/dsoftbus/core/common/include",

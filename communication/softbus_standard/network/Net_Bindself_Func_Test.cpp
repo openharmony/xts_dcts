@@ -14,8 +14,9 @@
  */
 
 #include <gtest/gtest.h>
-#include "net_trans_common.h"
+
 #include "SoftBus_Test_Permission.h"
+#include "net_trans_common.h"
 #include "wifi_utils.h"
 
 using namespace testing::ext;
@@ -75,9 +76,7 @@ static void WaitOnly(int seconds)
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(Net_Bindself_Func_Test,
-         SUB_Softbus_Net_Bind_Func_0100,
-         TestSize.Level3)
+HWTEST_F(Net_Bindself_Func_Test, SUB_Softbus_Net_Bind_Func_0100, TestSize.Level3)
 {
     char* netId = NULL;
     int count = GetRemoteDeviceNetId(&netId);
@@ -97,9 +96,7 @@ HWTEST_F(Net_Bindself_Func_Test,
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(Net_Bindself_Func_Test,
-         SUB_Softbus_Net_Bind_Func_0200,
-         TestSize.Level3)
+HWTEST_F(Net_Bindself_Func_Test, SUB_Softbus_Net_Bind_Func_0200, TestSize.Level3)
 {
     int ret = StartDiscoveryDevice();
     EXPECT_EQ(SOFTBUS_OK, ret) << "Discover fail";
@@ -112,9 +109,7 @@ HWTEST_F(Net_Bindself_Func_Test,
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(Net_Bindself_Func_Test,
-         SUB_Softbus_Net_Bind_Func_0300,
-         TestSize.Level3)
+HWTEST_F(Net_Bindself_Func_Test, SUB_Softbus_Net_Bind_Func_0300, TestSize.Level3)
 {
     int ret = CheckRemoteDeviceIsNull(BOOL_FALSE);
     EXPECT_EQ(SOFTBUS_OK, ret) << "check node fail";
@@ -127,14 +122,11 @@ HWTEST_F(Net_Bindself_Func_Test,
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(Net_Bindself_Func_Test,
-         SUB_Softbus_Net_Bind_Func_0400,
-         TestSize.Level3)
+HWTEST_F(Net_Bindself_Func_Test, SUB_Softbus_Net_Bind_Func_0400, TestSize.Level3)
 {
     int nodeCount = SetRemoteDeviceNetIdToGarray();
     LOG("######node count:%d", nodeCount);
-    EXPECT_TRUE(nodeCount >= DEF_REMOTE_DEV_COUNT)
-        << "check node fail, count:" << nodeCount;
+    EXPECT_TRUE(nodeCount >= DEF_REMOTE_DEV_COUNT) << "check node fail, count:" << nodeCount;
 }
 
 /**
@@ -144,9 +136,7 @@ HWTEST_F(Net_Bindself_Func_Test,
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(Net_Bindself_Func_Test,
-         SUB_Softbus_Net_Bind_Func_0500,
-         TestSize.Level3)
+HWTEST_F(Net_Bindself_Func_Test, SUB_Softbus_Net_Bind_Func_0500, TestSize.Level3)
 {
     int ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
     EXPECT_EQ(SOFTBUS_OK, ret) << "check node fail";
@@ -185,9 +175,7 @@ HWTEST_F(Net_Bindself_Func_Test,
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(Net_Bindself_Func_Test,
-         SUB_Softbus_Net_Bind_Func_0600,
-         TestSize.Level2)
+HWTEST_F(Net_Bindself_Func_Test, SUB_Softbus_Net_Bind_Func_0600, TestSize.Level2)
 {
     int ret;
     int size = 1024;
