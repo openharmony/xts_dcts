@@ -14,8 +14,9 @@
  */
 
 #include <gtest/gtest.h>
-#include "net_trans_common.h"
+
 #include "SoftBus_Test_Permission.h"
+#include "net_trans_common.h"
 #include "wifi_utils.h"
 
 using namespace testing::ext;
@@ -88,9 +89,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0100, TestSize.Level3)
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(TransFuncTest,
-         SUB_Softbus_Trans_SendMessage_Func_0100,
-         TestSize.Level3)
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0100, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();

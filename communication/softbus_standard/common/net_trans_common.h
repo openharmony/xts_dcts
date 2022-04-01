@@ -16,6 +16,11 @@
 #ifndef NET_TRANS_COMMON_H
 #define NET_TRANS_COMMON_H
 
+#include <pthread.h>
+#include <securec.h>
+#include <sys/time.h>
+#include <unistd.h>
+
 #include "common_list.h"
 #include "discovery_service.h"
 #include "session.h"
@@ -24,11 +29,6 @@
 #include "softbus_def.h"
 #include "softbus_errcode.h"
 #include "softbus_utils.h"
-
-#include <pthread.h>
-#include <securec.h>
-#include <sys/time.h>
-#include <unistd.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -115,8 +115,6 @@ extern "C" {
 #define CASE_9 9
 #define CASE_10 10
 
-
-
 typedef enum {
     SESSION_4DATA = 1,
     SESSION_4CTL,
@@ -165,16 +163,15 @@ typedef enum {
     CTRL_CODE_SEND_BIG_DATA,
 } CtrlCodeType;
 
-#define LOG(format, ...)                                           \
-    do {                                                           \
-        time_t timeSec;                                            \
-        time(&timeSec);                                            \
-        struct tm tmRst;                                           \
-        localtime_r(&timeSec, &tmRst);                             \
-        char strTime[10];                                          \
-        strftime(strTime, sizeof(strTime), "%H:%M:%S", &tmRst);    \
-        fprintf(stdout, "[Test-softbus] %s " format "\n", strTime, \
-                ##__VA_ARGS__);                                    \
+#define LOG(format, ...)                                                           \
+    do {                                                                           \
+        time_t timeSec;                                                            \
+        time(&timeSec);                                                            \
+        struct tm tmRst;                                                           \
+        localtime_r(&timeSec, &tmRst);                                             \
+        char strTime[10];                                                          \
+        strftime(strTime, sizeof(strTime), "%H:%M:%S", &tmRst);                    \
+        fprintf(stdout, "[Test-softbus] %s " format "\n", strTime, ##__VA_ARGS__); \
     } while (0)
 
 int Wait(int timeout);
@@ -211,21 +208,15 @@ int CreateSsAndOpenSession4Data(void);
 int CreateSsAndOpenSession4Ctl(void);
 int OpenSession4Ctl(void);
 int OpenSession4Data(void);
-int OpenSessionBatch4Data(char groupId[][GROUP_ID_LEN],
-                          int* sessionId,
-                          int count);
-int OpenSessionBatch4Ctl(char groupId[][GROUP_ID_LEN],
-                         int* sessionId,
-                         int count);
+int OpenSessionBatch4Data(char groupId[][GROUP_ID_LEN], int* sessionId, int count);
+int OpenSessionBatch4Ctl(char groupId[][GROUP_ID_LEN], int* sessionId, int count);
 int CloseSessionBatch4Data(int* sessionId, int count);
 int CloseSessionBatch4Ctl(int* sessionId, int count);
 void* OpenSessionTask4Data(void* param);
 void* OpenSessionTask4Ctl(void* param);
 
 int OpenSession4Perf(void);
-int OpenSession4PerfWithParam(const char* sessionName,
-                              const char* groupId,
-                              char* netId);
+int OpenSession4PerfWithParam(const char* sessionName, const char* groupId, char* netId);
 int SendData4Perf(int sessionId, char* dataMsg, char* dataByte);
 void SetTransStartTime(void);
 
