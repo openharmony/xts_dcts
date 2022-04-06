@@ -14,8 +14,9 @@
  */
 
 #include <gtest/gtest.h>
-#include "net_trans_common.h"
+
 #include "SoftBus_Test_Permission.h"
+#include "net_trans_common.h"
 #include "wifi_utils.h"
 
 using namespace testing::ext;
@@ -73,24 +74,18 @@ void TransSessionFuncTest::TearDownTestCase()
  * @tc.type             : FUNC
  * @tc.size             : MediumTest
  */
-HWTEST_F(TransSessionFuncTest,
-         SUB_Softbus_Trans_Session_Func_0100,
-         TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Session_Func_0100, TestSize.Level3)
 {
     int ret;
-    char sessionNames[][SESSION_NAME_SIZE_MAX] = {
-        "com.communication.demo1.1", "com.communication.demo1.2",
-        "com.communication.demo1.3", "com.communication.demo1.4",
-        "com.communication.demo1.5", "com.communication.demo1.6",
-        "com.communication.demo1.7", "com.communication.demo1.8"};
+    char sessionNames[][SESSION_NAME_SIZE_MAX] = { "com.communication.demo1.1", "com.communication.demo1.2",
+        "com.communication.demo1.3", "com.communication.demo1.4", "com.communication.demo1.5",
+        "com.communication.demo1.6", "com.communication.demo1.7", "com.communication.demo1.8" };
     for (int i = 0; i < MAX_SESSION_SERVER_NUM_CLIENT; i++) {
-        ret = CreateSessionServer(DEF_PKG_NAME, sessionNames[i],
-                                  GetSessionListenser4Data());
+        ret = CreateSessionServer(DEF_PKG_NAME, sessionNames[i], GetSessionListenser4Data());
         EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS fail,i=" << i;
     }
     string sessionName = "max+1";
-    ret = CreateSessionServer(DEF_PKG_NAME, sessionName.c_str(),
-                              GetSessionListenser4Data());
+    ret = CreateSessionServer(DEF_PKG_NAME, sessionName.c_str(), GetSessionListenser4Data());
     printf("CreateSS max+1, ret:%d \n", ret);
     EXPECT_NE(SOFTBUS_OK, ret) << "CreateSS max+1 success, expect fail";
 
@@ -110,23 +105,18 @@ HWTEST_F(TransSessionFuncTest,
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(TransSessionFuncTest,
-         SUB_Softbus_Trans_Session_Func_0200,
-         TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Session_Func_0200, TestSize.Level3)
 {
     int ret;
-    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA,
-                              GetSessionListenser4Data());
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[data] fail";
-    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_CTL,
-                              GetSessionListenser4Ctl());
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_CTL, GetSessionListenser4Ctl());
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[ctrl] fail";
 
     int count = MAX_SESSION_NUM / 2;
     int sessionId4Data[count];
     int sessionId4Ctrl[count];
-    char groupId[][4] = {"g1", "g2", "g3", "g4",
-                                    "g5", "g6", "g7", "g8"};
+    char groupId[][4] = { "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8" };
     ret = OpenSessionBatch4Data(groupId, sessionId4Data, count);
     EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSessionWithDiffGroupId4Data fail";
     ret = OpenSessionBatch4Ctl(groupId, sessionId4Ctrl, count);
@@ -134,11 +124,8 @@ HWTEST_F(TransSessionFuncTest,
 
     // open max+1, expect fail
     int sessionId;
-    sessionId =
-        OpenSession(SESSION_NAME_DATA, SESSION_NAME_DATA, GetNetworkId(),
-                    DEF_GROUP_ID, GetSessionAttr4Data());
-    EXPECT_FALSE(sessionId >= SESSION_ID_MIN)
-        << "call OpenSession[data] fail,sid=" << sessionId;
+    sessionId = OpenSession(SESSION_NAME_DATA, SESSION_NAME_DATA, GetNetworkId(), DEF_GROUP_ID, GetSessionAttr4Data());
+    EXPECT_FALSE(sessionId >= SESSION_ID_MIN) << "call OpenSession[data] fail,sid=" << sessionId;
 
     // close session
     ret = CloseSessionBatch4Data(sessionId4Data, count);
@@ -160,27 +147,22 @@ HWTEST_F(TransSessionFuncTest,
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransSessionFuncTest,
-         SUB_Softbus_Trans_Session_Func_0300,
-         TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Session_Func_0300, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     int sessionId = GetCurrentSessionId4Data();
-    char mySessionName[SESSION_NAME_SIZE_MAX] = {0};
+    char mySessionName[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetMySessionName(sessionId, mySessionName, SESSION_NAME_SIZE_MAX);
-    EXPECT_EQ(SOFTBUS_OK, ret)
-        << "call GetMySessionName fail, sid:" << sessionId;
-    EXPECT_STREQ(SESSION_NAME_DATA, mySessionName)
-        << "my session name cmp fail";
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call GetMySessionName fail, sid:" << sessionId;
+    EXPECT_STREQ(SESSION_NAME_DATA, mySessionName) << "my session name cmp fail";
 
-    char peerSessionName[SESSION_NAME_SIZE_MAX] = {0};
+    char peerSessionName[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetPeerSessionName(sessionId, peerSessionName, SESSION_NAME_SIZE_MAX);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call GetPeerSessionName fail";
-    EXPECT_STREQ(SESSION_NAME_DATA, peerSessionName)
-        << "peer session name cmp fail";
+    EXPECT_STREQ(SESSION_NAME_DATA, peerSessionName) << "peer session name cmp fail";
 
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
@@ -193,17 +175,14 @@ HWTEST_F(TransSessionFuncTest,
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(TransSessionFuncTest,
-         SUB_Softbus_Trans_Session_Func_0400,
-         TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Session_Func_0400, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Ctl();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[ctl] fail";
 
-    char deviceId[SESSION_NAME_SIZE_MAX] = {0};
-    ret = GetPeerDeviceId(GetCurrentSessionId4Ctl(), deviceId,
-                          SESSION_NAME_SIZE_MAX);
+    char deviceId[SESSION_NAME_SIZE_MAX] = { 0 };
+    ret = GetPeerDeviceId(GetCurrentSessionId4Ctl(), deviceId, SESSION_NAME_SIZE_MAX);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call GetPeerDeviceId fail";
     EXPECT_STREQ(GetNetworkId(), deviceId) << "peer device id cmp fail";
 
