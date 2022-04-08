@@ -107,6 +107,7 @@ void TransFileFuncTest::SetUpTestCase()
     ret = SetFileReceiveListener(DEF_PKG_NAME, SESSION_NAME_FILE, GetRecvFileListener(), RECV_FILE_PATH);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
 
+    system(" truncate -s 3M /data/SoftBusNetTest_BindSelf_1.xml");
     LOG("SetUp end");
 }
 
