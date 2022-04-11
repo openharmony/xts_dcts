@@ -16,12 +16,9 @@ group("communication") {
   testonly = true
   if (is_standard_system) {
     deps = [
-      "softbus_standard/network:DctsSoftBusNetTest",
       "softbus_standard/transmission/sendfile:DctsSoftBusTransFileFunTest",
       "softbus_standard/transmission/sendmsg:DctsSoftBusTransFunTest",
       "softbus_standard/transmission/sessionmgt:DctsSoftBusTransSessionFunTest",
-
-      #"softbus_standard/auxiliary:DctsSoftbusAuxiliaryTest",
     ]
   } else {
     deps = [ "wifi_standard:ActsWifiJSTest" ]
