@@ -17,6 +17,7 @@ group("distributeddatatest") {
     deps = [
       ":disDataProcess",
       "distributed_kv_store:DctsdisDataTest",
+      "../server/disServer:disTest",
     ]
   }
 }
