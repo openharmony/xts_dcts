@@ -44,8 +44,7 @@ void TransFuncTest::SetUpTestCase()
 
     int ret = RegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call reg node state callback fail";
-    ret = WiFiUtils::CheckIsConnectToDefault();
-    ASSERT_EQ(SOFTBUS_OK, ret) << "connect to default failed";
+    
     ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
     ASSERT_EQ(SOFTBUS_OK, ret) << "get node fail,please check network";
 
