@@ -15,8 +15,6 @@ import("//build/ohos_var.gni")
 group("disServer") {
   testonly = true
   if (is_standard_system) {
-    deps = [
-      "disServer:disTest",
-    ]
+    deps = [ "disServer:disTest" ]
   }
 }

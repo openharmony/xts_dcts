@@ -31,22 +31,21 @@ config("module_private_config") {
   ]
 }
 
-ohos_unittest("disTest")
-{
+ohos_unittest("disTest") {
   module_out_path = module_output_path
 
   configs = [ ":module_private_config" ]
 
-    sources =[
+  sources = [
+    "../../common/shm_utils.cpp",
     "net_trans_common.cpp",
     "softbus_test_permission.cpp",
-    "../../common/shm_utils.cpp",
-    ]
+  ]
 
-    deps=[
-    "//foundation/communication/dsoftbus/sdk:softbus_client",
+  deps = [
     "//base/security/permission/interfaces/innerkits/permission_standard/permissionsdk:libpermissionsdk_standard",
+    "//foundation/communication/dsoftbus/sdk:softbus_client",
     "//utils/native/base:utils",
-    ]
+  ]
 }
 ###########################################################################################

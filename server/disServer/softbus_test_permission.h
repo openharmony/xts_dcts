@@ -20,8 +20,8 @@
 
 class SoftBusPermission {
 public:
-    static void AddPermission(const std::string &pkgName);
-    static void RemovePermission(const std::string &pkgName);
+    static void AddPermission(const std::string& pkgName);
+    static void RemovePermission(const std::string& pkgName);
 };
 
 #endif
