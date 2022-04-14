@@ -20,6 +20,7 @@
 #include <pthread.h>
 #include <sys/socket.h>
 
+
 #include "softbus_permission.h"
 #include "unistd.h"
 #include "net_trans_common.h"
@@ -49,6 +50,7 @@ const int SLEEP_SECOND_TEN = 10;
 const int SLEEP_SECOND_NINEHUNDRED = 900;
 const int WHILE_I_ONEHUNDRED = 100;
 
+const int CODE_LEN_FIVE = 5;
 const int CODE_PREFIX_FOUR = 4;
 
 static int32_t g_currentSessionId4Data = -1;
@@ -605,8 +607,8 @@ void* DataOperateTask(char* param)
 {
     LOG("operate start...");
     int code = -1;
-    char codeType[5] = { 0 };
-    if (strncpy_s(codeType, CODE_PREFIX_FOUR, param, CODE_PREFIX_FOUR) != INT_RES_SUCC) {
+    char codeType[CODE_LEN_FIVE] = { 0 };
+    if (strncpy_s(codeType, CODE_LEN_FIVE, param, CODE_PREFIX_FOUR) != INT_RES_SUCC) {
         return nullptr;
     }
     if (sscanf_s(codeType, CODE_PREFIX_FOUR, "%d", &code) <= INT_RES_SUCC) {
@@ -618,100 +620,19 @@ void* DataOperateTask(char* param)
     int (*ProcessData)(int, char*);
     char* error;
     int ret = 0;
-
     if (code == CTRL_CODE_RESULT_TYPE) {
         writeDataToShm(param);
         free(param);
         return nullptr;
-    } else if (code > CTRL_CODE_SOFTBUS_TYPE && code < CTRL_CODE_DATAMGR_TYPE) {
-        handle = dlopen("/system/lib64/libsoftBusProcess.z.so", RTLD_LAZY);
-        if (!handle) {
-            LOG("dlopen failed %s", dlerror());
-        }
-
-        ProcessData = (int (*)(int, char*))dlsym(handle, "_Z14ProcessSoftBusiPc");
-        if ((error = dlerror()) != nullptr) {
-            LOG("dlsym failed %s", dlerror());
-        }
-
-        ret = (*ProcessData)(code, param);
-        LOG("code:%d", ret);
     } else if (code > CTRL_CODE_DATAMGR_TYPE && code < CTRL_CODE_DM_TYPE) {
         handle = dlopen("/system/lib64/libdisDataProcess.z.so", RTLD_LAZY);
         if (!handle) {
             LOG("dlopen failed %s", dlerror());
         }
-
         ProcessData = (int (*)(int, char*))dlsym(handle, "_Z14ProcessDataMgriPc");
         if ((error = dlerror()) != nullptr) {
             LOG("dlsym failed %s", dlerror());
         }
-
-        ret = (*ProcessData)(code, param);
-        LOG("code:%d", ret);
-    } else if (code > CTRL_CODE_DM_TYPE && code < CTRL_CODE_FILEMGR_TYPE) {
-        handle = dlopen("/system/lib64/libdisDMProcess.z.so", RTLD_LAZY);
-        if (!handle) {
-            LOG("dlopen failed %s", dlerror());
-        }
-
-        ProcessData = (int (*)(int, char*))dlsym(handle, "_Z9ProcessDMiPc");
-        if ((error = dlerror()) != nullptr) {
-            LOG("dlsym failed %s", dlerror());
-        }
-
-        ret = (*ProcessData)(code, param);
-        LOG("code:%d", ret);
-    } else if (code > CTRL_CODE_FILEMGR_TYPE && code < CTRL_CODE_DP_TYPE) {
-        handle = dlopen("/system/lib64/libdisFileProcess.z.so", RTLD_LAZY);
-        if (!handle) {
-            LOG("dlopen failed %s", dlerror());
-        }
-
-        ProcessData = (int (*)(int, char*))dlsym(handle, "_Z14ProcessFileMgriPc");
-        if ((error = dlerror()) != nullptr) {
-            LOG("dlsym failed %s", dlerror());
-        }
-
-        ret = (*ProcessData)(code, param);
-        LOG("code:%d", ret);
-    } else if (code > CTRL_CODE_DP_TYPE && code < CTRL_CODE_SEC_TYPE) {
-        handle = dlopen("/system/lib64/libdisDPProcess.z.so", RTLD_LAZY);
-        if (!handle) {
-            LOG("dlopen failed %s", dlerror());
-        }
-
-        ProcessData = (int (*)(int, char*))dlsym(handle, "_Z9ProcessDPiPc");
-        if ((error = dlerror()) != nullptr) {
-            LOG("dlsym failed %s", dlerror());
-        }
-
-        ret = (*ProcessData)(code, param);
-        LOG("code:%d", ret);
-    } else if (code > CTRL_CODE_SEC_TYPE && code < CTRL_CODE_MEDIA_TYPE) {
-        handle = dlopen("/system/lib64/libdisSecProcess.z.so", RTLD_LAZY);
-        if (!handle) {
-            LOG("dlopen failed %s", dlerror());
-        }
-
-        ProcessData = (int (*)(int, char*))dlsym(handle, "_Z13ProcessSecMgriPc");
-        if ((error = dlerror()) != nullptr) {
-            LOG("dlsym failed %s", dlerror());
-        }
-
-        ret = (*ProcessData)(code, param);
-        LOG("code:%d", ret);
-    } else {
-        handle = dlopen("/system/lib64/libdisMediaProcess.z.so", RTLD_LAZY);
-        if (!handle) {
-            LOG("dlopen failed %s", dlerror());
-        }
-
-        ProcessData = (int (*)(int, char*))dlsym(handle, "_Z15ProcessSecMgriPc");
-        if ((error = dlerror()) != nullptr) {
-            LOG("dlsym failed %s", dlerror());
-        }
-
         ret = (*ProcessData)(code, param);
         LOG("code:%d", ret);
     }
