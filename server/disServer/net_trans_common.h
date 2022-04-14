@@ -40,49 +40,26 @@
 extern "C" {
 #endif
 
-const int MAX_DATA_LENGTH = 1024;
-const char DEF_GROUP_ID[50] = "DEF_GROUP_ID";
-const char DEF_PKG_NAME[50] = "com.communication.demo";
-const char SESSION_NAME_DATA[50] = "com.communication.demo.data";
-const char SHM_DATA_RES[50] = "9999";
-
-const int WAIT_DEF_VALUE = -1;
-const int WAIT_SUCCESS_VALUE = 1;
-const int WAIT_FAIL_VALUE = 0;
-const int SESSION_ID_MIN = 1;
-const int MAX_SESSION_NUM = 16;
-const int ONE_SECOND = 1;
-const int BOOL_TRUE = 1;
-const int BOOL_FALSE = 0;
-
-const int STR_PREFIX_FOUR = 4;
-const int SLEEP_SECOND_ONE = 1;
-const int SLEEP_SECOND_TEO = 2;
-const int SLEEP_SECOND_TEN = 10;
-const int SLEEP_SECOND_NINEHUNDRED = 900;
-const int WHILE_I_ONEHUNDRED = 100;
-
-const int CODE_PREFIX_FOUR = 4;
-typedef enum {
+typedef enum class WaitSessionType {
     SESSION_4DATA = 1,
     SESSION_4CTL,
-} WaitSessionType;
+};
 
-typedef enum {
+typedef enum class DataType {
     DATA_TYPE_MSG = 1,
     DATA_TYPE_BYTE,
-} DataType;
+};
 
-typedef enum {
+typedef enum class WaitNodeStateType {
     STATE_ONLINE = 1,
     STATE_OFFLINE,
-} WaitNodeStateType;
+};
 
-typedef enum {
+typedef enum class ConcurrentType {
     CONC_CLOSE_SESSION = 1,
-} ConcurrentType;
+};
 
-typedef enum {
+typedef enum class CtrlCodeType {
     CTRL_CODE_SOFTBUS_TYPE = 1000,
     CTRL_CODE_DATAMGR_TYPE = 2000,
     CTRL_CODE_DM_TYPE = 3000,
@@ -91,27 +68,26 @@ typedef enum {
     CTRL_CODE_SEC_TYPE = 6000,
     CTRL_CODE_MEDIA_TYPE = 7000,
     CTRL_CODE_RESULT_TYPE = 9999,
-} CtrlCodeType;
+};
 
 namespace NetTransCommon {
-
 int Wait(int timeout);
 int Wait4Session(int timeout, WaitSessionType type);
 int WaitNodeCount(int timeout, WaitNodeStateType state, int expectCount);
-static void OnDefDeviceFound(const DeviceInfo* device);
+void OnDefDeviceFound(const DeviceInfo* device);
 int CheckRemoteDeviceIsNull(int isSetNetId);
-static void OnDefDiscoverFail(int subscribeId, DiscoveryFailReason failReason);
+void OnDefDiscoverFail(int subscribeId, DiscoveryFailReason failReason);
 
-static void OnDefDiscoverSuccess(int subscribeId);
+void OnDefDiscoverSuccess(int subscribeId);
 
-static void OnDefNodeOnline(NodeBasicInfo* info);
+void OnDefNodeOnline(NodeBasicInfo* info);
 
-static void OnDefNodeOffline(NodeBasicInfo* info);
+void OnDefNodeOffline(NodeBasicInfo* info);
 
-static void OnDefNodeBasicInfoChanged(NodeBasicInfoType type, NodeBasicInfo* info);
+void OnDefNodeBasicInfoChanged(NodeBasicInfoType type, NodeBasicInfo* info);
 
-static void OnLeaveNetCallBack(const char* networkId, int32_t ret);
-static int DataSessionOpened(int sessionId, int result);
+void OnLeaveNetCallBack(const char* networkId, int32_t ret);
+int DataSessionOpened(int sessionId, int result);
 void ResetWaitFlag(void);
 
 void ResetWaitFlag4Data(void);
@@ -122,15 +98,13 @@ void ResetWaitCount4Online(void);
 int GetCurrentSessionId4Data(void);
 int JoinNetwork(void);
 
-int DiscoverAndJoinNetwork(void);
-
 int LeaveNetWork(void);
 
-static void DataSessionClosed(int sessionId);
+void DataSessionClosed(int sessionId);
 
-static void DataBytesReceived(int sessionId, const void* data, unsigned int dataLen);
+void DataBytesReceived(int sessionId, unsigned int dataLen);
 
-static void DataMessageReceived(int sessionId, const void* data, unsigned int dataLen);
+void DataMessageReceived(int sessionId, const char* data, unsigned int dataLen);
 
 int RegisterDeviceStateDefCallback(void);
 
@@ -146,11 +120,11 @@ int CloseSessionAndRemoveSs4Data(void);
 
 int IncrementSubId(void);
 
-void OnDataMessageReceived(int sessionId, const void* data, unsigned int dataLen);
+void OnDataMessageReceived(int sessionId, const char* data, unsigned int dataLen);
 
-void* SendMsgTask(void* param);
+void* SendMsgTask(char* param);
 
-void* DataOperateTask(void* param);
+void* DataOperateTask(char* param);
 
 char* GetNetworkId(void);
 

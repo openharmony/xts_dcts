@@ -39,7 +39,7 @@ ohos_unittest("disTest") {
   sources = [
     "../../common/shm_utils.cpp",
     "net_trans_common.cpp",
-    "softbus_test_permission.cpp",
+    "softbus_permission.cpp",
   ]
 
   deps = [
