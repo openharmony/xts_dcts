@@ -123,7 +123,7 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Session_Func_0200, TestSize.Lev
     // open max+1, expect fail
     int sessionId;
     sessionId = OpenSession(SESSION_NAME_DATA, SESSION_NAME_DATA, GetNetworkId(), DEF_GROUP_ID, GetSessionAttr4Data());
-    EXPECT_FALSE(sessionId >= SESSION_ID_MIN) << "call OpenSession[data] fail,sid=" << sessionId;
+    EXPECT_FALSE(sessionId >= SESSION_ID_MIN) << "call OpenSession[data] success,sid=" << sessionId;
 
     // close session
     ret = CloseSessionBatch4Data(sessionId4Data, count);

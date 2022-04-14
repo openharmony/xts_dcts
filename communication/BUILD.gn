@@ -19,6 +19,8 @@ group("communication") {
       "softbus_standard/transmission/sendfile:DctsSoftBusTransFileFunTest",
       "softbus_standard/transmission/sendmsg:DctsSoftBusTransFunTest",
       "softbus_standard/transmission/sessionmgt:DctsSoftBusTransSessionFunTest",
+      "softbus_standard/transmission/reliability:DctsSoftBusTransReliabilityTest",
+      "softbus_standard/dsoftbusTest:dsoftbusTest",
     ]
   } else {
     deps = [ "wifi_standard:ActsWifiJSTest" ]
