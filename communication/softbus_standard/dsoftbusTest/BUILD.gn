@@ -16,39 +16,37 @@ import("//test/xts/tools/build/suite.gni")
 module_output_path = "dcts/softbus_base/dsoftbusTest"
 
 ohos_moduletest_suite("dsoftbusTest") {
-module_out_path = module_output_path
-    sources = [
-        "../common/net_trans_common.c",
-        "../common/wifi_utils.cpp",
-        "../common/SoftBus_Test_Permission.cpp",
-        "./dsoftbusTest.cpp",
-    ]
+  module_out_path = module_output_path
+  sources = [
+    "../common/SoftBus_Test_Permission.cpp",
+    "../common/net_trans_common.c",
+    "../common/wifi_utils.cpp",
+    "./dsoftbusTest.cpp",
+  ]
 
-     include_dirs = [
-         "../common",
-          "//third_party/cJSON",
-          "//utils/native/base/include",
-          "//foundation/communication/dsoftbus/core/common/include",
-          "//foundation/communication/dsoftbus/adapter/common/include",
-          "//foundation/communication/dsoftbus/interfaces/kits/common",
-          "//foundation/communication/dsoftbus/interfaces/kits/bus_center",
-          "//foundation/communication/dsoftbus/interfaces/kits/discovery",
-          "//foundation/communication/dsoftbus/interfaces/kits/transport",
-          "//base/security/permission/interfaces/innerkits/permission_standard/permissionsdk/main/cpp/include",
-          "//foundation/communication/wifi/interfaces/innerkits/native_cpp/wifi_standard/include",
-          "//foundation/communication/wifi/interfaces/innerkits/native_cpp/wifi_standard/interfaces",
-          "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include",
-          "//foundation/communication/wifi/services/wifi_standard/wifi_framework/common/net_helper",
-          "//foundation/communication/wifi/services/wifi_standard/wifi_framework/common/log",
-    ]
+  include_dirs = [
+    "../common",
+    "//third_party/cJSON",
+    "//utils/native/base/include",
+    "//foundation/communication/dsoftbus/core/common/include",
+    "//foundation/communication/dsoftbus/adapter/common/include",
+    "//foundation/communication/dsoftbus/interfaces/kits/common",
+    "//foundation/communication/dsoftbus/interfaces/kits/bus_center",
+    "//foundation/communication/dsoftbus/interfaces/kits/discovery",
+    "//foundation/communication/dsoftbus/interfaces/kits/transport",
+    "//base/security/permission/interfaces/innerkits/permission_standard/permissionsdk/main/cpp/include",
+    "//foundation/communication/wifi/interfaces/innerkits/native_cpp/wifi_standard/include",
+    "//foundation/communication/wifi/interfaces/innerkits/native_cpp/wifi_standard/interfaces",
+    "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include",
+    "//foundation/communication/wifi/services/wifi_standard/wifi_framework/common/net_helper",
+    "//foundation/communication/wifi/services/wifi_standard/wifi_framework/common/log",
+  ]
 
-    deps = [
-       "//third_party/googletest:gtest_main",
-       #"//foundation/communication/dsoftbus/core/frame/standard/client:softbus_client",
-       "//base/security/permission/interfaces/innerkits/permission_standard/permissionsdk:libpermissionsdk_standard",
-       "//foundation/communication/wifi/interfaces/innerkits/native_cpp/wifi_standard:wifi_sdk",
-    ]
-    external_deps = [
-        "dsoftbus_standard:softbus_client",
-   ]
+  deps = [
+    #"//foundation/communication/dsoftbus/core/frame/standard/client:softbus_client",
+    "//base/security/permission/interfaces/innerkits/permission_standard/permissionsdk:libpermissionsdk_standard",
+    "//foundation/communication/wifi/interfaces/innerkits/native_cpp/wifi_standard:wifi_sdk",
+    "//third_party/googletest:gtest_main",
+  ]
+  external_deps = [ "dsoftbus_standard:softbus_client" ]
 }
