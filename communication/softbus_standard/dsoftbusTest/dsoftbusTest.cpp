@@ -32,7 +32,8 @@ static const char* def_passwd = "OH2022@xa";
 static const char* def_ssid = "OpenHarmony_Private_Net_01";
 static const char* slave_ssid = "OpenHarmony_Private_Net_02";
 
-static const int three_seconds = 10;
+static const int three_seconds = 3;
+static const int six_seconds = 6;
 static const int ten_seconds = 10;
 
 static void SetupCallback(void);
@@ -180,7 +181,7 @@ void* CtrlOperateTask(void* param)
             WiFiUtils ::DisableThenEnableAndConnect(three_seconds, def_ssid, def_passwd);
             break;
         case CTRL_CODE_CLOSE_WIFI_TEN_MIN:
-            sleepTime = 66 * ten_seconds;
+            sleepTime = six_seconds * ten_seconds * ten_seconds;
             WiFiUtils ::DisableWifi();
             while (sleepTime > 0) {
                 sleep(ten_seconds);
@@ -190,7 +191,7 @@ void* CtrlOperateTask(void* param)
             WiFiUtils ::EnableThenConnect(def_ssid, def_passwd);
             break;
         case CTRL_CODE_CLOSE_WIFI_FIVE_MIN:
-            sleepTime = 33 * ten_seconds;
+            sleepTime = three_seconds * ten_seconds * ten_seconds;
             WiFiUtils ::DisableWifi();
             while (sleepTime > 0) {
                 sleep(ten_seconds);
@@ -209,7 +210,7 @@ void* CtrlOperateTask(void* param)
             LOG("[operate]connect to default ret:%d", ret);
             break;
         case CTRL_CODE_CHANGE_WIFI_SIXTY_SEC:
-            sleepTime = 6 * ten_seconds;
+            sleepTime = six_seconds * ten_seconds;
             ret = WiFiUtils ::ConnectToNew(slave_ssid, def_passwd);
             LOG("[operate]connect to salve ret:%d", ret);
             LOG("[operate]start sleep:%d", sleepTime);
