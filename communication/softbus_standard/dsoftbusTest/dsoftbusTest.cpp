@@ -32,6 +32,9 @@ static const char* def_passwd = "OH2022@xa";
 static const char* def_ssid = "OpenHarmony_Private_Net_01";
 static const char* slave_ssid = "OpenHarmony_Private_Net_02";
 
+static const int three_seconds = 10;
+static const int ten_seconds = 10;
+
 static void SetupCallback(void);
 static void TeardownCallback(void);
 
@@ -171,33 +174,33 @@ void* CtrlOperateTask(void* param)
     int sleepTime;
     switch (code) {
         case CTRL_CODE_CLOSE_WIFI_TEN_SEC:
-            WiFiUtils ::DisableThenEnableAndConnect(10, def_ssid, def_passwd);
+            WiFiUtils ::DisableThenEnableAndConnect(ten_seconds, def_ssid, def_passwd);
             break;
         case CTRL_CODE_CLOSE_WIFI_THREE_SEC:
-            WiFiUtils ::DisableThenEnableAndConnect(3, def_ssid, def_passwd);
+            WiFiUtils ::DisableThenEnableAndConnect(three_seconds, def_ssid, def_passwd);
             break;
         case CTRL_CODE_CLOSE_WIFI_TEN_MIN:
-            sleepTime = 660;
+            sleepTime = 66 * ten_seconds;
             WiFiUtils ::DisableWifi();
             while (sleepTime > 0) {
-                sleep(10);
-                sleepTime -= 10;
+                sleep(ten_seconds);
+                sleepTime -= ten_seconds;
                 LOG("[operate][close wifi 10mins] wait:%d", sleepTime);
             }
             WiFiUtils ::EnableThenConnect(def_ssid, def_passwd);
             break;
         case CTRL_CODE_CLOSE_WIFI_FIVE_MIN:
-            sleepTime = 330;
+            sleepTime = 33 * ten_seconds;
             WiFiUtils ::DisableWifi();
             while (sleepTime > 0) {
-                sleep(10);
-                sleepTime -= 10;
+                sleep(ten_seconds);
+                sleepTime -= ten_seconds;
                 LOG("[operate][close wifi 5mins] wait:%d", sleepTime);
             }
             WiFiUtils ::EnableThenConnect(def_ssid, def_passwd);
             break;
         case CTRL_CODE_CHANGE_WIFI_TEN_SEC:
-            sleepTime = 10;
+            sleepTime = ten_seconds;
             ret = WiFiUtils ::ConnectToNew(slave_ssid, def_passwd);
             LOG("[operate]connect to salve ret:%d", ret);
             LOG("[operate]start sleep:%d", sleepTime);
@@ -206,7 +209,7 @@ void* CtrlOperateTask(void* param)
             LOG("[operate]connect to default ret:%d", ret);
             break;
         case CTRL_CODE_CHANGE_WIFI_SIXTY_SEC:
-            sleepTime = 60;
+            sleepTime = 6 * ten_seconds;
             ret = WiFiUtils ::ConnectToNew(slave_ssid, def_passwd);
             LOG("[operate]connect to salve ret:%d", ret);
             LOG("[operate]start sleep:%d", sleepTime);
@@ -240,7 +243,7 @@ void* CtrlOperateTask(void* param)
     }
     free(param);
     LOG("[operate] end");
-    return 0;
+    return nullptr;
 }
 
 static int OnCtrlSessionOpened(int sessionId, int result)
@@ -325,7 +328,6 @@ static void OnPerfMessageReceived(int sessionId, const void* data, unsigned int 
     LOG("[cb][perf]mesg received send back:%d", ret);
 }
 
-/* session callback for passive*/
 static int OnPassSessionOpened(int sessionId, int result)
 {
     LOG("[cb][pass]session opened sid:%d, ret:%d", sessionId, result);
