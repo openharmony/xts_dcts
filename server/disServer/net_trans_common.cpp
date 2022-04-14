@@ -20,7 +20,6 @@
 #include <pthread.h>
 #include <sys/socket.h>
 
-
 #include "softbus_permission.h"
 #include "unistd.h"
 #include "net_trans_common.h"
@@ -41,6 +40,7 @@ const int MAX_SESSION_NUM = 16;
 const int ONE_SECOND = 1;
 const int BOOL_TRUE = 1;
 const int BOOL_FALSE = 0;
+const int INT_RES_SUCC = 0;
 
 const int STR_PREFIX_FOUR = 4;
 const int SLEEP_SECOND_ONE = 1;
@@ -162,7 +162,7 @@ void OnDefDeviceFound(const DeviceInfo* device)
     LOG("device found,addr:%s,port:%d", device->addr[0].info.ip.ip, device->addr[0].info.ip.port);
 
     if (strncpy_s(ipTmp, strlen(device->addr[0].info.ip.ip), device->addr[0].info.ip.ip,
-            strlen(device->addr[0].info.ip.ip)) != 0) {
+                  strlen(device->addr[0].info.ip.ip)) != 0) {
         LOG("device found, strcpy_s ip");
     }
 
@@ -205,7 +205,9 @@ void OnDefNodeOnline(NodeBasicInfo* info)
         LOG("OnDefNodeOnline info is nullptr");
         return;
     }
-    (void)strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, info->networkId, NETWORK_ID_BUF_LEN);
+    if (strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, info->networkId, NETWORK_ID_BUF_LEN) != INT_RES_SUCC) {
+        return;
+    }
     LOG("Online id:%s,name:%s,type id:%u", info->networkId, info->deviceName, info->deviceTypeId);
     g_nodeOnlineCount++;
 }
@@ -256,7 +258,9 @@ void OnJoinNetCallBack(ConnectionAddr* addr, const char* networkId, int32_t retC
             break;
     }
 
-    (void)strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, networkId, NETWORK_ID_BUF_LEN);
+    if (strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, networkId, NETWORK_ID_BUF_LEN) != INT_RES_SUCC) {
+        return;
+    }
     LOG("joinNet networkId:%s", g_networkId);
 
     g_waitFlag = WAIT_SUCCESS_VALUE;
@@ -421,8 +425,10 @@ void DataMessageReceived(int sessionId, const char* data, unsigned int dataLen)
     if (dataLen <= maxLen) {
         int* code = (int*)malloc(sizeof(int));
         char* buf = malloc(MAX_DATA_LENGTH);
-        memset_s(buf, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-        strncpy_s(buf, dataLen, data, dataLen);
+        (void)memset_s(buf, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+        if (strncpy_s(buf, dataLen, data, dataLen) != INT_RES_SUCC) {
+            return;
+        }
         if (*code != -1) {
             pthread_t thread;
             int ret = pthread_create(&thread, nullptr, DataOperateTask, buf);
@@ -484,7 +490,9 @@ int SendDataMsgToRemote(CtrlCodeType code, char* data)
     }
     (void)memset_s(msg, size, 0, size);
 
-    strcpy_s(msg, MAX_DATA_LENGTH, data);
+    if (strcpy_s(msg, size, data) != INT_RES_SUCC) {
+        return ret;
+    }
     ret = SendMessage(g_currentSessionId4Data, msg, strlen(msg));
     LOG("send msg ret:%d", ret);
     free(data);
@@ -502,8 +510,7 @@ int CloseSessionAndRemoveSs4Data(void)
         LOG("close session success");
     }
 
-    int retss;
-    retss = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
+    int retss = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
     if (retss != SOFTBUS_OK) {
         LOG("remove session ret:%d", retss);
     }
@@ -535,8 +542,9 @@ void OnDataMessageReceived(int sessionId, const char* data, unsigned int dataLen
     if (dataLen <= maxLen) {
         int* code = (int*)malloc(sizeof(int));
         char* buf = malloc(MAX_DATA_LENGTH);
-        strcpy_s(buf, MAX_DATA_LENGTH, data);
-
+        if (strcpy_s(buf, MAX_DATA_LENGTH, data) != INT_RES_SUCC) {
+            return ret;
+        }
         if (*code != -1) {
             pthread_t thread;
             int ret = pthread_create(&thread, nullptr, DataOperateTask, buf);
@@ -583,7 +591,7 @@ void* SendMsgTask(char* param)
             } else {
                 LOG("SendData send...%s", str);
                 SendMessage(g_currentSessionId4Data, str, strlen(str));
-                memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+                (void)memset_s(str, strlen(str) + 1, 0, strlen(str) + 1);
             }
         }
         sleep(SLEEP_SECOND_TEO);
@@ -598,8 +606,12 @@ void* DataOperateTask(char* param)
     LOG("operate start...");
     int code = -1;
     char codeType[5] = { 0 };
-    strncpy_s(codeType, CODE_PREFIX_FOUR, param, CODE_PREFIX_FOUR);
-    (void)sscanf_s(codeType, CODE_PREFIX_FOUR, "%d", &code);
+    if (strncpy_s(codeType, CODE_PREFIX_FOUR, param, CODE_PREFIX_FOUR) != INT_RES_SUCC) {
+        return nullptr;
+    }
+    if (sscanf_s(codeType, CODE_PREFIX_FOUR, "%d", &code) <= INT_RES_SUCC) {
+        return nullptr;
+    }
     LOG("code :%d", code);
 
     void* handle = nullptr;
@@ -708,12 +720,11 @@ void* DataOperateTask(char* param)
     if (str == nullptr) {
         return nullptr;
     }
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    sprintf_s(str, MAX_DATA_LENGTH, "%d:%d", CTRL_CODE_RESULT_TYPE, ret);
-    if (str == nullptr) {
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    int resSprint = sprintf_s(str, MAX_DATA_LENGTH, "%d:%d", CTRL_CODE_RESULT_TYPE, ret);
+    if (resSprint < BOOL_FALSE) {
         return nullptr;
     }
-
     SendDataMsgToRemote(CTRL_CODE_RESULT_TYPE, str);
     if (handle) {
         dlclose(handle);
@@ -737,7 +748,9 @@ int CheckRemoteDeviceIsNull(int isSetNetId)
     if (nodeInfo != nullptr && nodeNum > 0) {
         LOG("get neiId is %s", nodeInfo->networkId);
         if (isSetNetId == BOOL_TRUE) {
-            (void)strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, nodeInfo->networkId, NETWORK_ID_BUF_LEN);
+            if (strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, nodeInfo->networkId, NETWORK_ID_BUF_LEN) != INT_RES_SUCC) {
+                return SOFTBUS_ERR;
+            }
         }
         FreeNodeInfo(nodeInfo);
         return SOFTBUS_OK;
