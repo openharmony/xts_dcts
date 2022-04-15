@@ -40,26 +40,26 @@
 extern "C" {
 #endif
 
-typedef enum class WaitSessionType {
+enum class WaitSessionType:int {
     SESSION_4DATA = 1,
     SESSION_4CTL,
 };
 
-typedef enum class DataType {
+enum class DataType:int {
     DATA_TYPE_MSG = 1,
     DATA_TYPE_BYTE,
 };
 
-typedef enum class WaitNodeStateType {
+enum class WaitNodeStateType:int {
     STATE_ONLINE = 1,
     STATE_OFFLINE,
 };
 
-typedef enum class ConcurrentType {
+enum class ConcurrentType {
     CONC_CLOSE_SESSION = 1,
 };
 
-typedef enum class CtrlCodeType {
+enum class CtrlCodeType:int {
     CTRL_CODE_SOFTBUS_TYPE = 1000,
     CTRL_CODE_DATAMGR_TYPE = 2000,
     CTRL_CODE_DM_TYPE = 3000,
@@ -71,14 +71,10 @@ typedef enum class CtrlCodeType {
 };
 
 namespace NetTransCommon {
-int Wait(int timeout);
-int Wait4Session(int timeout, WaitSessionType type);
-int WaitNodeCount(int timeout, WaitNodeStateType state, int expectCount);
-void OnDefDeviceFound(const DeviceInfo* device);
-int CheckRemoteDeviceIsNull(int isSetNetId);
-void OnDefDiscoverFail(int subscribeId, DiscoveryFailReason failReason);
 
-void OnDefDiscoverSuccess(int subscribeId);
+int Wait4Session(int timeout, WaitSessionType type);
+
+int CheckRemoteDeviceIsNull(int isSetNetId);
 
 void OnDefNodeOnline(NodeBasicInfo* info);
 
@@ -86,9 +82,7 @@ void OnDefNodeOffline(NodeBasicInfo* info);
 
 void OnDefNodeBasicInfoChanged(NodeBasicInfoType type, NodeBasicInfo* info);
 
-void OnLeaveNetCallBack(const char* networkId, int32_t ret);
 int DataSessionOpened(int sessionId, int result);
-void ResetWaitFlag(void);
 
 void ResetWaitFlag4Data(void);
 
@@ -96,21 +90,19 @@ void ResetWaitCount4Offline(void);
 
 void ResetWaitCount4Online(void);
 int GetCurrentSessionId4Data(void);
-int JoinNetwork(void);
 
-int LeaveNetWork(void);
 
 void DataSessionClosed(int sessionId);
 
-void DataBytesReceived(int sessionId, unsigned int dataLen);
+void DataBytesReceived(int sessionId,const void* data, unsigned int dataLen);
 
-void DataMessageReceived(int sessionId, const char* data, unsigned int dataLen);
+void DataMessageReceived(int sessionId, const void* data, unsigned int dataLen);
 
 int RegisterDeviceStateDefCallback(void);
 
 int UnRegisterDeviceStateDefCallback(void);
 
-int CreateSsAndOpenSession4Data(void);
+int CreateSsAndOpenSession4Data();
 
 int OpenSession4Data(void);
 
@@ -122,11 +114,9 @@ int IncrementSubId(void);
 
 void OnDataMessageReceived(int sessionId, const char* data, unsigned int dataLen);
 
-void* SendMsgTask(char* param);
+void* SendMsgTask(void* param);
 
-void* DataOperateTask(char* param);
-
-char* GetNetworkId(void);
+void* DataOperateTask(void* param);
 
 ISessionListener* GetSessionListenser4Data(void);
 

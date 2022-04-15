@@ -20,10 +20,9 @@
 #include <pthread.h>
 #include <sys/socket.h>
 
-
+#include "net_trans_common.h"
 #include "softbus_permission.h"
 #include "unistd.h"
-#include "net_trans_common.h"
 
 using namespace NetTransCommon;
 
@@ -38,17 +37,14 @@ const int WAIT_SUCCESS_VALUE = 1;
 const int WAIT_FAIL_VALUE = 0;
 const int SESSION_ID_MIN = 1;
 const int MAX_SESSION_NUM = 16;
-const int ONE_SECOND = 1;
-const int BOOL_TRUE = 1;
-const int BOOL_FALSE = 0;
-const int INT_RES_SUCC = 0;
+const int INT_TRUE = 1;
+const int FALSE = 0;
+const int RET_SUCCESS = 0;
 
 const int STR_PREFIX_FOUR = 4;
 const int SLEEP_SECOND_ONE = 1;
 const int SLEEP_SECOND_TEO = 2;
 const int SLEEP_SECOND_TEN = 10;
-const int SLEEP_SECOND_NINEHUNDRED = 900;
-const int WHILE_I_ONEHUNDRED = 100;
 
 const int CODE_LEN_FIVE = 5;
 const int CODE_PREFIX_FOUR = 4;
@@ -69,53 +65,21 @@ static ConnectionAddr g_ethAddr = {
 };
 
 static int g_subscribeId = 0;
-static IDiscoveryCallback g_defDisCallback;
-static SubscribeInfo g_subInfo = {
-    .mode = DISCOVER_MODE_ACTIVE,
-    .medium = COAP,
-    .freq = MID,
-    .isSameAccount = true,
-    .isWakeRemote = false,
-    .capability = "ddmpCapability",
-    .capabilityData = (unsigned char*)"cap data",
-    .dataLen = sizeof("cap data"),
-};
 
-namespace {
-int Wait(int timeout)
-{
-    LOG("start wait timeout:%d", timeout);
-    int count = 0;
-    while (timeout > 0) {
-        sleep(ONE_SECOND);
-        if (g_waitFlag != WAIT_DEF_VALUE) {
-            LOG("wait success flag:%d time:%d", g_waitFlag, count);
-            break;
-        }
-        timeout--;
-        count++;
-    }
-
-    if (g_waitFlag != WAIT_SUCCESS_VALUE) {
-        LOG("wait fail flag:%d time:%d", g_waitFlag, count);
-        return SOFTBUS_ERR;
-    }
-    return SOFTBUS_OK;
-}
-
+namespace NetTransCommon {
 int Wait4Session(int timeout, WaitSessionType type)
 {
     int hitFlag = -1;
     while (timeout > 0) {
-        sleep(ONE_SECOND);
+        sleep(SLEEP_SECOND_ONE);
         switch (type) {
-            case SESSION_4CTL:
+            case WaitSessionType::SESSION_4CTL:
                 if (g_waitFlag4Ctl != WAIT_DEF_VALUE) {
                     LOG("Wait4Session success,flag:%d", g_waitFlag4Ctl);
                     hitFlag = 1;
                 }
                 break;
-            case SESSION_4DATA:
+            case WaitSessionType::SESSION_4DATA:
                 if (g_waitFlag4Data != WAIT_DEF_VALUE) {
                     LOG("Wait4Session success,flag:%d", g_waitFlag4Ctl);
                     hitFlag = 1;
@@ -132,13 +96,13 @@ int Wait4Session(int timeout, WaitSessionType type)
         timeout--;
     }
     switch (type) {
-        case SESSION_4CTL:
+        case WaitSessionType::SESSION_4CTL:
             if (g_waitFlag4Ctl != WAIT_SUCCESS_VALUE) {
                 LOG("Wait4Session FAIL,flag:%d", g_waitFlag4Ctl);
                 return SOFTBUS_ERR;
             }
             break;
-        case SESSION_4DATA:
+        case WaitSessionType::SESSION_4DATA:
             if (g_waitFlag4Data != WAIT_SUCCESS_VALUE) {
                 LOG("Wait4Session FAIL,flag:%d", g_waitFlag4Ctl);
                 return SOFTBUS_ERR;
@@ -151,55 +115,6 @@ int Wait4Session(int timeout, WaitSessionType type)
     return SOFTBUS_OK;
 }
 
-void OnDefDeviceFound(const DeviceInfo* device)
-{
-    if (device == nullptr) {
-        LOG("device found,but is nullptr");
-        g_waitFlag = WAIT_FAIL_VALUE;
-        return;
-    }
-
-    uint16_t port = device->addr[0].info.ip.port;
-    char ipTmp[20] = { 0 };
-    LOG("device found,addr:%s,port:%d", device->addr[0].info.ip.ip, device->addr[0].info.ip.port);
-
-    if (strncpy_s(ipTmp, strlen(device->addr[0].info.ip.ip), device->addr[0].info.ip.ip,
-                  strlen(device->addr[0].info.ip.ip)) != 0) {
-        LOG("device found, strcpy_s ip");
-    }
-
-    g_ethAddr.info.ip.port = port;
-    if (strncpy_s(g_ethAddr.info.ip.ip, strlen(ipTmp), ipTmp, strlen(ipTmp)) != 0) {
-        LOG("device found,strncpy_s ip fail");
-        g_waitFlag = WAIT_FAIL_VALUE;
-    }
-
-    LOG("device found,addr:%s,port:%d", g_ethAddr.info.ip.ip, port);
-    g_waitFlag = WAIT_SUCCESS_VALUE;
-
-    int ret = JoinNetwork();
-
-    int i = 0;
-    while (i < WHILE_I_ONEHUNDRED && ret != SOFTBUS_OK) {
-        ret = JoinNetwork();
-        if (ret != SOFTBUS_OK) {
-            LOG("call joinlnn fail, ret:%d", ret);
-            continue;
-        }
-        i++;
-    }
-}
-
-void OnDefDiscoverFail(int subscribeId, DiscoveryFailReason failReason)
-{
-    LOG("discover fail, sub id:%d,reason:%d", subscribeId, failReason);
-}
-
-void OnDefDiscoverSuccess(int subscribeId)
-{
-    LOG("discover success, sub id:%d", subscribeId);
-}
-
 void OnDefNodeOnline(NodeBasicInfo* info)
 {
     LOG("OnDefNodeOnline");
@@ -207,7 +122,7 @@ void OnDefNodeOnline(NodeBasicInfo* info)
         LOG("OnDefNodeOnline info is nullptr");
         return;
     }
-    if (strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, info->networkId, NETWORK_ID_BUF_LEN) != INT_RES_SUCC) {
+    if (strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, info->networkId, NETWORK_ID_BUF_LEN) != RET_SUCCESS) {
         return;
     }
     LOG("Online id:%s,name:%s,type id:%u", info->networkId, info->deviceName, info->deviceTypeId);
@@ -235,78 +150,6 @@ void OnDefNodeBasicInfoChanged(NodeBasicInfoType type, NodeBasicInfo* info)
     LOG("InfoChanged id:%s,name:%s", info->networkId, info->deviceName);
 }
 
-void OnJoinNetCallBack(ConnectionAddr* addr, const char* networkId, int32_t retCode)
-{
-    if (networkId == nullptr || retCode != SOFTBUS_OK) {
-        LOG("JoinNet error: ret:%d", retCode);
-        g_waitFlag = WAIT_FAIL_VALUE;
-        return;
-    }
-
-    LOG("JoinNet,ret:%d,id:%s", retCode, networkId);
-    switch (addr->type) {
-        case CONNECTION_ADDR_WLAN:
-            LOG("JoinNet type is WLAN");
-            break;
-        case CONNECTION_ADDR_BR:
-            LOG("JoinNet type is BR");
-            break;
-        case CONNECTION_ADDR_ETH:
-            LOG("JoinNet type is ETH");
-            break;
-        default:
-            LOG("JoinNet type error");
-            g_waitFlag = WAIT_FAIL_VALUE;
-            break;
-    }
-
-    if (strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, networkId, NETWORK_ID_BUF_LEN) != INT_RES_SUCC) {
-        return;
-    }
-    LOG("joinNet networkId:%s", g_networkId);
-
-    g_waitFlag = WAIT_SUCCESS_VALUE;
-
-    ResetWaitCount4Online();
-    int ret = WaitNodeCount(10, STATE_ONLINE, 1);
-    ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
-    if (ret == SOFTBUS_ERR) {
-        sleep(SLEEP_SECOND_NINEHUNDRED);
-    }
-
-    ret = CreateSsAndOpenSession4Data();
-    if (ret != SOFTBUS_OK) {
-        LOG("CreateSsAndOpenSession4Ctl failed ret=%d", ret);
-    }
-}
-
-int WaitNodeCount(int timeout, WaitNodeStateType state, int expectCount)
-{
-    LOG("Wait4Node,timeout:%d, type:%d, exp count:%d", timeout, state, expectCount);
-    while (timeout > 0) {
-        sleep(SLEEP_SECOND_ONE);
-        switch (state) {
-            case STATE_ONLINE:
-                break;
-            case STATE_OFFLINE:
-                break;
-            default:
-                break;
-        }
-        timeout--;
-    }
-    return SOFTBUS_OK;
-}
-void OnLeaveNetCallBack(const char* networkId, int32_t ret)
-{
-    LOG("LeaveLnn ret:%d", ret);
-    if (ret == SOFTBUS_OK) {
-        g_waitFlag = WAIT_SUCCESS_VALUE;
-    } else {
-        g_waitFlag = WAIT_FAIL_VALUE;
-    }
-}
-
 int DataSessionOpened(int sessionId, int result)
 {
     LOG("DataSessionOpened sessionId=%d,result=%d", sessionId, result);
@@ -327,11 +170,6 @@ int DataSessionOpened(int sessionId, int result)
     return SOFTBUS_OK;
 }
 
-void ResetWaitFlag(void)
-{
-    g_waitFlag = WAIT_DEF_VALUE;
-}
-
 void ResetWaitFlag4Data(void)
 {
     g_waitFlag = WAIT_DEF_VALUE;
@@ -347,88 +185,26 @@ void ResetWaitCount4Online(void)
     g_nodeOnlineCount = 0;
 }
 
-int StartDiscoveryDevice(void)
-{
-    int ret;
-    int timeout = 10;
-    ResetWaitFlag();
-    g_subInfo.subscribeId = IncrementSubId(void);
-    LOG("subscribeId:%d", g_subInfo.subscribeId);
-    ret = StartDiscovery(DEF_PKG_NAME, &g_subInfo, &g_defDisCallback);
-    if (ret != SOFTBUS_OK) {
-        LOG("call discovery fail,ret:%d", ret);
-        return ret;
-    }
-    ret = Wait(timeout);
-    if (ret != SOFTBUS_OK) {
-        LOG("discovery device fail");
-    }
-    return ret;
-}
-
-int JoinNetwork(void)
-{
-    LOG("call joinNetwork");
-    int ret;
-    int timeout = 15;
-    ResetWaitFlag();
-    ret = JoinLNN(DEF_PKG_NAME, &g_ethAddr, OnJoinNetCallBack);
-    if (ret != SOFTBUS_OK) {
-        LOG("call JoinLnn fail,ret:%d", ret);
-        return ret;
-    }
-    ret = Wait(timeout);
-    if (ret != SOFTBUS_OK) {
-        LOG("JoinNetwork fail");
-    }
-    return ret;
-}
-
-int LeaveNetWork(void)
-{
-    int ret;
-    int timeout = 10;
-
-    ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
-    if (ret != SOFTBUS_OK) {
-        return ret;
-    }
-
-    ResetWaitFlag();
-    ret = LeaveLNN(DEF_PKG_NAME, g_networkId, OnLeaveNetCallBack);
-    if (ret != SOFTBUS_OK) {
-        LOG("call LeaveLNN fail,ret:%d", ret);
-        return ret;
-    }
-
-    ret = Wait(timeout);
-    if (ret != SOFTBUS_OK) {
-        LOG("Leave NETwork fail");
-    }
-
-    return ret;
-}
-
 void DataSessionClosed(int sessionId)
 {
     LOG("close session %d", sessionId);
 }
 
-void DataBytesReceived(int sessionId, unsigned int dataLen)
+void DataBytesReceived(int sessionId, const void* data, unsigned int dataLen)
 {
     LOG("byteRec start");
 }
 
-void DataMessageReceived(int sessionId, const char* data, unsigned int dataLen)
+void DataMessageReceived(int sessionId, const void* data, unsigned int dataLen)
 {
     LOG("MsgRec start sessionId=%d, dataLen = %d, data=%s", sessionId, dataLen, data);
 
     unsigned int maxLen = MAX_DATA_LENGTH;
     if (dataLen <= maxLen) {
         int* code = (int*)malloc(sizeof(int));
-        char* buf = malloc(MAX_DATA_LENGTH);
+        char* buf = (char*)malloc(MAX_DATA_LENGTH);
         (void)memset_s(buf, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-        if (strncpy_s(buf, dataLen, data, dataLen) != INT_RES_SUCC) {
+        if (strncpy_s(buf, dataLen, (char*)data, dataLen) != RET_SUCCESS) {
             return;
         }
         if (*code != -1) {
@@ -452,7 +228,7 @@ int UnRegisterDeviceStateDefCallback(void)
     return UnregNodeDeviceStateCb(&g_defNodeStateCallback);
 }
 
-int CreateSsAndOpenSession4Data(void)
+int CreateSsAndOpenSession4Data()
 {
     int ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, g_sessionlistener4Data);
     if (ret != SOFTBUS_OK) {
@@ -492,7 +268,7 @@ int SendDataMsgToRemote(CtrlCodeType code, char* data)
     }
     (void)memset_s(msg, size, 0, size);
 
-    if (strcpy_s(msg, size, data) != INT_RES_SUCC) {
+    if (strcpy_s(msg, size, data) != RET_SUCCESS) {
         return ret;
     }
     ret = SendMessage(g_currentSessionId4Data, msg, strlen(msg));
@@ -507,7 +283,7 @@ int CloseSessionAndRemoveSs4Data(void)
     int timeout = 10;
     ResetWaitFlag4Data();
     CloseSession(g_currentSessionId4Data);
-    ret = Wait4Session(timeout, SESSION_4DATA);
+    ret = Wait4Session(timeout, WaitSessionType::SESSION_4DATA);
     if (ret == SOFTBUS_OK) {
         LOG("close session success");
     }
@@ -543,9 +319,9 @@ void OnDataMessageReceived(int sessionId, const char* data, unsigned int dataLen
     unsigned int maxLen = MAX_DATA_LENGTH;
     if (dataLen <= maxLen) {
         int* code = (int*)malloc(sizeof(int));
-        char* buf = malloc(MAX_DATA_LENGTH);
-        if (strcpy_s(buf, MAX_DATA_LENGTH, data) != INT_RES_SUCC) {
-            return ret;
+        char* buf = (char*)malloc(MAX_DATA_LENGTH);
+        if (strcpy_s(buf, MAX_DATA_LENGTH, data) != RET_SUCCESS) {
+            return;
         }
         if (*code != -1) {
             pthread_t thread;
@@ -558,7 +334,7 @@ void OnDataMessageReceived(int sessionId, const char* data, unsigned int dataLen
     }
 }
 
-void* SendMsgTask(char* param)
+void* SendMsgTask(void* param)
 {
     LOG("SendMsgTask send...%s", param);
     int sessionId;
@@ -573,7 +349,7 @@ void* SendMsgTask(char* param)
     SetCurrentSessionId4Data(sessionId);
     LOG("call open session success sid:%d", sessionId);
 
-    ret = Wait4Session(timeout, SESSION_4DATA);
+    ret = Wait4Session(timeout, WaitSessionType::SESSION_4DATA);
     if (ret != SOFTBUS_OK) {
         LOG("open session fail");
     }
@@ -586,7 +362,7 @@ void* SendMsgTask(char* param)
     initShm();
 
     char str[MAX_DATA_LENGTH] = { 0 };
-    while (true) {
+    while (INT_TRUE) {
         if (readDataFromShm(str) == 0) {
             if (strncmp(SHM_DATA_RES, str, STR_PREFIX_FOUR) == 0) {
                 LOG("read result");
@@ -603,15 +379,15 @@ void* SendMsgTask(char* param)
     return nullptr;
 }
 
-void* DataOperateTask(char* param)
+void* DataOperateTask(void* param)
 {
     LOG("operate start...");
     int code = -1;
     char codeType[CODE_LEN_FIVE] = { 0 };
-    if (strncpy_s(codeType, CODE_LEN_FIVE, param, CODE_PREFIX_FOUR) != INT_RES_SUCC) {
+    if (strncpy_s(codeType, CODE_LEN_FIVE, (char*)param, CODE_PREFIX_FOUR) != RET_SUCCESS) {
         return nullptr;
     }
-    if (sscanf_s(codeType, CODE_PREFIX_FOUR, "%d", &code) <= INT_RES_SUCC) {
+    if (sscanf_s(codeType, "%d", &code) <= RET_SUCCESS) {
         return nullptr;
     }
     LOG("code :%d", code);
@@ -620,11 +396,11 @@ void* DataOperateTask(char* param)
     int (*ProcessData)(int, char*);
     char* error;
     int ret = 0;
-    if (code == CTRL_CODE_RESULT_TYPE) {
-        writeDataToShm(param);
-        free(param);
+    if (code == int(CtrlCodeType::CTRL_CODE_RESULT_TYPE)) {
+        writeDataToShm((char*)param);
+        free((char*)param);
         return nullptr;
-    } else if (code > CTRL_CODE_DATAMGR_TYPE && code < CTRL_CODE_DM_TYPE) {
+    } else if (code > int(CtrlCodeType::CTRL_CODE_DATAMGR_TYPE) && code < int(CtrlCodeType::CTRL_CODE_DM_TYPE)) {
         handle = dlopen("/system/lib64/libdisDataProcess.z.so", RTLD_LAZY);
         if (!handle) {
             LOG("dlopen failed %s", dlerror());
@@ -633,7 +409,7 @@ void* DataOperateTask(char* param)
         if ((error = dlerror()) != nullptr) {
             LOG("dlsym failed %s", dlerror());
         }
-        ret = (*ProcessData)(code, param);
+        ret = (*ProcessData)(code, (char*)param);
         LOG("code:%d", ret);
     }
 
@@ -642,22 +418,17 @@ void* DataOperateTask(char* param)
         return nullptr;
     }
     (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    int resSprint = sprintf_s(str, MAX_DATA_LENGTH, "%d:%d", CTRL_CODE_RESULT_TYPE, ret);
-    if (resSprint < BOOL_FALSE) {
+    int resSprint = sprintf_s(str, MAX_DATA_LENGTH, "%d:%d", CtrlCodeType::CTRL_CODE_RESULT_TYPE, ret);
+    if (resSprint < FALSE) {
         return nullptr;
     }
-    SendDataMsgToRemote(CTRL_CODE_RESULT_TYPE, str);
+    SendDataMsgToRemote(CtrlCodeType::CTRL_CODE_RESULT_TYPE, str);
     if (handle) {
         dlclose(handle);
     }
-    free(param);
+    free((char*)param);
     LOG("operate end");
     return nullptr;
-}
-
-char* GetNetworkId(void)
-{
-    return g_networkId;
 }
 
 int CheckRemoteDeviceIsNull(int isSetNetId)
@@ -668,8 +439,8 @@ int CheckRemoteDeviceIsNull(int isSetNetId)
     LOG("get node number is %d, ret %d", nodeNum, ret);
     if (nodeInfo != nullptr && nodeNum > 0) {
         LOG("get neiId is %s", nodeInfo->networkId);
-        if (isSetNetId == BOOL_TRUE) {
-            if (strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, nodeInfo->networkId, NETWORK_ID_BUF_LEN) != INT_RES_SUCC) {
+        if (isSetNetId == INT_TRUE) {
+            if (strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, nodeInfo->networkId, NETWORK_ID_BUF_LEN) != RET_SUCCESS) {
                 return SOFTBUS_ERR;
             }
         }
@@ -708,10 +479,6 @@ void init(void)
     g_defNodeStateCallback.onNodeOffline = OnDefNodeOffline;
     g_defNodeStateCallback.onNodeBasicInfoChanged = OnDefNodeBasicInfoChanged;
 
-    g_defDisCallback.OnDeviceFound = OnDefDeviceFound;
-    g_defDisCallback.OnDiscoverFailed = OnDefDiscoverFail;
-    g_defDisCallback.OnDiscoverySuccess = OnDefDiscoverSuccess;
-
     if (g_sessionlistener4Data == nullptr) {
         g_sessionlistener4Data = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlistener4Data->OnSessionOpened = DataSessionOpened;
@@ -740,15 +507,15 @@ void destroy(void)
         g_sessionlistener4Data = nullptr;
     }
 }
-}; // namespace
+
 
 int main(int args, char* argv[])
 {
     LOG("enter main");
     init();
 
-    while (true) {
-        int ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
+    while (INT_TRUE) {
+        int ret = CheckRemoteDeviceIsNull(INT_TRUE);
         if (ret == SOFTBUS_OK) {
             break;
         } else {
@@ -761,9 +528,11 @@ int main(int args, char* argv[])
         LOG("CreateSsAndOpenSession4Ctl failed ret=%d", ret);
     }
 
-    while (true) {
+    while (INT_TRUE) {
         LOG("enter while success");
         sleep(SLEEP_SECOND_TEN);
     }
     return 0;
 }
+
+}; // namespace
