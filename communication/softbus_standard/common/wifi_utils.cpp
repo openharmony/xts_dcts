@@ -23,7 +23,6 @@ using namespace OHOS::Wifi;
 const static int WIFI_SA_ID = 1125;
 const static int TWO_SECOND = 2;
 const static int FIVE_SECOND = 5;
-static const char* def_ssid = "OpenHarmony_Private_Net_01";
 static unique_ptr<WifiDevice> wifiDevicePtr = WifiDevice::GetInstance(WIFI_SA_ID);
 
 int WiFiUtils::EnableWifi()
@@ -112,44 +111,6 @@ int WiFiUtils::DisableWifi()
     }
 }
 
-int WiFiUtils::DisableThenEnable(int delaySeconds)
-{
-    int ret = DisableWifi();
-    if (ret != SOFTBUS_OK) {
-        LOG("[wifi]DisableWifi fail");
-        return ret;
-    }
-    sleep(delaySeconds);
-    ret = EnableWifi();
-    if (ret != SOFTBUS_OK) {
-        LOG("[wifi]EnableWifi fail");
-    }
-    return ret;
-}
-
-int WiFiUtils::CheckIsConnectToDefault(void)
-{
-    WifiLinkedInfo linkInfo;
-    int ret = wifiDevicePtr->GetLinkedInfo(linkInfo);
-    if (ret != SOFTBUS_OK) {
-        LOG("[wifi]call GetLinkedInfo fail, ret:%d", ret);
-    } else {
-        char rstBuff[16];
-        struct in_addr inputAddr = { 0 };
-        inputAddr.s_addr = htonl(linkInfo.ipAddress);
-        inet_ntop(AF_INET, &inputAddr, rstBuff, sizeof(rstBuff));
-        LOG("[wifi]link info,netid:%d, ssid:%s, state:%d, ip:%u,%s", linkInfo.networkId, linkInfo.ssid.c_str(),
-            linkInfo.connState, linkInfo.ipAddress, rstBuff);
-        if (strncmp(linkInfo.ssid.c_str(), def_ssid, strlen(def_ssid)) == 0) {
-            LOG("[wifi]check success");
-            return SOFTBUS_OK;
-        } else {
-            LOG("[wifi]check fail");
-        }
-    }
-    return SOFTBUS_ERR;
-}
-
 int WiFiUtils::ConnectTo(const std::string& ssid, const std::string& passwd)
 {
     WifiDeviceConfig deviceConfig;
@@ -207,48 +168,6 @@ int WiFiUtils::ConnectToNew(const std::string& ssid, const std::string& passwd)
     LOG("[wifi]call Disconnect ret:%d", ret);
     ret = ConnectTo(ssid, passwd);
     return ret;
-}
-
-int WiFiUtils::ConnectToOpenAP(const std::string& ssid)
-{
-    WifiDeviceConfig deviceConfig;
-    deviceConfig.ssid = ssid;
-    deviceConfig.keyMgmt = "NONE";
-    int netId;
-    int ret = wifiDevicePtr->AddDeviceConfig(deviceConfig, netId);
-    if (ret != SOFTBUS_OK) {
-        LOG("[wifi]call AddDeviceConfig fail, ret:%d", ret);
-    } else {
-        LOG("[wifi]call AddDeviceConfig success, netId:%d", netId);
-    }
-
-    ret = wifiDevicePtr->ConnectToNetwork(netId);
-    if (ret != SOFTBUS_OK) {
-        LOG("[wifi]call ConnectTo fail, ret:%d", ret);
-        return SOFTBUS_ERR;
-    } else {
-        LOG("[wifi]call ConnectTo success, netId:%d", netId);
-    }
-    sleep(FIVE_SECOND);
-    int state;
-    ret = wifiDevicePtr->GetWifiState(state);
-    LOG("[wifi]call GetWifiState ret:%d,state:%d", ret, state);
-
-    WifiLinkedInfo linkInfo;
-    ret = wifiDevicePtr->GetLinkedInfo(linkInfo);
-    if (ret != SOFTBUS_OK) {
-        LOG("[wifi]call GetLinkedInfo fail, ret:%d", ret);
-    } else {
-        LOG("[wifi]call GetLinkedInfo success");
-        char rstBuff[16];
-        struct in_addr inputAddr = { 0 };
-        inputAddr.s_addr = htonl(linkInfo.ipAddress);
-        inet_ntop(AF_INET, &inputAddr, rstBuff, sizeof(rstBuff));
-
-        LOG("[wifi]link info,netid:%d, ssid:%s, state:%d, ip:%u,%s", linkInfo.networkId, linkInfo.ssid.c_str(),
-            linkInfo.connState, linkInfo.ipAddress, rstBuff);
-    }
-    return SOFTBUS_OK;
 }
 
 int WiFiUtils::EnableThenConnect(const std::string& ssid, const std::string& passwd)

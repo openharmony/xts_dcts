@@ -44,7 +44,6 @@ void TransFuncTest::SetUpTestCase()
 
     int ret = RegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call reg node state callback fail";
-    
     ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
     ASSERT_EQ(SOFTBUS_OK, ret) << "get node fail,please check network";
 
@@ -82,6 +81,71 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0100, TestSize.Level3)
 }
 
 /**
+ * @tc.number : SUB_Softbus_Trans_SendByte_Func_0200
+ * @tc.name   : SendByte Packet size 2K, send and receive successful
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0200, TestSize.Level1)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = 2 * 1024 * 1024;
+    ret = SendData4Data(DATA_TYPE_BYTE, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte,2M) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_SendByte_Func_0300
+ * @tc.name   : SendByte Packet size Max, send and receive successful
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0300, TestSize.Level2)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = TRANS_BYTES_LENGTH_MAX;
+    ret = SendData4Data(DATA_TYPE_BYTE, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte,Max) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_SendByte_Func_0400
+ * @tc.name   : SendByte Packet size 0, send and receive successful
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0400, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = 0;
+    string emptyStr = "";
+    int sessionId = GetCurrentSessionId4Data();
+    ret = SendBytes(sessionId, emptyStr.c_str(), size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call sendbytes(empty) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
  * @tc.number : SUB_Softbus_Trans_SendMessage_Func_0100
  * @tc.name     : SendMessage Packet size 1B, send and receive successful
  * @tc.desc       : Test the SendMessage specification
@@ -100,4 +164,95 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0100, TestSize.Level3
 
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_SendMessage_Func_0200
+ * @tc.name   : SendMessage Packet size 1K, send and receive successful
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0200, TestSize.Level1)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = 1000;
+    ret = SendData4Data(DATA_TYPE_MSG, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg,1K) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_SendMessage_Func_0300
+ * @tc.name   : SendMessage Packet size Max, send and receive successful
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0300, TestSize.Level2)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = TRANS_MESSAGE_LENGTH_MAX;
+    ret = SendData4Data(DATA_TYPE_MSG, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg,Max) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_SendMessage_Func_0400
+ * @tc.name   : SendMessage Packet size 0, send and receive successful
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0400, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = 0;
+    string emptyStr = "";
+    int sessionId = GetCurrentSessionId4Data();
+    ret = SendMessage(sessionId, emptyStr.c_str(), size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call sendmsg(empty) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_SendMessage_Func_0500
+ * @tc.name   : SendMessage Packet size Max+1, send and receive successful
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0500, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = TRANS_MESSAGE_LENGTH_MAX + 1;
+    char* dataMoreMax = (char*)malloc(size);
+    ASSERT_TRUE(dataMoreMax != NULL) << "malloc fail";
+
+    int sessionId = GetCurrentSessionId4Data();
+    ret = SendMessage(sessionId, &dataMoreMax, size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call sendmsg(Max+1) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+    free(dataMoreMax);
 }

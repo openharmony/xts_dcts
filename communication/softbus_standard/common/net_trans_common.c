@@ -47,7 +47,6 @@ static IFileSendListener* g_fileSendListener = NULL;
 static IFileReceiveListener* g_fileRecvListener = NULL;
 
 static char g_networkId[NETWORK_ID_BUF_LEN] = { 0 };
-static char g_networkIdArray[MULTI_REMOTE_DEV_COUNT][NETWORK_ID_BUF_LEN];
 static INodeStateCb g_defNodeStateCallback;
 static ConnectionAddr g_ethAddr = {
     .type = CONNECTION_ADDR_WLAN,
@@ -60,35 +59,15 @@ static unsigned int g_expectDataSize = 0;
 static char* g_expectDataContent = NULL;
 static pthread_barrier_t* g_barrier = NULL;
 
-static int32_t g_threadResult4Data = SOFTBUS_ERR;
-static int32_t g_threadResult4Ctl = SOFTBUS_ERR;
 static int32_t g_recvMsgStat4Control[MAX_SESSION_NUM] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 static int32_t g_recvByteStat4Control[MAX_SESSION_NUM] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-static uint64_t g_joinNetTimeStart;
-static uint64_t g_joinNetTimeEnd;
-static uint64_t g_leaveNetTimeStart;
-static uint64_t g_leaveNetTimeEnd;
-static uint64_t g_discoverTimeStart;
 static uint64_t g_discoverTimeEnd;
-static uint64_t g_openSessionTimeStart;
 static uint64_t g_openSessionTimeEnd;
-static uint64_t g_transTimeStart;
 static uint64_t g_transTimeEnd;
 
 /* discovery */
-static int g_subscribeId = 0;
 static IDiscoveryCallback g_defDiscCallback;
-static SubscribeInfo g_subInfo = {
-    .medium = COAP,
-    .mode = DISCOVER_MODE_ACTIVE,
-    .freq = MID,
-    .capability = "ddmpCapability",
-    .capabilityData = (unsigned char*)"cap data",
-    .dataLen = sizeof("cap data"),
-    .isSameAccount = true,
-    .isWakeRemote = false,
-};
 
 int Wait(int timeout)
 {
@@ -107,55 +86,6 @@ int Wait(int timeout)
     if (g_waitFlag != WAIT_SUCCESS_VALUE) {
         LOG("Wait fail[exp:%d, real:%d][used time:%d]", WAIT_SUCCESS_VALUE, g_waitFlag, count);
         return SOFTBUS_ERR;
-    }
-    return SOFTBUS_OK;
-}
-
-int WaitNodeCount(int timeout, WaitNodeStateType state, int expectCount)
-{
-    LOG("Wait4Node,timeout:%d, type:%d, exp count:%d", timeout, state, expectCount);
-    int hitFlag = -1;
-    int t = timeout;
-    while (t > 0) {
-        sleep(1);
-        switch (state) {
-            case STATE_ONLINE:
-                if (g_nodeOnlineCount == expectCount) {
-                    LOG("Wait4Node[online] succ,timeout:%d", t);
-                    hitFlag = 1;
-                }
-                break;
-            case STATE_OFFLINE:
-                if (g_nodeOfflineCount == expectCount) {
-                    LOG("Wait4Node[offline] succ,timeout:%d", t);
-                    hitFlag = 1;
-                }
-                break;
-            default:
-                LOG("Wait4Node state error");
-                hitFlag = 1;
-                break;
-        }
-        if (hitFlag != -1) {
-            break;
-        }
-        t--;
-    }
-    switch (state) {
-        case STATE_ONLINE:
-            if (g_nodeOnlineCount != expectCount) {
-                LOG("Wait4Node[online] fail[exp:%d, real:%d]", expectCount, g_nodeOnlineCount);
-                return SOFTBUS_ERR;
-            }
-            break;
-        case STATE_OFFLINE:
-            if (g_nodeOfflineCount != expectCount) {
-                LOG("Wait4Node[offline] fail[exp:%d, real:%d]", expectCount, g_nodeOfflineCount);
-                return SOFTBUS_ERR;
-            }
-            break;
-        default:
-            return SOFTBUS_ERR;
     }
     return SOFTBUS_OK;
 }
@@ -237,12 +167,6 @@ char* GetSoftbusPid(void)
     pclose(file);
 
     return buffer;
-}
-
-static int IncrementSubId(void)
-{
-    g_subscribeId++;
-    return g_subscribeId;
 }
 
 static int OnReceiveFileStarted(int sessionId, const char* files, int fileCnt)
@@ -351,54 +275,6 @@ static void OnDefNodeBasicInfoChanged(NodeBasicInfoType type, NodeBasicInfo* inf
         return;
     }
     LOG("[cb]InfoChanged id: %s,name: %s", info->networkId, info->deviceName);
-}
-
-static void OnJoinNetCallBack(ConnectionAddr* addr, const char* networkId, int32_t retCode)
-{
-    g_joinNetTimeEnd = GetCurrentTimeOfMs();
-
-    if (networkId == NULL || retCode != SOFTBUS_OK) {
-        LOG("[cb]JoinNet netid/ret error, ret:%d", retCode);
-        g_waitFlag = WAIT_FAIL_VALUE;
-        return;
-    }
-
-    LOG("[cb]JoinNet, ret:%d, id:%s", retCode, networkId);
-    switch (addr->type) {
-        case CONNECTION_ADDR_WLAN:
-            LOG("[cb]JoinNet type is [WLAN]");
-            break;
-        case CONNECTION_ADDR_BR:
-            LOG("[cb]JoinNet type is [BR]");
-            break;
-        case CONNECTION_ADDR_ETH:
-            LOG("[cb]JoinNet type is [ETH]");
-            break;
-        default:
-            LOG("[cb]JoinNet type error");
-            g_waitFlag = WAIT_FAIL_VALUE;
-            return;
-    }
-
-    int ret = strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, networkId, NETWORK_ID_BUF_LEN);
-    if (ret != SOFTBUS_OK) {
-        LOG("[cb]strncpy_s fail");
-        return;
-    }
-
-    g_waitFlag = WAIT_SUCCESS_VALUE;
-}
-
-static void OnLeaveNetCallBack(const char* networkId, int32_t ret)
-{
-    g_leaveNetTimeEnd = GetCurrentTimeOfMs();
-
-    LOG("[cb]LeaveLNN ret[%d]", ret);
-    if (ret == SOFTBUS_OK) {
-        g_waitFlag = WAIT_SUCCESS_VALUE;
-    } else {
-        g_waitFlag = WAIT_FAIL_VALUE;
-    }
 }
 
 static int DataSessionOpened(int sessionId, int result)
@@ -678,115 +554,6 @@ void ResetWaitFlag4Ctl(void)
     g_waitFlag4Ctl = WAIT_DEF_VALUE;
 }
 
-void ResetWaitCount4Offline(void)
-{
-    g_nodeOfflineCount = 0;
-}
-
-void ResetWaitCount4Online(void)
-{
-    g_nodeOnlineCount = 0;
-}
-
-int StartDiscoveryDevice(void)
-{
-    int ret;
-    int timeout = 10;
-    ResetWaitFlag();
-    g_subInfo.subscribeId = IncrementSubId();
-    LOG("subscribeId:%d", g_subInfo.subscribeId);
-    g_discoverTimeStart = GetCurrentTimeOfMs();
-    ret = StartDiscovery(DEF_PKG_NAME, &g_subInfo, &g_defDiscCallback);
-    if (ret != SOFTBUS_OK) {
-        LOG("call StartDiscovery fail, ret:%d", ret);
-        return ret;
-    }
-    ret = Wait(timeout);
-    if (ret != SOFTBUS_OK) {
-        LOG("discover device fail");
-    }
-    return ret;
-}
-
-int JoinNetwork(void)
-{
-    int ret;
-    int timeout = 15;
-    ResetWaitFlag();
-    g_joinNetTimeStart = GetCurrentTimeOfMs();
-    ret = JoinLNN(DEF_PKG_NAME, &g_ethAddr, OnJoinNetCallBack);
-    if (ret != SOFTBUS_OK) {
-        LOG("call JoinLNN fail, ret:%d", ret);
-        return ret;
-    }
-    ret = Wait(timeout);
-    if (ret != SOFTBUS_OK) {
-        LOG("JoinNetwork fail");
-    }
-    return ret;
-}
-
-int JoinNetworkByAddr(ConnectionAddr* addr)
-{
-    int ret;
-    int timeout = 15;
-    ResetWaitFlag();
-    LOG("JoinNetwork[input addr]ip:%s, port:%d", addr->info.ip.ip, addr->info.ip.port);
-    g_joinNetTimeStart = GetCurrentTimeOfMs();
-    ret = JoinLNN(DEF_PKG_NAME, addr, OnJoinNetCallBack);
-    if (ret != SOFTBUS_OK) {
-        LOG("call JoinLNN fail[input addr], ret:%d", ret);
-        return ret;
-    }
-    ret = Wait(timeout);
-    if (ret != SOFTBUS_OK) {
-        LOG("JoinNetwork[input addr] fail");
-    } else {
-        LOG("JoinNetwork[input addr] success");
-    }
-    return ret;
-}
-
-int DiscoverAndJoinNetwork(void)
-{
-    int ret = StartDiscoveryDevice();
-    int retStop = StopDiscovery(DEF_PKG_NAME, g_subscribeId);
-    if (retStop != SOFTBUS_OK) {
-        LOG("call StopDiscovery fail, ret:%d", ret);
-    }
-    if (ret != SOFTBUS_OK) {
-        return ret;
-    }
-    sleep(1);
-
-    return JoinNetwork();
-}
-
-int LeaveNetWork(void)
-{
-    int ret;
-    int timeout = 10;
-
-    ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
-    if (ret != SOFTBUS_OK) {
-        return ret;
-    }
-
-    ResetWaitFlag();
-    g_leaveNetTimeStart = GetCurrentTimeOfMs();
-    ret = LeaveLNN(DEF_PKG_NAME, g_networkId, OnLeaveNetCallBack);
-    if (ret != SOFTBUS_OK) {
-        LOG("call LeaveLNN fail, ret:%d", ret);
-        return ret;
-    }
-    ret = Wait(timeout);
-    if (ret != SOFTBUS_OK) {
-        LOG("LeaveNetwork fail");
-    }
-
-    return ret;
-}
-
 int RegisterDeviceStateDefCallback(void)
 {
     return RegNodeDeviceStateCb(DEF_PKG_NAME, &g_defNodeStateCallback);
@@ -833,27 +600,6 @@ int CreateSsAndOpenSession4Data(void)
     return ret;
 }
 
-int OpenSession4Data(void)
-{
-    int ret;
-    int sessionId;
-    int timeout = 10;
-    ResetWaitFlag4Data();
-    sessionId = OpenSession(SESSION_NAME_DATA, SESSION_NAME_DATA, g_networkId, DEF_GROUP_ID, g_sessionAttr4Data);
-    if (sessionId < SESSION_ID_MIN) {
-        LOG("call OpenSession[data] fail, ret sid:%d,netId:%s", sessionId, g_networkId);
-        return SOFTBUS_ERR;
-    }
-    SetCurrentSessionId4Data(sessionId);
-    LOG("call OpenSession[data] success,sid:%d", sessionId);
-    ret = Wait4Session(timeout, SESSION_4DATA);
-    if (ret != SOFTBUS_OK) {
-        LOG("OpenSession[data] fail");
-        return SOFTBUS_ERR;
-    }
-    return ret;
-}
-
 int CreateSsAndOpenSession4Ctl(void)
 {
     int ret;
@@ -887,101 +633,6 @@ int CreateSsAndOpenSession4Ctl(void)
         }
         return SOFTBUS_ERR;
     }
-    return ret;
-}
-
-int OpenSession4Ctl(void)
-{
-    int ret;
-    int timeout = 10;
-    int sessionId;
-    ResetWaitFlag4Ctl();
-    sessionId = OpenSession(SESSION_NAME_CTL, SESSION_NAME_CTL, g_networkId, DEF_GROUP_ID, g_sessionAttr4Ctl);
-    if (sessionId < SESSION_ID_MIN) {
-        LOG("call OpenSession[ctl] fail, ret sid:%d", sessionId);
-        return SOFTBUS_ERR;
-    }
-    SetCurrentSessionId4Ctl(sessionId);
-    LOG("call OpenSession[ctl] success,sid:%d", sessionId);
-
-    ret = Wait4Session(timeout, SESSION_4CTL);
-    if (ret != SOFTBUS_OK) {
-        LOG("OpenSession[ctl] fail");
-        return SOFTBUS_ERR;
-    }
-    return ret;
-}
-
-int SendCtrlMsgToRemote(CtrlCodeType code)
-{
-    int ret = -1;
-    switch (code) {
-        case CTRL_CODE_CLOSE_WIFI_TEN_SEC:
-            ret = SendMessage(g_currentSessionId4Ctl, CTRL_MSG_CLOSE_WIFI_TEN_SEC, strlen(CTRL_MSG_CLOSE_WIFI_TEN_SEC));
-            break;
-        case CTRL_CODE_CLOSE_WIFI_THREE_SEC:
-            ret = SendMessage(
-                g_currentSessionId4Ctl, CTRL_MSG_CLOSE_WIFI_THREE_SEC, strlen(CTRL_MSG_CLOSE_WIFI_THREE_SEC));
-            break;
-        case CTRL_CODE_CLOSE_WIFI_TEN_MIN:
-            ret = SendMessage(g_currentSessionId4Ctl, CTRL_MSG_CLOSE_WIFI_TEN_MIN, strlen(CTRL_MSG_CLOSE_WIFI_TEN_MIN));
-            break;
-        case CTRL_CODE_CLOSE_WIFI_FIVE_MIN:
-            ret =
-                SendMessage(g_currentSessionId4Ctl, CTRL_MSG_CLOSE_WIFI_FIVE_MIN, strlen(CTRL_MSG_CLOSE_WIFI_FIVE_MIN));
-            break;
-        case CTRL_CODE_CHANGE_WIFI_TEN_SEC:
-            ret =
-                SendMessage(g_currentSessionId4Ctl, CTRL_MSG_CHANGE_WIFI_TEN_SEC, strlen(CTRL_MSG_CHANGE_WIFI_TEN_SEC));
-            break;
-        case CTRL_CODE_CHANGE_WIFI_SIXTY_SEC:
-            ret = SendMessage(
-                g_currentSessionId4Ctl, CTRL_MSG_CHANGE_WIFI_SIXTY_SEC, strlen(CTRL_MSG_CHANGE_WIFI_SIXTY_SEC));
-            break;
-        case CTRL_CODE_CHANGE_WIFI_LOOP20:
-            ret = SendMessage(g_currentSessionId4Ctl, CTRL_MSG_CHANGE_WIFI_LOOP20, strlen(CTRL_MSG_CHANGE_WIFI_LOOP20));
-            break;
-        case CTRL_CODE_CLOSE_WIFI_LOOP20:
-            ret = SendMessage(g_currentSessionId4Ctl, CTRL_MSG_CLOSE_WIFI_LOOP20, strlen(CTRL_MSG_CLOSE_WIFI_LOOP20));
-            break;
-        case CTRL_CODE_CHANGE_WIFI_LOOP100:
-            ret =
-                SendMessage(g_currentSessionId4Ctl, CTRL_MSG_CHANGE_WIFI_LOOP100, strlen(CTRL_MSG_CHANGE_WIFI_LOOP100));
-            break;
-        case CTRL_CODE_CLOSE_WIFI_LOOP100:
-            ret = SendMessage(g_currentSessionId4Ctl, CTRL_MSG_CLOSE_WIFI_LOOP100, strlen(CTRL_MSG_CLOSE_WIFI_LOOP100));
-            break;
-        case CTRL_CODE_CLOSE_BR:
-            ret = SendMessage(g_currentSessionId4Ctl, CTRL_MSG_CLOSE_BR, strlen(CTRL_MSG_CLOSE_BR));
-            break;
-        case CTRL_CODE_CLOSE_OPEN_BR:
-            ret = SendMessage(g_currentSessionId4Ctl, CTRL_MSG_CLOSE_OPEN_BR, strlen(CTRL_MSG_CLOSE_OPEN_BR));
-            break;
-        case CTRL_CODE_OPEN_SESSION:
-            ret = SendMessage(g_currentSessionId4Ctl, CTRL_MSG_OPEN_SESSION, strlen(CTRL_MSG_OPEN_SESSION));
-            break;
-        case CTRL_CODE_OPEN_SESSION_MSG:
-            ret = SendMessage(g_currentSessionId4Ctl, CTRL_MSG_OPEN_SESSION_MSG, strlen(CTRL_MSG_OPEN_SESSION_MSG));
-            break;
-        case CTRL_CODE_OPEN_SESSION_FAIL:
-            g_passiveOpenRetFlag = SOFTBUS_ERR;
-            ret = SendMessage(g_currentSessionId4Ctl, CTRL_MSG_OPEN_SESSION_FAIL, strlen(CTRL_MSG_OPEN_SESSION_FAIL));
-            break;
-        case CTRL_CODE_CLOSE_SESSION:
-            ret = SendMessage(g_currentSessionId4Ctl, CTRL_MSG_CLOSE_SESSION, strlen(CTRL_MSG_CLOSE_SESSION));
-            break;
-        case CTRL_CODE_OPEN_SESSION_NOT_EXIST:
-            ret = SendMessage(
-                g_currentSessionId4Ctl, CTRL_MSG_OPEN_SESSION_NOT_EXIST, strlen(CTRL_MSG_OPEN_SESSION_NOT_EXIST));
-            break;
-        case CTRL_CODE_SEND_BIG_DATA:
-            ret = SendMessage(g_currentSessionId4Ctl, CTRL_MSG_SEND_BIG_DATA, strlen(CTRL_MSG_SEND_BIG_DATA));
-            break;
-        default:
-            LOG("[send ctrl msg]not support this code");
-            break;
-    }
-    LOG("[send ctrl msg]send ret:%d", ret);
     return ret;
 }
 
@@ -1026,84 +677,6 @@ int SendData4Data(DataType type, int size)
     free(g_expectDataContent);
     g_expectDataContent = NULL;
     return ret;
-}
-
-// if open session success, return session id
-int OpenSession4Perf(void)
-{
-    int ret;
-    int sessionId;
-    int timeout = 10;
-    ResetWaitFlag();
-    g_openSessionTimeStart = GetCurrentTimeOfMs();
-    sessionId = OpenSession(SESSION_NAME_PERF, SESSION_NAME_PERF, g_networkId, DEF_GROUP_ID, g_sessionAttr4Perf);
-    if (sessionId < SESSION_ID_MIN) {
-        LOG("call OpenSession[perf] fail, ret sid:%d", sessionId);
-        return SOFTBUS_ERR;
-    }
-    ret = Wait(timeout);
-    if (ret != SOFTBUS_OK) {
-        LOG("OpenSession[perf] fail");
-        return SOFTBUS_ERR;
-    }
-    return sessionId;
-}
-
-int OpenSession4PerfWithParam(const char* sessionName, const char* groupId, char* netId)
-{
-    int ret;
-    int sessionId;
-    int timeout = 10;
-    ResetWaitFlag();
-    g_openSessionTimeStart = GetCurrentTimeOfMs();
-    sessionId = OpenSession(sessionName, sessionName, netId, groupId, g_sessionAttr4Perf);
-    if (sessionId < SESSION_ID_MIN) {
-        LOG("call OpenSession[perf] fail, ret sid:%d", sessionId);
-        return SOFTBUS_ERR;
-    }
-    ret = Wait(timeout);
-    if (ret != SOFTBUS_OK) {
-        LOG("OpenSession[perf] fail");
-        return SOFTBUS_ERR;
-    }
-    return sessionId;
-}
-
-int SendData4Perf(int sessionId, char* dataMsg, char* dataByte)
-{
-    int sleeptime = 500000;
-    int timeout = 5;
-    int isHitFail = SOFTBUS_OK;
-    ResetWaitFlag();
-    g_transTimeStart = GetCurrentTimeOfMs();
-    int ret = SendMessage(sessionId, dataMsg, TRANS_MESSAGE_LENGTH_MAX);
-    g_transTimeEnd = GetCurrentTimeOfMs();
-    if (ret != SOFTBUS_OK) {
-        LOG("call SendMessage[perf] fail, ret:%d", ret);
-        isHitFail = SOFTBUS_ERR;
-    } else {
-    }
-    usleep(sleeptime);
-
-    ResetWaitFlag();
-    g_transTimeStart = GetCurrentTimeOfMs();
-    ret = SendBytes(sessionId, dataByte, TRANS_BYTES_LENGTH_MAX);
-    if (ret != SOFTBUS_OK) {
-        LOG("call SendBytes[perf] fail, ret:%d", ret);
-        isHitFail = SOFTBUS_ERR;
-    } else {
-        ret = Wait(timeout);
-        if (ret != SOFTBUS_OK) {
-            LOG("wait byte callback fail ret:%d", ret);
-            isHitFail = SOFTBUS_ERR;
-        }
-    }
-    return isHitFail;
-}
-
-void SetTransStartTime(void)
-{
-    g_transTimeStart = GetCurrentTimeOfMs();
 }
 
 int CloseSessionAndRemoveSs4Data(void)
@@ -1227,95 +800,6 @@ int CloseSessionBatch4Ctl(int* sessionId, int count)
     return SOFTBUS_OK;
 }
 
-void* OpenSessionTask4Data(void* param)
-{
-    LOG("OpenSessionTask[Data] start");
-    int ret;
-    int step1Flag;
-    int step2Flag;
-    int count = MAX_SESSION_NUM / 2;
-    int sessionId4Data[count];
-    char groupId[][GROUP_ID_LEN] = { "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8" };
-
-    pthread_barrier_wait(g_barrier);
-    ret = OpenSessionBatch4Data(groupId, sessionId4Data, count);
-    if (ret != SOFTBUS_OK) {
-        LOG("OpenSessionBatch4Data ret fail");
-    } else {
-        LOG("OpenSessionBatch4Data ret success");
-    }
-    step1Flag = ret;
-
-    pthread_barrier_wait(g_barrier);
-    // create more, expect fail
-    int moreCount = 3;
-    step2Flag = SOFTBUS_OK;
-    char groupIdMore[][GROUP_ID_LEN] = { "m1", "m2", "m3" };
-    for (int i = 0; i < moreCount; i++) {
-        int sessionId =
-            OpenSession(SESSION_NAME_DATA, SESSION_NAME_DATA, g_networkId, groupIdMore[i], g_sessionAttr4Data);
-        if (sessionId >= SESSION_ID_MIN) {
-            LOG("OpenSessionTask[Ctrl] open more success, expect fail,i:%d, "
-                "sid:%d",
-                i, sessionId);
-            step2Flag = SOFTBUS_ERR;
-        }
-    }
-
-    if (step1Flag == SOFTBUS_OK && step2Flag == SOFTBUS_OK) {
-        g_threadResult4Data = SOFTBUS_OK;
-    } else {
-        g_threadResult4Data = SOFTBUS_ERR;
-    }
-
-    LOG("OpenSessionTask[Data] end");
-    return NULL;
-}
-
-void* OpenSessionTask4Ctl(void* param)
-{
-    LOG("OpenSessionTask[Ctrl] start");
-    int ret;
-    int step1Flag;
-    int step2Flag;
-    int count = MAX_SESSION_NUM / 2;
-    int sessionId4Ctrl[count];
-    char groupId[][GROUP_ID_LEN] = { "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8" };
-
-    pthread_barrier_wait(g_barrier);
-    ret = OpenSessionBatch4Ctl(groupId, sessionId4Ctrl, count);
-    if (ret != SOFTBUS_OK) {
-        LOG("OpenSessionBatch4Ctl ret fail");
-    } else {
-        LOG("OpenSessionBatch4Ctl ret success");
-    }
-    step1Flag = ret;
-
-    pthread_barrier_wait(g_barrier);
-    // create more, expect fail
-    int moreCount = 3;
-    step2Flag = SOFTBUS_OK;
-    char groupIdMore[][GROUP_ID_LEN] = { "m1", "m2", "m3" };
-    for (int i = 0; i < moreCount; i++) {
-        int sessionId = OpenSession(SESSION_NAME_CTL, SESSION_NAME_CTL, g_networkId, groupIdMore[i], g_sessionAttr4Ctl);
-        if (sessionId >= SESSION_ID_MIN) {
-            LOG("OpenSessionTask[Ctrl] open more success, expect fail,i:%d, "
-                "sid:%d",
-                i, sessionId);
-            step2Flag = SOFTBUS_ERR;
-        }
-    }
-
-    if (step1Flag == SOFTBUS_OK && step2Flag == SOFTBUS_OK) {
-        g_threadResult4Ctl = SOFTBUS_OK;
-    } else {
-        g_threadResult4Ctl = SOFTBUS_ERR;
-    }
-
-    LOG("OpenSessionTask[Ctrl] end");
-    return NULL;
-}
-
 // set/get function
 void ResetClosedSessionCount4Data(void)
 {
@@ -1335,55 +819,6 @@ int GetClosedSessionCount4Data(void)
 int GetClosedSessionCount4Ctrl(void)
 {
     return g_sessionCloseCount4Ctrl;
-}
-
-void ResetOpenSessionCount4Data(void)
-{
-    g_sessionOpenCount4Data = 0;
-}
-
-void ResetOpenSessionCount4Ctrl(void)
-{
-    g_sessionOpenCount4Ctrl = 0;
-}
-
-int GetOpenSessionCount4Data(void)
-{
-    return g_sessionOpenCount4Data;
-}
-
-int GetOpenSessionCount4Ctrl(void)
-{
-    return g_sessionOpenCount4Ctrl;
-}
-
-int* GetSid4Task2(void)
-{
-    return g_sId4Task2;
-}
-
-int* GetSid4Task3(void)
-{
-    return g_sId4Task3;
-}
-
-void ResetMsgStat4Control(void)
-{
-    for (int i = 0; i < MAX_SESSION_NUM; i++) {
-        g_recvMsgStat4Control[i] = 0;
-    }
-}
-
-void ResetByteStat4Control(void)
-{
-    for (int i = 0; i < MAX_SESSION_NUM; i++) {
-        g_recvByteStat4Control[i] = 0;
-    }
-}
-
-pthread_barrier_t* GetThreadBarrier(void)
-{
-    return g_barrier;
 }
 
 char* GetNetworkId(void)
@@ -1411,66 +846,6 @@ int CheckRemoteDeviceIsNull(int isSetNetId)
     }
 }
 
-int GetRemoteDeviceNetId(char** netId)
-{
-    int nodeNum = 0;
-    NodeBasicInfo* nodeInfo = NULL;
-    NodeBasicInfo* nodeInfoTmp = NULL;
-    int ret = GetAllNodeDeviceInfo(DEF_PKG_NAME, &nodeInfo, &nodeNum);
-    nodeInfoTmp = nodeInfo;
-    LOG("[get]node number is:%d, ret:%d", nodeNum, ret);
-    if (nodeInfo != NULL && nodeNum > 0) {
-        for (int i = 0; i < nodeNum; i++) {
-            LOG("[get] netid is:%s", nodeInfo->networkId);
-            *(netId + i) = (char*)malloc(NETWORK_ID_BUF_LEN * sizeof(char));
-            (void)strncpy_s(*(netId + i), NETWORK_ID_BUF_LEN, nodeInfo->networkId, NETWORK_ID_BUF_LEN);
-            LOG("[get] netid is [strcpy]:%s", *(netId + i));
-            nodeInfo++;
-        }
-        FreeNodeInfo(nodeInfoTmp);
-    } else {
-        LOG("[get] nodeInfo is null");
-    }
-    return nodeNum;
-}
-
-// get remote device network id, then set to global array
-int SetRemoteDeviceNetIdToGarray(void)
-{
-    int nodeNum = 0;
-    NodeBasicInfo* nodeInfo = NULL;
-    NodeBasicInfo* nodeInfoTmp = NULL;
-    int ret = GetAllNodeDeviceInfo(DEF_PKG_NAME, &nodeInfo, &nodeNum);
-    nodeInfoTmp = nodeInfo;
-    LOG("[setdev netid]dev number is:%d, ret:%d", nodeNum, ret);
-    if (nodeInfo != NULL && nodeNum > 0) {
-        for (int i = 0; i < nodeNum; i++) {
-            (void)strncpy_s(g_networkIdArray[i], NETWORK_ID_BUF_LEN, nodeInfo->networkId, NETWORK_ID_BUF_LEN);
-            LOG("[setdev netid] netid:%s", g_networkIdArray[i]);
-            nodeInfo++;
-        }
-        FreeNodeInfo(nodeInfoTmp);
-    } else {
-        LOG("[setdev netid] nodeInfo is null");
-    }
-    return nodeNum;
-}
-
-int SetCurrentNetworkId(int index)
-{
-    if (index < 0 || index >= MULTI_REMOTE_DEV_COUNT) {
-        LOG("input index is error");
-        return SOFTBUS_ERR;
-    }
-    int ret = strncpy_s(g_networkId, NETWORK_ID_BUF_LEN, g_networkIdArray[index], NETWORK_ID_BUF_LEN);
-    if (ret != SOFTBUS_OK) {
-        LOG("strncpy_s fail");
-        return SOFTBUS_ERR;
-    }
-
-    return SOFTBUS_OK;
-}
-
 ISessionListener* GetSessionListenser4Data(void)
 {
     return g_sessionlistener4Data;
@@ -1479,21 +854,6 @@ ISessionListener* GetSessionListenser4Data(void)
 ISessionListener* GetSessionListenser4Ctl(void)
 {
     return g_sessionlistener4Ctl;
-}
-
-ISessionListener* GetSessionListenser4Pass(void)
-{
-    return g_sessionlistener4Pass;
-}
-
-ISessionListener* GetSessionListenser4Perf(void)
-{
-    return g_sessionlistener4Perf;
-}
-
-ISessionListener* GetSessionListenser4Proxy(void)
-{
-    return g_sessionlistener4Proxy;
 }
 
 IFileSendListener* GetSendFileListener(void)
@@ -1516,21 +876,6 @@ SessionAttribute* GetSessionAttr4Ctl(void)
     return g_sessionAttr4Ctl;
 }
 
-SessionAttribute* GetSessionAttr4Pass(void)
-{
-    return g_sessionAttr4Pass;
-}
-
-SessionAttribute* GetSessionAttr4Perf(void)
-{
-    return g_sessionAttr4Perf;
-}
-
-SessionAttribute* GetSessionAttr4Proxy(void)
-{
-    return g_sessionAttr4Proxy;
-}
-
 void SetCurrentSessionId4Data(int sessionId)
 {
     g_currentSessionId4Data = sessionId;
@@ -1549,21 +894,6 @@ int GetCurrentSessionId4Data(void)
 int GetCurrentSessionId4Ctl(void)
 {
     return g_currentSessionId4Ctl;
-}
-
-int GetThreadResult4Data(void)
-{
-    return g_threadResult4Data;
-}
-
-int GetThreadResult4Ctl(void)
-{
-    return g_threadResult4Ctl;
-}
-
-ConnectionAddr* GetConnectAddr(void)
-{
-    return &g_ethAddr;
 }
 
 void TestSetUp(void)

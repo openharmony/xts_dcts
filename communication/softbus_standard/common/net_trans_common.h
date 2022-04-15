@@ -176,53 +176,28 @@ typedef enum {
 
 int Wait(int timeout);
 int Wait4Session(int timeout, WaitSessionType type);
-int WaitNodeCount(int timeout, WaitNodeStateType state, int expectCount);
 
 void TestSetUp(void);
 void TestTearDown(void);
 
-int StartDiscoveryDevice(void);
-
-int JoinNetwork(void);
-int LeaveNetWork(void);
 int RegisterDeviceStateDefCallback(void);
 int UnRegisterDeviceStateDefCallback(void);
-int DiscoverAndJoinNetwork(void);
 int CheckRemoteDeviceIsNull(int isSetNetId);
-int GetRemoteDeviceNetId(char** netId);
-int SetCurrentNetworkId(int index);
-int SetRemoteDeviceNetIdToGarray(void);
 
 uint64_t GetCurrentTimeOfMs(void);
 
 void ResetWaitFlag(void);
 void ResetWaitFlag4Data(void);
 void ResetWaitFlag4Ctl(void);
-void ResetWaitCount4Offline(void);
-void ResetWaitCount4Online(void);
 
 int SendData4Data(DataType type, int size);
-int SendCtrlMsgToRemote(CtrlCodeType code);
 
 int CreateSsAndOpenSession4Data(void);
 int CreateSsAndOpenSession4Ctl(void);
-int OpenSession4Ctl(void);
-int OpenSession4Data(void);
 int OpenSessionBatch4Data(char groupId[][GROUP_ID_LEN], int* sessionId, int count);
 int OpenSessionBatch4Ctl(char groupId[][GROUP_ID_LEN], int* sessionId, int count);
 int CloseSessionBatch4Data(int* sessionId, int count);
 int CloseSessionBatch4Ctl(int* sessionId, int count);
-void* OpenSessionTask4Data(void* param);
-void* OpenSessionTask4Ctl(void* param);
-
-int OpenSession4Perf(void);
-int OpenSession4PerfWithParam(const char* sessionName, const char* groupId, char* netId);
-int SendData4Perf(int sessionId, char* dataMsg, char* dataByte);
-void SetTransStartTime(void);
-
-void* SendDataTask1(void* param);
-void* SendDataTask2(void* param);
-void* SendDataTask3(void* param);
 
 char* GetSoftbusPid(void);
 char* GetNetworkId(void);
@@ -232,34 +207,15 @@ void SetCurrentSessionId4Data(int sessionId);
 void SetCurrentSessionId4Ctl(int sessionId);
 ISessionListener* GetSessionListenser4Data(void);
 ISessionListener* GetSessionListenser4Ctl(void);
-ISessionListener* GetSessionListenser4Pass(void);
-ISessionListener* GetSessionListenser4Perf(void);
-ISessionListener* GetSessionListenser4Proxy(void);
-SessionAttribute* GetSessionAttr4Pass(void);
 SessionAttribute* GetSessionAttr4Ctl(void);
 SessionAttribute* GetSessionAttr4Data(void);
-SessionAttribute* GetSessionAttr4Perf(void);
-SessionAttribute* GetSessionAttr4Proxy(void);
 IFileReceiveListener* GetRecvFileListener(void);
 IFileSendListener* GetSendFileListener(void);
-
-pthread_barrier_t* GetThreadBarrier(void);
-int GetThreadResult4Data(void);
-int GetThreadResult4Ctl(void);
-int* GetSid4Task2(void);
-int* GetSid4Task3(void);
-void ResetMsgStat4Control(void);
-void ResetByteStat4Control(void);
-ConnectionAddr* GetConnectAddr(void);
 
 void ResetClosedSessionCount4Data(void);
 void ResetClosedSessionCount4Ctrl(void);
 int GetClosedSessionCount4Data(void);
 int GetClosedSessionCount4Ctrl(void);
-void ResetOpenSessionCount4Data(void);
-void ResetOpenSessionCount4Ctrl(void);
-int GetOpenSessionCount4Data(void);
-int GetOpenSessionCount4Ctrl(void);
 
 int CloseSessionAndRemoveSs4Data(void);
 int CloseSessionAndRemoveSs4Ctl(void);
