@@ -20,9 +20,9 @@
 #include <pthread.h>
 #include <sys/socket.h>
 
-#include "net_trans_common.h"
 #include "softbus_permission.h"
 #include "unistd.h"
+#include "net_trans_common.h"
 
 using namespace NetTransCommon;
 
@@ -204,7 +204,7 @@ void DataMessageReceived(int sessionId, const void* data, unsigned int dataLen)
         int* code = (int*)malloc(sizeof(int));
         char* buf = (char*)malloc(MAX_DATA_LENGTH);
         (void)memset_s(buf, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-        if (strncpy_s(buf, dataLen, (char*)data, dataLen) != RET_SUCCESS) {
+        if (strncpy_s(buf, MAX_DATA_LENGTH, (char*)data, dataLen) != RET_SUCCESS) {
             return;
         }
         if (*code != -1) {
@@ -508,7 +508,6 @@ void destroy(void)
     }
 }
 
-
 int main(int args, char* argv[])
 {
     LOG("enter main");
@@ -534,5 +533,4 @@ int main(int args, char* argv[])
     }
     return 0;
 }
-
-}; // namespace
+}; // namespace NetTransCommon

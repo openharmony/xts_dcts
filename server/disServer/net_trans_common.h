@@ -40,17 +40,17 @@
 extern "C" {
 #endif
 
-enum class WaitSessionType:int {
+enum class WaitSessionType : int {
     SESSION_4DATA = 1,
     SESSION_4CTL,
 };
 
-enum class DataType:int {
+enum class DataType : int {
     DATA_TYPE_MSG = 1,
     DATA_TYPE_BYTE,
 };
 
-enum class WaitNodeStateType:int {
+enum class WaitNodeStateType : int {
     STATE_ONLINE = 1,
     STATE_OFFLINE,
 };
@@ -59,7 +59,7 @@ enum class ConcurrentType {
     CONC_CLOSE_SESSION = 1,
 };
 
-enum class CtrlCodeType:int {
+enum class CtrlCodeType : int {
     CTRL_CODE_SOFTBUS_TYPE = 1000,
     CTRL_CODE_DATAMGR_TYPE = 2000,
     CTRL_CODE_DM_TYPE = 3000,
@@ -71,7 +71,6 @@ enum class CtrlCodeType:int {
 };
 
 namespace NetTransCommon {
-
 int Wait4Session(int timeout, WaitSessionType type);
 
 int CheckRemoteDeviceIsNull(int isSetNetId);
@@ -91,10 +90,9 @@ void ResetWaitCount4Offline(void);
 void ResetWaitCount4Online(void);
 int GetCurrentSessionId4Data(void);
 
-
 void DataSessionClosed(int sessionId);
 
-void DataBytesReceived(int sessionId,const void* data, unsigned int dataLen);
+void DataBytesReceived(int sessionId, const void* data, unsigned int dataLen);
 
 void DataMessageReceived(int sessionId, const void* data, unsigned int dataLen);
 
