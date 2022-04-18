@@ -16,6 +16,7 @@ group("distributeddatatest") {
   if (is_standard_system) {
     deps = [
       ":disDataProcess",
+      "../server/disServer:disTest",
       "distributed_kv_store:DctsdisDataTest",
     ]
   }
