@@ -16,6 +16,7 @@
 #include <arpa/inet.h>
 #include <cstdio>
 #include <dlfcn.h>
+#include <gtest/gtest.h>
 #include <netdb.h>
 #include <pthread.h>
 #include <sys/socket.h>
@@ -23,8 +24,8 @@
 #include "softbus_permission.h"
 #include "unistd.h"
 #include "net_trans_common.h"
-
-using namespace NetTransCommon;
+using namespace NetTrans;
+using namespace testing::ext;
 
 const int MAX_DATA_LENGTH = 1024;
 const char DEF_GROUP_ID[50] = "DEF_GROUP_ID";
@@ -66,7 +67,23 @@ static ConnectionAddr g_ethAddr = {
 
 static int g_subscribeId = 0;
 
-namespace NetTransCommon {
+namespace NetTrans {
+class NetTransCommon : public testing::Test {
+public:
+    static void SetUpTestCase(void);
+    static void TearDownTestCase(void);
+    void SetUp();
+    void TearDown();
+    NetTransCommon();
+};
+void NetTransCommon::SetUpTestCase(void) {}
+
+void NetTransCommon::TearDownTestCase(void) {}
+void NetTransCommon::SetUp(void) {}
+
+void NetTransCommon::TearDown(void) {}
+NetTransCommon::NetTransCommon(void) {}
+
 int Wait4Session(int timeout, WaitSessionType type)
 {
     int hitFlag = -1;
@@ -507,12 +524,16 @@ void destroy(void)
         g_sessionlistener4Data = nullptr;
     }
 }
-
-int main(int args, char* argv[])
+/**
+ *  @tc.number: DisTest_0001
+ *  @tc.name: net trans common
+ *  @tc.desc: net trans common
+ *  @tc.type: FUNC
+ */
+HWTEST_F(NetTransCommon, DisTest_0001, TestSize.Level1)
 {
     LOG("enter main");
     init();
-
     while (INT_TRUE) {
         int ret = CheckRemoteDeviceIsNull(INT_TRUE);
         if (ret == SOFTBUS_OK) {
@@ -531,6 +552,5 @@ int main(int args, char* argv[])
         LOG("enter while success");
         sleep(SLEEP_SECOND_TEN);
     }
-    return 0;
 }
-}; // namespace NetTransCommon
+}; // namespace NetTrans
