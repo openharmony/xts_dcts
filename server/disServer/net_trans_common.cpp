@@ -20,11 +20,11 @@
 #include <netdb.h>
 #include <pthread.h>
 #include <sys/socket.h>
+
 #include "softbus_permission.h"
 #include "unistd.h"
 #include "net_trans_common.h"
-
-using namespace NetTransCommon;
+using namespace NetTrans;
 using namespace testing::ext;
 
 const int MAX_DATA_LENGTH = 1024;
@@ -67,23 +67,22 @@ static ConnectionAddr g_ethAddr = {
 
 static int g_subscribeId = 0;
 
-namespace NetTransCommon {
-
-class DisServerTest : public testing::Test {
+namespace NetTrans {
+class NetTransCommon : public testing::Test {
 public:
     static void SetUpTestCase(void);
     static void TearDownTestCase(void);
     void SetUp();
     void TearDown();
-    DisServerTest();
+    NetTransCommon();
 };
-void DisServerTest::SetUpTestCase(void) {}
+void NetTransCommon::SetUpTestCase(void) {}
 
-void DisServerTest::TearDownTestCase(void) {}
-void DisServerTest::SetUp(void) {}
+void NetTransCommon::TearDownTestCase(void) {}
+void NetTransCommon::SetUp(void) {}
 
-void DisServerTest::TearDown(void) {}
-DisServerTest::DisServerTest(void) {}
+void NetTransCommon::TearDown(void) {}
+NetTransCommon::NetTransCommon(void) {}
 
 int Wait4Session(int timeout, WaitSessionType type)
 {
@@ -531,7 +530,7 @@ void destroy(void)
  *  @tc.desc: net trans common
  *  @tc.type: FUNC
  */
-HWTEST_F(DisServerTest, DisTest_0001, TestSize.Level1)
+HWTEST_F(NetTransCommon, DisTest_0001, TestSize.Level1)
 {
     LOG("enter main");
     init();
@@ -554,4 +553,4 @@ HWTEST_F(DisServerTest, DisTest_0001, TestSize.Level1)
         sleep(SLEEP_SECOND_TEN);
     }
 }
-}; // namespace NetTransCommon
+}; // namespace NetTrans

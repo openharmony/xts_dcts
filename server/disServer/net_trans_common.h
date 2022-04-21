@@ -70,7 +70,7 @@ enum class CtrlCodeType : int {
     CTRL_CODE_RESULT_TYPE = 9999,
 };
 
-namespace NetTransCommon {
+namespace NetTrans {
 int Wait4Session(int timeout, WaitSessionType type);
 
 int CheckRemoteDeviceIsNull(int isSetNetId);
@@ -125,7 +125,7 @@ ConnectionAddr* GetConnectAddr(void);
 void init(void);
 
 void destroy(void);
-}; // namespace NetTransCommon
+}; // namespace NetTrans
 
 #ifdef __cplusplus
 }
