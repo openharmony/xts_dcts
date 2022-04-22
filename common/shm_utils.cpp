@@ -27,6 +27,7 @@ const int WAITTIME = 2;
 const int DECIM_TEN = 10;
 const int CALCU_TWO = 2;
 const int CALCU_FOUR_AIGHT = 48;
+const int RES_FAIL = -1;
 
 static void* shm = nullptr;          // 分配的共享内存的原始首地址
 static struct shared_use_st* shared; // 指向shm
@@ -68,14 +69,19 @@ int readDataFromShm(char* buf)
         return -1;
     }
 
+    LOG("11--readDataFromShm buf= %s", buf);
+    LOG("11--readDataFromShm shared->data= %s", shared->data);
+
     if (shared->written != 0) {
         strcpy_s(buf, strlen(shared->data) + 1, shared->data);
         shared->written = 0;
-        LOG("readDataFromShm %s", buf);
+        LOG("22--readDataFromShm buf= %s", buf);
+        LOG("22--readDataFromShm shared->data= %s", shared->data);
         memset_s(shared->data, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     } else {
         return -1;
     }
+    LOG("33--SUCCESS: readDataFromShm return 0");
     return 0;
 }
 
@@ -85,22 +91,30 @@ int waitDataWithCode(char* code, char* data)
     int timeout = 10;
     char str[MAX_DATA_LENGTH] = { 0 };
     if (code == nullptr || data == nullptr) {
-        return -1;
+        return RES_FAIL;
     }
     while (i < timeout) {
-        if (readDataFromShm(str) == 0) {
-            if (strncmp(code, str, CODE_HEAD) == 0) {
-                if (strncpy_s(data, 2, str + STR_KEY, 1) != EOK) {
-                    return -1;
-                }
-                return 0;
+        if (readDataFromShm(str) == 0 && strncmp(code, str, CODE_HEAD) == 0) {
+            LOG("11--readDataFromShm str= %s", str);
+            LOG("11--readDataFromShm code= %s", code);
+            LOG("11--readDataFromShm data= %s", data);
+            errno_t ret = 1;
+            ret = strncpy_s(data, strlen("0") + 1, str + STR_KEY, 1);
+            if (ret != EOK) {
+                LOG("ERR:ret=%d", ret);
+                return RES_FAIL;
             }
+            LOG("22--readDataFromShm str= %s", str);
+            LOG("22--readDataFromShm code= %s", code);
+            LOG("22--readDataFromShm data= %s", data);
+            LOG("33--SUCCESS:waitDataWithCode return 0");
+            return 0;
         }
         i++;
         sleep(1);
     }
 
-    return -1;
+    return RES_FAIL;
 }
 
 int writeCodeDataToShm(int code, char* buf)
@@ -164,9 +178,8 @@ char* Int2String(int num, char* str) // 10进制
     if (str == nullptr) {
         return nullptr;
     }
-    int i = 0;   // 指示填充str
-    if (num < 0) // 如果num为负数，将num变正
-    {
+    int i = 0; // 指示填充str
+    if (num < 0) {
         num = -num;
         str[i++] = '-';
     }
@@ -180,8 +193,7 @@ char* Int2String(int num, char* str) // 10进制
 
     // 确定开始调整的位置
     int j = 0;
-    if (str[0] == '-') // 如果有负号，负号不用调整
-    {
+    if (str[0] == '-') {
         j = 1; // 从第二位开始调整
         ++i;   // 由于有负号，所以交换的对称轴也要后移一位
     }
