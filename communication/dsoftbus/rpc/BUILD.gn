@@ -12,7 +12,7 @@
 # limitations under the License.
 import("//test/xts/tools/build/suite.gni")
 
-ohos_js_hap_suite("ActsRpcJsTest") {
+ohos_js_hap_suite("DctsRpcJsTest") {
   hap_profile = "./src/main/config.json"
   deps = [
     ":rpc_js_assets",
@@ -20,7 +20,7 @@ ohos_js_hap_suite("ActsRpcJsTest") {
   ]
 
   certificate_profile = "./signature/openharmony_sx.p7b"
-  hap_name = "ActsRpcHapTest"
+  hap_name = "DctsRpcHapTest"
 }
 ohos_js_assets("rpc_js_assets") {
   source_dir = "./src/main/js/default"
