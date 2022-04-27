@@ -10,7 +10,7 @@
     "kits": [
         {
             "test-file-name": [
-                "ActsRpcHapTest.hap"
+                "DctsRpcHapTest.hap"
             ],
             "type": "AppInstallKit",
             "cleanup-apps": true

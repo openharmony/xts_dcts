@@ -121,7 +121,7 @@ describe('RpcJsUnitTest', function(){
             expect(actual[i]).assertEqual(expected[i])
         }
     }
-	
+
     function sleep(numberMillis){
         var now = new Date();
         var exitTime = now.getTime() + numberMillis;
@@ -130,7 +130,7 @@ describe('RpcJsUnitTest', function(){
             if (now.getTime() > exitTime)
                 return;
         }
-    }	
+    }
 
     beforeAll(async function(done) {
         console.info('beforeAll called rpc')
@@ -175,7 +175,7 @@ describe('RpcJsUnitTest', function(){
     afterAll(function (){
         console.info('afterAll called')
     })
-	
+
 
     /*
      * @tc.number  SUB_Softbus_RPC_MessageParcel_2400
@@ -2261,7 +2261,7 @@ describe('RpcJsUnitTest', function(){
     //             let writeFileDescriptor = data.writeFileDescriptor(fd)
     //             expect(writeFileDescriptor == true).assertTrue()
     //             let result1 = data.containFileDescriptors()
-    //            
+    //
     //             console.log(result + " " + writeInt + " " + result1);
     //             expect(data.containFileDescriptors()).assertTrue()
     //             await gIRemoteObject.sendRequest(CODE_FILESDIR, data, reply, option)

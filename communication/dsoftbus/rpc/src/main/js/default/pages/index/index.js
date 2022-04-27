@@ -15,12 +15,6 @@
  * limitations under the License.
  */
 
-import {Core} from 'deccjsunit/index';
-import featureAbility from '@ohos.ability.featureAbility';
-
-const injectRef = Object.getPrototypeOf(global) || global
-injectRef.regeneratorRuntime = require('@babel/runtime/regenerator')
-
 export default {
   data: {
     title: ''
@@ -30,22 +24,6 @@ export default {
   },
   onShow() {
     console.info('onShow finish')
-    const core = Core.getInstance()
-    core.init()
-    const configService = core.getDefaultService('config')
-    configService.setConfig(this)
-
-    console.info('Calc[IndexPage] grantPermission')
-    let context = featureAbility.getContext()
-    context.requestPermissionsFromUser(['ohos.permission.DISTRIBUTED_DATASYNC'], 666, function (result) {
-      console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser,'+result.requestCode)
-      setTimeout(()=>{
-        require('../../test/List.test')
-        core.execute()
-      },1000)
-
-    })
-
   },
   onReady() {
   },
