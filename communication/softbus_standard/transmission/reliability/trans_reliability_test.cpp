@@ -175,8 +175,8 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Reli_0400, TestSize.Level3)
 
 /**
  * @tc.number : SUB_Softbus_Trans_Session_Reli_0100
- * @tc.name   : CreateSessionServer_重复创建
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.name   : CreateSessionServer repeatedly
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
@@ -206,8 +206,8 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0100, TestSize.Lev
 
 /**
  * @tc.number : SUB_Softbus_Trans_Session_Reli_0200
- * @tc.name   : CreateSessionServer参数_异常输入
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.name   : CreateSessionServer input wrong value
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
@@ -238,57 +238,12 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0200, TestSize.Lev
 
 /**
  * @tc.number : SUB_Softbus_Trans_Session_Reli_0300
- * @tc.name   : RemoveSessionServer_删除未创建的Server
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.name   : RemoveSessionServer input wrong value
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
 HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0300, TestSize.Level3)
-{
-    int ret;
-    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
-    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS success[not create]";
-    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_CTL);
-    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS success[not create]";
-}
-
-/**
- * @tc.number : SUB_Softbus_Trans_Session_Reli_0400
- * @tc.name   : RemoveSessionServer_重复删除
- * @tc.desc   : 测试会话管理可靠性
- * @tc.type   : RELI
- * @tc.size   : MediumTest
- */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0400, TestSize.Level3)
-{
-    int ret;
-    char sessionNames[][SESSION_NAME_SIZE_MAX] = { "com.communication.demo1.1", "com.communication.demo1.2",
-        "com.communication.demo1.3", "com.communication.demo1.4", "com.communication.demo1.5",
-        "com.communication.demo1.6", "com.communication.demo1.7", "com.communication.demo1.8" };
-    for (int i = 0; i < MAX_SESSION_SERVER_NUM_CLIENT; i++) {
-        ret = CreateSessionServer(DEF_PKG_NAME, sessionNames[i], GetSessionListenser4Data());
-        EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS fail,i=" << i;
-    }
-
-    for (int i = 0; i < MAX_SESSION_SERVER_NUM_CLIENT; i++) {
-        ret = RemoveSessionServer(DEF_PKG_NAME, sessionNames[i]);
-        EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS fail,i=" << i;
-    }
-    // repeat once, expect fail
-    for (int i = 0; i < MAX_SESSION_SERVER_NUM_CLIENT; i++) {
-        ret = RemoveSessionServer(DEF_PKG_NAME, sessionNames[i]);
-        EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS success[repeat],i=" << i;
-    }
-}
-
-/**
- * @tc.number : SUB_Softbus_Trans_Session_Reli_0500
- * @tc.name   : RemoveSessionServer参数_异常输入
- * @tc.desc   : 测试会话管理可靠性
- * @tc.type   : RELI
- * @tc.size   : MediumTest
- */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0500, TestSize.Level3)
 {
     int ret;
     ret = RemoveSessionServer(NULL, SESSION_NAME_DATA);
@@ -300,13 +255,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0500, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Reli_0600
- * @tc.name   : RemoveSessionServer_存在未关闭session
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.number : SUB_Softbus_Trans_Session_Reli_0400
+ * @tc.name   : RemoveSessionServer There are unclosed Session
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0600, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0400, TestSize.Level3)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
@@ -368,13 +323,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0600, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Reli_0700
- * @tc.name   : OpenSession_未创建SessionServer
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.number : SUB_Softbus_Trans_Session_Reli_0500
+ * @tc.name   : OpenSession SessionServer do not exist
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0700, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0500, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -387,13 +342,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0700, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Reli_0800
- * @tc.name   : OpenSession_重复open同一个
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.number : SUB_Softbus_Trans_Session_Reli_0600
+ * @tc.name   : OpenSession Open the same one repeatedly
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0800, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0600, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -412,13 +367,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0800, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Reli_0900
- * @tc.name   : OpenSession参数_异常输入
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.number : SUB_Softbus_Trans_Session_Reli_0700
+ * @tc.name   : OpenSession input wrong value
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0900, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0700, TestSize.Level3)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
@@ -455,13 +410,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0900, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Reli_1000
- * @tc.name   : CloseSession_重复close
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.number : SUB_Softbus_Trans_Session_Reli_0800
+ * @tc.name   : CloseSession repeatedly
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1000, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0800, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -496,13 +451,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1000, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Reli_1100
- * @tc.name   : CloseSession_无效sessionId
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.number : SUB_Softbus_Trans_Session_Reli_0900
+ * @tc.name   : CloseSession not exist sessionId
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1100, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_0900, TestSize.Level3)
 {
     int ret;
     int timeout = 3;
@@ -526,13 +481,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1100, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Reli_1200
- * @tc.name   : GetMySessionName参数_异常输入
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.number : SUB_Softbus_Trans_Session_Reli_1000
+ * @tc.name   : GetMySessionName input wrong value
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1200, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1000, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -561,13 +516,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1200, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Reli_1300
- * @tc.name   : GetPeersessionName参数_异常输入
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.number : SUB_Softbus_Trans_Session_Reli_1100
+ * @tc.name   : GetPeersessionName input wrong value
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1300, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1100, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -596,13 +551,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1300, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Reli_1400
- * @tc.name   : GetPeerDeviceId参数_异常输入
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.number : SUB_Softbus_Trans_Session_Reli_1200
+ * @tc.name   : GetPeerDeviceId input wrong value
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1400, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1200, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -631,13 +586,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1400, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Reli_1500
- * @tc.name   : 主动OpenSession, 对端不存在SessionServer
- * @tc.desc   : 测试会话管理可靠性
+ * @tc.number : SUB_Softbus_Trans_Session_Reli_1300
+ * @tc.name   : OpenSession, no Session Server exists on the peer
+ * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1500, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Session_Reli_1300, TestSize.Level3)
 {
     int ret;
     char* softbusPidStart;
