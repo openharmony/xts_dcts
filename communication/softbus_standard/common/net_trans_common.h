@@ -48,6 +48,7 @@ extern "C" {
 #define SESSION_NAME_PERF "com.communication.demo1.perf"
 #define SESSION_NAME_PROXY "com.communication.demo1.proxy"
 #define SESSION_NAME_FILE "com.communication.demo1.file"
+#define SESSION_NAME_STREAM "com.communication.demo1.stream"
 #define DSOFT_PKG_NAME "com.plrdtest.dsoftbus"
 #define SESSION_NAME_DSOFT_DATA "com.plrdtest.dsoftbus.data"
 #define RECV_FILE_PATH "/data/"

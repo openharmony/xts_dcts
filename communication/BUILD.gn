@@ -22,6 +22,7 @@ group("communication") {
       "softbus_standard/transmission/reliability:DctsSoftBusTransReliabilityTest",
       "softbus_standard/transmission/sendfile:DctsSoftBusTransFileFunTest",
       "softbus_standard/transmission/sendmsg:DctsSoftBusTransFunTest",
+      "softbus_standard/transmission/sendstream:DctsSoftBusTransStreamFunTest",
       "softbus_standard/transmission/sessionmgt:DctsSoftBusTransSessionFunTest",
     ]
   } else {
