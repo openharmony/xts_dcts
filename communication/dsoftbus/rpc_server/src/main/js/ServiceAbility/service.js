@@ -389,7 +389,6 @@ class Stub extends rpc.RemoteObject {
                     var ashmem = data.readAshmem();
                     console.log("The server's readAshmem result is " + ashmem);
                     ashmem.mapReadAndWriteAshmem();
-//                    console.log("The server's gongxiang result is " + gong);
                     let huoqu = ashmem.getAshmemSize();
                     console.log("The server's huoqu result is " + huoqu);
                     var bytes = ashmem.readFromAshmem(huoqu, 0);
