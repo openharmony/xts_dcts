@@ -128,11 +128,16 @@ int writeCodeDataToShm(int code, char* buf)
     if (strcpy_s(str, strlen(codeStr) + 1, codeStr) != EOK) {
         return -1;
     }
-    strcat(str, ":");
+    if (strcat_s(str, strlen(":") + 1, ":") != EOK) {
+        return -1;
+    }
+
     if (buf == nullptr) {
         return -1;
     }
-    strcat(str, buf);
+    if (strcat_s(str, strlen(buf) + 1, buf) != EOK) {
+        return -1;
+    }
     int nres = writeDataToShm(str);
     if (nres == -1) {
         return -1;

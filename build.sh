@@ -43,7 +43,7 @@ parse_cmdline()
     BUILD_TARGET=""
     TARGET_PLATFORM=all
     GN_ARGS="is_dbt_test=true include_all=false"
-    TARGET_ARCH=arm64
+    TARGET_ARCH=arm
     BUILD_VARIANT=release
     UPLOAD_API_INFO=False
     SYSTEM_SIZE=large
@@ -98,7 +98,7 @@ do_make()
     rm -rf "$BASE_HOME/test/xts/autogen_apiobjs"
     export XTS_SUITENAME=dcts
     if [ "$SYSTEM_SIZE" = "standard" ]; then
-       ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true
+       ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true --target-cpu $TARGET_ARCH
     else
        if [ "$BUILD_TARGET" = "dcts dcts_ivi dcts_intellitv dcts_wearable" ]; then
          ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target "dcts" --build-target "dcts_ivi" --build-target "dcts_intellitv" --build-target "dcts_wearable" --build-target "deploy_testtools"
