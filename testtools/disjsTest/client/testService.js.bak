@@ -1,0 +1,100 @@
+// @ts-nocheck
+import rpc from '@ohos.rpc';
+
+var logTag = "RpcClient";
+var CODE_INVOKE = 1;
+import apiMessage from '../common/apiMessage.js';
+import apiResult from '../common/apiResult.js';
+import deviceManager from '@ohos.distributedHardware.deviceManager';
+import featureAbility from '@ohos.ability.featureAbility';
+
+var gIRemoteObject = undefined;
+export default class testService {
+    onCreate() {
+        console.info(logTag + 'AceApplication onCreate');
+    }
+
+    onDestroy() {
+        console.info(logTag + 'AceApplication onDestroy');
+    }
+
+    constructor() {
+        this.toConnectAbility();
+    }
+
+    invoke(message) {
+        var messageParcel = rpc.MessageParcel.create();
+        console.log(logTag + "create object successfully.");
+        var messageParcelreply = rpc.MessageParcel.create();
+        var option = new rpc.MessageOption();
+        var writeResult = messageParcel.writeSequenceable(message);
+        console.log(logTag + " run writeSequenceable success, " + message + "result is " + writeResult);
+        this.request(messageParcel, messageParcelreply, option);
+        console.log(logTag + " run request success, result is " + apiResult);
+        if(apiResult!= undefined){
+            return apiResult;
+        }
+    }
+
+    request(messageParcel, messageParcelreply, option) {
+        console.log(logTag + "gIRemoteObject is " + gIRemoteObject);
+        let self = this;
+        gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option).then(function (result) {
+            if (result.errCode === 0) {
+                console.log(logTag + "sendRequest got result");
+                let ret = new apiMessage(null, null, null, null, null, null, null)
+                var dataReply = result.reply.readSequenceable(ret);
+                console.log(logTag + "run readSequenceable success, result is" + dataReply);
+                apiResult = eval("(" + ret._apiResult + ")");
+                return true;
+            } else {
+                console.log(logTag + "sendRequest failed, errCode: " + errCode);
+            }
+        }).catch(function (e) {
+            console.log(logTag + " sendRequest got exception: " + e.message);
+        }).finally(() => {
+            console.log(logTag + "sendRequest ends, reclaim parcel");
+            messageParcel.reclaim();
+            messageParcelreply.reclaim();
+        });
+    }
+
+    toConnectAbility() {
+        console.info(logTag + " toConnectAbility")
+        let self = this;
+
+        function deviceManagerCallback(error, deviceManager) {
+            console.info(logTag + "got deviceManager: " + deviceManager + ", error: " + error)
+            let deviceList = deviceManager.getTrustedDeviceListSync()
+            let deviceId = deviceList[0].deviceId
+            console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList))
+            let want = {
+                "bundleName": "ohos.dcts.distributedisjsserver",
+                "abilityName": "ohos.dcts.distributedisjsserver.ServiceAbility",
+                "deviceId": deviceId,
+                "flags": 256
+            }
+            let connect = {
+                onConnect: function (elementName, remoteProxy) {
+                    console.log('RpcClient: onConnect called, instance of proxy: ' + (remoteProxy instanceof rpc.RemoteProxy));
+                    console.log('RpcClient: onConnect called, remoteProxy: ' + remoteProxy);
+                    gIRemoteObject = remoteProxy;
+                    isConnected = true
+                },
+                onDisconnect: function (elementName) {
+                    console.log("RpcClient: onDisconnect")
+                },
+                onFailed: function () {
+                    console.log("RpcClient: onFailed")
+                    gIRemoteObject = null
+                }
+            }
+            connectId = featureAbility.connectAbility(want, connect)
+            connectId.info(logTag + "connect ability got id: " + connectId)
+        }
+
+        deviceManager.createDeviceManager('ohos.dcts.distributedisjsserver', deviceManagerCallback)
+    }
+}
+
+
