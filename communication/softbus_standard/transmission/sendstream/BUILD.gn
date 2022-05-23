@@ -35,8 +35,8 @@ ohos_moduletest_suite("DctsSoftBusTransStreamFunTest") {
     "//foundation/communication/dsoftbus/interfaces/kits/discovery",
     "//foundation/communication/dsoftbus/interfaces/kits/transport",
     "//base/security/permission/interfaces/innerkits/permission_standard/permissionsdk/main/cpp/include",
-    "//foundation/communication/wifi/wifi/interfaces/innerkits/native_cpp/wifi_standard/include",
-    "//foundation/communication/wifi/wifi/interfaces/innerkits/native_cpp/wifi_standard/interfaces",
+    "//foundation/communication/wifi/wifi/frameworks/native/include",
+    "//foundation/communication/wifi/wifi/frameworks/native/interfaces",
     "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include",
     "//foundation/communication/wifi/wifi/services/wifi_standard/wifi_framework/common/net_helper",
     "//foundation/communication/wifi/wifi/services/wifi_standard/wifi_framework/common/log",
@@ -45,7 +45,7 @@ ohos_moduletest_suite("DctsSoftBusTransStreamFunTest") {
   deps = [
     #"//foundation/communication/dsoftbus/core/frame/standard/client:softbus_client",
     "//base/security/permission/interfaces/innerkits/permission_standard/permissionsdk:libpermissionsdk_standard",
-    "//foundation/communication/wifi/wifi/interfaces/innerkits/native_cpp/wifi_standard:wifi_sdk",
+    "//foundation/communication/wifi/wifi/frameworks/native:wifi_sdk",
     "//third_party/googletest:gtest_main",
   ]
   external_deps = [ "dsoftbus_standard:softbus_client" ]
