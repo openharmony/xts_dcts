@@ -96,10 +96,10 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
 }
 
 class Observer : public KvStoreObserver {
-    void OnChange(const ChangeNotification& changeNotification, std::shared_ptr<KvStoreSnapshot> snapshot);
+    void OnChange(const ChangeNotification& changeNotification);
 };
 void Observer::OnChange(
-    const ChangeNotification& changeNotification, std::shared_ptr<KvStoreSnapshot> snapshot)
+    const ChangeNotification& changeNotification)
 {
     LOG("%s OnChange begin", LOGSTR);
     cout << "OnChange insert: " << changeNotification.GetInsertEntries().size()
