@@ -1,18 +1,33 @@
+/*
+ * Copyright (C) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 var logTag = 'RpcServer'
-export default class apiMessage {
+export default class ApiMessage {
     _deviceName = null;
     _className = null;
     _methodName = null;
-    _api_session = null;
+    _apiSession = null;
     _parameterTypes = null;
     _parameters = null;
     _apiResult = null;
 
-    constructor(deviceName, className, methodName, api_session, parameterTypes, parameters, apiResult) {
+    constructor(deviceName, className, methodName, apiSession, parameterTypes, parameters, apiResult) {
         this._deviceName = deviceName;
         this._className = className;
         this._methodName = methodName;
-        this._api_session = api_session;
+        this._apiSession = apiSession;
         this._parameterTypes = parameterTypes;
         this._parameters = parameters;
         this._apiResult = apiResult;
@@ -23,7 +38,7 @@ export default class apiMessage {
         messageParcel.writeString(this._deviceName);
         messageParcel.writeString(this._className);
         messageParcel.writeString(this._methodName);
-        messageParcel.writeString(this._api_session);
+        messageParcel.writeString(this._apiSession);
         console.log(logTag + "writeString successfully.");
         messageParcel.writeStringArray(this._parameterTypes);
         messageParcel.writeStringArray(this._parameters);
@@ -37,7 +52,7 @@ export default class apiMessage {
         this._deviceName = messageParcel.readString();
         this._className = messageParcel.readString();
         this._methodName = messageParcel.readString();
-        this._api_session = messageParcel.readString();
+        this._apiSession = messageParcel.readString();
         this._parameterTypes = messageParcel.readStringArray();
         this._parameters = messageParcel.readStringArray();
         this._apiResult = messageParcel.readString();
