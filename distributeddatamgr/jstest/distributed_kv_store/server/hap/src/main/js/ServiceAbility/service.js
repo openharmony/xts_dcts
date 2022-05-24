@@ -1,4 +1,3 @@
-//require('../../../../../../../../../testtools/disjsTest/server/service.js')
 import Stub from '../../../../../../../../../testtools/disjsTest/server/service.js'
 
 export default {

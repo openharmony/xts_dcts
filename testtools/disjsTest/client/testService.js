@@ -8,7 +8,6 @@ import apiResult from '../common/apiResult.js';
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
-//var gIRemoteObject;
 var results;
 var isConnected = false;
 var bundleName = "ohos.dcts.distributedisjsserver";
@@ -51,34 +50,7 @@ export default class testService {
         }).catch(function (e) {
             console.log(logTag + " sendRequest got exception: " + e.message);
         })
-        /*.finally(() => {
-            console.log(logTag + "sendRequest ends, reclaim parcel");
-            messageParcel.reclaim();
-            messageParcelreply.reclaim();
-        });*/
-
-	    //console.log(logTag + "call invoke() success data=" + data);
-	    //	return data;
-    };
-    /*invoke(gIRemoteObject,message) {
-        return new Promise((resolve, reject) => {
-            var messageParcel = rpc.MessageParcel.create();
-            console.log(logTag + "create object successfully.");
-            var messageParcelreply = rpc.MessageParcel.create();
-            var option = new rpc.MessageOption();
-            var writeResult = messageParcel.writeSequenceable(message);
-            console.log(logTag + " run writeSequenceable success, " + message + "result is " + writeResult);
-            this.request(gIRemoteObject,messageParcel, messageParcelreply, option)
-	    .then(function(data) => {
-		console.log(logTag + "call invoke() success data=" + promise);
-	    //promise.then(value => {
-            //     console.log(logTag + "call invoke() success value=" + value);
-	    //});
-            //    resolve(data);})
-	    //.catch(e => console.log(logtag + e));
-	    resolve(promise);
-        })
-    }*/
+    }
 
     getDeviceList(deviceManager) {
         deviceList = deviceManager.getTrustedDeviceListSync();

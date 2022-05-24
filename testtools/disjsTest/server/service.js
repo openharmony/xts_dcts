@@ -27,7 +27,6 @@ export default class Stub extends rpc.RemoteObject {
                     console.log( logTag +" testBundleManager invoke success result is " + JSON.stringify(testBundleResult));
 
                     testBundle._apiResult=JSON.stringify(testBundleResult);
-                    //testBundle._apiResult=testBundleResult;
 		    console.log(logTag +" The testBundle is " + JSON.stringify(testBundle));
                     let result = reply.writeSequenceable(testBundle);
                     console.log(logTag +" writeSequenceable result is " + result);
