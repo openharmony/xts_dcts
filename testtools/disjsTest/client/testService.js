@@ -53,7 +53,7 @@ export default class TestService {
         gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option).then(function (result) {
             if (result.errCode === 0) {
                 console.log(logTag + "sendRequest got result");
-                var ret = new apiMessage(null, null, null, null, null, null,null)
+                var ret = new ApiMessage(null, null, null, null, null, null,null)
                 var dataReply = result.reply.readSequenceable(ret);
                  console.log(logTag + "run readSequenceable success, result is" + dataReply);
                  results = JSON.parse(ret._apiResult);

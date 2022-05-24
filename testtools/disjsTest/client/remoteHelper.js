@@ -29,7 +29,8 @@ export default class RemoteHelper{
     
    async add(a,b) {
             console.log(logTag+"_methodName is add");
-	    let message = new ApiMessage("openHarmony","testApi","add"," ",["number","number"],[String(a),String(b)]," ");
+	    let message = new ApiMessage("openHarmony","testApi","add"," ",
+		    ["number","number"],[String(a),String(b)]," ");
 
             var messageParcel = rpc.MessageParcel.create();
             console.log(logTag + "create object successfully.");
@@ -50,7 +51,8 @@ export default class RemoteHelper{
 
     async sub(a,b) {
         console.log(logTag+"_methodName is sub");
-            let message = new ApiMessage("openHarmony","testApi","sub"," ",["number","number"],[String(a),String(b)]," ");
+            let message = new ApiMessage("openHarmony","testApi","sub"," ",
+		    ["number","number"],[String(a),String(b)]," ");
             var messageParcel = rpc.MessageParcel.create();
             console.log(logTag + "create object successfully.");
             var messageParcelreply = rpc.MessageParcel.create();
