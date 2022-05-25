@@ -98,8 +98,7 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
 class Observer : public KvStoreObserver {
     void OnChange(const ChangeNotification& changeNotification);
 };
-void Observer::OnChange(
-    const ChangeNotification& changeNotification)
+void Observer::OnChange(const ChangeNotification& changeNotification)
 {
     LOG("%s OnChange begin", LOGSTR);
     cout << "OnChange insert: " << changeNotification.GetInsertEntries().size()
@@ -757,8 +756,8 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0700, 
 
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
     strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
-    strcat(strKV, ":");
-    strcat(strKV, strvc.c_str());
+    strcat_s(strKV, MAX_DATA_LENGTH, ":");
+    strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
 
     std::cout << "strvc = " << strvc << std::endl;
     std::cout << "strvc.c_str() = " << strvc.c_str() << std::endl;
@@ -1443,8 +1442,8 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
 
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
     strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
-    strcat(strKV, ":");
-    strcat(strKV, strvc.c_str());
+    strcat_s(strKV, MAX_DATA_LENGTH, ":");
+    strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
 
     std::cout << "strvc = " << strvc << std::endl;
     std::cout << "strvc.c_str() = " << strvc.c_str() << std::endl;
@@ -2497,8 +2496,8 @@ HWTEST_F(DistributedKvDataManagerTest, SubscribeWithQuery_0700, TestSize.Level1)
 
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
     strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
-    strcat(strKV, ":");
-    strcat(strKV, strvc.c_str());
+    strcat_s(strKV, MAX_DATA_LENGTH, ":");
+    strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
     DisKvTest::RemotePutData(strKV);
     // 5.远端getvect
     LOG("%s 5.远端get vect ", LOGSTR);
@@ -2844,8 +2843,8 @@ HWTEST_F(DistributedKvDataManagerTest, SyncWithCondition_0700, TestSize.Level1)
     strvc.assign(vect2.begin(), vect2.end());
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
     strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
-    strcat(strKV, ":");
-    strcat(strKV, strvc.c_str());
+    strcat_s(strKV, MAX_DATA_LENGTH, ":");
+    strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
     std::cout << "strvc = " << strvc << std::endl;
     std::cout << "strvc.c_str() = " << strvc.c_str() << std::endl;
     std::cout << "strKV = " << strKV << std::endl;
