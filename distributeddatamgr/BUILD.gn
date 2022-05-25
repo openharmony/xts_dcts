@@ -17,7 +17,9 @@ group("distributeddatatest") {
     deps = [
       ":disDataProcess",
       "../server/disServer:disTest",
-      "distributed_kv_store:DctsdisDataTest",
+      "cpptest/distributed_kv_store:DctsdisDataTest",
+      "jstest/distributed_kv_store/client/hap:distributekvdisjs_test",
+      "jstest/distributed_kv_store/server/hap:distributekvdisjs_server",
     ]
   }
 }
@@ -25,7 +27,7 @@ group("distributeddatatest") {
 shared_library("disDataProcess") {
   #module_out_path = module_output_path
   #
-  sources = [ "./process_common/process_msg.cpp" ]
+  sources = [ "./cpptest/process_common/process_msg.cpp" ]
 
   visibility = [ ":*" ]
 
