@@ -4,7 +4,7 @@
         "type": "JSUnitTest",
         "test-timeout": "900000",
         "package": "com.ohos.rpctest",
-	"abilityName": "com.ohos.rpc.MainAbility",
+	"abilityName": "com.ohos.rpctest.MainAbility",
         "shell-timeout": "900000"
     },
     "kits": [
