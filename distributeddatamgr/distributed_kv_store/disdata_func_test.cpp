@@ -566,8 +566,8 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0700, 
 
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
     strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
-    strcat(strKV, MAX_DATA_LENGTH, ":");
-    strcat(strKV, MAX_DATA_LENGTH, strvc.c_str());
+    strcat_s(strKV, MAX_DATA_LENGTH, ":");
+    strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
 
     std::cout << "strvc = " << strvc << std::endl;
     std::cout << "strvc.c_str() = " << strvc.c_str() << std::endl;
@@ -1277,8 +1277,8 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
 
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
     strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
-    strcat(strKV, MAX_DATA_LENGTH, ":");
-    strcat(strKV, MAX_DATA_LENGTH, strvc.c_str());
+    strcat_s(strKV, MAX_DATA_LENGTH, ":");
+    strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
 
     std::cout << "strvc = " << strvc << std::endl;
     std::cout << "strvc.c_str() = " << strvc.c_str() << std::endl;
@@ -2447,8 +2447,8 @@ HWTEST_F(DistributedKvDataManagerTest, SubscribeWithQuery_0700, TestSize.Level1)
 
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
     strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
-    strcat(strKV, MAX_DATA_LENGTH, ":");
-    strcat(strKV, MAX_DATA_LENGTH, strvc.c_str());
+    strcat_s(strKV, MAX_DATA_LENGTH, ":");
+    strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
 
     std::cout << "strvc = " << strvc << std::endl;
     std::cout << "strvc.c_str() = " << strvc.c_str() << std::endl;
@@ -2889,8 +2889,8 @@ HWTEST_F(DistributedKvDataManagerTest, SyncWithCondition_0700, TestSize.Level1)
 
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
     strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
-    strcat(strKV, MAX_DATA_LENGTH, ":");
-    strcat(strKV, MAX_DATA_LENGTH, strvc.c_str());
+    strcat_s(strKV, MAX_DATA_LENGTH, ":");
+    strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
 
     std::cout << "strvc = " << strvc << std::endl;
     std::cout << "strvc.c_str() = " << strvc.c_str() << std::endl;
