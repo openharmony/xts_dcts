@@ -99,12 +99,8 @@ int writeCodeDataToShm(int code, char* buf)
     memset_s(codeStr, 5, 0, 5);
     Int2String(code, codeStr);
     strcpy_s(str, strlen(codeStr) + 1, codeStr);
-    if (strcat_s(str, strlen(":") + 1, ":") != EOK) {
-        return -1;
-    }
-    if (strcat_s(str, strlen(buf) + 1, buf) != EOK) {
-        return -1;
-    }
+    strcat_s(str, MAX_DATA_LENGTH, ":");
+    strcat_s(str, MAX_DATA_LENGTH, buf);
     writeDataToShm(str);
     return 0;
 }
