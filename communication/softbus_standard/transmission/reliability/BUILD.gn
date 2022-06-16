@@ -48,5 +48,5 @@ ohos_moduletest_suite("DctsSoftBusTransReliabilityTest") {
     "//foundation/communication/wifi/wifi/frameworks/native:wifi_sdk",
     "//third_party/googletest:gtest_main",
   ]
-  external_deps = [ "dsoftbus_standard:softbus_client" ]
+  external_deps = [ "dsoftbus:softbus_client" ]
 }
