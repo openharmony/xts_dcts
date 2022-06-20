@@ -214,7 +214,7 @@ void DataBytesReceived(int sessionId, const void* data, unsigned int dataLen)
 
 void DataMessageReceived(int sessionId, const void* data, unsigned int dataLen)
 {
-    LOG("MsgRec start sessionId=%d, dataLen = %d, data=%s", sessionId, dataLen, data);
+    LOG("MsgRec start sessionId=%d, dataLen = %d, data=%s", sessionId, dataLen, (char *)data);
 
     unsigned int maxLen = MAX_DATA_LENGTH;
     if (dataLen <= maxLen) {
@@ -353,7 +353,7 @@ void OnDataMessageReceived(int sessionId, const char* data, unsigned int dataLen
 
 void* SendMsgTask(void* param)
 {
-    LOG("SendMsgTask send...%s", param);
+    LOG("SendMsgTask send...%s", (char *)param);
     int sessionId;
     int timeout = 10;
     int ret = 0;
