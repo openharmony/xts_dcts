@@ -191,7 +191,7 @@ void DisKvTest::SyncWithCondition(std::vector<std::string>& deviceList, DataQuer
     }
     std::unique_lock<std::mutex> lk(m);
     isSyncComplete = false;
-    auto syncStatus = DisKvTest::KvStorePtr->SyncWithCondition(deviceList, SyncMode::PULL, dataQuery);
+    auto syncStatus = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PULL, dataQuery);
     EXPECT_EQ(syncStatus, Status::SUCCESS) << "LOGdisDataTest--SUCCESS:SyncWithCondition";
     cv.wait_for(lk, std::chrono::seconds(SECOND_TIME), [] { return isSyncComplete; });
     LOG("%s sync::PUSH  cv.wait_for isSyncComplete = %d", LOGSTR, isSyncComplete);
