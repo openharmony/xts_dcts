@@ -33,7 +33,8 @@ ohos_moduletest_suite("DctsSoftBusTransSessionFunTest") {
     "//foundation/communication/dsoftbus/interfaces/kits/bus_center",
     "//foundation/communication/dsoftbus/interfaces/kits/discovery",
     "//foundation/communication/dsoftbus/interfaces/kits/transport",
-    "//base/security/permission/interfaces/innerkits/permission_standard/permissionsdk/main/cpp/include",
+
+    #"//base/security/permission/interfaces/innerkits/permission_standard/permissionsdk/main/cpp/include",
     "//foundation/communication/wifi/wifi/frameworks/native/include",
     "//foundation/communication/wifi/wifi/frameworks/native/interfaces",
     "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include",
@@ -42,8 +43,6 @@ ohos_moduletest_suite("DctsSoftBusTransSessionFunTest") {
   ]
 
   deps = [
-    #"//foundation/communication/dsoftbus/core/frame/standard/client:softbus_client",
-    "//base/security/permission/interfaces/innerkits/permission_standard/permissionsdk:libpermissionsdk_standard",
     "//foundation/communication/wifi/wifi/frameworks/native:wifi_sdk",
     "//third_party/googletest:gtest_main",
   ]
