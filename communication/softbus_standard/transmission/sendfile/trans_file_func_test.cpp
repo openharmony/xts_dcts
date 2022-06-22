@@ -15,7 +15,6 @@
 
 #include <gtest/gtest.h>
 
-#include "SoftBus_Test_Permission.h"
 #include "net_trans_common.h"
 #include "wifi_utils.h"
 
@@ -94,7 +93,6 @@ void TransFileFuncTest::SetUpTestCase()
 {
     LOG("SetUp begin");
     TestSetUp();
-    SoftBus_Test_Permission::AddPermission(DEF_PKG_NAME);
     int ret = RegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call reg node state callback fail";
 
@@ -117,7 +115,6 @@ void TransFileFuncTest::TearDownTestCase()
     EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
 
     TestTearDown();
-    SoftBus_Test_Permission::RemovePermission(DEF_PKG_NAME);
 }
 
 static int WaitFile(int timeout)
