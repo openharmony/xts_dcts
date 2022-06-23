@@ -17,7 +17,6 @@ module_output_path = "dcts/softbus_base/transmission/sessionmgt"
 ohos_moduletest_suite("DctsSoftBusTransSessionFunTest") {
   module_out_path = module_output_path
   sources = [
-    "../../common/SoftBus_Test_Permission.cpp",
     "../../common/net_trans_common.c",
     "../../common/wifi_utils.cpp",
     "./trans_session_func_test.cpp",
@@ -34,7 +33,6 @@ ohos_moduletest_suite("DctsSoftBusTransSessionFunTest") {
     "//foundation/communication/dsoftbus/interfaces/kits/discovery",
     "//foundation/communication/dsoftbus/interfaces/kits/transport",
 
-    #"//base/security/permission/interfaces/innerkits/permission_standard/permissionsdk/main/cpp/include",
     "//foundation/communication/wifi/wifi/frameworks/native/include",
     "//foundation/communication/wifi/wifi/frameworks/native/interfaces",
     "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include",

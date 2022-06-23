@@ -15,7 +15,6 @@
 
 #include <gtest/gtest.h>
 
-#include "SoftBus_Test_Permission.h"
 #include "net_trans_common.h"
 #include "wifi_utils.h"
 
@@ -28,6 +27,8 @@ static ISessionListener* g_sessionlist4Ctrl = NULL;
 static ISessionListener* g_sessionlist4Perf = NULL;
 static ISessionListener* g_sessionlist4Pass = NULL;
 static ISessionListener* g_sessionlist4File = NULL;
+static ISessionListener  *g_sessionlist4Stream  = NULL;
+
 static const char* def_passwd = "OH2022@xa";
 static const char* def_ssid = "OpenHarmony_Private_Net_01";
 static const char* slave_ssid = "OpenHarmony_Private_Net_02";
@@ -56,7 +57,6 @@ void dsoftbusTest ::SetUpTestCase()
     LOG("SetUpTestCase");
     TestSetUp();
     SetupCallback();
-    SoftBus_Test_Permission::AddPermission(DEF_PKG_NAME);
     int ret = RegNodeDeviceStateCb(DEF_PKG_NAME, g_nodeStateCallback);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call reg node state callback fail";
 }
@@ -66,7 +66,6 @@ void dsoftbusTest::TearDownTestCase()
     LOG("TearDownTestCase");
     int ret = UnregNodeDeviceStateCb(g_nodeStateCallback);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
-    SoftBus_Test_Permission ::RemovePermission(DEF_PKG_NAME);
     TeardownCallback();
     TestTearDown();
 }
@@ -98,6 +97,24 @@ static void OnFileMessageReceived(int sessionId, const void* data, unsigned int 
     }
 }
 
+static int OnStreamSessionOpened(int sessionId, int result)
+{
+    LOG("[cb][stream]open session sid[%d],rst[%d]", sessionId, result);
+    return SOFTBUS_OK;
+}
+
+static void OnStreamSessionClosed(int sessionId)
+{
+    LOG("[cb][stream]close session sid[%d]", sessionId);
+}
+
+static void StreamReceived(int sessionId, const StreamData *data, const StreamData *ext, const StreamFrameInfo *frame)
+{
+    if (data != NULL) {
+        LOG("[cb][stream]ByteRec sid:%d, data= %.*s.\n", sessionId, data->bufLen, data->buf);
+    }
+}
+
 /* session callback for data */
 static int OnDataSessionOpened(int sessionId, int result)
 {
@@ -112,7 +129,7 @@ static void OnDataSessionClosed(int sessionId)
 
 static void OnDataBytesReceived(int sessionId, const void* data, unsigned int dataLen)
 {
-    if (sessionId < 0 || sessionId > MAX_SESSION_NUM) {
+    if (sessionId < 0) {
         LOG("[cb][data]byte received invalid session id[%d]", sessionId);
         return;
     }
@@ -123,7 +140,7 @@ static void OnDataBytesReceived(int sessionId, const void* data, unsigned int da
 
 static void OnDataMessageReceived(int sessionId, const void* data, unsigned int dataLen)
 {
-    if (sessionId < 0 || sessionId > MAX_SESSION_NUM) {
+    if (sessionId < 0) {
         LOG("[cb][data]mesg received   invalid session id[%d]", sessionId);
         return;
     }
@@ -260,7 +277,7 @@ static void OnCtrlSessionClosed(int sessionId)
 
 static void OnCtrlBytesReceived(int sessionId, const void* data, unsigned int dataLen)
 {
-    if (sessionId < 0 || sessionId > MAX_SESSION_NUM) {
+    if (sessionId < 0) {
         LOG("[cb][ctrl]byte received invalid session id[%d]", sessionId);
         return;
     }
@@ -271,7 +288,7 @@ static void OnCtrlBytesReceived(int sessionId, const void* data, unsigned int da
 
 static void OnCtrlMessageReceived(int sessionId, const void* data, unsigned int dataLen)
 {
-    if (sessionId < 0 || sessionId > MAX_SESSION_NUM) {
+    if (sessionId < 0) {
         LOG("[cb][ctrl]mesg received invalid session id[%d]", sessionId);
         return;
     }
@@ -309,7 +326,7 @@ static void OnPerfSessionClosed(int sessionId)
 
 static void OnPerfBytesReceived(int sessionId, const void* data, unsigned int dataLen)
 {
-    if (sessionId < 0 || sessionId > MAX_SESSION_NUM) {
+    if (sessionId < 0) {
         LOG("[cb][perf]byte received invalid session id[%d]", sessionId);
         return;
     }
@@ -320,7 +337,7 @@ static void OnPerfBytesReceived(int sessionId, const void* data, unsigned int da
 
 static void OnPerfMessageReceived(int sessionId, const void* data, unsigned int dataLen)
 {
-    if (sessionId < 0 || sessionId > MAX_SESSION_NUM) {
+    if (sessionId < 0) {
         LOG("[cb][perf]mesg received invalid session id[%d]", sessionId);
         return;
     }
@@ -342,7 +359,7 @@ static void OnPassSessionClosed(int sessionId)
 
 static void OnPassBytesReceived(int sessionId, const void* data, unsigned int dataLen)
 {
-    if (sessionId < 0 || sessionId > MAX_SESSION_NUM) {
+    if (sessionId < 0) {
         LOG("[cb][pass]byte received invalid session id[%d]", sessionId);
         return;
     }
@@ -351,7 +368,7 @@ static void OnPassBytesReceived(int sessionId, const void* data, unsigned int da
 
 static void OnPassMessageReceived(int sessionId, const void* data, unsigned int dataLen)
 {
-    if (sessionId < 0 || sessionId > MAX_SESSION_NUM) {
+    if (sessionId < 0) {
         LOG("[cb][pass]mesg received invalid session id[%d]", sessionId);
         return;
     }
@@ -436,6 +453,13 @@ static void SetupCallback(void)
         g_nodeStateCallback->onNodeOffline = OnNodeOffline;
         g_nodeStateCallback->onNodeBasicInfoChanged = OnNodeBasicInfoChanged;
     }
+
+    if (g_sessionlist4Stream == NULL) {
+        g_sessionlist4Stream= (ISessionListener*)calloc(1, sizeof(ISessionListener));
+        g_sessionlist4Stream->OnSessionOpened = OnStreamSessionOpened;
+        g_sessionlist4Stream->OnSessionClosed = OnStreamSessionClosed;
+        g_sessionlist4Stream->OnStreamReceived = StreamReceived;
+    }
 }
 
 static void TeardownCallback(void)
@@ -464,6 +488,10 @@ static void TeardownCallback(void)
         free(g_nodeStateCallback);
         g_nodeStateCallback = NULL;
     }
+    if (g_sessionlist4Stream != NULL) {
+        free(g_sessionlist4Stream);
+        g_sessionlist4Stream = NULL;
+    }
 }
 
 /**
@@ -485,11 +513,13 @@ HWTEST_F(dsoftbusTest, test_create_ss, TestSize.Level3)
     LOG("CreateSs[pass] ret:%d", passRet);
     int fileRet = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, g_sessionlist4File);
     LOG("CreateSs[file] ret:%d", fileRet);
+    int streamRet = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM, g_sessionlist4Stream);
+    LOG("CreateSs[stream] ret:%d", streamRet);
 
-    int timeout = 10;
-    if (dataRet == SOFTBUS_OK && ctrlRet == SOFTBUS_OK && perfRet == SOFTBUS_OK && passRet == SOFTBUS_OK &&
-        fileRet == SOFTBUS_OK) {
-        timeout = 9000;
+    int timeout = 0;
+    if (dataRet == SOFTBUS_OK && ctrlRet == SOFTBUS_OK && perfRet == SOFTBUS_OK
+    && passRet == SOFTBUS_OK && fileRet == SOFTBUS_OK && streamRet == SOFTBUS_OK) {
+        LOG("CreateSs ok");
     }
 
     int ret = SetFileSendListener(DEF_PKG_NAME, SESSION_NAME_FILE, GetSendFileListener());
@@ -501,10 +531,12 @@ HWTEST_F(dsoftbusTest, test_create_ss, TestSize.Level3)
         LOG("##set recv listener fail:%d", ret);
     }
 
-    while (timeout > 0) {
-        sleep(10);
-        timeout -= 10;
-        LOG("###wait:%d", timeout);
+    while (1) {
+        sleep(1);
+        timeout += 1;
+        if (timeout % 60 == 0) {
+            LOG("### test run:%d" s, timeout);
+        }
     }
 
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
@@ -517,4 +549,6 @@ HWTEST_F(dsoftbusTest, test_create_ss, TestSize.Level3)
     LOG("RemoveSs[pass] ret:%d", ret);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
     LOG("RemoveSs[file] ret:%d", ret);
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
+    LOG("RemoveSs[stram] ret:%d", ret);
 }
