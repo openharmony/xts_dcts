@@ -65,23 +65,38 @@ void initShm(void)
 
 int readDataFromShm(char* buf)
 {
+    LOG("readDataFromShm begin...");
     if (shared == nullptr) {
         return -1;
     }
 
-    LOG("11--readDataFromShm buf= %s", buf);
-    LOG("11--readDataFromShm shared->data= %s", shared->data);
-
     if (shared->written != 0) {
         strcpy_s(buf, strlen(shared->data) + 1, shared->data);
+        LOG("readDataFromShm buf= %s", buf);
+        LOG("readDataFromShm shared->data= %s", shared->data);
         shared->written = 0;
-        LOG("22--readDataFromShm buf= %s", buf);
-        LOG("22--readDataFromShm shared->data= %s", shared->data);
         memset_s(shared->data, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     } else {
         return -1;
     }
-    LOG("33--SUCCESS: readDataFromShm return 0");
+    LOG("SUCCESS: readDataFromShm return 0");
+    return 0;
+}
+
+int readDataFromShmNoClear(char* buf)
+{
+    LOG("readDataFromShmNoClear begin...");
+    if (shared == nullptr) {
+        return -1;
+    }
+    if (shared->written != 0) {
+        strcpy_s(buf, strlen(shared->data) + 1, shared->data);
+        LOG("readDataFromShmNoClear buf= %s", buf);
+        LOG("readDataFromShmNoClear shared->data= %s", shared->data);
+    } else {
+        return -1;
+    }
+    LOG("SUCCESS: readDataFromShmNoClear return 0");
     return 0;
 }
 
@@ -94,48 +109,63 @@ int waitDataWithCode(char* code, char* data)
         return RES_FAIL;
     }
     while (i < timeout) {
+        if (readDataFromShmNoClear(str) != 0 || strncmp(code, str, CODE_HEAD) != 0) {
+            i++;
+            sleep(1);
+            LOG("while: waitDataWithCode 9999 str= %s, i=%d", str, i);
+            continue;
+        }
+
         if (readDataFromShm(str) == 0 && strncmp(code, str, CODE_HEAD) == 0) {
-            LOG("11--readDataFromShm str= %s", str);
-            LOG("11--readDataFromShm code= %s", code);
-            LOG("11--readDataFromShm data= %s", data);
-            errno_t ret = 1;
-            ret = strncpy_s(data, strlen("0") + 1, str + STR_KEY, 1);
-            if (ret != EOK) {
-                LOG("ERR:ret=%d", ret);
+            if (strncpy_s(data, strlen("0") + 1, str + STR_KEY, 1) != EOK) {
+                LOG("ERR:strncpy_s");
                 return RES_FAIL;
             }
-            LOG("22--readDataFromShm str= %s", str);
-            LOG("22--readDataFromShm code= %s", code);
-            LOG("22--readDataFromShm data= %s", data);
-            LOG("33--SUCCESS:waitDataWithCode return 0");
+            LOG("waitDataWithCode 9999 str= %s", str);
+            LOG("waitDataWithCode 9999 data= %s", data);
+            LOG("SUCCESS:waitDataWithCode return 0");
             return 0;
         }
         i++;
         sleep(1);
+        LOG("while: waitDataWithCode 9999 str= %s, i=%d", str, i);
     }
-
+    LOG("ERR :waitDataWithCode ");
     return RES_FAIL;
 }
 
 int writeCodeDataToShm(int code, char* buf)
 {
-    char str[MAX_DATA_LENGTH] = { 0 };
+    LOG("writeCodeDataToShm, begin");
+    char* str = (char*)malloc(MAX_DATA_LENGTH);
+    if (str == nullptr) {
+        LOG("malloc fail");
+        return nullptr;
+    }
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+
     char codeStr[5] = { 0 };
     char* str2 = Int2String(code, codeStr);
     if (str2 == nullptr) {
+        LOG("ERROR: str2 == nullptr");
         return -1;
     }
-    if (strcpy_s(str, strlen(codeStr) + 1, codeStr) != EOK) {
+
+    if (strcpy_s(str, MAX_DATA_LENGTH, codeStr) != EOK) {
+        LOG("ERROR:  strcpy_s != EOK");
         return -1;
     }
-    if (strcat_s(str, strlen(":") + 1, ":") != EOK) {
+    if (strcat_s(str, MAX_DATA_LENGTH, ":") != EOK) {
+        LOG("ERROR: 1. strcat_s!= EOK ");
         return -1;
     }
 
     if (buf == nullptr) {
+        LOG("ERROR:buf == nullptr ");
         return -1;
     }
-    if (strcat_s(str, strlen(buf) + 1, buf) != EOK) {
+    if (strcat_s(str, MAX_DATA_LENGTH, buf) != EOK) {
+        LOG("ERROR:2. strcat_s != EOK");
         return -1;
     }
     int nres = writeDataToShm(str);
@@ -158,6 +188,9 @@ int writeDataToShm(char* buf)
     memset_s(shared->data, SHARED_DATA_LEN, 0, SHARED_DATA_LEN);
     strcpy_s(shared->data, strlen(buf) + 1, buf);
     shared->written = 1;
+    LOG("writeDataToShm shared->data= %s", shared->data);
+    LOG("writeDataToShm shared->written= %d", shared->written);
+
     sleep(WAITTIME);
     return 0;
 }

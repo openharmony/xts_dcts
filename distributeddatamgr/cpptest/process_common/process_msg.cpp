@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
+#include <cmath>
 #include <cstdint>
 #include <cstdio>
-#include <cstdlib>
 #include <cstring>
 #include <iostream>
 #include <securec.h>
@@ -25,7 +25,6 @@
 #include "distributed_kv_data_manager.h"
 #include "types.h"
 #include "process_msg.h"
-
 using namespace OHOS::DistributedKv;
 using namespace std;
 
@@ -267,7 +266,7 @@ int processGetData(char* putData)
         LOG("LOGdisDataTest--faaa=  %f", faaa);
         LOG("LOGdisDataTest--f2 =  %f", f2);
         LOG("LOGdisDataTest--fdelta =  %f", fdelta);
-        if (std::abs(fdelta) <= DEFDELTA) {
+        if (std::fabs(fdelta) <= DEFDELTA) {
             return RESULT_OK;
         }
     } else if (strcmp(result[1], "math_score_double") == 0) {
@@ -278,7 +277,7 @@ int processGetData(char* putData)
         LOG("LOGdisDataTest--daaa=  %f", daaa);
         LOG("LOGdisDataTest--d2 =  %f", d2);
         LOG("LOGdisDataTest--delta =  %f", delta);
-        if (std::abs(delta) <= DEFDELTA) {
+        if (std::fabs(delta) <= DEFDELTA) {
             return RESULT_OK;
         }
     } else if (strcmp(result[1], "math_score_int64_t") == 0) {
