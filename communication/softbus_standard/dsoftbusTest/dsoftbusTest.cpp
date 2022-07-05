@@ -516,7 +516,7 @@ HWTEST_F(dsoftbusTest, test_create_ss, TestSize.Level3)
     int streamRet = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM, g_sessionlist4Stream);
     LOG("CreateSs[stream] ret:%d", streamRet);
 
-    int timeout = 0;
+    int runtime = 0;
     if (dataRet == SOFTBUS_OK && ctrlRet == SOFTBUS_OK && perfRet == SOFTBUS_OK
     && passRet == SOFTBUS_OK && fileRet == SOFTBUS_OK && streamRet == SOFTBUS_OK) {
         LOG("CreateSs ok");
@@ -533,9 +533,9 @@ HWTEST_F(dsoftbusTest, test_create_ss, TestSize.Level3)
 
     while (1) {
         sleep(1);
-        timeout += 1;
-        if (timeout % 60 == 0) {
-            LOG("### test run:%d" s, timeout);
+        runtime += 1;
+        if (runtime % 60 == 0) {
+            LOG("### test run:%d s", runtime);
         }
     }
 
