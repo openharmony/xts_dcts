@@ -14,6 +14,7 @@
  */
 #define LOG_TAG "disDataTest"
 
+#include <cmath>
 #include <condition_variable>
 #include <cstdint>
 #include <cstring>
@@ -328,8 +329,7 @@ void DistributedKvDataManagerTest::SetUp(void)
         return;
     }
     memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(str, strlen("") + 1, "");
-    DisKvTest::RemoteCreateKV(str);
+    DisKvTest::RemoteDeleteKV(str);
     free(str);
     // S3.本地创建数据库
     LOG("%s s3.Local---GetSingleKvStore ", LOGSTR);
@@ -984,7 +984,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0200, 
     EXPECT_EQ(status, Status::SUCCESS);
     float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
     float delta = aaa - 9.99f;
-    EXPECT_LE(std::abs(delta), DEFDELTA) << "ERR:8.本地get数据 与 float:9.99比较";
+    EXPECT_LE(std::fabs(delta), DEFDELTA) << "ERR:8.本地get数据 与 float:9.99比较";
 
     // 解注册回调
 }
@@ -1090,7 +1090,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0300, 
     double delta = aaa - 999.999;
     std::cout << "aaa = " << aaa << std::endl;
     std::cout << "delta = " << delta << std::endl;
-    EXPECT_LE(std::abs(delta), DEFDELTA) << "ERR:8.本地get数据 与double:999.999比较";
+    EXPECT_LE(std::fabs(delta), DEFDELTA) << "ERR:8.本地get数据 与double:999.999比较";
 
     // 解注册回调
 }
@@ -2259,7 +2259,7 @@ HWTEST_F(DistributedKvDataManagerTest, SubscribeWithQuery_0200, TestSize.Level1)
     EXPECT_EQ(status, Status::SUCCESS) << "LOGdisDataTest--ERR:Get(keyInt, valueRetInt)";
     float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
     float delta = aaa - 9.99f;
-    EXPECT_LE(std::abs(delta), DEFDELTA) << "ERR:本地get数据与float 9.99比较";
+    EXPECT_LE(std::fabs(delta), DEFDELTA) << "ERR:本地get数据与float 9.99比较";
     // 取消订阅
     auto unSubscribeStatus = DisKvTest::KvStorePtr->UnsubscribeWithQuery(deviceList, dataQuery);
     EXPECT_EQ(unSubscribeStatus, Status::SUCCESS) << "LOGdisDataTest--ERR:SubscribeWithQuery";
@@ -2312,7 +2312,7 @@ HWTEST_F(DistributedKvDataManagerTest, SubscribeWithQuery_0300, TestSize.Level1)
     double delta = aaa - 999.999;
     std::cout << "aaa = " << aaa << std::endl;
     std::cout << "delta = " << delta << std::endl;
-    EXPECT_LE(std::abs(delta), DEFDELTA) << "ERR:本地get数据与double 999.999比较";
+    EXPECT_LE(std::fabs(delta), DEFDELTA) << "ERR:本地get数据与double 999.999比较";
 
     // 取消订阅
     auto unSubscribeStatus = DisKvTest::KvStorePtr->UnsubscribeWithQuery(deviceList, dataQuery);
@@ -2619,7 +2619,7 @@ HWTEST_F(DistributedKvDataManagerTest, SyncWithCondition_0200, TestSize.Level1)
     EXPECT_EQ(status, Status::SUCCESS) << "LOGdisDataTest--ERR:Get(keyInt, valueRetInt)";
     float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
     float delta = aaa - 9.99f;
-    EXPECT_LE(std::abs(delta), DEFDELTA) << "ERR:本地get数据与float 9.99比较";
+    EXPECT_LE(std::fabs(delta), DEFDELTA) << "ERR:本地get数据与float 9.99比较";
 }
 
 /**
@@ -2669,7 +2669,7 @@ HWTEST_F(DistributedKvDataManagerTest, SyncWithCondition_0300, TestSize.Level1)
     double delta = aaa - 999.999;
     std::cout << "aaa = " << aaa << std::endl;
     std::cout << "delta = " << delta << std::endl;
-    EXPECT_LE(std::abs(delta), DEFDELTA) << "ERR:本地get数据与double 999.999比较";
+    EXPECT_LE(std::fabs(delta), DEFDELTA) << "ERR:本地get数据与double 999.999比较";
 }
 
 /**
