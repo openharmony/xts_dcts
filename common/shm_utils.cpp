@@ -140,7 +140,7 @@ int writeCodeDataToShm(int code, char* buf)
     char* str = (char*)malloc(MAX_DATA_LENGTH);
     if (str == nullptr) {
         LOG("malloc fail");
-        return nullptr;
+        return -1;
     }
     (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
 

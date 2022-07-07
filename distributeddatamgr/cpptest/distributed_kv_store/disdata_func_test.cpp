@@ -365,14 +365,17 @@ void DistributedKvDataManagerTest::TearDown(void)
 }
 void DistributedKvDataManagerTest::RemoveAllStore(DistributedKvDataManager manager)
 {
+    LOG("%s ::RemoveAllStore begin... ", LOGSTR);
     DisKvTest::statusCloseKvStore = DisKvTest::manager.CloseAllKvStore(DisKvTest::appId);
-    DisKvTest::statusDeleteKvStore = DisKvTest::manager.DeleteAllKvStore(DisKvTest::appId);
+    LOG("%s CloseAllKvStore", LOGSTR);
     if (DisKvTest::statusCloseKvStore == Status::SUCCESS) {
         LOG("%s SUCCESS: local---CloseAllKvStore ", LOGSTR);
     } else {
         LOG("%s ERR: local---CloseAllKvStore ", LOGSTR);
     }
 
+    DisKvTest::statusDeleteKvStore = DisKvTest::manager.DeleteAllKvStore(DisKvTest::appId);
+    LOG("%s DeleteAllKvStore", LOGSTR);
     if (DisKvTest::statusDeleteKvStore == Status::SUCCESS) {
         LOG("%s SUCCESS: local---DeleteAllKvStore ", LOGSTR);
     } else {
