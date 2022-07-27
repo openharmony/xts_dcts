@@ -96,9 +96,9 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
 }
 
 class Observer : public KvStoreObserver {
-    void OnChange(const ChangeNotification& changeNotification);
+    void OnChange(const ChangeNotification& changeNotification, std::shared_ptr<KvStoreSnapshot> snapshot);
 };
-void Observer::OnChange(const ChangeNotification& changeNotification)
+void Observer::OnChange(const ChangeNotification& changeNotification, std::shared_ptr<KvStoreSnapshot> snapshot)
 {
     LOG("%s OnChange begin", LOGSTR);
     cout << "OnChange insert: " << changeNotification.GetInsertEntries().size()
@@ -229,7 +229,7 @@ void DisKvTest::RemoteCreateKV(char* str)
 }
 void DisKvTest::RemoteDeleteKV(char* str)
 {
-    LOG("%s RemoteCreateKV", LOGSTR);
+    LOG("%s RemoteDeleteKV", LOGSTR);
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_KV, str);
 
     char code[CODE_LEN_TEN] = { 0 };
@@ -314,22 +314,21 @@ void DistributedKvDataManagerTest::SetUp(void)
     DisKvTest::storeIdTest.storeId = "test3";
     Options options { .createIfMissing = true,
         .encrypt = false,
-        .autoSync = false,
         .backup = false,
+        .autoSync = false,
         .kvStoreType = KvStoreType::SINGLE_VERSION };
     // S1.本地删除数据库
     LOG("%s s1.Local---RemoveAllStore ", LOGSTR);
     RemoveAllStore(DisKvTest::manager);
     // S2.远端删除数据库
-    LOG("%s s2.Remote---RemoveAllStore ", LOGSTR);
+    LOG("%s s2.Remote---RemoteDeleteKV ", LOGSTR);
     char* str = (char*)malloc(MAX_DATA_LENGTH);
     if (str == nullptr) {
         std::cout << "ERROR: str malloc failed" << std::endl;
         return;
     }
     memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(str, strlen("") + 1, "");
-    DisKvTest::RemoteCreateKV(str);
+    DisKvTest::RemoteDeleteKV(str);
     free(str);
     // S3.本地创建数据库
     LOG("%s s3.Local---GetSingleKvStore ", LOGSTR);

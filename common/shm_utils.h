@@ -56,5 +56,5 @@ int deleteShm(void);
 char* Int2String(int num, char* str);
 void initShm(void);
 int readDataFromShm(char* buf);
-
+int readDataFromShmNoClear(char* buf);
 #endif
