@@ -19,7 +19,7 @@ config("module_private_config") {
   visibility = [ ":*" ]
   include_dirs = [
     "//third_party/cJSON",
-    "//utils/native/base/include",
+    "//commonlibrary/c_utils/base/include",
     "//foundation/communication/dsoftbus/adapter/common/include",
     "//foundation/communication/dsoftbus/core/common/include",
     "//foundation/communication/dsoftbus/interfaces/kits/common",
@@ -40,9 +40,7 @@ ohos_unittest("disTest") {
     "net_trans_common.cpp",
   ]
 
-  deps = [
-    "//foundation/communication/dsoftbus/sdk:softbus_client",
-    "//utils/native/base:utils",
-  ]
+  deps = [ "//foundation/communication/dsoftbus/sdk:softbus_client" ]
+  external_deps = [ "c_utils:utils" ]
 }
 ###########################################################################################

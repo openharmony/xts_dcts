@@ -25,7 +25,7 @@ ohos_moduletest_suite("DctsSoftBusTransFunTest") {
   include_dirs = [
     "../../common",
     "//third_party/cJSON",
-    "//utils/native/base/include",
+    "//commonlibrary/c_utils/base/include",
     "//foundation/communication/dsoftbus/core/common/include",
     "//foundation/communication/dsoftbus/adapter/common/include",
     "//foundation/communication/dsoftbus/interfaces/kits/common",

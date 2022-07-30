@@ -26,7 +26,7 @@ config("module_private_config") {
     "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include",
     "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/broadcaster",
     "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/utils",
-    "//utils/native/base/include",
+    "//commonlibrary/c_utils/base/include",
     "//utils/system/safwk/native/ include",
     "../include",
     "../../../../interfaces/innerkits/distributeddata",
@@ -51,10 +51,10 @@ ohos_moduletest_suite("DctsdisDataTest") {
     "//foundation/distributeddatamgr/distributeddatamgr/interfaces/innerkits/distributeddata:distributeddata_inner",
     "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter:distributeddata_adapter",
     "//third_party/googletest:gtest_main",
-    "//utils/native/base:utils",
   ]
 
   external_deps = [
+    "c_utils:utils",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",
   ]
