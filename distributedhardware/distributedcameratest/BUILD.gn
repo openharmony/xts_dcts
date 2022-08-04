@@ -1,0 +1,85 @@
+# Copyright (C) 2022 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import("//test/xts/tools/build/suite.gni")
+
+module_output_path = "dcts/distributedhardware"
+
+###############################################################################################
+config("module_private_config") {
+  visibility = [ ":*" ]
+  include_dirs = [
+    "//drivers/peripheral/camera/interfaces/metadata/include",
+    "//third_party/jsoncpp/include",
+    "//utils/native/base/include",
+    "//utils/system/safwk/native/include",
+    "//foundation/graphic/graphic_2d/frameworks/surface/include",
+    "//foundation/multimedia/camera_standard/interfaces/inner_api/native/camera/include",
+    "//foundation/multimedia/camera_standard/interfaces/inner_api/native/camera/include/input",
+    "//foundation/multimedia/camera_standard/interfaces/inner_api/native/camera/include/output",
+    "//foundation/multimedia/camera_standard/interfaces/inner_api/native/camera/include/session",
+    "//foundation/multimedia/camera_standard/services/camera_service/binder/base/include",
+    "//foundation/multimedia/camera_standard/services/camera_service/binder/client/include",
+    "//foundation/multimedia/camera_standard/services/camera_service/binder/server/include",
+    "//foundation/multimedia/camera_standard/services/camera_service/include",
+    "//foundation/distributedhardware/distributed_hardware_fwk/common/log/include",
+    "//foundation/distributedhardware/distributed_hardware_fwk/common/utils/include",
+    "//foundation/distributedhardware/distributed_hardware_fwk/utils/include/log",
+    "//foundation/distributedhardware/distributed_hardware_fwk/utils/include",
+    "//foundation/distributedhardware/distributed_camera/common/include/constants",
+    "//foundation/distributedhardware/distributed_camera/common/include/utils",
+    "//foundation/distributedhardware/distributed_camera/services/cameraservice/base/include",
+    "//foundation/distributedhardware/distributed_camera/services/cameraservice/cameraoperator/client/include",
+    "//foundation/distributedhardware/distributed_camera/services/cameraservice/cameraoperator/client/include/callback",
+    "//foundation/distributedhardware/distributed_camera/services/cameraservice/cameraoperator/client/include/listener",
+  ]
+}
+
+ohos_moduletest_suite("DctsdisCameraTest") {
+  module_out_path = module_output_path
+
+  sources = [
+    "dcamera_automat_test.cpp",
+    "dcamera_client_test.cpp",
+  ]
+
+  configs = [ ":module_private_config" ]
+
+  defines = [
+    "HI_LOG_ENABLE",
+    "DH_LOG_TAG=\"DCameraClientTest\"",
+    "LOG_DOMAIN=0xD004100",
+  ]
+
+  deps = [
+    "//drivers/peripheral/camera/interfaces/metadata:metadata",
+    "//foundation/distributedhardware/distributed_camera/common:distributed_camera_utils",
+    "//foundation/distributedhardware/distributed_camera/services/cameraservice/cameraoperator/client:distributed_camera_client",
+    "//foundation/distributedhardware/distributed_camera/services/cameraservice/sinkservice:distributed_camera_sink",
+    "//foundation/distributedhardware/distributed_hardware_fwk/utils:distributedhardwareutils",
+    "//foundation/graphic/graphic_2d:libsurface",
+    "//foundation/multimedia/camera_standard/frameworks/native/camera:camera_framework",
+    "//third_party/googletest:gtest_main",
+    "//third_party/jsoncpp:jsoncpp",
+    "//utils/native/base:utils",
+  ]
+
+  external_deps = [
+    "drivers_interface_distributed_camera:libdistributed_camera_provider_proxy_1.0",
+    "hiviewdfx_hilog_native:libhilog",
+    "multimedia_player_framework:media_client",
+  ]
+
+  subsystem_name = "distributedhardware"
+  part_name = "distributed_camera"
+}
+###########################################################################################
