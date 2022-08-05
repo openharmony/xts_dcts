@@ -78,5 +78,8 @@ ohos_moduletest_suite("DctsdisCameraTest") {
     "hiviewdfx_hilog_native:libhilog",
     "multimedia_player_framework:media_client",
   ]
+
+  subsystem_name = "distributedhardware"
+  part_name = "distributed_camera"
 }
 ###########################################################################################
