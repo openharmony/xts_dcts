@@ -1057,3 +1057,23 @@ void TestTearDown(void)
         g_sId4Task3 = NULL;
     }
 }
+
+void AddPermission (void)
+{
+    uint64_t tokenId;
+    const char *perms[2];
+    perms[0] = OHOS_PERMISSION_DISTRIBUTED_SOFTBUS_CENTER;
+    perms[1] = OHOS_PERMISSION_DISTRIBUTED_DATASYNC;
+    NativeTokenInfoParams infoTnstance = {
+        .dcapsNum = 0,
+        .permsNum = 2,
+        .aclsNum = 0,
+        .dcaps = NULL,
+        .perms = perms,
+        .acls = NULL,
+        .processName = "dsoftbus_service",
+        .aplStr = "system_core",
+    };
+    tokenId = GetAccessTokenId(&infoTnstance);
+    SetSelfTokenID(tokenId);
+}

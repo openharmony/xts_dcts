@@ -55,6 +55,10 @@ void dsoftbusTest ::TearDown() {}
 void dsoftbusTest ::SetUpTestCase()
 {
     LOG("SetUpTestCase");
+    AddPermission();
+    sleep(1);
+    system("pidof accesstoken_ser | xargs kill -9");
+    sleep(1);
     TestSetUp();
     SetupCallback();
     int ret = RegNodeDeviceStateCb(DEF_PKG_NAME, g_nodeStateCallback);
