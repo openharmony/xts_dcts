@@ -30,6 +30,9 @@
 #include "softbus_errcode.h"
 #include "softbus_utils.h"
 
+#include "nativetoken_kit.h"
+#include "token_setproc.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -177,6 +180,8 @@ typedef enum {
 
 int Wait(int timeout);
 int Wait4Session(int timeout, WaitSessionType type);
+
+void AddPermission (void);
 
 void TestSetUp(void);
 void TestTearDown(void);

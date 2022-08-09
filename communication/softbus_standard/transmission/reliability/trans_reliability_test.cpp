@@ -17,10 +17,11 @@
 
 #include "net_trans_common.h"
 #include "wifi_utils.h"
+#include "softbus_errcode.h"
 
 using namespace testing::ext;
 
-static const int EXPECT_INVALID_PARAM = -998;
+static const int EXPECT_INVALID_PARAM = SOFTBUS_INVALID_PARAM;
 
 class TransReliabilityTest : public testing::Test {
 public:
@@ -37,6 +38,10 @@ void TransReliabilityTest::TearDown() {}
 void TransReliabilityTest::SetUpTestCase()
 {
     LOG("SetUp begin");
+    AddPermission();
+    sleep(1);
+    system("pidof accesstoken_ser | xargs kill -9");
+    sleep(1);
     TestSetUp();
 
     int ret = RegisterDeviceStateDefCallback();

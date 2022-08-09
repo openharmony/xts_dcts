@@ -70,6 +70,10 @@ void TransStreamTest::TearDown() {}
 void TransStreamTest::SetUpTestCase()
 {
     LOG("SetUp begin");
+    AddPermission();
+    sleep(1);
+    system("pidof accesstoken_ser | xargs kill -9");
+    sleep(1);
     TestSetUp();
     int ret = RegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call reg node state callback fail";
