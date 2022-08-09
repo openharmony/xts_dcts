@@ -17,6 +17,7 @@ _all_test_packages = [
   "${DCTS_ROOT}/distributedhardware:distributedcameratest",
   "${DCTS_ROOT}/distributeddatamgr:distributeddatatest",
   "${DCTS_ROOT}/communication:communication",
+  "${DCTS_ROOT}/filemanagement:filemanagement",
 ]
 
 _all_test_packages_ivi = [

@@ -55,5 +55,6 @@ shared_library("disDataProcess") {
     "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter:distributeddata_adapter",
     "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/libs/distributeddb:distributeddb",
   ]
+
   external_deps = [ "c_utils:utils" ]
 }
