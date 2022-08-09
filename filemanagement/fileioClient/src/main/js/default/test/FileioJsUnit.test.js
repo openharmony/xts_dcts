@@ -301,10 +301,10 @@ describe('FileioJsUnitTest', function () {
                 reply = rpc.MessageParcel.create();
                 option = new rpc.MessageOption();
 
-                var writeResult_1 = data.writeString(fpath);
-                console.info(tcNumber + " : run writeString success, writeResult_1 is " + writeResult_1);
+                var writeResult1 = data.writeString(fpath);
+                console.info(tcNumber + " : run writeString success, writeResult1 is " + writeResult1);
                 console.info(tcNumber + " : run writeString success, data is " + data.readString());
-                expect(writeResult_1 == true).assertTrue();
+                expect(writeResult1 == true).assertTrue();
 
                 if (gIRemoteObject == undefined) {
                     console.info(tcNumber + " : gIRemoteObject undefined");
@@ -314,9 +314,9 @@ describe('FileioJsUnitTest', function () {
                     console.info(tcNumber + " : sendRequest success, result1 is " + result1.errCode);
                     // expect(result.errCode == 0).assertTrue();
 
-                    var resultToken_1 = result1.reply.readString();
-                    console.info(tcNumber + " :run readString success, resultToken_1 is " + resultToken_1);
-                    expect(resultToken_1 == SERVER_CHECK_SUCCESS).assertTrue();
+                    var resultToken1 = result1.reply.readString();
+                    console.info(tcNumber + " :run readString success, resultToken1 is " + resultToken1);
+                    expect(resultToken1 == SERVER_CHECK_SUCCESS).assertTrue();
                 }).catch((err) => {
                     console.info(tcNumber + " sendRequest has failed for : " + err);
                     expect(false).assertTrue();
@@ -350,10 +350,10 @@ describe('FileioJsUnitTest', function () {
                     reply = rpc.MessageParcel.create();
                     option = new rpc.MessageOption();
 
-                    var writeResult_2 = data.writeString(fpath);
-                    console.info(tcNumber + " : run writeString success, writeResult_2 is " + writeResult_2);
+                    var writeResult2 = data.writeString(fpath);
+                    console.info(tcNumber + " : run writeString success, writeResult2 is " + writeResult2);
                     console.info(tcNumber + " : run writeString success, data is " + data.readString());
-                    expect(writeResult_2 == true).assertTrue();
+                    expect(writeResult2 == true).assertTrue();
 
                     if (gIRemoteObject == undefined) {
                         console.info(tcNumber + " : gIRemoteObject undefined");
@@ -363,9 +363,9 @@ describe('FileioJsUnitTest', function () {
                         console.info(tcNumber + " : sendRequest success, result2 is " + result2.errCode);
                         // expect(result.errCode == 0).assertTrue();
 
-                        var resultToken_2 = result2.reply.readString();
-                        console.info(tcNumber + " : run readString success, resultToken_2 is " + resultToken_2);
-                        expect(resultToken_2 == SERVER_CHECK_SUCCESS).assertTrue();
+                        var resultToken2 = result2.reply.readString();
+                        console.info(tcNumber + " : run readString success, resultToken2 is " + resultToken2);
+                        expect(resultToken2 == SERVER_CHECK_SUCCESS).assertTrue();
                     }).catch((err) => {
                         console.info(tcNumber + " sendRequest has failed for : " + err);
                         expect(false).assertTrue();
@@ -415,10 +415,10 @@ describe('FileioJsUnitTest', function () {
                 reply = rpc.MessageParcel.create();
                 option = new rpc.MessageOption();
 
-                var writeResult_1 = data.writeString(fpath);
-                console.info(tcNumber + " : run writeString success, writeResult_1 is " + writeResult_1);
+                var writeResult1 = data.writeString(fpath);
+                console.info(tcNumber + " : run writeString success, writeResult1 is " + writeResult1);
                 console.info(tcNumber + " : run writeString success, data is " + data.readString());
-                expect(writeResult_1 == true).assertTrue();
+                expect(writeResult1 == true).assertTrue();
 
                 if (gIRemoteObject == undefined) {
                     console.info(tcNumber + " : gIRemoteObject undefined");
@@ -427,11 +427,11 @@ describe('FileioJsUnitTest', function () {
                 await gIRemoteObject.sendRequest(CODE_CREATE_FILE, data, reply, option).then((result1) => {
                     console.info(tcNumber + " : sendRequest success, result1 is " + result1.errCode);
 
-                    var renameToken_1 = result1.reply.readString();
-                    console.info(tcNumber + " :run readString success, renameToken_1 is assertequal " + renameToken_1);
-                    console.info(tcNumber + " :renameToken_1        =" + renameToken_1);
+                    var renameToken1 = result1.reply.readString();
+                    console.info(tcNumber + " :run readString success, renameToken1 is assertequal " + renameToken1);
+                    console.info(tcNumber + " :renameToken1        =" + renameToken1);
                     console.info(tcNumber + " :SERVER_CHECK_SUCCESS =" + SERVER_CHECK_SUCCESS);
-                    expect(renameToken_1).assertEqual(SERVER_CHECK_SUCCESS);
+                    expect(renameToken1).assertEqual(SERVER_CHECK_SUCCESS);
 
                 }).catch((err) => {
                     console.info(tcNumber + " sendRequest has failed for : " + err);
@@ -479,9 +479,9 @@ describe('FileioJsUnitTest', function () {
                     console.info(tcNumber + " : sendRequest success, result2 is " + result2.errCode);
                     // expect(result2.errCode == 0).assertTrue();
 
-                    var renameToken_2 = result2.reply.readString();
-                    console.info(tcNumber + " :run readString success, renameToken_2 is " + renameToken_2);
-                    expect(renameToken_2 == SERVER_CHECK_SUCCESS).assertTrue();
+                    var renameToken2 = result2.reply.readString();
+                    console.info(tcNumber + " :run readString success, renameToken2 is " + renameToken2);
+                    expect(renameToken2 == SERVER_CHECK_SUCCESS).assertTrue();
 
                 }).catch((err) => {
                     console.info(tcNumber + " sendRequest has failed for : " + err);
@@ -535,10 +535,10 @@ describe('FileioJsUnitTest', function () {
                 reply = rpc.MessageParcel.create();
                 option = new rpc.MessageOption();
 
-                var writeResult_1 = data.writeString(fpath);
-                console.info(tcNumber + " : run writeString success, writeResult_1 is " + writeResult_1);
+                var writeResult1 = data.writeString(fpath);
+                console.info(tcNumber + " : run writeString success, writeResult1 is " + writeResult1);
                 console.info(tcNumber + " : run writeString success, data is " + data.readString());
-                expect(writeResult_1 == true).assertTrue();
+                expect(writeResult1 == true).assertTrue();
 
                 if (gIRemoteObject == undefined) {
                     console.info(tcNumber + " : gIRemoteObject undefined");
@@ -548,9 +548,9 @@ describe('FileioJsUnitTest', function () {
                     console.info(tcNumber + " : sendRequest success, result1 is " + result1.errCode);
                     // expect(result.errCode == 0).assertTrue();
 
-                    var resultToken_1 = result1.reply.readString();
-                    console.info(tcNumber + " :run readString success, resultToken_1 is " + resultToken_1);
-                    expect(resultToken_1 == SERVER_CHECK_SUCCESS).assertTrue();
+                    var resultToken1 = result1.reply.readString();
+                    console.info(tcNumber + " :run readString success, resultToken1 is " + resultToken1);
+                    expect(resultToken1 == SERVER_CHECK_SUCCESS).assertTrue();
 
                 }).catch((err) => {
                     console.info(tcNumber + " sendRequest has failed for : " + err);
@@ -574,10 +574,10 @@ describe('FileioJsUnitTest', function () {
                 reply = rpc.MessageParcel.create();
                 option = new rpc.MessageOption();
 
-                var writeResult_2 = data.writeString(fpath);
-                console.info(tcNumber + " : run writeString success, writeResult_2 is " + writeResult_2);
+                var writeResult2 = data.writeString(fpath);
+                console.info(tcNumber + " : run writeString success, writeResult2 is " + writeResult2);
                 console.info(tcNumber + " : run writeString success, data is " + data.readString());
-                expect(writeResult_2 == true).assertTrue();
+                expect(writeResult2 == true).assertTrue();
 
                 if (gIRemoteObject == undefined) {
                     console.info(tcNumber + " : gIRemoteObject undefined");
@@ -587,10 +587,10 @@ describe('FileioJsUnitTest', function () {
                     console.info(tcNumber + " : sendRequest success, result2 is " + result2.errCode);
                     // expect(result.errCode == 0).assertTrue();
 
-                    var resultToken_2 = result2.reply.readString();
-                    console.info(tcNumber + " :run readString success, resultToken_2 is " + resultToken_2);
+                    var resultToken2 = result2.reply.readString();
+                    console.info(tcNumber + " :run readString success, resultToken2 is " + resultToken2);
 
-                    expect(resultToken_2 == SERVER_CHECK_SUCCESS).assertTrue();
+                    expect(resultToken2 == SERVER_CHECK_SUCCESS).assertTrue();
                 }).catch((err) => {
                     console.info(tcNumber + " sendRequest has failed for : " + err);
                     expect(false).assertTrue();
