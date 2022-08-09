@@ -28,17 +28,9 @@ var option;
 
 describe('FileioJsUnitTest', function () {
     console.info("-----------------------SUB_Storage_Fileio_Distributed JS Test is starting-----------------------");
-
-    const DISTRIBUTED_FILE_CONTENT = 'content';
-    const APPEND_FILE_CONTENT = '_append';
     const SERVER_CHECK_SUCCESS = 'SUCCESS';
-
-    const CODE_MK_DIR = 1;
-    const CODE_RM_DIR = 2;
     const CODE_CREATE_FILE = 3;
     const CODE_DELETE_FILE = 4;
-    const CODE_GET_FILE_CONTENT = 5;
-    const CODE_GET_FILE_STAT = 6;
     const CODE_FSYNC_FILE = 7;
 
     function sleep(numberMillis) {
@@ -52,93 +44,6 @@ describe('FileioJsUnitTest', function () {
     }
 
     /**
-     * checkServerResult 发送rpc请求校验服务端数据
-     * @param tcNumber 
-     * @param dpath 
-     * @param codeNumber 
-     * @returns boolean
-     */
-    async function checkServerResult(tcNumber, path, codeNumber, done) {
-        try {
-            var data = rpc.MessageParcel.create();
-            var reply = rpc.MessageParcel.create();
-            var option = new rpc.MessageOption();
-
-            var writeResult = data.writeString(path);
-            console.info(tcNumber + " : run writeString success, writeResult is " + writeResult);
-            console.info(tcNumber + " : run writeString success, data is " + data.readString());
-            expect(writeResult == true).assertTrue();
-
-            if (gIRemoteObject == undefined) {
-                console.info(tcNumber + " : gIRemoteObject undefined");
-            }
-            await gIRemoteObject.sendRequest(codeNumber, data, reply, option).then((result) => {
-                console.info(tcNumber + " : sendRequest success, result is " + result.errCode);
-                console.info(tcNumber + " :result.errCode = " + result.errCode);
-                // expect(result.errCode == 0).assertTrue();
-
-                var resultToken = result.reply.readString();
-                console.info(tcNumber + " :run readString success, result is " + resultToken);
-                expect(resultToken == SERVER_CHECK_SUCCESS).assertTrue();
-                return true;
-            }).catch((err) => {
-                console.info(tcNumber + " sendRequest has failed for : " + err);
-                return false;
-            }).finally(() => {
-                data.reclaim();
-                reply.reclaim();
-                done();
-            })
-        } catch (e) {
-            console.info(tcNumber + " has failed for : " + e);
-            return false;
-        }
-    }
-
-    /**
-     * getServerFileInfo 发送rpc请求获取服务端文件内容
-     * @param tcNumber 
-     * @param dpath 
-     * @param codeNumber 
-     * @returns string
-     */
-    async function getServerFileInfo(tcNumber, path, codeNumber, done) {
-        try {
-            var data = rpc.MessageParcel.create();
-            var reply = rpc.MessageParcel.create();
-            var option = new rpc.MessageOption();
-
-            var writeResult = data.writeString(path);
-            console.info(tcNumber + " : run writeString success, writeResult is " + writeResult);
-            console.info(tcNumber + " : run writeString success, data is " + data.readString());
-            expect(writeResult == true).assertTrue();
-
-            if (gIRemoteObject == undefined) {
-                console.info(tcNumber + " : gIRemoteObject undefined");
-            }
-            await gIRemoteObject.sendRequest(codeNumber, data, reply, option).then((result) => {
-                console.info(tcNumber + " : sendRequest success, result is " + result.errCode);
-                expect(result.errCode == 0).assertTrue();
-
-                var resultToken = result.reply.readString();
-                console.info(tcNumber + " :run readString success, result is " + resultToken);
-                return resultToken;
-            }).catch((err) => {
-                console.info(tcNumber + " sendRequest has failed for : " + err);
-                return "Empty";
-            }).finally(() => {
-                data.reclaim();
-                reply.reclaim();
-                done();
-            })
-        } catch (e) {
-            console.info(tcNumber + " has failed for : " + e);
-            return "Empty";
-        }
-    }
-
-
-    /**
      * 获取应用的分布式目录
      * @param testName 
      * @returns 
@@ -147,9 +52,7 @@ describe('FileioJsUnitTest', function () {
         let basePath;
         try {
             let context = featureAbility.getContext();
-            // basePath = await context.getFilesDir(); // /data/storage/el2/base/haps/entry/files
             basePath = await context.getOrCreateDistributedDir();
-
         } catch (e) {
             console.log("-------------- getDistributedFilePath() failed for : " + e);
         }
@@ -238,8 +141,6 @@ describe('FileioJsUnitTest', function () {
                 }
                 await gIRemoteObject.sendRequest(CODE_CREATE_FILE, data, reply, option).then((result) => {
                     console.info(tcNumber + " : sendRequest success, result is " + result.errCode);
-                    // expect(result.errCode == 0).assertTrue();
-
                     var resultToken = result.reply.readString();
                     console.info(tcNumber + " :run readString success, resultToken is " + resultToken);
                     expect(resultToken == SERVER_CHECK_SUCCESS).assertTrue();
@@ -312,8 +213,6 @@ describe('FileioJsUnitTest', function () {
 
                 await gIRemoteObject.sendRequest(CODE_CREATE_FILE, data, reply, option).then((result1) => {
                     console.info(tcNumber + " : sendRequest success, result1 is " + result1.errCode);
-                    // expect(result.errCode == 0).assertTrue();
-
                     var resultToken1 = result1.reply.readString();
                     console.info(tcNumber + " :run readString success, resultToken1 is " + resultToken1);
                     expect(resultToken1 == SERVER_CHECK_SUCCESS).assertTrue();
@@ -361,7 +260,6 @@ describe('FileioJsUnitTest', function () {
 
                     await gIRemoteObject.sendRequest(CODE_DELETE_FILE, data, reply, option).then((result2) => {
                         console.info(tcNumber + " : sendRequest success, result2 is " + result2.errCode);
-                        // expect(result.errCode == 0).assertTrue();
 
                         var resultToken2 = result2.reply.readString();
                         console.info(tcNumber + " : run readString success, resultToken2 is " + resultToken2);
@@ -385,7 +283,6 @@ describe('FileioJsUnitTest', function () {
         }
         console.info("---------------------end test_fileio_delete_file_sync_000---------------------------");
     });
-
 
     /**
      * 
@@ -428,8 +325,7 @@ describe('FileioJsUnitTest', function () {
                     console.info(tcNumber + " : sendRequest success, result1 is " + result1.errCode);
 
                     var renameToken1 = result1.reply.readString();
-                    console.info(tcNumber + " :run readString success, renameToken1 is assertequal " + renameToken1);
-                    console.info(tcNumber + " :renameToken1        =" + renameToken1);
+                    console.info(tcNumber + " :run readString success, renameToken1 is " + renameToken1);
                     console.info(tcNumber + " :SERVER_CHECK_SUCCESS =" + SERVER_CHECK_SUCCESS);
                     expect(renameToken1).assertEqual(SERVER_CHECK_SUCCESS);
 
@@ -477,12 +373,9 @@ describe('FileioJsUnitTest', function () {
                 }
                 await gIRemoteObject.sendRequest(CODE_CREATE_FILE, data, reply, option).then((result2) => {
                     console.info(tcNumber + " : sendRequest success, result2 is " + result2.errCode);
-                    // expect(result2.errCode == 0).assertTrue();
-
                     var renameToken2 = result2.reply.readString();
                     console.info(tcNumber + " :run readString success, renameToken2 is " + renameToken2);
                     expect(renameToken2 == SERVER_CHECK_SUCCESS).assertTrue();
-
                 }).catch((err) => {
                     console.info(tcNumber + " sendRequest has failed for : " + err);
                     expect(false).assertTrue();
@@ -495,7 +388,6 @@ describe('FileioJsUnitTest', function () {
             } catch (e) {
                 console.info(tcNumber + " has failed for : " + e);
                 expect(false).assertTrue();
-
             }
 
             // 清理测试环境
@@ -505,7 +397,7 @@ describe('FileioJsUnitTest', function () {
 
         } catch (e) {
             console.info('test_fileio_rename_file_000 has failed for : ' + e);
-
+            expect(false).assertTrue();
         }
         console.info("---------------------end test_fileio_rename_file_000---------------------------");
     });
@@ -546,12 +438,9 @@ describe('FileioJsUnitTest', function () {
 
                 await gIRemoteObject.sendRequest(CODE_CREATE_FILE, data, reply, option).then((result1) => {
                     console.info(tcNumber + " : sendRequest success, result1 is " + result1.errCode);
-                    // expect(result.errCode == 0).assertTrue();
-
                     var resultToken1 = result1.reply.readString();
                     console.info(tcNumber + " :run readString success, resultToken1 is " + resultToken1);
                     expect(resultToken1 == SERVER_CHECK_SUCCESS).assertTrue();
-
                 }).catch((err) => {
                     console.info(tcNumber + " sendRequest has failed for : " + err);
                     expect(false).assertTrue();
@@ -585,11 +474,8 @@ describe('FileioJsUnitTest', function () {
 
                 await gIRemoteObject.sendRequest(CODE_FSYNC_FILE, data, reply, option).then((result2) => {
                     console.info(tcNumber + " : sendRequest success, result2 is " + result2.errCode);
-                    // expect(result.errCode == 0).assertTrue();
-
                     var resultToken2 = result2.reply.readString();
                     console.info(tcNumber + " :run readString success, resultToken2 is " + resultToken2);
-
                     expect(resultToken2 == SERVER_CHECK_SUCCESS).assertTrue();
                 }).catch((err) => {
                     console.info(tcNumber + " sendRequest has failed for : " + err);
