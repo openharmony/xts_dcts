@@ -118,14 +118,15 @@ int WiFiUtils::ConnectTo(const std::string& ssid, const std::string& passwd)
     deviceConfig.preSharedKey = passwd;
     deviceConfig.keyMgmt = "WPA-PSK";
     int netId;
-    int ret = wifiDevicePtr->AddDeviceConfig(deviceConfig, netId);
+    bool isCandidate = false;
+    int ret = wifiDevicePtr->AddDeviceConfig(deviceConfig, netId, isCandidate);
     if (ret != SOFTBUS_OK) {
         LOG("[wifi]call AddDeviceConfig fail, ret:%d", ret);
     } else {
         LOG("[wifi]call AddDeviceConfig success, netId:%d", netId);
     }
 
-    ret = wifiDevicePtr->ConnectToNetwork(netId);
+    ret = wifiDevicePtr->ConnectToNetwork(netId, isCandidate);
     if (ret != SOFTBUS_OK) {
         LOG("[wifi]call ConnectTo fail, ret:%d", ret);
         return SOFTBUS_ERR;
