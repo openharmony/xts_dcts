@@ -52,8 +52,8 @@ shared_library("disDataProcess") {
 
   deps = [
     "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter:distributeddata_adapter",
-    "//foundation/distributeddatamgr/kv_store/interfaces/innerkits/distributeddata:distributeddata_inner",
     "//foundation/distributeddatamgr/kv_store/frameworks/innerkitsimpl/kvdb/distributeddb:distributeddb",
+    "//foundation/distributeddatamgr/kv_store/interfaces/innerkits/distributeddata:distributeddata_inner",
   ]
 
   external_deps = [ "c_utils:utils" ]
