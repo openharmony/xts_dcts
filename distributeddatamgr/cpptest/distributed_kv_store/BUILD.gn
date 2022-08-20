@@ -18,14 +18,14 @@ module_output_path = "dcts/distributeddatamgr"
 config("module_private_config") {
   visibility = [ ":*" ]
   include_dirs = [
-    "//foundation/distributeddatamgr/distributeddatamgr/frameworks/innerkitsimpl/distributeddatafwk/include",
-    "//foundation/distributeddatamgr/distributeddatamgr/frameworks/innerkitsimpl/distributeddatafwk/src",
-    "//foundation/distributeddatamgr/distributeddatamgr/interfaces/innerkits/app_distributeddata/include",
-    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/permission",
-    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/account",
-    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include",
-    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/broadcaster",
-    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter/include/utils",
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/include/permission",
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/include/account",
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/include",
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/include/broadcaster",
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/include/utils",    
+    "//foundation/distributeddatamgr/kv_store/frameworks/innerkitsimpl/distributeddatafwk/include",
+    "//foundation/distributeddatamgr/kv_store/frameworks/innerkitsimpl/distributeddatafwk/src",
+    "//foundation/distributeddatamgr/kv_store/interfaces/innerkits/app_distributeddata/include",
     "//commonlibrary/c_utils/base/include",
     "//utils/system/safwk/native/ include",
     "../include",
@@ -48,8 +48,8 @@ ohos_moduletest_suite("DctsdisDataTest") {
   configs = [ ":module_private_config" ]
 
   deps = [
-    "//foundation/distributeddatamgr/distributeddatamgr/interfaces/innerkits/distributeddata:distributeddata_inner",
-    "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter:distributeddata_adapter",
+    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter:distributeddata_adapter",    
+    "//foundation/distributeddatamgr/kv_store/interfaces/innerkits/distributeddata:distributeddata_inner",
     "//third_party/googletest:gtest_main",
   ]
 
