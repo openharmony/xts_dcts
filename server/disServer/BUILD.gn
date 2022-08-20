@@ -20,6 +20,8 @@ config("module_private_config") {
   include_dirs = [
     "//third_party/cJSON",
     "//commonlibrary/c_utils/base/include",
+    "//base/security/access_token/interfaces/innerkits/accesstoke/include",
+    "//base/security/access_token/interfaces/innerkits/nativetoken/include",
     "//foundation/communication/dsoftbus/adapter/common/include",
     "//foundation/communication/dsoftbus/core/common/include",
     "//foundation/communication/dsoftbus/interfaces/kits/common",
@@ -40,7 +42,15 @@ ohos_unittest("disTest") {
     "net_trans_common.cpp",
   ]
 
-  deps = [ "//foundation/communication/dsoftbus/sdk:softbus_client" ]
+  deps = [
+    "//base/security/access_token/interfaces/innerkits/nativetoken:libnativetoken",
+    "//base/security/access_token/interfaces/innerkits/token_setproc:libtoken_setproc",
+    "//foundation/communication/dsoftbus/sdk:softbus_client",
+
+    #  "//utils/native/base:utils",
+  ]
   external_deps = [ "c_utils:utils" ]
+  subsystem_name = "distributeddatamgr"
+  part_name = "distributeddatamgr"
 }
 ###########################################################################################

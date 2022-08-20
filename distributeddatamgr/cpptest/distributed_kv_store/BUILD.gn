@@ -48,6 +48,7 @@ ohos_moduletest_suite("DctsdisDataTest") {
   configs = [ ":module_private_config" ]
 
   deps = [
+    "//commonlibrary/c_utils/base:utils",
     "//foundation/distributeddatamgr/distributeddatamgr/interfaces/innerkits/distributeddata:distributeddata_inner",
     "//foundation/distributeddatamgr/distributeddatamgr/services/distributeddataservice/adapter:distributeddata_adapter",
     "//third_party/googletest:gtest_main",
@@ -58,5 +59,7 @@ ohos_moduletest_suite("DctsdisDataTest") {
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",
   ]
+  subsystem_name = "distributeddatamgr"
+  part_name = "distributeddatamgr"
 }
 ###########################################################################################

@@ -28,7 +28,7 @@ const int DECIM_TEN = 10;
 const int CALCU_TWO = 2;
 const int CALCU_FOUR_AIGHT = 48;
 const int RES_FAIL = -1;
-
+const char LOGSTR[20] = "LOG_SHM::----";
 static void* shm = nullptr;          // 分配的共享内存的原始首地址
 static struct shared_use_st* shared; // 指向shm
 static int shmid;                    // 共享内存标识符
@@ -36,7 +36,11 @@ static int shmid;                    // 共享内存标识符
 int createShm(int key)
 {
     // 创建共享内存
+    LOG("%s createShm begin...", LOGSTR);
+    int a = sizeof(struct shared_use_st);
+    LOG("a=%d", a);
     shmid = shmget(static_cast<key_t>(key), sizeof(struct shared_use_st), PERMISSION | IPC_CREAT);
+    LOG("shmget shmid=%d", shmid);
     if (shmid == -1) {
         return -1;
     }
@@ -54,12 +58,14 @@ int createShm(int key)
 
 void initShm(void)
 {
+    LOG("initShm begin...");
     memset_s(shm, sizeof(struct shared_use_st), 0, sizeof(struct shared_use_st));
     if (shared == nullptr) {
         return;
     }
     shared->written = 0;
     memset_s(shared->data, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    LOG("initShm end...");
     return;
 }
 
