@@ -89,7 +89,6 @@ void KvStoreSyncCallbackTestImpl::SyncCompleted(const std::map<std::string, Stat
     LOG("%s SyncCompleted begin", LOGSTR);
     for (const auto& result : results) {
         std::cout << result.first << " status: " << static_cast<int>(result.second) << std::endl;
-        EXPECT_EQ(static_cast<int>(result.second), 0);
     }
     isSyncComplete = true;
     cv.notify_all();

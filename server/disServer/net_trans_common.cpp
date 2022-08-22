@@ -22,8 +22,10 @@
 #include <sys/socket.h>
 #include <vector>
 
-
+#include "nativetoken_kit.h"
+#include "shm_utils.h"
 #include "softbus_permission.h"
+#include "token_setproc.h"
 #include "unistd.h"
 #include "net_trans_common.h"
 using namespace std;
@@ -80,7 +82,28 @@ public:
     void TearDown();
     NetTransCommon();
 };
-void NetTransCommon::SetUpTestCase(void) {}
+void NetTransCommon::SetUpTestCase(void)
+{
+    uint64_t tokenId;
+    const char* perms[2];
+    perms[0] = OHOS_PERMISSION_DISTRIBUTED_SOFTBUS_CENTER;
+    perms[1] = OHOS_PERMISSION_DISTRIBUTED_DATASYNC;
+    NativeTokenInfoParams infoTnstance = {
+        .dcapsNum = 0,
+        .permsNum = 2,
+        .aclsNum = 0,
+        .dcaps = NULL,
+        .perms = perms,
+        .acls = NULL,
+        .processName = "dsoftbus_service",
+        .aplStr = "system_core",
+    };
+    tokenId = GetAccessTokenId(&infoTnstance);
+    SetSelfTokenID(tokenId);
+    sleep(1);
+    system("pidof accesstoken_ser | xargs kill -9");
+    sleep(1);
+}
 
 void NetTransCommon::TearDownTestCase(void) {}
 void NetTransCommon::SetUp(void) {}
@@ -102,7 +125,7 @@ int Wait4Session(int timeout, WaitSessionType type)
                 break;
             case WaitSessionType::SESSION_4DATA:
                 if (g_waitFlag4Data != WAIT_DEF_VALUE) {
-                    LOG("Wait4Session success,flag:%d", g_waitFlag4Ctl);
+                    LOG("Wait4Session success,flag:%d", g_waitFlag4Data);
                     hitFlag = 1;
                 }
                 break;
@@ -125,7 +148,7 @@ int Wait4Session(int timeout, WaitSessionType type)
             break;
         case WaitSessionType::SESSION_4DATA:
             if (g_waitFlag4Data != WAIT_SUCCESS_VALUE) {
-                LOG("Wait4Session FAIL,flag:%d", g_waitFlag4Ctl);
+                LOG("Wait4Session FAIL,flag:%d", g_waitFlag4Data);
                 return SOFTBUS_ERR;
             }
             break;
@@ -239,7 +262,7 @@ int DataSessionOpened(int sessionId, int result)
     } else {
         g_waitFlag4Data = WAIT_FAIL_VALUE;
     }
-
+    LOG("DataSessionOpened,g_waitFlag4Data:%d", g_waitFlag4Data);
     return SOFTBUS_OK;
 }
 
