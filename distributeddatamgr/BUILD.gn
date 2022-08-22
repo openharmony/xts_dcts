@@ -11,6 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import("//build/ohos_var.gni")
+
+#import("//foundation/distributeddatamgr/data_share/datashare.gni")
 group("distributeddatatest") {
   testonly = true
   if (is_standard_system) {
@@ -48,13 +50,23 @@ shared_library("disDataProcess") {
     "//base/powermgr/power_manager/interfaces/innerkits/native/include",
     "../../common",
     "../common",
+
+    #   "${datashare_innerapi_path}/common/include",
+    #   "${datashare_innerapi_path}/provider/include",
+    "//foundation/distributeddatamgr/distributedfile/interfaces/kits/js/src/mod_securitylabel",
+    "//foundation/distributedhardware/device_manager/interfaces/inner_kits/native_cpp/include",
+    "//base/security/access_token/interfaces/innerkits/accesstoke/include",
+    "//base/security/access_token/interfaces/innerkits/nativetoken/include",
   ]
 
   deps = [
+    "//base/security/access_token/interfaces/innerkits/nativetoken:libnativetoken",
+    "//base/security/access_token/interfaces/innerkits/token_setproc:libtoken_setproc",
+    "//commonlibrary/c_utils/base:utils",
     "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter:distributeddata_adapter",
     "//foundation/distributeddatamgr/kv_store/frameworks/innerkitsimpl/kvdb/distributeddb:distributeddb",
     "//foundation/distributeddatamgr/kv_store/interfaces/innerkits/distributeddata:distributeddata_inner",
+    "//foundation/distributedhardware/device_manager/interfaces/inner_kits/native_cpp:devicemanagersdk",
+    "//utils/native/base:utils",
   ]
-
-  external_deps = [ "c_utils:utils" ]
 }
