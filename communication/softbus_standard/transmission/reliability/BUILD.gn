@@ -51,4 +51,6 @@ ohos_moduletest_suite("DctsSoftBusTransReliabilityTest") {
     "//third_party/googletest:gtest_main",
   ]
   external_deps = [ "dsoftbus:softbus_client" ]
+  subsystem_name = "communication"
+  part_name = "dsoftbus"
 }
