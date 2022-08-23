@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import apiMessage from '../common/apiMessage.js'
-import apiResult from '../common/apiResult.js'
+import ApiMessage from '../common/apiMessage.js'
+import ApiResult from '../common/apiResult.js'
 import rpc from '@ohos.rpc'
 var logTag = "RpcClient";
 var CODE_INVOKE =1;
@@ -39,7 +39,7 @@ export default class RemoteHelper{
             var writeResult = messageParcel.writeSequenceable(message);
 	    await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
             console.log(logTag + "sendRequest got result");
-            var ret = new ApiMessage(null, null, null, null, null, null,null)
+            var ret = new ApiMessage(null, null, null, null, null, null,null);
             var dataReply = messageParcelreply.readSequenceable(ret);
             console.log(logTag + "run readSequenceable success, result is" + dataReply);
             results = JSON.parse(ret._apiResult);
@@ -60,7 +60,7 @@ export default class RemoteHelper{
             var writeResult = messageParcel.writeSequenceable(message);
             await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
             console.log(logTag + "sendRequest got result");
-            var ret = new ApiMessage(null, null, null, null, null, null,null)
+            var ret = new ApiMessage(null, null, null, null, null, null,null);
             var dataReply = messageParcelreply.readSequenceable(ret);
             console.log(logTag + "run readSequenceable success, result is" + dataReply);
             results = JSON.parse(ret._apiResult);

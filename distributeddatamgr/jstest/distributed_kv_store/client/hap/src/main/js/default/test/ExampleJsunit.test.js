@@ -15,14 +15,15 @@
 
 import app from '@system.app'
 import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from 'deccjsunit/index'
-import apiMessage from '../../../../../../../../../../testtools/disjsTest/common/apiMessage.js'
-import testService from '../../../../../../../../../../testtools/disjsTest/client/testService.js'
-import remoteHelper from '../../../../../../../../../../testtools/disjsTest/client/remoteHelper.js'
+import ApiMessage from '../../../../../../../../../../testtools/disjsTest/common/apiMessage.js'
+import TestService from '../../../../../../../../../../testtools/disjsTest/client/testService.js'
+import RemoteHelper from '../../../../../../../../../../testtools/disjsTest/client/remoteHelper.js'
 
 var logTag = 'RpcClient'
 var testservice = null
 var gIRemoteObject = null;
 var remoteHelpers = null;
+
 describe('addTest', function () {
 
     beforeAll(async function (done) {
@@ -31,17 +32,17 @@ describe('addTest', function () {
         await testservice.toConnectAbility().then(data=>{
             gIRemoteObject = data;
             console.log(logTag + "toConnectAbility data is" + data);
-	    remoteHelpers = new RemoteHelper(testservice,gIRemoteObject);
+            remoteHelpers = new RemoteHelper(testservice,gIRemoteObject);
         })
         done();
     })
 
     it('add_test_001', 0, async function (done) {
         console.log(logTag + "test_add");
-	await remoteHelpers.add(2,3).then(result=>{
-	console.log(logTag + "test_add reult " + result);
+        await remoteHelpers.add(2,3).then(result=>{
+        console.log(logTag + "test_add reult " + result);
         expect(result).assertEqual(5);
-	})
-	done();
+    })
+    done();
     })
 }) 
