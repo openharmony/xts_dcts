@@ -14,8 +14,8 @@
  */
 
 import rpc from '@ohos.rpc';
-import apiMessage from '../common/apiMessage.js'
-import testBundleManager from './testBundleManager.js'
+import ApiMessage from '../common/apiMessage.js'
+import TestBundleManager from './testBundleManager.js'
 
 var CODE_INVOKE = 1;
 var logTag = "RpcServer";
@@ -33,7 +33,7 @@ export default class Stub extends rpc.RemoteObject {
                 case CODE_INVOKE:
                 {
                     console.info(logTag +" case CODE_INVOKE start")
-                    let testBundle = new ApiMessage(null, null, null, null, null, null, null)
+                    let testBundle = new ApiMessage(null, null, null, null, null, null, null);
                     var tmp = data.readSequenceable(testBundle);
                     console.log( logTag +" read result is " + tmp + JSON.stringify(testBundle));
                     let testBundleManager = new TestBundleManager();

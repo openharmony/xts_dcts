@@ -12,8 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import testApi from './testApi.js'
-import apiResult from '../common/apiResult.js'
+import TestApi from './testApi.js'
+import ApiResult from '../common/apiResult.js'
 
 var logTag = "RpcServer";
 export default class TestBundleManager{

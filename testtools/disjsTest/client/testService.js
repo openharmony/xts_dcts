@@ -18,8 +18,8 @@ import process from '@ohos.process';
 
 var logTag = "RpcClient";
 var CODE_INVOKE = 1;
-import apiMessage from '../common/apiMessage.js';
-import apiResult from '../common/apiResult.js';
+import ApiMessage from '../common/apiMessage.js';
+import ApiResult from '../common/apiResult.js';
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
@@ -53,7 +53,7 @@ export default class TestService {
         gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option).then(function (result) {
             if (result.errCode === 0) {
                 console.log(logTag + "sendRequest got result");
-                var ret = new ApiMessage(null, null, null, null, null, null,null)
+                var ret = new ApiMessage(null, null, null, null, null, null,null);
                 var dataReply = result.reply.readSequenceable(ret);
                  console.log(logTag + "run readSequenceable success, result is" + dataReply);
                  results = JSON.parse(ret._apiResult);
