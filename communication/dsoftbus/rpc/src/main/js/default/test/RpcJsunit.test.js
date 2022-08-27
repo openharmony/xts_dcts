@@ -5489,6 +5489,49 @@ describe('RpcJsUnitTest', function(){
     });
 
     /*
+     * @tc.number  SUB_Softbus_RPC_MessageParcel_13900
+     * @tc.name    MessageParcel sendRequestAsync API test
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_Softbus_RPC_MessageParcel_13900", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_MessageParcel_13900---------------------------");
+        try{
+            let maxsize = 1024;
+            let data = rpc.MessageParcel.create();
+            let Capacity = data.getRawDataCapacity()
+            console.info("SUB_Softbus_RPC_MessageParcel_13900:run Capacity success, Capacity is " + Capacity);
+            let rawdata = [1, 2, 3];
+            let option = new rpc.MessageOption();
+            let reply = rpc.MessageParcel.create();
+            expect(data.writeInt(maxsize)).assertTrue();
+            let result = data.writeRawData(rawdata, maxsize);
+            console.info("SUB_Softbus_RPC_MessageParcel_13900:run writeRawData is " + result);
+            expect(result).assertTrue();
+            if (gIRemoteObject == undefined){
+                console.info("SUB_Softbus_RPC_MessageParcel_13900: gIRemoteObject undefined");
+            }
+            await gIRemoteObject.sendRequestAsync(CODE_WRITE_RAWDATA, data, reply, option).then((result) => {
+                console.info("SUB_Softbus_RPC_MessageParcel_13900: sendRequestAsync is " + result.errCode);
+                expect(result.errCode == 0).assertTrue();
+                let size = result.reply.readInt();
+                console.info("SUB_Softbus_RPC_MessageParcel_13900:run readInt is " + size);
+                var newReadResult = result.reply.readRawData(size)
+                console.info("SUB_Softbus_RPC_MessageParcel_13900:run readRawData is "
+                    + newReadResult.length);
+                expect(newReadResult != rawdata).assertTrue();
+            });
+            data.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            console.info("SUB_Softbus_RPC_MessageParcel_13900:error = " + error);
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_MessageParcel_13900---------------------------");
+    });
+
+
+    /*
      * @tc.number  SUB_Softbus_RPC_MessageOption_00100
      * @tc.name    Basic method of testing messageoption
      * @tc.desc    Function test
@@ -5805,6 +5848,47 @@ describe('RpcJsUnitTest', function(){
         }
         done();
         console.info("---------------------end SUB_Softbus_RPC_MessageOption_01100---------------------------");
+    })
+
+    /*
+     * @tc.number  SUB_Softbus_RPC_MessageOption_01200
+     * @tc.name    MessageOption sendRequestAsync test
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_Softbus_RPC_MessageOption_01200",0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_MessageOption_01200---------------------------");
+        try{
+
+            var data = rpc.MessageParcel.create();
+            console.info("SUB_Softbus_RPC_MessageOption_01200: create object successfully.");
+            var reply = rpc.MessageParcel.create();
+            var option = new rpc.MessageOption();
+            option.setFlags(1);
+            var token = "option";
+            var result = data.writeString(token);
+            console.info("SUB_Softbus_RPC_MessageOption_01200:run writeString is " + result);
+            expect(result).assertTrue();
+            expect(option.getFlags()).assertEqual(1);
+            if (gIRemoteObject == undefined)
+            {
+                console.info("SUB_Softbus_RPC_MessageOption_01200: gIRemoteObject is undefined");
+            }
+            await gIRemoteObject.sendRequestAsync(CODE_WRITE_STRING, data, reply, option).then((result) => {
+                console.info("SUB_Softbus_RPC_MessageOption_01200: sendRequestAsync is " + result.errCode);
+                var replyReadResult = result.reply.readString();
+                console.info("SUB_Softbus_RPC_MessageOption_01200: run readString is " + replyReadResult);
+                expect(replyReadResult).assertEqual("");
+                expect(option.getFlags()).assertEqual(1);
+
+            });
+            data.reclaim();
+            reply.reclaim();
+        }catch(error){
+            console.info("SUB_Softbus_RPC_MessageOption_01200: error " + error);
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_MessageOption_01200---------------------------");
     })
 
     /*
@@ -6861,6 +6945,56 @@ describe('RpcJsUnitTest', function(){
     });
 
     /*
+     * @tc.number  SUB_Softbus_RPC_IRemoteObject_00800
+     * @tc.name    IRemoteObject sendRequestAsync API Test
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_Softbus_RPC_IRemoteObject_00800", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_IRemoteObject_00800---------------------------");
+        try{
+            var data = rpc.MessageParcel.create();
+            console.info("SUB_Softbus_RPC_IRemoteObject_00800: create object successfully.");
+            var reply = rpc.MessageParcel.create();
+            var option = new rpc.MessageOption();
+            expect(data.writeByte(1)).assertTrue()
+            expect(data.writeShort(2)).assertTrue()
+            expect(data.writeInt(3)).assertTrue()
+            expect(data.writeLong(10000)).assertTrue()
+            expect(data.writeFloat(1.2)).assertTrue()
+            expect(data.writeDouble(10.2)).assertTrue()
+            expect(data.writeBoolean(true)).assertTrue()
+            expect(data.writeChar(96)).assertTrue()
+            expect(data.writeString("HelloWorld")).assertTrue()
+            expect(data.writeSequenceable(new MySequenceable(1, "aaa"))).assertTrue()
+
+            await gIRemoteObject.sendRequestAsync(CODE_ALL_TYPE, data, reply, option, (err, result) => {
+                console.info("SUB_Softbus_RPC_IRemoteObject_00800:sendRequest done, error code: " + result.errCode)
+                expect(result.errCode).assertEqual(0)
+                expect(result.reply.readByte()).assertEqual(1)
+                expect(result.reply.readShort()).assertEqual(2)
+                expect(result.reply.readInt()).assertEqual(3)
+                expect(result.reply.readLong()).assertEqual(10000)
+                expect(result.reply.readFloat()).assertEqual(1.2)
+                expect(result.reply.readDouble()).assertEqual(10.2)
+                expect(result.reply.readBoolean()).assertTrue()
+                expect(result.reply.readChar()).assertEqual(96)
+                expect(result.reply.readString()).assertEqual("HelloWorld")
+                let s = new MySequenceable(0, '')
+                expect(result.reply.readSequenceable(s)).assertTrue()
+                expect(s.num).assertEqual(1)
+                expect(s.str).assertEqual("aaa")
+            });
+        } catch (error) {
+            console.info("SUB_Softbus_RPC_IRemoteObject_00800:error = " + error);
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_IRemoteObject_00800---------------------------");
+    });
+
+    /*
      * @tc.number  SUB_Softbus_RPC_RemoteProxy_00100
      * @tc.name    Call adddeathrecipient to register the death notification
      * @tc.desc    Function test
@@ -7439,6 +7573,45 @@ describe('RpcJsUnitTest', function(){
             console.info("SUB_Softbus_RPC_IPCSkeleton_01200:error = " + error);
         }
         console.info("---------------------end SUB_Softbus_RPC_IPCSkeleton_01200---------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_Softbus_RPC_IPCSkeleton_01300
+     * @tc.name    IPCSkeleton sendRequestAsync API test
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_Softbus_RPC_IPCSkeleton_01300", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_IPCSkeleton_01300---------------------------");
+        try{
+            expect(rpc.IPCSkeleton.getContextObject().getInterfaceDescriptor()).assertEqual("");
+            let callingPid = rpc.IPCSkeleton.getCallingPid();
+            let callingUid = rpc.IPCSkeleton.getCallingUid();
+            let option = new rpc.MessageOption();
+            let data = rpc.MessageParcel.create();
+            let reply = rpc.MessageParcel.create();
+            expect(data.writeInterfaceToken("rpcTestAbility")).assertTrue();
+            console.info("SUB_Softbus_RPC_IPCSkeleton_01300 callingPid: " + callingPid
+                + ", callingUid: " + callingUid);
+            expect(callingUid != null).assertTrue();
+            expect(callingPid != null).assertTrue();
+            await gIRemoteObject.sendRequestAsync(CODE_IPCSKELETON, data, reply, option).then((result) => {
+                console.info("SUB_Softbus_RPC_IPCSkeleton_01300 sendRequest done, error code: " + result.errCode)
+                expect(result.errCode).assertEqual(0);
+                result.reply.readException();
+                let rescallingPid = result.reply.readInt();
+                let rescallingUid = result.reply.readInt();
+                console.info("SUB_Softbus_RPC_IPCSkeleton_01300" + rescallingPid +" ;"+ rescallingUid);
+                expect(rescallingPid).assertEqual(callingPid);
+                expect(rescallingUid).assertEqual(callingUid);
+            })
+            data.reclaim();
+            reply.reclaim();
+            done();
+        } catch (error) {
+            console.info("SUB_Softbus_RPC_IPCSkeleton_01300:error = " + error);
+        }
+        console.info("---------------------end SUB_Softbus_RPC_IPCSkeleton_01300---------------------------");
     });
     console.info("-----------------------SUB_Softbus_RPC_MessageParce_Test is end-----------------------");
 });
