@@ -51,6 +51,6 @@ ohos_unittest("disTest") {
   ]
   external_deps = [ "c_utils:utils" ]
   subsystem_name = "distributeddatamgr"
-  part_name = "distributeddatamgr"
+  part_name = "kv_store"
 }
 ###########################################################################################
