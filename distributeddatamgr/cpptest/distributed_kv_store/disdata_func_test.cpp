@@ -208,7 +208,7 @@ void DisKvTest::RemoteCreateKV(char* str)
     writeCodeDataToShm(CTRL_CODE_DATAMGR_CREATE_KV, str);
 
     char code[CODE_LEN_TEN] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     if (memset_s(code, strlen(code), 0, CODE_LEN_TEN) != EOK) {
         return;
     }
@@ -233,7 +233,7 @@ void DisKvTest::RemoteDeleteKV(char* str)
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_KV, str);
 
     char code[CODE_LEN_TEN] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     if (str == nullptr) {
         return;
@@ -242,7 +242,7 @@ void DisKvTest::RemoteDeleteKV(char* str)
     if (strcpy_s(code, strlen(str) + 1, str) != EOK) {
         return;
     }
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     int ret = strcmp(str, "0");
     if (ret == 0) {
@@ -327,7 +327,7 @@ void DistributedKvDataManagerTest::SetUp(void)
         std::cout << "ERROR: str malloc failed" << std::endl;
         return;
     }
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     DisKvTest::RemoteDeleteKV(str);
     free(str);
     // S3.本地创建数据库
@@ -351,7 +351,7 @@ void DistributedKvDataManagerTest::SetUp(void)
     // S6.远端创建数据库
     LOG("%s s6.Remote---GetSingleKvStore ", LOGSTR);
     str = (char*)malloc(MAX_DATA_LENGTH);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     DisKvTest::RemoteCreateKV(str);
     free(str);
 }
@@ -422,17 +422,17 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0100, 
 
     // 远端getdata
     char strKV[MAX_DATA_LENGTH] = { "math" };
-    memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(strKV, strlen("math_score_int:100") + 1, "math_score_int:100");
+    (void)memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(strKV, strlen("math_score_int:100") + 1, "math_score_int:100");
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); // 2001:math_score_int:10
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
 
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "int 100 yget result=" << str << std::endl;
     // 检查远端是否返回成功
@@ -481,16 +481,16 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0200, 
 
     // 远端getdata
     char strKV[MAX_DATA_LENGTH] = { "math" };
-    memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(strKV, strlen("math_score_float:3.14") + 1, "math_score_float:3.14");
+    (void)memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(strKV, strlen("math_score_float:3.14") + 1, "math_score_float:3.14");
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); // 2001:math_score_int:10
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " float 3.14f yget result=" << str << std::endl;
     // 检查远端是否返回成功
@@ -535,18 +535,18 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0300, 
 
     // 远端getdata
     char strKV[MAX_DATA_LENGTH] = { "math" };
-    memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(strKV, strlen("math_score_double:28.288") + 1, "math_score_double:28.288");
+    (void)memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(strKV, strlen("math_score_double:28.288") + 1, "math_score_double:28.288");
 
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); // 2001:math_score_int:10
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
 
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "<double>(28.288f) get result=" << str << std::endl;
 
@@ -592,16 +592,16 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0400, 
 
     // 远端getdata
     char strKV[MAX_DATA_LENGTH] = { "math" };
-    memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(strKV, strlen("math_score_int64_t:12345678") + 1, "math_score_int64_t:12345678");
+    (void)memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(strKV, strlen("math_score_int64_t:12345678") + 1, "math_score_int64_t:12345678");
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); // 2001:math_score_int:10
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " <int64_t>(12345678) get result=" << str << std::endl;
     // 检查远端是否返回成功
@@ -645,18 +645,18 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0500, 
 
     // 远端getdata
     char strKV[MAX_DATA_LENGTH] = { "math" };
-    memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(strKV, strlen("math_score_size_t:28") + 1, "math_score_size_t:28");
+    (void)memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(strKV, strlen("math_score_size_t:28") + 1, "math_score_size_t:28");
 
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV); // 2001:math_score_int:10
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
 
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " <size_t>(28) get result=" << str << std::endl;
     // 检查远端是否返回成功
@@ -701,13 +701,13 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0600, 
     // 远端getdata
     char str[MAX_DATA_LENGTH] = { "math_score_string:{\"class\":20, \"age\":18, \"gradle\":\"good\"}" };
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, str); // 2001:math_score_int:10
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
 
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "string get result=" << str << std::endl;
 
@@ -757,9 +757,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0700, 
     strvc.assign(vect.begin(), vect.end());
 
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
-    strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
-    strcat_s(strKV, MAX_DATA_LENGTH, ":");
-    strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
+    (void)strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
+    (void)strcat_s(strKV, MAX_DATA_LENGTH, ":");
+    (void)strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
 
     std::cout << "strvc = " << strvc << std::endl;
     std::cout << "strvc.c_str() = " << strvc.c_str() << std::endl;
@@ -767,13 +767,13 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0700, 
 
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { "9999" };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
 
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "vector<int> get result=" << str << std::endl;
 
@@ -823,19 +823,19 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0100, 
 
     // 5.远端修改数据200
     char strKV[MAX_DATA_LENGTH] = { "math" };
-    memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(strKV, strlen("math_score_int:200") + 1, "math_score_int:200");
+    (void)memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(strKV, strlen("math_score_int:200") + 1, "math_score_int:200");
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strKV);
 
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
 
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " 5.远端修改数据200， str=" << str << std::endl;
     int ret = strcmp(str, "0");
@@ -843,12 +843,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0100, 
 
     // 6.远端get 200
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " 6.远端get数据200， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -927,17 +927,17 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0200, 
 
     // 5.远端修改数据float:9.99
     char strKV[MAX_DATA_LENGTH] = { "math" };
-    memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(strKV, strlen("math_score_float:9.99") + 1, "math_score_float:9.99");
+    (void)memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(strKV, strlen("math_score_float:9.99") + 1, "math_score_float:9.99");
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "5.远端修改数据float:9.99， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -946,12 +946,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0200, 
 
     // 6.远端get float:9.99
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "6.远端get float:9.99， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -1032,14 +1032,14 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0300, 
     char strKV[MAX_DATA_LENGTH] = { "math_score_double:999.999" };
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { "9999" };
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
 
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " 5.远端修改数据double:999.999， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -1048,12 +1048,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0300, 
 
     // 6.远端get double:999.999
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " 6.远端get double:999.999， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -1134,18 +1134,18 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0400, 
 
     // 5.远端修改数据int64_t
     char strKV[MAX_DATA_LENGTH] = { "math" };
-    memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(strKV, strlen("math_score_int64_t:99889988") + 1, "math_score_int64_t:99889988");
+    (void)memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(strKV, strlen("math_score_int64_t:99889988") + 1, "math_score_int64_t:99889988");
 
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " 5.远端修改数据int64_t， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -1154,12 +1154,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0400, 
 
     // 6.远端get int64_t
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " 6.远端get int64_t， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -1235,16 +1235,16 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0500, 
 
     // 5.远端修改数据size_t:88
     char strKV[MAX_DATA_LENGTH] = { "math" };
-    memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(strKV, strlen("math_score_size_t:88") + 1, "math_score_size_t:88");
+    (void)memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(strKV, strlen("math_score_size_t:88") + 1, "math_score_size_t:88");
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " 5.远端修改数据size_t:88， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -1253,12 +1253,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0500, 
 
     // 6.远端get size_t:88
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " 6.远端get size_t:88， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -1339,12 +1339,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0600, 
     char strPut[MAX_DATA_LENGTH] = { "math_score_string:{\"class\":88, \"age\":99, \"gradle\":\"QQWWQQ\"}" };
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strPut);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " 5.远端修改数据string， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -1353,12 +1353,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0600, 
 
     // 6.远端get string
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strPut);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " 6.远端get string， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -1443,9 +1443,9 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
     strvc.assign(vect2.begin(), vect2.end());
 
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
-    strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
-    strcat_s(strKV, MAX_DATA_LENGTH, ":");
-    strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
+    (void)strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
+    (void)strcat_s(strKV, MAX_DATA_LENGTH, ":");
+    (void)strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
 
     std::cout << "strvc = " << strvc << std::endl;
     std::cout << "strvc.c_str() = " << strvc.c_str() << std::endl;
@@ -1453,13 +1453,13 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
 
     writeCodeDataToShm(CTRL_CODE_DATAMGR_PUT_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { "9999" };
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " 5.远端修改数据vector， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -1468,13 +1468,13 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0700, 
 
     // 6.远端get vector
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
 
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << " 6.远端get vector， str=" << str << std::endl;
     // 检查远端是否返回成功
@@ -1554,12 +1554,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
     char strKV[MAX_DATA_LENGTH] = { "math_score_int:100" };
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "5.远端delete数据， str=" << str << std::endl;
     int ret = strcmp(str, "0");
@@ -1567,12 +1567,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
 
     // 6.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "6.远端get数据失败， str=" << str << std::endl;
     ret = strcmp(str, "1");
@@ -1648,24 +1648,24 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
     char strKV[MAX_DATA_LENGTH] = { "math_score_int:100" };
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "5.远端delete数据， str=" << str << std::endl;
     int ret = strcmp(str, "0");
     EXPECT_EQ(ret, 0) << "ERR: 5.远端delete数据";
     // 6.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "6.远端get数据失败， str=" << str << std::endl;
     ret = strcmp(str, "1");
@@ -1740,12 +1740,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
     char strKV[MAX_DATA_LENGTH] = { "math_score_int:100" };
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "5.远端delete数据， str=" << str << std::endl;
     int ret = strcmp(str, "0");
@@ -1753,12 +1753,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
 
     // 6.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "6.远端get数据失败， str=" << str << std::endl;
     ret = strcmp(str, "1");
@@ -1833,12 +1833,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
     char strKV[MAX_DATA_LENGTH] = { "math_score_int:100" };
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "5.远端delete数据， str=" << str << std::endl;
     int ret = strcmp(str, "0");
@@ -1846,12 +1846,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
 
     // 6.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "6.远端get数据失败， str=" << str << std::endl;
     ret = strcmp(str, "1");
@@ -1925,12 +1925,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
     char strKV[MAX_DATA_LENGTH] = { "math_score_int:100" };
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "5.远端delete数据， str=" << str << std::endl;
     int ret = strcmp(str, "0");
@@ -1938,12 +1938,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
 
     // 6.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "6.远端get数据失败， str=" << str << std::endl;
     ret = strcmp(str, "1");
@@ -2018,12 +2018,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
     char strKV[MAX_DATA_LENGTH] = { "math_score_int:100" };
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { 0 };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "5.远端delete数据， str=" << str << std::endl;
     int ret = strcmp(str, "0");
@@ -2031,12 +2031,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
 
     // 6.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "6.远端get数据失败， str=" << str << std::endl;
     ret = strcmp(str, "1");
@@ -2110,12 +2110,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
     char strKV[MAX_DATA_LENGTH] = { "math_score_int:100" };
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_DATA, strKV);
     char str[MAX_DATA_LENGTH] = { 0 };
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     char code[CODE_LEN_TEN] = { "9999" };
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "5.远端delete数据， str=" << str << std::endl;
     int ret = strcmp(str, "0");
@@ -2123,12 +2123,12 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_PUSH_PULL_0
 
     // 6.远端get数据失败
     writeCodeDataToShm(CTRL_CODE_DATAMGR_GET_DATA, strKV);
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)memset_s(code, CODE_LEN_TEN, 0, CODE_LEN_TEN);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     ASSERT_NE(nullptr, str);
-    strcpy_s(code, strlen(str) + 1, str); // 9999
-    memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(code, strlen(str) + 1, str); // 9999
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     waitDataWithCode(code, str);
     std::cout << "6.远端get数据失败， str=" << str << std::endl;
     ret = strcmp(str, "1");
@@ -2186,8 +2186,8 @@ HWTEST_F(DistributedKvDataManagerTest, SubscribeWithQuery_0100, TestSize.Level1)
     // 4.远端put int 200
     LOG("%s 4.远端put int ", LOGSTR);
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
-    memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(strKV, strlen("math_score_int:200") + 1, "math_score_int:200");
+    (void)memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(strKV, strlen("math_score_int:200") + 1, "math_score_int:200");
     DisKvTest::RemotePutData(strKV);
 
     // 5.远端get int 200
@@ -2497,9 +2497,9 @@ HWTEST_F(DistributedKvDataManagerTest, SubscribeWithQuery_0700, TestSize.Level1)
     strvc.assign(vect2.begin(), vect2.end());
 
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
-    strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
-    strcat_s(strKV, MAX_DATA_LENGTH, ":");
-    strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
+    (void)strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
+    (void)strcat_s(strKV, MAX_DATA_LENGTH, ":");
+    (void)strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
     DisKvTest::RemotePutData(strKV);
     // 5.远端getvect
     LOG("%s 5.远端get vect ", LOGSTR);
@@ -2548,8 +2548,8 @@ HWTEST_F(DistributedKvDataManagerTest, SyncWithCondition_0100, TestSize.Level1)
     // 4.远端put int 200
     LOG("%s 4.远端put int 200", LOGSTR);
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
-    memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    strcpy_s(strKV, strlen("math_score_int:200") + 1, "math_score_int:200");
+    (void)memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    (void)strcpy_s(strKV, strlen("math_score_int:200") + 1, "math_score_int:200");
     DisKvTest::RemotePutData(strKV);
 
     // 5.远端get int 200
@@ -2844,9 +2844,9 @@ HWTEST_F(DistributedKvDataManagerTest, SyncWithCondition_0700, TestSize.Level1)
     std::string strvc;
     strvc.assign(vect2.begin(), vect2.end());
     char strKV[MAX_DATA_LENGTH] = { "math_score_int" };
-    strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
-    strcat_s(strKV, MAX_DATA_LENGTH, ":");
-    strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
+    (void)strcpy_s(strKV, strlen(stringKey.c_str()) + 1, stringKey.c_str());
+    (void)strcat_s(strKV, MAX_DATA_LENGTH, ":");
+    (void)strcat_s(strKV, MAX_DATA_LENGTH, strvc.c_str());
     std::cout << "strvc = " << strvc << std::endl;
     std::cout << "strvc.c_str() = " << strvc.c_str() << std::endl;
     std::cout << "strKV = " << strKV << std::endl;
