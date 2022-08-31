@@ -29,6 +29,7 @@ describe('RpcJsUnitTest', function(){
     const T = 1024*1024*1024*1024;
     const P = 1024*1024*1024*1024*1024;
     const CODE_WRITE_BYTEARRAY = 1;
+    const CODE_SAME_PROCESS = 1;
     const CODE_WRITE_INTARRAY = 2;
     const CODE_WRITE_FLOATARRAY = 3;
     const CODE_WRITE_SHORTARRAY = 4;
@@ -132,40 +133,26 @@ describe('RpcJsUnitTest', function(){
                 case 1:
                 {
                     let tmp1 = data.readByte()
-                    let tmp2 = data.readByte()
-                    let tmp3 = data.readShort()
-                    let tmp4 = data.readShort()
-                    let tmp5 = data.readInt()
-                    let tmp6 = data.readInt()
-                    let tmp7 = data.readLong()
-                    let tmp8 = data.readLong()
-                    let tmp9 = data.readFloat()
-                    let tmp10 = data.readFloat()
-                    let tmp11 = data.readDouble()
-                    let tmp12 = data.readDouble()
-                    let tmp13 = data.readBoolean()
-                    let tmp14 = data.readBoolean()
-                    let tmp15 = data.readChar()
-                    let tmp16 = data.readString()
+                    let tmp2 = data.readShort()
+                    let tmp3 = data.readInt()
+                    let tmp4 = data.readLong()  
+                    let tmp5 = data.readFloat()
+                    let tmp6 = data.readDouble()
+                    let tmp7 = data.readBoolean()    
+                    let tmp8 = data.readChar()
+                    let tmp9 = data.readString()
                     let s = new MySequenceable(null, null)
                     data.readSequenceable(s)
                     reply.writeNoException()
-                    reply.writeByte(tmp1)
-                    reply.writeByte(tmp2)
-                    reply.writeShort(tmp3)
-                    reply.writeShort(tmp4)
-                    reply.writeInt(tmp5)
-                    reply.writeInt(tmp6)
-                    reply.writeLong(tmp7)
-                    reply.writeLong(tmp8)
-                    reply.writeFloat(tmp9)
-                    reply.writeFloat(tmp10)
-                    reply.writeDouble(tmp11)
-                    reply.writeDouble(tmp12)
-                    reply.writeBoolean(tmp13)
-                    reply.writeBoolean(tmp14)
-                    reply.writeChar(tmp15)
-                    reply.writeString(tmp16)
+                    reply.writeByte(tmp1)           
+                    reply.writeShort(tmp2)           
+                    reply.writeInt(tmp3)          
+                    reply.writeLong(tmp4)           
+                    reply.writeFloat(tmp5)         
+                    reply.writeDouble(tmp6)        
+                    reply.writeBoolean(tmp7)
+                    reply.writeChar(tmp8)
+                    reply.writeString(tmp9)
                     reply.writeSequenceable(s)
                     return true
                 }
@@ -4364,29 +4351,39 @@ describe('RpcJsUnitTest', function(){
             expect(data.writeChar(97)).assertTrue()
             expect(data.writeString("HelloWorld")).assertTrue()
             expect(data.writeSequenceable(new MySequenceable(1, "aaa"))).assertTrue()
-            await gIRemoteObject.sendRequest(CODE_ALL_TYPE, data, reply, option,(err, result) => {
-                console.info("sendRequest done, error code: " + result.errCode)
-                expect(result.errCode).assertEqual(0)
-                expect(result.reply.readByte()).assertEqual(2)
-                expect(result.reply.readShort()).assertEqual(3)
-                expect(result.reply.readInt()).assertEqual(4)
-                expect(result.reply.readLong()).assertEqual(5)
-                expect(result.reply.readFloat()).assertEqual(1.2)
-                expect(result.reply.readDouble()).assertEqual(10.2)
-                expect(result.reply.readBoolean()).assertTrue()
-                expect(result.reply.readChar()).assertEqual(97)
-                expect(result.reply.readString()).assertEqual("HelloWorld")
-                let s = new MySequenceable(null, null)
-                expect(result.reply.readSequenceable(s)).assertTrue()
-                expect(s.num).assertEqual(1)
-                expect(s.str).assertEqual("aaa")
-            });
+
+
+            function sendRequestCallback(result) {
+                try{
+                    console.info("sendRequest Callback")
+                    console.info("sendRequest done, error code: " + result.errCode)
+                    expect(result.errCode).assertEqual(0)
+                    expect(result.reply.readByte()).assertEqual(2)
+                    expect(result.reply.readShort()).assertEqual(3)
+                    expect(result.reply.readInt()).assertEqual(4)
+                    expect(result.reply.readLong()).assertEqual(5)
+                    expect(result.reply.readFloat()).assertEqual(1.2)
+                    expect(result.reply.readDouble()).assertEqual(10.2)
+                    expect(result.reply.readBoolean()).assertTrue()
+                    expect(result.reply.readChar()).assertEqual(97)
+                    expect(result.reply.readString()).assertEqual("HelloWorld")
+                    let s = new MySequenceable(null, null)
+                    expect(result.reply.readSequenceable(s)).assertTrue()
+                    expect(s.num).assertEqual(1)
+                    expect(s.str).assertEqual("aaa")
+                } finally {
+                    result.data.reclaim();
+                    result.reply.reclaim();
+                    console.info("test done")
+                    done()
+                }
+           }
+            console.info("start send request")
+            await gIRemoteObject.sendRequest(CODE_ALL_TYPE, data, reply, option, sendRequestCallback)     
+
         } catch (error) {
             console.info("SUB_Softbus_RPC_MessageParcel_11100:error = " + error);
         }
-        data.reclaim();
-        reply.reclaim();
-        done();
         console.info("--------------------end SUB_Softbus_RPC_MessageParcel_11100--------------------------");
     });
 
@@ -6795,31 +6792,39 @@ describe('RpcJsUnitTest', function(){
             expect(data.writeChar(96)).assertTrue()
             expect(data.writeString("HelloWorld")).assertTrue()
             expect(data.writeSequenceable(new MySequenceable(1, "aaa"))).assertTrue()
-            const CODE_IREMOTEOBJECT_0200 = 21;
-            await gIRemoteObject.sendRequest(CODE_ALL_TYPE, data, reply, option, (err, result) => {
-                console.info("SUB_Softbus_RPC_IRemoteObject_00300:sendRequest done, error code: " + result.errCode)
-                expect(result.errCode).assertEqual(0)
-                expect(result.reply.readByte()).assertEqual(1)
-                expect(result.reply.readShort()).assertEqual(2)
-                expect(result.reply.readInt()).assertEqual(3)
-                expect(result.reply.readLong()).assertEqual(10000)
-                expect(result.reply.readFloat()).assertEqual(1.2)
-                expect(result.reply.readDouble()).assertEqual(10.2)
-                expect(result.reply.readBoolean()).assertTrue()
-                expect(result.reply.readChar()).assertEqual(96)
-                expect(result.reply.readString()).assertEqual("HelloWorld")
-                let s = new MySequenceable(0, '')
-                expect(result.reply.readSequenceable(s)).assertTrue()
-                expect(s.num).assertEqual(1)
-                expect(s.str).assertEqual("aaa")
-            });
+
+            function sendRequestCallback(result) {
+                try{
+                    console.info("sendRequest Callback")
+                    console.info("sendRequest done, error code: " + result.errCode)
+                    expect(result.errCode).assertEqual(0)
+                    expect(result.reply.readByte()).assertEqual(1)
+                    expect(result.reply.readShort()).assertEqual(2)
+                    expect(result.reply.readInt()).assertEqual(3)
+                    expect(result.reply.readLong()).assertEqual(10000)
+                    expect(result.reply.readFloat()).assertEqual(1.2)
+                    expect(result.reply.readDouble()).assertEqual(10.2)
+                    expect(result.reply.readBoolean()).assertTrue()
+                    expect(result.reply.readChar()).assertEqual(96)
+                    expect(result.reply.readString()).assertEqual("HelloWorld")
+                    let s = new MySequenceable(null, null)
+                    expect(result.reply.readSequenceable(s)).assertTrue()
+                    expect(s.num).assertEqual(1)
+                    expect(s.str).assertEqual("aaa")
+                } finally {
+                    result.data.reclaim();
+                    result.reply.reclaim();
+                    console.info("test done")
+                    done()
+                }
+           }
+            console.info("start send request")
+            await gIRemoteObject.sendRequest(CODE_ALL_TYPE, data, reply, option, sendRequestCallback)     
+
         } catch (error) {
             console.info("SUB_Softbus_RPC_IRemoteObject_00300:error = " + error);
         }
-        data.reclaim();
-        reply.reclaim();
-        done();
-        console.info("---------------------end SUB_Softbus_RPC_IRemoteObject_00300---------------------------");
+        console.info("--------------------end SUB_Softbus_RPC_IRemoteObject_00300--------------------------");
     });
 
     /*
@@ -6994,6 +6999,69 @@ describe('RpcJsUnitTest', function(){
         console.info("---------------------end SUB_Softbus_RPC_IRemoteObject_00800---------------------------");
     });
 
+    /*
+     * @tc.number  SUB_Softbus_RPC_IRemoteObject_00900
+     * @tc.name    Test that messageparcel passes through the same process, and the client
+     *             receives the reply message in the callback function
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_Softbus_RPC_IRemoteObject_00900", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_IRemoteObject_00900---------------------------");
+        try{
+            let object = new TestAbilityStub("TestAbilityStub") 
+            var data = rpc.MessageParcel.create();
+            console.info("SUB_Softbus_RPC_IRemoteObject_00900: create object successfully.");
+            var reply = rpc.MessageParcel.create();
+            var option = new rpc.MessageOption();
+            expect(data.writeInterfaceToken("TestAbilityStub")).assertTrue()
+            expect(data.writeByte(2)).assertTrue()
+            expect(data.writeShort(3)).assertTrue()
+            expect(data.writeInt(4)).assertTrue()
+            expect(data.writeLong(5)).assertTrue()
+            expect(data.writeFloat(1.2)).assertTrue()
+            expect(data.writeDouble(10.2)).assertTrue()
+            expect(data.writeBoolean(true)).assertTrue()
+            expect(data.writeChar(5)).assertTrue()
+            expect(data.writeString("HelloWorld")).assertTrue()
+            expect(data.writeSequenceable(new MySequenceable(1, "aaa"))).assertTrue()
+
+            function sendRequestCallback(result) {
+                try{
+                    console.info("sendRequest Callback")
+                    console.info("sendRequest done, error code: " + result.errCode)
+                    expect(result.errCode).assertEqual(0)
+                    result.reply.readException()
+                    expect(result.reply.readByte()).assertEqual(2)
+                    expect(result.reply.readShort()).assertEqual(3)
+                    expect(result.reply.readInt()).assertEqual(4)
+                    expect(result.reply.readLong()).assertEqual(5)
+                    expect(result.reply.readFloat()).assertEqual(1.2)
+                    expect(result.reply.readDouble()).assertEqual(10.2)
+                    expect(result.reply.readBoolean()).assertTrue()
+                    expect(result.reply.readChar()).assertEqual(5)
+                    expect(result.reply.readString()).assertEqual("HelloWorld")
+                    let s = new MySequenceable(null, null)
+                    expect(result.reply.readSequenceable(s)).assertTrue()
+                    expect(s.num).assertEqual(1)
+                    expect(s.str).assertEqual("aaa")
+                } finally {
+                    result.data.reclaim();
+                    result.reply.reclaim();
+                    console.info("test done")
+                    done()
+                }
+           }
+
+           console.info("start send request")
+           object.sendRequest(CODE_SAME_PROCESS, data, reply, option, sendRequestCallback) 
+                
+        } catch (error) {
+         console.info("SUB_Softbus_RPC_IRemoteObject_00900:error = " + error);
+        }
+        console.info("---------------------end SUB_Softbus_RPC_IRemoteObject_00900---------------------------");
+    });
+    
     /*
      * @tc.number  SUB_Softbus_RPC_RemoteProxy_00100
      * @tc.name    Call adddeathrecipient to register the death notification
