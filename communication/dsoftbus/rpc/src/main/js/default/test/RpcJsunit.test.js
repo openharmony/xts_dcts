@@ -3459,10 +3459,10 @@ describe('RpcJsUnitTest', function(){
 
             data.reclaim()
             reply.reclaim()
-            console.info("test done")
         } catch(error) {
             console.info("SUB_Softbus_RPC_MessageParcel_8200: error = " + error);
         }
+        done()
         console.info("---------------------end SUB_Softbus_RPC_MessageParcel_8200---------------------------");
     })
 
@@ -3508,10 +3508,10 @@ describe('RpcJsUnitTest', function(){
 
             data.reclaim()
             reply.reclaim()
-            console.info("test done")
         } catch(error) {
             console.info("SUB_Softbus_RPC_MessageParcel_8300: error = " + error);
         }
+        done()
         console.info("---------------------end SUB_Softbus_RPC_MessageParcel_8300---------------------------");
     })
 
