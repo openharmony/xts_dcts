@@ -60,6 +60,6 @@ ohos_moduletest_suite("DctsdisDataTest") {
     "ipc:ipc_core",
   ]
   subsystem_name = "distributeddatamgr"
-  part_name = "distributeddatamgr"
+  part_name = "kv_store"
 }
 ###########################################################################################
