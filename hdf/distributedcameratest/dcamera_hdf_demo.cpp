@@ -87,36 +87,46 @@ void DcameraHdfDemo::GetStreamOpt()
     }
 }
 
+void DcameraHdfDemo::CaptureSet(std::vector<uint8_t> &setNum)
+{
+    constexpr double latitude = 27.987500; // dummy data: Qomolangma latitde
+    constexpr double longitude = 86.927500; // dummy data: Qomolangma longituude
+    constexpr double altitude = 8848.86; // dummy data: Qomolangma altitude
+    constexpr size_t entryCapacity = 100;
+    constexpr size_t dataCapacity = 2000;
+    captureSetting_ = std::make_shared<CameraSetting>(entryCapacity, dataCapacity);
+    captureQuality_ = OHOS_CAMERA_JPEG_LEVEL_HIGH;
+    captureOrientation_ = OHOS_CAMERA_JPEG_ROTATION_270;
+    mirrorSwitch_ = OHOS_CAMERA_MIRROR_ON;
+    gps_.push_back(latitude);
+    gps_.push_back(longitude);
+    gps_.push_back(altitude);
+    captureSetting_->addEntry(OHOS_JPEG_QUALITY, static_cast<void*>(&captureQuality_),
+        sizeof(captureQuality_));
+    captureSetting_->addEntry(OHOS_JPEG_ORIENTATION, static_cast<void*>(&captureOrientation_),
+        sizeof(captureOrientation_));
+    captureSetting_->addEntry(OHOS_CONTROL_CAPTURE_MIRROR, static_cast<void*>(&mirrorSwitch_),
+        sizeof(mirrorSwitch_));
+    captureSetting_->addEntry(OHOS_JPEG_GPS_COORDINATES, gps_.data(), gps_.size());
+
+    OHOS::Camera::MetadataUtils::ConvertMetadataToVec(captureSetting_, setNum);
+}
+
 RetCode DcameraHdfDemo::CaptureON(const int streamId, const int captureId, CaptureMode mode)
 {
     DHLOGI("demo test: CaptureON enter streamId == %d and captureId == %d and mode == %d",
         streamId, captureId, mode);
     std::lock_guard<std::mutex> l(metaDatalock_);
-    if (mode == CAPTURE_SNAPSHOT) {
-        constexpr double latitude = 27.987500; // dummy data: Qomolangma latitde
-        constexpr double longitude = 86.927500; // dummy data: Qomolangma longituude
-        constexpr double altitude = 8848.86; // dummy data: Qomolangma altitude
-        constexpr size_t entryCapacity = 100;
-        constexpr size_t dataCapacity = 2000;
-        captureSetting_ = std::make_shared<CameraSetting>(entryCapacity, dataCapacity);
-        captureQuality_ = OHOS_CAMERA_JPEG_LEVEL_HIGH;
-        captureOrientation_ = OHOS_CAMERA_JPEG_ROTATION_270;
-        mirrorSwitch_ = OHOS_CAMERA_MIRROR_ON;
-        gps_.push_back(latitude);
-        gps_.push_back(longitude);
-        gps_.push_back(altitude);
-        captureSetting_->addEntry(OHOS_JPEG_QUALITY, static_cast<void*>(&captureQuality_),
-            sizeof(captureQuality_));
-        captureSetting_->addEntry(OHOS_JPEG_ORIENTATION, static_cast<void*>(&captureOrientation_),
-            sizeof(captureOrientation_));
-        captureSetting_->addEntry(OHOS_CONTROL_CAPTURE_MIRROR, static_cast<void*>(&mirrorSwitch_),
-            sizeof(mirrorSwitch_));
-        captureSetting_->addEntry(OHOS_JPEG_GPS_COORDINATES, gps_.data(), gps_.size());
-    }
-    
     std::vector<uint8_t> setting;
     bool iscapture = true;
-    OHOS::Camera::MetadataUtils::ConvertMetadataToVec(captureSetting_, setting);
+
+    if (mode == CAPTURE_SNAPSHOT) {
+       CaptureSet(setting);
+    }else
+    {
+        OHOS::Camera::MetadataUtils::ConvertMetadataToVec(captureSetting_, setting);
+    }
+    
     captureInfo_.streamIds_ = {streamId};
     if (mode == CAPTURE_SNAPSHOT) {
         captureInfo_.captureSetting_ = setting;
@@ -141,13 +151,11 @@ RetCode DcameraHdfDemo::CaptureON(const int streamId, const int captureId, Captu
         });
     } else if (mode == CAPTURE_VIDEO) {
         OpenVideoFile();
-
         streamCustomerVideo_->ReceiveFrameOn([this](void* addr, const uint32_t size) {
             StoreVideo((char*)addr, size);
         });
     }
     DHLOGI("demo test: CaptureON exit");
-
     return RC_OK;
 }
 
@@ -179,7 +187,6 @@ RetCode DcameraHdfDemo::CaptureOff(const int captureId, const CaptureMode mode)
         return RC_ERROR;
     }
     DHLOGI("demo test: CaptureOff exit");
-
     return RC_OK;
 }
 
@@ -223,7 +230,6 @@ RetCode DcameraHdfDemo::CreateStream()
     }
 
     DHLOGI("demo test: CreateStream exit");
-
     return RC_OK;
 }
 
@@ -293,8 +299,8 @@ RetCode DcameraHdfDemo::InitSensors()
         return RC_OK;
     }
 
-    constexpr const char *DEMO_SERVICE_NAME = "distributed_camera_service";
-    demoCameraHost_ = ICameraHost::Get(DEMO_SERVICE_NAME, false);
+    constexpr const char *demoServiceName = "distributed_camera_service";
+    demoCameraHost_ = ICameraHost::Get(demoServiceName, false);
     if (demoCameraHost_ == nullptr) {
         DHLOGE("demo test: ICameraHost::Get error");
         return RC_ERROR;
@@ -417,7 +423,6 @@ RetCode DcameraHdfDemo::CreateStreams(const int streamIdSecond, StreamIntent int
         streamOperator_->ReleaseStreams(streamIds);
         return RC_ERROR;
     }
-
     return RC_OK;
 }
 

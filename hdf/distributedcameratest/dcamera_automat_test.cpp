@@ -21,8 +21,8 @@ using namespace testing::ext;
 using namespace OHOS::DistributedHardware;
 
 auto mainDemo = std::make_shared<DcameraHdfDemo>();
-int32_t CameraOk = 0;
-int32_t SleepOk = 2;
+int32_t cameraOk = 0;
+int32_t sleepOk = 2;
 
 class DCameraAutomatTest : public testing::Test {
 public:
@@ -47,68 +47,68 @@ DCameraAutomatTest::DCameraAutomatTest(void) {}
 HWTEST_F(DCameraAutomatTest, DCameraTest_0100, TestSize.Level1)
 {
     int32_t ret = mainDemo->InitSensors();
-    EXPECT_EQ(CameraOk, ret) << "InitSensors fail";
-    sleep(SleepOk);
+    EXPECT_EQ(cameraOk, ret) << "InitSensors fail";
+    sleep(sleepOk);
     ret = mainDemo->InitCameraDevice();
-    EXPECT_EQ(CameraOk, ret) << "InitCameraDevice fail";
-    sleep(SleepOk);
+    EXPECT_EQ(cameraOk, ret) << "InitCameraDevice fail";
+    sleep(sleepOk);
     ret = PreviewOn(0, mainDemo);
-    EXPECT_EQ(CameraOk, ret) << "PreviewOn fail";
-    sleep(SleepOk);
+    EXPECT_EQ(cameraOk, ret) << "PreviewOn fail";
+    sleep(sleepOk);
 }
 
 HWTEST_F(DCameraAutomatTest, DCameraTest_0200, TestSize.Level1)
 {
-    int32_t ret = mainDemo->SetAwbMode(SleepOk);
-    EXPECT_EQ(CameraOk, ret) << "SetAwbMode incandescent fail";
-    sleep(SleepOk);
+    int32_t ret = mainDemo->SetAwbMode(sleepOk);
+    EXPECT_EQ(cameraOk, ret) << "SetAwbMode incandescent fail";
+    sleep(sleepOk);
 }
 
 HWTEST_F(DCameraAutomatTest, DCameraTest_0300, TestSize.Level1)
 {
-    int32_t ret = mainDemo->SetAwbMode(SleepOk);
-    EXPECT_EQ(CameraOk, ret) << "SetAwbMode fail";
-    sleep(SleepOk);
+    int32_t ret = mainDemo->SetAwbMode(sleepOk);
+    EXPECT_EQ(cameraOk, ret) << "SetAwbMode fail";
+    sleep(sleepOk);
 }
 
 HWTEST_F(DCameraAutomatTest, DCameraTest_0400, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAeExpo();
-    EXPECT_EQ(CameraOk, ret) << "SetAeExpo fail";
-    sleep(SleepOk);
+    EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
+    sleep(sleepOk);
 }
 
 HWTEST_F(DCameraAutomatTest, DCameraTest_0500, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetMetadata();
-    EXPECT_EQ(CameraOk, ret) << "SetMetadata fail";
-    sleep(SleepOk);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
 }
 
 HWTEST_F(DCameraAutomatTest, DCameraTest_0600, TestSize.Level1)
 {
     int32_t ret = CaptureTest(mainDemo);
-    EXPECT_EQ(CameraOk, ret) << "CaptureTest fail";
-    sleep(SleepOk);
+    EXPECT_EQ(cameraOk, ret) << "CaptureTest fail";
+    sleep(sleepOk);
 }
 
 HWTEST_F(DCameraAutomatTest, DCameraTest_0700, TestSize.Level1)
 {
     int32_t ret = VideoTest(mainDemo);
-    EXPECT_EQ(CameraOk, ret) << "VideoTest fail";
-    sleep(SleepOk);
+    EXPECT_EQ(cameraOk, ret) << "VideoTest fail";
+    sleep(sleepOk);
 }
 
 HWTEST_F(DCameraAutomatTest, DCameraTest_0800, TestSize.Level1)
 {
     int32_t ret = FlashLightTest(mainDemo);
-    EXPECT_EQ(CameraOk, ret) << "FlashLightTest fail";
-    sleep(SleepOk);
+    EXPECT_EQ(cameraOk, ret) << "FlashLightTest fail";
+    sleep(sleepOk);
 }
 
 HWTEST_F(DCameraAutomatTest, DCameraTest_0900, TestSize.Level1)
 {
     int32_t ret = OfflineTest(mainDemo);
-    EXPECT_EQ(CameraOk, ret) << "OfflineTest fail";
+    EXPECT_EQ(cameraOk, ret) << "OfflineTest fail";
 }
 

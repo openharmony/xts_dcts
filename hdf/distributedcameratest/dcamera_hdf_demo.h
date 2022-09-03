@@ -98,6 +98,7 @@ public:
 
     RetCode CaptureOnDualStreams(const int streamIdSecond);
     RetCode CaptureON(const int streamId, const int captureId, CaptureMode mode);
+    void CaptureSet(std::vector<uint8_t> &setNum);
     RetCode CaptureOff(const int captureId, const CaptureMode mode);
 
     RetCode SetAwbMode(const int mode) const;
