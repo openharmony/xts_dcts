@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -88,7 +88,6 @@ RetCode StreamCustomer::ReceiveFrameOn(const std::function<void(void*, uint32_t)
         DHLOGI("demo test:ReceiveFrameOn loop thread is running");
     }
     DHLOGI("demo test:ReceiveFrameOn exit");
-
     return RC_OK;
 }
 
@@ -104,7 +103,6 @@ void StreamCustomer::ReceiveFrameOff()
             previewThreadId_ = nullptr;
         }
     }
-
     DHLOGI("demo test:ReceiveFrameOff exit");
 }
 }
