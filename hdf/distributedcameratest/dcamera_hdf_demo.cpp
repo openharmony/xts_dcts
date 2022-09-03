@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -87,8 +87,7 @@ void DcameraHdfDemo::GetStreamOpt()
     }
 }
 
-RetCode DcameraHdfDemo::CaptureON(const int streamId,
-    const int captureId, CaptureMode mode)
+RetCode DcameraHdfDemo::CaptureON(const int streamId, const int captureId, CaptureMode mode)
 {
     DHLOGI("demo test: CaptureON enter streamId == %d and captureId == %d and mode == %d",
         streamId, captureId, mode);
@@ -114,7 +113,7 @@ RetCode DcameraHdfDemo::CaptureON(const int streamId,
             sizeof(mirrorSwitch_));
         captureSetting_->addEntry(OHOS_JPEG_GPS_COORDINATES, gps_.data(), gps_.size());
     }
-
+    
     std::vector<uint8_t> setting;
     bool iscapture = true;
     OHOS::Camera::MetadataUtils::ConvertMetadataToVec(captureSetting_, setting);

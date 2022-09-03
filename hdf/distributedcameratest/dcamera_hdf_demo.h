@@ -78,7 +78,7 @@ typedef enum {
     OHOS_CAMERA_AWB_MODE_CLOUDY_DAYLIGHT,
     OHOS_CAMERA_AWB_MODE_TWILIGHT,
     OHOS_CAMERA_AWB_MODE_SHADE,
-} camera_awb_mode_t;
+} CameraAwbMode;
 
 class DemoCameraHostCallback;
 class DcameraHdfDemo {
