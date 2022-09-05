@@ -13,9 +13,9 @@
 
 import("//build/ohos_var.gni")
 
-group("distributedhardware") {
+group("hdf") {
   testonly = true
   if (is_standard_system) {
-    deps = [ "distributedscreentest:DctsdisSreenTest" ]
+    deps = [ "distributedcameratest:DctsdisCameraTest" ]
   }
 }

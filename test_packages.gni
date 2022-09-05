@@ -14,6 +14,7 @@
 import("//test/xts/tools/build/suite.gni")
 
 _all_test_packages = [
+  "${DCTS_ROOT}/hdf:hdf",
   "${DCTS_ROOT}/distributedhardware:distributedhardware",
   "${DCTS_ROOT}/distributeddatamgr:distributeddatatest",
   "${DCTS_ROOT}/communication:communication",
