@@ -39,7 +39,7 @@ typedef enum {
 
 class TestBuffersConsumerListener : public IBufferConsumerListener {
 public:
-    TestBuffersConsumerListener(const sptr<Surface>& surface, 
+    TestBuffersConsumerListener(const sptr<Surface>& surface,
     const std::function<void(void*, const uint32_t)> callback):callback_(callback), consumer_(surface)
     {
     }
