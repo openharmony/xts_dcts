@@ -45,18 +45,7 @@ using namespace OHOS::Camera;
 using namespace OHOS::HDI::Camera::V1_0;
 #define CAMERA_CAPTURE_ENCODE_TYPE OHOS::HDI::Camera::V1_0::ENCODE_TYPE_JPEG
 #define CAMERA_VIDEO_ENCODE_TYPE OHOS::HDI::Camera::V1_0::ENCODE_TYPE_H264
-
-#ifdef DCAMERA_YUV
-        #define CAMERA_FORMAT PIXEL_FMT_YCRCB_420_SP
-#else
-        #define CAMERA_FORMAT PIXEL_FMT_RGBA_8888
-#endif
-
-typedef enum {
-    CAPTURE_PREVIEW = 0,
-    CAPTURE_SNAPSHOT,
-    CAPTURE_VIDEO,
-} CaptureMode;
+#define CAMERA_FORMAT PIXEL_FMT_YCRCB_420_SP
 
 typedef enum {
     STREAM_ID_PREVIEW = 1001,
@@ -169,6 +158,7 @@ private:
     OHOS::sptr<ICameraDevice> demoCameraDevice_ = nullptr;
  
     std::vector<std::string> cameraIds_ = {};
+    friend class StreamCustomer;
 };
  
 class DemoCameraDeviceCallback : public ICameraDeviceCallback {
