@@ -80,7 +80,8 @@ class StreamCustomer {
 public:
     StreamCustomer();
     ~StreamCustomer();
-    sptr<OHOS::IBufferProducer> CreateProducer(CaptureMode mode, const std::function<void(void*, uint32_t)> callback);
+    sptr<OHOS::IBufferProducer> CreateProducer(CaptureMode mode,
+        const std::function<void(void*, uint32_t)> callback);
 
 private:
     sptr<OHOS::Surface> consumer_ = nullptr;
