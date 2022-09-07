@@ -180,9 +180,10 @@ typedef enum {
 
 int Wait(int timeout);
 int Wait4Session(int timeout, WaitSessionType type);
+int WaitNodeCount(int timeout, WaitNodeStateType state, int expectCount);
 
 void AddPermission (void);
-
+void sleepn(int n);
 void TestSetUp(void);
 void TestTearDown(void);
 
@@ -195,8 +196,11 @@ uint64_t GetCurrentTimeOfMs(void);
 void ResetWaitFlag(void);
 void ResetWaitFlag4Data(void);
 void ResetWaitFlag4Ctl(void);
+void ResetwaitCount4Online(void);
+void ResetwaitCount4Offline(void);
 
 int SendData4Data(DataType type, int size);
+int SendData4Message(DataType type, int size);
 
 int CreateSsAndOpenSession4Data(void);
 int CreateSsAndOpenSession4Ctl(void);

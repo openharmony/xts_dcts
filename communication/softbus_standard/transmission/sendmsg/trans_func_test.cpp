@@ -61,13 +61,13 @@ void TransFuncTest::TearDownTestCase()
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_SendByte_Func_0100
- * @tc.name     : SendByte Packet size 1B, send and receive successful
- * @tc.desc       : Test the SendByte specification
- * @tc.type       : FUNC
- * @tc.size        : MediumTest
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_Fun_0100
+ * @tc.name   : SendByte Packet size 1B, send and receive successful
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
  */
-HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0100, TestSize.Level3)
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0100, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
@@ -82,13 +82,13 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0100, TestSize.Level3)
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_SendByte_Func_0200
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_Fun_0200
  * @tc.name   : SendByte Packet size 2K, send and receive successful
  * @tc.desc   : Test the SendByte specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0200, TestSize.Level1)
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0200, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
@@ -103,13 +103,13 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0200, TestSize.Level1)
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_SendByte_Func_0300
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_Fun_0300
  * @tc.name   : SendByte Packet size Max, send and receive successful
  * @tc.desc   : Test the SendByte specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0300, TestSize.Level2)
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0300, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
@@ -124,13 +124,13 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0300, TestSize.Level2)
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_SendByte_Func_0400
- * @tc.name   : SendByte Packet size 0, send and receive successful
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_Fun_0400
+ * @tc.name   : SendByte Packet size 0, send and receive failed
  * @tc.desc   : Test the SendByte specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0400, TestSize.Level3)
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0400, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
@@ -147,13 +147,141 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendByte_Func_0400, TestSize.Level3)
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_SendMessage_Func_0100
- * @tc.name     : SendMessage Packet size 1B, send and receive successful
- * @tc.desc       : Test the SendMessage specification
- * @tc.type       : FUNC
- * @tc.size        : MediumTest
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_Fun_0500
+ * @tc.name   : SendByte Packet size Max + 1, send and receive failed
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
  */
-HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0100, TestSize.Level3)
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0500, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = TRANS_BYTES_LENGTH_MAX + 1;
+    ret = SendData4Data(DATA_TYPE_BYTE, size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call sendbytes(empty) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_Fun_0600
+ * @tc.name   : SendByte Packet size 1B ,Proxy channel, send and receive successful
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0600, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Ctl();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = 1;
+    ret = SendData4Message(DATA_TYPE_BYTE, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
+
+    ret = CloseSessionAndRemoveSs4Ctl();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_Fun_0700
+ * @tc.name   : SendByte Packet size 2K, Proxy channel, send and receive successful
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0700, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Ctl();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = 2 * 1024;
+    ret = SendData4Message(DATA_TYPE_BYTE, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte,2M) fail";
+
+    ret = CloseSessionAndRemoveSs4Ctl();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_Fun_0800
+ * @tc.name   : SendByte Packet size 4k ,Proxy channel, send and receive successful
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0800, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Ctl();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = 4 * 1024;
+    ret = SendData4Message(DATA_TYPE_BYTE, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte,Max) fail";
+
+    ret = CloseSessionAndRemoveSs4Ctl();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_Fun_0900
+ * @tc.name   : SendByte Packet size 0, Proxy channel, send and receive failed
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0900, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Ctl();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = 0;
+    string emptyStr = "";
+    int sessionId = GetCurrentSessionId4Ctl();
+    ret = SendBytes(sessionId, emptyStr.c_str(), size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call sendbytes(empty) fail";
+
+    ret = CloseSessionAndRemoveSs4Ctl();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_Fun_1000
+ * @tc.name   : SendByte Packet size 4k + 1, Proxy channel, send and receive failed
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_1000, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Ctl();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = 4 * 1024 + 1;
+    ret = SendData4Message(DATA_TYPE_BYTE, size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call sendbytes(empty) fail";
+
+    ret = CloseSessionAndRemoveSs4Ctl();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0100
+ * @tc.name   : SendMessage Packet size 1B, send and receive successful
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0100, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
@@ -168,13 +296,13 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0100, TestSize.Level3
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_SendMessage_Func_0200
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0200
  * @tc.name   : SendMessage Packet size 1K, send and receive successful
  * @tc.desc   : Test the SendMessage specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0200, TestSize.Level1)
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0200, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
@@ -189,13 +317,13 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0200, TestSize.Level1
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_SendMessage_Func_0300
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0300
  * @tc.name   : SendMessage Packet size Max, send and receive successful
  * @tc.desc   : Test the SendMessage specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0300, TestSize.Level2)
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0300, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
@@ -210,13 +338,13 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0300, TestSize.Level2
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_SendMessage_Func_0400
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0400
  * @tc.name   : SendMessage Packet size 0, send and receive successful
  * @tc.desc   : Test the SendMessage specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0400, TestSize.Level3)
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0400, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
@@ -233,13 +361,13 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0400, TestSize.Level3
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_SendMessage_Func_0500
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0500
  * @tc.name   : SendMessage Packet size Max+1, send and receive successful
  * @tc.desc   : Test the SendMessage specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0500, TestSize.Level3)
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0500, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
@@ -256,4 +384,111 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_SendMessage_Func_0500, TestSize.Level3
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
     free(dataMoreMax);
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0600
+ * @tc.name   : SendMessage Packet size 1B, proxy channel, send and receive successful
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0600, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Ctl();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = 1;
+    ret = SendData4Message(DATA_TYPE_MSG, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg, 1B) fail";
+
+    ret = CloseSessionAndRemoveSs4Ctl();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0700
+ * @tc.name   : SendMessage Packet size 1K, proxy channel, send and receive successful
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0700, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Ctl();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = 1000;
+    ret = SendData4Message(DATA_TYPE_MSG, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg,1K) fail";
+
+    ret = CloseSessionAndRemoveSs4Ctl();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0800
+ * @tc.name   : SendMessage Packet size Max, proxy channel, send and receive successful
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0800, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Ctl();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = TRANS_PROXY_MESSAGE_LENGTH_MAX;
+    ret = SendData4Message(DATA_TYPE_MSG, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg,Max) fail";
+
+    ret = CloseSessionAndRemoveSs4Ctl();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0900
+ * @tc.name   : SendMessage Packet size 0, proxy channel, send and receive failed
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0900, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Ctl();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = 0;
+    string emptystr = "";
+    int sessionId = GetCurrentSessionId4Ctl();
+    ret = SendMessage(sessionId, emptystr.c_str(), size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call sendmsg(empty) fail";
+
+    ret = CloseSessionAndRemoveSs4Ctl();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_1000
+ * @tc.name   : SendMessage Packet size 1kb +1, proxy channel, send and receive failed
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_1000, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSsAndOpenSession4Ctl();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    int size = TRANS_PROXY_MESSAGE_LENGTH_MAX + 1;
+    ret = SendData4Message(DATA_TYPE_MSG, size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call sendmsg(Max+1) fail";
+
+    ret = CloseSessionAndRemoveSs4Ctl();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }

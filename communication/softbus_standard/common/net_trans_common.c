@@ -15,6 +15,8 @@
 
 #include "net_trans_common.h"
 
+static int ONE_SECOND = 1;
+
 static int32_t g_currentSessionId4Data = -1;
 static int32_t g_currentSessionId4Ctl = -1;
 
@@ -57,6 +59,8 @@ static int* g_sId4Task3;
 static char g_fillContentChar = 'd';
 static unsigned int g_expectDataSize = 0;
 static char* g_expectDataContent = NULL;
+static char* g_expectMessageContent = NULL;
+
 static pthread_barrier_t* g_barrier = NULL;
 
 static int32_t g_recvMsgStat4Control[MAX_SESSION_NUM] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -69,6 +73,12 @@ static uint64_t g_transTimeEnd;
 /* discovery */
 static IDiscoveryCallback g_defDiscCallback;
 
+void sleepn(int n)
+{
+    for(int i = 0; i < n; i++) {
+        sleep(1);
+    }
+}
 int Wait(int timeout)
 {
     LOG("start wait,timeout:%d", timeout);
@@ -554,6 +564,16 @@ void ResetWaitFlag4Ctl(void)
     g_waitFlag4Ctl = WAIT_DEF_VALUE;
 }
 
+void ResetwaitCount4Online(void)
+{
+    g_nodeOnlineCount = 0;
+}
+
+void ResetwaitCount4Offline(void)
+{
+    g_nodeOfflineCount = 0;
+}
+
 int RegisterDeviceStateDefCallback(void)
 {
     return RegNodeDeviceStateCb(DEF_PKG_NAME, &g_defNodeStateCallback);
@@ -679,6 +699,42 @@ int SendData4Data(DataType type, int size)
     return ret;
 }
 
+int SendData4Message(DataType type, int size)
+{
+    int ret;
+    if (size > 0) {
+        g_expectMessageContent = (char*)calloc(1, size);
+        if (g_expectMessageContent == NULL) {
+            LOG("[send data]calloc fail");
+            return SOFTBUS_ERR;
+        }
+        (void)memset_s(g_expectMessageContent, size, g_fillContentChar, size);
+    } else {
+        LOG("[send data]invalid param[size>=1]");
+        return SOFTBUS_ERR;
+    }
+
+    g_expectDataSize = size;
+    ResetWaitFlag();
+    if (type == DATA_TYPE_MSG) {
+        ret = SendMessage(g_currentSessionId4Ctl, g_expectMessageContent, size);
+    } else if (type == DATA_TYPE_BYTE) {
+        ret = SendBytes(g_currentSessionId4Ctl, g_expectMessageContent, size);
+    } else {
+        LOG("[send data]invalid param[DataType]");
+        free(g_expectMessageContent);
+        return SOFTBUS_ERR;
+    }
+    if (ret != SOFTBUS_OK) {
+        LOG("[send data]call SendX fail, ret:%d", ret);
+        free(g_expectMessageContent);
+        return SOFTBUS_ERR;
+    }
+    free(g_expectMessageContent);
+    g_expectMessageContent = NULL;
+    return ret;
+}
+
 int CloseSessionAndRemoveSs4Data(void)
 {
     int ret4Close;
@@ -796,6 +852,54 @@ int CloseSessionBatch4Ctl(int* sessionId, int count)
 
         SetCurrentSessionId4Ctl(sid);
         CloseSession(sid);
+    }
+    return SOFTBUS_OK;
+}
+
+int WaitNodeCount(int timeout, WaitNodeStateType state, int expectCount)
+{
+    LOG("Wait4Node,timeout:%d, type:%d, exp count:%d", timeout, state, expectCount);
+    int hitFlag = -1;
+    while (timeout > 0) {
+        sleep(ONE_SECOND);
+        switch (state) {
+            case STATE_ONLINE:
+                if (g_nodeOnlineCount == expectCount) {
+                    LOG("Wait4Node[online] succ,timeout:%d", timeout);
+                    hitFlag = 1;
+                }
+                break;
+            case STATE_OFFLINE:
+                if (g_nodeOfflineCount == expectCount) {
+                    LOG("Wait4Node[offline] succ,timeout:%d", timeout);
+                    hitFlag = 1;
+                }
+                break;
+            default:
+                LOG("Wait4Node state error");
+                hitFlag = 1;
+                break;
+        }
+        if (hitFlag != -1) {
+            break;
+        }
+        timeout--;
+    }
+    switch (state) {
+        case STATE_ONLINE:
+            if (g_nodeOnlineCount != expectCount) {
+                LOG("Wait4Node[online] fail[exp:%d, real:%d]", expectCount, g_nodeOnlineCount);
+                return SOFTBUS_ERR;
+            }
+            break;
+        case STATE_OFFLINE:
+            if (g_nodeOfflineCount != expectCount) {
+                LOG("Wait4Node[offline] fail[exp:%d, real:%d]", expectCount, g_nodeOfflineCount);
+                return SOFTBUS_ERR;
+            }
+            break;
+        default:
+            return SOFTBUS_ERR;
     }
     return SOFTBUS_OK;
 }
@@ -963,7 +1067,7 @@ void TestSetUp(void)
     }
     if (g_sessionAttr4Ctl == NULL) {
         g_sessionAttr4Ctl = (SessionAttribute*)calloc(1, sizeof(SessionAttribute));
-        g_sessionAttr4Ctl->dataType = TYPE_BYTES;
+        g_sessionAttr4Ctl->dataType = TYPE_MESSAGE;
     }
     if (g_sessionAttr4Pass == NULL) {
         g_sessionAttr4Pass = (SessionAttribute*)calloc(1, sizeof(SessionAttribute));
