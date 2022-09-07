@@ -64,7 +64,7 @@ shared_library("disDataProcess") {
     "//base/security/access_token/interfaces/innerkits/token_setproc:libtoken_setproc",
     "//commonlibrary/c_utils/base:utils",
     "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter:distributeddata_adapter",
-    "//foundation/distributeddatamgr/kv_store/frameworks/innerkitsimpl/libs/distributeddb:distributeddb",
+    "//foundation/distributeddatamgr/kv_store/frameworks/libs/distributeddb:distributeddb",
     "//foundation/distributeddatamgr/kv_store/interfaces/innerkits/distributeddata:distributeddata_inner",
     "//foundation/distributedhardware/device_manager/interfaces/inner_kits/native_cpp:devicemanagersdk",
     "//utils/native/base:utils",
