@@ -2498,7 +2498,6 @@ describe('FileioJsUnitTest', function () {
         let tcNumber = 'test_fileio_create_dir_async_000';
         let dpath = await getDistributedFilePath(tcNumber) + 'd';
         try {
-            // await fileio.mkdir(dpath);
             fileio.mkdir(dpath).then(function() {
                 console.info("------ mkdir succeed");
             }).catch(function (error){
