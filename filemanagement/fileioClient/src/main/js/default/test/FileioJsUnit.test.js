@@ -22,15 +22,18 @@ import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from
 let gIRemoteObject = null;
 let connectId = null;
 
-var data;
-var reply;
-var option;
-
 describe('FileioJsUnitTest', function () {
-    console.info("-----------------------SUB_Storage_Fileio_Distributed JS Test is starting-----------------------");
+    console.info("----------SUB_Storage_Fileio_Distributed JS Test is starting----------");
+    const DISTRIBUTED_FILE_CONTENT = 'content';
+    const APPEND_FILE_CONTENT = '_append';
     const SERVER_CHECK_SUCCESS = 'SUCCESS';
+
+    const CODE_MK_DIR = 1;
+    const CODE_RM_DIR = 2;
     const CODE_CREATE_FILE = 3;
     const CODE_DELETE_FILE = 4;
+    const CODE_GET_FILE_CONTENT = 5;
+    const CODE_GET_FILE_STAT = 6;
     const CODE_FSYNC_FILE = 7;
 
     function sleep(numberMillis) {
@@ -54,9 +57,52 @@ describe('FileioJsUnitTest', function () {
             let context = featureAbility.getContext();
             basePath = await context.getOrCreateDistributedDir();
         } catch (e) {
-            console.log("-------------- getDistributedFilePath() failed for : " + e);
+            console.log("-------- getDistributedFilePath() failed for : " + e);
         }
         return basePath + "/" + testName;
+    }
+
+    /**
+     * Send rpc request to get server-side verification result
+     * @param tcNumber 
+     * @param path 
+     * @param codeNumber 
+     * @param done 
+     * @param callback 
+     */
+    async function getServerFileInfo(tcNumber, path, codeNumber, done, callback) {
+        try {
+            var data = rpc.MessageParcel.create();
+            var reply = rpc.MessageParcel.create();
+            var option = new rpc.MessageOption();
+
+            var writeResult = data.writeString(path);
+            console.info(tcNumber + " : run writeString success, writeResult is " + writeResult);
+            console.info(tcNumber + " : run writeString success, data is " + data.readString());
+            expect(writeResult == true).assertTrue();
+
+            if (gIRemoteObject == undefined) {
+                console.info(tcNumber + " : gIRemoteObject undefined");
+            }
+            await gIRemoteObject.sendRequest(codeNumber, data, reply, option).then((result) => {
+                console.info(tcNumber + " : sendRequest success, result is " + result.errCode);
+                expect(result.errCode == 0).assertTrue();
+
+                var resultToken = result.reply.readString();
+                console.info(tcNumber + " :run readString success, result is " + resultToken);
+                callback(resultToken);
+            }).catch((err) => {
+                console.info(tcNumber + " sendRequest has failed for : " + err);
+                callback("Empty");
+            }).finally(() => {
+                data.reclaim();
+                reply.reclaim();
+                done();
+            })
+        } catch (e) {
+            console.info(tcNumber + " has failed for : " + e);
+            callback("Empty");
+        }
     }
 
     beforeAll(async function (done) {
@@ -95,7 +141,7 @@ describe('FileioJsUnitTest', function () {
     })
     beforeEach(function () {
         console.info(('beforeEach called'));
-        sleep(2000);
+        sleep(1000);
     })
     afterEach(function () {
         console.info('afterEach called');
@@ -104,6 +150,2458 @@ describe('FileioJsUnitTest', function () {
         console.info('afterAll called');
     })
 
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0000
+     * @tc.name    test_fileio_create_dir_sync_000
+     * @tc.desc    Test the distributed file mkdirSync interface without the mode parameter
+     * @tc.level   0
+     */
+    it('test_fileio_create_dir_sync_000', 0, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_000--------");
+        let tcNumber = 'test_fileio_create_dir_sync_000';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+        try {
+            fileio.mkdirSync(dpath);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_000 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_000 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_000--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0100
+     * @tc.name    test_fileio_create_dir_sync_001
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o700
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_001', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_001--------");
+        let tcNumber = 'test_fileio_create_dir_sync_001';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o700);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_001 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_001 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_001--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0200
+     * @tc.name    test_fileio_create_dir_sync_002
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o600
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_002', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_002--------");
+        let tcNumber = 'test_fileio_create_dir_sync_002';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o600);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_002 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_002 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_002--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0300
+     * @tc.name    test_fileio_create_dir_sync_003
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o500
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_003', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_003--------");
+        let tcNumber = 'test_fileio_create_dir_sync_003';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o500);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_003 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_003 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_003--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0400
+     * @tc.name    test_fileio_create_dir_sync_004
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o400
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_004', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_004--------");
+        let tcNumber = 'test_fileio_create_dir_sync_004';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o400);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_004 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_004 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_004--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0500
+     * @tc.name    test_fileio_create_dir_sync_005
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o300
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_005', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_005--------");
+        let tcNumber = 'test_fileio_create_dir_sync_005';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o300);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_005 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_005 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_005--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0600
+     * @tc.name    test_fileio_create_dir_sync_006
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o200
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_006', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_006--------");
+        let tcNumber = 'test_fileio_create_dir_sync_006';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o200);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_006 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_006 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_006--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0700
+     * @tc.name    test_fileio_create_dir_sync_007
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o100
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_007', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_007--------");
+        let tcNumber = 'test_fileio_create_dir_sync_007';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o100);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_007 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_007 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_007--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0800
+     * @tc.name    test_fileio_create_dir_sync_008
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o070
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_008', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_008--------");
+        let tcNumber = 'test_fileio_create_dir_sync_008';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o070);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_008 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_008 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_008--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0900
+     * @tc.name    test_fileio_create_dir_sync_009
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o060
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_009', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_009--------");
+        let tcNumber = 'test_fileio_create_dir_sync_009';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o060);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_009 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_009 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_009--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_1000
+     * @tc.name    test_fileio_create_dir_sync_010
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o050
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_010', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_010--------");
+        let tcNumber = 'test_fileio_create_dir_sync_010';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o050);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_010 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_010 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_010--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_1100
+     * @tc.name    test_fileio_create_dir_sync_011
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o040
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_011', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_011--------");
+        let tcNumber = 'test_fileio_create_dir_sync_011';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o040);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_011 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_011 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_011--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_1200
+     * @tc.name    test_fileio_create_dir_sync_012
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o030
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_012', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_012--------");
+        let tcNumber = 'test_fileio_create_dir_sync_012';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o030);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_012 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_012 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_012--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_1300
+     * @tc.name    test_fileio_create_dir_sync_013
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o020
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_013', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_013--------");
+        let tcNumber = 'test_fileio_create_dir_sync_013';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o020);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_013 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_013 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_013--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_1400
+     * @tc.name    test_fileio_create_dir_sync_014
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o010
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_014', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_014--------");
+        let tcNumber = 'test_fileio_create_dir_sync_014';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o010);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_014 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_014 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_014--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_1500
+     * @tc.name    test_fileio_create_dir_sync_015
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o007
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_015', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_015--------");
+        let tcNumber = 'test_fileio_create_dir_sync_015';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o007);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_015 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_015 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_015--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_1600
+     * @tc.name    test_fileio_create_dir_sync_016
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o006
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_016', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_016--------");
+        let tcNumber = 'test_fileio_create_dir_sync_016';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o006);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_016 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_016 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_016--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_1700
+     * @tc.name    test_fileio_create_dir_sync_017
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o005
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_017', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_017--------");
+        let tcNumber = 'test_fileio_create_dir_sync_017';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o005);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_017 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_017 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_017--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_1800
+     * @tc.name    test_fileio_create_dir_sync_018
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o004
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_018', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_018--------");
+        let tcNumber = 'test_fileio_create_dir_sync_018';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o004);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_018 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_018 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_018--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_1900
+     * @tc.name    test_fileio_create_dir_sync_019
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o003
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_019', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_019--------");
+        let tcNumber = 'test_fileio_create_dir_sync_019';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o003);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_019 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_019 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_019--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_2000
+     * @tc.name    test_fileio_create_dir_sync_020
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o002
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_020', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_020--------");
+        let tcNumber = 'test_fileio_create_dir_sync_020';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o002);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_020 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_020 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_020--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_2100
+     * @tc.name    test_fileio_create_dir_sync_021
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o001
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_021', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_021--------");
+        let tcNumber = 'test_fileio_create_dir_sync_021';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o001);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_021 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_021 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_021--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_2200
+     * @tc.name    test_fileio_create_dir_sync_022
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o777
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_022', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_022--------");
+        let tcNumber = 'test_fileio_create_dir_sync_022';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o777);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_022 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_022 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_022--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_2300
+     * @tc.name    test_fileio_create_dir_sync_023
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o766
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_023', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_023--------");
+        let tcNumber = 'test_fileio_create_dir_sync_023';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o766);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_023 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_023 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_023--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_2400
+     * @tc.name    test_fileio_create_dir_sync_024
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o755
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_024', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_024--------");
+        let tcNumber = 'test_fileio_create_dir_sync_024';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o755);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_024 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_024 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_024--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_2500
+     * @tc.name    test_fileio_create_dir_sync_025
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o744
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_025', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_025--------");
+        let tcNumber = 'test_fileio_create_dir_sync_025';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o744);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_025 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_025 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_025--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_2600
+     * @tc.name    test_fileio_create_dir_sync_026
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o733
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_026', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_026--------");
+        let tcNumber = 'test_fileio_create_dir_sync_026';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o733);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_026 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_026 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_026--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_2700
+     * @tc.name    test_fileio_create_dir_sync_027
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o722
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_027', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_027--------");
+        let tcNumber = 'test_fileio_create_dir_sync_027';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o722);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_027 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_027 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_027--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_2800
+     * @tc.name    test_fileio_create_dir_sync_028
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o711
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_028', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_028--------");
+        let tcNumber = 'test_fileio_create_dir_sync_028';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o001);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_028 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_028 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_028--------");
+    });
+
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_2900
+     * @tc.name    test_fileio_create_dir_sync_029
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o676
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_029', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_029--------");
+        let tcNumber = 'test_fileio_create_dir_sync_029';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o676);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_029 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_029 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_029--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_3000
+     * @tc.name    test_fileio_create_dir_sync_030
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o667
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_030', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_030--------");
+        let tcNumber = 'test_fileio_create_dir_sync_030';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o667);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_030 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_030 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_030--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_3100
+     * @tc.name    test_fileio_create_dir_sync_031
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o654
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_031', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_031--------");
+        let tcNumber = 'test_fileio_create_dir_sync_031';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o654);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_031 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_031 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_031--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_3200
+     * @tc.name    test_fileio_create_dir_sync_032
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o645
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_032', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_032--------");
+        let tcNumber = 'test_fileio_create_dir_sync_032';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o645);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_032 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_032 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_032--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_3300
+     * @tc.name    test_fileio_create_dir_sync_033
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o632
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_033', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_033--------");
+        let tcNumber = 'test_fileio_create_dir_sync_033';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o632);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_033 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_033 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_033--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_3400
+     * @tc.name    test_fileio_create_dir_sync_034
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o623
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_034', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_034--------");
+        let tcNumber = 'test_fileio_create_dir_sync_034';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o623);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_034 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_034 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_034--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_3500
+     * @tc.name    test_fileio_create_dir_sync_035
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o617
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_035', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_035--------");
+        let tcNumber = 'test_fileio_create_dir_sync_035';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o617);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_035 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_035 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_035--------");
+    });
+
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_3600
+     * @tc.name    test_fileio_create_dir_sync_036
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o575
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_036', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_036--------");
+        let tcNumber = 'test_fileio_create_dir_sync_036';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o575);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_036 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_036 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_036--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_3700
+     * @tc.name    test_fileio_create_dir_sync_037
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o564
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_037', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_037--------");
+        let tcNumber = 'test_fileio_create_dir_sync_037';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o564);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_037 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_037 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_037--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_3800
+     * @tc.name    test_fileio_create_dir_sync_038
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o557
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_038', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_038--------");
+        let tcNumber = 'test_fileio_create_dir_sync_038';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o557);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_038 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_038 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_038--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_3900
+     * @tc.name    test_fileio_create_dir_sync_039
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o546
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_039', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_039--------");
+        let tcNumber = 'test_fileio_create_dir_sync_039';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o546);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_039 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_039 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_039--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_4000
+     * @tc.name    test_fileio_create_dir_sync_040
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o531
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_040', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_040--------");
+        let tcNumber = 'test_fileio_create_dir_sync_040';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o531);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_040 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_040 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_040--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_4100
+     * @tc.name    test_fileio_create_dir_sync_041
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o527
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_041', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_041--------");
+        let tcNumber = 'test_fileio_create_dir_sync_041';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o527);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_041 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_041 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_041--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_4200
+     * @tc.name    test_fileio_create_dir_sync_042
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o513
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_042', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_042--------");
+        let tcNumber = 'test_fileio_create_dir_sync_042';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o513);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_042 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_042 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_042--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_4300
+     * @tc.name    test_fileio_create_dir_sync_043
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o474
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_043', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_043--------");
+        let tcNumber = 'test_fileio_create_dir_sync_043';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o474);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_043 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_043 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_043--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_4400
+     * @tc.name    test_fileio_create_dir_sync_044
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o465
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_044', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_044--------");
+        let tcNumber = 'test_fileio_create_dir_sync_044';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o465);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_044 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_044 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_044--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_4500
+     * @tc.name    test_fileio_create_dir_sync_045
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o456
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_045', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_045--------");
+        let tcNumber = 'test_fileio_create_dir_sync_045';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o456);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_045 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_045 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_045--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_4600
+     * @tc.name    test_fileio_create_dir_sync_046
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o447
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_046', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_046--------");
+        let tcNumber = 'test_fileio_create_dir_sync_046';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o447);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_046 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_046 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_046--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_4700
+     * @tc.name    test_fileio_create_dir_sync_047
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o437
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_047', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_047--------");
+        let tcNumber = 'test_fileio_create_dir_sync_047';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o437);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_047 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_047 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_047--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_4800
+     * @tc.name    test_fileio_create_dir_sync_048
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o421
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_048', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_048--------");
+        let tcNumber = 'test_fileio_create_dir_sync_048';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o421);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_048 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_048 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_048--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_4900
+     * @tc.name    test_fileio_create_dir_sync_049
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o412
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_049', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_049--------");
+        let tcNumber = 'test_fileio_create_dir_sync_049';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o412);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_049 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_049 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_049--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_5000
+     * @tc.name    test_fileio_create_dir_sync_050
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o373
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_050', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_050--------");
+        let tcNumber = 'test_fileio_create_dir_sync_050';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o373);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_050 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_050 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_050--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_5100
+     * @tc.name    test_fileio_create_dir_sync_051
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o362
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_051', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_051--------");
+        let tcNumber = 'test_fileio_create_dir_sync_051';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o362);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_051 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_051 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_051--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_5200
+     * @tc.name    test_fileio_create_dir_sync_052
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o351
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_052', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_052--------");
+        let tcNumber = 'test_fileio_create_dir_sync_052';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o351);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_052 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_052 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_052--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_5300
+     * @tc.name    test_fileio_create_dir_sync_053
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o347
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_053', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_053--------");
+        let tcNumber = 'test_fileio_create_dir_sync_053';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o347);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_053 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_053 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_053--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_5400
+     * @tc.name    test_fileio_create_dir_sync_054
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o336
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_054', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_054--------");
+        let tcNumber = 'test_fileio_create_dir_sync_054';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o336);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_054 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_054 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_054--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_5500
+     * @tc.name    test_fileio_create_dir_sync_055
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o325
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_055', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_055--------");
+        let tcNumber = 'test_fileio_create_dir_sync_055';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o325);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_055 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_055 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_055--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_5600
+     * @tc.name    test_fileio_create_dir_sync_056
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o314
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_056', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_056--------");
+        let tcNumber = 'test_fileio_create_dir_sync_056';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o314);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_056 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_056 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_056--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_5700
+     * @tc.name    test_fileio_create_dir_sync_057
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o272
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_057', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_057--------");
+        let tcNumber = 'test_fileio_create_dir_sync_057';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o272);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_057 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_057 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_057--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_5800
+     * @tc.name    test_fileio_create_dir_sync_058
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o263
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_058', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_058--------");
+        let tcNumber = 'test_fileio_create_dir_sync_058';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o263);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_058 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_058 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_058--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_5900
+     * @tc.name    test_fileio_create_dir_sync_059
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o257
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_059', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_059--------");
+        let tcNumber = 'test_fileio_create_dir_sync_059';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o257);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_059 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_059 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_059--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_6000
+     * @tc.name    test_fileio_create_dir_sync_060
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o241
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_060', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_060--------");
+        let tcNumber = 'test_fileio_create_dir_sync_060';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o241);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_060 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_060 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_060--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_6100
+     * @tc.name    test_fileio_create_dir_sync_061
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o235
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_061', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_061--------");
+        let tcNumber = 'test_fileio_create_dir_sync_061';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o235);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_061 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_061 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_061--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_6200
+     * @tc.name    test_fileio_create_dir_sync_062
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o226
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_062', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_062--------");
+        let tcNumber = 'test_fileio_create_dir_sync_062';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o226);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_062 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_062 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_062--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_6300
+     * @tc.name    test_fileio_create_dir_sync_063
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o216
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_063', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_063--------");
+        let tcNumber = 'test_fileio_create_dir_sync_063';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o216);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_063 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_063 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_063--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_6400
+     * @tc.name    test_fileio_create_dir_sync_064
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o171
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_064', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_064--------");
+        let tcNumber = 'test_fileio_create_dir_sync_064';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o171);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_064 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_064 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_064--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_6500
+     * @tc.name    test_fileio_create_dir_sync_065
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o167
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_065', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_065--------");
+        let tcNumber = 'test_fileio_create_dir_sync_065';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o167);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_065 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_065 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_065--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_6600
+     * @tc.name    test_fileio_create_dir_sync_066
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o153
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_066', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_066--------");
+        let tcNumber = 'test_fileio_create_dir_sync_066';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o153);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_066 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_066 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_066--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_6700
+     * @tc.name    test_fileio_create_dir_sync_067
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o142
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_067', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_067--------");
+        let tcNumber = 'test_fileio_create_dir_sync_067';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o142);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_067 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_067 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_067--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_6800
+     * @tc.name    test_fileio_create_dir_sync_068
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o134
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_068', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_068--------");
+        let tcNumber = 'test_fileio_create_dir_sync_068';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o134);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_068 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_068 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_068--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_6900
+     * @tc.name    test_fileio_create_dir_sync_069
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o126
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_069', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_069--------");
+        let tcNumber = 'test_fileio_create_dir_sync_069';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o126);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_069 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_069 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_069--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_7000
+     * @tc.name    test_fileio_create_dir_sync_070
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o115
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_070', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_070--------");
+        let tcNumber = 'test_fileio_create_dir_sync_070';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o115);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_070 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_070 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_070--------");
+    });
+
+
+
+
+
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_7100
+     * @tc.name    test_fileio_create_dir_sync_071
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o661
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_071', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_071--------");
+        let tcNumber = 'test_fileio_create_dir_sync_071';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o661);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_071 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_071 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_071--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_7200
+     * @tc.name    test_fileio_create_dir_sync_072
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o552
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_072', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_072--------");
+        let tcNumber = 'test_fileio_create_dir_sync_072';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o552);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_072 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_072 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_072--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_7300
+     * @tc.name    test_fileio_create_dir_sync_073
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o443
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_073', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_073--------");
+        let tcNumber = 'test_fileio_create_dir_sync_073';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o443);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_073 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_073 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_073--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_7400
+     * @tc.name    test_fileio_create_dir_sync_074
+     * @tc.desc    Test the distributed file mkdirSync interface with mode=0o224
+     * @tc.level   1
+     */
+    it('test_fileio_create_dir_sync_074', 1, async function (done) {
+        console.info("--------start test_fileio_create_dir_sync_074--------");
+        let tcNumber = 'test_fileio_create_dir_sync_074';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+
+        try {
+            fileio.mkdirSync(dpath, 0o224);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            console.info('------ client mkdirSync success.');
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_sync_074 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_sync_074 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_sync_074--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirAsync_0000
+     * @tc.name    test_fileio_create_dir_async_000
+     * @tc.desc    Test the distributed file mkdir() interface without the mode parameter, returned in promise mode.
+     * @tc.level   0
+     */
+     it('test_fileio_create_dir_async_000', 0, async function (done) {
+        console.info("--------start test_fileio_create_dir_async_000--------");
+        let tcNumber = 'test_fileio_create_dir_async_000';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+        try {
+            // await fileio.mkdir(dpath);
+            fileio.mkdir(dpath).then(function() {
+                console.info("------ mkdir succeed");
+            }).catch(function (error){
+                console.info("------ mkdir failed with error:"+ error);
+                expect(false).assertTrue();
+            });
+
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_async_000 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_async_000 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_async_000--------");
+    });
+
+    /** 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0100
+     * @tc.name    test_fileio_create_dir_async_001
+     * @tc.desc    Test the distributed file mkdir() interface without the mode parameter,returned in callback mode.
+     * @tc.level   0
+     */
+     it('test_fileio_create_dir_async_001', 0, async function (done) {
+        console.info("--------start test_fileio_create_dir_async_001--------");
+        let tcNumber = 'test_fileio_create_dir_async_001';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+        try {
+            fileio.mkdir(dpath, function(err) {
+                console.info('------ client mkdirSync success.');
+            });
+
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_create_dir_async_001 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+
+            dir.closeSync();
+            fileio.rmdirSync(dpath);
+        } catch (error) {
+            console.info('test_fileio_create_dir_async_001 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_dir_async_001--------");
+    });
+
+    /** 
+     * 
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_rmdirSync_0000
+     * @tc.name    test_fileio_delete_dir_sync_000
+     * @tc.desc    Function of API, rmdirSync(),
+     * @tc.level   0
+     */
+    it('test_fileio_delete_dir_sync_000', 0, async function (done) {
+        console.info("--------start test_fileio_delete_dir_sync_000--------");
+        let tcNumber = 'test_fileio_delete_dir_sync_000';
+        let dpath = await getDistributedFilePath(tcNumber) + 'd';
+        try {
+            fileio.mkdirSync(dpath);
+            let dir = fileio.opendirSync(dpath);
+            expect(dir !== null).assertTrue();
+            expect(dir.closeSync() == null).assertTrue();
+            console.info('------------- test_fileio_delete_dir_sync_000 : client mkdirSync success.');
+
+            console.info('------ start check server first ... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                console.info("test_fileio_delete_dir_sync_000 : getServerFileInfo serverDirCreate: " + JSON.stringify(serverDirCreate));
+                expect(serverDirCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+
+            expect(fileio.rmdirSync(dpath) !== null).assertTrue();
+            try {
+                let rm = fileio.opendirSync(dpath);
+                console.info('------------- test_fileio_delete_dir_sync_000 : client rmdirSync failed.');
+                expect(false).assertTrue();
+            } catch (e) {
+                console.info('------------- test_fileio_delete_dir_sync_000 : check client rmdirSync success.');
+            }
+
+            console.info('------ start check server second ... ');
+            await getServerFileInfo(tcNumber, dpath, CODE_RM_DIR, done, function (serverDirRemove) {
+                console.info("test_fileio_delete_dir_sync_000 : getServerFileInfo serverDirRemove: " + JSON.stringify(serverDirRemove));
+                expect(serverDirRemove == SERVER_CHECK_SUCCESS).assertTrue();
+            });
+        } catch (error) {
+            console.info('test_fileio_delete_dir_sync_000 has failed for : ' + error);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_delete_dir_sync_000--------");
+    });
+
     /**
      * 
      * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0000
@@ -111,54 +2609,23 @@ describe('FileioJsUnitTest', function () {
      * @tc.desc    Function of API, flags=0o102. mode=0o777
      * @tc.level   0
      */
-    it("test_fileio_create_file_sync_000", 0, async function (done) {
-        console.info("---------------------start test_fileio_create_file_sync_000---------------------------");
+    it('test_fileio_create_file_sync_000', 0, async function (done) {
+        console.info("--------start test_fileio_create_file_sync_000--------");
         let tcNumber = 'test_fileio_create_file_sync_000';
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            // 创建文件
             let fd = fileio.openSync(fpath, 0o102, 0o777);
             console.info('------------- create file success.');
-            // 检查文件
             fileio.accessSync(fpath, 0);
 
-            // 检查对端设备文件是否存在
-            console.info('------------------- start check server... ');
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
+                console.info("test_fileio_create_file_sync_000 getServerFileInfo serverFileCreate: " + JSON.stringify(serverFileCreate));
+                expect(serverFileCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            })
 
-            try {
-                data = rpc.MessageParcel.create();
-                reply = rpc.MessageParcel.create();
-                option = new rpc.MessageOption();
-
-                var writeResult = data.writeString(fpath);
-                console.info(tcNumber + " : run writeString success, writeResult is " + writeResult);
-                console.info(tcNumber + " : run writeString success, data is " + data.readString());
-                expect(writeResult == true).assertTrue();
-
-                if (gIRemoteObject == undefined) {
-                    console.info(tcNumber + " : gIRemoteObject undefined");
-                }
-                await gIRemoteObject.sendRequest(CODE_CREATE_FILE, data, reply, option).then((result) => {
-                    console.info(tcNumber + " : sendRequest success, result is " + result.errCode);
-                    var resultToken = result.reply.readString();
-                    console.info(tcNumber + " :run readString success, resultToken is " + resultToken);
-                    expect(resultToken == SERVER_CHECK_SUCCESS).assertTrue();
-                }).catch((err) => {
-                    console.info(tcNumber + " sendRequest has failed for : " + err);
-                    expect(false).assertTrue();
-                }).finally(() => {
-                    data.reclaim();
-                    reply.reclaim();
-                    done();
-                })
-            } catch (e) {
-                console.info(tcNumber + " has failed for : " + e);
-                expect(false).assertTrue();
-            }
-
-            // 清理测试环境
-            console.info('------------  start clean test environment.');
+            console.info('------------ start clean test environment.');
             fileio.closeSync(fd);
             fileio.unlinkSync(fpath);
 
@@ -166,7 +2633,7 @@ describe('FileioJsUnitTest', function () {
             console.info('test_fileio_create_file_sync_000 has failed for : ' + e);
             expect(false).assertTrue();
         }
-        console.info("---------------------end test_fileio_create_file_sync_000---------------------------");
+        console.info("--------end test_fileio_create_file_sync_000--------");
     });
 
     /**
@@ -177,15 +2644,14 @@ describe('FileioJsUnitTest', function () {
      * @tc.level    0
      */
     it('test_fileio_delete_file_sync_000', 0, async function (done) {
-        console.info("---------------------start test_fileio_delete_file_sync_000---------------------------");
+        console.info("--------start test_fileio_delete_file_sync_000--------");
         let tcNumber = 'test_fileio_delete_file_sync_000';
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            // 创建文件
             let fd = fileio.openSync(fpath, 0o102, 0o777);
             console.info('------------ test_fileio_delete_file_sync_000 : create file ...');
-            // 检查文件
+
             try {
                 fileio.accessSync(fpath, 0);
             } catch (e) {
@@ -194,45 +2660,14 @@ describe('FileioJsUnitTest', function () {
             }
             fileio.closeSync(fd);
 
-            // check 对端文件是否存在
-            console.info('------------------- start check server first ... ');
+            console.info('------ start check server first ... ');
+            await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
+                console.info("test_fileio_delete_file_sync_000 getServerFileInfo serverFileCreate: " + JSON.stringify(serverFileCreate));
+                expect(serverFileCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            })
 
-            try {
-                data = rpc.MessageParcel.create();
-                reply = rpc.MessageParcel.create();
-                option = new rpc.MessageOption();
-
-                var writeResult1 = data.writeString(fpath);
-                console.info(tcNumber + " : run writeString success, writeResult1 is " + writeResult1);
-                console.info(tcNumber + " : run writeString success, data is " + data.readString());
-                expect(writeResult1 == true).assertTrue();
-
-                if (gIRemoteObject == undefined) {
-                    console.info(tcNumber + " : gIRemoteObject undefined");
-                }
-
-                await gIRemoteObject.sendRequest(CODE_CREATE_FILE, data, reply, option).then((result1) => {
-                    console.info(tcNumber + " : sendRequest success, result1 is " + result1.errCode);
-                    var resultToken1 = result1.reply.readString();
-                    console.info(tcNumber + " :run readString success, resultToken1 is " + resultToken1);
-                    expect(resultToken1 == SERVER_CHECK_SUCCESS).assertTrue();
-                }).catch((err) => {
-                    console.info(tcNumber + " sendRequest has failed for : " + err);
-                    expect(false).assertTrue();
-                }).finally(() => {
-                    data.reclaim();
-                    reply.reclaim();
-                    done();
-                })
-            } catch (e) {
-                console.info(tcNumber + " has failed for : " + e);
-                expect(false).assertTrue();
-            }
-
-            // 删除文件
             fileio.unlinkSync(fpath);
             console.info('------------ test_fileio_delete_file_sync_000 : delete file ...');
-            // 检查本地是否删除成功
             try {
                 fileio.accessSync(fpath, 0);
                 console.info('------------ test_fileio_delete_file_sync_000 : delete file failed!');
@@ -240,48 +2675,17 @@ describe('FileioJsUnitTest', function () {
             } catch (e) {
                 console.info('------------ test_fileio_delete_file_sync_000 : delete file success!');
 
-                // check 对端文件是否同步被删除
-                sleep(1000);
-                console.info('------------------- start check server second ... ');
-
-                try {
-                    data = rpc.MessageParcel.create();
-                    reply = rpc.MessageParcel.create();
-                    option = new rpc.MessageOption();
-
-                    var writeResult2 = data.writeString(fpath);
-                    console.info(tcNumber + " : run writeString success, writeResult2 is " + writeResult2);
-                    console.info(tcNumber + " : run writeString success, data is " + data.readString());
-                    expect(writeResult2 == true).assertTrue();
-
-                    if (gIRemoteObject == undefined) {
-                        console.info(tcNumber + " : gIRemoteObject undefined");
-                    }
-
-                    await gIRemoteObject.sendRequest(CODE_DELETE_FILE, data, reply, option).then((result2) => {
-                        console.info(tcNumber + " : sendRequest success, result2 is " + result2.errCode);
-
-                        var resultToken2 = result2.reply.readString();
-                        console.info(tcNumber + " : run readString success, resultToken2 is " + resultToken2);
-                        expect(resultToken2 == SERVER_CHECK_SUCCESS).assertTrue();
-                    }).catch((err) => {
-                        console.info(tcNumber + " sendRequest has failed for : " + err);
-                        expect(false).assertTrue();
-                    }).finally(() => {
-                        data.reclaim();
-                        reply.reclaim();
-                        done();
-                    })
-                } catch (e) {
-                    console.info(tcNumber + " has failed for : " + e);
-                    expect(false).assertTrue();
-                }
+                console.info('------ start check server second ... ');
+                await getServerFileInfo(tcNumber, fpath, CODE_DELETE_FILE, done, function (serverFileDelete) {
+                    console.info("test_fileio_delete_file_sync_000 getServerFileInfo serverFileDelete: " + JSON.stringify(serverFileDelete));
+                    expect(serverFileDelete == SERVER_CHECK_SUCCESS).assertTrue();
+                })
             }
         } catch (e) {
             console.info('test_fileio_delete_file_sync_000 has failed for : ' + e);
             expect(false).assertTrue();
         }
-        console.info("---------------------end test_fileio_delete_file_sync_000---------------------------");
+        console.info("--------end test_fileio_delete_file_sync_000--------");
     });
 
     /**
@@ -292,61 +2696,26 @@ describe('FileioJsUnitTest', function () {
      * @tc.level   0
      */
     it('test_fileio_rename_file_000', 0, async function (done) {
-        console.info("---------------------start test_fileio_rename_file_000---------------------------");
+        console.info("--------start test_fileio_rename_file_000--------");
         let tcNumber = 'test_fileio_rename_file_000';
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            // 创建文件
+
             let fd = fileio.openSync(fpath, 0o102, 0o777);
-            // 检查文件
-            console.info('------------------- start check client first... ');
             fileio.accessSync(fpath, 0);
             console.info('------------- create file success.');
 
-            // 检查对端设备文件是否存在
-            console.info('------------------- start check server first... ');
+            console.info('------ start check server first... ');
+            await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
+                console.info("test_fileio_rename_file_000 getServerFileInfo serverFileCreate: " + JSON.stringify(serverFileCreate));
+                expect(serverFileCreate == SERVER_CHECK_SUCCESS).assertTrue();
+            })
 
-            try {
-                data = rpc.MessageParcel.create();
-                reply = rpc.MessageParcel.create();
-                option = new rpc.MessageOption();
-
-                var writeResult1 = data.writeString(fpath);
-                console.info(tcNumber + " : run writeString success, writeResult1 is " + writeResult1);
-                console.info(tcNumber + " : run writeString success, data is " + data.readString());
-                expect(writeResult1 == true).assertTrue();
-
-                if (gIRemoteObject == undefined) {
-                    console.info(tcNumber + " : gIRemoteObject undefined");
-                }
-
-                await gIRemoteObject.sendRequest(CODE_CREATE_FILE, data, reply, option).then((result1) => {
-                    console.info(tcNumber + " : sendRequest success, result1 is " + result1.errCode);
-
-                    var renameToken1 = result1.reply.readString();
-                    console.info(tcNumber + " :run readString success, renameToken1 is " + renameToken1);
-                    console.info(tcNumber + " :SERVER_CHECK_SUCCESS =" + SERVER_CHECK_SUCCESS);
-                    expect(renameToken1).assertEqual(SERVER_CHECK_SUCCESS);
-
-                }).catch((err) => {
-                    console.info(tcNumber + " sendRequest has failed for : " + err);
-                    expect(false).assertTrue();
-                }).finally(() => {
-                    data.reclaim();
-                    reply.reclaim();
-                    done();
-                })
-            } catch (e) {
-                console.info(tcNumber + " has failed for : " + e);
-                expect(false).assertTrue();
-            }
-
-            // 本端文件重命名
             let newPath = fpath + "_new";
             console.info('------------ test_fileio_rename_file_000 : newPath = ' + newPath);
             fileio.renameSync(fpath, newPath);
-            //检查本端重命名成功
+
             try {
                 fileio.accessSync(newPath, 0);
                 console.info('------------ test_fileio_rename_file_000 : rename file success!');
@@ -355,151 +2724,21 @@ describe('FileioJsUnitTest', function () {
                 console.info('test_fileio_rename_file_000 has failed for : ' + error);
                 expect(false).assertTrue();
             }
-            // 检查对端设备文件是否存在
-            console.info('------------------- start check server second... ');
 
-            try {
-                data = rpc.MessageParcel.create();
-                reply = rpc.MessageParcel.create();
-                option = new rpc.MessageOption();
+            console.info('------ start check server second... ');
+            await getServerFileInfo(tcNumber, newPath, CODE_CREATE_FILE, done, function (serverFileRename) {
+                console.info("test_fileio_rename_file_000 getServerFileInfo serverFileRename: " + JSON.stringify(serverFileRename));
+                expect(serverFileRename == SERVER_CHECK_SUCCESS).assertTrue();
+            })
 
-                var writeResult = data.writeString(newPath);
-                console.info(tcNumber + " : run writeString success, writeResult is " + writeResult);
-                console.info(tcNumber + " : run writeString success, data is " + data.readString());
-                expect(writeResult == true).assertTrue();
-
-                if (gIRemoteObject == undefined) {
-                    console.info(tcNumber + " : gIRemoteObject undefined");
-                }
-                await gIRemoteObject.sendRequest(CODE_CREATE_FILE, data, reply, option).then((result2) => {
-                    console.info(tcNumber + " : sendRequest success, result2 is " + result2.errCode);
-                    var renameToken2 = result2.reply.readString();
-                    console.info(tcNumber + " :run readString success, renameToken2 is " + renameToken2);
-                    expect(renameToken2 == SERVER_CHECK_SUCCESS).assertTrue();
-                }).catch((err) => {
-                    console.info(tcNumber + " sendRequest has failed for : " + err);
-                    expect(false).assertTrue();
-
-                }).finally(() => {
-                    data.reclaim();
-                    reply.reclaim();
-                    done();
-                })
-            } catch (e) {
-                console.info(tcNumber + " has failed for : " + e);
-                expect(false).assertTrue();
-            }
-
-            // 清理测试环境
-            console.info('------------  start clean test environment.');
             fileio.closeSync(fd);
             fileio.unlinkSync(newPath);
-
         } catch (e) {
             console.info('test_fileio_rename_file_000 has failed for : ' + e);
             expect(false).assertTrue();
         }
-        console.info("---------------------end test_fileio_rename_file_000---------------------------");
+        console.info("--------end test_fileio_rename_file_000--------");
     });
 
-    /**
-     * 
-     * @tc.number  SUB_STORAGE_Distributed_FileIO_fSync_0000
-     * @tc.name    test_fileio_fSync_file_000
-     * @tc.desc    Function of API, fSync()
-     * @tc.level   0
-     */
-    it('test_fileio_fSync_file_000', 0, async function (done) {
-        console.info("---------------------start test_fileio_fSync_file_000---------------------------");
-        let tcNumber = 'test_fileio_fSync_file_000';
-        let fpath = await getDistributedFilePath(tcNumber);
-
-        console.info('fpath == ' + fpath);
-        try {
-            // 创建文件
-            let fd = fileio.openSync(fpath, 0o102, 0o777);
-
-            // 检查对端设备文件是否存在
-            console.info('------------------- start check server first(filecreate)... ');
-
-            try {
-                data = rpc.MessageParcel.create();
-                reply = rpc.MessageParcel.create();
-                option = new rpc.MessageOption();
-
-                var writeResult1 = data.writeString(fpath);
-                console.info(tcNumber + " : run writeString success, writeResult1 is " + writeResult1);
-                console.info(tcNumber + " : run writeString success, data is " + data.readString());
-                expect(writeResult1 == true).assertTrue();
-
-                if (gIRemoteObject == undefined) {
-                    console.info(tcNumber + " : gIRemoteObject undefined");
-                }
-
-                await gIRemoteObject.sendRequest(CODE_CREATE_FILE, data, reply, option).then((result1) => {
-                    console.info(tcNumber + " : sendRequest success, result1 is " + result1.errCode);
-                    var resultToken1 = result1.reply.readString();
-                    console.info(tcNumber + " :run readString success, resultToken1 is " + resultToken1);
-                    expect(resultToken1 == SERVER_CHECK_SUCCESS).assertTrue();
-                }).catch((err) => {
-                    console.info(tcNumber + " sendRequest has failed for : " + err);
-                    expect(false).assertTrue();
-                }).finally(() => {
-                    data.reclaim();
-                    reply.reclaim();
-                    done();
-                })
-            } catch (e) {
-                console.info(tcNumber + " has failed for : " + e);
-                expect(false).assertTrue();
-            }
-
-            // 刷新对端文件，查看返回结果
-            sleep(2000);
-            console.info('------------------- start check server second(sync)... ');
-
-            try {
-                data = rpc.MessageParcel.create();
-                reply = rpc.MessageParcel.create();
-                option = new rpc.MessageOption();
-
-                var writeResult2 = data.writeString(fpath);
-                console.info(tcNumber + " : run writeString success, writeResult2 is " + writeResult2);
-                console.info(tcNumber + " : run writeString success, data is " + data.readString());
-                expect(writeResult2 == true).assertTrue();
-
-                if (gIRemoteObject == undefined) {
-                    console.info(tcNumber + " : gIRemoteObject undefined");
-                }
-
-                await gIRemoteObject.sendRequest(CODE_FSYNC_FILE, data, reply, option).then((result2) => {
-                    console.info(tcNumber + " : sendRequest success, result2 is " + result2.errCode);
-                    var resultToken2 = result2.reply.readString();
-                    console.info(tcNumber + " :run readString success, resultToken2 is " + resultToken2);
-                    expect(resultToken2 == SERVER_CHECK_SUCCESS).assertTrue();
-                }).catch((err) => {
-                    console.info(tcNumber + " sendRequest has failed for : " + err);
-                    expect(false).assertTrue();
-                }).finally(() => {
-                    data.reclaim();
-                    reply.reclaim();
-                    done();
-                })
-            } catch (e) {
-                console.info(tcNumber + " has failed for : " + e);
-                expect(false).assertTrue();
-            }
-
-            // 清理测试环境
-            console.info('------------  start clean test environment.');
-            fileio.closeSync(fd);
-            fileio.unlinkSync(fpath);
-        } catch (e) {
-            console.info('test_fileio_fSync_file_000 has failed for : ' + e);
-            expect(false).assertTrue();
-        }
-        console.info("---------------------end test_fileio_fSync_file_000---------------------------");
-    });
-
-    console.info("-----------------------SUB_Storage_Fileio_Distributed JS Test is end-----------------------");
+    console.info("----------SUB_Storage_Fileio_Distributed JS Test is end----------");
 });
