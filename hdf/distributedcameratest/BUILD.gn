@@ -52,6 +52,11 @@ ohos_moduletest_suite("DctsdisCameraTest") {
     "//third_party/jsoncpp:jsoncpp",
   ]
 
+  cflags = [
+    "-fPIC",
+    "-Wall",
+  ]
+
   external_deps = [
     "drivers_interface_camera:libcamera_proxy_1.0",
     "graphic_chipsetsdk:surface",
@@ -66,9 +71,7 @@ ohos_moduletest_suite("DctsdisCameraTest") {
     "LOG_DOMAIN=0xD004100",
   ]
 
-  public_configs = [ ":dcamera_hdf_demo_config" ]
-  install_enable = true
-  install_images = [ chipset_base_dir ]
+  cflags_cc = cflags
   subsystem_name = "hdf"
   part_name = "drivers_peripheral_distributed_camera"
 }

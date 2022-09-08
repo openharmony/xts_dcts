@@ -52,6 +52,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_0100, TestSize.Level1)
     ret = mainDemo->InitCameraDevice();
     EXPECT_EQ(cameraOk, ret) << "InitCameraDevice fail";
     sleep(sleepOk);
+    mainDemo->SetEnableResult();
     ret = PreviewOn(0, mainDemo);
     EXPECT_EQ(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);

@@ -16,11 +16,11 @@
 #ifndef DISTRIBUTED_STREAM_CUSTOMER_H
 #define DISTRIBUTED_STREAM_CUSTOMER_H
 
+#include <fstream>
 #include <iostream>
 #include <thread>
 #include <vector>
 #include <map>
-#include <hdf_log.h>
 #include <surface.h>
 #include <display_type.h>
 #include "constants.h"
@@ -30,35 +30,61 @@
 
 namespace OHOS {
 namespace DistributedHardware {
+
+typedef enum {
+    CAPTURE_PREVIEW = 0,
+    CAPTURE_SNAPSHOT,
+    CAPTURE_VIDEO,
+} CaptureMode;
+
+class TestBuffersConsumerListener : public IBufferConsumerListener {
+public:
+    TestBuffersConsumerListener(const sptr<Surface>& surface,
+    const std::function<void(void*, const uint32_t)> callback):callback_(callback), consumer_(surface)
+    {
+    }
+
+    ~TestBuffersConsumerListener()
+    {
+    }
+
+    void OnBufferAvailable()
+    {
+        DHLOGI("demo test:enter OnBufferAvailable start");
+        OHOS::Rect damage;
+        int32_t flushFence = 0;
+        int64_t timestamp = 0;
+
+        OHOS::sptr<OHOS::SurfaceBuffer> buff = nullptr;
+        consumer_->AcquireBuffer(buff, flushFence, timestamp, damage);
+        if (buff != nullptr) {
+            void* addr = buff->GetVirAddr();
+            if (callback_ != nullptr) {
+                int32_t size = buff->GetSize();
+                callback_(addr, size);
+            }
+            consumer_->ReleaseBuffer(buff, -1);
+            DHLOGI("demo test:Exiting OnBufferAvailable end");
+        }
+    }
+    void SetCallback(const std::function<void(void*, const uint32_t)> callback)
+    {
+        callback_ = callback;
+    }
+private:
+    std::function<void(void*, uint32_t)> callback_;
+    sptr<Surface> consumer_;
+};
+
 class StreamCustomer {
 public:
     StreamCustomer();
     ~StreamCustomer();
-    sptr<OHOS::IBufferProducer> CreateProducer();
-    void CamFrame(const std::function<void(void*, const uint32_t)> callback);
+    sptr<OHOS::IBufferProducer> CreateProducer(CaptureMode mode,
+        const std::function<void(void*, uint32_t)> callback);
 
-    RetCode ReceiveFrameOn(const std::function<void(void*, const uint32_t)> callback);
-    void ReceiveFrameOff();
-    class TestBuffersConsumerListener : public IBufferConsumerListener {
-    public:
-        TestBuffersConsumerListener()
-        {
-        }
-
-        ~TestBuffersConsumerListener()
-        {
-        }
-
-        void OnBufferAvailable()
-        {
-        }
-    };
 private:
-    unsigned int camFrameExit_ = 1;
-
     sptr<OHOS::Surface> consumer_ = nullptr;
-
-    std::thread* previewThreadId_ = nullptr;
 };
 } // namespace OHOS::Camera
 }

@@ -48,18 +48,26 @@ void DcameraHdfDemo::SetStreamInfo(StreamInfo& streamInfo,
         constexpr uint32_t height = CAMERA_PREVIEW_HEIGHT;
         streamInfo.width_ = width;
         streamInfo.height_ = height;
+        producer = streamCustomer->CreateProducer(CAPTURE_PREVIEW, nullptr);
     } else if (intent == OHOS::HDI::Camera::V1_0::STILL_CAPTURE) {
         constexpr uint32_t width = CAMERA_CAPTURE_WIDTH;
         constexpr uint32_t height = CAMERA_CAPTURE_HEIGHT;
         streamInfo.width_ = width;
         streamInfo.height_ = height;
         streamInfo.encodeType_ = CAMERA_CAPTURE_ENCODE_TYPE;
+        producer = streamCustomer->CreateProducer(CAPTURE_SNAPSHOT, [this](void* addr, const uint32_t size) {
+            StoreImage((char*)addr, size);
+        });
     } else {
         constexpr uint32_t width = CAMERA_VIDEO_WIDTH;
         constexpr uint32_t height = CAMERA_VIDEO_HEIGHT;
         streamInfo.width_ = width;
         streamInfo.height_ = height;
         streamInfo.encodeType_ = CAMERA_VIDEO_ENCODE_TYPE;
+        OpenVideoFile();
+        producer = streamCustomer->CreateProducer(CAPTURE_VIDEO, [this](void* addr, const uint32_t size) {
+            StoreVideo((char*)addr, size);
+        });
     }
 
     streamInfo.streamId_ = streamId;
@@ -68,7 +76,6 @@ void DcameraHdfDemo::SetStreamInfo(StreamInfo& streamInfo,
     streamInfo.intent_ = intent;
     streamInfo.tunneledMode_ = tunneledMode;
 
-    producer = streamCustomer->CreateProducer();
     streamInfo.bufferQueue_ = new BufferProducerSequenceable(producer);
     streamInfo.bufferQueue_->producer_->SetQueueSize(8); // 8:set bufferQueue size
 }
@@ -121,9 +128,8 @@ RetCode DcameraHdfDemo::CaptureON(const int streamId, const int captureId, Captu
     bool iscapture = true;
 
     if (mode == CAPTURE_SNAPSHOT) {
-       CaptureSet(setting);
-    }else
-    {
+        CaptureSet(setting);
+    } else {
         OHOS::Camera::MetadataUtils::ConvertMetadataToVec(captureSetting_, setting);
     }
     
@@ -142,19 +148,7 @@ RetCode DcameraHdfDemo::CaptureON(const int streamId, const int captureId, Captu
         streamOperator_->ReleaseStreams(captureInfo_.streamIds_);
         return RC_ERROR;
     }
-    DHLOGI("demo test: CaptureStart Capture success");
-    if (mode == CAPTURE_PREVIEW) {
-        streamCustomerPreview_->ReceiveFrameOn(nullptr);
-    } else if (mode == CAPTURE_SNAPSHOT) {
-        streamCustomerCapture_->ReceiveFrameOn([this](void* addr, const uint32_t size) {
-            StoreImage((char*)addr, size);
-        });
-    } else if (mode == CAPTURE_VIDEO) {
-        OpenVideoFile();
-        streamCustomerVideo_->ReceiveFrameOn([this](void* addr, const uint32_t size) {
-            StoreVideo((char*)addr, size);
-        });
-    }
+
     DHLOGI("demo test: CaptureON exit");
     return RC_OK;
 }
@@ -170,13 +164,10 @@ RetCode DcameraHdfDemo::CaptureOff(const int captureId, const CaptureMode mode)
     }
 
     if (mode == CAPTURE_PREVIEW) {
-        streamCustomerPreview_->ReceiveFrameOff();
         rc = streamOperator_->CancelCapture(captureId);
     } else if (mode == CAPTURE_SNAPSHOT) {
-        streamCustomerCapture_->ReceiveFrameOff();
         rc = streamOperator_->CancelCapture(captureId);
     } else if (mode == CAPTURE_VIDEO) {
-        streamCustomerVideo_->ReceiveFrameOff();
         rc = streamOperator_->CancelCapture(captureId);
         close(videoFd_);
         videoFd_ = -1;
@@ -201,7 +192,6 @@ RetCode DcameraHdfDemo::CreateStreamInfo(const int streamId, std::shared_ptr<Str
     }
 
     StreamInfo streamInfo = {0};
-
     SetStreamInfo(streamInfo, streamCustomer, streamId, intent);
     if (streamInfo.bufferQueue_->producer_ == nullptr) {
         DHLOGE("demo test: CreateStream CreateProducer(); is nullptr");
@@ -236,7 +226,6 @@ RetCode DcameraHdfDemo::CreateStream()
 RetCode DcameraHdfDemo::InitCameraDevice()
 {
     int rc = 0;
-
     DHLOGI("demo test: InitCameraDevice enter");
 
     if (demoCameraHost_ == nullptr) {
@@ -251,7 +240,6 @@ RetCode DcameraHdfDemo::InitCameraDevice()
 
     const std::string cameraId = cameraIds_.front();
     demoCameraHost_->GetCameraAbility(cameraId, cameraAbility_);
-
     OHOS::Camera::MetadataUtils::ConvertVecToMetadata(cameraAbility_, ability_);
 
     GetFaceDetectMode(ability_);
@@ -397,7 +385,6 @@ RetCode DcameraHdfDemo::CreateStreams(const int streamIdSecond, StreamIntent int
     streamInfos.push_back(previewStreamInfo);
 
     StreamInfo secondStreamInfo = {0};
-
     if (streamIdSecond == STREAM_ID_CAPTURE) {
         SetStreamInfo(secondStreamInfo, streamCustomerCapture_, STREAM_ID_CAPTURE, intent);
     } else {
@@ -442,7 +429,6 @@ RetCode DcameraHdfDemo::CaptureOnDualStreams(const int streamIdSecond)
         streamOperator_->ReleaseStreams(previewCaptureInfo.streamIds_);
         return RC_ERROR;
     }
-    streamCustomerPreview_->ReceiveFrameOn(nullptr);
 
     CaptureInfo secondCaptureInfo;
     secondCaptureInfo.streamIds_ = {streamIdSecond};
@@ -456,10 +442,6 @@ RetCode DcameraHdfDemo::CaptureOnDualStreams(const int streamIdSecond)
             streamOperator_->ReleaseStreams(secondCaptureInfo.streamIds_);
             return RC_ERROR;
         }
-
-        streamCustomerCapture_->ReceiveFrameOn([this](void *addr, const uint32_t size) {
-            StoreImage((char*)addr, size);
-        });
     } else {
         rc = streamOperator_->Capture(CAPTURE_ID_VIDEO, secondCaptureInfo, true);
         if (rc != HDI::Camera::V1_0::NO_ERROR) {
@@ -467,11 +449,6 @@ RetCode DcameraHdfDemo::CaptureOnDualStreams(const int streamIdSecond)
             streamOperator_->ReleaseStreams(secondCaptureInfo.streamIds_);
             return RC_ERROR;
         }
-
-        OpenVideoFile();
-        streamCustomerVideo_->ReceiveFrameOn([this](void* addr, const uint32_t size) {
-            StoreVideo((char*)addr, size);
-        });
     }
 
     DHLOGI("demo test: CaptuCaptureOnDualStreamsreON exit");
@@ -660,7 +637,6 @@ RetCode DcameraHdfDemo::SetAwbMode(const int mode) const
 RetCode DcameraHdfDemo::SetAeExpo()
 {
     int32_t expo;
-
     DHLOGI("demo test: SetAeExpo enter");
 
     constexpr size_t entryCapacity = 100;
@@ -804,7 +780,6 @@ RetCode DcameraHdfDemo::StreamOffline(const int streamId)
             return RC_ERROR;
         }
     }
-    streamCustomerCapture_->ReceiveFrameOff();
 
     DHLOGI("demo test: StreamOffline exit");
     return RC_OK;
@@ -1281,7 +1256,7 @@ RetCode OfflineTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
 RetCode CaptureTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
 {
     RetCode rc = RC_OK;
-    constexpr size_t delayTime = 10;
+    constexpr size_t delayTime = 5;
 
     rc = mainDemo->CaptureON(STREAM_ID_CAPTURE, CAPTURE_ID_CAPTURE, CAPTURE_SNAPSHOT);
     if (rc != RC_OK) {
@@ -1302,7 +1277,7 @@ RetCode CaptureTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
 RetCode VideoTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
 {
     RetCode rc = RC_OK;
-    constexpr size_t delayTime = 10;
+    constexpr size_t delayTime = 5;
 
     PreviewOff(mainDemo);
     mainDemo->StartDualStreams(STREAM_ID_VIDEO);
