@@ -42,30 +42,34 @@ int createShm(int key)
     shmid = shmget(static_cast<key_t>(key), sizeof(struct shared_use_st), PERMISSION | IPC_CREAT);
     LOG("shmget shmid=%d", shmid);
     if (shmid == -1) {
+        LOG("%s err: shmget, shmid = -1", LOGSTR);
         return -1;
     }
     // 将共享内存连接到当前进程的地址空间
     shm = shmat(shmid, nullptr, 0);
     int n = -1;
     if (shm == static_cast<void*>(&n)) {
+        LOG("%s err: shmat, shm = -1", LOGSTR);
         return -1;
     }
 
     shared = (struct shared_use_st*)shm;
     initShm();
+    LOG("%s createShm end...", LOGSTR);
     return 0;
 }
 
 void initShm(void)
 {
-    LOG("initShm begin...");
+    LOG("%s initShm begin...", LOGSTR);
     memset_s(shm, sizeof(struct shared_use_st), 0, sizeof(struct shared_use_st));
     if (shared == nullptr) {
+        LOG("%s err:initShm  shared = nullptr", LOGSTR);
         return;
     }
     shared->written = 0;
     memset_s(shared->data, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    LOG("initShm end...");
+    LOG("%s initShm end...", LOGSTR);
     return;
 }
 
@@ -73,6 +77,7 @@ int readDataFromShm(char* buf)
 {
     LOG("readDataFromShm begin...");
     if (shared == nullptr) {
+        LOG("%s err:readDataFromShm  shared = nullptr", LOGSTR);
         return -1;
     }
 
@@ -182,8 +187,13 @@ int writeCodeDataToShm(int code, char* buf)
 }
 int writeDataToShm(char* buf)
 {
-    LOG("writeDataToShm, begin");
-    if (shared == nullptr || buf == nullptr) {
+    LOG("%s writeDataToShm, begin", LOGSTR);
+    if (shared == nullptr) {
+        LOG("%s err:writeDataToShm  shared == nullptr", LOGSTR);
+        return -1;
+    }
+    if (buf == nullptr) {
+        LOG("%s err: writeDataToShm, buf == nullptr", LOGSTR);
         return -1;
     }
     while (shared->written == 1) {

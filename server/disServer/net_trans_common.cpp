@@ -540,9 +540,6 @@ void* DataOperateTask(void* param)
         return nullptr;
     }
     SendDataMsgToRemote(CtrlCodeType::CTRL_CODE_RESULT_TYPE, str);
-    if (handle) {
-        dlclose(handle);
-    }
     free((char*)param);
     LOG("operate end");
     return nullptr;
