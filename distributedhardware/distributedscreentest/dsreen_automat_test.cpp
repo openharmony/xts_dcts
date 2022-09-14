@@ -101,3 +101,159 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_0700, TestSize.Level1)
     int ret = QueryRemoteScreenInfo();
     EXPECT_EQ(g_dSreenOk, ret) << "QueryRemoteScreenInfo fail";
 }
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_0800, TestSize.Level1)
+{
+    int ret = StartMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = StopMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_0900, TestSize.Level1)
+{
+    int ret = StartExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = StopExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_1000, TestSize.Level1)
+{
+    int ret = StartMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = StopMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+    ret = CreateWindow();
+    EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_1100, TestSize.Level1)
+{
+    int ret = StartExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = StopExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+    ret = CreateWindow();
+    EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_1200, TestSize.Level1)
+{
+    int ret = StartMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = CreateWindow();
+    EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
+    ret = StopMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_1300, TestSize.Level1)
+{
+    int ret = StartExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = CreateWindow();
+    EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
+    ret = StopExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_1400, TestSize.Level1)
+{
+    int ret = StartMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = QueryRemoteDeviceInfo();
+    EXPECT_EQ(g_dSreenOk, ret) << "QueryRemoteDeviceInfo fail";
+    ret = StopMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_1500, TestSize.Level1)
+{
+    int ret = StartMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = QueryRemoteScreenInfo();
+    EXPECT_EQ(g_dSreenOk, ret) << "QueryRemoteScreenInfo fail";
+    ret = StopMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_1600, TestSize.Level1)
+{
+    int ret = StartExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = QueryRemoteDeviceInfo();
+    EXPECT_EQ(g_dSreenOk, ret) << "QueryRemoteDeviceInfo fail";
+    ret = StopExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_1700, TestSize.Level1)
+{
+    int ret = StartExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = QueryRemoteScreenInfo();
+    EXPECT_EQ(g_dSreenOk, ret) << "QueryRemoteScreenInfo fail";
+    ret = StopExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_1800, TestSize.Level1)
+{
+    int ret = CreateWindow();
+    EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
+    ret = StopMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+    ret = StartMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_1900, TestSize.Level1)
+{
+    int ret = StartExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = StopExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+    ret = StartMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = StopMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_2000, TestSize.Level1)
+{
+    int ret = StartMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = StartExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = StopMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+    ret = StopExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_2100, TestSize.Level1)
+{
+    int ret = StartExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = StartMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = StopMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+    ret = StopExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+}
+
+HWTEST_F(DSreenAutomatTest, DSreenTest_2200, TestSize.Level1)
+{
+    int ret = CreateWindow();
+    EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
+    ret = StopExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+    ret = StopMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+    ret = StartExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = StartMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+}
