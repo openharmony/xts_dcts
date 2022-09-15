@@ -20,7 +20,7 @@ ohos_js_hap_suite("DctsFileioClientTest") {
   ]
 
   certificate_profile = "./signature/openharmony_sx.p7b"
-  hap_name = "DctsFileioClient"
+  hap_name = "DctsFileioClientTest"
   subsystem_name = "filemanagement"
   part_name = "dfs_service"
 }
