@@ -214,7 +214,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_1700, TestSize.Level1)
     int32_t ret = mainDemo->SetMetadata();
     EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
     sleep(sleepOk);
-     ret = mainDemo->SetAeExpo();
+    ret = mainDemo->SetAeExpo();
     EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
     sleep(sleepOk);
     ret = CaptureTest(mainDemo);
@@ -255,7 +255,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_2000, TestSize.Level1)
     ret = mainDemo->SetMetadata();
     EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
     sleep(sleepOk);
-     ret = mainDemo->SetAeExpo();
+    ret = mainDemo->SetAeExpo();
     EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
     sleep(sleepOk);
 }
