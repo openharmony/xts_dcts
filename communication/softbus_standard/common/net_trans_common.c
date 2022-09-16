@@ -19,10 +19,12 @@ static int ONE_SECOND = 1;
 
 static int32_t g_currentSessionId4Data = -1;
 static int32_t g_currentSessionId4Ctl = -1;
+static int32_t g_currentSessionId4Proxy = -1;
 
 static int32_t g_waitFlag = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Data = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Ctl = WAIT_DEF_VALUE;
+static int32_t g_waitFlag4Proxy = WAIT_DEF_VALUE;
 static int32_t g_passiveOpenRetFlag = SOFTBUS_OK;
 static int32_t g_nodeOnlineCount = 0;
 static int32_t g_nodeOfflineCount = 0;
@@ -33,6 +35,7 @@ static int32_t g_sessionCloseCount4Data = 0;
 static int32_t g_sessionCloseCount4Ctrl = 0;
 static int32_t g_sessionOpenCount4Data = 0;
 static int32_t g_sessionOpenCount4Ctrl = 0;
+static int32_t g_sessionOpenCount4Proxy = 0;
 
 static SessionAttribute* g_sessionAttr4Data = NULL;
 static SessionAttribute* g_sessionAttr4Ctl = NULL;
@@ -119,6 +122,12 @@ int Wait4Session(int timeout, WaitSessionType type)
                     hitFlag = 1;
                 }
                 break;
+            case SESSION_4PROXY:
+                if (g_waitFlag4Proxy != WAIT_DEF_VALUE) {
+                    LOG("Wait4Session[proxy] succ,flag:%d", g_waitFlag4Proxy);
+                    hitFlag = 1;
+                }
+                break;
             default:
                 LOG("Wait4Session type error");
                 hitFlag = 1;
@@ -139,6 +148,12 @@ int Wait4Session(int timeout, WaitSessionType type)
         case SESSION_4DATA:
             if (g_waitFlag4Data != WAIT_SUCCESS_VALUE) {
                 LOG("Wait4Session[data] fail[exp:%d, real:%d]", WAIT_SUCCESS_VALUE, g_waitFlag4Data);
+                return SOFTBUS_ERR;
+            }
+            break;
+        case SESSION_4PROXY:
+            if (g_waitFlag4Proxy != WAIT_SUCCESS_VALUE) {
+                LOG("Wait4Session[proxy] fail[exp:%d, real:%d]", WAIT_SUCCESS_VALUE, g_waitFlag4Proxy);
                 return SOFTBUS_ERR;
             }
             break;
@@ -514,9 +529,9 @@ static int ProxySessionOpened(int sessionId, int result)
 {
     LOG("[cb][proxy]open session proxy sid[%d],rst[%d]", sessionId, result);
     if (result == SOFTBUS_OK) {
-        g_waitFlag = WAIT_SUCCESS_VALUE;
+        g_waitFlag4Proxy = WAIT_SUCCESS_VALUE;
     } else {
-        g_waitFlag = WAIT_FAIL_VALUE;
+        g_waitFlag4Proxy = WAIT_FAIL_VALUE;
     }
     return SOFTBUS_OK;
 }
@@ -524,7 +539,7 @@ static int ProxySessionOpened(int sessionId, int result)
 static void ProxySessionClosed(int sessionId)
 {
     LOG("[cb][proxy]close session proxy sid[%d]", sessionId);
-    g_waitFlag = WAIT_SUCCESS_VALUE;
+    g_waitFlag4Proxy = WAIT_SUCCESS_VALUE;
 }
 
 static void ProxyBytesReceived(int sessionId, const void* data, unsigned int dataLen)
@@ -532,9 +547,9 @@ static void ProxyBytesReceived(int sessionId, const void* data, unsigned int dat
     LOG("[cb][proxy]ByteRec sid:%d, data len:%u", sessionId, dataLen);
     if (data == NULL) {
         LOG("[cb][proxy]ByteRec invalid data=null sid:[%d]", sessionId);
-        g_waitFlag = WAIT_FAIL_VALUE;
+        g_waitFlag4Proxy = WAIT_FAIL_VALUE;
     } else {
-        g_waitFlag = WAIT_SUCCESS_VALUE;
+        g_waitFlag4Proxy = WAIT_SUCCESS_VALUE;
     }
 }
 
@@ -543,9 +558,9 @@ static void ProxyMessageReceived(int sessionId, const void* data, unsigned int d
     LOG("[cb][proxy]MessageRec sid:%d, data len:%u", sessionId, dataLen);
     if (data == NULL) {
         LOG("[cb][proxy]MessageRec invalid data=null sid[%d]", sessionId);
-        g_waitFlag = WAIT_FAIL_VALUE;
+        g_waitFlag4Proxy = WAIT_FAIL_VALUE;
     } else {
-        g_waitFlag = WAIT_SUCCESS_VALUE;
+        g_waitFlag4Proxy = WAIT_SUCCESS_VALUE;
     }
 }
 
@@ -562,6 +577,11 @@ void ResetWaitFlag4Data(void)
 void ResetWaitFlag4Ctl(void)
 {
     g_waitFlag4Ctl = WAIT_DEF_VALUE;
+}
+
+void ResetWaitFlag4Proxy(void)
+{
+    g_waitFlag4Proxy = WAIT_DEF_VALUE;
 }
 
 void ResetwaitCount4Online(void)
@@ -656,6 +676,34 @@ int CreateSsAndOpenSession4Ctl(void)
     return ret;
 }
 
+int CreateSsAndOpenSession4Proxy(void)
+{
+    int ret;
+    int timeout = 10;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY, g_sessionlistener4Proxy);
+    if (ret != SOFTBUS_OK) {
+        LOG("call CreateSessionServer[Proxy] fail, ret:%d", ret);
+        return ret;
+    }
+
+    int sessionId;
+    ResetWaitFlag();
+    sessionId = OpenSession(SESSION_NAME_PROXY, SESSION_NAME_PROXY, g_networkId, DEF_GROUP_ID, g_sessionAttr4Proxy);
+    if (sessionId < SESSION_ID_MIN) {
+        LOG("call OpenSession[Proxy] fail, ret sid:%d", sessionId);
+        return SOFTBUS_ERR;
+    }
+    SetCurrentSessionId4Proxy(sessionId);
+    LOG("call OpenSession[Proxy] success,sid:%d", sessionId);
+
+    ret = Wait4Session(timeout, SESSION_4PROXY);
+    if (ret != SOFTBUS_OK) {
+        LOG("OpenSession[Proxy] fail");
+        return SOFTBUS_ERR;
+    }
+    return ret;
+}
+
 int SendData4Data(DataType type, int size)
 {
     int ret;
@@ -717,9 +765,9 @@ int SendData4Message(DataType type, int size)
     g_expectDataSize = size;
     ResetWaitFlag();
     if (type == DATA_TYPE_MSG) {
-        ret = SendMessage(g_currentSessionId4Ctl, g_expectMessageContent, size);
+        ret = SendMessage(g_currentSessionId4Proxy, g_expectMessageContent, size);
     } else if (type == DATA_TYPE_BYTE) {
-        ret = SendBytes(g_currentSessionId4Ctl, g_expectMessageContent, size);
+        ret = SendBytes(g_currentSessionId4Proxy, g_expectMessageContent, size);
     } else {
         LOG("[send data]invalid param[DataType]");
         free(g_expectMessageContent);
@@ -775,6 +823,30 @@ int CloseSessionAndRemoveSs4Ctl(void)
     ret4Ss = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_CTL);
     if (ret4Ss != SOFTBUS_OK) {
         LOG("RemoveSessionServer[ctl] fail, ret:%d", ret4Ss);
+    }
+
+    if (ret4Ss != SOFTBUS_OK || ret4Close == SOFTBUS_OK) {
+        return SOFTBUS_ERR;
+    } else {
+        return SOFTBUS_OK;
+    }
+}
+
+int CloseSessionAndRemoveSs4Proxy(void)
+{
+    int ret4Close;
+    int timeout = 2;
+    ResetWaitFlag();
+    CloseSession(g_currentSessionId4Proxy);
+    ret4Close = Wait(timeout);
+    if (ret4Close == SOFTBUS_OK) {
+        LOG("CloseSession[Proxy] recv callback");
+    }
+
+    int ret4Ss;
+    ret4Ss = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY);
+    if (ret4Ss != SOFTBUS_OK) {
+        LOG("RemoveSessionServer[Proxy] fail, ret:%d", ret4Ss);
     }
 
     if (ret4Ss != SOFTBUS_OK || ret4Close == SOFTBUS_OK) {
@@ -980,6 +1052,11 @@ SessionAttribute* GetSessionAttr4Ctl(void)
     return g_sessionAttr4Ctl;
 }
 
+SessionAttribute* GetSessionAttr4Proxy(void)
+{
+    return g_sessionAttr4Proxy;
+}
+
 void SetCurrentSessionId4Data(int sessionId)
 {
     g_currentSessionId4Data = sessionId;
@@ -990,6 +1067,12 @@ void SetCurrentSessionId4Ctl(int sessionId)
     g_currentSessionId4Ctl = sessionId;
 }
 
+void SetCurrentSessionId4Proxy(int sessionId)
+{
+    g_currentSessionId4Proxy = sessionId;
+}
+
+
 int GetCurrentSessionId4Data(void)
 {
     return g_currentSessionId4Data;
@@ -998,6 +1081,17 @@ int GetCurrentSessionId4Data(void)
 int GetCurrentSessionId4Ctl(void)
 {
     return g_currentSessionId4Ctl;
+}
+
+
+int GetCurrentSessionId4Proxy(void)
+{
+    return g_currentSessionId4Proxy;
+}
+
+int GetOpenSessionCount4Proxy(void)
+{
+    return g_sessionOpenCount4Proxy;
 }
 
 void TestSetUp(void)
@@ -1067,7 +1161,7 @@ void TestSetUp(void)
     }
     if (g_sessionAttr4Ctl == NULL) {
         g_sessionAttr4Ctl = (SessionAttribute*)calloc(1, sizeof(SessionAttribute));
-        g_sessionAttr4Ctl->dataType = TYPE_MESSAGE;
+        g_sessionAttr4Ctl->dataType = TYPE_BYTES;
     }
     if (g_sessionAttr4Pass == NULL) {
         g_sessionAttr4Pass = (SessionAttribute*)calloc(1, sizeof(SessionAttribute));

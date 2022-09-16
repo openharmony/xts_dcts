@@ -177,14 +177,14 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0500, TestSize.Leve
 HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0600, TestSize.Level3)
 {
     int ret;
-    ret = CreateSsAndOpenSession4Ctl();
+    ret = CreateSsAndOpenSession4Proxy();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     int size = 1;
     ret = SendData4Message(DATA_TYPE_BYTE, size);
     EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
 
-    ret = CloseSessionAndRemoveSs4Ctl();
+    ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }
 
@@ -198,14 +198,14 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0600, TestSize.Leve
 HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0700, TestSize.Level3)
 {
     int ret;
-    ret = CreateSsAndOpenSession4Ctl();
+    ret = CreateSsAndOpenSession4Proxy();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     int size = 2 * 1024;
     ret = SendData4Message(DATA_TYPE_BYTE, size);
     EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte,2M) fail";
 
-    ret = CloseSessionAndRemoveSs4Ctl();
+    ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }
 
@@ -219,14 +219,14 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0700, TestSize.Leve
 HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0800, TestSize.Level3)
 {
     int ret;
-    ret = CreateSsAndOpenSession4Ctl();
+    ret = CreateSsAndOpenSession4Proxy();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     int size = 4 * 1024;
     ret = SendData4Message(DATA_TYPE_BYTE, size);
     EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte,Max) fail";
 
-    ret = CloseSessionAndRemoveSs4Ctl();
+    ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }
 
@@ -240,16 +240,16 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0800, TestSize.Leve
 HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0900, TestSize.Level3)
 {
     int ret;
-    ret = CreateSsAndOpenSession4Ctl();
+    ret = CreateSsAndOpenSession4Proxy();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     int size = 0;
     string emptyStr = "";
-    int sessionId = GetCurrentSessionId4Ctl();
+    int sessionId = GetCurrentSessionId4Proxy();
     ret = SendBytes(sessionId, emptyStr.c_str(), size);
     EXPECT_NE(SOFTBUS_OK, ret) << "call sendbytes(empty) fail";
 
-    ret = CloseSessionAndRemoveSs4Ctl();
+    ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }
 
@@ -263,14 +263,14 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0900, TestSize.Leve
 HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_1000, TestSize.Level3)
 {
     int ret;
-    ret = CreateSsAndOpenSession4Ctl();
+    ret = CreateSsAndOpenSession4Proxy();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     int size = 4 * 1024 + 1;
     ret = SendData4Message(DATA_TYPE_BYTE, size);
     EXPECT_NE(SOFTBUS_OK, ret) << "call sendbytes(empty) fail";
 
-    ret = CloseSessionAndRemoveSs4Ctl();
+    ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }
 
@@ -396,14 +396,14 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0500, TestSize.Le
 HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0600, TestSize.Level3)
 {
     int ret;
-    ret = CreateSsAndOpenSession4Ctl();
+    ret = CreateSsAndOpenSession4Proxy();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     int size = 1;
     ret = SendData4Message(DATA_TYPE_MSG, size);
     EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg, 1B) fail";
 
-    ret = CloseSessionAndRemoveSs4Ctl();
+    ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }
 
@@ -417,14 +417,14 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0600, TestSize.Le
 HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0700, TestSize.Level3)
 {
     int ret;
-    ret = CreateSsAndOpenSession4Ctl();
+    ret = CreateSsAndOpenSession4Proxy();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     int size = 1000;
     ret = SendData4Message(DATA_TYPE_MSG, size);
     EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg,1K) fail";
 
-    ret = CloseSessionAndRemoveSs4Ctl();
+    ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }
 
@@ -438,14 +438,14 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0700, TestSize.Le
 HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0800, TestSize.Level3)
 {
     int ret;
-    ret = CreateSsAndOpenSession4Ctl();
+    ret = CreateSsAndOpenSession4Proxy();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     int size = TRANS_PROXY_MESSAGE_LENGTH_MAX;
     ret = SendData4Message(DATA_TYPE_MSG, size);
     EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg,Max) fail";
 
-    ret = CloseSessionAndRemoveSs4Ctl();
+    ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }
 
@@ -459,16 +459,16 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0800, TestSize.Le
 HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0900, TestSize.Level3)
 {
     int ret;
-    ret = CreateSsAndOpenSession4Ctl();
+    ret = CreateSsAndOpenSession4Proxy();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     int size = 0;
     string emptystr = "";
-    int sessionId = GetCurrentSessionId4Ctl();
+    int sessionId = GetCurrentSessionId4Proxy();
     ret = SendMessage(sessionId, emptystr.c_str(), size);
     EXPECT_NE(SOFTBUS_OK, ret) << "call sendmsg(empty) fail";
 
-    ret = CloseSessionAndRemoveSs4Ctl();
+    ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }
 
@@ -482,13 +482,13 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0900, TestSize.Le
 HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_1000, TestSize.Level3)
 {
     int ret;
-    ret = CreateSsAndOpenSession4Ctl();
+    ret = CreateSsAndOpenSession4Proxy();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     int size = TRANS_PROXY_MESSAGE_LENGTH_MAX + 1;
     ret = SendData4Message(DATA_TYPE_MSG, size);
     EXPECT_NE(SOFTBUS_OK, ret) << "call sendmsg(Max+1) fail";
 
-    ret = CloseSessionAndRemoveSs4Ctl();
+    ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }

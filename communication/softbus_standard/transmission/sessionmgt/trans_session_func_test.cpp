@@ -62,14 +62,14 @@ void TransSessionFuncTest::TearDownTestCase()
 }
 
 /**
- * @tc.number           : SUB_Softbus_Trans_Session_Func_0100
- * @tc.name             : one Client creates SessionServer + 1, Max succeeds, 1
+ * @tc.number  : SUB_Softbus_Trans_Comp_OpenSession_Func_0100
+ * @tc.name    : one Client creates SessionServer + 1, Max succeeds, 1
  * fails
- * @tc.desc             : Test session management
- * @tc.type             : FUNC
- * @tc.size             : MediumTest
+ * @tc.desc    : Test session management
+ * @tc.type    : FUNC
+ * @tc.size    : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Session_Func_0100, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0100, TestSize.Level3)
 {
     int ret;
     char sessionNames[][SESSION_NAME_SIZE_MAX] = { "com.communication.demo1.1", "com.communication.demo1.2",
@@ -94,13 +94,13 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Session_Func_0100, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Func_0200
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0200
  * @tc.name     : OpenSession + 1, Max succeeds, 1 fails
  * @tc.desc       : Test session management
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Session_Func_0200, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0200, TestSize.Level3)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
@@ -136,13 +136,13 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Session_Func_0200, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Func_0300
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0300
  * @tc.name   : Obtain DevicedName based on Sessionid
  * @tc.desc   : Test session management
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Session_Func_0300, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0300, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
@@ -164,13 +164,13 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Session_Func_0300, TestSize.Lev
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Session_Func_0400
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0400
  * @tc.name     : Obtain DevicedId based on Sessionid
  * @tc.desc       : Test session management
  * @tc.type       : FUNC
  * @tc.size        : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Session_Func_0400, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0400, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Ctl();
