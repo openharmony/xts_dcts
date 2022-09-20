@@ -122,6 +122,8 @@ extern "C" {
 typedef enum {
     SESSION_4DATA = 1,
     SESSION_4CTL,
+    SESSION_4PROXY,
+    SESSION_4STREAM,
 } WaitSessionType;
 
 typedef enum {
@@ -196,6 +198,7 @@ uint64_t GetCurrentTimeOfMs(void);
 void ResetWaitFlag(void);
 void ResetWaitFlag4Data(void);
 void ResetWaitFlag4Ctl(void);
+void ResetWaitFlag4Proxy(void);
 void ResetwaitCount4Online(void);
 void ResetwaitCount4Offline(void);
 
@@ -204,6 +207,7 @@ int SendData4Message(DataType type, int size);
 
 int CreateSsAndOpenSession4Data(void);
 int CreateSsAndOpenSession4Ctl(void);
+int CreateSsAndOpenSession4Proxy(void);
 int OpenSessionBatch4Data(char groupId[][GROUP_ID_LEN], int* sessionId, int count);
 int OpenSessionBatch4Ctl(char groupId[][GROUP_ID_LEN], int* sessionId, int count);
 int CloseSessionBatch4Data(int* sessionId, int count);
@@ -213,8 +217,10 @@ char* GetSoftbusPid(void);
 char* GetNetworkId(void);
 int GetCurrentSessionId4Data(void);
 int GetCurrentSessionId4Ctl(void);
+int GetCurrentSessionId4Proxy(void);
 void SetCurrentSessionId4Data(int sessionId);
 void SetCurrentSessionId4Ctl(int sessionId);
+void SetCurrentSessionId4Proxy(int sessionId);
 ISessionListener* GetSessionListenser4Data(void);
 ISessionListener* GetSessionListenser4Ctl(void);
 SessionAttribute* GetSessionAttr4Ctl(void);
@@ -229,6 +235,7 @@ int GetClosedSessionCount4Ctrl(void);
 
 int CloseSessionAndRemoveSs4Data(void);
 int CloseSessionAndRemoveSs4Ctl(void);
+int CloseSessionAndRemoveSs4Proxy(void);
 
 #ifdef __cplusplus
 }

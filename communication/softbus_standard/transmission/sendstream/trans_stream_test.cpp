@@ -113,13 +113,13 @@ static int WaitStream(int timeout)
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_SendStream_Func_0100
+ * @tc.number : SUB_Softbus_Trans_Comp_SendStream_0100
  * @tc.name     : test Stream
  * @tc.desc     : Test send stream function
  * @tc.type     : FUNC
  * @tc.size     : MediumTest
  */
-HWTEST_F(TransStreamTest, SUB_Softbus_Trans_SendStream_Func_0100, TestSize.Level2) {
+HWTEST_F(TransStreamTest, SUB_Softbus_Trans_Comp_SendStream_0100, TestSize.Level2) {
     int ret;
 
     string data = "send stream transmission test!!!!";

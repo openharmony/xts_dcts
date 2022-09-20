@@ -27,6 +27,7 @@ static ISessionListener* g_sessionlist4Ctrl = NULL;
 static ISessionListener* g_sessionlist4Perf = NULL;
 static ISessionListener* g_sessionlist4Pass = NULL;
 static ISessionListener* g_sessionlist4File = NULL;
+static ISessionListener* g_sessionlist4Proxy = NULL;
 static ISessionListener  *g_sessionlist4Stream  = NULL;
 
 static const char* def_passwd = "OH2022@xa";
@@ -379,6 +380,39 @@ static void OnPassMessageReceived(int sessionId, const void* data, unsigned int 
     LOG("[cb][pass]mesg received sid:%d, data-len:%d", sessionId, dataLen);
 }
 
+static int OnProxySessionOpened(int sessionId, int result)
+{
+    LOG("[cb][Proxy]session opened sid:%d, ret:%d", sessionId, result);
+    return SOFTBUS_OK;
+}
+
+static void OnProxySessionClosed(int sessionId)
+{
+    LOG("[cb][Proxy]session closed sid:%d", sessionId);
+}
+
+static void OnProxyBytesReceived(int sessionId, const void* data, unsigned int dataLen)
+{
+    if (sessionId < 0) {
+        LOG("[cb][Proxy]byte received invalid session id[%d]", sessionId);
+        return;
+    }
+    LOG("[cb][Proxy]byte received sid:%d, data-len:%d", sessionId, dataLen);
+    int ret = SendBytes(sessionId, data, dataLen);
+    LOG("[cb][Proxy]byte received send back:%d", ret);
+}
+
+static void OnProxyMessageReceived(int sessionId, const void* data, unsigned int dataLen)
+{
+   if (sessionId < 0) {
+        LOG("[cb][Proxy]mesg received   invalid session id[%d]", sessionId);
+        return;
+    }
+    LOG("[cb][Proxy]mesg received   sid:%d, data-len:%d", sessionId, dataLen);
+    int ret = SendMessage(sessionId, data, dataLen);
+    LOG("[cb][Proxy]mesg received   send back:%d", ret);
+}
+
 /* net state callback */
 static void OnNodeOnline(NodeBasicInfo* info)
 {
@@ -442,6 +476,14 @@ static void SetupCallback(void)
         g_sessionlist4Pass->OnBytesReceived = OnPassBytesReceived;
     }
 
+    if (g_sessionlist4Proxy == NULL) {
+        g_sessionlist4Proxy = (ISessionListener*)calloc(1, sizeof(ISessionListener));
+        g_sessionlist4Proxy->OnSessionOpened = OnProxySessionOpened;
+        g_sessionlist4Proxy->OnSessionClosed = OnProxySessionClosed;
+        g_sessionlist4Proxy->OnMessageReceived = OnProxyMessageReceived;
+        g_sessionlist4Proxy->OnBytesReceived = OnProxyBytesReceived;
+    }
+
     if (g_sessionlist4File == NULL) {
         g_sessionlist4File = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlist4File->OnSessionOpened = OnFileSessionOpened;
@@ -484,6 +526,10 @@ static void TeardownCallback(void)
         free(g_sessionlist4Pass);
         g_sessionlist4Pass = NULL;
     }
+    if (g_sessionlist4Proxy != NULL) {
+        free(g_sessionlist4Proxy);
+        g_sessionlist4Proxy = NULL;
+    }
     if (g_sessionlist4File != NULL) {
         free(g_sessionlist4File);
         g_sessionlist4File = NULL;
@@ -515,6 +561,8 @@ HWTEST_F(dsoftbusTest, test_create_ss, TestSize.Level3)
     LOG("CreateSs[perf] ret:%d", perfRet);
     int passRet = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PASS, g_sessionlist4Pass);
     LOG("CreateSs[pass] ret:%d", passRet);
+    int proxyRet = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY, g_sessionlist4Proxy);
+    LOG("CreateSs[Proxy] ret:%d", proxyRet);
     int fileRet = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, g_sessionlist4File);
     LOG("CreateSs[file] ret:%d", fileRet);
     int streamRet = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM, g_sessionlist4Stream);
@@ -522,7 +570,7 @@ HWTEST_F(dsoftbusTest, test_create_ss, TestSize.Level3)
 
     int runtime = 0;
     if (dataRet == SOFTBUS_OK && ctrlRet == SOFTBUS_OK && perfRet == SOFTBUS_OK
-    && passRet == SOFTBUS_OK && fileRet == SOFTBUS_OK && streamRet == SOFTBUS_OK) {
+    && passRet == SOFTBUS_OK && fileRet == SOFTBUS_OK && streamRet == SOFTBUS_OK && proxyRet == SOFTBUS_OK) {
         LOG("CreateSs ok");
     }
 
@@ -551,6 +599,8 @@ HWTEST_F(dsoftbusTest, test_create_ss, TestSize.Level3)
     LOG("RemoveSs[perf] ret:%d", ret);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_PASS);
     LOG("RemoveSs[pass] ret:%d", ret);
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY);
+    LOG("RemoveSs[Proxy] ret:%d", ret);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
     LOG("RemoveSs[file] ret:%d", ret);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
