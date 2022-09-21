@@ -113,10 +113,12 @@ int readDataFromShmNoClear(char* buf)
 
 int waitDataWithCode(char* code, char* data)
 {
+    LOG("waitDataWithCode begin...");
     int i = 0;
     int timeout = 10;
     char str[MAX_DATA_LENGTH] = { 0 };
     if (code == nullptr || data == nullptr) {
+        LOG("code = nullptr ,data = nullptr");
         return RES_FAIL;
     }
     while (i < timeout) {
