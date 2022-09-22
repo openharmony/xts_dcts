@@ -46,8 +46,6 @@ ohos_unittest("disTest") {
     "//base/security/access_token/interfaces/innerkits/nativetoken:libnativetoken",
     "//base/security/access_token/interfaces/innerkits/token_setproc:libtoken_setproc",
     "//foundation/communication/dsoftbus/sdk:softbus_client",
-
-    #  "//utils/native/base:utils",
   ]
   external_deps = [ "c_utils:utils" ]
   subsystem_name = "distributeddatamgr"
