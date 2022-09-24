@@ -3,7 +3,7 @@
     "driver": {
         "type": "JSUnitTest",
         "test-timeout": "1200000",
-        "package": "ohos.dcts.distributedisjsserver",
+        "package": "com.ohos.distributekvdisjs",
         "shell-timeout": "60000"
     },
     "kits": [
