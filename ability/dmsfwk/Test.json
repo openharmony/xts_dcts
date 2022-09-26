@@ -3,14 +3,14 @@
     "driver": {
         "type": "JSUnitTest",
         "test-timeout": "900000",
-        "package": "com.ohos.fileiotest",
-	"abilityName": "com.ohos.fileiotest.MainAbility",
+        "package": "com.ohos.abilitydmstest",
+	"abilityName": "com.ohos.abilitydmstest.MainAbility",
         "shell-timeout": "900000"
     },
     "kits": [
         {
             "test-file-name": [
-                "DctsFileioClientTest.hap"
+                "DctsAbilityDms.hap"
             ],
             "type": "AppInstallKit",
             "cleanup-apps": true

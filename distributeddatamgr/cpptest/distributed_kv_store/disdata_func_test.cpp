@@ -209,17 +209,19 @@ void DisKvTest::RemoteCreateKV(char* str)
 
     char code[CODE_LEN_TEN] = { 0 };
     (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
-    if (memset_s(code, strlen(code), 0, CODE_LEN_TEN) != EOK) {
-        return;
-    }
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     if (str == nullptr) {
+        LOG("%s Int2String(CTRL_CODE_RESULT_TYPE, str)", LOGSTR);
         return;
     }
     if (strcpy_s(code, strlen(str) + 1, str) != EOK) {
+        LOG("%s strcpy_s(code", LOGSTR);
         return;
     }
+    (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    LOG("%s code=%s, str=%s", LOGSTR, code, str);
     waitDataWithCode(code, str);
+    LOG("%s waitDataWithCode(code, str)", LOGSTR);
     int ret = strcmp(str, "0");
     if (ret == 0) {
         LOG("%s SUCCESS: Remote---CREATE_KV ", LOGSTR);
@@ -229,21 +231,25 @@ void DisKvTest::RemoteCreateKV(char* str)
 }
 void DisKvTest::RemoteDeleteKV(char* str)
 {
-    LOG("%s RemoteCreateKV", LOGSTR);
+    LOG("%s RemoteDeleteKV", LOGSTR);
     writeCodeDataToShm(CTRL_CODE_DATAMGR_DELETE_KV, str);
 
     char code[CODE_LEN_TEN] = { 0 };
     (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     Int2String(CTRL_CODE_RESULT_TYPE, str);
     if (str == nullptr) {
+        LOG("%s Int2String(CTRL_CODE_RESULT_TYPE, str)", LOGSTR);
         return;
     }
 
     if (strcpy_s(code, strlen(str) + 1, str) != EOK) {
+        LOG("%s strcpy_s(code", LOGSTR);
         return;
     }
     (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
+    LOG("%s code=%s, str=%s", LOGSTR, code, str);
     waitDataWithCode(code, str);
+    LOG("%s waitDataWithCode(code, str)", LOGSTR);
     int ret = strcmp(str, "0");
     if (ret == 0) {
         LOG("%s SUCCESS: Remote---DELETE_KV ", LOGSTR);

@@ -12,13 +12,11 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
-
-group("distributedhardware") {
+group("ability") {
   testonly = true
   if (is_standard_system) {
-    deps = [
-      "distributedcameratest:DctsdisCameraTest",
-      "distributedscreentest:DctsdisSreenTest",
-    ]
+    deps = [ "dmsfwk:DctsAbilityDmsTest" ]
+  } else {
+    deps = [ "wifi_standard:ActsWifiJSTest" ]
   }
 }

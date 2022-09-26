@@ -48,7 +48,6 @@ ohos_moduletest_suite("DctsdisDataTest") {
   configs = [ ":module_private_config" ]
 
   deps = [
-    "//commonlibrary/c_utils/base:utils",
     "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter:distributeddata_adapter",
     "//foundation/distributeddatamgr/kv_store/interfaces/innerkits/distributeddata:distributeddata_inner",
     "//third_party/googletest:gtest_main",

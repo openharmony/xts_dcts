@@ -10,12 +10,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import("//test/xts/tools/build/suite.gni")
 
-import("//build/ohos_var.gni")
+ohos_js_hap_suite("DctsAbilityDmsTest") {
+  hap_profile = "./src/main/config.json"
+  deps = [
+    ":fileio_js_assets",
+    ":fileio_js_resources",
+  ]
 
-group("hdf") {
-  testonly = true
-  if (is_standard_system) {
-    deps = [ "distributedcameratest:DctsdisCameraTest" ]
-  }
+  certificate_profile = "./signature/openharmony_sx.p7b"
+  hap_name = "DctsAbilityDms"
+  subsystem_name = "ability"
+  part_name = "dmsfwk"
+}
+ohos_js_assets("fileio_js_assets") {
+  source_dir = "./src/main/js/default"
+}
+ohos_resources("fileio_js_resources") {
+  sources = [ "./src/main/resources" ]
+  hap_profile = "./src/main/config.json"
 }
