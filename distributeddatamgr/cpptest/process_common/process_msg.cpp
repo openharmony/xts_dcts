@@ -17,17 +17,26 @@
 #include <cstdint>
 #include <cstdio>
 #include <cstring>
+#include <dirent.h>
 #include <iostream>
 #include <securec.h>
 #include <sstream> // 使用stringstream
+#include <string>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <vector>
 
 #include "cstring"
+#include "directory_ex.h"
 #include "distributed_kv_data_manager.h"
 #include "types.h"
 #include "process_msg.h"
-using namespace OHOS::DistributedKv;
-using namespace std;
 
+using namespace OHOS::DistributedKv;
+using namespace OHOS;
+using namespace std;
+const char LOGSTR[20] = "LOG_PROCESS::----";
 const double DEFDELTA = 0.00001;
 const int MAX_DATA_LENGTH = 1024;
 const int NUMTHREE = 3;
@@ -41,9 +50,10 @@ std::shared_ptr<SingleKvStore> KvStorePtr;
 Status statusGetKvStore;
 Status statusCloseKvStore;
 Status statusDeleteKvStore;
+Options create;
 UserId userId;
 AppId appId;
-StoreId storeIdTest;
+StoreId storeId;
 }; // namespace DisKvTest
 
 void initKvstoreId(void)
@@ -55,17 +65,30 @@ void initKvstoreId(void)
 
     DisKvTest::userId.userId = "account0";
     DisKvTest::appId.appId = "com.ohos.kvdatamanager3.test";
-    DisKvTest::storeIdTest.storeId = "test3";
+    DisKvTest::storeId.storeId = "test3";
+    DisKvTest::create.createIfMissing = true;
+    DisKvTest::create.encrypt = false;
+    DisKvTest::create.autoSync = false;
+    DisKvTest::create.kvStoreType = KvStoreType::SINGLE_VERSION;
+    DisKvTest::create.area = EL1;
+    DisKvTest::create.baseDir = std::string("/data/service/el1/public/database/") + DisKvTest::appId.appId;
 
-    // 1.创建数据库
-    Options options { .createIfMissing = true,
-        .encrypt = false, //   .persistant = true,
-        .autoSync = false,
-        .backup = false,
-        .kvStoreType = KvStoreType::SINGLE_VERSION };
+    if (mkdir(DisKvTest::create.baseDir.c_str(), (S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)) != 0 && errno != EEXIST) {
+        LOG("mkdir errno:%d, path:%s", errno, DisKvTest::create.baseDir.c_str());
+    } else {
+        LOG("%s SUCCESS: mkdir", LOGSTR);
+    }
 
     DisKvTest::statusGetKvStore = DisKvTest::manager.GetSingleKvStore(
-        options, { DisKvTest::appId }, { DisKvTest::storeIdTest }, DisKvTest::KvStorePtr);
+        DisKvTest::create, DisKvTest::appId, DisKvTest::storeId, DisKvTest::KvStorePtr);
+    LOG("%s GetSingleKvStore , status=%d ", LOGSTR, DisKvTest::statusGetKvStore);
+
+    if (DisKvTest::KvStorePtr == nullptr) {
+        std::cout << "ERR：DisKvTest::KvStorePtr == nullptr " << std::endl;
+    } else {
+        std::cout << "SUCC：DisKvTest::KvStorePtr " << std::endl;
+    }
+    OHOS::ChangeModeDirectory(DisKvTest::create.baseDir.c_str(), 0777);
 }
 
 char* getRealData(char* str, char* delims)
@@ -114,11 +137,13 @@ int ProcessDataMgr(int code, char* recvData)
     LOG("ProcessDataMgr, begin");
 
     initKvstoreId();
+
+    LOG("%s GetSingleKvStore, status=%d", LOGSTR, DisKvTest::statusGetKvStore);
+
     if (DisKvTest::KvStorePtr == nullptr) {
         std::cout << "ERR：DisKvTest::KvStorePtr == nullptr" << std::endl;
         return RESULT_ERR;
     }
-    std::cout << "create status=" << static_cast<int>(DisKvTest::statusGetKvStore) << std::endl;
     if (Status::SUCCESS != DisKvTest::statusGetKvStore) {
         std::cout << "ERR：statusGetKvStore" << std::endl;
         return RESULT_ERR;
@@ -334,14 +359,17 @@ int processDeleteKv(char* putData)
 {
     LOG("processDeleteKv,  begin");
     DisKvTest::statusCloseKvStore = DisKvTest::manager.CloseAllKvStore(DisKvTest::appId);
-    DisKvTest::statusDeleteKvStore = DisKvTest::manager.DeleteAllKvStore(DisKvTest::appId);
-    if ((Status::SUCCESS == DisKvTest::statusCloseKvStore) && (Status::SUCCESS == DisKvTest::statusDeleteKvStore)) {
-        std::cout << "SUCCESS：statusDeleteKvStore" << std::endl;
-        return RESULT_OK;
-    } else {
+    DisKvTest::statusDeleteKvStore = DisKvTest::manager.DeleteAllKvStore(DisKvTest::appId, DisKvTest::create.baseDir);
+    if (Status::SUCCESS != DisKvTest::statusDeleteKvStore) {
         std::cout << "ERR：statusDeleteKvStore" << std::endl;
         return RESULT_ERR;
     }
+
+    (void)remove((DisKvTest::create.baseDir + "/kvdb").c_str());
+    (void)remove(DisKvTest::create.baseDir.c_str());
+
+    std::cout << "SUCCESS：statusDeleteKvStore" << std::endl;
+    return RESULT_OK;
 }
 
 int ProcessDP(int code, char* recvData)
