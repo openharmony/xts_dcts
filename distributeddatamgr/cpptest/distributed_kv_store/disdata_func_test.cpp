@@ -24,8 +24,13 @@
 #include <mutex>
 #include <sstream> // 使用stringstream
 #include <string>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <vector>
+
+#include <sys/types.h>
+#include <dirent.h>
+#include "directory_ex.h"
 
 #include "distributed_kv_data_manager.h"
 #include "log_print.h"
@@ -58,6 +63,8 @@ const char LOGSTR[20] = "LOG::----";
 using namespace std;
 using namespace testing::ext;
 using namespace OHOS::DistributedKv;
+using namespace OHOS;
+
 namespace {
 const int USLEEP_TIME_SUBSCRIBE = 0;
 const int USLEEP_TIME = 0;
@@ -131,9 +138,10 @@ public:
     static Status statusGetKvStore;
     static Status statusCloseKvStore;
     static Status statusDeleteKvStore;
+    static Options create;
     static UserId userId;
     static AppId appId;
-    static StoreId storeIdTest;
+    static StoreId storeId;
     static void SubscribeWithQuery(std::vector<std::string>& deviceList, DataQuery& dataQuery);
     static void SyncWithCondition(std::vector<std::string>& deviceList, DataQuery& dataQuery);
     static void RemoteCreateKV(char* str);
@@ -147,9 +155,10 @@ std::shared_ptr<SingleKvStore> DisKvTest::KvStorePtr = nullptr; // declare kvsto
 Status DisKvTest::statusGetKvStore = Status::ERROR;
 Status DisKvTest::statusCloseKvStore = Status::ERROR;
 Status DisKvTest::statusDeleteKvStore = Status::ERROR;
+Options DisKvTest::create;
 UserId DisKvTest::userId;
 AppId DisKvTest::appId;
-StoreId DisKvTest::storeIdTest;
+StoreId DisKvTest::storeId;
 
 void DisKvTest::SubscribeWithQuery(std::vector<std::string>& deviceList, DataQuery& dataQuery)
 {
@@ -317,12 +326,21 @@ void DistributedKvDataManagerTest::SetUp(void)
     LOG("%s SetUp", LOGSTR);
     DisKvTest::userId.userId = "account0";
     DisKvTest::appId.appId = "com.ohos.kvdatamanager3.test";
-    DisKvTest::storeIdTest.storeId = "test3";
-    Options options { .createIfMissing = true,
-        .encrypt = false,
-        .autoSync = false,
-        .backup = false,
-        .kvStoreType = KvStoreType::SINGLE_VERSION };
+    DisKvTest::storeId.storeId = "test3";
+    DisKvTest::create.createIfMissing = true;
+    DisKvTest::create.encrypt = false;
+    DisKvTest::create.autoSync = false;
+    DisKvTest::create.kvStoreType = KvStoreType::SINGLE_VERSION;
+    DisKvTest::create.area = EL1;
+    DisKvTest::create.baseDir = std::string("/data/service/el1/public/database/") + DisKvTest::appId.appId;
+
+
+    if (mkdir(DisKvTest::create.baseDir.c_str(), (S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)) != 0 && errno != EEXIST) {
+        LOG("mkdir errno:%d, path:%s", errno, DisKvTest::create.baseDir.c_str());
+    }else {
+        LOG("%s SUCCESS: mkdir", LOGSTR);
+    }
+
     // S1.本地删除数据库
     LOG("%s s1.Local---RemoveAllStore ", LOGSTR);
     RemoveAllStore(DisKvTest::manager);
@@ -336,14 +354,34 @@ void DistributedKvDataManagerTest::SetUp(void)
     (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     DisKvTest::RemoteDeleteKV(str);
     free(str);
+
     // S3.本地创建数据库
     LOG("%s s3.Local---GetSingleKvStore ", LOGSTR);
     auto deathRecipient = std::make_shared<DeathRecipient>();
     DisKvTest::manager.RegisterKvStoreServiceDeathRecipient(deathRecipient);
+
+    if (mkdir(DisKvTest::create.baseDir.c_str(), (S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)) != 0 && errno != EEXIST) {
+        LOG("mkdir errno:%d, path:%s", errno, DisKvTest::create.baseDir.c_str());
+    }else {
+        LOG("%s SUCCESS: mkdir", LOGSTR);
+    }
+    
+
+
     DisKvTest::statusGetKvStore = DisKvTest::manager.GetSingleKvStore(
-        options, { DisKvTest::appId }, { DisKvTest::storeIdTest }, DisKvTest::KvStorePtr);
+        DisKvTest::create, DisKvTest::appId, DisKvTest::storeId, DisKvTest::KvStorePtr);
+    LOG("%s GetSingleKvStore , status=%d", LOGSTR, DisKvTest::statusGetKvStore);
+    if (DisKvTest::KvStorePtr == nullptr) {
+        std::cout << "ERR：DisKvTest::KvStorePtr == nullptr " << std::endl;
+    }else{
+        std::cout << "SUCC：DisKvTest::KvStorePtr " << std::endl;
+    }
+
+    OHOS::ChangeModeDirectory(DisKvTest::create.baseDir.c_str(), 0777);
+
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
     ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
+
     // S4.本端注册同步回调对象
     LOG("%s s4.Local---RegisterSyncCallback ", LOGSTR);
     auto syncCallback = std::make_shared<KvStoreSyncCallbackTestImpl>();
@@ -359,7 +397,9 @@ void DistributedKvDataManagerTest::SetUp(void)
     str = (char*)malloc(MAX_DATA_LENGTH);
     (void)memset_s(str, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     DisKvTest::RemoteCreateKV(str);
+    LOG("%s DisKvTest::RemoteCreateKV(str) ", LOGSTR);
     free(str);
+    LOG("%s free(str) ", LOGSTR);
 }
 
 void DistributedKvDataManagerTest::TearDown(void)
@@ -378,14 +418,18 @@ void DistributedKvDataManagerTest::RemoveAllStore(DistributedKvDataManager manag
     } else {
         LOG("%s ERR: local---CloseAllKvStore ", LOGSTR);
     }
-
-    DisKvTest::statusDeleteKvStore = DisKvTest::manager.DeleteAllKvStore(DisKvTest::appId);
+	
+	
+	DisKvTest::statusDeleteKvStore = DisKvTest::manager.DeleteAllKvStore(DisKvTest::appId, DisKvTest::create.baseDir);
     LOG("%s DeleteAllKvStore", LOGSTR);
     if (DisKvTest::statusDeleteKvStore == Status::SUCCESS) {
         LOG("%s SUCCESS: local---DeleteAllKvStore ", LOGSTR);
     } else {
         LOG("%s ERR: local---DeleteAllKvStore ", LOGSTR);
     }
+
+    (void)remove((DisKvTest::create.baseDir + "/kvdb").c_str());
+	(void)remove(DisKvTest::create.baseDir.c_str());
 }
 
 DistributedKvDataManagerTest::DistributedKvDataManagerTest(void) {}
@@ -399,16 +443,20 @@ DistributedKvDataManagerTest::DistributedKvDataManagerTest(void) {}
 HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0100, TestSize.Level1 | Function | MediumTest)
 {
     ZLOGI("DistribitedKvDataManager_Sync_Push_0100 begin.");
+    LOG("%s DistribitedKvDataManager_Sync_Push_0100", LOGSTR);
+    LOG("%s statusGetKvStore, status=%d", LOGSTR, DisKvTest::statusGetKvStore);
     EXPECT_EQ(Status::SUCCESS, DisKvTest::statusGetKvStore) << "statusGetKvStore return wrong status";
     ASSERT_NE(nullptr, DisKvTest::KvStorePtr) << "KvStorePtr is nullptr";
-    // 本地数据库添加数据 100
+    // 1.本地数据库添加数据 100
+    LOG("%s 1.本地数据库添加数据 100", LOGSTR);
     std::string stringKey = "math_score_int";
     Key keyInt = stringKey;
     Value valueInt = Value(TransferTypeToByteArray<int>(100));
     Status status = DisKvTest::KvStorePtr->Put(keyInt, valueInt);
     EXPECT_EQ(Status::SUCCESS, status);
 
-    // 同步数据到远端
+    // 2.同步数据到远端
+    LOG("%s 2.同步数据到远端", LOGSTR);
     std::vector<OHOS::DistributedKv::DeviceInfo> remoteDevice;
     status = DisKvTest::manager.GetDeviceList(remoteDevice, DeviceFilterStrategy::NO_FILTER);
     EXPECT_EQ(status, Status::SUCCESS);
@@ -421,12 +469,15 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Push_0100, 
     }
     std::unique_lock<std::mutex> lk(m);
     isSyncComplete = false;
+    ZLOGI("DistribitedKvDataManager_Sync_Push_0100,   Sync begin ");
     status = DisKvTest::KvStorePtr->Sync(deviceList, SyncMode::PUSH);
-    ASSERT_EQ(status, Status::SUCCESS);
+    ZLOGI("DistribitedKvDataManager_Sync_Push_0100,   Sync, status = %d ", status);
+    EXPECT_EQ(status, Status::SUCCESS) << "ERR: Sync";
     cv.wait_for(lk, std::chrono::seconds(SECOND_TIME), [] { return isSyncComplete; });
     LOG("cv.wait_for isSyncComplete = %d", isSyncComplete);
 
-    // 远端getdata
+    // 3.远端getdata
+    LOG("%s 3.远端getdata", LOGSTR);
     char strKV[MAX_DATA_LENGTH] = { "math" };
     (void)memset_s(strKV, MAX_DATA_LENGTH, 0, MAX_DATA_LENGTH);
     (void)strcpy_s(strKV, strlen("math_score_int:100") + 1, "math_score_int:100");
@@ -992,6 +1043,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0200, 
     EXPECT_EQ(status, Status::SUCCESS);
     float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
     float delta = aaa - 9.99f;
+    LOG("%s float aaa = %f, delta =  %f", LOGSTR, aaa, delta);
     EXPECT_LE(std::fabs(delta), DEFDELTA) << "ERR:8.本地get数据 与 float:9.99比较";
 
     // 解注册回调
@@ -1096,8 +1148,7 @@ HWTEST_F(DistributedKvDataManagerTest, DistribitedKvDataManager_Sync_Pull_0300, 
     EXPECT_EQ(status, Status::SUCCESS);
     double aaa = TransferByteArrayToType<double>(valueRetInt.Data());
     double delta = aaa - 999.999;
-    std::cout << "aaa = " << aaa << std::endl;
-    std::cout << "delta = " << delta << std::endl;
+    LOG("%s float aaa = %f, delta =  %f", LOGSTR, aaa, delta);
     EXPECT_LE(std::fabs(delta), DEFDELTA) << "ERR:8.本地get数据 与double:999.999比较";
 
     // 解注册回调
@@ -2267,6 +2318,7 @@ HWTEST_F(DistributedKvDataManagerTest, SubscribeWithQuery_0200, TestSize.Level1)
     EXPECT_EQ(status, Status::SUCCESS) << "LOGdisDataTest--ERR:Get(keyInt, valueRetInt)";
     float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
     float delta = aaa - 9.99f;
+    LOG("%s float aaa = %f, delta =  %f", LOGSTR, aaa, delta);
     EXPECT_LE(std::fabs(delta), DEFDELTA) << "ERR:本地get数据与float 9.99比较";
     // 取消订阅
     auto unSubscribeStatus = DisKvTest::KvStorePtr->UnsubscribeWithQuery(deviceList, dataQuery);
@@ -2318,8 +2370,7 @@ HWTEST_F(DistributedKvDataManagerTest, SubscribeWithQuery_0300, TestSize.Level1)
     EXPECT_EQ(status, Status::SUCCESS);
     double aaa = TransferByteArrayToType<double>(valueRetInt.Data());
     double delta = aaa - 999.999;
-    std::cout << "aaa = " << aaa << std::endl;
-    std::cout << "delta = " << delta << std::endl;
+    LOG("%s float aaa = %f, delta =  %f", LOGSTR, aaa, delta);
     EXPECT_LE(std::fabs(delta), DEFDELTA) << "ERR:本地get数据与double 999.999比较";
 
     // 取消订阅
@@ -2627,6 +2678,7 @@ HWTEST_F(DistributedKvDataManagerTest, SyncWithCondition_0200, TestSize.Level1)
     EXPECT_EQ(status, Status::SUCCESS) << "LOGdisDataTest--ERR:Get(keyInt, valueRetInt)";
     float aaa = TransferByteArrayToType<float>(valueRetInt.Data());
     float delta = aaa - 9.99f;
+    LOG("%s float aaa = %f, delta =  %f", LOGSTR, aaa, delta);
     EXPECT_LE(std::fabs(delta), DEFDELTA) << "ERR:本地get数据与float 9.99比较";
 }
 
@@ -2675,8 +2727,7 @@ HWTEST_F(DistributedKvDataManagerTest, SyncWithCondition_0300, TestSize.Level1)
     EXPECT_EQ(status, Status::SUCCESS);
     double aaa = TransferByteArrayToType<double>(valueRetInt.Data());
     double delta = aaa - 999.999;
-    std::cout << "aaa = " << aaa << std::endl;
-    std::cout << "delta = " << delta << std::endl;
+    LOG("%s float aaa = %f, delta =  %f", LOGSTR, aaa, delta);
     EXPECT_LE(std::fabs(delta), DEFDELTA) << "ERR:本地get数据与double 999.999比较";
 }
 
