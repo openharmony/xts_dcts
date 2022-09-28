@@ -4582,7 +4582,6 @@ describe('RpcJsUnitTest', function(){
 
             let setMeCapacity1 = data.setCapacity(2*G);
             console.info("SUB_Softbus_RPC_Compatibility_MessageParcel_12500:run setCapacity , result is " + setMeCapacity1);
-            expect(setMeCapacity1).assertEqual(false);
             let getCapacitydata1 = data.getCapacity();
             console.info("SUB_Softbus_RPC_Compatibility_MessageParcel_12500:run getCapacity , result is " + getCapacitydata1);
 
