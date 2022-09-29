@@ -18,6 +18,7 @@ _all_test_packages = [
   "${DCTS_ROOT}/distributeddatamgr:distributeddatatest",
   "${DCTS_ROOT}/communication:communication",
   "${DCTS_ROOT}/filemanagement:filemanagement",
+  "${DCTS_ROOT}/ability:ability",
 ]
 
 _all_test_packages_ivi = [
