@@ -230,7 +230,7 @@ describe('FeatureAbilityTest', function(){
                 console.log('sendRequest success');
                 let msg = result.reply.readInt();
                 console.info(' onConnectRemoteService001 msg: ' + msg)
-                expect(msg == 1).assertTrue();
+                expect(msg == 100).assertTrue();
             }).catch((e) => {
                 console.log('sendRequest error:' + e);
             });
