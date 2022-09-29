@@ -2,11 +2,11 @@
   "string": [
     {
       "name": "app_name",
-      "value": "fileioClient"
+      "value": "DctsAbilityDms"
     },
     {
       "name": "mainability_description",
-      "value": "JS_Phone_Empty fileio"
+      "value": "JS_Phone_Empty abilityDms"
     }
   ]
 }
