@@ -54,7 +54,7 @@ describe('FeatureAbilityTest', function(){
         }
 
     beforeAll(async function(done) {
-        console.info('beforeAll called rpc')
+        console.info('beforeAll called ability')
         function deviceManagerCallback(error, deviceManager) {
             console.info("got deviceManager: " + deviceManager + ", error: " + error)
             let deviceList = deviceManager.getTrustedDeviceListSync()
@@ -63,23 +63,23 @@ describe('FeatureAbilityTest', function(){
             dvId = deviceId;
             console.info("online device id: " + deviceId)
             let want = {
-                "bundleName":"ohos.rpc.test.server",
-                "abilityName":"ohos.rpc.test.server.ServiceAbility",
+                "bundleName":"ohos.ability.test.server",
+                "abilityName":"ohos.ability.test.server.ServiceAbility",
                 "deviceId":deviceId,
                 "flags": 256
             }
             let connect = {
                 onConnect:function (elementName, remoteProxy) {
-                    console.info('RpcClient: onConnect called,proxy: ' + (remoteProxy instanceof rpc.RemoteProxy))
-                    console.info('RpcClient: onConnect called,elementName: ' + elementName)
+                    console.info('abilityClient: onConnect called,proxy: ' + (remoteProxy instanceof rpc.RemoteProxy))
+                    console.info('abilityClient: onConnect called,elementName: ' + elementName)
                     gIRemoteObject = remoteProxy
                     done()
                 },
                 onDisconnect:function (elementName) {
-                    console.info("RpcClient: onDisconnect")
+                    console.info("abilityClient: onDisconnect")
                 },
                 onFailed:function () {
-                    console.info("RpcClient: onFailed")
+                    console.info("abilityClient: onFailed")
                     gIRemoteObject = null
                 }
             }
@@ -87,7 +87,7 @@ describe('FeatureAbilityTest', function(){
             connectId.info("connect ability got id: " + connectId)
         }
 
-        deviceManager.createDeviceManager('ohos.rpc.test', deviceManagerCallback)
+        deviceManager.createDeviceManager('ohos.ability.test', deviceManagerCallback)
         console.info("beforeAll done")
     })
     beforeEach(function (){
@@ -117,8 +117,8 @@ describe('FeatureAbilityTest', function(){
             }
             let params;
             let wantValue = {
-                "bundleName":"ohos.rpc.test.server",
-                "abilityName":"ohos.rpc.test.server.ServiceAbility",
+                "bundleName":"ohos.ability.test.server",
+                "abilityName":"ohos.ability.test.server.ServiceAbility",
                 "deviceId": dvId,
                 "parameters": params
             };
@@ -154,7 +154,7 @@ describe('FeatureAbilityTest', function(){
             }
             let params;
             let wantValue = {
-                "bundleName":"ohos.rpc.test.server",
+                "bundleName":"ohos.ability.test.server",
                 "abilityName":"",
                 "deviceId": dvId,
                 "parameters": params
@@ -191,8 +191,8 @@ describe('FeatureAbilityTest', function(){
             }
             let params;
             let wantValue = {
-                "bundleName":"ohos.rpc.test.server",
-                "abilityName":"ohos.rpc.test.server.ServiceAbility",
+                "bundleName":"ohos.ability.test.server",
+                "abilityName":"ohos.ability.test.server.ServiceAbility",
                 "deviceId": null,
                 "parameters": params
             };
@@ -254,8 +254,8 @@ describe('FeatureAbilityTest', function(){
             let connectedAbility = featureAbility.connectAbility(
                 {
                     deviceId: dvId,
-                    "bundleName":"ohos.rpc.test.server",
-                    "abilityName":"ohos.rpc.test.server.ServiceAbility",
+                    "bundleName":"ohos.ability.test.server",
+                    "abilityName":"ohos.ability.test.server.ServiceAbility",
                 }
 
             );
