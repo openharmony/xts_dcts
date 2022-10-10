@@ -30,6 +30,8 @@ static ISessionListener* g_sessionlist4File = NULL;
 static ISessionListener* g_sessionlist4Proxy = NULL;
 static ISessionListener  *g_sessionlist4Stream  = NULL;
 
+static uint64_t g_transTimeEnd;
+
 static const char* def_passwd = "OH2022@xa";
 static const char* def_ssid = "OpenHarmony_Private_Net_01";
 static const char* slave_ssid = "OpenHarmony_Private_Net_02";
@@ -113,11 +115,37 @@ static void OnStreamSessionClosed(int sessionId)
     LOG("[cb][stream]close session sid[%d]", sessionId);
 }
 
+static inline int GetNumberInStreamData(const char *streamData)
+{
+    if (streamData[0] == '1') {
+        return (streamData[1] - '0');
+    } else if (streamData[0] == '2') {
+        return (streamData[1] - '0') * 10 + (streamData[2] - '0');
+    } else if (streamData[0] == '3') {
+        return (streamData[1] - '0') * 100 + (streamData[2] - '0') * 10 + (streamData[3] - '0');
+    } else if (streamData[0] == '4') {
+        return (streamData[1] - '0') * 1000 + (streamData[2] - '0') * 100 + (streamData[3] - '0' * 10 + (streamData[4] - '0'));
+    }
+    return -1;
+}
+
 static void StreamReceived(int sessionId, const StreamData *data, const StreamData *ext, const StreamFrameInfo *frame)
 {
-    if (data != NULL) {
-        LOG("[cb][stream]ByteRec sid:%d, data= %.*s.\n", sessionId, data->bufLen, data->buf);
+    g_transTimeEnd = GetCurrentTimeOfMs();
+    int i = GetNumberInStreamData((const char *)data->buf);
+    if (i < 0) {
+        return;
     }
+    if (i % 60 == 0)
+    {
+        LOG("### RECV IFREAMTime =  %llu and counts = %d ", g_transTimeEnd, i );
+    } else
+    {
+        LOG("### RECV PFREAMTime =  %llu and counts = %d ", g_transTimeEnd, i );
+    } 
+    if (data != NULL) {
+        LOG("[cb][stream]Rec sid:%d, data= %.*s.\n", sessionId, data->bufLen, data->buf);
+    } 
 }
 
 /* session callback for data */

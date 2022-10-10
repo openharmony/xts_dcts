@@ -208,7 +208,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0500, Tes
 
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_0600
- * @tc.name   : CreateSessionServer input wrong value
+ * @tc.name   : CreateSessionServer input pkg name null
  * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
@@ -216,12 +216,86 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0500, Tes
 HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0600, TestSize.Level3)
 {
     int ret;
+    ISessionListener* listener = (ISessionListener*)malloc(sizeof(ISessionListener));
     ret = CreateSessionServer(NULL, SESSION_NAME_DATA, GetSessionListenser4Data());
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS[pkg name null]";
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS fail[session listener only malloc]";
+
+    listener->OnBytesReceived = NULL;
+    listener->OnMessageReceived = NULL;
+    listener->OnSessionClosed = NULL;
+    listener->OnSessionOpened = NULL;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, listener);
+    EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS success[session listener member=null]";
+
+    free(listener);
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_0700
+ * @tc.name   : CreateSessionServer input session name null
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0700, TestSize.Level3)
+{
+    int ret;
+    ISessionListener* listener = (ISessionListener*)malloc(sizeof(ISessionListener));
     ret = CreateSessionServer(DEF_PKG_NAME, NULL, GetSessionListenser4Data());
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS[session name null]";
+    
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS fail[session listener only malloc]";
+
+    listener->OnBytesReceived = NULL;
+    listener->OnMessageReceived = NULL;
+    listener->OnSessionClosed = NULL;
+    listener->OnSessionOpened = NULL;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, listener);
+    EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS success[session listener member=null]";
+
+    free(listener);
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_0800
+ * @tc.name   : CreateSessionServer input session listener null
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0800, TestSize.Level3)
+{
+    int ret;
+    ISessionListener* listener = (ISessionListener*)malloc(sizeof(ISessionListener));
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, NULL);
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS[session listener null]";
+   
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS fail[session listener only malloc]";
+
+    listener->OnBytesReceived = NULL;
+    listener->OnMessageReceived = NULL;
+    listener->OnSessionClosed = NULL;
+    listener->OnSessionOpened = NULL;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, listener);
+    EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS success[session listener member=null]";
+
+    free(listener);
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_0900
+ * @tc.name   : CreateSessionServer input session listener only malloc
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0900, TestSize.Level3)
+{
+    int ret;
     ISessionListener* listener = (ISessionListener*)malloc(sizeof(ISessionListener));
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, listener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS fail[session listener only malloc]";
@@ -239,31 +313,57 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0600, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_0700
- * @tc.name   : RemoveSessionServer input wrong value
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1000
+ * @tc.name   : RemoveSessionServer input pkg name null
  * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0700, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1000, TestSize.Level3)
 {
     int ret;
     ret = RemoveSessionServer(NULL, SESSION_NAME_DATA);
     EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS success[pkg name null]";
+
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1100
+ * @tc.name   : RemoveSessionServer input session name null
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1100, TestSize.Level3)
+{
+    int ret;
+    
     ret = RemoveSessionServer(DEF_PKG_NAME, NULL);
     EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS success[session name null]";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1200
+ * @tc.name   : RemoveSessionServer input all null
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1200, TestSize.Level3)
+{
+    int ret;
     ret = RemoveSessionServer(NULL, NULL);
     EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS success[all null]";
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_0800
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1300
  * @tc.name   : RemoveSessionServer There are unclosed Session
  * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0800, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1300, TestSize.Level3)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
@@ -309,13 +409,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0800, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_0900
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1400
  * @tc.name   : OpenSession, SessionServer do not exist
  * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0900, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1400, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -328,13 +428,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0900, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1000
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1500
  * @tc.name   : OpenSession Open the same one repeatedly
  * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1000, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1500, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -353,13 +453,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1000, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1100
- * @tc.name   : OpenSession input wrong value
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1600
+ * @tc.name   : OpenSession input my name null
  * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1100, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1600, TestSize.Level3)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
@@ -369,23 +469,131 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1100, Tes
     sessionId = OpenSession(NULL, SESSION_NAME_DATA, GetNetworkId(), DEF_GROUP_ID, GetSessionAttr4Data());
     EXPECT_TRUE(sessionId < SESSION_ID_MIN) << "call opensession success[my name null]";
 
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSessionServer fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1700
+ * @tc.name   : OpenSession input peer name null
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1700, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSessionServer fail";
+
+    int sessionId;
     sessionId = OpenSession(SESSION_NAME_DATA, NULL, GetNetworkId(), DEF_GROUP_ID, GetSessionAttr4Data());
     EXPECT_TRUE(sessionId < SESSION_ID_MIN) << "call opensession success[peer name null]";
 
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSessionServer fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1800
+ * @tc.name   : OpenSession input net id null
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1800, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSessionServer fail";
+
+    int sessionId;
     sessionId = OpenSession(SESSION_NAME_DATA, SESSION_NAME_DATA, NULL, DEF_GROUP_ID, GetSessionAttr4Data());
     EXPECT_TRUE(sessionId < SESSION_ID_MIN) << "call opensession success[net id null]";
 
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSessionServer fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1900
+ * @tc.name   : OpenSession input net id invalid
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1900, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSessionServer fail";
+
+    int sessionId;
     string invalidNetId = "123456789012345678901234567890123456789012345678901234567890abcd";
     sessionId =
         OpenSession(SESSION_NAME_DATA, SESSION_NAME_DATA, invalidNetId.c_str(), DEF_GROUP_ID, GetSessionAttr4Data());
     EXPECT_TRUE(sessionId < SESSION_ID_MIN) << "call opensession success[net id invalid]";
 
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSessionServer fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_2000
+ * @tc.name   : OpenSession input group id null
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_2000, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSessionServer fail";
+
+    int sessionId;
     sessionId = OpenSession(SESSION_NAME_DATA, SESSION_NAME_DATA, GetNetworkId(), NULL, GetSessionAttr4Data());
     EXPECT_TRUE(sessionId < SESSION_ID_MIN) << "call opensession success[group id null]";
 
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSessionServer fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_2100
+ * @tc.name   : OpenSession input arrt null
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_2100, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSessionServer fail";
+
+    int sessionId;
     sessionId = OpenSession(SESSION_NAME_DATA, SESSION_NAME_DATA, GetNetworkId(), DEF_GROUP_ID, NULL);
     EXPECT_TRUE(sessionId < SESSION_ID_MIN) << "call opensession success[arrt null]";
 
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSessionServer fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_2200
+ * @tc.name   : OpenSession input arrt invalid
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_2200, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSessionServer fail";
+
+    int sessionId;
     SessionAttribute sAttr;
     sAttr.dataType = 50;
     sessionId = OpenSession(SESSION_NAME_DATA, SESSION_NAME_DATA, GetNetworkId(), DEF_GROUP_ID, &sAttr);
@@ -396,13 +604,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1100, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1200
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_2300
  * @tc.name   : CloseSession repeatedly
  * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1200, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_2300, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -437,13 +645,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1200, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1300
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_2400
  * @tc.name   : CloseSession not exist sessionId
  * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1300, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_2400, TestSize.Level3)
 {
     int ret;
     int timeout = 3;
@@ -467,13 +675,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1300, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1400
- * @tc.name   : GetMySessionName input wrong value
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_2500
+ * @tc.name   : GetMySessionName input invalid sid -1
  * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1400, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_2500, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -484,15 +692,116 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1400, Tes
     char mySname[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetMySessionName(-1, mySname, SESSION_NAME_SIZE_MAX);
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "GetMySessionName invalid sid[-1]";
+    
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_2600
+ * @tc.name   : GetMySessionName input invalid sid max+1
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_2600, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
+
+    char mySname[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetMySessionName(MAX_SESSION_NUM + 1, mySname, SESSION_NAME_SIZE_MAX);
     EXPECT_NE(SOFTBUS_OK, ret) << "GetMySessionName invalid sid[max+1]";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_2700
+ * @tc.name   : GetMySessionName input invalid sid not open
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_2700, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
+
+    char mySname[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetMySessionName(sessionId + 1, mySname, SESSION_NAME_SIZE_MAX);
     EXPECT_NE(SOFTBUS_OK, ret) << "GetMySessionName invalid sid[not open]";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_2800
+ * @tc.name   : GetMySessionName input MySessionName invalid sname null
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_2800, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
+
     ret = GetMySessionName(sessionId, NULL, SESSION_NAME_SIZE_MAX);
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "GetMySessionName invalid sname[null]";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_2900
+ * @tc.name   : GetMySessionName input MySessionName invalid len[max+1]
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_2900, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
+
+    char mySname[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetMySessionName(sessionId, mySname, SESSION_NAME_SIZE_MAX + 1);
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "GetMySessionName invalid len[max+1]";
 
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_3000
+ * @tc.name   : GetMySessionName input MySessionName len short than real
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3000, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
     char mySnameShort[5];
     ret = GetMySessionName(sessionId, mySnameShort, 5);
     EXPECT_NE(SOFTBUS_OK, ret) << "GetMySessionName len short than real";
@@ -502,13 +811,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1400, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1500
- * @tc.name   : GetPeersessionName input wrong value
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_3100
+ * @tc.name   : GetPeersessionName input invalid sid -1
  * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1500, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3100, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -519,14 +828,116 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1500, Tes
     char peerSname[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetPeerSessionName(-1, peerSname, SESSION_NAME_SIZE_MAX);
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "GetPeerSessionName invalid sid[-1]";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_3200
+ * @tc.name   : GetPeersessionName input invalid sid max+1
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3200, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
+
+    char peerSname[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetPeerSessionName(MAX_SESSION_NUM + 1, peerSname, SESSION_NAME_SIZE_MAX);
     EXPECT_NE(SOFTBUS_OK, ret) << "GetPeerSessionName invalid sid[max+1]";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_3300
+ * @tc.name   : GetPeersessionName input invalid sid not open
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3300, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
+
+    char peerSname[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetPeerSessionName(sessionId + 1, peerSname, SESSION_NAME_SIZE_MAX);
     EXPECT_NE(SOFTBUS_OK, ret) << "GetPeerSessionName invalid sid[not open]";
+   
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_3400
+ * @tc.name   : GetPeersessionName input SessionName invalid sname[null]
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3400, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
+
     ret = GetPeerSessionName(sessionId, NULL, SESSION_NAME_SIZE_MAX);
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "GetPeerSessionName invalid sname[null]";
+   
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_3500
+ * @tc.name   : GetPeersessionName input PeerSessionName invalid len[max+1]
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3500, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
+
+    char peerSname[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetPeerSessionName(sessionId, peerSname, SESSION_NAME_SIZE_MAX + 1);
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "GetPeerSessionName invalid len[max+1]";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_3600
+ * @tc.name   : GetPeersessionName input PeerSessionName len short than real
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3600, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
 
     char peerSnameShort[5];
     ret = GetPeerSessionName(sessionId, peerSnameShort, 5);
@@ -537,13 +948,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1500, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1600
- * @tc.name   : GetPeerDeviceId input wrong value
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_3700
+ * @tc.name   : GetPeerDeviceId input DeviceId invalid sid -1
  * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1600, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3700, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -554,14 +965,113 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1600, Tes
     char deviceId[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetPeerDeviceId(-1, deviceId, SESSION_NAME_SIZE_MAX);
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "GetPeerDeviceId invalid sid[-1]";
+   
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_3800
+ * @tc.name   : GetPeerDeviceId input DeviceId invalid sid[max+1]
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3800, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
+
+    char deviceId[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetPeerDeviceId(MAX_SESSION_NUM + 1, deviceId, SESSION_NAME_SIZE_MAX);
     EXPECT_NE(SOFTBUS_OK, ret) << "GetPeerDeviceId invalid sid[max+1]";
+    
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_3900
+ * @tc.name   : GetPeerDeviceId input DeviceId invalid sid not open
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3900, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+
+    char deviceId[SESSION_NAME_SIZE_MAX] = { 0 };
+    sessionId = GetCurrentSessionId4Data();
     ret = GetPeerDeviceId(sessionId + 1, deviceId, SESSION_NAME_SIZE_MAX);
     EXPECT_NE(SOFTBUS_OK, ret) << "GetPeerDeviceId invalid sid[not open]";
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4000
+ * @tc.name   : GetPeerDeviceId input DeviceId invalid sname[null]
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4000, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
+
     ret = GetPeerDeviceId(sessionId, NULL, SESSION_NAME_SIZE_MAX);
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "GetPeerDeviceId invalid sname[null]";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4100
+ * @tc.name   : GetPeerDeviceId input DeviceId invalid len[max+1]
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4100, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
+
+    char deviceId[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetPeerDeviceId(sessionId, deviceId, SESSION_NAME_SIZE_MAX + 1);
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "GetPeerDeviceId invalid len[max+1]";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
+}
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4200
+ * @tc.name   : GetPeerDeviceId input DeviceId len short than real
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4200, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    ret = CreateSsAndOpenSession4Data();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "CreateSsAndOpenSession4Data fail";
+    sessionId = GetCurrentSessionId4Data();
 
     char deviceIdShort[5];
     ret = GetPeerDeviceId(sessionId, deviceIdShort, 5);
@@ -572,13 +1082,13 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1600, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1700
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4300
  * @tc.name   : OpenSession, no Session Server exists on the peer
  * @tc.desc   : Test session management reliability
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1700, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4300, TestSize.Level3)
 {
     int ret;
     char* softbusPidStart;
