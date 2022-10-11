@@ -18,6 +18,56 @@
 #include "net_trans_common.h"
 #include "wifi_utils.h"
 
+static int g_waitFlag = WAIT_DEF_VALUE;
+static int FileSessionOpened(int sessionId, int result)
+{
+    LOG("[cb][file]open session sid[%d],rst[%d]", sessionId, result);
+    if (result == SOFTBUS_OK) {
+        g_waitFlag = WAIT_SUCCESS_VALUE;
+    } else {
+        g_waitFlag = WAIT_FAIL_VALUE;
+    }
+    return SOFTBUS_OK;
+}
+
+static void FileSessionClosed(int sessionId)
+{
+    LOG("[cb][file]close session sid[%d]", sessionId);
+}
+
+static void FileBytesReceived(int sessionId, const void* data, unsigned int dataLen)
+{
+    LOG("[cb][file]ByteRec sid:%d, data len:%d", sessionId, dataLen);
+    if (data == NULL) {
+        LOG("[cb][file]ByteRec invalid data=null sid[%d]", sessionId);
+        g_waitFlag = WAIT_FAIL_VALUE;
+    } else {
+        g_waitFlag = WAIT_SUCCESS_VALUE;
+    }
+}
+
+static void FileMessageReceived(int sessionId, const void* data, unsigned int dataLen)
+{
+    LOG("[cb][file]MessageRec sid:%d, data len:%d", sessionId, dataLen);
+    if (data == NULL) {
+        LOG("[cb][file]MessageRec invalid data=null sid[%d]", sessionId);
+        g_waitFlag = WAIT_FAIL_VALUE;
+    } else {
+        g_waitFlag = WAIT_SUCCESS_VALUE;
+    }
+}
+
+static SessionAttribute g_fileSessionAttr = {
+    .dataType = TYPE_FILE,
+};
+
+static ISessionListener g_fileSessionListener = {
+    .OnSessionOpened = FileSessionOpened,
+    .OnSessionClosed = FileSessionClosed,
+    .OnBytesReceived = FileBytesReceived,
+    .OnMessageReceived = FileMessageReceived,
+};
+
 using namespace testing::ext;
 
 class TransSessionFuncTest : public testing::Test {
@@ -50,6 +100,8 @@ void TransSessionFuncTest::SetUpTestCase()
     ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
     ASSERT_EQ(SOFTBUS_OK, ret) << "get node fail,please check network";
 
+    system(" truncate -s 8M /data/8M.tar");
+
     LOG("SetUp end");
 }
 
@@ -63,8 +115,7 @@ void TransSessionFuncTest::TearDownTestCase()
 
 /**
  * @tc.number  : SUB_Softbus_Trans_Comp_OpenSession_Func_0100
- * @tc.name    : one Client creates SessionServer + 1, Max succeeds, 1
- * fails
+ * @tc.name    : one Client creates SessionServer + 1, Max succeeds, 1 fails
  * @tc.desc    : Test session management
  * @tc.type    : FUNC
  * @tc.size    : MediumTest
@@ -95,10 +146,10 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0100, Tes
 
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0200
- * @tc.name     : OpenSession + 1, Max succeeds, 1 fails
- * @tc.desc       : Test session management
- * @tc.type       : FUNC
- * @tc.size        : MediumTest
+ * @tc.name   : OpenSession + 1, Max succeeds, 1 fails
+ * @tc.desc   : Test session management
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
  */
 HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0200, TestSize.Level3)
 {
@@ -165,10 +216,10 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0300, Tes
 
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0400
- * @tc.name     : Obtain DevicedId based on Sessionid
- * @tc.desc       : Test session management
- * @tc.type       : FUNC
- * @tc.size        : MediumTest
+ * @tc.name   : Obtain DevicedId based on Sessionid
+ * @tc.desc   : Test session management
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
  */
 HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0400, TestSize.Level3)
 {
@@ -183,4 +234,298 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0400, Tes
 
     ret = CloseSessionAndRemoveSs4Ctl();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0500
+ * @tc.name   : OpenSession Type is TYPE_BYTES sendfile fail
+ * @tc.desc   : Test session management
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0500, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    int timeout = 10;
+
+    static const char* g_file[] = {
+        "/data/8M.tar",
+    };
+
+    static const char *recv_file[] = {
+        "/data/datatype_8M.tar",
+    };
+
+    ret = SetFileSendListener(DEF_PKG_NAME, SESSION_NAME_FILE, GetSendFileListener());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
+    ret = SetFileReceiveListener(DEF_PKG_NAME, SESSION_NAME_FILE, GetRecvFileListener(), RECV_FILE_PATH);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
+
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call CreateSS[file] fail";
+
+    sessionId = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, GetSessionAttr4Data());
+    if (sessionId < SESSION_ID_MIN)
+    {
+        LOG("call opensession[file] fail, ret sid:%d, netid:%s", sessionId, GetNetworkId());
+    }
+    ret = Wait4Session(timeout, SESSION_4DATA);
+    if (ret != SOFTBUS_OK)
+    {
+        LOG("call opensession[file] fail");
+    }
+    
+    ret = SendFile(sessionId, g_file, recv_file, 1);
+    EXPECT_NE(SOFTBUS_OK, ret) << "sendfile succees";
+
+    CloseSession(sessionId);
+    
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0600
+ * @tc.name   : OpenSession Type is TYPE_MESSAGE sendfile fail
+ * @tc.desc   : Test session management
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0600, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    int timeout = 10;
+
+    static const char* g_file[] = {
+        "/data/8M.tar",
+    };
+
+    static const char *recv_file[] = {
+        "/data/messagetype_8M.tar",
+    };
+
+    ret = SetFileSendListener(DEF_PKG_NAME, SESSION_NAME_PROXY, GetSendFileListener());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
+    ret = SetFileReceiveListener(DEF_PKG_NAME, SESSION_NAME_PROXY, GetRecvFileListener(), RECV_FILE_PATH);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
+
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY, GetSessionListenser4Proxy());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call CreateSS[file] fail";
+
+    sessionId = OpenSession(SESSION_NAME_PROXY, SESSION_NAME_PROXY, GetNetworkId(), DEF_GROUP_ID, GetSessionAttr4Proxy());
+    if (sessionId < SESSION_ID_MIN)
+    {
+        LOG("call opensession[message] fail, ret sid:%d, netid:%s", sessionId, GetNetworkId());
+    }
+    ret = Wait4Session(timeout, SESSION_4PROXY);
+    if (ret != SOFTBUS_OK)
+    {
+        LOG("call opensession[message] fail");
+    }
+    
+    ret = SendFile(sessionId, g_file, recv_file, 1);
+    EXPECT_NE(SOFTBUS_OK, ret) << "sendfile succees";
+
+    CloseSession(sessionId);
+    
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0700
+ * @tc.name   : OpenSession Type is TYPE_STREAM sendfile fail
+ * @tc.desc   : Test session management
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0700, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    int timeout = 10;
+
+    static const char* g_file[] = {
+        "/data/8M.tar",
+    };
+
+    static const char *recv_file[] = {
+        "/data/streamtype_8M.tar",
+    };
+
+    ret = SetFileSendListener(DEF_PKG_NAME, SESSION_NAME_STREAM, GetSendFileListener());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
+    ret = SetFileReceiveListener(DEF_PKG_NAME, SESSION_NAME_STREAM, GetRecvFileListener(), RECV_FILE_PATH);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
+
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM, GetSessionListenser4Stream());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call CreateSS[file] fail";
+
+    SessionAttribute attr;
+    (void)memset_s(&attr, sizeof(attr), 0, sizeof(attr));
+    attr.dataType = TYPE_STREAM;
+    sessionId = OpenSession(SESSION_NAME_STREAM, SESSION_NAME_STREAM, GetNetworkId(), DEF_GROUP_ID, &attr);
+    if (sessionId < SESSION_ID_MIN)
+    {
+        LOG("call opensession[stream] fail, ret sid:%d, netid:%s", sessionId, GetNetworkId());
+    }
+    ret = Wait4Session(timeout, SESSION_4STREAM);
+    if (ret != SOFTBUS_OK)
+    {
+        LOG("call opensession[stream] fail");
+    }
+    
+    ret = SendFile(sessionId, g_file, recv_file, 1);
+    EXPECT_NE(SOFTBUS_OK, ret) << "sendfile succees";
+
+    CloseSession(sessionId);
+    
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0800
+ * @tc.name   : OpenSession Type is TYPE_BYTES sendstream fail
+ * @tc.desc   : Test session management
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0800, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    int timeout = 10;
+
+    string data = "send stream transmission test!!!!";
+    char *sendData = (char *)malloc(data.length() + 1);
+    EXPECT_NE(sendData, nullptr);
+    ret = strcpy_s(sendData, data.length() + 1, data.c_str());
+    EXPECT_EQ(ret, SOFTBUS_OK);
+    StreamData extStreamData {0};
+    StreamData streamData {
+        .buf = sendData,
+        .bufLen = data.length() + 1,
+    };
+    StreamFrameInfo  frame = {0};
+
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM, &g_fileSessionListener);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call CreateSS[file] fail";
+
+    sessionId = OpenSession(SESSION_NAME_STREAM, SESSION_NAME_STREAM, GetNetworkId(), DEF_GROUP_ID, GetSessionAttr4Data());
+    if (sessionId < SESSION_ID_MIN)
+    {
+        LOG("call opensession[file] fail, ret sid:%d, netid:%s", sessionId, GetNetworkId());
+    }
+    ret = Wait4Session(timeout, SESSION_4DATA);
+    if (ret != SOFTBUS_OK)
+    {
+        LOG("call opensession[file] fail");
+    }
+    
+    ret = SendStream(sessionId, &streamData, &extStreamData, &frame);
+    EXPECT_NE(SOFTBUS_OK, ret) << "sendstream succees";
+
+    CloseSession(sessionId);
+    
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0900
+ * @tc.name   : OpenSession Type is TYPE_MESSAGE sendstream fail
+ * @tc.desc   : Test session management
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0900, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    int timeout = 10;
+
+    string data = "send stream transmission test!!!!";
+    char *sendData = (char *)malloc(data.length() + 1);
+    EXPECT_NE(sendData, nullptr);
+    ret = strcpy_s(sendData, data.length() + 1, data.c_str());
+    EXPECT_EQ(ret, SOFTBUS_OK);
+    StreamData extStreamData {0};
+    StreamData streamData {
+        .buf = sendData,
+        .bufLen = data.length() + 1,
+    };
+    StreamFrameInfo  frame = {0};
+
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY, GetSessionListenser4Proxy());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call CreateSS[file] fail";
+
+    sessionId = OpenSession(SESSION_NAME_PROXY, SESSION_NAME_PROXY, GetNetworkId(), DEF_GROUP_ID, GetSessionAttr4Proxy());
+    if (sessionId < SESSION_ID_MIN)
+    {
+        LOG("call opensession[message] fail, ret sid:%d, netid:%s", sessionId, GetNetworkId());
+    }
+    ret = Wait4Session(timeout, SESSION_4PROXY);
+    if (ret != SOFTBUS_OK)
+    {
+        LOG("call opensession[message] fail");
+    }
+    
+    ret = SendStream(sessionId, &streamData, &extStreamData, &frame);
+    EXPECT_NE(SOFTBUS_OK, ret) << "sendstream succees";
+
+    CloseSession(sessionId);
+    
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_1000
+ * @tc.name   : OpenSession Type is TYPE_FILE sendstream fail
+ * @tc.desc   : Test session management
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_1000, TestSize.Level3)
+{
+    int ret;
+    int sessionId;
+    int timeout = 10;
+
+    string data = "send stream transmission test!!!!";
+    char *sendData = (char *)malloc(data.length() + 1);
+    EXPECT_NE(sendData, nullptr);
+    ret = strcpy_s(sendData, data.length() + 1, data.c_str());
+    EXPECT_EQ(ret, SOFTBUS_OK);
+    StreamData extStreamData {0};
+    StreamData streamData {
+        .buf = sendData,
+        .bufLen = data.length() + 1,
+    };
+    StreamFrameInfo  frame = {0};
+
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call CreateSS[file] fail";
+
+    sessionId = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttr);
+    if (sessionId < SESSION_ID_MIN)
+    {
+        LOG("call opensession[stream] fail, ret sid:%d, netid:%s", sessionId, GetNetworkId());
+    }
+    ret = Wait4Session(timeout, SESSION_4STREAM);
+    if (ret != SOFTBUS_OK)
+    {
+        LOG("call opensession[stream] fail");
+    }
+    
+    ret = SendStream(sessionId, &streamData, &extStreamData, &frame);
+    EXPECT_NE(SOFTBUS_OK, ret) << "sendstream succees";
+
+    CloseSession(sessionId);
+    
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "remove Ss fail";
 }

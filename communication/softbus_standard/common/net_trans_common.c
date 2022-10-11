@@ -25,6 +25,7 @@ static int32_t g_waitFlag = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Data = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Ctl = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Proxy = WAIT_DEF_VALUE;
+static int32_t g_waitFlag4Stream = WAIT_DEF_VALUE;
 static int32_t g_passiveOpenRetFlag = SOFTBUS_OK;
 static int32_t g_nodeOnlineCount = 0;
 static int32_t g_nodeOfflineCount = 0;
@@ -47,6 +48,7 @@ static ISessionListener* g_sessionlistener4Ctl = NULL;
 static ISessionListener* g_sessionlistener4Pass = NULL;
 static ISessionListener* g_sessionlistener4Perf = NULL;
 static ISessionListener* g_sessionlistener4Proxy = NULL;
+static ISessionListener* g_sessionlistener4Stream = NULL;
 
 static IFileSendListener* g_fileSendListener = NULL;
 static IFileReceiveListener* g_fileRecvListener = NULL;
@@ -128,6 +130,12 @@ int Wait4Session(int timeout, WaitSessionType type)
                     hitFlag = 1;
                 }
                 break;
+            case SESSION_4STREAM:
+                if (g_waitFlag4Stream != WAIT_DEF_VALUE) {
+                    LOG("Wait4Session[proxy] succ,flag:%d", g_waitFlag4Stream);
+                    hitFlag = 1;
+                }
+                break;
             default:
                 LOG("Wait4Session type error");
                 hitFlag = 1;
@@ -154,6 +162,12 @@ int Wait4Session(int timeout, WaitSessionType type)
         case SESSION_4PROXY:
             if (g_waitFlag4Proxy != WAIT_SUCCESS_VALUE) {
                 LOG("Wait4Session[proxy] fail[exp:%d, real:%d]", WAIT_SUCCESS_VALUE, g_waitFlag4Proxy);
+                return SOFTBUS_ERR;
+            }
+            break;
+         case SESSION_4STREAM:
+            if (g_waitFlag4Stream != WAIT_SUCCESS_VALUE) {
+                LOG("Wait4Session[proxy] fail[exp:%d, real:%d]", WAIT_SUCCESS_VALUE, g_waitFlag4Stream);
                 return SOFTBUS_ERR;
             }
             break;
@@ -561,6 +575,31 @@ static void ProxyMessageReceived(int sessionId, const void* data, unsigned int d
         g_waitFlag4Proxy = WAIT_FAIL_VALUE;
     } else {
         g_waitFlag4Proxy = WAIT_SUCCESS_VALUE;
+    }
+}
+
+static int StreamSessionOpened(int sessionId, int result)
+{
+    LOG("[cb][stream]open session sessionId[%d],rst[%d]", sessionId, result);
+    if (result == SOFTBUS_OK) {
+        g_waitFlag4Stream = WAIT_SUCCESS_VALUE;
+    } else {
+        g_waitFlag4Stream = WAIT_FAIL_VALUE;
+    }
+    return SOFTBUS_OK;
+}
+
+static void StreamSessionClosed(int sessionId)
+{
+    LOG("[cb][stream]close session sessionId[%d]", sessionId);
+}
+
+
+static void StreamReceived(int sessionId, const StreamData *data, const StreamData *ext, const StreamFrameInfo *frame)
+{
+    if (data != NULL) {
+        LOG("[cb][stream]ByteRec sessionId:%d, data= %.*s.\n", sessionId, data->bufLen, data->buf);
+        g_waitFlag4Stream = WAIT_SUCCESS_VALUE;
     }
 }
 
@@ -1032,6 +1071,16 @@ ISessionListener* GetSessionListenser4Ctl(void)
     return g_sessionlistener4Ctl;
 }
 
+ISessionListener* GetSessionListenser4Proxy(void)
+{
+    return g_sessionlistener4Proxy;
+}
+
+ISessionListener* GetSessionListenser4Stream(void)
+{
+    return g_sessionlistener4Stream;
+}
+
 IFileSendListener* GetSendFileListener(void)
 {
     return g_fileSendListener;
@@ -1140,6 +1189,12 @@ void TestSetUp(void)
         g_sessionlistener4Proxy->OnMessageReceived = ProxyMessageReceived;
         g_sessionlistener4Proxy->OnBytesReceived = ProxyBytesReceived;
     }
+    if (g_sessionlistener4Stream == NULL) {
+        g_sessionlistener4Stream = (ISessionListener*)calloc(1, sizeof(ISessionListener));
+        g_sessionlistener4Stream->OnSessionOpened = StreamSessionOpened;
+        g_sessionlistener4Stream->OnSessionClosed = StreamSessionClosed;
+        g_sessionlistener4Stream->OnStreamReceived = StreamReceived;
+    }
 
     if (g_fileSendListener == NULL) {
         g_fileSendListener = (IFileSendListener*)calloc(1, sizeof(IFileSendListener));
@@ -1209,6 +1264,10 @@ void TestTearDown(void)
     if (g_sessionlistener4Proxy != NULL) {
         free(g_sessionlistener4Proxy);
         g_sessionlistener4Proxy = NULL;
+    }
+    if (g_sessionlistener4Stream != NULL) {
+        free(g_sessionlistener4Stream);
+        g_sessionlistener4Stream = NULL;
     }
 
     if (g_fileRecvListener != NULL) {

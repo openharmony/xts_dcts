@@ -223,8 +223,12 @@ void SetCurrentSessionId4Ctl(int sessionId);
 void SetCurrentSessionId4Proxy(int sessionId);
 ISessionListener* GetSessionListenser4Data(void);
 ISessionListener* GetSessionListenser4Ctl(void);
+ISessionListener* GetSessionListenser4Proxy(void);
+ISessionListener* GetSessionListenser4Stream(void);
+
 SessionAttribute* GetSessionAttr4Ctl(void);
 SessionAttribute* GetSessionAttr4Data(void);
+SessionAttribute* GetSessionAttr4Proxy(void);
 IFileReceiveListener* GetRecvFileListener(void);
 IFileSendListener* GetSendFileListener(void);
 
