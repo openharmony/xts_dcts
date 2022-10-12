@@ -10,7 +10,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import("//build/ohos_var.gni")
+import("//build/ohos.gni")
 
 #import("//foundation/distributeddatamgr/data_share/datashare.gni")
 group("distributeddatatest") {
@@ -26,7 +26,7 @@ group("distributeddatatest") {
   }
 }
 
-shared_library("disDataProcess") {
+ohos_shared_library("disDataProcess") {
   #module_out_path = module_output_path
   #
   sources = [ "./cpptest/process_common/process_msg.cpp" ]
