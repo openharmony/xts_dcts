@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "ohos.dcts.distributedisjsserver",
+    "bundleName": "com.ohos.distributekvdisjs",
     "vendor": "rpc",
     "version": {
       "code": 1000000,
@@ -27,7 +27,7 @@
         "name":"ohos.permission.KEEP_BACKGROUND_RUNNING"
       }
     ],
-    "package": "ohos.dcts.distributedisjsserver",
+    "package": "com.ohos.distributekvdisjs",
     "name": ".MyApplication",
     "mainAbility": ".MainAbility",
     "deviceType": [
