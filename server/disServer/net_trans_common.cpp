@@ -161,7 +161,6 @@ int Wait4Session(int timeout, WaitSessionType type)
 
 void OnDefNodeOnline(NodeBasicInfo* info)
 {
-    LOG("OnDefNodeOnline");
     if (info == nullptr) {
         LOG("OnDefNodeOnline info is nullptr");
         return;
