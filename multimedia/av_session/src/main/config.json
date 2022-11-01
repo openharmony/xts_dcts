@@ -28,7 +28,7 @@
       }
     ],
     "package": "com.example.myapplication",
-    "name": "com.ohos.example.MyApplication",
+    "name": "com.example.myapplication.MyApplication",
     "deviceType": [
       "phone"
     ],
