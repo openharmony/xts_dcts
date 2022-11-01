@@ -2,7 +2,7 @@
   "string": [
     {
       "name": "app_name",
-      "value": "fileioClient"
+      "value": "avsessionClient"
     },
     {
       "name": "mainability_description",
