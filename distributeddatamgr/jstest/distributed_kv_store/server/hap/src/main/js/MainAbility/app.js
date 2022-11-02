@@ -12,11 +12,28 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+import {Core} from 'deccjsunit/index';
+import featureAbility from '@ohos.ability.featureAbility';
+
 export default {
     onCreate() {
-        console.info('TestApplication onCreate');
+        console.info('AceApplication onCreate');
+        const core = Core.getInstance()
+        core.init()
+        const configService = core.getDefaultService('config')
+        configService.setConfig(this)
+
+        console.info('Calc[IndexPage] grantPermission')
+        let context = featureAbility.getContext()
+        context.requestPermissionsFromUser(['ohos.permission.DISTRIBUTED_DATASYNC'], 666, function (result) {
+            console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser,'+result.requestCode)
+            setTimeout(()=>{
+                require('./test/List.test')
+                core.execute()
+            },1000)
+        })
     },
     onDestroy() {
-        console.info('TestApplication onDestroy');
+        console.info('AceApplication onDestroy');
     }
 };
