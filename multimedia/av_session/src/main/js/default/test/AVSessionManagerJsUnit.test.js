@@ -107,6 +107,8 @@ describe('AVSessionManagerJsUnit', function () {
             session = data;
             sessionId = session.sessionId;
             sessionToken = {sessionId, pid, uid};
+            console.info(sessionToken.pid);
+            console.info(sessionToken.uid);
         }).catch((err) => {
             console.info(`Session create BusinessError: ${err.code}, message: ${err.message}`);
             expect(false).assertTrue();
