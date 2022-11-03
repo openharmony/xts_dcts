@@ -138,10 +138,10 @@ static void StreamReceived(int sessionId, const StreamData *data, const StreamDa
     }
     if (i % 60 == 0)
     {
-        LOG("### RECV IFREAMTime =  %llu and counts = %d ", g_transTimeEnd, i );
+        LOG("### RECV counts = %d ", i );
     } else
     {
-        LOG("### RECV PFREAMTime =  %llu and counts = %d ", g_transTimeEnd, i );
+        LOG("### RECV counts = %d ", i );
     } 
     if (data != NULL) {
         LOG("[cb][stream]Rec sid:%d, data= %.*s.\n", sessionId, data->bufLen, data->buf);
