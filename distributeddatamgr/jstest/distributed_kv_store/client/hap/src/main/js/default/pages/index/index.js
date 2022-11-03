@@ -26,23 +26,11 @@ export default {
     },
     onInit() {
         this.title = this.$t('strings.world');
-	this.grantPermission();
-    },
-    onShow() {
+      },
+      onShow() {
         console.info('onShow finish')
-        const core = Core.getInstance()
-        core.init()
-        require('../../test/List.test')
-        core.execute()
-    },
-    onReady() {
-    },
-    grantPermission() {
-        console.info(logTag + '[IndexPage] grantPermission')
-        let context = featureAbility.getContext()
-        context.requestPermissionsFromUser(['ohos.permission.DISTRIBUTED_DATASYNC'], 666, function (result) {
-            console.info(logTag + '[IndexPage] grantPermission,requestPermissionsFromUser,' + result.requestCode)
+      },
+      onReady() {
+      },
 
-        })
-    },
 }
