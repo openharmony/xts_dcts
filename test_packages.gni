@@ -19,6 +19,7 @@ _all_test_packages = [
   "${DCTS_ROOT}/communication:communication",
   "${DCTS_ROOT}/filemanagement:filemanagement",
   "${DCTS_ROOT}/ability:ability",
+  "${DCTS_ROOT}/multimedia:multimedia",
 ]
 
 _all_test_packages_ivi = [
