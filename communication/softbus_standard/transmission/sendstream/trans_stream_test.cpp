@@ -137,17 +137,17 @@ HWTEST_F(TransStreamTest, SUB_Softbus_Trans_Comp_SendStream_0200, TestSize.Level
      char *sendPFrame = (char *)malloc(P_FRAME_SIZE);
     EXPECT_NE(sendPFrame, nullptr);
   
-    StreamData extStreamData {0};
+    StreamData extStreamData = {0};
 
-    StreamData streamIData {
+    StreamData streamIData = {
         .buf = sendIFrame,
         .bufLen = I_FRAME_SIZE + 1,
     };
     StreamFrameInfo  iFrame = {0};
 
-     StreamData streamPData {
+     StreamData streamPData = {
         .buf = sendPFrame,
-        .bufLen = I_FRAME_SIZE + 1,
+        .bufLen = P_FRAME_SIZE + 1,
     };
     StreamFrameInfo  pFrame = {0};
 
@@ -178,7 +178,7 @@ HWTEST_F(TransStreamTest, SUB_Softbus_Trans_Comp_SendStream_0200, TestSize.Level
             EXPECT_EQ(SOFTBUS_OK, ret) << "call SendStream fail";
             if (ret == SOFTBUS_OK)
             {
-                LOG("###SendStream IFREAM Start Time =  %llu and counts = %d ", g_transTimStart, i);
+                LOG("###SendStream IFREAM counts = %d ", i);
             }
         } else
         {
@@ -189,7 +189,7 @@ HWTEST_F(TransStreamTest, SUB_Softbus_Trans_Comp_SendStream_0200, TestSize.Level
             EXPECT_EQ(SOFTBUS_OK, ret) << "call SendStream fail";
             if (ret == SOFTBUS_OK)
             {
-                LOG("###SendStream PFREAM Start Time =  %llu and counts = %d ", g_transTimStart, i );
+                LOG("###SendStream PFREAM counts = %d ", i );
             }
         }
         usleep(16666); //sleep 100ms

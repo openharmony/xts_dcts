@@ -182,7 +182,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0600, TestSize.Leve
 
     int size = 1;
     ret = SendData4Message(DATA_TYPE_BYTE, size);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
+    EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
 
     ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
@@ -203,7 +203,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0700, TestSize.Leve
 
     int size = 2 * 1024;
     ret = SendData4Message(DATA_TYPE_BYTE, size);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte,2M) fail";
+    EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(byte,2M) fail";
 
     ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
@@ -224,7 +224,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0800, TestSize.Leve
 
     int size = 4 * 1024;
     ret = SendData4Message(DATA_TYPE_BYTE, size);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte,Max) fail";
+    EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(byte,Max) fail";
 
     ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
@@ -289,7 +289,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0100, TestSize.Le
 
     int size = 1;
     ret = SendData4Data(DATA_TYPE_MSG, size);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg, 1B) fail";
+    EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(msg, 1B) fail";
 
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
@@ -310,7 +310,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0200, TestSize.Le
 
     int size = 1000;
     ret = SendData4Data(DATA_TYPE_MSG, size);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg,1K) fail";
+    EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(msg,1K) fail";
 
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
@@ -331,7 +331,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0300, TestSize.Le
 
     int size = TRANS_MESSAGE_LENGTH_MAX;
     ret = SendData4Data(DATA_TYPE_MSG, size);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg,Max) fail";
+    EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(msg,Max) fail";
 
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
