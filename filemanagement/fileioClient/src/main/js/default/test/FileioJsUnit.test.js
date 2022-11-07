@@ -2622,105 +2622,9 @@ describe('FileioJsUnitTest', function () {
     });
 
     /**
-     * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0000
-     * @tc.name    test_fileio_create_file_sync_000
-     * @tc.desc    Function of API, flags=0o100. mode=0o777
-     * @tc.level   0
-     */
-    it('test_fileio_create_file_sync_000', 0, async function (done) {
-        console.info("--------start test_fileio_create_file_sync_000--------");
-        let tcNumber = 'test_fileio_create_file_sync_000';
-        let fpath = await getDistributedFilePath(tcNumber);
-        console.info('fpath == ' + fpath);
-        try {
-            let fd = fileio.openSync(fpath, 0o100, 0o777);
-            console.info('------------- create file success.');
-            fileio.accessSync(fpath, 0);
-
-            console.info('------ start check server... ');
-            await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
-                console.info("test_fileio_create_file_sync_000 getServerFileInfo serverFileCreate: " + serverFileCreate);
-                expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
-            })
-
-            console.info('------------ start clean test environment.');
-            fileio.closeSync(fd);
-            fileio.unlinkSync(fpath);
-        } catch (e) {
-            console.info('test_fileio_create_file_sync_000 has failed for : ' + e);
-            expect(false).assertTrue();
-        }
-        console.info("--------end test_fileio_create_file_sync_000--------");
-    });
-
-    /**
-     * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0100
-     * @tc.name    test_fileio_create_file_sync_001
-     * @tc.desc    Function of API, flags=0o101. mode=0o777
-     * @tc.level   0
-     */
-    it('test_fileio_create_file_sync_001', 0, async function (done) {
-        console.info("--------start test_fileio_create_file_sync_001--------");
-        let tcNumber = 'test_fileio_create_file_sync_001';
-        let fpath = await getDistributedFilePath(tcNumber);
-        console.info('fpath == ' + fpath);
-        try {
-            let fd = fileio.openSync(fpath, 0o101, 0o777);
-            console.info('------------- create file success.');
-            fileio.accessSync(fpath, 0);
-
-            console.info('------ start check server... ');
-            await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
-                console.info("test_fileio_create_file_sync_001 getServerFileInfo serverFileCreate: " + serverFileCreate);
-                expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
-            })
-
-            console.info('------------ start clean test environment.');
-            fileio.closeSync(fd);
-            fileio.unlinkSync(fpath);
-        } catch (e) {
-            console.info('test_fileio_create_file_sync_001 has failed for : ' + e);
-            expect(false).assertTrue();
-        }
-        console.info("--------end test_fileio_create_file_sync_001--------");
-    });
-
-    /**
-     * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0200
-     * @tc.name    test_fileio_create_file_sync_002
-     * @tc.desc    Function of API, flags=0o102. mode=0o777
-     * @tc.level   0
-     */
-    it('test_fileio_create_file_sync_002', 0, async function (done) {
-        console.info("--------start test_fileio_create_file_sync_002--------");
-        let tcNumber = 'test_fileio_create_file_sync_002';
-        let fpath = await getDistributedFilePath(tcNumber);
-        console.info('fpath == ' + fpath);
-        try {
-            let fd = fileio.openSync(fpath, 0o102, 0o777);
-            console.info('------------- create file success.');
-            fileio.accessSync(fpath, 0);
-
-            console.info('------ start check server... ');
-            await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
-                console.info("test_fileio_create_file_sync_002 getServerFileInfo serverFileCreate: " + serverFileCreate);
-                expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
-            })
-
-            console.info('------------ start clean test environment.');
-            fileio.closeSync(fd);
-            fileio.unlinkSync(fpath);
-        } catch (e) {
-            console.info('test_fileio_create_file_sync_002 has failed for : ' + e);
-            expect(false).assertTrue();
-        }
-        console.info("--------end test_fileio_create_file_sync_002--------");
-    });
-
-    /**
      * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0300
      * @tc.name    test_fileio_create_file_sync_003
-     * @tc.desc    Function of API, flags=0o100. mode=0o444
+     * @tc.desc    Function of API, flags=0o100. mode=0o744
      * @tc.level   3
      */
     it('test_fileio_create_file_sync_003', 0, async function (done) {
@@ -2729,7 +2633,7 @@ describe('FileioJsUnitTest', function () {
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            let fd = fileio.openSync(fpath, 0o100, 0o444);
+            let fd = fileio.openSync(fpath, 0o100, 0o744);
             console.info('------------- create file success.');
             fileio.accessSync(fpath, 0);
 
@@ -2752,7 +2656,7 @@ describe('FileioJsUnitTest', function () {
     /**
      * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0400
      * @tc.name    test_fileio_create_file_sync_004
-     * @tc.desc    Function of API, flags=0o100. mode=0o422
+     * @tc.desc    Function of API, flags=0o100. mode=0o722
      * @tc.level   3
      */
     it('test_fileio_create_file_sync_004', 0, async function (done) {
@@ -2761,7 +2665,7 @@ describe('FileioJsUnitTest', function () {
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            let fd = fileio.openSync(fpath, 0o100, 0o422);
+            let fd = fileio.openSync(fpath, 0o100, 0o722);
             console.info('------------- create file success.');
             fileio.accessSync(fpath, 0);
 
@@ -2784,7 +2688,7 @@ describe('FileioJsUnitTest', function () {
     /**
      * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0500
      * @tc.name    test_fileio_create_file_sync_005
-     * @tc.desc    Function of API, flags=0o100. mode=0o411
+     * @tc.desc    Function of API, flags=0o100. mode=0o711
      * @tc.level   3
      */
     it('test_fileio_create_file_sync_005', 0, async function (done) {
@@ -2793,7 +2697,7 @@ describe('FileioJsUnitTest', function () {
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            let fd = fileio.openSync(fpath, 0o100, 0o411);
+            let fd = fileio.openSync(fpath, 0o100, 0o711);
             console.info('------------- create file success.');
             fileio.accessSync(fpath, 0);
 
@@ -2816,7 +2720,7 @@ describe('FileioJsUnitTest', function () {
     /**
      * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0600
      * @tc.name    test_fileio_create_file_sync_006
-     * @tc.desc    Function of API, flags=0o100. mode=0o242
+     * @tc.desc    Function of API, flags=0o100. mode=0o474
      * @tc.level   3
      */
     it('test_fileio_create_file_sync_006', 0, async function (done) {
@@ -2825,7 +2729,7 @@ describe('FileioJsUnitTest', function () {
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            let fd = fileio.openSync(fpath, 0o100, 0o242);
+            let fd = fileio.openSync(fpath, 0o100, 0o474);
             console.info('------------- create file success.');
             fileio.accessSync(fpath, 0);
 
@@ -2848,7 +2752,7 @@ describe('FileioJsUnitTest', function () {
     /**
      * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0700
      * @tc.name    test_fileio_create_file_sync_007
-     * @tc.desc    Function of API, flags=0o100. mode=0o224
+     * @tc.desc    Function of API, flags=0o100. mode=0o447
      * @tc.level   3
      */
     it('test_fileio_create_file_sync_007', 0, async function (done) {
@@ -2857,7 +2761,7 @@ describe('FileioJsUnitTest', function () {
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            let fd = fileio.openSync(fpath, 0o100, 0o224);
+            let fd = fileio.openSync(fpath, 0o100, 0o447);
             console.info('------------- create file success.');
             fileio.accessSync(fpath, 0);
 
@@ -2880,7 +2784,7 @@ describe('FileioJsUnitTest', function () {
     /**
      * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0800
      * @tc.name    test_fileio_create_file_sync_008
-     * @tc.desc    Function of API, flags=0o100. mode=0o214
+     * @tc.desc    Function of API, flags=0o100. mode=0o421
      * @tc.level   3
      */
     it('test_fileio_create_file_sync_008', 0, async function (done) {
@@ -2889,7 +2793,7 @@ describe('FileioJsUnitTest', function () {
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            let fd = fileio.openSync(fpath, 0o100, 0o214);
+            let fd = fileio.openSync(fpath, 0o100, 0o421);
             console.info('------------- create file success.');
             fileio.accessSync(fpath, 0);
 
@@ -2912,7 +2816,7 @@ describe('FileioJsUnitTest', function () {
     /**
      * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0900
      * @tc.name    test_fileio_create_file_sync_009
-     * @tc.desc    Function of API, flags=0o100. mode=0o141
+     * @tc.desc    Function of API, flags=0o100. mode=0o412
      * @tc.level   3
      */
     it('test_fileio_create_file_sync_009', 0, async function (done) {
@@ -2921,7 +2825,7 @@ describe('FileioJsUnitTest', function () {
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            let fd = fileio.openSync(fpath, 0o100, 0o141);
+            let fd = fileio.openSync(fpath, 0o100, 0o412);
             console.info('------------- create file success.');
             fileio.accessSync(fpath, 0);
 
@@ -2944,7 +2848,7 @@ describe('FileioJsUnitTest', function () {
     /**
      * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_1000
      * @tc.name    test_fileio_create_file_sync_010
-     * @tc.desc    Function of API, flags=0o100. mode=0o124
+     * @tc.desc    Function of API, flags=0o100. mode=0o272
      * @tc.level   3
      */
     it('test_fileio_create_file_sync_010', 0, async function (done) {
@@ -2953,7 +2857,7 @@ describe('FileioJsUnitTest', function () {
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            let fd = fileio.openSync(fpath, 0o100, 0o124);
+            let fd = fileio.openSync(fpath, 0o100, 0o272);
             console.info('------------- create file success.');
             fileio.accessSync(fpath, 0);
 
@@ -2976,7 +2880,7 @@ describe('FileioJsUnitTest', function () {
     /**
      * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_1100
      * @tc.name    test_fileio_create_file_sync_011
-     * @tc.desc    Function of API, flags=0o100. mode=0o112
+     * @tc.desc    Function of API, flags=0o100. mode=0o241
      * @tc.level   3
      */
     it('test_fileio_create_file_sync_011', 0, async function (done) {
@@ -2985,7 +2889,7 @@ describe('FileioJsUnitTest', function () {
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            let fd = fileio.openSync(fpath, 0o100, 0o112);
+            let fd = fileio.openSync(fpath, 0o100, 0o241);
             console.info('------------- create file success.');
             fileio.accessSync(fpath, 0);
 
@@ -3008,7 +2912,7 @@ describe('FileioJsUnitTest', function () {
     /**
      * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_1200
      * @tc.name    test_fileio_create_file_sync_012
-     * @tc.desc    Function of API, flags=0o100. mode=0o221
+     * @tc.desc    Function of API, flags=0o100. mode=0o227
      * @tc.level   3
      */
     it('test_fileio_create_file_sync_012', 0, async function (done) {
@@ -3017,7 +2921,7 @@ describe('FileioJsUnitTest', function () {
         let fpath = await getDistributedFilePath(tcNumber);
         console.info('fpath == ' + fpath);
         try {
-            let fd = fileio.openSync(fpath, 0o100, 0o221);
+            let fd = fileio.openSync(fpath, 0o100, 0o227);
             console.info('------------- create file success.');
             fileio.accessSync(fpath, 0);
 
@@ -3035,6 +2939,166 @@ describe('FileioJsUnitTest', function () {
             expect(false).assertTrue();
         }
         console.info("--------end test_fileio_create_file_sync_012--------");
+    });
+
+    /**
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_1300
+     * @tc.name    test_fileio_create_file_sync_013
+     * @tc.desc    Function of API, flags=0o100. mode=0o214
+     * @tc.level   3
+     */
+    it('test_fileio_create_file_sync_013', 0, async function (done) {
+        console.info("--------start test_fileio_create_file_sync_013--------");
+        let tcNumber = 'test_fileio_create_file_sync_013';
+        let fpath = await getDistributedFilePath(tcNumber);
+        console.info('fpath == ' + fpath);
+        try {
+            let fd = fileio.openSync(fpath, 0o100, 0o214);
+            console.info('------------- create file success.');
+            fileio.accessSync(fpath, 0);
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
+                console.info("test_fileio_create_file_sync_013 getServerFileInfo serverFileCreate: " + serverFileCreate);
+                expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
+            })
+
+            console.info('------------ start clean test environment.');
+            fileio.closeSync(fd);
+            fileio.unlinkSync(fpath);
+        } catch (e) {
+            console.info('test_fileio_create_file_sync_013 has failed for : ' + e);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_file_sync_013--------");
+    });
+
+    /**
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_1400
+     * @tc.name    test_fileio_create_file_sync_014
+     * @tc.desc    Function of API, flags=0o100. mode=0o171
+     * @tc.level   3
+     */
+    it('test_fileio_create_file_sync_014', 0, async function (done) {
+        console.info("--------start test_fileio_create_file_sync_014--------");
+        let tcNumber = 'test_fileio_create_file_sync_014';
+        let fpath = await getDistributedFilePath(tcNumber);
+        console.info('fpath == ' + fpath);
+        try {
+            let fd = fileio.openSync(fpath, 0o100, 0o171);
+            console.info('------------- create file success.');
+            fileio.accessSync(fpath, 0);
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
+                console.info("test_fileio_create_file_sync_014 getServerFileInfo serverFileCreate: " + serverFileCreate);
+                expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
+            })
+
+            console.info('------------ start clean test environment.');
+            fileio.closeSync(fd);
+            fileio.unlinkSync(fpath);
+        } catch (e) {
+            console.info('test_fileio_create_file_sync_014 has failed for : ' + e);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_file_sync_014--------");
+    });
+
+    /**
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_1500
+     * @tc.name    test_fileio_create_file_sync_015
+     * @tc.desc    Function of API, flags=0o100. mode=0o142
+     * @tc.level   3
+     */
+    it('test_fileio_create_file_sync_015', 0, async function (done) {
+        console.info("--------start test_fileio_create_file_sync_015--------");
+        let tcNumber = 'test_fileio_create_file_sync_015';
+        let fpath = await getDistributedFilePath(tcNumber);
+        console.info('fpath == ' + fpath);
+        try {
+            let fd = fileio.openSync(fpath, 0o100, 0o142);
+            console.info('------------- create file success.');
+            fileio.accessSync(fpath, 0);
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
+                console.info("test_fileio_create_file_sync_015 getServerFileInfo serverFileCreate: " + serverFileCreate);
+                expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
+            })
+
+            console.info('------------ start clean test environment.');
+            fileio.closeSync(fd);
+            fileio.unlinkSync(fpath);
+        } catch (e) {
+            console.info('test_fileio_create_file_sync_015 has failed for : ' + e);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_file_sync_015--------");
+    });
+
+    /**
+    * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_1600
+    * @tc.name    test_fileio_create_file_sync_016
+    * @tc.desc    Function of API, flags=0o100. mode=0o124
+    * @tc.level   3
+    */
+    it('test_fileio_create_file_sync_016', 0, async function (done) {
+        console.info("--------start test_fileio_create_file_sync_016--------");
+        let tcNumber = 'test_fileio_create_file_sync_016';
+        let fpath = await getDistributedFilePath(tcNumber);
+        console.info('fpath == ' + fpath);
+        try {
+            let fd = fileio.openSync(fpath, 0o100, 0o124);
+            console.info('------------- create file success.');
+            fileio.accessSync(fpath, 0);
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
+                console.info("test_fileio_create_file_sync_016 getServerFileInfo serverFileCreate: " + serverFileCreate);
+                expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
+            })
+
+            console.info('------------ start clean test environment.');
+            fileio.closeSync(fd);
+            fileio.unlinkSync(fpath);
+        } catch (e) {
+            console.info('test_fileio_create_file_sync_016 has failed for : ' + e);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_file_sync_016--------");
+    });
+
+    /**
+     * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_1700
+     * @tc.name    test_fileio_create_file_sync_017
+     * @tc.desc    Function of API, flags=0o100. mode=0o117
+     * @tc.level   3
+     */
+    it('test_fileio_create_file_sync_017', 0, async function (done) {
+        console.info("--------start test_fileio_create_file_sync_017--------");
+        let tcNumber = 'test_fileio_create_file_sync_017';
+        let fpath = await getDistributedFilePath(tcNumber);
+        console.info('fpath == ' + fpath);
+        try {
+            let fd = fileio.openSync(fpath, 0o100, 0o117);
+            console.info('------------- create file success.');
+            fileio.accessSync(fpath, 0);
+
+            console.info('------ start check server... ');
+            await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
+                console.info("test_fileio_create_file_sync_017 getServerFileInfo serverFileCreate: " + serverFileCreate);
+                expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
+            })
+
+            console.info('------------ start clean test environment.');
+            fileio.closeSync(fd);
+            fileio.unlinkSync(fpath);
+        } catch (e) {
+            console.info('test_fileio_create_file_sync_017 has failed for : ' + e);
+            expect(false).assertTrue();
+        }
+        console.info("--------end test_fileio_create_file_sync_017--------");
     });
 
     /**
@@ -3191,6 +3255,7 @@ describe('FileioJsUnitTest', function () {
 
             console.info('------ start check server first... ');
             await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverFileCreate) {
+                sleep(1000);
                 console.info("test_fileio_rename_dir_sync_000 getServerFileInfo serverFileCreate: " + serverFileCreate);
                 expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
             })
@@ -3210,6 +3275,7 @@ describe('FileioJsUnitTest', function () {
 
             console.info('------ start check server second... ');
             await getServerFileInfo(tcNumber, newPath, CODE_MK_DIR, done, function (serverDirRename) {
+                sleep(1000);
                 console.info("test_fileio_rename_dir_sync_000 getServerFileInfo serverDirRename: " + serverDirRename);
                 expect(serverDirRename).assertEqual(SERVER_CHECK_SUCCESS);
             })
