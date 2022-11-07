@@ -17,9 +17,6 @@ group("distributeddatatest") {
   testonly = true
   if (is_standard_system) {
     deps = [
-      ":disDataProcess",
-      "../server/disServer:disTest",
-      "cpptest/distributed_kv_store:DctsdisDataTest",
       "jstest/distributed_kv_store/client/hap:distributekvdisjs_test",
       "jstest/distributed_kv_store/server/hap:distributekvdisjs_server",
     ]
