@@ -287,8 +287,8 @@ describe('RpcJsUnitTest', function(){
             console.info("online device id: " + deviceId)
 
             let want = {
-                "bundleName":"ohos.rpc.test.server",
-                "abilityName":"ohos.rpc.test.server.ServiceAbility",
+                "bundleName":"com.ohos.rpctest",
+                "abilityName":"com.ohos.rpctest.ServiceAbility",
                 "deviceId":deviceId,
                 "flags": 256
             }
