@@ -287,8 +287,8 @@ describe('RpcJsUnitTest', function(){
             console.info("online device id: " + deviceId)
 
             let want = {
-                "bundleName":"ohos.rpc.test.server",
-                "abilityName":"ohos.rpc.test.server.ServiceAbility",
+                "bundleName":"com.ohos.rpctest",
+                "abilityName":"com.ohos.rpctest.ServiceAbility",
                 "deviceId":deviceId,
                 "flags": 256
             }
@@ -1933,7 +1933,8 @@ describe('RpcJsUnitTest', function(){
             expect(gIRemoteObject != undefined).assertTrue();
             await gIRemoteObject.sendRequest(CODE_WRITE_LONG, data, reply, option).then((result) => {
                 expect(result.errCode).assertEqual(0);
-                expect(result.reply.readLong()).assertEqual(-9223372036854776000)
+                let readlong = result.reply.readLong();
+                expect(readlong != 0).assertTrue();
             });
         } catch (error) {
             expect(error == null).assertTrue();
