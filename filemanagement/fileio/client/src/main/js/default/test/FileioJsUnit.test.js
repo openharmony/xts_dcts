@@ -15,14 +15,13 @@
 
 import rpc from "@ohos.rpc";
 import fileio from '@ohos.fileio';
-import featureAbility from '@ohos.ability.featureAbility'
 import deviceManager from '@ohos.distributedHardware.deviceManager';
-import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from 'deccjsunit/index';
+import featureAbility from "@ohos.ability.featureAbility";
+import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from 'deccjsunit/index';
 
 let gIRemoteObject = null;
 let connectId = null;
-
-describe('FileioJsUnitTest', function () {
+describe('FileioJsUnit', function(){
     console.info("----------SUB_Storage_Fileio_Distributed JS Test is starting----------");
     const DISTRIBUTED_FILE_CONTENT = 'content';
     const SERVER_CHECK_SUCCESS = 'SUCCESS';
@@ -114,7 +113,7 @@ describe('FileioJsUnitTest', function () {
 
             let want = {
                 "bundleName": "com.ohos.fileiotest",
-                "abilityName": "com.example.server.ServiceAbility",
+                "abilityName": "com.ohos.fileiotest.ServiceAbility",
                 "deviceId": deviceId,
                 "flags": 256
             }
