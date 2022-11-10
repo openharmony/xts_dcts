@@ -11,15 +11,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/ohos_var.gni")
-group("filemanagement") {
-  testonly = true
-  if (is_standard_system) {
-    deps = [
-      "fileio/client:DctsFileioClientTest",
-      "fileio/server:DctsFileioServer",
-    ]
-  } else {
-    deps = [ "wifi_standard:ActsWifiJSTest" ]
-  }
+import("//test/xts/tools/build/suite.gni")
+
+ohos_hap_assist_suite("DctsFileioServer") {
+  hap_profile = "./src/main/config.json"
+  deps = [
+    ":fileio_js_assets",
+    ":fileio_js_resources",
+  ]
+
+  certificate_profile = "./signature/openharmony_sx.p7b"
+  hap_name = "DctsFileioServer"
+  subsystem_name = "filemanagement"
+  part_name = "dfs_service"
+}
+ohos_js_assets("fileio_js_assets") {
+  source_dir = "./src/main/js"
+  hap_profile = "./src/main/config.json"
+}
+ohos_resources("fileio_js_resources") {
+  sources = [ "./src/main/resources" ]
+  hap_profile = "./src/main/config.json"
 }
