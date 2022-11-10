@@ -14,9 +14,6 @@
  */
 
 import rpc from "@ohos.rpc";
-// import backgroundTaskManager from '@ohos.backgroundTaskManager';
-// import featureAbility from '@ohos.ability.featureAbility';
-// import wantAgent from '@ohos.wantAgent'
 
 export default {
     onStart() {
