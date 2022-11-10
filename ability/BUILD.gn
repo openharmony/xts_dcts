@@ -15,7 +15,10 @@ import("//build/ohos_var.gni")
 group("ability") {
   testonly = true
   if (is_standard_system) {
-    deps = [ "dmsfwk:DctsAbilityDmsTest" ]
+    deps = [ 
+      "dmsfwk/dmsfwk:DctsDmsJsTest",
+      "dmsfwk/dmsfwkserver:DctsDmsJsServer",
+    ]
   } else {
     deps = [ "wifi_standard:ActsWifiJSTest" ]
   }
