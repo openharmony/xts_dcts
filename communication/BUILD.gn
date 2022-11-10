@@ -17,6 +17,7 @@ group("communication") {
   if (is_standard_system) {
     deps = [
       "dsoftbus/rpc:DctsRpcJsTest",
+      "dsoftbus/rpcserver:DctsRpcJsServer",
       "softbus_standard/transmission/reliability:DctsSoftBusTransReliabilityTest",
       "softbus_standard/transmission/sendfile:DctsSoftBusTransFileFunTest",
       "softbus_standard/transmission/sendmsg:DctsSoftBusTransFunTest",
