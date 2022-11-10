@@ -15,7 +15,7 @@ import("//build/ohos_var.gni")
 group("ability") {
   testonly = true
   if (is_standard_system) {
-    deps = [ 
+    deps = [
       "dmsfwk/dmsfwk:DctsDmsJsTest",
       "dmsfwk/dmsfwkserver:DctsDmsJsServer",
     ]
