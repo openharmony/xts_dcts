@@ -256,4 +256,8 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_2200, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = StartMirror();
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    ret = StopExpand();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+    ret = StopMirror();
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
 }
