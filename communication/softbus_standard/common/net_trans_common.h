@@ -210,6 +210,8 @@ int CreateSsAndOpenSession4Ctl(void);
 int CreateSsAndOpenSession4Proxy(void);
 int OpenSessionBatch4Data(char groupId[][GROUP_ID_LEN], int* sessionId, int count);
 int OpenSessionBatch4Ctl(char groupId[][GROUP_ID_LEN], int* sessionId, int count);
+int OpenSession4DataByP2p(void);
+int OpenSession4ProxyByP2p(void);
 int CloseSessionBatch4Data(int* sessionId, int count);
 int CloseSessionBatch4Ctl(int* sessionId, int count);
 
@@ -229,6 +231,8 @@ ISessionListener* GetSessionListenser4Stream(void);
 SessionAttribute* GetSessionAttr4Ctl(void);
 SessionAttribute* GetSessionAttr4Data(void);
 SessionAttribute* GetSessionAttr4Proxy(void);
+SessionAttribute* GetSessionAttr4DataP2p(void);
+SessionAttribute* GetSessionAttr4ProxyP2p(void);
 IFileReceiveListener* GetRecvFileListener(void);
 IFileSendListener* GetSendFileListener(void);
 
