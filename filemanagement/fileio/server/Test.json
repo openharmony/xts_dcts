@@ -1,0 +1,21 @@
+{
+    "description": "Configuration for fileio Server",
+    "driver": {
+        "type": "JSUnitServer",
+        "test-timeout": "900000",
+        "package": "com.ohos.fileiotest",
+
+        "abilityName": ".MainAbility",
+        "shell-timeout": "900000"
+    },
+    "kits": [
+        {
+            "test-file-name": [
+                "DctsFileioServer.hap"
+            ],
+            "type": "AppInstallKit",
+            "cleanup-apps": true
+        }
+    ]
+
+}
