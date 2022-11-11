@@ -15,6 +15,9 @@ import("//build/ohos_var.gni")
 group("multimedia") {
   testonly = true
   if (is_standard_system) {
-    deps = [ "av_session:DctsAVSessionClientTest" ]
+    deps = [
+      "avsession:DctsAVSessionClientTest",
+      "avsessionserver:DctsAVSessionServerTest",
+    ]
   }
 }
