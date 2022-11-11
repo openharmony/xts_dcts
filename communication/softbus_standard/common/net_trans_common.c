@@ -43,6 +43,8 @@ static SessionAttribute* g_sessionAttr4Ctl = NULL;
 static SessionAttribute* g_sessionAttr4Pass = NULL;
 static SessionAttribute* g_sessionAttr4Perf = NULL;
 static SessionAttribute* g_sessionAttr4Proxy = NULL;
+static SessionAttribute* g_p2pattribute = NULL;
+static SessionAttribute* g_p2pattributeProxy = NULL;
 static ISessionListener* g_sessionlistener4Data = NULL;
 static ISessionListener* g_sessionlistener4Ctl = NULL;
 static ISessionListener* g_sessionlistener4Pass = NULL;
@@ -895,6 +897,46 @@ int CloseSessionAndRemoveSs4Proxy(void)
     }
 }
 
+int OpenSession4DataByP2p(void)
+{
+    int ret;
+    int timeout = 10;
+    ResetWaitFlag4Data();
+    int sId = OpenSession(SESSION_NAME_DATA, SESSION_NAME_DATA, g_networkId, DEF_GROUP_ID, g_p2pattribute);
+    if (sId < SESSION_ID_MIN) {
+        LOG("openSession[data] fail,id:%d, netId:%s", sId, g_networkId);
+        return  SOFTBUS_ERR;
+    }
+    SetCurrentSessionId4Data(sId);
+    ret = Wait4Session(timeout, SESSION_4DATA);
+    if (ret != SOFTBUS_OK) {
+        LOG("Wait4Session[data] fail");
+        return SOFTBUS_ERR;
+    }
+    
+    return ret;
+}
+
+int OpenSession4ProxyByP2p(void)
+{
+    int ret;
+    int timeout = 10;
+    ResetWaitFlag4Proxy();
+    int sId = OpenSession(SESSION_NAME_PROXY, SESSION_NAME_PROXY, g_networkId, DEF_GROUP_ID, g_p2pattributeProxy);
+    if (sId < SESSION_ID_MIN) {
+        LOG("openSession[data] fail,id:%d, netId:%s", sId, g_networkId);
+        return SOFTBUS_ERR;
+    }
+    SetCurrentSessionId4Proxy(sId);
+    ret = Wait4Session(timeout, SESSION_4PROXY);
+    if (ret != SOFTBUS_OK) {
+        LOG("Wait4Session[data] fail");
+        return SOFTBUS_ERR;
+    }
+    
+    return ret;
+}
+
 int OpenSessionBatch4Data(char groupId[][GROUP_ID_LEN], int* sessionId, int count)
 {
     int ret;
@@ -1096,6 +1138,15 @@ SessionAttribute* GetSessionAttr4Data(void)
     return g_sessionAttr4Data;
 }
 
+SessionAttribute* GetSessionAttr4DataP2p(void)
+{
+    return g_p2pattribute;
+}
+
+SessionAttribute* GetSessionAttr4ProxyP2p(void)
+{
+    return g_p2pattributeProxy;
+}
 SessionAttribute* GetSessionAttr4Ctl(void)
 {
     return g_sessionAttr4Ctl;
@@ -1230,6 +1281,18 @@ void TestSetUp(void)
         g_sessionAttr4Proxy = (SessionAttribute*)calloc(1, sizeof(SessionAttribute));
         g_sessionAttr4Proxy->dataType = TYPE_MESSAGE;
     }
+    if (g_p2pattribute == NULL) {
+        g_p2pattribute = (SessionAttribute*)calloc(1, sizeof(SessionAttribute));
+        g_p2pattribute->dataType = TYPE_BYTES;
+        g_p2pattribute->linkTypeNum = 1;
+        g_p2pattribute->linkType[0] = LINK_TYPE_WIFI_P2P;
+    }
+    if (g_p2pattributeProxy == NULL) {
+        g_p2pattributeProxy = (SessionAttribute*)calloc(1, sizeof(SessionAttribute));
+        g_p2pattributeProxy->dataType = TYPE_MESSAGE;
+        g_p2pattributeProxy->linkTypeNum = 1;
+        g_p2pattributeProxy->linkType[0] = LINK_TYPE_WIFI_P2P;
+    }
 
     if (g_barrier == NULL) {
         g_barrier = (pthread_barrier_t*)calloc(1, sizeof(pthread_barrier_t));
@@ -1299,12 +1362,18 @@ void TestTearDown(void)
         free(g_sessionAttr4Proxy);
         g_sessionAttr4Proxy = NULL;
     }
-
+    if (g_p2pattribute != NULL) {
+        free(g_p2pattribute);
+        g_p2pattribute = NULL;
+    }
+    if (g_p2pattributeProxy != NULL) {
+        free(g_p2pattributeProxy);
+        g_p2pattributeProxy = NULL;
+    }
     if (g_barrier != NULL) {
         free(g_barrier);
         g_barrier = NULL;
     }
-
     if (g_sId4Task2 != NULL) {
         free(g_sId4Task2);
         g_sId4Task2 = NULL;

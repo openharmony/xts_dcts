@@ -62,6 +62,12 @@ static SessionAttribute g_fileSessionAttr = {
     .dataType = TYPE_FILE,
 };
 
+static SessionAttribute g_fileSessionAttrP2P = {
+    .dataType = TYPE_FILE,
+    .linkTypeNum = 1,
+    .linkType[0] = LINK_TYPE_WIFI_P2P,
+};
+
 static ISessionListener g_fileSessionListener = {
     .OnSessionOpened = FileSessionOpened,
     .OnSessionClosed = FileSessionClosed,
@@ -72,7 +78,7 @@ static ISessionListener g_fileSessionListener = {
 
 using namespace testing::ext;
 
-class TransFileFuncTest : public testing::Test {
+class TransFileFuncBrTest : public testing::Test {
 public:
     // 测试套前置和后置操作
     static void SetUpTestCase();
@@ -83,7 +89,7 @@ public:
     void TearDown();
 };
 
-void TransFileFuncTest::SetUp() {
+void TransFileFuncBrTest::SetUp() {
     // set listener
     int ret = SetFileSendListener(DEF_PKG_NAME, SESSION_NAME_FILE, GetSendFileListener());
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
@@ -91,9 +97,9 @@ void TransFileFuncTest::SetUp() {
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
 }
 
-void TransFileFuncTest::TearDown() {}
+void TransFileFuncBrTest::TearDown() {}
 
-void TransFileFuncTest::SetUpTestCase()
+void TransFileFuncBrTest::SetUpTestCase()
 {
     LOG("SetUp begin");
     AddPermission();
@@ -119,7 +125,7 @@ void TransFileFuncTest::SetUpTestCase()
     LOG("SetUp end");
 }
 
-void TransFileFuncTest::TearDownTestCase()
+void TransFileFuncBrTest::TearDownTestCase()
 {
     int ret = UnRegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
@@ -155,7 +161,7 @@ static int WaitFile(int timeout)
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0100, TestSize.Level2)
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0100, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -195,7 +201,7 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0100, TestSize.L
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0200, TestSize.Level2)
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0200, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -235,7 +241,7 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0200, TestSize.L
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0300, TestSize.Level2)
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0300, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -269,7 +275,7 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0300, TestSize.L
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0400, TestSize.Level2)
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0400, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -307,7 +313,7 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0400, TestSize.L
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0500, TestSize.Level2)
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0500, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -343,7 +349,7 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0500, TestSize.L
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0600, TestSize.Level2)
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0600, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -383,7 +389,7 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0600, TestSize.L
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0700, TestSize.Level2)
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0700, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -424,7 +430,7 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0700, TestSize.L
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0800, TestSize.Level2)
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0800, TestSize.Level2)
 {
     int ret = SetFileReceiveListener(DEF_PKG_NAME, SESSION_NAME_FILE, GetRecvFileListener(), NULL);
     EXPECT_NE(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
@@ -437,7 +443,7 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0800, TestSize.L
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0900, TestSize.Level2)
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0900, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -445,6 +451,314 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0900, TestSize.L
 
     g_waitFlag = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttr);
+    EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
+    if (sid >= SESSION_ID_MIN) {
+        ret = WaitFile(10);
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait opensession fail[file]";
+    }
+
+    static const char* g_fileOne[] = {
+        "/data/big.tar",
+        "/data/richu.jpg",
+        "/data/richu-002.jpg",
+        "/data/richu-003.jpg",
+    };
+
+    ResetWaitFlag();
+    ret = SendFile(sid, g_fileOne, NULL, 4);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
+    ret = Wait(350);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+
+    CloseSession(sid);
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS[proxy] fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0100
+ * @tc.name   : test SendFile 8M By P2P
+ * @tc.desc   : Test send file function
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0100, TestSize.Level2)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
+
+    g_waitFlag = WAIT_DEF_VALUE;
+    int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
+    EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
+    if (sid >= SESSION_ID_MIN) {
+        ret = WaitFile(10);
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait opensession fail[file]";
+    }
+
+    static const char* g_fileOne[] = {
+        "/data/8M.tar",
+    };
+
+    static const char *dfileList[] = {
+        "/data/P2P/8M.tar",
+    };
+
+    ResetWaitFlag();
+    ret = SendFile(sid, g_fileOne, dfileList, 1);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
+    ret = Wait(10);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+
+    CloseSession(sid);
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS[proxy] fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0200
+ * @tc.name   : test SendFile 0M By P2P
+ * @tc.desc   : Test send file function
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0200, TestSize.Level2)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
+
+    g_waitFlag = WAIT_DEF_VALUE;
+    int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
+    EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
+    if (sid >= SESSION_ID_MIN) {
+        ret = WaitFile(10);
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait opensession fail[file]";
+    }
+
+    static const char* g_fileOne[] = {
+        "/data/A.tar",
+    };
+
+    static const char *dfileList[] = {
+        "/data/P2P/A_recv.tar",
+    };
+
+    ResetWaitFlag();
+    ret = SendFile(sid, g_fileOne, dfileList, 1);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
+    ret = Wait(10);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+
+    CloseSession(sid);
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS[proxy] fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0300
+ * @tc.name   : SendFile By P2P the sender address is empty ,send failed
+ * @tc.desc   : Test send file function
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0300, TestSize.Level2)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
+
+    g_waitFlag = WAIT_DEF_VALUE;
+    int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
+    EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
+    if (sid >= SESSION_ID_MIN) {
+        ret = WaitFile(10);
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait opensession fail[file]";
+    }
+
+    static const char *dfileList[] = {
+        "/data/P2P/SNULL.tar",
+    };
+
+    ResetWaitFlag();
+    ret = SendFile(sid, NULL, dfileList, 1);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call SendFile successful";
+    
+    CloseSession(sid);
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS[proxy] fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0400
+ * @tc.name   : SendFile By P2P the sender address is invalid ,send failed
+ * @tc.desc   : Test send file function
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0400, TestSize.Level2)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
+
+    g_waitFlag = WAIT_DEF_VALUE;
+    int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
+    EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
+    if (sid >= SESSION_ID_MIN) {
+        ret = WaitFile(10);
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait opensession fail[file]";
+    }
+
+    static const char *g_fileOne[] = {
+        "/data/sendfile/8M.tar",
+    };
+
+    static const char *dfileList[] = {
+        "/data/P2P/8M_invalid.tar",
+    };
+
+    ResetWaitFlag();
+    ret = SendFile(sid, g_fileOne, dfileList, 1);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call SendFile successful";
+    
+    CloseSession(sid);
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS[proxy] fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0500
+ * @tc.name   : SendFile By P2P the receiving address is null ,send successful
+ * @tc.desc   : Test send file function
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0500, TestSize.Level2)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
+
+    g_waitFlag = WAIT_DEF_VALUE;
+    int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
+    EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
+    if (sid >= SESSION_ID_MIN) {
+        ret = WaitFile(10);
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait opensession fail[file]";
+    }
+
+    static const char* g_fileOne[] = {
+        "/data/8M_DNull.tar",
+    };
+
+    ResetWaitFlag();
+    ret = SendFile(sid, g_fileOne, NULL, 1);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
+    ret = Wait(15);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    
+    CloseSession(sid);
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS[proxy] fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0600
+ * @tc.name   : SendFile By P2P the receiving address is invalid ,send successful
+ * @tc.desc   : Test send file function
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0600, TestSize.Level2)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
+
+    g_waitFlag = WAIT_DEF_VALUE;
+    int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
+    EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
+    if (sid >= SESSION_ID_MIN) {
+        ret = WaitFile(10);
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait opensession fail[file]";
+    }
+
+    static const char* g_fileOne[] = {
+        "/data/8M.tar",
+    };
+
+    static const char *dfileList[] = {
+        "/sendfile/P2P/8M_invalid.tar",
+    };
+
+    ResetWaitFlag();
+    ret = SendFile(sid, g_fileOne, dfileList, 1);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
+    ret = Wait(15);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    
+    CloseSession(sid);
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS[proxy] fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0700
+ * @tc.name   : SendFile By P2P close  session ,send failed
+ * @tc.desc   : Test send file function
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0700, TestSize.Level2)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
+
+    g_waitFlag = WAIT_DEF_VALUE;
+    int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
+    EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
+    if (sid >= SESSION_ID_MIN) {
+        ret = WaitFile(10);
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait opensession fail[file]";
+    }
+
+    static const char* g_fileOne[] = {
+        "/data/big.tar",
+    };
+
+    static const char *dfileList[] = {
+        "/sendfile/P2P/big.tar",
+    };
+
+    ResetWaitFlag();
+    ret = SendFile(sid, g_fileOne, dfileList, 1);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
+
+    CloseSession(sid);
+    ret = Wait(15);
+    EXPECT_NE(SOFTBUS_OK, ret) << "wait send success ,expect fail";
+    
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS[proxy] fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0800
+ * @tc.name   : Send 4 files once By P2P
+ * @tc.desc   : Test send file function
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0800, TestSize.Level2)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
+
+    g_waitFlag = WAIT_DEF_VALUE;
+    int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
         ret = WaitFile(10);
