@@ -276,7 +276,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_1000, TestSize.Leve
 
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0100
- * @tc.name   : SendMessage Packet size 1B, send and receive successful
+ * @tc.name   : SendMessage Packet size 1B, session type is TYPE_BYTES send and receive failed
  * @tc.desc   : Test the SendMessage specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
@@ -297,7 +297,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0100, TestSize.Le
 
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0200
- * @tc.name   : SendMessage Packet size 1K, send and receive successful
+ * @tc.name   : SendMessage Packet size 1K, session type is TYPE_BYTES send and receive failed
  * @tc.desc   : Test the SendMessage specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
@@ -318,7 +318,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0200, TestSize.Le
 
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0300
- * @tc.name   : SendMessage Packet size Max, send and receive successful
+ * @tc.name   : SendMessage Packet size Max, session type is TYPE_BYTES send and receive failed
  * @tc.desc   : Test the SendMessage specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
@@ -339,7 +339,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0300, TestSize.Le
 
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0400
- * @tc.name   : SendMessage Packet size 0, send and receive successful
+ * @tc.name   : SendMessage Packet size 0, session type is TYPE_BYTES send and receive failed
  * @tc.desc   : Test the SendMessage specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
@@ -362,7 +362,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0400, TestSize.Le
 
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0500
- * @tc.name   : SendMessage Packet size Max+1, send and receive successful
+ * @tc.name   : SendMessage Packet size Max+1, session type is TYPE_BYTES send and receive failed
  * @tc.desc   : Test the SendMessage specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
@@ -490,5 +490,198 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_1000, TestSize.Le
     EXPECT_NE(SOFTBUS_OK, ret) << "call sendmsg(Max+1) fail";
 
     ret = CloseSessionAndRemoveSs4Proxy();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0100
+ * @tc.name   : SendByte By P2P Packet size 1B, send and receive successful
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0100, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    ret = OpenSession4DataByP2p();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
+
+    int size = 1;
+    ret = SendData4Data(DATA_TYPE_BYTE, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0200
+ * @tc.name   : SendByte By P2P Packet size 2K, send and receive successful
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0200, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    ret = OpenSession4DataByP2p();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
+
+    int size = 2 * 1024 * 1024;
+    ret = SendData4Data(DATA_TYPE_BYTE, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte,2M) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0300
+ * @tc.name   : SendByte By P2P Packet size Max, send and receive successful
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0300, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    ret = OpenSession4DataByP2p();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
+
+    int size = TRANS_BYTES_LENGTH_MAX;
+    ret = SendData4Data(DATA_TYPE_BYTE, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte,Max) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0400
+ * @tc.name   : SendByte By P2P Packet size 0, send and receive failed
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0400, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    ret = OpenSession4DataByP2p();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
+
+    int size = 0;
+    string emptyStr = "";
+    int sessionId = GetCurrentSessionId4Data();
+    ret = SendBytes(sessionId, emptyStr.c_str(), size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call sendbytes(empty) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0500
+ * @tc.name   : SendByte By P2P Packet size Max + 1, send and receive failed
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0500, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    ret = OpenSession4DataByP2p();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
+
+    int size = TRANS_BYTES_LENGTH_MAX + 1;
+    ret = SendData4Data(DATA_TYPE_BYTE, size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call sendbytes(empty) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0600
+ * @tc.name   : SendByte By P2P Packet size 1B ,Proxy channel, send and receive failed
+ * @tc.desc   : Test the SendByte specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0600, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY, GetSessionListenser4Proxy());
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    ret = OpenSession4ProxyByP2p();
+    EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
+
+    int size = 1;
+    ret = SendData4Message(DATA_TYPE_BYTE, size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
+
+    ret = CloseSessionAndRemoveSs4Proxy();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0100
+ * @tc.name   : SendMessage By P2P Packet size 1B, send and receive failed
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0100, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    ret = OpenSession4DataByP2p();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
+    int size = 1;
+    ret = SendData4Data(DATA_TYPE_MSG, size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(msg, 1B) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0200
+ * @tc.name   : SendMessage By P2P Packet size 1K, send and receive failed
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0200, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY, GetSessionListenser4Proxy());
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+
+    ret = OpenSession4ProxyByP2p();
+    EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
+
+    int size = 1000;
+    ret = SendData4Message(DATA_TYPE_MSG, size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(msg,1K) fail";
+
+    ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }
