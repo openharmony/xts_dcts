@@ -1,16 +1,16 @@
 {
-    "description": "Configuration for fileio Tests",
+    "description": "Configuration for dms Servers",
     "driver": {
-        "type": "JSUnitTest",
+        "type": "JSUnitServer",
         "test-timeout": "900000",
-        "package": "com.ohos.abilitydmstest",
-	"abilityName": "com.ohos.abilitydmstest.MainAbility",
+        "package": "com.ohos.dmstest",
+        "abilityName": ".MainAbility",
         "shell-timeout": "900000"
     },
     "kits": [
         {
             "test-file-name": [
-                "DctsAbilityDms.hap"
+                "DctsDmsHapServer.hap"
             ],
             "type": "AppInstallKit",
             "cleanup-apps": true

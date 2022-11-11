@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,8 +20,8 @@ import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '
 
 let gIRemoteObject = null;
 let connectId = null;
-describe('FeatureAbilityTest', function(){
-    console.info("-----------------------SUB_DMSFWK_MessageParce_Test is starting-----------------------");
+describe('dmsJsUnitTest', function(){
+    console.info("-----------------------SUB_Softbus_dms_Compatibility_MessageParce_Test is starting-----------------------");
     var dvList = [];
     var dvId = null;
     class ConnectRemoteService {
@@ -52,9 +52,9 @@ describe('FeatureAbilityTest', function(){
                     return;
             }
         }
-
+   
     beforeAll(async function(done) {
-        console.info('beforeAll called ability')
+        console.info('beforeAll called dms')
         function deviceManagerCallback(error, deviceManager) {
             console.info("got deviceManager: " + deviceManager + ", error: " + error)
             let deviceList = deviceManager.getTrustedDeviceListSync()
@@ -62,32 +62,31 @@ describe('FeatureAbilityTest', function(){
             dvList = deviceList;
             dvId = deviceId;
             console.info("online device id: " + deviceId)
+
             let want = {
-                "bundleName":"ohos.ability.test.server",
-                "abilityName":"ohos.ability.test.server.ServiceAbility",
+                "bundleName":"com.ohos.dmstest",
+                "abilityName":"com.ohos.dmstest.ServiceAbility",
                 "deviceId":deviceId,
                 "flags": 256
             }
             let connect = {
                 onConnect:function (elementName, remoteProxy) {
-                    console.info('abilityClient: onConnect called,proxy: ' + (remoteProxy instanceof rpc.RemoteProxy))
-                    console.info('abilityClient: onConnect called,elementName: ' + elementName)
+                    console.info('dmsClient: onConnect called,proxy: ' + (remoteProxy instanceof rpc.RemoteProxy))
                     gIRemoteObject = remoteProxy
                     done()
                 },
                 onDisconnect:function (elementName) {
-                    console.info("abilityClient: onDisconnect")
+                    console.info("dmsClient: onDisconnect")
                 },
                 onFailed:function () {
-                    console.info("abilityClient: onFailed")
+                    console.info("dmsClient: onFailed")
                     gIRemoteObject = null
                 }
             }
             connectId = featureAbility.connectAbility(want, connect)
             connectId.info("connect ability got id: " + connectId)
         }
-
-        deviceManager.createDeviceManager('ohos.ability.test', deviceManagerCallback)
+        deviceManager.createDeviceManager('ohos.dms.test', deviceManagerCallback)
         console.info("beforeAll done")
     })
     beforeEach(function (){
@@ -117,8 +116,8 @@ describe('FeatureAbilityTest', function(){
             }
             let params;
             let wantValue = {
-                "bundleName":"ohos.ability.test.server",
-                "abilityName":"ohos.ability.test.server.ServiceAbility",
+                "bundleName":"com.ohos.dmstest",
+                "abilityName":"com.ohos.dmstest.ServiceAbility",
                 "deviceId": dvId,
                 "parameters": params
             };
@@ -154,7 +153,7 @@ describe('FeatureAbilityTest', function(){
             }
             let params;
             let wantValue = {
-                "bundleName":"ohos.ability.test.server",
+                "bundleName":"com.ohos.dmstest",
                 "abilityName":"",
                 "deviceId": dvId,
                 "parameters": params
@@ -191,8 +190,8 @@ describe('FeatureAbilityTest', function(){
             }
             let params;
             let wantValue = {
-                "bundleName":"ohos.ability.test.server",
-                "abilityName":"ohos.ability.test.server.ServiceAbility",
+                "bundleName":"com.ohos.dmstest",
+                "abilityName":"com.ohos.dmstest.ServiceAbility",
                 "deviceId": null,
                 "parameters": params
             };
@@ -254,8 +253,8 @@ describe('FeatureAbilityTest', function(){
             let connectedAbility = featureAbility.connectAbility(
                 {
                     deviceId: dvId,
-                    "bundleName":"ohos.ability.test.server",
-                    "abilityName":"ohos.ability.test.server.ServiceAbility",
+                    "bundleName":"com.ohos.dmstest",
+                    "abilityName":"com.ohos.dmstest.ServiceAbility",
                 }
 
             );

@@ -10,24 +10,26 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 import("//test/xts/tools/build/suite.gni")
 
-ohos_js_hap_suite("DctsAbilityDmsTest") {
+ohos_hap_assist_suite("DctsDmsJsServer") {
   hap_profile = "./src/main/config.json"
   deps = [
-    ":fileio_js_assets",
-    ":fileio_js_resources",
+    ":dms_js_assets",
+    ":dms_js_resources",
   ]
 
   certificate_profile = "./signature/openharmony_sx.p7b"
-  hap_name = "DctsAbilityDms"
+  hap_name = "DctsDmsHapServer"
   subsystem_name = "ability"
   part_name = "dmsfwk"
 }
-ohos_js_assets("fileio_js_assets") {
-  source_dir = "./src/main/js/default"
+ohos_js_assets("dms_js_assets") {
+  source_dir = "./src/main/js"
+  hap_profile = "./src/main/config.json"
 }
-ohos_resources("fileio_js_resources") {
+ohos_resources("dms_js_resources") {
   sources = [ "./src/main/resources" ]
   hap_profile = "./src/main/config.json"
 }
