@@ -44,43 +44,22 @@ describe('AVSessionManagerJsUnit', function () {
     let connectId = null;
     let audioManager;
     let localAudioDevice;
-    let state = false;
-
-    class CastAudioCallBack extends rpc.RemoteObject {
-        constructor(descriptor) {
-            super(descriptor);
-        }
-        onRemoteRequest(code, data, reply, option) {
-            let flag = false;
-            if (code === 1) {
-                console.info('Client callback successful');
-                let result = data.readString();
-                if (result == 'GET METADATA SUCCESSFUL') {
-                    state = true;
-                }
-                flag = true;
-            } else {
-                console.info(`unknown code: ${code}`);
-            }
-            return flag;
-        }
-    }
 
     function sleep(time) {
         return new Promise(resolve => setTimeout(resolve, time));
     }
 
-    beforeAll(async function (done) {
+    beforeAll(async function () {
         console.info('beforeAll called avsession server');
         function deviceManagerCallback(error, deviceManager) {
-            console.info(`got deviceManager: ${deviceManager}, error: ${error.code}: ${error.message}`);
+            console.info(`got deviceManager: ${deviceManager}, error: ${error}`);
             let deviceList = deviceManager.getTrustedDeviceListSync();
             let deviceId = deviceList[0].deviceId;
             console.info(`online device id: ${deviceId}`);
 
             let want = {
                 "bundleName": "com.example.myapplication",
-                "abilityName": "com.example.server.ServiceAbility",
+                "abilityName": "com.example.myapplication.ServiceAbility",
                 "deviceId": deviceId,
                 "flags": 256
             }
@@ -126,12 +105,7 @@ describe('AVSessionManagerJsUnit', function () {
             console.info(`Set artist BusinessError: ${err.code}, message: ${err.message}`);
             expect(false).assertTrue();
         })
-        await audio.getAudioManager().getRoutingManager().then((data) => {
-            audioManager = data;
-        }).catch((err) => {
-            console.info(`Get audioManager BusinessError: ${err.code}, message: ${err.messgage}`);
-            expect(false).assertTrue();
-        })
+        audioManager = audio.getAudioManager().getRoutingManager();
         await audioManager.getDevices(audio.DeviceFlag.DISTRIBUTED_OUTPUT_DEVICES_FLAG).then((data) => {
             console.info('get remote device success');
             audioDevices = data;
@@ -152,10 +126,10 @@ describe('AVSessionManagerJsUnit', function () {
             console.info(`Get device BusinessError: ${err.code}, message: ${err.message}`);
             expect(false).assertTrue();
         });
-        done();
         console.info('beforeAll done');
     })
-    beforeEach(function () {
+    beforeEach(async function () {
+        await sleep(1000);
         console.info('beforeEach called');
     })
     afterEach(function () {
@@ -176,7 +150,6 @@ describe('AVSessionManagerJsUnit', function () {
      * @tc.level     : Level2
      */
     it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_CALLBACK_0100", 0, async function (done) {
-        state = false;
         avSession.castAudio('all', audioDevices, (err) => {
             if (err) {
                 console.info(`Cast audio to remote device BusinessError: ${err.code}, message: ${err.message}`);
@@ -190,7 +163,6 @@ describe('AVSessionManagerJsUnit', function () {
             let data = rpc.MessageParcel.create();
             let reply = rpc.MessageParcel.create();
             let option = new rpc.MessageOption();
-            data.writeRemoteObject(new CastAudioCallBack('client'));
 
             if (gIRemoteObject === undefined) {
                 console.info('gIRemoteObject undefined');
@@ -208,17 +180,6 @@ describe('AVSessionManagerJsUnit', function () {
                 data.reclaim();
                 reply.reclaim();
             });
-
-            console.info('Waiting client callback result');
-            await sleep(1000);
-            console.info('Judging client callback result');
-            if (state) {
-                console.info('state is right');
-                expect(true).assertTrue();
-            } else {
-                console.info('state is wrong');
-                expect(false).assertTrue();
-            }
         } catch (err) {
             console.info(`Testing has failed BusinessError: ${err.code}, message: ${err.message}`);
             expect(false).assertTrue();
@@ -229,6 +190,7 @@ describe('AVSessionManagerJsUnit', function () {
             console.info(`Cast audio to local BusinessError: ${err.code}, message: ${err.message}`);
             expect(false).assertTrue();
         })
+        await sleep(1000);
         done();
     })
 
@@ -241,138 +203,6 @@ describe('AVSessionManagerJsUnit', function () {
      * @tc.level     : Level2
      */
     it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_PROMISE_0100", 0, async function (done) {
-        state = false;
-        await avSession.castAudio(sessionToken, audioDevices).then(() => {
-            console.info('Cast audio to remote');
-        }).catch((err) => {
-            console.info(`Cast audio to remote BusinessError: ${err.code}, message: ${err.message}`);
-            expect(false).assertTrue();
-        })
-
-        await sleep(1500);
-
-        try {
-            let data = rpc.MessageParcel.create();
-            let reply = rpc.MessageParcel.create();
-            let option = new rpc.MessageOption();
-            data.writeRemoteObject(new CastAudioCallBack('client'));
-
-            if (gIRemoteObject === undefined) {
-                console.info('gIRemoteObject undefined');
-            }
-
-            await gIRemoteObject.sendRequest(CODE_CAST_AUDIO, data, reply, option).then((result) => {
-                console.info(`sendRequest success, result is ${result.errCode}`);
-                let remoteResult = result.reply.readString();
-                console.info(`Run readString success, remoteResult is ${remoteResult}`);
-                expect(remoteResult === 'case 1 get successfully').assertTrue();
-            }).catch((err) => {
-                console.info(`sendRequest has failed BusinessError: ${err.code}, message: ${err.message}`);
-                expect(false).assertTrue();
-            }).finally(() => {
-                data.reclaim();
-                reply.reclaim();
-            });
-
-            console.info('Waiting client callback result');
-            await sleep(1000);
-            console.info('Judging client callback result');
-            if (state) {
-                console.info('state is right');
-                expect(true).assertTrue();
-            } else {
-                console.info('state is wrong');
-                expect(false).assertTrue();
-            }
-        } catch (err) {
-            console.info(`Testing has failed BusinessError: ${err.code}, message: ${err.message}`);
-            expect(false).assertTrue();
-        }
-
-        await avSession.castAudio(sessionToken, localAudioDevice).then(() => {
-            console.info('Cast audio to local device');
-        }).catch((err) => {
-            console.info(`Cast audio to local BusinessError: ${err.code}, message: ${err.message}`);
-            expect(false).assertTrue();
-        })
-        done();
-    })
-
-    /**
-     * @tc.number    : SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_CALLBACK_0200
-     * @tc.name      : CAST_AUDIO_0200
-     * @tc.desc      : Testing cast audio
-     * @tc.size      : MediumTest
-     * @tc.type      : Function
-     * @tc.level     : Level2
-     */
-    it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_CALLBACK_0200", 0, async function (done) {
-        state = false;
-        avSession.castAudio(sessionToken, audioDevices, (err) => {
-            if (err) {
-                console.info(`Cast audio to remote BusinessError: ${err.code}, message: ${err.message}`);
-                expect(false).assertTrue();
-            } else {
-                console.info('Cast audio to remote device');
-            }
-        });
-        await sleep(1500);
-        try {
-            let data = rpc.MessageParcel.create();
-            let reply = rpc.MessageParcel.create();
-            let option = new rpc.MessageOption();
-            data.writeRemoteObject(new CastAudioCallBack('client'));
-
-            if (gIRemoteObject === undefined) {
-                console.info('gIRemoteObject undefined');
-            }
-
-            await gIRemoteObject.sendRequest(CODE_CAST_AUDIO, data, reply, option).then((result) => {
-                console.info(`sendRequest success, result is ${result.errCode}`);
-                let remoteResult = result.reply.readString();
-                console.info(`Run readString success, remoteResult is ${remoteResult}`);
-                expect(remoteResult === 'case 1 get successfully').assertTrue();
-            }).catch((err) => {
-                console.info(`sendRequest has failed BusinessError: ${err.code}, message: ${err.message}`);
-                expect(false).assertTrue();
-            }).finally(() => {
-                data.reclaim();
-                reply.reclaim();
-            });
-
-            console.info('Waiting client callback result');
-            await sleep(1000);
-            console.info('Judging client callback result');
-            if (state) {
-                console.info('state is right');
-                expect(true).assertTrue();
-            } else {
-                console.info('state is wrong');
-                expect(false).assertTrue();
-            }
-        } catch (err) {
-            console.info(`Testing has failed BusinessError: ${err.code}, message: ${err.message}`);
-            expect(false).assertTrue();
-        }
-        await avSession.castAudio(sessionToken, localAudioDevice).then(() => {
-            console.info('Cast audio to local device');
-        }).catch((err) => {
-            console.info(`Cast audio to local BusinessError: ${err.code}, message: ${err.message}`);
-            expect(false).assertTrue();
-        })
-        done();
-    })
-
-    /**
-     * @tc.number    : SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_PROMISE_0200
-     * @tc.name      : CAST_AUDIO_0200
-     * @tc.desc      : Testing cast audio with all session
-     * @tc.size      : MediumTest
-     * @tc.type      : Function
-     * @tc.level     : Level2
-     */
-    it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_PROMISE_0100", 0, async function (done) {
-        state = false;
         await avSession.castAudio('all', audioDevices).then(() => {
             console.info('Cast audio to remote');
         }).catch((err) => {
@@ -386,7 +216,6 @@ describe('AVSessionManagerJsUnit', function () {
             let data = rpc.MessageParcel.create();
             let reply = rpc.MessageParcel.create();
             let option = new rpc.MessageOption();
-            data.writeRemoteObject(new CastAudioCallBack('client'));
 
             if (gIRemoteObject === undefined) {
                 console.info('gIRemoteObject undefined');
@@ -404,17 +233,6 @@ describe('AVSessionManagerJsUnit', function () {
                 data.reclaim();
                 reply.reclaim();
             });
-
-            console.info('Waiting client callback result');
-            await sleep(1000);
-            console.info('Judging client callback result');
-            if (state) {
-                console.info('state is right');
-                expect(true).assertTrue();
-            } else {
-                console.info('state is wrong');
-                expect(false).assertTrue();
-            }
         } catch (err) {
             console.info(`Testing has failed BusinessError: ${err.code}, message: ${err.message}`);
             expect(false).assertTrue();
@@ -426,6 +244,114 @@ describe('AVSessionManagerJsUnit', function () {
             console.info(`Cast audio to local BusinessError: ${err.code}, message: ${err.message}`);
             expect(false).assertTrue();
         })
+        await sleep(1000);
+        done();
+    })
+
+    /**
+     * @tc.number    : SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_CALLBACK_0200
+     * @tc.name      : CAST_AUDIO_0200
+     * @tc.desc      : Testing cast audio
+     * @tc.size      : MediumTest
+     * @tc.type      : Function
+     * @tc.level     : Level2
+     */
+    it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_CALLBACK_0200", 0, async function (done) {
+        avSession.castAudio(sessionToken, audioDevices, (err) => {
+            if (err) {
+                console.info(`Cast audio to remote BusinessError: ${err.code}, message: ${err.message}`);
+                expect(false).assertTrue();
+            } else {
+                console.info('Cast audio to remote device');
+            }
+        });
+        await sleep(1500);
+        try {
+            let data = rpc.MessageParcel.create();
+            let reply = rpc.MessageParcel.create();
+            let option = new rpc.MessageOption();
+
+            if (gIRemoteObject === undefined) {
+                console.info('gIRemoteObject undefined');
+            }
+
+            await gIRemoteObject.sendRequest(CODE_CAST_AUDIO, data, reply, option).then((result) => {
+                console.info(`sendRequest success, result is ${result.errCode}`);
+                let remoteResult = result.reply.readString();
+                console.info(`Run readString success, remoteResult is ${remoteResult}`);
+                expect(remoteResult === 'case 1 get successfully').assertTrue();
+            }).catch((err) => {
+                console.info(`sendRequest has failed BusinessError: ${err.code}, message: ${err.message}`);
+                expect(false).assertTrue();
+            }).finally(() => {
+                data.reclaim();
+                reply.reclaim();
+            });
+        } catch (err) {
+            console.info(`Testing has failed BusinessError: ${err.code}, message: ${err.message}`);
+            expect(false).assertTrue();
+        }
+        await avSession.castAudio(sessionToken, localAudioDevice).then(() => {
+            console.info('Cast audio to local device');
+        }).catch((err) => {
+            console.info(`Cast audio to local BusinessError: ${err.code}, message: ${err.message}`);
+            expect(false).assertTrue();
+        })
+        await sleep(1000);
+        done();
+    })
+
+    /**
+     * @tc.number    : SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_PROMISE_0200
+     * @tc.name      : CAST_AUDIO_0200
+     * @tc.desc      : Testing cast audio with all session
+     * @tc.size      : MediumTest
+     * @tc.type      : Function
+     * @tc.level     : Level2
+     */
+    it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_PROMISE_0200", 0, async function (done) {
+        await avSession.castAudio(sessionToken, audioDevices).then(() => {
+            console.info('Cast audio to remote');
+        }).catch((err) => {
+            console.info(`Cast audio to remote BusinessError: ${err.code}, message: ${err.message}`);
+            expect(false).assertTrue();
+        })
+
+        await sleep(1500);
+
+        try {
+            let data = rpc.MessageParcel.create();
+            let reply = rpc.MessageParcel.create();
+            let option = new rpc.MessageOption();
+
+            if (gIRemoteObject === undefined) {
+                console.info('gIRemoteObject undefined');
+            }
+
+            await gIRemoteObject.sendRequest(CODE_CAST_AUDIO, data, reply, option).then((result) => {
+                console.info(`sendRequest success, result is ${result.errCode}`);
+                let remoteResult = result.reply.readString();
+                console.info(`Run readString success, remoteResult is ${remoteResult}`);
+                expect(remoteResult === 'case 1 get successfully').assertTrue();
+            }).catch((err) => {
+                console.info(`sendRequest has failed BusinessError: ${err.code}, message: ${err.message}`);
+                expect(false).assertTrue();
+            }).finally(() => {
+                data.reclaim();
+                reply.reclaim();
+            });
+        } catch (err) {
+            console.info(`Testing has failed BusinessError: ${err.code}, message: ${err.message}`);
+            expect(false).assertTrue();
+        }
+
+        await avSession.castAudio(sessionToken, localAudioDevice).then(() => {
+            console.info('Cast audio to local device');
+        }).catch((err) => {
+            console.info(`Cast audio to local BusinessError: ${err.code}, message: ${err.message}`);
+            expect(false).assertTrue();
+        })
+        await sleep(1000);
         done();
     })
 
@@ -655,7 +581,7 @@ describe('AVSessionManagerJsUnit', function () {
             console.info('Outputdevicechanged callback unRegistration failed');
             expect(false).assertTrue();
         }
-        session.off('outputdeviceChange', callback1);
+        session.off('outputDeviceChange', callback1);
         await avSession.castAudio(sessionToken, localAudioDevice).then(() => {
             console.info('Cast audio to local');
         }).catch((err) => {
@@ -700,7 +626,7 @@ describe('AVSessionManagerJsUnit', function () {
         })
 
         await sleep(1500);
-        session.off('outputDeviceChange');
+        controller.off('outputDeviceChange');
 
         await avSession.castAudio(sessionToken, localAudioDevice).then(() => {
             console.info('Cast audio to local');
@@ -708,6 +634,7 @@ describe('AVSessionManagerJsUnit', function () {
             console.info(`Cast audio to local BusinessError: ${err.code}, message: ${err.message}`);
             expect(false).assertTrue();
         })
+        await controller.destroy();
         done();
     })
 
