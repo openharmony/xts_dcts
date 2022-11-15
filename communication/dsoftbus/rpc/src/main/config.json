@@ -27,6 +27,8 @@
     "package": "com.ohos.rpctest",
     "name": "com.ohos.rpctest.MyApplication",
     "deviceType": [
+      "tablet",
+      "default",
       "phone"
     ],
     "distro": {
