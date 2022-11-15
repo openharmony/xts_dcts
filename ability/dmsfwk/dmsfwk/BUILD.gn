@@ -10,16 +10,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import("//test/xts/tools/build/suite.gni")
 
-import("//build/ohos_var.gni")
-group("ability") {
-  testonly = true
-  if (is_standard_system) {
-    deps = [
-      "dmsfwk/dmsfwk:DctsDmsJsTest",
-      "dmsfwk/dmsfwkserver:DctsDmsJsServer",
-    ]
-  } else {
-    deps = [ "wifi_standard:ActsWifiJSTest" ]
-  }
+ohos_js_hap_suite("DctsDmsJsTest") {
+  hap_profile = "./src/main/config.json"
+  deps = [
+    ":dms_js_assets",
+    ":dms_js_resources",
+  ]
+
+  certificate_profile = "./signature/openharmony_sx.p7b"
+  hap_name = "DctsDmsHapTest"
+  subsystem_name = "ability"
+  part_name = "dmsfwk"
+}
+ohos_js_assets("dms_js_assets") {
+  source_dir = "./src/main/js/default"
+}
+ohos_resources("dms_js_resources") {
+  sources = [ "./src/main/resources" ]
+  hap_profile = "./src/main/config.json"
 }

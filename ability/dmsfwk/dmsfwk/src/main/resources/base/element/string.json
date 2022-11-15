@@ -2,11 +2,11 @@
   "string": [
     {
       "name": "app_name",
-      "value": "DctsAbilityDms"
+      "value": "dmstest"
     },
     {
       "name": "mainability_description",
-      "value": "JS_Phone_Empty abilityDms"
+      "value": "JS_Phone_Empty Dms"
     }
   ]
 }
