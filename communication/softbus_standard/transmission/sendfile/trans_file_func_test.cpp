@@ -78,7 +78,7 @@ static ISessionListener g_fileSessionListener = {
 
 using namespace testing::ext;
 
-class TransFileFuncBrTest : public testing::Test {
+class TransFileFuncTest : public testing::Test {
 public:
     // 测试套前置和后置操作
     static void SetUpTestCase();
@@ -89,7 +89,7 @@ public:
     void TearDown();
 };
 
-void TransFileFuncBrTest::SetUp() {
+void TransFileFuncTest::SetUp() {
     // set listener
     int ret = SetFileSendListener(DEF_PKG_NAME, SESSION_NAME_FILE, GetSendFileListener());
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
@@ -97,9 +97,9 @@ void TransFileFuncBrTest::SetUp() {
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
 }
 
-void TransFileFuncBrTest::TearDown() {}
+void TransFileFuncTest::TearDown() {}
 
-void TransFileFuncBrTest::SetUpTestCase()
+void TransFileFuncTest::SetUpTestCase()
 {
     LOG("SetUp begin");
     AddPermission();
@@ -125,7 +125,7 @@ void TransFileFuncBrTest::SetUpTestCase()
     LOG("SetUp end");
 }
 
-void TransFileFuncBrTest::TearDownTestCase()
+void TransFileFuncTest::TearDownTestCase()
 {
     int ret = UnRegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
@@ -161,7 +161,7 @@ static int WaitFile(int timeout)
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0100, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0100, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -201,7 +201,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0100, TestSize
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0200, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0200, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -241,7 +241,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0200, TestSize
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0300, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0300, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -275,7 +275,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0300, TestSize
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0400, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0400, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -313,7 +313,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0400, TestSize
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0500, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0500, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -349,7 +349,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0500, TestSize
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0600, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0600, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -389,7 +389,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0600, TestSize
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0700, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0700, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -430,7 +430,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0700, TestSize
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0800, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0800, TestSize.Level2)
 {
     int ret = SetFileReceiveListener(DEF_PKG_NAME, SESSION_NAME_FILE, GetRecvFileListener(), NULL);
     EXPECT_NE(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
@@ -443,7 +443,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0800, TestSize
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0900, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0900, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -482,7 +482,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0900, TestSize
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0100, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0100, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -522,7 +522,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0100, Test
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0200, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0200, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -562,7 +562,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0200, Test
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0300, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0300, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -596,7 +596,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0300, Test
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0400, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0400, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -634,7 +634,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0400, Test
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0500, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0500, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -670,7 +670,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0500, Test
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0600, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0600, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -710,7 +710,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0600, Test
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0700, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0700, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -751,7 +751,7 @@ HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0700, Test
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncBrTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0800, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0800, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);

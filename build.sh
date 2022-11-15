@@ -65,8 +65,10 @@ parse_cmdline()
                           ;;
         variant)          BUILD_VARIANT="$PARAM"
                           ;;
-	target_platform)  TARGET_PLATFORM="$PARAM"
+	    target_platform)  TARGET_PLATFORM="$PARAM"
                           ;;
+        use_musl)         USE_MUSL="$PARAM"
+                          ;;                         
         target_subsystem) export target_subsystem=${PARAM}
                           ;;
         system_size)      SYSTEM_SIZE="$PARAM"
@@ -100,7 +102,9 @@ do_make()
     if [ "$SYSTEM_SIZE" = "standard" ]; then
         MUSL_ARGS=""
         if [ "$PRODUCT_NAME" = "m40" ]; then
-            MUSL_ARGS="--gn-args use_musl=false --gn-args use_custom_libcxx=true --gn-args use_custom_clang=true"
+            if [ "$USE_MUSL" = "false" ]; then
+                        MUSL_ARGS="--gn-args use_musl=false --gn-args use_custom_libcxx=true --gn-args use_custom_clang=true"			
+		    fi
         fi
        ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true $MUSL_ARGS --target-cpu $TARGET_ARCH
     else
