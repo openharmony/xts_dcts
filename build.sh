@@ -48,6 +48,7 @@ parse_cmdline()
     UPLOAD_API_INFO=False
     SYSTEM_SIZE=large
     PRODUCT_NAME=""
+    USE_MUSL=false
     export PATH=${BASE_HOME}/prebuilts/python/linux-x86/3.8.3/bin:$PATH
 
     while [ -n "$1" ]
