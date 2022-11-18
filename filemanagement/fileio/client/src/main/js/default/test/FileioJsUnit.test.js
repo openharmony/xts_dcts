@@ -21,7 +21,7 @@ import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '
 
 let gIRemoteObject = null;
 let connectId = null;
-describe('FileioJsUnit', function(){
+describe('FileioDistributedTest', function(){
     console.info("----------SUB_Storage_Fileio_Distributed JS Test is starting----------");
     const DISTRIBUTED_FILE_CONTENT = 'content';
     const SERVER_CHECK_SUCCESS = 'SUCCESS';
