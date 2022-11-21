@@ -27,7 +27,8 @@
     "package": "com.ohos.fileiotest",
     "name": "com.ohos.fileiotest.MyApplication",
     "deviceType": [
-      "phone"
+      "tablet",
+      "default"
     ],
     "distro": {
       "deliveryWithInstall": true,
