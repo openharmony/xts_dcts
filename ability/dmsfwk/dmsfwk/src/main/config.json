@@ -27,6 +27,8 @@
     "package": "com.ohos.dmstest",
     "name": "com.ohos.dmstest.MyApplication",
     "deviceType": [
+      "tablet",
+      "default",
       "phone"
     ],
     "distro": {
