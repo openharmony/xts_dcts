@@ -20,7 +20,8 @@
       "phone",
       "tablet",
       "tv",
-      "wearable"
+      "wearable",
+      "default"
     ],
     "distro": {
       "deliveryWithInstall": true,
