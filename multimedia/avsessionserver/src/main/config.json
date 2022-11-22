@@ -31,6 +31,8 @@
     "name": ".MyApplication",
     "mainAbility": "com.example.myapplication.MainAbility",
     "deviceType": [
+      "tablet",
+      "default",
       "phone"
     ],
     "distro": {
