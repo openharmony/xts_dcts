@@ -12,7 +12,7 @@
 # limitations under the License.
 import("//test/xts/tools/build/suite.gni")
 
-ohos_js_hap_suite("DctsAVSessionServerTest") {
+ohos_hap_assist_suite("DctsAVSessionServerTest") {
   hap_profile = "./src/main/config.json"
   deps = [
     ":avsession_js_assets",
