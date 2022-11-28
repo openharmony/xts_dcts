@@ -628,7 +628,9 @@ RetCode DcameraHdfDemo::SetAwbMode(const int mode) const
     const uint8_t awbMode = mode;
     metaData->addEntry(OHOS_CONTROL_AWB_MODE, &awbMode, 1);
     OHOS::Camera::MetadataUtils::ConvertMetadataToVec(metaData, result);
-    demoCameraDevice_->UpdateSettings(result);
+    if (demoCameraDevice_ != nullptr) {
+        demoCameraDevice_->UpdateSettings(result);
+    }
 
     DHLOGI("demo test: SetAwbMode exit");
     return RC_OK;
@@ -653,7 +655,9 @@ RetCode DcameraHdfDemo::SetAeExpo()
     aeStatus_ = !aeStatus_;
     metaData->addEntry(OHOS_CONTROL_AE_EXPOSURE_COMPENSATION, &expo, 1);
     OHOS::Camera::MetadataUtils::ConvertMetadataToVec(metaData, result);
-    demoCameraDevice_->UpdateSettings(result);
+    if (demoCameraDevice_ != nullptr) {
+        demoCameraDevice_->UpdateSettings(result);
+    }
 
     DHLOGI("demo test: SetAeExpo exit");
     return RC_OK;
@@ -724,7 +728,9 @@ RetCode DcameraHdfDemo::SetMetadata()
 
     std::vector<uint8_t> result;
     OHOS::Camera::MetadataUtils::ConvertMetadataToVec(metaData, result);
-    demoCameraDevice_->UpdateSettings(result);
+    if (demoCameraDevice_ != nullptr) {
+        demoCameraDevice_->UpdateSettings(result);
+    }
 
     DHLOGI("demo test: SetMetadata exit");
     return RC_OK;
