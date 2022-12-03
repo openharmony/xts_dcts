@@ -4764,25 +4764,25 @@ describe('kvSyncTest', function () {
                     console.info(logTag + " Sycn complete get data success,result is: " + data)
                     result = data
                 }
+                console.info(logTag + " get data finish,result is: " + result)
+                expect(result == undefined).assertTrue();
+                kvStore.off("syncComplete",call)
+                console.info(logTag + "testSyncDeleteSync0100 end")
+                done();
             })
         }
         kvStore.sync(syncDeviceIds, PUSH)
-        await sleep(200)
-        await sleep(200)
+        await sleep(1000)
+        kvStore.on("syncComplete",call)
         await remoteHelpers.kvDelete("key1")
         kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, function (data, err){
             console.info( logTag + "local device data has changed,key is:  " + data.deleteEntries.key)
         })
-        kvStore.on("syncComplete",call)
-        await sleep(200)
+        await sleep(1000)
+        console.info(logTag + " Sync start")
         kvStore.sync(syncDeviceIds, PULL)
-        await sleep(300)
-        await sleep(300)
-        console.info(logTag + " get data finish,result is: " + result)
-        expect(result == undefined).assertTrue();
-        kvStore.off("syncComplete",call)
-        console.info(logTag + "testSyncDeleteSync0100 end")
-        done();
+        await sleep(600)
+
     })
 
     /**
@@ -4819,26 +4819,25 @@ describe('kvSyncTest', function () {
                     console.info(logTag + " Sycn complete get data success,result is: " + data)
                     result = data
                 }
+                console.info(logTag + " get data finish,result is: " + result)
+                expect(result == undefined).assertTrue();
+                kvStore.off("syncComplete",call)
+                console.info(logTag + "testSyncDeleteSync0200 end")
+                done();
             })
         }
         kvStore.sync(syncDeviceIds, PUSH_PULL)
-        await sleep(200)
-        await sleep(200)
+        await sleep(1000)
+        kvStore.on("syncComplete",call)
         await remoteHelpers.kvDelete("key1")
         kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, function (data, err){
             console.info( logTag + "local device data has changed,key is:  " + data.deleteEntries.key)
         })
-        kvStore.on("syncComplete",call)
+        await sleep(1000)
         console.info(logTag + " Sync start")
-        await sleep(200)
         kvStore.sync(syncDeviceIds,PUSH_PULL)
-        await sleep(300)
-        await sleep(300)
-        console.info(logTag + " get data finish,result is: " + result)
-        expect(result == undefined).assertTrue();
-        kvStore.off("syncComplete",call)
-        console.info(logTag + "testSyncDeleteSync0200 end")
-        done();
+        await sleep(600)
+
     })
 
     /**
@@ -4883,14 +4882,16 @@ describe('kvSyncTest', function () {
             })
         }
         kvStore.sync(syncDeviceIds, PUSH)
-        await sleep(200)
-        await sleep(200)
+        await sleep(1000)
+        kvStore.on("syncComplete",call)
         await remoteHelpers.kvPut("key1","value2","String")
         kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, function (data, err){
             console.info( logTag + "local device data has changed,key is:  " + data.updateEntries.key)
         })
-        kvStore.on("syncComplete",call)
+        await sleep(1000)
+        console.info(logTag + " Sync start")
         kvStore.sync(syncDeviceIds,PULL)
+        await sleep(600)
     })
 
     /**
@@ -4935,14 +4936,16 @@ describe('kvSyncTest', function () {
             })
         }
         kvStore.sync(syncDeviceIds, PUSH_PULL)
-        await sleep(200)
-        await sleep(200)
+        await sleep(1000)
+        kvStore.on("syncComplete",call)
         await remoteHelpers.kvPut("key1","value2","String")
         kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, function (data, err){
             console.info( logTag + "local device data has changed,key is:  " + data.updateEntries.key)
             expect(data.updateEntries.key).assertEqual("key1")
         })
-        kvStore.on("syncComplete",call)
+        await sleep(1000)
+        console.info(logTag + " Sync start")
         kvStore.sync(syncDeviceIds,PUSH_PULL)
+        await sleep(600)
     })
 })
