@@ -321,6 +321,1370 @@ describe('RpcJsUnitTest', function(){
     })
 
     /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00100
+    * @tc.name    Call the writeinterfacetoken interface, write the interface descriptor, and read interfacetoken
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_00100", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_00100---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = "hello ruan zong xian";
+            data.writeInterfaceToken(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_INTERFACETOKEN, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readInterfaceToken()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_00100---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00200
+        * @tc.name    The writeInterfaceToken interface is looping, the interface descriptor is written, and the
+                    InterfaceToken is read
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_00200", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_00200---------------------------");
+        try{
+            for (let i = 0; i < 5;i++){
+                var data = rpc.MessageSequence.create();
+                var reply = rpc.MessageSequence.create();
+                var option = new rpc.MessageOption();
+                let token = "hello ruan zong xian";
+                data.writeInterfaceToken(token);
+                expect(gIRemoteObject != undefined).assertTrue();
+                await gIRemoteObject.sendMessageRequest(CODE_INTERFACETOKEN, data, reply, option).then((result) => {
+                    expect(result.errCode).assertEqual(0);
+                    expect(result.reply.readInterfaceToken()).assertEqual(token);
+                });
+                data.reclaim();
+                reply.reclaim();
+            }
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_00200---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00300
+        * @tc.name    Call the WriteInterfaceToken interface, write the maximum length interface descriptor, and read
+                    the InterfaceToken
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_00300", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_00300---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = "";
+            for(let i = 0; i < (40*K - 1); i++){
+                token += 'a';
+            }
+            data.writeInterfaceToken(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_INTERFACETOKEN, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readInterfaceToken()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_00300---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00400
+        * @tc.name    The WriteInterfaceToken interface is called, the exceeding-length interface descriptor is written,
+                    and the InterfaceToken is read
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_00400", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_00400---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var token = "";
+            for(let i = 0; i < 40*K; i++){
+                token += 'a';
+            }
+            data.writeInterfaceToken(token);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_00400---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00500
+        * @tc.name    Call the writeinterfacetoken interface to write a non string interface descriptor
+                    and read interfacetoken
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_00500", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_00500---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var token = 123;
+            data.writeInterfaceToken(token);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_00500---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00600
+        * @tc.name    Call the writeshortarray interface, write the array to the MessageSequence instance,
+        *             and call readshortarray to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_00600", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_00600---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wShortArryData = [-1, 0, 1];
+            data.writeShortArray(wShortArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_SHORTARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readShortArray(),wShortArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_00600---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00700
+        * @tc.name    Call the writeshortarray interface, write the short integer array to the MessageSequence instance,
+        *             and call readshortarray (datain: number []) to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_00700", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_00700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wShortArryData = [];
+            for(let i=0;i<(50*1024 - 1);i++){
+                wShortArryData[i] = 1;
+            }
+            data.writeShortArray(wShortArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_SHORTARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var rShortArryData =[];
+                result.reply.readShortArray(rShortArryData);
+                assertArrayElementEqual(rShortArryData,wShortArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_00700---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00800
+        * @tc.name    Writeshortarray interface, boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_00800", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_00800---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wShortArryData = [-32768, 0, 1, 2, 32767];
+            data.writeShortArray(wShortArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_SHORTARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readShortArray(),wShortArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_00800---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00900
+        * @tc.name    Writeshortarray interface, illegal value validation
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_00900", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_00900---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var eShortArryData = [-32769, 32768];
+            data.writeShortArray(eShortArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_SHORTARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var erShortArryData = [32767, -32768];
+                assertArrayElementEqual(result.reply.readShortArray(),erShortArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_00900---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01000
+        * @tc.name    Writeshortarray interface, transmission length verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_01000", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_01000---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var eShortArryData = [];
+            for(let i=0;i<50*K;i++){
+                eShortArryData[i] = 1;
+            };
+            data.writeShortArray(eShortArryData);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_01000---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01100
+        * @tc.name    Call the writelongarray interface, write the long integer array to the MessageSequence instance,
+        *             and call readlongarray to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_01100", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_01100---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wLongArryData = [3276826, 123456, 9999999];
+            data.writeLongArray(wLongArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_LONGARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readLongArray(),wLongArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_01100---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01200
+        * @tc.name    Call the writelongarray interface, write the long integer array to the MessageSequence instance,
+        *             and call readlongarray (datain: number []) to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_01200", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_01200---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wLongArryData = [];
+            for(let i=0;i<(25*K - 1);i++){
+                wLongArryData[i] = 11;
+            };
+            data.writeLongArray(wLongArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_LONGARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var rLongArryData = [];
+                result.reply.readLongArray(rLongArryData);
+                assertArrayElementEqual(rLongArryData,wLongArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_01200---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01300
+        * @tc.name    Writelongarray interface, boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_01300", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_01300---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wLongArryData = [-9007199254740992, 0, 1, 2, 9007199254740991];
+            data.writeLongArray(wLongArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_LONGARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var rLongArryData = [];
+                result.reply.readLongArray(rLongArryData);
+                assertArrayElementEqual(rLongArryData,wLongArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_01300---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01400
+        * @tc.name    Writelongarray interface, long type precision verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_01400", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_01400---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wLongArryData = [-9999999999999999, 9999999999999999];
+            data.writeLongArray(wLongArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_LONGARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var rLongArryData = result.reply.readLongArray();
+                let newlongdata = [-10000000000000000,10000000000000000];
+                expect(rLongArryData[0]).assertEqual(newlongdata[0]);
+                expect(rLongArryData[1]).assertEqual(newlongdata[1]);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_01400---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01500
+        * @tc.name    Writelongarray Indicates an interface for verifying the input length
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_01500", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_01500---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var wLongArryData = [];
+            for(let i=0;i<25*K;i++){
+                wLongArryData[i] = 11;
+            };
+            data.writeLongArray(wLongArryData);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_01500---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01600
+        * @tc.name    Call the writedoublearray interface, write the array to the MessageSequence instance,
+        *             and call readdoublearra to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_01600", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_01600---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wDoubleArryData = [1.2, 235.67, 99.76];
+            data.writeDoubleArray(wDoubleArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_DOUBLEARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readDoubleArray(), wDoubleArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_01600---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01700
+        * @tc.name    Call the writedoublearray interface, write the array to the MessageSequence instance,
+        *             and call readdoublearra (datain: number []) to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_01700", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_01700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wDoubleArryData = [];
+            for(let i = 0;i < (25*K - 1);i++){
+                wDoubleArryData[i] = 11.1;
+            };
+            data.writeDoubleArray(wDoubleArryData);    
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_DOUBLEARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var rDoubleArryData = [];
+                result.reply.readDoubleArray(rDoubleArryData);
+                assertArrayElementEqual(rDoubleArryData, wDoubleArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_01700---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01800
+        * @tc.name    Writedoublearray interface, boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_01800", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_01800---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wDoubleArryData = [4.9E-324, 235.67, 1.79E+308];
+            data.writeDoubleArray(wDoubleArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_DOUBLEARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readDoubleArray(), wDoubleArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_01800---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01900
+        * @tc.name    Writedoublearray interface, illegal value validation
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_01900", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_01900---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();   
+            var eDoubleArryData = [(4.9E-324) - 1, (1.79E+308) + 1];
+            data.writeDoubleArray(eDoubleArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_DOUBLEARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var rDoubleArryData = result.reply.readDoubleArray();
+                expect(rDoubleArryData[0]).assertEqual(-1);
+                expect(rDoubleArryData[1]).assertEqual(1.79e+308);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_01900---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02000
+        * @tc.name    Writedoublearray interface, Out-of-bounds value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_02000", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_02000---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var eDoubleArryData = [];
+            for(let i = 0;i < 25*K;i++){
+                eDoubleArryData[i] = 11.1;
+            }
+            data.writeDoubleArray(eDoubleArryData);   
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_02000---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02100
+        * @tc.name    Call the writebooleanarray interface, write the array to the MessageSequence instance,
+        *             and call readbooleanarray to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_02100", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_02100---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wBooleanArryData = [true, false, false];
+            data.writeBooleanArray(wBooleanArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BOOLEANARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readBooleanArray(),wBooleanArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_02100---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02200
+        * @tc.name    Call the writebooleanarray interface, write the array to the MessageSequence instance,
+        *             and call readbooleanarray (datain: number []) to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_02200", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_02200---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wBooleanArryData = [];
+            for (let i=0;i<(50*K - 1);i++){
+                if (i % 2 == 0){
+                    wBooleanArryData[i] = false;
+                }else {
+                    wBooleanArryData[i] = true;
+                }
+            }
+            data.writeBooleanArray(wBooleanArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BOOLEANARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var rBooleanArryData = [];
+                result.reply.readBooleanArray(rBooleanArryData);
+                assertArrayElementEqual(rBooleanArryData,wBooleanArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_02200---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02300
+        * @tc.name    Writebooleanarray interface, illegal value validation
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_02300", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_02300---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var errorBooleanArryData = [true, 9, false];
+            data.writeBooleanArray(errorBooleanArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BOOLEANARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var eCharArrayData = [true, false, false];
+                assertArrayElementEqual(result.reply.readBooleanArray(),eCharArrayData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_02300---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02400
+        * @tc.name    Writebooleanarray Interface for length verification of input parameters
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_02400", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_02400---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var wBooleanArryData = [];
+            for (let i=0;i<50*K;i++){
+                if (i % 2 == 0){
+                    wBooleanArryData[i] = false;
+                }else {
+                    wBooleanArryData[i] = true;
+                };
+            }
+            data.writeBooleanArray(wBooleanArryData);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_02400---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02500
+        * @tc.name    Call the writechararray interface, write the array to the MessageSequence instance,
+        *             and call readchararray to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_02500", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_02500---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wCharArryData = [0,97,255];
+            data.writeCharArray(wCharArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_CHARARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readCharArray(),wCharArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_02500---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02600
+        * @tc.name    Call the writechararray interface, write the array to the MessageSequence instance,
+        *             and call readchararray (datain: number []) to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_02600", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_02600---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wCharArryData = [];
+            for(let i=0;i<(50*K - 1);i++){
+                wCharArryData[i] = 96;
+            };
+            data.writeCharArray(wCharArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_CHARARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var rCharArryData = [];
+                result.reply.readCharArray(rCharArryData);
+                assertArrayElementEqual(rCharArryData,wCharArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_02600---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02700
+        * @tc.name    Writechararray interface, illegal value validation
+        * @tc.desc    Function test
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_02700", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_02700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var errorCharArryData = [96, 'asfgdgdtu', 97];
+            data.writeCharArray(errorCharArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_CHARARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                let eCharArrayData = [96, 0, 97];
+                let readchardata = result.reply.readCharArray();
+                assertArrayElementEqual(readchardata, eCharArrayData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_02700---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02800
+        * @tc.name    Writechararray Indicates the length of an interface input parameter
+        * @tc.desc    Function test
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_02800", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_02800---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var errorCharArryData = [];
+            for(let i=0;i<50*K;i++){
+                errorCharArryData[i] = 96;
+            };
+            data.writeCharArray(errorCharArryData);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_02800---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02900
+        * @tc.name    Call the writestringarray interface, write the array to the MessageSequence instance,
+        *             and call readstringarray (datain: number []) to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_02900", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_02900---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wStringArryData = ['abc', 'hello', 'beauty'];
+            data.writeStringArray(wStringArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_STRINGARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readStringArray(),wStringArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_02900---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03000
+        * @tc.name    Call the writestringarray interface, write the array to the MessageSequence instance,
+        *             and call readstringarray() to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_03000", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_03000---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wStringArryData = [];
+            for (let i = 0;i < (10*K - 1);i++){
+                wStringArryData[i] = "heddSDF";
+            };
+            data.writeStringArray(wStringArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_STRINGARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var rStringArryData = [];
+                result.reply.readStringArray(rStringArryData);
+                assertArrayElementEqual(rStringArryData,wStringArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_03000---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03100
+        * @tc.name    Writestringarray interface, illegal value validation
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_03100", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_03100---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var errorStringArryData = ['abc' , 123, 'beauty'];
+            data.writeStringArray(errorStringArryData);
+
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_03100---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03200
+        * @tc.name    writeStringArray Interface for length verification of input parameters
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_03200", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_03200---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var wStringArryData = [];
+            for (let i = 0;i < 10 * K;i++){
+                wStringArryData[i] = "heddSDF";
+            }
+            data.writeStringArray(wStringArryData);
+        } catch (error) {
+            expect(error != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_03200---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03300
+        * @tc.name    Call the writebytearray interface, write the array to the MessageSequence instance,
+        *             and call readbytearray to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_03300", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_03300---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            let ByteArrayVar = [1, 2, 3, 4, 5];
+            data.writeByteArray(ByteArrayVar);
+
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BYTEARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readByteArray(),ByteArrayVar);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_03300---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03400
+        * @tc.name    Call the writebytearray interface, write the array to the MessageSequence instance,
+        *             and call readbytearray (datain: number []) to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_03400", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_03400---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            let ByteArrayVar = [-128, 0, 1, 2, 127];
+            data.writeByteArray(ByteArrayVar);
+
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BYTEARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var newArr = new Array(5);
+                result.reply.readByteArray(newArr);
+                assertArrayElementEqual(ByteArrayVar,newArr);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_03400---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03500
+        * @tc.name    Writebytearray interface, boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_03500", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_03500---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+
+            let ByteArrayVar = [];
+            for (let i=0;i<(40*K - 1);i++){
+                ByteArrayVar[i] = 1;
+            }
+            data.writeByteArray(ByteArrayVar);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BYTEARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var newArr = new Array(5)
+                result.reply.readByteArray(newArr);
+                assertArrayElementEqual(newArr,ByteArrayVar);
+            });
+            data.reclaim();
+            reply.reclaim();
+            done();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_03500---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03600
+        * @tc.name    Writebytearray interface, illegal value validation
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_03600", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_03600---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            let ByteArrayVar = [-129, 0, 1, 2, 128];
+            data.writeByteArray(ByteArrayVar);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BYTEARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var shortArryDataReply = result.reply.readByteArray();
+                expect(shortArryDataReply[0] == 127).assertTrue();
+                expect(shortArryDataReply[1] == ByteArrayVar[1]).assertTrue();
+                expect(shortArryDataReply[2] == ByteArrayVar[2]).assertTrue();
+                expect(shortArryDataReply[3] == ByteArrayVar[3]).assertTrue();
+                expect(shortArryDataReply[4] == -128).assertTrue();
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_03600---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03700
+        * @tc.name    Writebytearray Interface，input parameter length verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_03700", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_03700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            let ByteArrayVar = [];
+            for (let i=0;i<40*K;i++){
+                ByteArrayVar[i] = 1;
+            }
+            data.writeByteArray(ByteArrayVar)
+            data.reclaim();
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_03700---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03800
+        * @tc.name    Call the writeintarray interface, write the array to the MessageSequence instance,
+        *             and call readintarray to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_03800", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_03800---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var intArryData = [100, 111, 112];
+            data.writeIntArray(intArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INTARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readIntArray(),intArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_03800---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03900
+        * @tc.name    Call the writeintarray interface, write the array to the MessageSequence instance,
+        *             and call readintarray (datain: number []) to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_03900", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_03900---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var intArryData = [];
+            for (let i=0;i<(50*K - 1);i++){
+                intArryData[i] = 1;
+            };
+            data.writeIntArray(intArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INTARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var newArr = new Array(3);
+                result.reply.readIntArray(newArr);
+                assertArrayElementEqual(newArr,intArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_03900---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04000
+        * @tc.name    Writeintarray interface, boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_04000", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_04000---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var intArryData = [-2147483648, 0, 1, 2, 2147483647];
+            data.writeIntArray(intArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INTARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readIntArray(),intArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_04000---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04100
+        * @tc.name    Writeintarray interface, illegal value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_04100", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_04100---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var intArryData = [-2147483649, 0, 1, 2, 2147483648];
+            data.writeIntArray(intArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INTARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var shortArryDataReply = result.reply.readIntArray();
+                expect(shortArryDataReply[0] == 2147483647).assertTrue();
+                expect(shortArryDataReply[1] == intArryData[1]).assertTrue();
+                expect(shortArryDataReply[2] == intArryData[2]).assertTrue();
+                expect(shortArryDataReply[3] == intArryData[3]).assertTrue();
+                expect(shortArryDataReply[4] == -2147483648).assertTrue();
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_04100---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04200
+        * @tc.name    Writeintarray interface, input parameter length verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_04200", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_04200---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var intArryData = [];
+            for (let i=0;i<50*K;i++){
+                intArryData[i] = 1;
+            }
+            data.writeIntArray(intArryData);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_04200---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04300
+        * @tc.name    Call the writefloatarray interface, write the array to the MessageSequence instance,
+        *             and call readfloatarray to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_04300", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_04300---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var floatArryData = [1.2, 1.3, 1.4];
+            data.writeFloatArray(floatArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_FLOATARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readFloatArray(),floatArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_04300---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04400
+        * @tc.name    Call the writefloatarray interface, write the array to the MessageSequence instance,
+        *             and call readfloatarray (datain: number []) to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_04400", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_04400---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var floatArryData = [1.4E-45, 1.3, 3.4028235E38];
+            data.writeFloatArray(floatArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_FLOATARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var newArr = new Array(3);
+                result.reply.readFloatArray(newArr);
+                assertArrayElementEqual(newArr,floatArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_04400---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04500
+        * @tc.name    Writefloatarray interface, boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_04500", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_04500---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var floatArryData = [(1.4E-45) - 1, 1.3, (3.4028235E38) + 1];
+            data.writeFloatArray(floatArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_FLOATARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var newArr = result.reply.readFloatArray();
+                expect(newArr[0]).assertEqual(-1);
+                expect(newArr[1]).assertEqual(1.3);
+                expect(newArr[2]).assertEqual(3.4028235e+38);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_04500---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04600
+        * @tc.name    Writefloatarray interface, boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_04600", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_04600---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var floatArryData = [];
+            for (let i = 0;i < (25*K - 1);i++){
+                floatArryData[i] = 1.1;
+            };
+            data.writeFloatArray(floatArryData);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_FLOATARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readFloatArray(),floatArryData);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_04600---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04700
+        * @tc.name    Writefloatarray interface, Longest array verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_04700", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_04700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var floatArryData = [];
+            for (let i = 0;i < (25*K);i++){
+                floatArryData[i] = 1.1;
+            };
+            data.writeFloatArray(floatArryData);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_04700---------------------------");
+    });     
+
+    /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_00100
      * @tc.name    Call the writeinterfacetoken interface, write the interface descriptor, and read interfacetoken
      * @tc.desc    Function test
@@ -3506,7 +4870,7 @@ describe('RpcJsUnitTest', function(){
             let a = [new MySequenceable(1, "aaa"), new MySequenceable(2, "bbb"),
                 new MySequenceable(3, "ccc")]
             expect(data.writeSequenceableArray(a)).assertTrue()
-            await gIRemoteObject.sendRequest(CODE_ALL_ARRAY_TYPE, data, reply, option,(err, result) => {
+            await gIRemoteObject.sendRequest(CODE_ALL_ARRAY_TYPE, data, reply, option,(result, err) => {
                 expect(result.errCode).assertEqual(0)
                 assertArrayElementEqual(result.reply.readByteArray(), [1, 2, 3])
                 assertArrayElementEqual(result.reply.readShortArray(), [4, 5, 6])
@@ -6309,7 +7673,7 @@ describe('RpcJsUnitTest', function(){
             data.writeChar(96);
             data.writeString("HelloWorld");
             data.writeParcelable(new MySequenceable(1, "aaa"));
-            gIRemoteObject.sendMessageRequest(CODE_ALL_TYPE, data, reply, option, (err, result) => {
+            gIRemoteObject.sendMessageRequest(CODE_ALL_TYPE, data, reply, option, (result, err) => {
                 expect(result.errCode).assertEqual(0);
                 expect(result.reply.readByte()).assertEqual(1);
                 expect(result.reply.readShort()).assertEqual(2);

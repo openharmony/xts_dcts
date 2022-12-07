@@ -20,8 +20,6 @@
 #define I_FRAME_SIZE (150 * 1024)
 #define P_FRAME_SIZE (30 * 1024)
 
-static uint64_t g_transTimStart;
-
 using namespace testing::ext;
 
 class TransStreamTest : public testing::Test {
@@ -57,23 +55,6 @@ void TransStreamTest::TearDownTestCase()
     EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
 
     TestTearDown();
-}
-
-static inline void SetNumberInStreamData(char *streamData, int i)
-{
-    if (i < 10) {
-        streamData[0] = '1';
-        streamData[1] = '0' + i;
-    } else if (i < 100){
-        streamData[0] = '2';
-        streamData[1] = '0' + (i / 10);
-        streamData[2] = '0' + (i % 10);
-    } else {
-        streamData[0] = '3';
-        streamData[1] = '0' + (i / 100);
-        streamData[2] = '0' + ((i / 10) % 10);
-        streamData[3] = '0' + (i % 100);
-    }
 }
 
 /**
@@ -122,42 +103,36 @@ HWTEST_F(TransStreamTest, SUB_Softbus_Trans_Comp_SendStream_0100, TestSize.Level
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendStream_0200
- * @tc.name     : test Common Stream
+ * @tc.number : SUB_Softbus_Trans_Comp_SendStream_P2P_0100
+ * @tc.name     : test Stream By P2P
  * @tc.desc     : Test send stream function
  * @tc.type     : FUNC
  * @tc.size     : MediumTest
  */
-HWTEST_F(TransStreamTest, SUB_Softbus_Trans_Comp_SendStream_0200, TestSize.Level2) {
+HWTEST_F(TransStreamTest, SUB_Softbus_Trans_Comp_SendStream_P2P_0100, TestSize.Level2) {
     int ret;
 
-    
-    char *sendIFrame = (char *)malloc(I_FRAME_SIZE);
-    EXPECT_NE(sendIFrame, nullptr);
-     char *sendPFrame = (char *)malloc(P_FRAME_SIZE);
-    EXPECT_NE(sendPFrame, nullptr);
-  
-    StreamData extStreamData = {0};
-
-    StreamData streamIData = {
-        .buf = sendIFrame,
-        .bufLen = I_FRAME_SIZE + 1,
+    string data = "send stream transmission test!!!!";
+    char *sendData = (char *)malloc(data.length() + 1);
+    EXPECT_NE(sendData, nullptr);
+    ret = strcpy_s(sendData, data.length() + 1, data.c_str());
+    EXPECT_EQ(ret, SOFTBUS_OK);
+    StreamData extStreamData {0};
+    StreamData streamData {
+        .buf = sendData,
+        .bufLen = data.length() + 1,
     };
-    StreamFrameInfo  iFrame = {0};
-
-     StreamData streamPData = {
-        .buf = sendPFrame,
-        .bufLen = P_FRAME_SIZE + 1,
-    };
-    StreamFrameInfo  pFrame = {0};
+    StreamFrameInfo  frame = {0};
 
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM, GetSessionListenser4Stream());
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[Stream] fail";
 
-
     SessionAttribute attr;
     (void)memset_s(&attr, sizeof(attr), 0, sizeof(attr));
     attr.dataType = TYPE_STREAM;
+    attr.linkTypeNum = 1;
+    attr.linkType[0] = LINK_TYPE_WIFI_P2P;
+
     int sessionId = OpenSession(SESSION_NAME_STREAM, SESSION_NAME_STREAM, GetNetworkId(),
                           DEF_GROUP_ID, &attr);
     EXPECT_TRUE(sessionId >= SESSION_ID_MIN) << "call OpenSession[Stream] fail, sessionId=" << sessionId;
@@ -166,39 +141,10 @@ HWTEST_F(TransStreamTest, SUB_Softbus_Trans_Comp_SendStream_0200, TestSize.Level
         EXPECT_EQ(SOFTBUS_OK, ret) << "wait opensession fail[Stream]";
         LOG("call OpenSession[Stream] success");
     }
-
-    for (int i = 0; i < 3000; i++)
-    {
-        if (i % 60 == 0)
-        {
-            //I_Fream
-            SetNumberInStreamData(sendIFrame, i);
-            g_transTimStart = GetCurrentTimeOfMs();
-            ret = SendStream(sessionId, &streamIData, &extStreamData, &iFrame);
-            EXPECT_EQ(SOFTBUS_OK, ret) << "call SendStream fail";
-            if (ret == SOFTBUS_OK)
-            {
-                LOG("###SendStream IFREAM counts = %d ", i);
-            }
-        } else
-        {
-            //P Fream
-            SetNumberInStreamData(sendPFrame, i);
-            g_transTimStart = GetCurrentTimeOfMs();
-            ret = SendStream(sessionId, &streamPData, &extStreamData, &pFrame);
-            EXPECT_EQ(SOFTBUS_OK, ret) << "call SendStream fail";
-            if (ret == SOFTBUS_OK)
-            {
-                LOG("###SendStream PFREAM counts = %d ", i );
-            }
-        }
-        usleep(100000); //sleep 100ms
-    }
+    ResetWaitFlag();
+    ret = SendStream(sessionId, &streamData, &extStreamData, &frame);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call SendStream fail";
     
-    free(sendIFrame);
-    sendIFrame = nullptr;
-    free(sendPFrame);
-    sendPFrame = nullptr;
     CloseSession(sessionId);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM);
     EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS[proxy] fail";
