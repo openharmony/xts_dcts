@@ -1682,7 +1682,2079 @@ describe('RpcJsUnitTest', function(){
         }
         data.reclaim();
         console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_04700---------------------------");
-    });     
+    }); 
+    
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04800
+        * @tc.name    Call the writeShort interface to write the short integer data to the MessageSequence instance,
+        *             and call readshort to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_04800", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_04800---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var short = 8;
+            data.writeShort(short);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_SHORT, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readShort(),short);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_04800---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04900
+        * @tc.name    WriteShort interface, boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_04900", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_04900---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeShort(-32768);
+            data.writeShort(0);
+            data.writeShort(1);
+            data.writeShort(2);
+            data.writeShort(32767);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_SHORT_MULTI, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readShort() == -32768).assertTrue();
+                expect(result.reply.readShort() == 0).assertTrue();
+                expect(result.reply.readShort() == 1).assertTrue();
+                expect(result.reply.readShort() == 2).assertTrue();
+                expect(result.reply.readShort() == 32767).assertTrue();
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_04900---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05000
+        * @tc.name    WriteShort interface, Boundary value minimum value out of bounds verification
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_05000", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_05000---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeShort(-32769);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_SHORT_MULTI, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readShort() == 32767).assertTrue();
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_05000---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05100
+        * @tc.name    WriteShort interface, Boundary value maximum value out of bounds verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_05100", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_05100---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeShort(32768);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_SHORT_MULTI, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readShort() == -32768).assertTrue();
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_05100---------------------------");
+    });
+    
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05200
+        * @tc.name    Call writelong interface to write long integer data to MessageSequence instance
+        *             and call readlong to read data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_05200", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_05200---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var long = 9007199254740991;
+            data.writeLong(long);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_LONG, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readLong()).assertEqual(long);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_05200---------------------------");
+    });
+
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05300
+        * @tc.name    Writelong interface, Verification of maximum accuracy value
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_05300", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_05300---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var long = -9007199254740992;
+            data.writeLong(long);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_LONG, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readLong() == long).assertTrue();
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_05300---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05400
+        * @tc.name    Writelong interface, Minimum loss accuracy verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_05400", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_05400---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var long = -9223372036854775300;
+            data.writeLong(long);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_LONG, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readLong()).assertEqual(-9223372036854776000);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_05400---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05500
+        * @tc.name    Writelong interface, Maximum loss accuracy verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_05500", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_05500---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var short = 9223372036854775300;
+            data.writeLong(short);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_LONG, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                let readlong = result.reply.readLong();
+                expect(readlong != 0).assertTrue();
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_05500---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05600
+        * @tc.name    Call the parallel interface to read and write data to the double instance
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_05600", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_05600---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = 4.9E-324;
+            data.writeDouble(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_DOUBLE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readDouble()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_05600---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05700
+        * @tc.name    Writedouble interface, boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_05700", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_05700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = 1.79E+308;
+            data.writeDouble(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_DOUBLE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readDouble()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_05700---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05800
+        * @tc.name    Writedouble interface, Minimum boundary value out of bounds verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_05800", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_05800---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = (4.9E-324) - 1;
+            data.writeDouble(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_DOUBLE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readDouble()).assertEqual(-1);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_05800---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05900
+        * @tc.name    Writedouble interface, illegal value validation
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_05900", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_05900---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var token = "1.79E+465312156";
+            data.writeDouble(token);
+            data.reclaim();
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_05900---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06000
+        * @tc.name    Call the writeboolean interface to write the data to the MessageSequence instance,
+        *             and call readboolean to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_06000", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_06000---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = true;
+            data.writeBoolean(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BOOLEAN, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readBoolean()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_06000---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06100
+        * @tc.name    Call the writeboolean interface to write the data to the MessageSequence instance,
+        *             and call readboolean to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_06100", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_06100---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = false;
+            data.writeBoolean(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BOOLEAN, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readBoolean()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_06100---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06200
+        * @tc.name    Writeboolean interface, illegal value number type verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_06200", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_06200---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            data.writeBoolean(9);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_06200---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06300
+        * @tc.name    Writeboolean interface, illegal value string type verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_06300", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_06300---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var token = "true";
+            data.writeBoolean(token);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_06300---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06400
+        * @tc.name    Call the writechar interface to write the minimum data to the MessageSequence instance,
+        *               and call readchar to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_06400", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_06400---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = 0;
+            data.writeChar(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_CHAR, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readChar()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_06400---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06500
+        * @tc.name    Call the writechar interface to write the maximum data to the MessageSequence instance,
+        *              and call readchar to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_06500", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_06500---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = 255;
+            data.writeChar(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_CHAR, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readChar()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_06500---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06600
+        * @tc.name    Call the writechar interface to write the minimum out of range data to the MessageSequence instance,
+        *              and call readchar to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_06600", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_06600---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = -1;
+            data.writeChar(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_CHAR, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readChar()).assertEqual(255);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_06600---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06700
+        * @tc.name    Call the writechar interface to write the maximum out of range data to the MessageSequence instance,
+        *              and call readchar to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_06700", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_06700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = 256;
+            data.writeChar(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_CHAR, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readChar()).assertEqual(0);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_06700---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06800
+        * @tc.name    Writechar interface, illegal value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_06800", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_06800---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var token = 'ades';
+            data.writeChar(token);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_06800---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06900
+        * @tc.name    Call the writestring interface to write the data to the MessageSequence instance,
+        *             and call readstring() to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_06900", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_06900---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = '';
+            for(var i = 0; i < (40*K - 1); i++){
+                token += 'a';
+            }
+            data.writeString(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_STRING, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readString()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_06900---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07000
+        * @tc.name    Writestring interface Maximum data out of range verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_07000", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_07000---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var token = '';
+            for(var i = 0; i < 40*K; i++){
+                token += 'a';
+            }
+            data.writeString(token);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_07000---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07100
+        * @tc.name    Writestring interface, illegal value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_07100", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_07100---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var token = 123;
+            data.writeString(token);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_07100---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07200
+        * @tc.name    Call the writebyte interface to write data to the MessageSequence instance,
+        *             and call readbyte to read data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_07200", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_07200---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = 2;
+            data.writeByte(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BYTE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readByte()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_07200---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07300
+        * @tc.name    Writebyte interface, boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_07300", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_07300---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeByte(128);
+            data.writeByte(0);
+            data.writeByte(1);
+            data.writeByte(2);
+            data.writeByte(127);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BYTE_MULTI, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(reply.readByte()).assertEqual(-128);
+                expect(reply.readByte()).assertEqual(0);
+                expect(reply.readByte()).assertEqual(1);
+                expect(reply.readByte()).assertEqual(2);
+                expect(reply.readByte()).assertEqual(127);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim()
+        reply.reclaim()
+        done()
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_07300---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07400
+        * @tc.name    Writebyte interface, Maximum boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_07400", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_07400---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeByte(-129);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BYTE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readByte()).assertEqual(127);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_07400---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07500
+        * @tc.name    Writebyte interface, Minimum boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_07500", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_07500---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeByte(128);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_BYTE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readByte()).assertEqual(-128);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_07500---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07600
+        * @tc.name    Writebyte interface, illegal value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_07600", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_07600---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            data.writeByte("error");  
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_07600---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07700
+        * @tc.name    Call the writeint interface to write the data to the MessageSequence instance,
+        *             and call readint to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_07700", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_07700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = 2;
+            data.writeInt(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INT, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readInt()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_07700---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07800
+        * @tc.name    Writeint interface, boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_07800", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_07800---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeInt(-2147483648);
+            data.writeInt(0);
+            data.writeInt(1);
+            data.writeInt(2);
+            data.writeInt(2147483647);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INT_MULTI, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readInt()).assertEqual(-2147483648);
+                expect(result.reply.readInt()).assertEqual(0);
+                expect(result.reply.readInt()).assertEqual(1);
+                expect(result.reply.readInt()).assertEqual(2);
+                expect(result.reply.readInt()).assertEqual(2147483647);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_07800---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07900
+        * @tc.name    Writeint interface, Verification of minimum boundary overrun value
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_07900", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_07900---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeInt(-2147483649);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INT_MULTI, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readInt()).assertEqual(2147483647);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_07900---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08000
+        * @tc.name    Writeint interface, Verification of maximum boundary overrun value
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_08000", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_08000---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeInt(2147483648);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INT_MULTI, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readInt()).assertEqual(-2147483648);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_08000---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08100
+        * @tc.name    Writeint interface, illegal value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_08100", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_08100---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            data.writeInt("error");
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_08100---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08200
+        * @tc.name    Call the writefloat interface to write data to the MessageSequence instance,
+        *             and call readfloat to read data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_08200", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_08200---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = 2.2;
+            data.writeFloat(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_FLOAT, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readFloat()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_08200---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08300
+        * @tc.name    Writefloat interface, Minimum boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_08300", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_08300---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = 1.4E-45;
+            data.writeFloat(token);
+
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_FLOAT, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readFloat()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_08300---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08400
+        * @tc.name    Writefloat interface, Maximum boundary value verification
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_08400", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_08400---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = 3.4028235E38;
+            data.writeFloat(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_FLOAT, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readFloat()).assertEqual(token);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_08400---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08500
+        * @tc.name    Writefloat interface, Verification of maximum boundary overrun value
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_08500", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_08500---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = (3.4028235E38) + 1;
+            data.writeFloat(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_FLOAT, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readFloat()).assertEqual(3.4028235e+38);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_08500---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08600
+        * @tc.name    Writefloat interface, Verification of minimum boundary overrun value
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_08600", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_08600---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var token = (1.4E-45) - 1;
+            data.writeFloat(token);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_FLOAT, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readFloat()).assertEqual(-1);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_08600---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08700
+        * @tc.name    Writefloat interface, illegal value validation
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_08700", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_08700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var token = 'a';
+            data.writeFloat(token);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code != errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_08700---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08800
+        * @tc.name    Call the getRawDataCapacity interface to get the maximum amount of raw data that a MessageSequence
+                        can hold
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_08800", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_08800---------------------------");
+        try{
+            let parcel = new rpc.MessageSequence();
+            let reply = new rpc.MessageSequence();
+            let option = new  rpc.MessageOption();
+            expect(parcel.getRawDataCapacity()).assertEqual(128*M);
+            parcel.writeIntArray([1, 2, 3, 4, 5]);
+            expect(parcel.getRawDataCapacity()).assertEqual(128*M);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INTARRAY, parcel, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.getRawDataCapacity()).assertEqual(128*M);
+                assertArrayElementEqual(result.reply.readIntArray(),[1, 2, 3, 4, 5]);
+                expect(result.reply.getRawDataCapacity()).assertEqual(128*M);
+            });
+            parcel.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_08800---------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08900
+    * @tc.name    Test MessageSequence to deliver rawdata data
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_08900", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_08900---------------------------");
+        try{
+            let parcel = new rpc.MessageSequence();
+            let reply = new rpc.MessageSequence();
+            let option = new rpc.MessageOption();
+            let arr = [1, 2, 3, 4, 5];
+            parcel.writeInt(arr.length);
+            parcel.writeRawData(arr, arr.length);
+            expect(parcel.getRawDataCapacity()).assertEqual(128*M);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_RAWDATA, parcel, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                let size = result.reply.readInt();
+                expect(size).assertEqual(arr.length);
+                expect(result.reply.getRawDataCapacity()).assertEqual(128*M);
+                assertArrayElementEqual(result.reply.readRawData(size),arr);
+            });
+            parcel.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_08900---------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09000
+    * @tc.name    Test MessageSequence to pass abnormal rawdata data, and expand the capacity for verification
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_09000", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_09000---------------------------");
+        try{
+            let parcel = new rpc.MessageSequence();
+            let reply = new rpc.MessageSequence();
+            let option = new rpc.MessageOption();
+            let arr = [1, 2, 3, 4, 5];
+            parcel.writeInt(arr.length + 1);
+            parcel.writeRawData(arr, (arr.length + 1));
+            expect(parcel.getRawDataCapacity()).assertEqual(128*M);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_RAWDATA, parcel, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                let size = result.reply.readInt();
+                expect(size).assertEqual(arr.length + 1);
+                expect(result.reply.getRawDataCapacity()).assertEqual(128*M);
+                let newReadResult = result.reply.readRawData(size);
+                expect(arr[0]).assertEqual(newReadResult[0]);
+                expect(arr[1]).assertEqual(newReadResult[1]);
+                expect(arr[2]).assertEqual(newReadResult[2]);
+                expect(arr[3]).assertEqual(newReadResult[3]);
+                expect(arr[4]).assertEqual(newReadResult[4]);
+            });
+            parcel.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_09000---------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09100
+    * @tc.name    Test MessageSequence to pass exception rawdata data data interception verification
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_09100", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_09100---------------------------");
+        try{
+            let parcel = new rpc.MessageSequence();
+            let reply = new rpc.MessageSequence();
+            let option = new rpc.MessageOption();
+            let arr = [1, 2, 3, 4, 5];
+            parcel.writeInt(arr.length - 1);
+            parcel.writeRawData(arr, (arr.length - 1));
+            expect(parcel.getRawDataCapacity()).assertEqual(128*M);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_RAWDATA, parcel, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                let size = result.reply.readInt();
+                expect(size).assertEqual(arr.length - 1);
+                expect(result.reply.getRawDataCapacity()).assertEqual(128*M);
+                let newReadResult = result.reply.readRawData(size);
+                expect(arr[0]).assertEqual(newReadResult[0]);
+                expect(arr[1]).assertEqual(newReadResult[1]);
+                expect(arr[2]).assertEqual(newReadResult[2]);
+                expect(arr[3]).assertEqual(newReadResult[3]);
+            });
+            parcel.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_09100---------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09200
+    * @tc.name    Test MessageSequence to deliver out-of-bounds RawData data
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_09200", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_09200---------------------------");
+        try{
+            let parcel = new rpc.MessageSequence();
+            let reply = new rpc.MessageSequence();
+            let option = new rpc.MessageOption();
+            let arr = [-129, 2, 3, 4, 128];
+            parcel.writeInt(arr.length);
+            parcel.writeRawData(arr, arr.length);
+            expect(parcel.getRawDataCapacity()).assertEqual(128*M);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_RAWDATA, parcel, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                let size = result.reply.readInt();
+                expect(size).assertEqual(arr.length);
+                expect(result.reply.getRawDataCapacity()).assertEqual(128*M);
+                assertArrayElementEqual(result.reply.readRawData(size),arr);
+            });
+            parcel.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_09200---------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09300
+    * @tc.name    Test MessageSequence to deliver illegal RawData data
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_09300", 0, async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_09300---------------------------");
+        try{
+            let parcel = new rpc.MessageSequence();
+            let arr = ["aaa", 1, 2, 3];
+            parcel.writeInt(arr.length);
+            parcel.writeRawData(arr, arr.length);
+            expect(parcel.getRawDataCapacity()).assertEqual(128*M);
+            parcel.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_09300---------------------------");
+    }); 
+    
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09400
+        * @tc.name    Call the writeremoteobject interface to serialize the remote object
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_09400", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_09400---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            let testRemoteObject = new TestRemoteObject("testObject");
+            data.writeRemoteObject(testRemoteObject);
+            expect( data.readRemoteObject() != null).assertTrue();
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_09400---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09500
+        * @tc.name    Call the writeremoteobject interface to serialize the remote object and pass in the empty object
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_09500", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_09500---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var token = new TestRemoteObject(null);
+            data.writeRemoteObject(token);
+        } catch (error) {
+            expect(error != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_09500---------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09600
+    * @tc.name    Call the writeremoteobject interface to serialize the remote object and pass in the empty object
+    * @tc.desc    Function test
+    * @tc.level   3   
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_09600", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_09600---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var token = {};
+            data.writeRemoteObject(token);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.PROXY_OR_REMOTE_OBJECT_INVALID_ERROR}`;
+            expect(error.code == errCode).assertTrue();
+            console.info("SUB_Softbus_RPC_Compatibility_MessageSequence_09600: errorMessage " + error.message);
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_09600---------------------------");
+    });        
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09700
+        * @tc.name    Call the writeParcelable interface to write the custom serialized
+        *             object to the MessageSequence instance
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_09700", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_09700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            let sequenceable = new MySequenceable(1, "aaa");
+            data.writeParcelable(sequenceable);
+            let ret = new MySequenceable(0, "");
+            data.readParcelable(ret);
+        } catch (error) {
+            expect(error).assertEqual(null);
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_09700---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09800
+        * @tc.name    Call the writeParcelable interface to write the custom serialized
+        *             object to the MessageSequence instance, Migration to read
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_09800", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_09800---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            let sequenceable = new MySequenceable(1, "aaa");
+            data.writeParcelable(sequenceable);
+            let ret = new MySequenceable(1, "");
+            data.readParcelable(ret);
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_09800---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09900
+        * @tc.name    After the server finishes processing, write noexception first before writing the result,
+        *             and the client calls readexception to judge whether the server is abnormal
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_09900", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_09900---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeNoException();
+            data.writeInt(6);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_NOEXCEPTION, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                result.reply.readException();
+                expect(result.reply.readInt()).assertEqual(6);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_09900---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10000
+        * @tc.name    If the data on the server is abnormal, the client calls readexception
+        *             to judge whether the server is abnormal
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_10000", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_10000---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeNoException();
+            data.writeInt(1232222223444);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_NOEXCEPTION, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                result.reply.readException();
+                expect(result.reply.readInt() != 1232222223444).assertTrue();
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_10000---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10100
+        * @tc.name    Serializable object marshaling and unmarshalling test
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_10100", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_10100---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var sequenceable = new MySequenceable(1, "aaa");
+            data.writeParcelable(sequenceable);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_SEQUENCEABLE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var s = new MySequenceable(null,null);
+                result.reply.readParcelable(s);
+                expect(s.str).assertEqual(sequenceable.str);
+                expect(s.num).assertEqual(sequenceable.num);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_10100---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10200
+        * @tc.name    Non serializable object marshaling test
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_10200", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_10200---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var sequenceable = new MySequenceable(1, 1);
+            data.writeParcelable(sequenceable);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+            expect(error.code == errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_10200---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10300
+        * @tc.name    The server did not send a serializable object, and the client was ungrouped
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_10300", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_10300---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var sequenceable = 10;
+            data.writeInt(sequenceable);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INT, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var s = new MySequenceable(0,null);
+                result.reply.readParcelable(s);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_10300---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10400
+        * @tc.name    Call the writeParcelable interface to write the custom serialized object to the
+        *             MessageSequence instance, and call readParcelable to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_10400", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_10400---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var sequenceable = new MySequenceable(2, "abc");
+            data.writeParcelable(sequenceable);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_SEQUENCEABLE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var s = new MySequenceable(null,null);
+                result.reply.readParcelable(s);
+                expect(s.str).assertEqual(sequenceable.str);
+                expect(s.num).assertEqual(sequenceable.num);
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_10400---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10500
+        * @tc.name    Call the writeParcelablearray interface to write the custom serialized object array (1, 2, 3) to
+        *              the MessageSequence instance, and call readParcelablearray to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_10500", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_10500---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var sequenceable = [new MySequenceable(1, "aaa"),
+                new MySequenceable(2, "bbb"), new MySequenceable(3, "ccc")];
+            data.writeParcelableArray(sequenceable);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_SEQUENCEABLEARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var s = [new MySequenceable(null, null), new MySequenceable(null, null),
+                    new MySequenceable(null, null)];
+                result.reply.readParcelableArray(s);
+                for (let i = 0; i < s.length; i++) {
+                    expect(s[i].str).assertEqual(sequenceable[i].str);
+                    expect(s[i].num).assertEqual(sequenceable[i].num);
+                }
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_10500---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10600
+        * @tc.name    Call the writeParcelablearray interface to write the custom serialized object to the
+        *             MessageSequence instance, and call readParcelablearray to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_10600", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_10600---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            var sequenceable = [new MySequenceable(4, "abc"),
+                new MySequenceable(5, "bcd"), new MySequenceable(6, "cef")];
+            data.writeParcelableArray(sequenceable);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_SEQUENCEABLEARRAY, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                var s = [new MySequenceable(null, null),
+                    new MySequenceable(null, null), new MySequenceable(null, null)];
+                result.reply.readParcelableArray(s);
+                for (let i = 0; i < s.length; i++) {
+                    expect(s[i].str).assertEqual(sequenceable[i].str);
+                    expect(s[i].num).assertEqual(sequenceable[i].num);
+                };
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_10600---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10700
+        * @tc.name    Call the writeParcelablearray interface to write the custom
+        *             serialized object to the MessageSequence instance
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_10700", 0,async function(){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_10700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var sequenceable = 1;
+            data.writeParcelableArray(sequenceable);
+        } catch (error) {
+            let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
+            expect(error.code == errCode).assertTrue();
+            expect(error.message != null).assertTrue();
+        }
+        data.reclaim();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_10700---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10800
+        * @tc.name    Call the writeremoteobjectarray interface to write the object array to the MessageSequence
+        *             instance, and call readremoteobjectarray to read the data
+        * @tc.desc    Function test
+        * @tc.level   0
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_10800", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_10800---------------------------");
+        try{
+            let count = 0;
+            function checkResult(num, str) {
+                expect(num).assertEqual(123);
+                expect(str).assertEqual("rpcListenerTest");
+                count++;
+                console.info("check result done, count: " + count);
+                if (count == 3) {
+                    done();
+                };
+            };
+            let data = rpc.MessageSequence.create();
+            let reply = rpc.MessageSequence.create();
+            let option = new rpc.MessageOption();
+            data.writeInterfaceToken("rpcTestAbility");
+            let listeners = [new TestListener("rpcListener", checkResult),
+                new TestListener("rpcListener2", checkResult),
+                new TestListener("rpcListener3", checkResult)];
+            data.writeRemoteObjectArray(listeners);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECTARRAY, data, reply, option).then((result) => {
+                console.info("SUB_Softbus_RPC_Compatibility_MessageSequence_10800: sendMessageRequest is " + result.errCode);
+                expect(result.errCode).assertEqual(0);
+                expect(result.code).assertEqual(CODE_WRITE_REMOTEOBJECTARRAY);
+                expect(result.data).assertEqual(data);
+                expect(result.reply).assertEqual(reply);
+            });
+            data.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_10800---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10900
+        * @tc.name    Call the writeremoteobjectarray interface to write the object array to the MessageSequence instance,
+        *             and call readremoteobjectarray (objects: iremoteobject []) to read the data
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_10900", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_10900---------------------------");
+        try{
+            let count = 0;
+            function checkResult(num, str) {
+                expect(num).assertEqual(123);
+                expect(str).assertEqual("rpcListenerTest");
+                count++;
+                console.info("check result done, count: " + count);
+                if (count == 3) {
+                    done();
+                }
+            }
+            let data = rpc.MessageSequence.create();
+            let reply = rpc.MessageSequence.create();
+            let option = new rpc.MessageOption();
+            data.writeInterfaceToken("rpcTestAbility");
+            let listeners = [new TestListener("rpcListener", checkResult),
+                new TestListener("rpcListener2", checkResult),
+                new TestListener("rpcListener3", checkResult)];
+            data.writeRemoteObjectArray(listeners);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECTARRAY, data, reply, option).then((result) => {
+                console.info("SUB_Softbus_RPC_Compatibility_MessageSequence_10900: sendMessageRequest is " + result.errCode);
+                expect(result.errCode == 0).assertTrue();
+            });
+            data.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_10900---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11000
+        * @tc.name    Test MessageSequence to deliver the reply message received in promise across processes
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_11000", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_11000---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeByte(2);
+            data.writeShort(3);
+            data.writeInt(4);
+            data.writeLong(5);
+            data.writeFloat(1.2);
+            data.writeDouble(10.2);
+            data.writeBoolean(true);
+            data.writeChar(97);
+            data.writeString("HelloWorld");
+            data.writeParcelable(new MySequenceable(1, "aaa"));
+            await gIRemoteObject.sendMessageRequest(CODE_ALL_TYPE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readByte()).assertEqual(2);
+                expect(result.reply.readShort()).assertEqual(3);
+                expect(result.reply.readInt()).assertEqual(4);
+                expect(result.reply.readLong()).assertEqual(5);
+                expect(result.reply.readFloat()).assertEqual(1.2);
+                expect(result.reply.readDouble()).assertEqual(10.2);
+                expect(result.reply.readBoolean()).assertTrue();
+                expect(result.reply.readChar()).assertEqual(97)
+                expect(result.reply.readString()).assertEqual("HelloWorld");
+                let s = new MySequenceable(null, null);
+                result.reply.readParcelable(s);
+                expect(s.num).assertEqual(1);
+                expect(s.str).assertEqual("aaa");
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_11000---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11100
+        * @tc.name    Test the cross process delivery of MessageSequence and receive the reply message
+        *             in the callback function
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_11100", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_11100---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeByte(2);
+            data.writeShort(3);
+            data.writeInt(4);
+            data.writeLong(5);
+            data.writeFloat(1.2);
+            data.writeDouble(10.2);
+            data.writeBoolean(true);
+            data.writeChar(97);
+            data.writeString("HelloWorld");
+            data.writeParcelable(new MySequenceable(1, "aaa"));
+            function sendMessageRequestCallback(result) {
+                try{
+                    console.info("sendMessageRequest Callback");
+                    expect(result.errCode).assertEqual(0);
+                    expect(result.reply.readByte()).assertEqual(2);
+                    expect(result.reply.readShort()).assertEqual(3);
+                    expect(result.reply.readInt()).assertEqual(4);
+                    expect(result.reply.readLong()).assertEqual(5);
+                    expect(result.reply.readFloat()).assertEqual(1.2);
+                    expect(result.reply.readDouble()).assertEqual(10.2);
+                    expect(result.reply.readBoolean()).assertTrue();
+                    expect(result.reply.readChar()).assertEqual(97);
+                    expect(result.reply.readString()).assertEqual("HelloWorld");
+                    let s = new MySequenceable(null, null);
+                    result.reply.readParcelable(s);
+                    expect(s.num).assertEqual(1);
+                    expect(s.str).assertEqual("aaa");
+                } finally {
+                    result.data.reclaim();
+                    result.reply.reclaim();
+                    console.info("test done");
+                    done();
+                }
+            }
+            console.info("start send request");
+            await gIRemoteObject.sendMessageRequest(CODE_ALL_TYPE, data, reply, option, sendMessageRequestCallback);
+
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        console.info("--------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_11100--------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11200
+        * @tc.name    Test the cross process transmission of MessageSequence.
+        *             After receiving the reply message in promise, read various types of arrays in order
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_11200", 0,async function(done){
+        console.info("--------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_11200--------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeByteArray([1, 2, 3]);
+            data.writeShortArray([4, 5, 6]);
+            data.writeIntArray([7, 8, 9]);
+            data.writeLongArray([10, 11, 12]);
+            data.writeFloatArray([1.1, 1.2, 1.3]);
+            data.writeDoubleArray([2.1, 2.2, 2.3]);
+            data.writeBooleanArray([true, true, false]);
+            data.writeCharArray([65,97,122]);
+            data.writeStringArray(['abc', 'seggg']);
+            let a = [new MySequenceable(1, "aaa"), new MySequenceable(2, "bbb"),
+                new MySequenceable(3, "ccc")]
+            data.writeParcelableArray(a);
+            await gIRemoteObject.sendMessageRequest(CODE_ALL_ARRAY_TYPE, data, reply, option,(result, err) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readByteArray(), [1, 2, 3]);
+                assertArrayElementEqual(result.reply.readShortArray(), [4, 5, 6]);
+                assertArrayElementEqual(result.reply.readIntArray(), [7, 8, 9]);
+                assertArrayElementEqual(result.reply.readLongArray(), [10, 11, 12]);
+                assertArrayElementEqual(result.reply.readFloatArray(), [1.1, 1.2, 1.3]);
+                assertArrayElementEqual(result.reply.readDoubleArray(), [2.1, 2.2, 2.3]);
+                assertArrayElementEqual(result.reply.readBooleanArray(), [true, true, false]);
+                assertArrayElementEqual(result.reply.readCharArray(), [65,97,122]);
+                assertArrayElementEqual(result.reply.readStringArray(), ['abc', 'seggg']);
+                let b = [new MySequenceable(null, null), new MySequenceable(null, null),
+                    new MySequenceable(null, null)];
+                result.reply.readParcelableArray(b);
+                for (let i = 0; i < b.length; i++) {
+                    expect(b[i].str).assertEqual(a[i].str);
+                    expect(b[i].num).assertEqual(a[i].num);
+                }
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_11200---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11300
+        * @tc.name    Test MessageSequence cross process delivery. After receiving the reply message in promise,
+        *             the client constructs an empty array in sequence and reads the data from the reply message
+        *             into the corresponding array
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_11300", 0,async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_11300---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeByteArray([1, 2, 3]);
+            data.writeShortArray([4, 5, 6]);
+            data.writeIntArray([7, 8, 9]);
+            data.writeLongArray([10, 11, 12]);
+            data.writeFloatArray([1.1, 1.2, 1.3]);
+            data.writeDoubleArray([2.1, 2.2, 2.3]);
+            data.writeBooleanArray([true, true, false]);
+            data.writeCharArray([65,97,122]);
+            data.writeStringArray(['abc', 'seggg']);
+            let a = [new MySequenceable(1, "aaa"), new MySequenceable(2, "bbb"),
+                new MySequenceable(3, "ccc")]
+            data.writeParcelableArray(a);
+            await gIRemoteObject.sendMessageRequest(CODE_ALL_ARRAY_TYPE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                assertArrayElementEqual(result.reply.readByteArray(), [1, 2, 3]);
+                assertArrayElementEqual(result.reply.readShortArray(), [4, 5, 6]);
+                assertArrayElementEqual(result.reply.readIntArray(), [7, 8, 9]);
+                assertArrayElementEqual(result.reply.readLongArray(), [10, 11, 12]);
+                assertArrayElementEqual(result.reply.readFloatArray(), [1.1, 1.2, 1.3]);
+                assertArrayElementEqual(result.reply.readDoubleArray(), [2.1, 2.2, 2.3]);
+                assertArrayElementEqual(result.reply.readBooleanArray(), [true, true, false]);
+                assertArrayElementEqual(result.reply.readCharArray(), [65,97,122]);
+                assertArrayElementEqual(result.reply.readStringArray(), ['abc', 'seggg']);
+                let b = [new MySequenceable(null, null), new MySequenceable(null, null),
+                    new MySequenceable(null, null)];
+                result.reply.readParcelableArray(b);
+                for (let i = 0; i < b.length; i++) {
+                    expect(b[i].str).assertEqual(a[i].str);
+                    expect(b[i].num).assertEqual(a[i].num);
+                }
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        data.reclaim();
+        reply.reclaim();
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_11300---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11400
+        * @tc.name    Test MessageSequence to pass an object of type iremoteobject across processes
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it('SUB_Softbus_RPC_Compatibility_MessageSequence_11400', 0, async function(done) {
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_11400---------------------------");
+        function checkResult(num, str) {
+            expect(num).assertEqual(123);
+            expect(str).assertEqual("rpcListenerTest");
+            done();
+        };
+        try{
+            let option = new rpc.MessageOption();
+            let data = rpc.MessageSequence.create();
+            let reply = rpc.MessageSequence.create();
+            let listener = new TestListener("rpcListener", checkResult);
+            data.writeRemoteObject(listener);
+            data.writeInt(123);
+            data.writeString("rpcListenerTest");
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECT, data, reply, option).then((result)=> {
+                expect(result.errCode).assertEqual(0);
+                result.reply.readException();
+            });
+            data.reclaim();
+            reply.reclaim();
+            done();
+        } catch(error) {
+            expect(error == null).assertTrue();
+        }
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_11400---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11500
+        * @tc.name    Test MessageSequence to pass an array of iremoteobject objects across processes
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it('SUB_Softbus_RPC_Compatibility_MessageSequence_11500', 0, async function(done) {
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_11500---------------------------");
+        let count = 0;
+        function checkResult(num, str) {
+            expect(num).assertEqual(123);
+            expect(str).assertEqual("rpcListenerTest");
+            count++;
+            console.info("check result done, count: " + count);
+            if (count == 3) {
+                done();
+            }
+        }
+        try{
+            let option = new rpc.MessageOption();
+            let data = rpc.MessageSequence.create();
+            let reply = rpc.MessageSequence.create();
+            let listeners = [new TestListener("rpcListener", checkResult),
+                new TestListener("rpcListener2", checkResult),
+                new TestListener("rpcListener3", checkResult)];
+            data.writeRemoteObjectArray(listeners);
+            data.writeInt(123);
+            data.writeString("rpcListenerTest");
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECTARRAY_1, data, reply, option)
+                .then((result)=> {
+                    expect(result.errCode).assertEqual(0);
+                    result.reply.readException();
+                });
+            data.reclaim();
+            reply.reclaim();
+        } catch(error) {
+            expect(error == null).assertTrue();
+        }
+        done()
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_11500---------------------------");
+    });
+
+    /*
+        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11600
+        * @tc.name    Test MessageSequence to pass the array of iremoteobject objects across processes. The server
+        *             constructs an empty array in onremoterequest and reads it from MessageSequence
+        * @tc.desc    Function test
+        * @tc.level   3
+        */
+    it('SUB_Softbus_RPC_Compatibility_MessageSequence_11600', 0, async function(done) {
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_11600---------------------------");
+        let count = 0;
+        function checkResult(num, str) {
+            expect(num).assertEqual(123);
+            expect(str).assertEqual("rpcListenerTest");
+            count++;
+            console.info("check result done, count: " + count);
+            if (count == 3) {
+                done();
+            }
+        }
+        try{
+            let option = new rpc.MessageOption();
+            let data = rpc.MessageSequence.create();
+            let reply = rpc.MessageSequence.create();
+            let listeners = [new TestListener("rpcListener", checkResult),
+                new TestListener("rpcListener2", checkResult),
+                new TestListener("rpcListener3", checkResult)];
+            data.writeRemoteObjectArray(listeners);
+            data.readRemoteObjectArray();
+            data.writeInt(123);
+            data.writeString("rpcListenerTest");
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECTARRAY_2, data, reply, option)
+                .then((result)=> {
+                    expect(result.errCode).assertEqual(0);
+                    result.reply.readException();
+                })
+            data.reclaim();
+            reply.reclaim();
+        } catch(error) {
+            expect(error == null).assertTrue();
+        }
+        done()
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_11600---------------------------");
+    });    
 
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_00100
