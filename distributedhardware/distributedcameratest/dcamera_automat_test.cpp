@@ -385,3 +385,107 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_3000, TestSize.Level1)
     EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
     sleep(sleepOk);
 }
+
+HWTEST_F(DCameraAutomatTest, DCameraTest_3100, TestSize.Level1)
+{
+    int32_t ret = PreviewOn(1, mainDemo);
+    DHLOGI("DCameraTest_3100 = ", ret);
+    EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
+    sleep(sleepOk);
+}
+
+HWTEST_F(DCameraAutomatTest, DCameraTest_3200, TestSize.Level1)
+{
+    int32_t ret = PreviewOn(1, nullptr);
+    DHLOGI("DCameraTest_3200 = ", ret);
+    EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
+    sleep(sleepOk);
+}
+
+HWTEST_F(DCameraAutomatTest, DCameraTest_3300, TestSize.Level1)
+{
+    int32_t ret = PreviewOn(0, nullptr);
+    DHLOGI("DCameraTest_3300 = ", ret);
+    EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
+    sleep(sleepOk);
+}
+
+HWTEST_F(DCameraAutomatTest, DCameraTest_3400, TestSize.Level1)
+{
+    int32_t ret = PreviewOn(-1, mainDemo);
+    DHLOGI("DCameraTest_3400 = ", ret);
+    EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
+    sleep(sleepOk);
+}
+
+HWTEST_F(DCameraAutomatTest, DCameraTest_3500, TestSize.Level1)
+{
+    int32_t ret = mainDemo->SetAwbMode(5);
+    DHLOGI("DCameraTest_3500 = ", ret);
+    EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
+    sleep(sleepOk);
+}
+
+HWTEST_F(DCameraAutomatTest, DCameraTest_3600, TestSize.Level1)
+{
+    int32_t ret = mainDemo->SetAwbMode(camoreError);
+    DHLOGI("DCameraTest_3600 = ", ret);
+    EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
+    sleep(sleepOk);
+}
+
+HWTEST_F(DCameraAutomatTest, DCameraTest_3700, TestSize.Level1)
+{
+    int32_t ret = mainDemo->SetAwbMode(camoreError);
+    DHLOGI("DCameraTest_3700 = ", ret);
+    EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
+    sleep(sleepOk);
+    ret = mainDemo->SetAeExpo();
+    DHLOGI("DCameraTest_3701 = ", ret);
+    EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
+    sleep(sleepOk);
+}
+
+HWTEST_F(DCameraAutomatTest, DCameraTest_3800, TestSize.Level1)
+{
+    int32_t ret = mainDemo->SetAwbMode(camoreError);
+    DHLOGI("DCameraTest_3800 = ", ret);
+    EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
+    sleep(sleepOk);
+    ret = mainDemo->SetMetadata();
+    DHLOGI("DCameraTest_3801 = ", ret);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+HWTEST_F(DCameraAutomatTest, DCameraTest_3900, TestSize.Level1)
+{
+    int32_t ret = CaptureTest(nullptr);
+    DHLOGI("DCameraTest_3900 = ", ret);
+    EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
+    sleep(sleepOk);
+}
+
+HWTEST_F(DCameraAutomatTest, DCameraTest_4000, TestSize.Level1)
+{
+    int32_t ret = VideoTest(nullptr);
+    DHLOGI("DCameraTest_4000 = ", ret);
+    EXPECT_NE(cameraOk, ret) << "VideoTest fail";
+    sleep(sleepOk);
+}
+
+HWTEST_F(DCameraAutomatTest, DCameraTest_4100, TestSize.Level1)
+{
+    int32_t ret = FlashLightTest(nullptr);
+    DHLOGI("DCameraTest_4100 = ", ret);
+    EXPECT_NE(cameraOk, ret) << "FlashLightTest fail";
+    sleep(sleepOk);
+}
+
+HWTEST_F(DCameraAutomatTest, DCameraTest_4200, TestSize.Level1)
+{
+    int32_t ret = OfflineTest(nullptr);
+     DHLOGI("DCameraTest_4200 = ", ret);
+    EXPECT_NE(cameraOk, ret) << "OfflineTest fail";
+    sleep(sleepOk);
+}
