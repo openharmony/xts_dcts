@@ -485,7 +485,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_4100, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, DCameraTest_4200, TestSize.Level1)
 {
     int32_t ret = OfflineTest(nullptr);
-     DHLOGI("DCameraTest_4200 = ", ret);
+    DHLOGI("DCameraTest_4200 = ", ret);
     EXPECT_NE(cameraOk, ret) << "OfflineTest fail";
     sleep(sleepOk);
 }

@@ -619,7 +619,7 @@ RetCode DcameraHdfDemo::SetAwbMode(const int mode) const
 {
     DHLOGI("demo test: SetAwbMode enter");
     
-    if (mode < 0 || mode > 2) {
+    if (mode < 0 || mode > OHOS_CAMERA_AWB_MODE_INCANDESCENT) {
         DHLOGI("demo test: SetAwbMode mode error");
         return RC_ERROR;
     }
