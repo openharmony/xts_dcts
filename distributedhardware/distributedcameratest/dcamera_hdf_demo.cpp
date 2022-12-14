@@ -618,6 +618,11 @@ void DcameraHdfDemo::SetEnableResult()
 RetCode DcameraHdfDemo::SetAwbMode(const int mode) const
 {
     DHLOGI("demo test: SetAwbMode enter");
+    
+    if (mode < 0 || mode > OHOS_CAMERA_AWB_MODE_INCANDESCENT) {
+        DHLOGI("demo test: SetAwbMode mode error");
+        return RC_ERROR;
+    }
 
     constexpr size_t entryCapacity = 100;
     constexpr size_t dataCapacity = 2000;
@@ -1176,6 +1181,11 @@ RetCode PreviewOn(int mode, const std::shared_ptr<DcameraHdfDemo>& mainDemo)
     RetCode rc = RC_OK;
     DHLOGI("main test: PreviewOn enter");
 
+    if (mode != 0 || mainDemo == nullptr) {
+        DHLOGE("main test: mainDemo is nullptr or mode is 0");
+        return RC_ERROR;
+    }
+
     rc = mainDemo->StartPreviewStream();
     if (rc != RC_OK) {
         DHLOGE("main test: PreviewOn StartPreviewStream error");
@@ -1221,6 +1231,11 @@ void PreviewOff(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
 RetCode FlashLightTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
 {
     constexpr size_t delayTime = 5;
+    
+    if (mainDemo == nullptr) {
+        DHLOGE("main test: FlashLightTest  mainDemo is nullptr");
+        return RC_ERROR;
+    }
 
     PreviewOff(mainDemo);
     mainDemo->ReleaseCameraDevice();
@@ -1237,6 +1252,12 @@ RetCode OfflineTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
 {
     RetCode rc = RC_OK;
     int32_t dalayTime = 5;
+
+    if (mainDemo == nullptr) {
+        DHLOGE("main test: OfflineTest  mainDemo is nullptr");
+        return RC_ERROR;
+    }
+
     PreviewOff(mainDemo);
 
     mainDemo->StartDualStreams(STREAM_ID_CAPTURE);
@@ -1263,6 +1284,11 @@ RetCode CaptureTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
 {
     RetCode rc = RC_OK;
     constexpr size_t delayTime = 5;
+    
+    if (mainDemo == nullptr) {
+        DHLOGE("main test: CaptureTest  mainDemo is nullptr");
+        return RC_ERROR;
+    }
 
     rc = mainDemo->CaptureON(STREAM_ID_CAPTURE, CAPTURE_ID_CAPTURE, CAPTURE_SNAPSHOT);
     if (rc != RC_OK) {
@@ -1284,6 +1310,11 @@ RetCode VideoTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
 {
     RetCode rc = RC_OK;
     constexpr size_t delayTime = 5;
+    
+    if (mainDemo == nullptr) {
+        DHLOGE("main test: VideoTest  mainDemo is nullptr");
+        return RC_ERROR;
+    }
 
     PreviewOff(mainDemo);
     mainDemo->StartDualStreams(STREAM_ID_VIDEO);
