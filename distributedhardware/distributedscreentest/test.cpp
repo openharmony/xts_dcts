@@ -15,6 +15,7 @@
 
 #include <iostream>
 
+#include "accesstoken_kit.h"
 #include "display.h"
 #include "display_manager.h"
 #include "dscreen_source_handler.h"
@@ -29,6 +30,8 @@
 #include "wm_common.h"
 #include "window.h"
 #include "window_option.h"
+#include "nativetoken_kit.h"
+#include "token_setproc.h"
 
 #include "decoder_demo.h"
 #include "softbus_adapter_mem.h"
@@ -40,6 +43,7 @@ using namespace OHOS;
 using namespace OHOS::DistributedHardware;
 using namespace OHOS::Rosen;
 using namespace OHOS::Media;
+using namespace OHOS::Security::AccessToken;
 
 namespace {
     static char const *g_pkgName = "ohos.dsoftbus.tool";
@@ -229,11 +233,31 @@ static void PrintNodeProperty(NodeBasicInfo *nodeInfo)
     unsigned char uuid[UUID_BUF_LEN] = {0};
     if (GetNodeKeyInfo(g_pkgName, nodeInfo->networkId, key, uuid, UUID_BUF_LEN) != 0) {
         DHLOGE("GetNodeKeyInfo Fail!");
+    }else {
+        DHLOGE("Uuid = %s\n", GetAnonyString(reinterpret_cast<char *>(udid)).c_str());
     }
 }
 
 int QueryRemoteDeviceInfo(void)
 {
+    uint64_t tokenId;
+    const char *perms[2];
+    perms[0] = OHOS_PERMISSION_DISTRIBUTED_SOFTBUS_CENTER;
+    perms[1] = OHOS_PERMISSION_DISTRIBUTED_DATASYNC;
+    NativeTokenInfoParams infoInstance = {
+        .dcapsNum = 0,
+        .permsNum = 2,
+        .aclsNum = 0,
+        .dcaps = NULL,
+        .perms = perms,
+        .acls = NULL,
+        .processName = "dscreen_test_demo",
+        .aplStr = "system_core",
+    };
+    tokenId = GetAccessTokenId(&infoInstance);
+    SetSelfTokenID(tokenId);
+    OHOS::Security::AccessToken::AccessTokenKit::ReloadNativeTokenInfo();
+
     NodeBasicInfo localNodeinfo;
     NodeBasicInfo *remoteNodeInfo = nullptr;
     int32_t infoNum = 0;
