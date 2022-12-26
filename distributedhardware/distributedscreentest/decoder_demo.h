@@ -94,11 +94,11 @@ private:
 } // namespace Media
 } // namespace OHOS
 
-int StartMirror(void);
-int StopMirror(void);
-int StartExpand(void);
-int StopExpand(void);
-int CreateWindow(void);
-int QueryRemoteDeviceInfo(void);
-int QueryRemoteScreenInfo(void);
+int StartMirror(int mode);
+int StopMirror(int mode);
+int StartExpand(int mode);
+int StopExpand(int mode);
+int CreateWindow(int mode);
+int QueryRemoteDeviceInfo(int mode);
+int QueryRemoteScreenInfo(int mode);
 #endif // AVCODEC_VDEC_DEMO_H
