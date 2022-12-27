@@ -22,8 +22,8 @@ function startContinuousTask() {
     let wantAgentInfo = {
         wants: [
             {
-                bundleName: "ohos.rpc.test.server",
-                abilityName: "ohos.rpc.test.server.ServiceAbility"
+                bundleName: "com.ohos.rpctest",
+                abilityName: "com.ohos.rpctest.MainAbility"
             }
         ],
         operationType: wantAgent.OperationType.START_SERVICE,
@@ -32,21 +32,29 @@ function startContinuousTask() {
     };
 
     wantAgent.getWantAgent(wantAgentInfo).then((wantAgentObj) => {
-        backgroundTaskManager.startBackgroundRunning(featureAbility.getContext(),
+        try{
+            backgroundTaskManager.startBackgroundRunning(featureAbility.getContext(),
             backgroundTaskManager.BackgroundMode.DATA_TRANSFER, wantAgentObj).then(() => {
             console.info("Operation startBackgroundRunning succeeded");
         }).catch((err) => {
             console.error("Operation startBackgroundRunning failed Cause: " + err);
         });
+        }catch(error){
+            console.error(`Operation startBackgroundRunning failed. code is ${error.code} message is ${error.message}`);
+        }
     });
 }
 
 function stopContinuousTask() {
-    backgroundTaskManager.stopBackgroundRunning(featureAbility.getContext()).then(() => {
-        console.info("Operation stopBackgroundRunning succeeded");
-    }).catch((err) => {
-        console.error("Operation stopBackgroundRunning failed Cause: " + err);
-    });
+    try{
+        backgroundTaskManager.stopBackgroundRunning(featureAbility.getContext()).then(() => {
+            console.info("Operation stopBackgroundRunning succeeded");
+        }).catch((err) => {
+            console.error("Operation stopBackgroundRunning failed Cause: " + err);
+        });
+    }catch(error){
+        console.error(`Operation stopBackgroundRunning failed. code is ${error.code} message is ${error.message}`);
+    }
 }
 
 export default {
