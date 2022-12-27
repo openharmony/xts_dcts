@@ -53,8 +53,12 @@ constexpr int32_t SLEEP_FIVE_SECOND = 10;
 static vector<sptr<Screen>> remoteScreens;
 static uint64_t g_screenId = 0;
 
-int QueryRemoteScreenInfo(void)
+int QueryRemoteScreenInfo(int mode)
 {
+    if (mode != 0) {
+        DHLOGE("QueryRemoteScreenInfo mode error");
+        return -1;
+    }
     vector<sptr<Screen>> allScreens = ScreenManager::GetInstance().GetAllScreens();
     sptr<Display> defaultDisplay = DisplayManager::GetInstance().GetDefaultDisplay();
     for (const auto &screen : allScreens) {
@@ -82,9 +86,13 @@ int QueryRemoteScreenInfo(void)
     return 0;
 }
 
-int StartMirror(void)
+int StartMirror(int mode)
 {
-    uint64_t ret = QueryRemoteScreenInfo();
+    if (mode != 0) {
+        DHLOGE("StartMirror mode error");
+        return -1;
+    }
+    uint64_t ret = QueryRemoteScreenInfo(0);
     if (ret != 0) {
         DHLOGE("Error: no remote screens enabled");
         return -1;
@@ -118,9 +126,13 @@ int StartMirror(void)
     return 0;
 }
 
-int StopMirror(void)
+int StopMirror(int mode)
 {
-    uint64_t ret = QueryRemoteScreenInfo();
+    if (mode != 0) {
+        DHLOGE("StopMirror mode error");
+        return -1;
+    }
+    uint64_t ret = QueryRemoteScreenInfo(0);
     if (ret != 0) {
         DHLOGE("no remote screens enabled, no need stop mirror ");
         return -1;
@@ -150,9 +162,13 @@ int StopMirror(void)
     return 0;
 }
 
-int StartExpand(void)
+int StartExpand(int mode)
 {
-    uint64_t ret = QueryRemoteScreenInfo();
+    if (mode != 0) {
+        DHLOGE("StartExpand mode error");
+        return -1;
+    }
+    uint64_t ret = QueryRemoteScreenInfo(0);
     if (ret != 0) {
         DHLOGE("Error: no remote screens enabled");
         return -1;
@@ -183,9 +199,13 @@ int StartExpand(void)
     return 0;
 }
 
-int StopExpand(void)
+int StopExpand(int mode)
 {
-    uint64_t ret = QueryRemoteScreenInfo();
+    if (mode != 0) {
+        DHLOGE("StopExpand mode error");
+        return -1;
+    }
+    uint64_t ret = QueryRemoteScreenInfo(0);
     if (ret != 0) {
         DHLOGE("no remote screens enabled, no need stop expand");
         return -1;
@@ -233,13 +253,17 @@ static void PrintNodeProperty(NodeBasicInfo *nodeInfo)
     unsigned char uuid[UUID_BUF_LEN] = {0};
     if (GetNodeKeyInfo(g_pkgName, nodeInfo->networkId, key, uuid, UUID_BUF_LEN) != 0) {
         DHLOGE("GetNodeKeyInfo Fail!");
-    }else {
+    } else {
         DHLOGE("Uuid = %s\n", GetAnonyString(reinterpret_cast<char *>(udid)).c_str());
     }
 }
 
-int QueryRemoteDeviceInfo(void)
+int QueryRemoteDeviceInfo(int mode)
 {
+    if (mode != 0) {
+        DHLOGE("QueryRemoteDeviceInfo mode error");
+        return -1;
+    }
     uint64_t tokenId;
     const char *perms[2];
     perms[0] = OHOS_PERMISSION_DISTRIBUTED_SOFTBUS_CENTER;
@@ -289,8 +313,12 @@ int QueryRemoteDeviceInfo(void)
     return 0;
 }
 
-int CreateWindow(void)
+int CreateWindow(int mode)
 {
+    if (mode != 0) {
+        DHLOGE("CreateWindow mode error");
+        return -1;
+    }
     DHLOGE("create window, please input window size");
 
     uint32_t windowWidth = 640;
@@ -309,10 +337,7 @@ int CreateWindow(void)
     DHLOGE("create window success.");
 
     auto vdec = make_shared<VDecDemo>();
-    if (vdec == nullptr) {
-        DHLOGE("videoDecoder is nullptr");
-        return -1;
-    }
+    
     vdec->SetWindowSize(windowWidth, windowHeight);
     vdec->SetOutputSurface(surface);
     DHLOGE("start run decoder");
