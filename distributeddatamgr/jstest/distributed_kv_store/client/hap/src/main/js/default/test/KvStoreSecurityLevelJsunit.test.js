@@ -708,6 +708,52 @@ describe('kvSyncTest', function (){
         kvStore.sync(syncDeviceIds, PULL)
     })
 
+
+    /**
+     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_1300
+     * @tc.name testServerNoLevelSecurity1300
+     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is null
+     */
+     it("testServerNoLevelSecurity1300", 0, async function(done){
+        console.info(logTag + "testServerNoLevelSecurity1300 start")
+        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false)
+        await sleep(1000)
+        const options = {}
+        try{
+            await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
+                kvStore = store
+                console.info(logTag + " testServerNoLevelSecurity1300 get kvStore success")
+            })
+        }catch(err){
+            console.info(logTag + " testServerNoLevelSecurity1300 get kvStore err"+err.code)
+        }
+
+        let result = undefined;
+
+        function call(data) {
+            console.info("syncComplete: " + data);
+            kvStore.get(TEST_STRING_KEY,(err, data) => {
+                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY)
+                if(err != null){
+                    console.info(logTag + " Sync complete get data error,err: " + err)
+                }else{
+                    console.info(logTag + " Sycn complete get data success,result is: " + data)
+                    result = data
+                }
+                console.info(logTag + " get data finish,result is: " + result)
+                expect(result).assertEqual(undefined);
+                console.info(logTag + "testServerNoLevelSecurity1300 end")
+                kvStore.off("syncComplete",call)
+                done();
+            })
+        }
+        kvStore.on("syncComplete",call)
+        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String")
+        await sleep(1000)
+        console.info(logTag + "Client sync start")
+        kvStore.sync(syncDeviceIds, PULL)
+    })
+
     /**
      * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S0_0100
      * @tc.name testServerS0Security0100
