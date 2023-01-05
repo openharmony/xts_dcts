@@ -13,18 +13,18 @@
  * limitations under the License.
  */
 
-import ApiMessage from '../common/apiMessage.js'
-import ApiResult from '../common/apiResult.js'
-import rpc from '@ohos.rpc'
-var logTag = "RpcClient";
-var CODE_INVOKE =1;
-var results;
+import ApiMessage from '../common/apiMessage.js';
+import ApiResult from '../common/apiResult.js';
+import rpc from '@ohos.rpc';
+let logTag = "RpcClient_RemoteHelper:  ";
+let CODE_INVOKE =1;
+let results;
 export default class RemoteHelper{
-    testservice = undefined
-    gIRemoteObject = undefined
+    testservice = undefined;
+    gIRemoteObject = undefined;
     constructor(testservice,gIRemoteObject){
-        this.testservice = testservice
-	this.gIRemoteObject = gIRemoteObject
+        this.testservice = testservice;
+        this.gIRemoteObject = gIRemoteObject;
     }
 
 
@@ -66,7 +66,7 @@ export default class RemoteHelper{
         return results._result;
     }
    async add(a,b) {
-            console.log(logTag+"_methodName is add");
+        console.log(logTag+"_methodName is add");
 	    let message = new ApiMessage("openHarmony","testApi","add"," ",
 		    ["number","number"],[String(a),String(b)]," ");
 

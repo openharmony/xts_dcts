@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-var logTag = 'RpcServer'
+let logTag = 'RpcServer_ApiMessage:  ';
 export default class ApiMessage {
     _deviceName = null;
     _className = null;
@@ -42,7 +42,7 @@ export default class ApiMessage {
         console.log(logTag + "writeString successfully.");
         messageParcel.writeStringArray(this._parameterTypes);
         messageParcel.writeStringArray(this._parameters);
-        messageParcel.writeString(this._apiResult)
+        messageParcel.writeString(this._apiResult);
         console.log(logTag + "marshalling successfully.");
         return true;
     }

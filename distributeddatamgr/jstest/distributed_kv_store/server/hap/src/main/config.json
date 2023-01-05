@@ -65,7 +65,7 @@
         "type": "page",
         "launchType": "standard"
       },
-      {
+      { 
         "srcPath": "ServiceAbility",
         "name": ".ServiceAbility",
         "icon": "$media:icon",
@@ -74,7 +74,7 @@
         "type": "service",
         "visible": true,
         "formsEnabled": false,
-        "backgroundModes": ["dataTransfer", "location"]
+        "backgroundModes": ["dataTransfer", "location","multiDeviceConnection"]
       }
     ],
     "js": [
