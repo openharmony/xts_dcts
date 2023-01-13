@@ -60,42 +60,77 @@ void DSreenAutomatTest::SetUp(void) {}
 void DSreenAutomatTest::TearDown(void) {}
 DSreenAutomatTest::DSreenAutomatTest(void) {}
 
+/**
+ * @tc.number    : DSreenTest_0100
+ * @tc.name      : StartMirror parameter test
+ * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0100, TestSize.Level1)
 {
     int ret = StartMirror(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_0200
+ * @tc.name      : StopMirror parameter test
+ * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0200, TestSize.Level1)
 {
     int ret = StopMirror(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_0300
+ * @tc.name      : StartExpand parameter test
+ * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0300, TestSize.Level1)
 {
     int ret = StartExpand(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartExpand fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_0400
+ * @tc.name      : StopExpand parameter test
+ * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0400, TestSize.Level1)
 {
     int ret = StopExpand(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StopExpand fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_0500
+ * @tc.name      : CreateWindow parameter test
+ * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0500, TestSize.Level1)
 {
     int ret = CreateWindow(0);
     EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_0600
+ * @tc.name      : QueryRemoteDeviceInfo parameter test
+ * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0600, TestSize.Level1)
 {
     int ret = QueryRemoteDeviceInfo(0);
     EXPECT_EQ(g_dSreenOk, ret) << "QueryRemoteDeviceInfo fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_0700
+ * @tc.name      : QueryRemoteScreenInfo parameter test
+ * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0700, TestSize.Level1)
 {
     int ret = QueryRemoteScreenInfo(0);
