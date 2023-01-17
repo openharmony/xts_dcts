@@ -22,6 +22,9 @@
       },
       {
         "name": "ohos.permission.GET_BUNDLE_INFO"
+      },
+      {
+        "name": "ohos.permission.KEEP_BACKGROUND_RUNNING"
       }
     ],
     "package": "com.ohos.rpctest",
@@ -63,11 +66,15 @@
         "launchType": "standard"
       },
       {
+        "backgroundModes": [
+          "dataTransfer",
+          "location",
+          "multiDeviceConnection"
+        ], 
         "srcPath": "ServiceAbility",
         "name": ".ServiceAbility",
         "icon": "$media:icon",
         "srcLanguage": "js",
-
         "description": "$string:serviceability_description",
         "type": "service",
         "visible": true,
