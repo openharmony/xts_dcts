@@ -886,7 +886,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3600, Tes
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_3700
  * @tc.name   : GetPeerDeviceId input DeviceId invalid sid -1
- * @tc.desc   : Test session management reliability
+ * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
@@ -932,7 +932,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3800, Tes
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_3900
  * @tc.name   : GetPeerDeviceId input DeviceId invalid sid not open
- * @tc.desc   : Test session management reliability
+ * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
@@ -954,7 +954,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3900, Tes
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4000
  * @tc.name   : GetPeerDeviceId input DeviceId invalid sname[null]
- * @tc.desc   : Test session management reliability
+ * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
@@ -1067,4 +1067,128 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4300, Tes
     EXPECT_STREQ(softbusPidStart, softbusPidEnd);
     free(softbusPidStart);
     free(softbusPidEnd);
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4400
+ * @tc.name   : CreateSessionServer, input sessionName Max success
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4400, TestSize.Level3)
+{
+    int ret = CreateSessionServer(DEF_PKG_NAME, SESSIONNAME_MAX, GetSessionListenser4Ctl());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS-ctrl fail";
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSIONNAME_MAX);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS-ctrl fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4500
+ * @tc.name   : CreateSessionServer, input sessionName contains special char
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4500, TestSize.Level3)
+{
+    string sessionName = "com.communication.demo.max.len.#@$%!";
+    int ret = CreateSessionServer(DEF_PKG_NAME, sessionName.c_str(), GetSessionListenser4Ctl());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS-ctrl fail";
+    ret = RemoveSessionServer(DEF_PKG_NAME, sessionName.c_str());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS-ctrl fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4600
+ * @tc.name   : CreateSessionServer, input pkgName Max success
+ * @tc.desc   : Test session management reliability
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4600, TestSize.Level3)
+{
+    int ret = CreateSessionServer(PKGNAME_MAX, SESSION_NAME_CTL, GetSessionListenser4Ctl());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS-ctrl fail";
+    ret = RemoveSessionServer(PKGNAME_MAX, SESSION_NAME_CTL);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS-ctrl fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4700
+ * @tc.name   : CreateSessionServer, input pkgName contains special char
+ * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4700, TestSize.Level3)
+{
+    string pkgName = "com.communication.demo.max.len.#@$%!";
+    int ret = CreateSessionServer(pkgName.c_str(), SESSION_NAME_DATA, GetSessionListenser4Data());
+    EXPECT_NE(SOFTBUS_OK, ret) << "CreateSS-ctrl success";
+    ret = RemoveSessionServer(pkgName.c_str(), SESSION_NAME_DATA);
+    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS-ctrl success";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4800
+ * @tc.name   : CreateSessionServer, input pkgNameMax and sessionNameMax
+ * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4800, TestSize.Level3)
+{
+    int ret = CreateSessionServer(PKGNAME_MAX, SESSIONNAME_MAX, GetSessionListenser4Ctl());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS-ctrl fail, pkgnamelen:"
+        << strlen(PKGNAME_MAX) << ",sessionLen:" << strlen(SESSIONNAME_MAX);
+    ret = RemoveSessionServer(PKGNAME_MAX, SESSIONNAME_MAX);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS-ctrl fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4900
+ * @tc.name   : CreateSessionServer, input pkgName Max+1 failed
+ * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4900, TestSize.Level3)
+{
+    int ret = CreateSessionServer(PKGNAME_MAX_OUT, SESSION_NAME_CTL, GetSessionListenser4Ctl());
+    EXPECT_NE(SOFTBUS_OK, ret) << "CreateSS-ctrl success";
+    ret = RemoveSessionServer(PKGNAME_MAX_OUT, SESSION_NAME_CTL);
+    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS-ctrl fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_5000
+ * @tc.name   : CreateSessionServer, input sessionName Max+1 failed
+ * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_5000, TestSize.Level3)
+{
+    int ret = CreateSessionServer(DEF_PKG_NAME, SESSIONNAME_MAX_OUT, GetSessionListenser4Ctl());
+    EXPECT_NE(SOFTBUS_OK, ret) << "CreateSS-ctrl success";
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSIONNAME_MAX_OUT);
+    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS-ctrl success";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_5100
+ * @tc.name   : CreateSessionServer, input invalid sessionName  failed
+ * @tc.desc   : 【G-DISTRIBUTED-0211】出于安全和兼容性考虑，不应修改安全相关逻辑，不应变更软总线依赖的安全和协议部件。
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_5100, TestSize.Level3)
+{
+    string sessionName = "com.communication.test.demo";
+    int ret = CreateSessionServer(DEF_PKG_NAME, sessionName.c_str(), GetSessionListenser4Ctl());
+    EXPECT_EQ(SOFTBUS_PERMISSION_DENIED, ret) << "CreateSS-ctrl success";
+    ret = RemoveSessionServer(DEF_PKG_NAME, sessionName.c_str());
+    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS-ctrl fail";
 }
