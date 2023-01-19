@@ -4708,6 +4708,105 @@ describe('kvSyncTest', function () {
             kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
+    /**
+     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0500
+     * @tc.name testSyncIntType0500
+     * @tc.desc Sync int type data
+     */
+     it("testSyncIntType0500", 0, async function(done){
+        console.info(logTag + "testSyncIntType0500 start");
+        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await sleep(1000);
+        const options = {
+            createIfMissing : true,
+            encrypt : false,
+            backup : false,
+            autoSync : false,
+            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
+            schema : '',
+            securityLevel : factory.SecurityLevel.NO_LEVEL,
+        }
+        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
+            kvStore = store;
+            console.info(logTag + " get kvStore success");
+        })
+
+        let result = undefined;
+        let intValue = Number.MIN_VALUE;
+        console.info(logTag + "testSyncIntType0500  intValue " + intValue);
+        function call(data) {
+            console.info(logTag + "syncComplete: " + data);
+            kvStore.get(TEST_INT_KEY,(err, data) => {
+                console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                if(err != null){
+                    console.info(logTag + " Sync complete get data error,err: " + err);
+                }else{
+                    console.info(logTag + " Sycn complete get data success,result is: " + data);
+                    result = data;
+                }
+                console.info(logTag + " get data finish,result is: " + result);
+                expect(result).assertEqual(intValue);
+                kvStore.off("syncComplete",call);
+                console.info(logTag + "testSyncIntType0500 end");
+                done();
+            })
+        }
+        kvStore.on("syncComplete",call);
+        await remoteHelpers.kvPut(TEST_INT_KEY, intValue, "Number_Min");
+        await sleep(1000);
+        console.info(logTag + "Client sync start");
+        kvStore.sync(syncDeviceIds, PULL);
+    })
+
+        /**
+     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0600
+     * @tc.name testSyncIntType0600
+     * @tc.desc Sync int type data
+     */
+         it("testSyncIntType0600", 0, async function(done){
+            console.info(logTag + "testSyncIntType0600 start");
+            await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+            await sleep(1000);
+            const options = {
+                createIfMissing : true,
+                encrypt : false,
+                backup : false,
+                autoSync : false,
+                kvStoreType : factory.KVStoreType.SINGLE_VERSION,
+                schema : '',
+                securityLevel : factory.SecurityLevel.NO_LEVEL,
+            }
+            await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
+                kvStore = store;
+                console.info(logTag + " get kvStore success");
+            })
+            let result = undefined;
+            let intValue = Number.MIN_VALUE;
+            console.info(logTag + "testSyncIntType0600  intValue " + intValue);
+            function call(data) {
+                console.info(logTag + "syncComplete: " + data);
+                kvStore.get(TEST_INT_KEY,(err, data) => {
+                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(intValue);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncIntType0600 end");
+                    done();
+                })
+            }
+            kvStore.on("syncComplete",call);
+            await remoteHelpers.kvPut(TEST_INT_KEY, intValue, "Number_Min");
+            await sleep(1000);
+            console.info(logTag + "Client sync start");
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
+        })
+
 
     /**
      * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0700
