@@ -157,7 +157,7 @@ static int WaitFile(int timeout)
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendFile_Fun_0100
  * @tc.name   : test SendFile 8M
- * @tc.desc   : Test send file function
+ * @tc.desc   : [G-DISTRIBUTED-0208] 必须支持蓝牙 WiFi或以太网等软总线依赖的通信能力中的一种或者多种
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */

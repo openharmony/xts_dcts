@@ -420,7 +420,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0700, TestSize.Le
     ret = CreateSsAndOpenSession4Proxy();
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
-    int size = 1000;
+    int size = 1024;
     ret = SendData4Message(DATA_TYPE_MSG, size);
     EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg,1K) fail";
 
@@ -431,7 +431,8 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0700, TestSize.Le
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0800
  * @tc.name   : SendMessage Packet size Max, proxy channel, send and receive successful
- * @tc.desc   : Test the SendMessage specification
+ * @tc.desc   : [G-DISTRIBUTED-0210] 使用消息传输接口，消息大小不超过4K字节，超过时需要业务对消息进行分包
+ *             处理，或者改为使用字节传输接口，字节传输可支持最大4M字节
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
@@ -507,7 +508,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0100, TestSize.
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     ret = OpenSession4DataByP2p();
-    EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSession fail";
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
 
     int size = 1;
     ret = SendData4Data(DATA_TYPE_BYTE, size);
@@ -531,7 +532,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0200, TestSize.
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     ret = OpenSession4DataByP2p();
-    EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSession fail";
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
 
     int size = 2 * 1024 * 1024;
     ret = SendData4Data(DATA_TYPE_BYTE, size);
@@ -544,7 +545,8 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0200, TestSize.
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0300
  * @tc.name   : SendByte By P2P Packet size Max, send and receive successful
- * @tc.desc   : Test the SendByte specification
+ * @tc.desc   : [G-DISTRIBUTED-0210] 使用消息传输接口，消息大小不超过4K字节，超过时需要业务对消息进行分包
+ *             处理，或者改为使用字节传输接口，字节传输可支持最大4M字节
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
@@ -555,7 +557,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0300, TestSize.
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     ret = OpenSession4DataByP2p();
-    EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSession fail";
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
 
     int size = TRANS_BYTES_LENGTH_MAX;
     ret = SendData4Data(DATA_TYPE_BYTE, size);
@@ -579,7 +581,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0400, TestSize.
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     ret = OpenSession4DataByP2p();
-    EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSession fail";
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
 
     int size = 0;
     string emptyStr = "";
@@ -594,7 +596,8 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0400, TestSize.
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0500
  * @tc.name   : SendByte By P2P Packet size Max + 1, send and receive failed
- * @tc.desc   : Test the SendByte specification
+ * @tc.desc   : [G-DISTRIBUTED-0210] 使用消息传输接口，消息大小不超过4K字节，超过时需要业务对消息进行分包
+ *             处理，或者改为使用字节传输接口，字节传输可支持最大4M字节
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
@@ -605,7 +608,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0500, TestSize.
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     ret = OpenSession4DataByP2p();
-    EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSession fail";
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
 
     int size = TRANS_BYTES_LENGTH_MAX + 1;
     ret = SendData4Data(DATA_TYPE_BYTE, size);
@@ -626,10 +629,10 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0600, TestSize.
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY, GetSessionListenser4Proxy());
-    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss  fail";
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     ret = OpenSession4ProxyByP2p();
-    EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSession fail";
+    ASSERT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
 
     int size = 1;
     ret = SendData4Message(DATA_TYPE_BYTE, size);
@@ -653,7 +656,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0100, TestSiz
     ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
 
     ret = OpenSession4DataByP2p();
-    EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSession fail";
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
     int size = 1;
     ret = SendData4Data(DATA_TYPE_MSG, size);
     EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(msg, 1B) fail";
@@ -664,7 +667,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0100, TestSiz
 
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0200
- * @tc.name   : SendMessage By P2P Packet size 1K, send and receive successful
+ * @tc.name   : SendMessage Packet size 1B, proxy channel, send and receive successful
  * @tc.desc   : Test the SendMessage specification
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
@@ -673,7 +676,31 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0200, TestSiz
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY, GetSessionListenser4Proxy());
-    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss [Proxy] fail";
+
+    ret = OpenSession4ProxyByP2p();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSession Proxy fail";
+
+    int size = 1;
+    ret = SendData4Message(DATA_TYPE_MSG, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg, 1B) fail";
+
+    ret = CloseSessionAndRemoveSs4Proxy();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0300
+ * @tc.name   : SendMessage Packet size 1K, proxy channel, send and receive successful
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0300, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY, GetSessionListenser4Proxy());
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss [Proxy] fail";
 
     ret = OpenSession4ProxyByP2p();
     EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSession Proxy fail";
@@ -682,6 +709,82 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0200, TestSiz
     ret = SendData4Message(DATA_TYPE_MSG, size);
     EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg,1K) fail";
 
-    ret = CloseSessionAndRemoveSs4Data();
+    ret = CloseSessionAndRemoveSs4Proxy();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0400
+ * @tc.name   : SendMessage Packet size Max, proxy channel, send and receive successful
+ * @tc.desc   : [G-DISTRIBUTED-0210] 使用消息传输接口，消息大小不超过4K字节，超过时需要业务对消息进行分包
+ *             处理，或者改为使用字节传输接口，字节传输可支持最大4M字节
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0400, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY, GetSessionListenser4Proxy());
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss [Proxy] fail";
+
+    ret = OpenSession4ProxyByP2p();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSession Proxy fail";
+
+    int size = TRANS_PROXY_MESSAGE_LENGTH_MAX;
+    ret = SendData4Message(DATA_TYPE_MSG, size);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg,Max) fail";
+
+    ret = CloseSessionAndRemoveSs4Proxy();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0500
+ * @tc.name   : SendMessage Packet size 0, proxy channel, send and receive failed
+ * @tc.desc   : Test the SendMessage specification
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0500, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY, GetSessionListenser4Proxy());
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss [Proxy] fail";
+
+    ret = OpenSession4ProxyByP2p();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "OpenSession Proxy fail";
+
+    int size = 0;
+    string emptystr = "";
+    int sessionId = GetCurrentSessionId4Proxy();
+    ret = SendMessage(sessionId, emptystr.c_str(), size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call sendmsg(empty) fail";
+
+    ret = CloseSessionAndRemoveSs4Proxy();
+    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0600
+ * @tc.name   : SendMessage Packet size 4kb +1, proxy channel, send and receive failed
+ * @tc.desc   : [G-DISTRIBUTED-0210] 使用消息传输接口，消息大小不超过4K字节，超过时需要业务对消息进行分包
+ *             处理，或者改为使用字节传输接口，字节传输可支持最大4M字节
+ * @tc.type   : FUNC
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_P2P_Fun_0600, TestSize.Level3)
+{
+    int ret;
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_PROXY, GetSessionListenser4Proxy());
+    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss [Proxy] fail";
+
+    ret = OpenSession4ProxyByP2p();
+    ASSERT_EQ(SOFTBUS_OK, ret) << "OpenSession Proxy fail";
+
+    int size = 4 * TRANS_PROXY_MESSAGE_LENGTH_MAX + 1;
+    ret = SendData4Message(DATA_TYPE_MSG, size);
+    EXPECT_NE(SOFTBUS_OK, ret) << "call sendmsg(Max+1) fail";
+
+    ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
 }
