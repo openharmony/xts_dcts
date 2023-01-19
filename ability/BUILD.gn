@@ -18,6 +18,10 @@ group("ability") {
     deps = [
       "dmsfwk/dmsfwk:DctsDmsJsTest",
       "dmsfwk/dmsfwkserver:DctsDmsJsServer",
+      "dmsfwk/dmsfwkstagetest:DctsDmsFwkStageTest",
+      "dmsfwk/dmsfwkstageserver:DctsDmsFwkStageServer",
+      "dmsfwk/dmsfwkstagepermissiontest:DctsDmsFwkStagePermissionTest",
+      "dmsfwk/dmsfwkstagetestserver:DctsDmsFwkStageTestServer",
     ]
   } else {
     deps = [ "wifi_standard:ActsWifiJSTest" ]
