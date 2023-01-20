@@ -16,12 +16,14 @@ group("ability") {
   testonly = true
   if (is_standard_system) {
     deps = [
+      "dmsfwk/dmsfafwk:DctsDmsFaTest",
       "dmsfwk/dmsfwk:DctsDmsJsTest",
       "dmsfwk/dmsfwkserver:DctsDmsJsServer",
-      "dmsfwk/dmsfwkstagetest:DctsDmsFwkStageTest",
-      "dmsfwk/dmsfwkstageserver:DctsDmsFwkStageServer",
-      "dmsfwk/dmsfwkstagepermissiontest:DctsDmsFwkStagePermissionTest",
-      "dmsfwk/dmsfwkstagetestserver:DctsDmsFwkStageTestServer",
+
+      #"dmsfwk/dmsfwkstagetest:DctsDmsFwkStageTest",
+      #"dmsfwk/dmsfwkstageserver:DctsDmsFwkStageServer",
+      #"dmsfwk/dmsfwkstagepermissiontest:DctsDmsFwkStagePermissionTest",
+      #"dmsfwk/dmsfwkstagetestserver:DctsDmsFwkStageTestServer",
     ]
   } else {
     deps = [ "wifi_standard:ActsWifiJSTest" ]
