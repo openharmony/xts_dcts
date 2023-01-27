@@ -138,20 +138,24 @@ export default class TestApi{
     }
 
     async kvPut(key,value,valueType){
-        var putValue = undefined;
+        let putValue = undefined;
+        console.info(logTag + " putValue : " + putValue + "  value is: " + value + "  valueType is: " + valueType);
         if(valueType == "String"){
             putValue = value;
-        }else if(valueType = "Number"){
+        }else if(valueType == "Number"){
             putValue = Number(value);
-        }else if(valueType = "Uint8Array"){
+        }else if(valueType == "Number_Min"){
+            putValue = Number.MIN_VALUE;
+        }else if(valueType == "Uint8Array"){
             putValue = value.split(',');
-        }else if(valueType = "Boolean"){
+        }else if(valueType == "Boolean"){
             if(value == "false"){
                 putValue = false;
             }else{
                 putValue = Boolean(value);
             }
         }
+        console.info(logTag + " putValue : " + putValue + "  value is: " + value);
         await kvStore.put(key,putValue).then(() =>  {
             console.info(logTag + " Server  put data success ,key is : " + key + " value is: " + putValue);
             return String(true);
