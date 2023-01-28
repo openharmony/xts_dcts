@@ -1,0 +1,69 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "srcEntrance": "./ets/Application/AbilityStage.ts",
+    "description": "$string:entry_desc",
+    "mainElement": "MainAbility",
+    "deviceTypes": [
+        "default",
+        "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "uiSyntax": "ets",
+    "abilities": [
+      {
+        "name": "MainAbility",
+        "srcEntrance": "./ets/MainAbility/MainAbility.ts",
+        "description": "$string:MainAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:MainAbility_label",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:white",
+        "visible": true,
+        "launchType": "singleton",
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ]
+      }
+    ],
+    "extensionAbilities": [
+      {
+        "name": "ServiceAbility",
+        "srcEntrance": "./ets/serviceability/ServiceAbility.ts",
+        "label": "$string:MainAbility_label",
+        "description": "$string:MainAbility_desc",
+        "type": "service",
+        "visible": true
+      },
+      {
+        "name": "ServiceAbility2",
+        "srcEntrance": "./ets/serviceability2/ServiceAbility.ts",
+        "label": "$string:MainAbility_label",
+        "description": "$string:MainAbility_desc",
+        "type": "service",
+        "visible": false
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name":"ohos.permission.GET_BUNDLE_INFO"
+      },
+      {
+        "name": "ohos.permission.DISTRIBUTED_DATASYNC"
+      },
+      {
+        "name": "ohos.permission.GET_DISTRIBUTED_DEVICE_INFO"
+      }
+    ]
+  }
+}
