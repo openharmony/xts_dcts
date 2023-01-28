@@ -239,7 +239,7 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0400, Tes
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0500
  * @tc.name   : OpenSession Type is TYPE_BYTES sendfile fail
- * @tc.desc   : Test session management
+ * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
