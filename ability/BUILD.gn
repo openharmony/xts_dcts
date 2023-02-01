@@ -17,8 +17,8 @@ group("ability") {
   if (is_standard_system) {
     deps = [
       "dmsfwk/dmsfwk:DctsDmsJsTest",
-      "dmsfwk/dmsfwkserver:DctsDmsJsServer",
       "dmsfwk/dmsfwkfatest:DctsDmsFaTest",
+      "dmsfwk/dmsfwkserver:DctsDmsJsServer",
       "dmsfwk/dmsfwkstagepermissiontest:DctsDmsFwkStagePermissionTest",
       "dmsfwk/dmsfwkstageserver:DctsDmsFwkStageServer",
       "dmsfwk/dmsfwkstagetest:DctsDmsFwkStageTest",
