@@ -18,6 +18,9 @@ import rpc from "@ohos.rpc";
 export default {
     onStart() {
         console.info('DmsServer: onStart')
+        setTimeout(()=>{
+            particleAbility.terminateSelf()
+        },2000)
     },
     onStop() {
         console.info('DmsServer: onStop')

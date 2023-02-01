@@ -18,6 +18,7 @@ group("ability") {
     deps = [
       "dmsfwk/dmsfwk:DctsDmsJsTest",
       "dmsfwk/dmsfwkserver:DctsDmsJsServer",
+      "dmsfwk/dmsfwkfatest:DctsDmsFaTest",
       "dmsfwk/dmsfwkstagepermissiontest:DctsDmsFwkStagePermissionTest",
       "dmsfwk/dmsfwkstageserver:DctsDmsFwkStageServer",
       "dmsfwk/dmsfwkstagetest:DctsDmsFwkStageTest",
