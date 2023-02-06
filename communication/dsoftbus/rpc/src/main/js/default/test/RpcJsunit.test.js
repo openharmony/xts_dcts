@@ -4630,6 +4630,404 @@ describe('RpcJsUnitTest', function(){
         }
         data.reclaim();
         console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_14800---------------------------");
+    }); 
+    
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_14900
+    * @tc.name    Basic test of the rewindWrite interface
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_14900", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_14900---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            let option = new rpc.MessageOption();
+            let reply = rpc.MessageSequence.create();
+            expect(data.getWritePosition()).assertEqual(0);
+            data.writeInt(4);
+            expect(data.getWritePosition()).assertEqual(4);
+            data.rewindWrite(0);
+            expect(data.getWritePosition()).assertEqual(0);
+            data.writeInt(5);
+            expect(data.getWritePosition()).assertEqual(4);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INT, data, reply, option).then((result) => {
+                expect(result.errCode == 0).assertTrue();
+                expect(result.reply.getReadPosition()).assertEqual(0);
+                expect(result.reply.readInt()).assertEqual(5);
+                expect(result.reply.getReadPosition()).assertEqual(4);
+            });
+            data.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_14900---------------------------");
+    });
+     
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15000
+    * @tc.name    RewindWrite interface write position cheap extension test
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15000", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15000---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            let option = new rpc.MessageOption();
+            let reply = rpc.MessageSequence.create();
+            expect(data.getWritePosition()).assertEqual(0);
+            data.writeInt(4);
+            expect(data.getWritePosition()).assertEqual(4);
+            data.rewindWrite(3);
+            expect(data.getWritePosition()).assertEqual(3);
+            data.writeInt(5);
+            expect(data.getWritePosition()).assertEqual(3+4);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INT, data, reply, option).then((result) => {
+                expect(result.errCode == 0).assertTrue();
+                expect(result.reply.readInt() != 5).assertTrue();
+            });
+            data.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15000---------------------------");
+    });
+    
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15100
+    * @tc.name    Test the boundary value of the rewindWrite interface
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15100", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15100---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            var token = '';
+            for(var i = 0; i < (40*K - 1); i++){
+                token += 'a';
+            }
+            expect(data.getWritePosition()).assertEqual(0);
+            data.writeString(token);
+            expect(data.getWritePosition()).assertEqual(token.length*2 + 6);
+            data.rewindWrite((token.length*2 + 6)-1);
+            expect(data.getWritePosition()).assertEqual((token.length*2 + 6)-1);
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15100---------------------------");
+    });    
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15200
+    * @tc.name    Test the critical value of the rewindWrite interface
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15200", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15200---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            var token = '';
+            for(var i = 0; i < (40*K - 1); i++){
+                token += 'a';
+            }
+            expect(data.getWritePosition()).assertEqual(0);
+            data.writeString(token);
+            expect(data.getWritePosition()).assertEqual(token.length*2 + 6);
+            data.rewindWrite((token.length*2 + 6)+1);
+            expect(data.getWritePosition()).assertEqual(token.length*2 + 6);
+            data.reclaim();
+        } catch (error) {
+            console.info("SUB_Softbus_RPC_Compatibility_MessageSequence_15200 errorMessage " + error.message);
+            expect(error != null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15200---------------------------");
+    });
+    
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15300
+    * @tc.name    Basic test of the rewindRead interface
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15300", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15300---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            let option = new rpc.MessageOption();
+            let reply = rpc.MessageSequence.create();
+            data.writeInt(12);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INT, data, reply, option).then((result) => {
+                expect(result.errCode == 0).assertTrue();
+                expect(result.reply.getReadPosition()).assertEqual(0);
+                expect(result.reply.readInt()).assertEqual(12);
+                expect(result.reply.getReadPosition()).assertEqual(4);
+                result.reply.rewindRead(1);
+                expect(result.reply.getReadPosition()).assertEqual(1);
+                expect(result.reply.readInt() != 12).assertTrue();
+                expect(result.reply.getReadPosition()).assertEqual(1);
+            });
+            data.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15300---------------------------");
+    });    
+    
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15400
+    * @tc.name    rewindRead interface write position cheap extension test
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15400", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15400---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            data.writeInt(16);
+            data.writeString("sequence");
+            expect(data.getReadPosition()).assertEqual(0);
+            expect(data.readInt()).assertEqual(16);
+            expect(data.getReadPosition()).assertEqual(4);
+            expect(data.readString()).assertEqual("sequence");
+            expect(data.getReadPosition()).assertEqual(4 + ("sequence".length*2 + 8));
+            data.rewindRead(5);
+            expect(data.getReadPosition()).assertEqual(5);
+            expect(data.readInt() != 16).assertTrue();
+            expect(data.getReadPosition()).assertEqual(4 + 5);
+            expect(data.readString() != "sequence").assertTrue();
+            expect(data.getReadPosition()).assertEqual(4 + 5);
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15400---------------------------");
+    });    
+        
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15500
+    * @tc.name    Test the boundary value of the rewindRead interface
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15500", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15500---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            var token = '';
+            for(var i = 0; i < (40*K - 1); i++){
+                token += 'a';
+            }
+            data.writeString(token);
+            expect(data.getReadPosition()).assertEqual(0);
+            expect(data.readString().length).assertEqual(40*K - 1);
+            expect(data.getReadPosition()).assertEqual(token.length*2 + 6);
+            data.rewindRead((token.length*2 + 6)-1);
+            expect(data.getReadPosition()).assertEqual((token.length*2 + 6)-1);
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15500---------------------------");
+    });  
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15600
+    * @tc.name    Test the critical value of the rewindRead interface 
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15600", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15600---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            var token = '';
+            for(var i = 0; i < (40*K - 1); i++){
+                token += 'a';
+            }
+            data.writeString(token);
+            expect(data.getReadPosition()).assertEqual(0);
+            expect(data.readString().length).assertEqual(40*K - 1);
+            expect(data.getReadPosition()).assertEqual(token.length*2 + 6);
+            data.rewindRead((token.length*2 + 6)+1);
+            expect(data.getReadPosition()).assertEqual(token.length*2 + 6);
+            data.reclaim();
+        } catch (error) {
+            console.info("SUB_Softbus_RPC_Compatibility_MessageSequence_15600 errorMessage " + error.message);
+            expect(error != null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15600---------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15700
+    * @tc.name    Test the function of the getWritePosition interface
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15700", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeByte(2);
+            expect(data.getWritePosition()).assertEqual(4);
+            data.writeShort(3);
+            expect(data.getWritePosition()).assertEqual(4+4);
+            data.writeInt(4);
+            expect(data.getWritePosition()).assertEqual((4+4)+4);
+            data.writeLong(5);
+            expect(data.getWritePosition()).assertEqual(((4+4)+4)+8);
+            data.writeFloat(1.2);
+            expect(data.getWritePosition()).assertEqual((((4+4)+4)+8)+8);
+            data.writeDouble(10.2);
+            expect(data.getWritePosition()).assertEqual(((((4+4)+4)+8)+8)+8);
+            data.writeBoolean(true);
+            expect(data.getWritePosition()).assertEqual((((((4+4)+4)+8)+8)+8)+4);
+            data.writeChar(97);
+            expect(data.getWritePosition()).assertEqual(((((((4+4)+4)+8)+8)+8)+4)+4);
+            data.writeString("");
+            expect(data.getWritePosition()).assertEqual((((((((4+4)+4)+8)+8)+8)+4)+4)+8);
+            data.writeParcelable(new MySequenceable(1, "aaa"));
+            expect(data.getWritePosition()).assertEqual(((((((((4+4)+4)+8)+8)+8)+4)+4)+8)+(12+8));
+            await gIRemoteObject.sendMessageRequest(CODE_ALL_TYPE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readByte()).assertEqual(2);
+                expect(result.reply.readShort()).assertEqual(3);
+                expect(result.reply.readInt()).assertEqual(4);
+                expect(result.reply.readLong()).assertEqual(5);
+                expect(result.reply.readFloat()).assertEqual(1.2);
+                expect(result.reply.readDouble()).assertEqual(10.2);
+                expect(result.reply.readBoolean()).assertTrue();
+                expect(result.reply.readChar()).assertEqual(97)
+                expect(result.reply.readString()).assertEqual("");
+                let s = new MySequenceable(null, null);
+                result.reply.readParcelable(s);
+                expect(s.num).assertEqual(1);
+                expect(s.str).assertEqual("aaa");
+            });
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15700---------------------------");
+    });    
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15800
+    * @tc.name    Test on the null value of the getWritePosition interface
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15800", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15800---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            let str = "";
+            data.writeString(str);
+            expect(data.getWritePosition()).assertEqual(8);
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15800---------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15900
+    * @tc.name    Test the function of the getReadPosition interface
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15900", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15900---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeByte(2);
+            data.writeShort(3);
+            data.writeInt(4);
+            data.writeLong(5);
+            data.writeFloat(1.2);
+            data.writeDouble(10.2);
+            data.writeBoolean(true);
+            data.writeChar(97);
+            data.writeString("");
+            data.writeParcelable(new MySequenceable(1, "aaa"));
+            await gIRemoteObject.sendMessageRequest(CODE_ALL_TYPE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readByte()).assertEqual(2);
+                expect(result.reply.getReadPosition()).assertEqual(4);
+                expect(result.reply.readShort()).assertEqual(3);
+                expect(result.reply.getReadPosition()).assertEqual(4+4);
+                expect(result.reply.readInt()).assertEqual(4);
+                expect(result.reply.getReadPosition()).assertEqual((4+4)+4);
+                expect(result.reply.readLong()).assertEqual(5);
+                expect(result.reply.getReadPosition()).assertEqual(((4+4)+4)+8);
+                expect(result.reply.readFloat()).assertEqual(1.2);
+                expect(result.reply.getReadPosition()).assertEqual((((4+4)+4)+8)+8);
+                expect(result.reply.readDouble()).assertEqual(10.2);
+                expect(result.reply.getReadPosition()).assertEqual(((((4+4)+4)+8)+8)+8);
+                expect(result.reply.readBoolean()).assertTrue();
+                expect(result.reply.getReadPosition()).assertEqual((((((4+4)+4)+8)+8)+8)+4);
+                expect(result.reply.readChar()).assertEqual(97);
+                expect(result.reply.getReadPosition()).assertEqual(((((((4+4)+4)+8)+8)+8)+4)+4);
+                expect(result.reply.readString()).assertEqual("");
+                expect(result.reply.getReadPosition()).assertEqual((((((((4+4)+4)+8)+8)+8)+4)+4)+8);
+                let s = new MySequenceable(null, null);
+                result.reply.readParcelable(s);
+                expect(result.reply.getReadPosition()).assertEqual(((((((((4+4)+4)+8)+8)+8)+4)+4)+8)+(12+8));
+                expect(s.num).assertEqual(1);
+                expect(s.str).assertEqual("aaa");
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15900---------------------------");
+    });     
+ 
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_16000
+    * @tc.name    Test on the null value of the getReadPosition interface
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_16000", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_16000---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            let str = "";
+            data.writeString(str);
+            expect(data.readString()).assertEqual(str);
+            expect(data.getReadPosition()).assertEqual(8);
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_16000---------------------------");
     });    
 
     /*
