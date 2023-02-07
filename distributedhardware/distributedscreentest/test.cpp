@@ -59,7 +59,8 @@ int QueryRemoteScreenInfo(int mode)
         DHLOGE("QueryRemoteScreenInfo mode error");
         return -1;
     }
-    vector<sptr<Screen>> allScreens = ScreenManager::GetInstance().GetAllScreens();
+    vector<sptr<Screen>> allScreens;
+    ScreenManager::GetInstance().GetAllScreens(allScreens);
     sptr<Display> defaultDisplay = DisplayManager::GetInstance().GetDefaultDisplay();
     for (const auto &screen : allScreens) {
         if (screen == nullptr) {
@@ -99,7 +100,7 @@ int StartMirror(int mode)
     }
 
     DHLOGE("select remote screen id to mirror");
-    
+
     bool isMirrorIdValid = false;
     for (const auto &screen : remoteScreens) {
         if (screen == nullptr) {
@@ -121,7 +122,8 @@ int StartMirror(int mode)
     DHLOGE("mirror screen Id is: %d", g_screenId);
     vector<uint64_t> mirrorIds;
     mirrorIds.push_back(g_screenId);
-    ScreenManager::GetInstance().MakeMirror(defaultDisplay->GetScreenId(), mirrorIds);
+    ScreenId screenGroupId;
+    ScreenManager::GetInstance().MakeMirror(defaultDisplay->GetScreenId(), mirrorIds, screenGroupId);
     sleep(SLEEP_FIVE_SECOND);
     return 0;
 }
@@ -194,7 +196,8 @@ int StartExpand(int mode)
     DHLOGE("------------start expand----------");
     DHLOGE("expand screen Id is: %d", g_screenId);
     vector<ExpandOption> options = {{defaultDisplay->GetScreenId(), 0, 0}, {g_screenId, defaultDisplay->GetWidth(), 0}};
-    ScreenManager::GetInstance().MakeExpand(options);
+    ScreenId screenGroupId;
+    ScreenManager::GetInstance().MakeExpand(options, screenGroupId);
     sleep(SLEEP_FIVE_SECOND);
     return 0;
 }
@@ -323,7 +326,7 @@ int CreateWindow(int mode)
 
     uint32_t windowWidth = 640;
     uint32_t windowHeight = 480;
-   
+
     sptr<Display> defaultDisplay = DisplayManager::GetInstance().GetDefaultDisplay();
     shared_ptr<WindowProperty> windowProperty = make_shared<WindowProperty>();
     windowProperty->displayId = defaultDisplay->GetId();
@@ -337,7 +340,7 @@ int CreateWindow(int mode)
     DHLOGE("create window success.");
 
     auto vdec = make_shared<VDecDemo>();
-    
+
     vdec->SetWindowSize(windowWidth, windowHeight);
     vdec->SetOutputSurface(surface);
     DHLOGE("start run decoder");
