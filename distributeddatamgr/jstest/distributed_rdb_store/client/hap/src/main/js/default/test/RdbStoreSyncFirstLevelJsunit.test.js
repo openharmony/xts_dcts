@@ -119,7 +119,6 @@ describe('rdbSyncFirstLevelTest', function () {
         rdbStore = null;
         await data_Rdb.deleteRdbStore(context, "RemoteRdb.db").then(() => {
             console.info(logTag + "delete RemoteRdb success");
-            sleep(2);
         });
         await sleep(50);
         console.info(logTag + '-----------------afterAll end-----------------');
