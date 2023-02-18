@@ -30,7 +30,7 @@ const STORE_CONFIG = {
     name: "RemoteRdb.db",
     securityLevel: data_Rdb.SecurityLevel.S1
 }
-
+const TEST_BUNDLE_NAME = 'com.ohos.distributerdbdisjs';
 var rdbStore = undefined;
 var resultSet = undefined;
 let dmInstance = null;
