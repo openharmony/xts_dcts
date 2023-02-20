@@ -250,7 +250,7 @@ describe('RpcJsUnitTest', function(){
 
         onRemoteDied() {
             console.info("server died");
-            expect(this.proxy.unregisterDeathRecipient(this, 0)).assertTrue();
+            expect(this.gIRemoteObject.unregisterDeathRecipient(this, 0)).assertEqual(null);
             let _done = this.done;
             setTimeout(function() {
                 _done()
@@ -323,7 +323,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00100
     * @tc.name    Call the writeinterfacetoken interface, write the interface descriptor, and read interfacetoken
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_00100", 0, async function(done){
@@ -352,7 +352,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00200
         * @tc.name    The writeInterfaceToken interface is looping, the interface descriptor is written, and the
                     InterfaceToken is read
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_00200", 0, async function(done){
@@ -383,7 +383,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00300
         * @tc.name    Call the WriteInterfaceToken interface, write the maximum length interface descriptor, and read
                     the InterfaceToken
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_00300", 0, async function(done){
@@ -415,7 +415,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00400
         * @tc.name    The WriteInterfaceToken interface is called, the exceeding-length interface descriptor is written,
                     and the InterfaceToken is read
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_00400", 0, async function(){
@@ -440,7 +440,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00500
         * @tc.name    Call the writeinterfacetoken interface to write a non string interface descriptor
                     and read interfacetoken
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_00500", 0, async function(){
@@ -462,7 +462,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00600
         * @tc.name    Call the writeshortarray interface, write the array to the MessageSequence instance,
         *             and call readshortarray to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_00600", 0, async function(done){
@@ -491,7 +491,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00700
         * @tc.name    Call the writeshortarray interface, write the short integer array to the MessageSequence instance,
         *             and call readshortarray (datain: number []) to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_00700", 0, async function(done){
@@ -524,7 +524,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00800
         * @tc.name    Writeshortarray interface, boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_00800", 0, async function(done){
@@ -552,7 +552,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_00900
         * @tc.name    Writeshortarray interface, illegal value validation
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_00900", 0, async function(done){
@@ -581,7 +581,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01000
         * @tc.name    Writeshortarray interface, transmission length verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_01000", 0, async function(){
@@ -606,7 +606,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01100
         * @tc.name    Call the writelongarray interface, write the long integer array to the MessageSequence instance,
         *             and call readlongarray to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_01100", 0, async function(done){
@@ -635,7 +635,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01200
         * @tc.name    Call the writelongarray interface, write the long integer array to the MessageSequence instance,
         *             and call readlongarray (datain: number []) to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_01200", 0, async function(done){
@@ -668,7 +668,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01300
         * @tc.name    Writelongarray interface, boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_01300", 0, async function(done){
@@ -698,7 +698,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01400
         * @tc.name    Writelongarray interface, long type precision verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_01400", 0, async function(done){
@@ -729,7 +729,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01500
         * @tc.name    Writelongarray Indicates an interface for verifying the input length
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_01500", 0, async function(){
@@ -754,7 +754,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01600
         * @tc.name    Call the writedoublearray interface, write the array to the MessageSequence instance,
         *             and call readdoublearra to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_01600", 0, async function(done){
@@ -783,7 +783,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01700
         * @tc.name    Call the writedoublearray interface, write the array to the MessageSequence instance,
         *             and call readdoublearra (datain: number []) to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_01700", 0, async function(done){
@@ -816,7 +816,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01800
         * @tc.name    Writedoublearray interface, boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_01800", 0, async function(done){
@@ -844,7 +844,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_01900
         * @tc.name    Writedoublearray interface, illegal value validation
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_01900", 0, async function(done){
@@ -874,7 +874,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02000
         * @tc.name    Writedoublearray interface, Out-of-bounds value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_02000", 0, async function(){
@@ -899,7 +899,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02100
         * @tc.name    Call the writebooleanarray interface, write the array to the MessageSequence instance,
         *             and call readbooleanarray to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_02100", 0, async function(done){
@@ -928,7 +928,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02200
         * @tc.name    Call the writebooleanarray interface, write the array to the MessageSequence instance,
         *             and call readbooleanarray (datain: number []) to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_02200", 0, async function(done){
@@ -965,7 +965,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02300
         * @tc.name    Writebooleanarray interface, illegal value validation
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_02300", 0, async function(done){
@@ -994,7 +994,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02400
         * @tc.name    Writebooleanarray Interface for length verification of input parameters
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_02400", 0, async function(){
@@ -1023,7 +1023,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02500
         * @tc.name    Call the writechararray interface, write the array to the MessageSequence instance,
         *             and call readchararray to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_02500", 0, async function(done){
@@ -1052,7 +1052,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02600
         * @tc.name    Call the writechararray interface, write the array to the MessageSequence instance,
         *             and call readchararray (datain: number []) to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_02600", 0, async function(done){
@@ -1085,7 +1085,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02700
         * @tc.name    Writechararray interface, illegal value validation
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_02700", 0, async function(done){
         console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_02700---------------------------");
@@ -1114,7 +1114,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02800
         * @tc.name    Writechararray Indicates the length of an interface input parameter
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_02800", 0, async function(){
         console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_02800---------------------------");
@@ -1138,7 +1138,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_02900
         * @tc.name    Call the writestringarray interface, write the array to the MessageSequence instance,
         *             and call readstringarray (datain: number []) to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_02900", 0, async function(){
@@ -1165,7 +1165,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03000
         * @tc.name    Call the writestringarray interface, write the array to the MessageSequence instance,
         *             and call readstringarray() to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_03000", 0, async function(){
@@ -1196,7 +1196,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03100
         * @tc.name    Writestringarray interface, illegal value validation
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_03100", 0, async function(){
@@ -1218,7 +1218,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03200
         * @tc.name    writeStringArray Interface for length verification of input parameters
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_03200", 0, async function(){
@@ -1243,7 +1243,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03300
         * @tc.name    Call the writebytearray interface, write the array to the MessageSequence instance,
         *             and call readbytearray to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_03300", 0, async function(done){
@@ -1273,7 +1273,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03400
         * @tc.name    Call the writebytearray interface, write the array to the MessageSequence instance,
         *             and call readbytearray (datain: number []) to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_03400", 0, async function(done){
@@ -1304,7 +1304,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03500
         * @tc.name    Writebytearray interface, boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_03500", 0, async function(done){
@@ -1338,7 +1338,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03600
         * @tc.name    Writebytearray interface, illegal value validation
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_03600", 0, async function(done){
@@ -1371,7 +1371,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03700
         * @tc.name    Writebytearray Interface，input parameter length verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_03700", 0, async function(){
@@ -1396,7 +1396,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03800
         * @tc.name    Call the writeintarray interface, write the array to the MessageSequence instance,
         *             and call readintarray to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_03800", 0, async function(done){
@@ -1425,7 +1425,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_03900
         * @tc.name    Call the writeintarray interface, write the array to the MessageSequence instance,
         *             and call readintarray (datain: number []) to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_03900", 0, async function(done){
@@ -1458,7 +1458,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04000
         * @tc.name    Writeintarray interface, boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_04000", 0, async function(){
@@ -1485,7 +1485,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04100
         * @tc.name    Writeintarray interface, illegal value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_04100", 0, async function(){
@@ -1517,7 +1517,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04200
         * @tc.name    Writeintarray interface, input parameter length verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_04200", 0, async function(){
@@ -1542,7 +1542,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04300
         * @tc.name    Call the writefloatarray interface, write the array to the MessageSequence instance,
         *             and call readfloatarray to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_04300", 0, async function(done){
@@ -1571,7 +1571,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04400
         * @tc.name    Call the writefloatarray interface, write the array to the MessageSequence instance,
         *             and call readfloatarray (datain: number []) to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_04400", 0, async function(done){
@@ -1601,7 +1601,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04500
         * @tc.name    Writefloatarray interface, boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_04500", 0, async function(done){
@@ -1632,7 +1632,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04600
         * @tc.name    Writefloatarray interface, boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_04600", 0, async function(done){
@@ -1663,7 +1663,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04700
         * @tc.name    Writefloatarray interface, Longest array verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_04700", 0, async function(){
@@ -1688,7 +1688,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04800
         * @tc.name    Call the writeShort interface to write the short integer data to the MessageSequence instance,
         *             and call readshort to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_04800", 0, async function(done){
@@ -1716,7 +1716,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_04900
         * @tc.name    WriteShort interface, boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_04900", 0, async function(done){
@@ -1751,7 +1751,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05000
         * @tc.name    WriteShort interface, Boundary value minimum value out of bounds verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_05000", 0, async function(done){
@@ -1778,7 +1778,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05100
         * @tc.name    WriteShort interface, Boundary value maximum value out of bounds verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_05100", 0, async function(done){
@@ -1806,7 +1806,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05200
         * @tc.name    Call writelong interface to write long integer data to MessageSequence instance
         *             and call readlong to read data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_05200", 0, async function(done){
@@ -1835,7 +1835,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05300
         * @tc.name    Writelong interface, Verification of maximum accuracy value
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_05300", 0, async function(done){
@@ -1863,7 +1863,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05400
         * @tc.name    Writelong interface, Minimum loss accuracy verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_05400", 0, async function(done){
@@ -1891,7 +1891,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05500
         * @tc.name    Writelong interface, Maximum loss accuracy verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_05500", 0, async function(done){
@@ -1920,7 +1920,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05600
         * @tc.name    Call the parallel interface to read and write data to the double instance
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_05600", 0,async function(done){
@@ -1948,7 +1948,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05700
         * @tc.name    Writedouble interface, boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_05700", 0,async function(){
@@ -1975,7 +1975,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05800
         * @tc.name    Writedouble interface, Minimum boundary value out of bounds verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_05800", 0,async function(){
@@ -2002,7 +2002,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_05900
         * @tc.name    Writedouble interface, illegal value validation
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_05900", 0,async function(){
@@ -2024,7 +2024,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06000
         * @tc.name    Call the writeboolean interface to write the data to the MessageSequence instance,
         *             and call readboolean to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_06000", 0,async function(done){
@@ -2053,7 +2053,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06100
         * @tc.name    Call the writeboolean interface to write the data to the MessageSequence instance,
         *             and call readboolean to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_06100", 0,async function(done){
@@ -2081,7 +2081,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06200
         * @tc.name    Writeboolean interface, illegal value number type verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_06200", 0,async function(){
@@ -2101,7 +2101,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06300
         * @tc.name    Writeboolean interface, illegal value string type verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_06300", 0,async function(){
@@ -2123,7 +2123,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06400
         * @tc.name    Call the writechar interface to write the minimum data to the MessageSequence instance,
         *               and call readchar to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_06400", 0,async function(done){
@@ -2152,7 +2152,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06500
         * @tc.name    Call the writechar interface to write the maximum data to the MessageSequence instance,
         *              and call readchar to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_06500", 0,async function(done){
@@ -2181,7 +2181,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06600
         * @tc.name    Call the writechar interface to write the minimum out of range data to the MessageSequence instance,
         *              and call readchar to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_06600", 0,async function(done){
@@ -2210,7 +2210,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06700
         * @tc.name    Call the writechar interface to write the maximum out of range data to the MessageSequence instance,
         *              and call readchar to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_06700", 0,async function(done){
@@ -2238,7 +2238,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06800
         * @tc.name    Writechar interface, illegal value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_06800", 0,async function(){
@@ -2260,7 +2260,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_06900
         * @tc.name    Call the writestring interface to write the data to the MessageSequence instance,
         *             and call readstring() to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_06900", 0,async function(done){
@@ -2291,7 +2291,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07000
         * @tc.name    Writestring interface Maximum data out of range verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_07000", 0,async function(){
@@ -2315,7 +2315,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07100
         * @tc.name    Writestring interface, illegal value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_07100", 0,async function(){
@@ -2337,7 +2337,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07200
         * @tc.name    Call the writebyte interface to write data to the MessageSequence instance,
         *             and call readbyte to read data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_07200", 0,async function(done){
@@ -2365,7 +2365,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07300
         * @tc.name    Writebyte interface, boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_07300", 0,async function(done){
@@ -2400,7 +2400,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07400
         * @tc.name    Writebyte interface, Maximum boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_07400", 0,async function(done){
@@ -2427,7 +2427,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07500
         * @tc.name    Writebyte interface, Minimum boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_07500", 0,async function(done){
@@ -2454,7 +2454,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07600
         * @tc.name    Writebyte interface, illegal value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_07600", 0,async function(){
@@ -2475,7 +2475,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07700
         * @tc.name    Call the writeint interface to write the data to the MessageSequence instance,
         *             and call readint to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_07700", 0,async function(done){
@@ -2503,7 +2503,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07800
         * @tc.name    Writeint interface, boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_07800", 0,async function(done){
@@ -2538,7 +2538,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_07900
         * @tc.name    Writeint interface, Verification of minimum boundary overrun value
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_07900", 0,async function(done){
@@ -2565,7 +2565,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08000
         * @tc.name    Writeint interface, Verification of maximum boundary overrun value
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_08000", 0,async function(done){
@@ -2592,7 +2592,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08100
         * @tc.name    Writeint interface, illegal value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_08100", 0,async function(){
@@ -2613,7 +2613,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08200
         * @tc.name    Call the writefloat interface to write data to the MessageSequence instance,
         *             and call readfloat to read data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_08200", 0,async function(done){
@@ -2641,7 +2641,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08300
         * @tc.name    Writefloat interface, Minimum boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_08300", 0,async function(done){
@@ -2670,7 +2670,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08400
         * @tc.name    Writefloat interface, Maximum boundary value verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_08400", 0,async function(done){
@@ -2698,7 +2698,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08500
         * @tc.name    Writefloat interface, Verification of maximum boundary overrun value
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_08500", 0,async function(done){
@@ -2726,7 +2726,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08600
         * @tc.name    Writefloat interface, Verification of minimum boundary overrun value
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_08600", 0,async function(done){
@@ -2754,7 +2754,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08700
         * @tc.name    Writefloat interface, illegal value validation
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_08700", 0,async function(){
@@ -2776,7 +2776,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08800
         * @tc.name    Call the getRawDataCapacity interface to get the maximum amount of raw data that a MessageSequence
                         can hold
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_08800", 0,async function(done){
@@ -2807,7 +2807,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_08900
     * @tc.name    Test MessageSequence to deliver rawdata data
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_08900", 0, async function(done){
@@ -2840,7 +2840,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09000
     * @tc.name    Test MessageSequence to pass abnormal rawdata data, and expand the capacity for verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_09000", 0, async function(done){
@@ -2878,7 +2878,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09100
     * @tc.name    Test MessageSequence to pass exception rawdata data data interception verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_09100", 0, async function(done){
@@ -2915,7 +2915,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09200
     * @tc.name    Test MessageSequence to deliver out-of-bounds RawData data
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_09200", 0, async function(done){
@@ -2948,7 +2948,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09300
     * @tc.name    Test MessageSequence to deliver illegal RawData data
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_09300", 0, async function(){
@@ -2969,7 +2969,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09400
         * @tc.name    Call the writeremoteobject interface to serialize the remote object
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_09400", 0,async function(){
@@ -2989,7 +2989,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09500
         * @tc.name    Call the writeremoteobject interface to serialize the remote object and pass in the empty object
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_09500", 0,async function(){
@@ -3008,7 +3008,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09600
     * @tc.name    Call the writeremoteobject interface to serialize the remote object and pass in the empty object
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3   
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_09600", 0,async function(){
@@ -3031,7 +3031,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09700
         * @tc.name    Call the writeParcelable interface to write the custom serialized
         *             object to the MessageSequence instance
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_09700", 0,async function(){
@@ -3053,7 +3053,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09800
         * @tc.name    Call the writeParcelable interface to write the custom serialized
         *             object to the MessageSequence instance, Migration to read
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_09800", 0,async function(){
@@ -3075,7 +3075,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_09900
         * @tc.name    After the server finishes processing, write noexception first before writing the result,
         *             and the client calls readexception to judge whether the server is abnormal
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_09900", 0,async function(done){
@@ -3105,7 +3105,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10000
         * @tc.name    If the data on the server is abnormal, the client calls readexception
         *             to judge whether the server is abnormal
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_10000", 0,async function(done){
@@ -3134,7 +3134,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10100
         * @tc.name    Serializable object marshaling and unmarshalling test
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_10100", 0, async function(done){
@@ -3165,7 +3165,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10200
         * @tc.name    Non serializable object marshaling test
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_10200", 0, async function(done){
@@ -3187,7 +3187,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10300
         * @tc.name    The server did not send a serializable object, and the client was ungrouped
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_10300", 0,async function(done){
@@ -3217,7 +3217,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10400
         * @tc.name    Call the writeParcelable interface to write the custom serialized object to the
         *             MessageSequence instance, and call readParcelable to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_10400", 0,async function(done){
@@ -3249,7 +3249,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10500
         * @tc.name    Call the writeParcelablearray interface to write the custom serialized object array (1, 2, 3) to
         *              the MessageSequence instance, and call readParcelablearray to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_10500", 0,async function(done){
@@ -3285,7 +3285,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10600
         * @tc.name    Call the writeParcelablearray interface to write the custom serialized object to the
         *             MessageSequence instance, and call readParcelablearray to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_10600", 0,async function(done){
@@ -3321,7 +3321,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10700
         * @tc.name    Call the writeParcelablearray interface to write the custom
         *             serialized object to the MessageSequence instance
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_10700", 0,async function(){
@@ -3343,7 +3343,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10800
         * @tc.name    Call the writeremoteobjectarray interface to write the object array to the MessageSequence
         *             instance, and call readremoteobjectarray to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_10800", 0,async function(done){
@@ -3388,7 +3388,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_10900
         * @tc.name    Call the writeremoteobjectarray interface to write the object array to the MessageSequence instance,
         *             and call readremoteobjectarray (objects: iremoteobject []) to read the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_10900", 0,async function(done){
@@ -3429,7 +3429,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11000
         * @tc.name    Test MessageSequence to deliver the reply message received in promise across processes
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_11000", 0,async function(done){
@@ -3477,7 +3477,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11100
         * @tc.name    Test the cross process delivery of MessageSequence and receive the reply message
         *             in the callback function
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_11100", 0,async function(done){
@@ -3533,7 +3533,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11200
         * @tc.name    Test the cross process transmission of MessageSequence.
         *             After receiving the reply message in promise, read various types of arrays in order
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_11200", 0,async function(done){
@@ -3587,7 +3587,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.name    Test MessageSequence cross process delivery. After receiving the reply message in promise,
         *             the client constructs an empty array in sequence and reads the data from the reply message
         *             into the corresponding array
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_11300", 0,async function(done){
@@ -3639,7 +3639,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11400
         * @tc.name    Test MessageSequence to pass an object of type iremoteobject across processes
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it('SUB_Softbus_RPC_Compatibility_MessageSequence_11400', 0, async function(done) {
@@ -3673,7 +3673,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11500
         * @tc.name    Test MessageSequence to pass an array of iremoteobject objects across processes
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it('SUB_Softbus_RPC_Compatibility_MessageSequence_11500', 0, async function(done) {
@@ -3716,7 +3716,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11600
         * @tc.name    Test MessageSequence to pass the array of iremoteobject objects across processes. The server
         *             constructs an empty array in onremoterequest and reads it from MessageSequence
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
     it('SUB_Softbus_RPC_Compatibility_MessageSequence_11600', 0, async function(done) {
@@ -3759,7 +3759,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11700
         * @tc.name    Invoke the rewindRead interface,Set 0-bit offset and read the data after offset
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_11700", 0, async function(done){
@@ -3790,7 +3790,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11800
         * @tc.name    Invoke the rewindRead interface,Set 1-bit offset and read the data after offset
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_11800", 0, async function(done){
@@ -3820,7 +3820,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_11900
         * @tc.name    Invoke the rewindWrite interface, Set 0-bit offset and write the data after offset
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_11900", 0, async function(done){
@@ -3849,7 +3849,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_12000
         * @tc.name    Invoke the rewindWrite interface, Set 1-bit offset and write the data after offset
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_12000", 0, async function(done){
@@ -3879,7 +3879,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_12100
         * @tc.name    setCapacity Sets the storage capacity of the null MessageSequence instance. The getCapacity
                     obtains the current MessageSequence capacity
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_12100", 0, async function(done){
@@ -3911,7 +3911,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_12200
         * @tc.name    setCapacity Sets the storage capacity of the MessageSequence instance. The getCapacity
                     obtains the current MessageSequence capacity
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_12200", 0, async function(done){
@@ -3941,7 +3941,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_12300
         * @tc.name    Setcapacity test: size limit verification of MessageSequence instance
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_12300", 0, async function(){
@@ -3965,7 +3965,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_12400
     * @tc.name    SetCapacity Tests the storage capacity threshold of the MessageSequence instance
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_12400", 0, async function(done){
@@ -3997,7 +3997,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_12500
     * @tc.name    Setcapacity test storage capacity boundary value verification of MessageSequence instance
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_12500", 0, async function(){
@@ -4021,7 +4021,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_12600
         * @tc.name    setSize Sets the size of the data contained in the MessageSequence instance. The getSize command
                     reads the data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_12600", 0, async function(done){
@@ -4054,7 +4054,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_12700
         * @tc.name    SetSize: Increases the value of the data contained in the MessageSequence instance by 1,
                     Write setSize
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_12700", 0, async function(done){
@@ -4086,7 +4086,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_12800
         * @tc.name    Verify the MessageSequence instance SetSize setting and the instance capacitydata qualification verification
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_12800", 0, async function(){
@@ -4112,7 +4112,7 @@ describe('RpcJsUnitTest', function(){
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_12900
         * @tc.name    setSize Sets the storage capacity of the MessageSequence instance to decrease by one.
                     The getSize obtains the current MessageSequence capacity
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_12900", 0, async function(done){
@@ -4144,7 +4144,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_13000
         * @tc.name    Validate the setSize boundary value in the MessageSequence instance
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_13000", 0, async function(done){
@@ -4166,7 +4166,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_13100
         * @tc.name    Verify that setSize is out of bounds in a MessageSequence instance
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_13100", 0, async function(done){
@@ -4189,7 +4189,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_13200
         * @tc.name    Obtains the write and read positions of the MessageSequence
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_13200", 0, async function(done){
@@ -4220,7 +4220,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_13300
         * @tc.name    Obtaining the Writable and Readable Byte Spaces of MessageSequence
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_13300", 0, async function(done){
@@ -4250,7 +4250,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_13400
         * @tc.name    Obtains the writeable and readable byte space and read position of the MessageSequence
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_13400", 0, async function(done){
@@ -4283,7 +4283,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_13500
     * @tc.name    Get the space size of MessageSequence to pass rawdata data
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_13500", 0, async function(done){
@@ -4316,20 +4316,19 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_13600
         * @tc.name    Test fixed MessageSequence space size to pass rawData data
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_13600", 0, async function(done){
         console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_13600---------------------------");
         try{
-            let maxsize = 1024;
             let data = rpc.MessageSequence.create();
             expect(data.getRawDataCapacity()).assertEqual(128*M);
             let rawdata = [1, 2, 3];
             let option = new rpc.MessageOption();
             let reply = rpc.MessageSequence.create();
-            data.writeInt(maxsize);
-            data.writeRawData(rawdata, maxsize);
+            data.writeInt(rawdata.length);
+            data.writeRawData(rawdata, rawdata.length);
             expect(gIRemoteObject != undefined).assertTrue();
             await gIRemoteObject.sendMessageRequest(CODE_WRITE_RAWDATA, data, reply, option).then((result) => {
                 expect(result.errCode).assertEqual(0);
@@ -4348,7 +4347,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_13700
         * @tc.name    Test MessageSequence delivery file descriptor object
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_13700", 0,async function(){
@@ -4365,7 +4364,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_13800
         * @tc.name    Test that the asObject interface is called by a RemoteObject and returns itself
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_13800", 0,async function(){
@@ -4382,7 +4381,7 @@ describe('RpcJsUnitTest', function(){
     /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_13900
         * @tc.name    MessageSequence sendMessageRequest API test
-        * @tc.desc    Function test
+        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0
         */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_13900", 0, async function(done){
@@ -4393,13 +4392,13 @@ describe('RpcJsUnitTest', function(){
             let option = new rpc.MessageOption();
             let reply = rpc.MessageSequence.create();
             data.getRawDataCapacity();
-            data.writeInt(K);
-            data.writeRawData(rawdata, K);
+            data.writeInt(rawdata.length);
+            data.writeRawData(rawdata, rawdata.length);
             expect(gIRemoteObject != undefined).assertTrue();
             await gIRemoteObject.sendMessageRequest(CODE_WRITE_RAWDATA, data, reply, option).then((result) => {
                 expect(result.errCode).assertEqual(0);
-                expect(result.reply.readInt()).assertEqual(K);
-                expect(result.reply.readRawData(K) != rawdata).assertTrue();
+                expect(result.reply.readInt()).assertEqual(rawdata.length);
+                expect(result.reply.readRawData(rawdata.length) != rawdata).assertTrue();
             });
             data.reclaim();
             reply.reclaim();
@@ -4414,7 +4413,7 @@ describe('RpcJsUnitTest', function(){
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_14000
     * @tc.name    Invoke the writestring interface to write data to the MessageSequence instance sendMessageRequest Asynchronous
     *               Authentication onRemoteMessageRequest Server Processing
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_14000", 0, async function(done){
@@ -4444,7 +4443,7 @@ describe('RpcJsUnitTest', function(){
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_14100
     * @tc.name    Invoke the writestring interface to write data to the MessageSequence instance. sendMessageRequest asynchronously
     *               verifies the priority processing levels of onRemoteMessageRequest and onRemoteRequest
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_14100", 0, async function(done){
@@ -4472,7 +4471,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_14200
     * @tc.name    readParcelable is Call JS callback function failedv Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_14200", 0,async function(){
@@ -4497,7 +4496,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_14300
     * @tc.name    Call the writeinterfacetoken interface, write the interface descriptor, and read interfacetoken
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_14300", 0, function(){
@@ -4521,7 +4520,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_14400
     * @tc.name    writeString check param error Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_14400", 0, function(){
@@ -4545,7 +4544,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_14500
     * @tc.name    writeInterfaceToken Sequence memory alloc failed Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_14500", 0, function(){
@@ -4568,7 +4567,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_14600
     * @tc.name    writeInterfaceToken Write data to message sequence failed Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_14600", 0, function(){
@@ -4591,7 +4590,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_14700
     * @tc.name    readParcelable Sequence memory alloc failed Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_14700", 0, function(){
@@ -4614,7 +4613,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_14800
     * @tc.name    writeRemoteObject is proxy or remote object is invalid Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0   
     */
     it("SUB_Softbus_RPC_Compatibility_MessageSequence_14800", 0,async function(){
@@ -4630,12 +4629,410 @@ describe('RpcJsUnitTest', function(){
         }
         data.reclaim();
         console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_14800---------------------------");
+    }); 
+    
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_14900
+    * @tc.name    Basic test of the rewindWrite interface
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   0
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_14900", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_14900---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            let option = new rpc.MessageOption();
+            let reply = rpc.MessageSequence.create();
+            expect(data.getWritePosition()).assertEqual(0);
+            data.writeInt(4);
+            expect(data.getWritePosition()).assertEqual(4);
+            data.rewindWrite(0);
+            expect(data.getWritePosition()).assertEqual(0);
+            data.writeInt(5);
+            expect(data.getWritePosition()).assertEqual(4);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INT, data, reply, option).then((result) => {
+                expect(result.errCode == 0).assertTrue();
+                expect(result.reply.getReadPosition()).assertEqual(0);
+                expect(result.reply.readInt()).assertEqual(5);
+                expect(result.reply.getReadPosition()).assertEqual(4);
+            });
+            data.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_14900---------------------------");
+    });
+     
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15000
+    * @tc.name    RewindWrite interface write position cheap extension test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15000", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15000---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            let option = new rpc.MessageOption();
+            let reply = rpc.MessageSequence.create();
+            expect(data.getWritePosition()).assertEqual(0);
+            data.writeInt(4);
+            expect(data.getWritePosition()).assertEqual(4);
+            data.rewindWrite(3);
+            expect(data.getWritePosition()).assertEqual(3);
+            data.writeInt(5);
+            expect(data.getWritePosition()).assertEqual(3+4);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INT, data, reply, option).then((result) => {
+                expect(result.errCode == 0).assertTrue();
+                expect(result.reply.readInt() != 5).assertTrue();
+            });
+            data.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15000---------------------------");
+    });
+    
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15100
+    * @tc.name    Test the boundary value of the rewindWrite interface
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15100", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15100---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            var token = '';
+            for(var i = 0; i < (40*K - 1); i++){
+                token += 'a';
+            }
+            expect(data.getWritePosition()).assertEqual(0);
+            data.writeString(token);
+            expect(data.getWritePosition()).assertEqual(token.length*2 + 6);
+            data.rewindWrite((token.length*2 + 6)-1);
+            expect(data.getWritePosition()).assertEqual((token.length*2 + 6)-1);
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15100---------------------------");
+    });    
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15200
+    * @tc.name    Test the critical value of the rewindWrite interface
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15200", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15200---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            var token = '';
+            for(var i = 0; i < (40*K - 1); i++){
+                token += 'a';
+            }
+            expect(data.getWritePosition()).assertEqual(0);
+            data.writeString(token);
+            expect(data.getWritePosition()).assertEqual(token.length*2 + 6);
+            data.rewindWrite((token.length*2 + 6)+1);
+            expect(data.getWritePosition()).assertEqual(token.length*2 + 6);
+            data.reclaim();
+        } catch (error) {
+            console.info("SUB_Softbus_RPC_Compatibility_MessageSequence_15200 errorMessage " + error.message);
+            expect(error != null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15200---------------------------");
+    });
+    
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15300
+    * @tc.name    Basic test of the rewindRead interface
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   0
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15300", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15300---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            let option = new rpc.MessageOption();
+            let reply = rpc.MessageSequence.create();
+            data.writeInt(12);
+            expect(gIRemoteObject != undefined).assertTrue();
+            await gIRemoteObject.sendMessageRequest(CODE_WRITE_INT, data, reply, option).then((result) => {
+                expect(result.errCode == 0).assertTrue();
+                expect(result.reply.getReadPosition()).assertEqual(0);
+                expect(result.reply.readInt()).assertEqual(12);
+                expect(result.reply.getReadPosition()).assertEqual(4);
+                result.reply.rewindRead(1);
+                expect(result.reply.getReadPosition()).assertEqual(1);
+                expect(result.reply.readInt() != 12).assertTrue();
+                expect(result.reply.getReadPosition()).assertEqual(1);
+            });
+            data.reclaim();
+            reply.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15300---------------------------");
+    });    
+    
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15400
+    * @tc.name    rewindRead interface write position cheap extension test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15400", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15400---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            data.writeInt(16);
+            data.writeString("sequence");
+            expect(data.getReadPosition()).assertEqual(0);
+            expect(data.readInt()).assertEqual(16);
+            expect(data.getReadPosition()).assertEqual(4);
+            expect(data.readString()).assertEqual("sequence");
+            expect(data.getReadPosition()).assertEqual(4 + ("sequence".length*2 + 8));
+            data.rewindRead(5);
+            expect(data.getReadPosition()).assertEqual(5);
+            expect(data.readInt() != 16).assertTrue();
+            expect(data.getReadPosition()).assertEqual(4 + 5);
+            expect(data.readString() != "sequence").assertTrue();
+            expect(data.getReadPosition()).assertEqual(4 + 5);
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15400---------------------------");
+    });    
+        
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15500
+    * @tc.name    Test the boundary value of the rewindRead interface
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15500", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15500---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            var token = '';
+            for(var i = 0; i < (40*K - 1); i++){
+                token += 'a';
+            }
+            data.writeString(token);
+            expect(data.getReadPosition()).assertEqual(0);
+            expect(data.readString().length).assertEqual(40*K - 1);
+            expect(data.getReadPosition()).assertEqual(token.length*2 + 6);
+            data.rewindRead((token.length*2 + 6)-1);
+            expect(data.getReadPosition()).assertEqual((token.length*2 + 6)-1);
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15500---------------------------");
+    });  
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15600
+    * @tc.name    Test the critical value of the rewindRead interface 
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15600", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15600---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            var token = '';
+            for(var i = 0; i < (40*K - 1); i++){
+                token += 'a';
+            }
+            data.writeString(token);
+            expect(data.getReadPosition()).assertEqual(0);
+            expect(data.readString().length).assertEqual(40*K - 1);
+            expect(data.getReadPosition()).assertEqual(token.length*2 + 6);
+            data.rewindRead((token.length*2 + 6)+1);
+            expect(data.getReadPosition()).assertEqual(token.length*2 + 6);
+            data.reclaim();
+        } catch (error) {
+            console.info("SUB_Softbus_RPC_Compatibility_MessageSequence_15600 errorMessage " + error.message);
+            expect(error != null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15600---------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15700
+    * @tc.name    Test the function of the getWritePosition interface
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   0
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15700", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15700---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeByte(2);
+            expect(data.getWritePosition()).assertEqual(4);
+            data.writeShort(3);
+            expect(data.getWritePosition()).assertEqual(4+4);
+            data.writeInt(4);
+            expect(data.getWritePosition()).assertEqual((4+4)+4);
+            data.writeLong(5);
+            expect(data.getWritePosition()).assertEqual(((4+4)+4)+8);
+            data.writeFloat(1.2);
+            expect(data.getWritePosition()).assertEqual((((4+4)+4)+8)+8);
+            data.writeDouble(10.2);
+            expect(data.getWritePosition()).assertEqual(((((4+4)+4)+8)+8)+8);
+            data.writeBoolean(true);
+            expect(data.getWritePosition()).assertEqual((((((4+4)+4)+8)+8)+8)+4);
+            data.writeChar(97);
+            expect(data.getWritePosition()).assertEqual(((((((4+4)+4)+8)+8)+8)+4)+4);
+            data.writeString("");
+            expect(data.getWritePosition()).assertEqual((((((((4+4)+4)+8)+8)+8)+4)+4)+8);
+            data.writeParcelable(new MySequenceable(1, "aaa"));
+            expect(data.getWritePosition()).assertEqual(((((((((4+4)+4)+8)+8)+8)+4)+4)+8)+(12+8));
+            await gIRemoteObject.sendMessageRequest(CODE_ALL_TYPE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readByte()).assertEqual(2);
+                expect(result.reply.readShort()).assertEqual(3);
+                expect(result.reply.readInt()).assertEqual(4);
+                expect(result.reply.readLong()).assertEqual(5);
+                expect(result.reply.readFloat()).assertEqual(1.2);
+                expect(result.reply.readDouble()).assertEqual(10.2);
+                expect(result.reply.readBoolean()).assertTrue();
+                expect(result.reply.readChar()).assertEqual(97)
+                expect(result.reply.readString()).assertEqual("");
+                let s = new MySequenceable(null, null);
+                result.reply.readParcelable(s);
+                expect(s.num).assertEqual(1);
+                expect(s.str).assertEqual("aaa");
+            });
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15700---------------------------");
+    });    
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15800
+    * @tc.name    Test on the null value of the getWritePosition interface
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15800", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15800---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            let str = "";
+            data.writeString(str);
+            expect(data.getWritePosition()).assertEqual(8);
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15800---------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_15900
+    * @tc.name    Test the function of the getReadPosition interface
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_15900", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_15900---------------------------");
+        try{
+            var data = rpc.MessageSequence.create();
+            var reply = rpc.MessageSequence.create();
+            var option = new rpc.MessageOption();
+            data.writeByte(2);
+            data.writeShort(3);
+            data.writeInt(4);
+            data.writeLong(5);
+            data.writeFloat(1.2);
+            data.writeDouble(10.2);
+            data.writeBoolean(true);
+            data.writeChar(97);
+            data.writeString("");
+            data.writeParcelable(new MySequenceable(1, "aaa"));
+            await gIRemoteObject.sendMessageRequest(CODE_ALL_TYPE, data, reply, option).then((result) => {
+                expect(result.errCode).assertEqual(0);
+                expect(result.reply.readByte()).assertEqual(2);
+                expect(result.reply.getReadPosition()).assertEqual(4);
+                expect(result.reply.readShort()).assertEqual(3);
+                expect(result.reply.getReadPosition()).assertEqual(4+4);
+                expect(result.reply.readInt()).assertEqual(4);
+                expect(result.reply.getReadPosition()).assertEqual((4+4)+4);
+                expect(result.reply.readLong()).assertEqual(5);
+                expect(result.reply.getReadPosition()).assertEqual(((4+4)+4)+8);
+                expect(result.reply.readFloat()).assertEqual(1.2);
+                expect(result.reply.getReadPosition()).assertEqual((((4+4)+4)+8)+8);
+                expect(result.reply.readDouble()).assertEqual(10.2);
+                expect(result.reply.getReadPosition()).assertEqual(((((4+4)+4)+8)+8)+8);
+                expect(result.reply.readBoolean()).assertTrue();
+                expect(result.reply.getReadPosition()).assertEqual((((((4+4)+4)+8)+8)+8)+4);
+                expect(result.reply.readChar()).assertEqual(97);
+                expect(result.reply.getReadPosition()).assertEqual(((((((4+4)+4)+8)+8)+8)+4)+4);
+                expect(result.reply.readString()).assertEqual("");
+                expect(result.reply.getReadPosition()).assertEqual((((((((4+4)+4)+8)+8)+8)+4)+4)+8);
+                let s = new MySequenceable(null, null);
+                result.reply.readParcelable(s);
+                expect(result.reply.getReadPosition()).assertEqual(((((((((4+4)+4)+8)+8)+8)+4)+4)+8)+(12+8));
+                expect(s.num).assertEqual(1);
+                expect(s.str).assertEqual("aaa");
+            });
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_15900---------------------------");
+    });     
+ 
+    /*
+    * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_16000
+    * @tc.name    Test on the null value of the getReadPosition interface
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   3
+    */
+    it("SUB_Softbus_RPC_Compatibility_MessageSequence_16000", 0, async function(done){
+        console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_16000---------------------------");
+        try{
+            let data = rpc.MessageSequence.create();
+            let str = "";
+            data.writeString(str);
+            expect(data.readString()).assertEqual(str);
+            expect(data.getReadPosition()).assertEqual(8);
+            data.reclaim();
+        } catch (error) {
+            expect(error == null).assertTrue();
+        }
+        done();
+        console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_16000---------------------------");
     });    
 
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_00100
      * @tc.name    Call the writeinterfacetoken interface, write the interface descriptor, and read interfacetoken
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_00100", 0, async function(done){
@@ -4664,7 +5061,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_00200
      * @tc.name    The writeInterfaceToken interface is looping, the interface descriptor is written, and the
                     InterfaceToken is read
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_00200", 0, async function(done){
@@ -4695,7 +5092,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_00300
      * @tc.name    Call the WriteInterfaceToken interface, write the maximum length interface descriptor, and read
                     the InterfaceToken
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_00300", 0, async function(done){
@@ -4727,7 +5124,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_00400
      * @tc.name    The WriteInterfaceToken interface is called, the exceeding-length interface descriptor is written,
                     and the InterfaceToken is read
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_00400", 0, async function(){
@@ -4750,7 +5147,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_00500
      * @tc.name    Call the writeinterfacetoken interface to write a non string interface descriptor
                    and read interfacetoken
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_00500", 0, async function(){
@@ -4770,7 +5167,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_00600
      * @tc.name    Call the writeshortarray interface, write the array to the messageparcel instance,
      *             and call readshortarray to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_00600", 0, async function(done){
@@ -4799,7 +5196,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_00700
      * @tc.name    Call the writeshortarray interface, write the short integer array to the messageparcel instance,
      *             and call readshortarray (datain: number []) to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_00700", 0, async function(done){
@@ -4832,7 +5229,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_00800
      * @tc.name    Writeshortarray interface, boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_00800", 0, async function(done){
@@ -4860,7 +5257,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_00900
      * @tc.name    Writeshortarray interface, illegal value validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_00900", 0, async function(done){
@@ -4889,7 +5286,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_01000
      * @tc.name    Writeshortarray interface, transmission length verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_01000", 0, async function(){
@@ -4912,7 +5309,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_01100
      * @tc.name    Call the writelongarray interface, write the long integer array to the messageparcel instance,
      *             and call readlongarray to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_01100", 0, async function(done){
@@ -4941,7 +5338,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_01200
      * @tc.name    Call the writelongarray interface, write the long integer array to the messageparcel instance,
      *             and call readlongarray (datain: number []) to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_01200", 0, async function(done){
@@ -4974,7 +5371,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_01300
      * @tc.name    Writelongarray interface, boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_01300", 0, async function(done){
@@ -5004,7 +5401,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_01400
      * @tc.name    Writelongarray interface, long type precision verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_01400", 0, async function(done){
@@ -5035,7 +5432,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_01500
      * @tc.name    Writelongarray Indicates an interface for verifying the input length
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_01500", 0, async function(){
@@ -5058,7 +5455,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_01600
      * @tc.name    Call the writedoublearray interface, write the array to the messageparcel instance,
      *             and call readdoublearra to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_01600", 0, async function(done){
@@ -5087,7 +5484,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_01700
      * @tc.name    Call the writedoublearray interface, write the array to the messageparcel instance,
      *             and call readdoublearra (datain: number []) to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_01700", 0, async function(done){
@@ -5120,7 +5517,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_01800
      * @tc.name    Writedoublearray interface, boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_01800", 0, async function(done){
@@ -5148,7 +5545,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_01900
      * @tc.name    Writedoublearray interface, illegal value validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_01900", 0, async function(done){
@@ -5178,7 +5575,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_02000
      * @tc.name    Writedoublearray interface, Out-of-bounds value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_02000", 0, async function(){
@@ -5201,7 +5598,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_02100
      * @tc.name    Call the writebooleanarray interface, write the array to the messageparcel instance,
      *             and call readbooleanarray to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_02100", 0, async function(done){
@@ -5230,7 +5627,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_02200
      * @tc.name    Call the writebooleanarray interface, write the array to the messageparcel instance,
      *             and call readbooleanarray (datain: number []) to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_02200", 0, async function(done){
@@ -5267,7 +5664,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_02300
      * @tc.name    Writebooleanarray interface, illegal value validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_02300", 0, async function(done){
@@ -5296,7 +5693,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_02400
      * @tc.name    Writebooleanarray Interface for length verification of input parameters
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_02400", 0, async function(){
@@ -5323,7 +5720,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_02500
      * @tc.name    Call the writechararray interface, write the array to the messageparcel instance,
      *             and call readchararray to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_02500", 0, async function(done){
@@ -5352,7 +5749,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_02600
      * @tc.name    Call the writechararray interface, write the array to the messageparcel instance,
      *             and call readchararray (datain: number []) to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_02600", 0, async function(done){
@@ -5385,7 +5782,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_02700
      * @tc.name    Writechararray interface, illegal value validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_02700", 0, async function(done){
         console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageParcel_02700---------------------------");
@@ -5413,7 +5810,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_02800
      * @tc.name    Writechararray Indicates the length of an interface input parameter
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_02800", 0, async function(){
         console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageParcel_02800---------------------------");
@@ -5435,7 +5832,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_02900
      * @tc.name    Call the writestringarray interface, write the array to the messageparcel instance,
      *             and call readstringarray (datain: number []) to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_02900", 0, async function(){
@@ -5462,7 +5859,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_03000
      * @tc.name    Call the writestringarray interface, write the array to the messageparcel instance,
      *             and call readstringarray() to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_03000", 0, async function(){
@@ -5493,7 +5890,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_03100
      * @tc.name    Writestringarray interface, illegal value validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_03100", 0, async function(){
@@ -5512,7 +5909,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_03200
      * @tc.name    writeStringArray Interface for length verification of input parameters
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_03200", 0, async function(){
@@ -5535,7 +5932,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_03300
      * @tc.name    Call the writebytearray interface, write the array to the messageparcel instance,
      *             and call readbytearray to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_03300", 0, async function(done){
@@ -5564,7 +5961,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_03400
      * @tc.name    Call the writebytearray interface, write the array to the messageparcel instance,
      *             and call readbytearray (datain: number []) to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_03400", 0, async function(done){
@@ -5594,7 +5991,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_03500
      * @tc.name    Writebytearray interface, boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_03500", 0, async function(done){
@@ -5627,7 +6024,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_03600
      * @tc.name    Writebytearray interface, illegal value validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_03600", 0, async function(done){
@@ -5660,7 +6057,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_03700
      * @tc.name    Writebytearray Interface，input parameter length verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_03700", 0, async function(){
@@ -5683,7 +6080,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_03800
      * @tc.name    Call the writeintarray interface, write the array to the messageparcel instance,
      *             and call readintarray to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_03800", 0, async function(done){
@@ -5712,7 +6109,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_03900
      * @tc.name    Call the writeintarray interface, write the array to the messageparcel instance,
      *             and call readintarray (datain: number []) to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_03900", 0, async function(done){
@@ -5745,7 +6142,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_04000
      * @tc.name    Writeintarray interface, boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_04000", 0, async function(){
@@ -5772,7 +6169,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_04100
      * @tc.name    Writeintarray interface, illegal value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_04100", 0, async function(){
@@ -5804,7 +6201,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_04200
      * @tc.name    Writeintarray interface, input parameter length verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_04200", 0, async function(){
@@ -5827,7 +6224,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_04300
      * @tc.name    Call the writefloatarray interface, write the array to the messageparcel instance,
      *             and call readfloatarray to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_04300", 0, async function(done){
@@ -5856,7 +6253,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_04400
      * @tc.name    Call the writefloatarray interface, write the array to the messageparcel instance,
      *             and call readfloatarray (datain: number []) to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_04400", 0, async function(done){
@@ -5886,7 +6283,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_04500
      * @tc.name    Writefloatarray interface, boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_04500", 0, async function(done){
@@ -5917,7 +6314,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_04600
      * @tc.name    Writefloatarray interface, boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_04600", 0, async function(done){
@@ -5948,7 +6345,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_04700
      * @tc.name    Writefloatarray interface, Longest array verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_04700", 0, async function(){
@@ -5971,7 +6368,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_04800
      * @tc.name    Call the writeShort interface to write the short integer data to the messageparcel instance,
      *             and call readshort to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_04800", 0, async function(done){
@@ -5999,7 +6396,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_04900
      * @tc.name    WriteShort interface, boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_04900", 0, async function(done){
@@ -6034,7 +6431,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_05000
      * @tc.name    WriteShort interface, Boundary value minimum value out of bounds verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_05000", 0, async function(done){
@@ -6061,7 +6458,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_05100
      * @tc.name    WriteShort interface, Boundary value maximum value out of bounds verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_05100", 0, async function(done){
@@ -6089,7 +6486,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_05200
      * @tc.name    Call writelong interface to write long integer data to messageparcel instance
      *             and call readlong to read data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_05200", 0, async function(done){
@@ -6118,7 +6515,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_05300
      * @tc.name    Writelong interface, Verification of maximum accuracy value
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_05300", 0, async function(done){
@@ -6146,7 +6543,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_05400
      * @tc.name    Writelong interface, Minimum loss accuracy verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_05400", 0, async function(done){
@@ -6174,7 +6571,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_05500
      * @tc.name    Writelong interface, Maximum loss accuracy verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_05500", 0, async function(done){
@@ -6203,7 +6600,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_05600
      * @tc.name    Call the parallel interface to read and write data to the double instance
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_05600", 0,async function(done){
@@ -6231,7 +6628,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_05700
      * @tc.name    Writedouble interface, boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_05700", 0,async function(){
@@ -6258,7 +6655,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_05800
      * @tc.name    Writedouble interface, Minimum boundary value out of bounds verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_05800", 0,async function(){
@@ -6285,7 +6682,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_05900
      * @tc.name    Writedouble interface, illegal value validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_05900", 0,async function(){
@@ -6305,7 +6702,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_06000
      * @tc.name    Call the writeboolean interface to write the data to the messageparcel instance,
      *             and call readboolean to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_06000", 0,async function(done){
@@ -6334,7 +6731,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_06100
      * @tc.name    Call the writeboolean interface to write the data to the messageparcel instance,
      *             and call readboolean to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_06100", 0,async function(done){
@@ -6362,7 +6759,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_06200
      * @tc.name    Writeboolean interface, illegal value number type verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_06200", 0,async function(){
@@ -6380,7 +6777,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_06300
      * @tc.name    Writeboolean interface, illegal value string type verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_06300", 0,async function(){
@@ -6400,7 +6797,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_06400
      * @tc.name    Call the writechar interface to write the minimum data to the messageparcel instance,
      *               and call readchar to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_06400", 0,async function(done){
@@ -6429,7 +6826,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_06500
      * @tc.name    Call the writechar interface to write the maximum data to the messageparcel instance,
      *              and call readchar to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_06500", 0,async function(done){
@@ -6458,7 +6855,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_06600
      * @tc.name    Call the writechar interface to write the minimum out of range data to the messageparcel instance,
      *              and call readchar to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_06600", 0,async function(done){
@@ -6487,7 +6884,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_06700
      * @tc.name    Call the writechar interface to write the maximum out of range data to the messageparcel instance,
      *              and call readchar to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_06700", 0,async function(done){
@@ -6515,7 +6912,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_06800
      * @tc.name    Writechar interface, illegal value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_06800", 0,async function(){
@@ -6535,7 +6932,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_06900
      * @tc.name    Call the writestring interface to write the data to the messageparcel instance,
      *             and call readstring() to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_06900", 0,async function(done){
@@ -6566,7 +6963,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_07000
      * @tc.name    Writestring interface Maximum data out of range verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_07000", 0,async function(){
@@ -6588,7 +6985,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_07100
      * @tc.name    Writestring interface, illegal value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_07100", 0,async function(){
@@ -6608,7 +7005,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_07200
      * @tc.name    Call the writebyte interface to write data to the messageparcel instance,
      *             and call readbyte to read data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_07200", 0,async function(done){
@@ -6636,7 +7033,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_07300
      * @tc.name    Writebyte interface, boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_07300", 0,async function(done){
@@ -6671,7 +7068,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_07400
      * @tc.name    Writebyte interface, Maximum boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_07400", 0,async function(done){
@@ -6698,7 +7095,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_07500
      * @tc.name    Writebyte interface, Minimum boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_07500", 0,async function(done){
@@ -6725,7 +7122,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_07600
      * @tc.name    Writebyte interface, illegal value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_07600", 0,async function(){
@@ -6744,7 +7141,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_07700
      * @tc.name    Call the writeint interface to write the data to the messageparcel instance,
      *             and call readint to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_07700", 0,async function(done){
@@ -6772,7 +7169,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_07800
      * @tc.name    Writeint interface, boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_07800", 0,async function(done){
@@ -6807,7 +7204,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_07900
      * @tc.name    Writeint interface, Verification of minimum boundary overrun value
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_07900", 0,async function(done){
@@ -6834,7 +7231,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_08000
      * @tc.name    Writeint interface, Verification of maximum boundary overrun value
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_08000", 0,async function(done){
@@ -6861,7 +7258,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_08100
      * @tc.name    Writeint interface, illegal value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_08100", 0,async function(){
@@ -6880,7 +7277,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_08200
      * @tc.name    Call the writefloat interface to write data to the messageparcel instance,
      *             and call readfloat to read data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_08200", 0,async function(done){
@@ -6908,7 +7305,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_08300
      * @tc.name    Writefloat interface, Minimum boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_08300", 0,async function(done){
@@ -6936,7 +7333,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_08400
      * @tc.name    Writefloat interface, Maximum boundary value verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_08400", 0,async function(done){
@@ -6964,7 +7361,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_08500
      * @tc.name    Writefloat interface, Verification of maximum boundary overrun value
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_08500", 0,async function(done){
@@ -6992,7 +7389,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_08600
      * @tc.name    Writefloat interface, Verification of minimum boundary overrun value
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_08600", 0,async function(done){
@@ -7020,7 +7417,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_08700
      * @tc.name    Writefloat interface, illegal value validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_08700", 0,async function(){
@@ -7040,7 +7437,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_08800
      * @tc.name    Call the getRawDataCapacity interface to get the maximum amount of raw data that a MessageParcel
                      can hold
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_08800", 0,async function(done){
@@ -7071,7 +7468,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_08900
     * @tc.name    Test messageparcel to deliver rawdata data
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_08900", 0, async function(done){
@@ -7104,7 +7501,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_09000
     * @tc.name    Test messageparcel to pass abnormal rawdata data, and expand the capacity for verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_09000", 0, async function(done){
@@ -7142,7 +7539,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_09100
     * @tc.name    Test messageparcel to pass exception rawdata data data interception verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_09100", 0, async function(done){
@@ -7179,7 +7576,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_09200
     * @tc.name    Test messageParcel to deliver out-of-bounds RawData data
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_09200", 0, async function(done){
@@ -7212,7 +7609,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_09300
     * @tc.name    Test messageParcel to deliver illegal RawData data
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_09300", 0, async function(){
@@ -7233,7 +7630,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_09400
      * @tc.name    Call the writeremoteobject interface to serialize the remote object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_09400", 0,async function(){
@@ -7253,7 +7650,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_09500
      * @tc.name    Call the writeremoteobject interface to serialize the remote object and pass in the empty object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_09500", 0,async function(){
@@ -7272,7 +7669,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_09600
      * @tc.name    Call the writeremoteobject interface to serialize the remote object and pass in the constructor object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_09600", 0,async function(){
@@ -7292,7 +7689,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_09700
      * @tc.name    Call the writesequenceable interface to write the custom serialized
      *             object to the messageparcel instance
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_09700", 0,async function(){
@@ -7314,7 +7711,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_09800
      * @tc.name    Call the writesequenceable interface to write the custom serialized
      *             object to the messageparcel instance, Migration to read
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_09800", 0,async function(){
@@ -7336,7 +7733,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_09900
      * @tc.name    After the server finishes processing, write noexception first before writing the result,
      *             and the client calls readexception to judge whether the server is abnormal
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_09900", 0,async function(done){
@@ -7366,7 +7763,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_10000
      * @tc.name    If the data on the server is abnormal, the client calls readexception
      *             to judge whether the server is abnormal
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_10000", 0,async function(done){
@@ -7395,7 +7792,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_10100
      * @tc.name    Serializable object marshaling and unmarshalling test
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_10100", 0, async function(done){
@@ -7426,7 +7823,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_10200
      * @tc.name    Non serializable object marshaling test
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_10200", 0, async function(done){
@@ -7449,7 +7846,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_10300
      * @tc.name    The server did not send a serializable object, and the client was ungrouped
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_10300", 0,async function(done){
@@ -7479,7 +7876,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_10400
      * @tc.name    Call the writesequenceable interface to write the custom serialized object to the
      *             messageparcel instance, and call readsequenceable to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_10400", 0,async function(done){
@@ -7511,7 +7908,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_10500
      * @tc.name    Call the writesequenceablearray interface to write the custom serialized object array (1, 2, 3) to
      *              the messageparcel instance, and call readsequenceablearray to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_10500", 0,async function(done){
@@ -7547,7 +7944,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_10600
      * @tc.name    Call the writesequenceablearray interface to write the custom serialized object to the
      *             messageparcel instance, and call readsequenceablearray to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_10600", 0,async function(done){
@@ -7583,7 +7980,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_10700
      * @tc.name    Call the writesequenceablearray interface to write the custom
      *             serialized object to the messageparcel instance
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_10700", 0,async function(){
@@ -7603,7 +8000,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_10800
      * @tc.name    Call the writeremoteobjectarray interface to write the object array to the messageparcel
      *             instance, and call readremoteobjectarray to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_10800", 0,async function(done){
@@ -7650,7 +8047,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_10900
      * @tc.name    Call the writeremoteobjectarray interface to write the object array to the messageparcel instance,
      *             and call readremoteobjectarray (objects: iremoteobject []) to read the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_10900", 0,async function(done){
@@ -7693,7 +8090,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_11000
      * @tc.name    Test messageparcel to deliver the reply message received in promise across processes
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_11000", 0,async function(done){
@@ -7741,7 +8138,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_11100
      * @tc.name    Test the cross process delivery of messageparcel and receive the reply message
      *             in the callback function
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_11100", 0,async function(done){
@@ -7797,7 +8194,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_11200
      * @tc.name    Test the cross process transmission of messageparcel.
      *             After receiving the reply message in promise, read various types of arrays in order
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_11200", 0,async function(done){
@@ -7851,7 +8248,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.name    Test messageparcel cross process delivery. After receiving the reply message in promise,
      *             the client constructs an empty array in sequence and reads the data from the reply message
      *             into the corresponding array
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_11300", 0,async function(done){
@@ -7903,7 +8300,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_11400
      * @tc.name    Test messageparcel to pass an object of type iremoteobject across processes
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it('SUB_Softbus_RPC_Compatibility_MessageParcel_11400', 0, async function(done) {
@@ -7938,7 +8335,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_11500
      * @tc.name    Test messageparcel to pass an array of iremoteobject objects across processes
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it('SUB_Softbus_RPC_Compatibility_MessageParcel_11500', 0, async function(done) {
@@ -7983,7 +8380,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_11600
      * @tc.name    Test messageparcel to pass the array of iremoteobject objects across processes. The server
      *             constructs an empty array in onremoterequest and reads it from messageparcel
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it('SUB_Softbus_RPC_Compatibility_MessageParcel_11600', 0, async function(done) {
@@ -8026,7 +8423,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_11700
      * @tc.name    Invoke the rewindRead interface,Set 0-bit offset and read the data after offset
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_11700", 0, async function(done){
@@ -8057,7 +8454,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_11800
      * @tc.name    Invoke the rewindRead interface,Set 1-bit offset and read the data after offset
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_11800", 0, async function(done){
@@ -8087,7 +8484,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_11900
      * @tc.name    Invoke the rewindWrite interface, Set 0-bit offset and write the data after offset
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_11900", 0, async function(done){
@@ -8116,7 +8513,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_12000
      * @tc.name    Invoke the rewindWrite interface, Set 1-bit offset and write the data after offset
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_12000", 0, async function(done){
@@ -8146,7 +8543,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_12100
      * @tc.name    setCapacity Sets the storage capacity of the null MessageParcel instance. The getCapacity
                    obtains the current MessageParcel capacity
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_12100", 0, async function(done){
@@ -8178,7 +8575,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_12200
      * @tc.name    setCapacity Sets the storage capacity of the MessageParcel instance. The getCapacity
                    obtains the current MessageParcel capacity
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_12200", 0, async function(done){
@@ -8208,7 +8605,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_12300
      * @tc.name    Setcapacity test: size limit verification of messageparcel instance
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_12300", 0, async function(){
@@ -8232,7 +8629,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_12400
     * @tc.name    SetCapacity Tests the storage capacity threshold of the MessageParcel instance
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_12400", 0, async function(done){
@@ -8264,7 +8661,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_12500
     * @tc.name    Setcapacity test storage capacity boundary value verification of messageparcel instance
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_12500", 0, async function(){
@@ -8287,7 +8684,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_12600
      * @tc.name    setSize Sets the size of the data contained in the MessageParcel instance. The getSize command
                     reads the data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_12600", 0, async function(done){
@@ -8319,7 +8716,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_12700
      * @tc.name    SetSize: Increases the value of the data contained in the MessageParcel instance by 1,
                     Write setSize
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_12700", 0, async function(done){
@@ -8350,7 +8747,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_12800
      * @tc.name    Verify the messageparcel instance SetSize setting and the instance capacitydata qualification verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_12800", 0, async function(){
@@ -8375,7 +8772,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_12900
      * @tc.name    setSize Sets the storage capacity of the MessageParcel instance to decrease by one.
                    The getSize obtains the current MessageParcel capacity
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_12900", 0, async function(done){
@@ -8407,7 +8804,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_13000
      * @tc.name    Validate the setSize boundary value in the MessageParcel instance
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_13000", 0, async function(done){
@@ -8429,7 +8826,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_13100
      * @tc.name    Verify that setSize is out of bounds in a MessageParcel instance
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_13100", 0, async function(done){
@@ -8452,7 +8849,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_13200
      * @tc.name    Obtains the write and read positions of the MessageParcel
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_13200", 0, async function(done){
@@ -8483,7 +8880,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_13300
      * @tc.name    Obtaining the Writable and Readable Byte Spaces of MessageParcel
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_13300", 0, async function(done){
@@ -8513,7 +8910,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_13400
      * @tc.name    Obtains the writeable and readable byte space and read position of the MessageParcel
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_13400", 0, async function(done){
@@ -8546,7 +8943,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_13500
     * @tc.name    Get the space size of messageparcel to pass rawdata data
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_13500", 0, async function(done){
@@ -8579,20 +8976,19 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_13600
      * @tc.name    Test fixed MessageParcel space size to pass rawData data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_13600", 0, async function(done){
         console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageParcel_13600---------------------------");
         try{
-            let maxsize = 1024;
             let data = rpc.MessageParcel.create();
             expect(data.getRawDataCapacity()).assertEqual(128*M);
             let rawdata = [1, 2, 3];
             let option = new rpc.MessageOption();
             let reply = rpc.MessageParcel.create();
-            expect(data.writeInt(maxsize)).assertTrue();
-            expect(data.writeRawData(rawdata, maxsize)).assertTrue();
+            expect(data.writeInt(rawdata.length)).assertTrue();
+            expect(data.writeRawData(rawdata, rawdata.length)).assertTrue();
             expect(gIRemoteObject != undefined).assertTrue();
             await gIRemoteObject.sendRequest(CODE_WRITE_RAWDATA, data, reply, option).then((result) => {
                 expect(result.errCode).assertEqual(0);
@@ -8611,7 +9007,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_13700
      * @tc.name    Test messageparcel delivery file descriptor object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_13700", 0,async function(){
@@ -8628,7 +9024,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_13800
      * @tc.name    Test that the asObject interface is called by a RemoteObject and returns itself
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_13800", 0,async function(){
@@ -8645,7 +9041,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_13900
      * @tc.name    MessageParcel sendMessageRequest API test
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_13900", 0, async function(done){
@@ -8656,13 +9052,13 @@ describe('RpcJsUnitTest', function(){
             let option = new rpc.MessageOption();
             let reply = rpc.MessageSequence.create();
             data.getRawDataCapacity();
-            data.writeInt(K);
-            data.writeRawData(rawdata, K);
+            data.writeInt(rawdata.length);
+            data.writeRawData(rawdata, rawdata.length);
             expect(gIRemoteObject != undefined).assertTrue();
             await gIRemoteObject.sendMessageRequest(CODE_WRITE_RAWDATA, data, reply, option).then((result) => {
                 expect(result.errCode).assertEqual(0);
-                expect(result.reply.readInt()).assertEqual(K);
-                expect(result.reply.readRawData(K) != rawdata).assertTrue();
+                expect(result.reply.readInt()).assertEqual(rawdata.length);
+                expect(result.reply.readRawData(rawdata.length) != rawdata).assertTrue();
             });
             data.reclaim();
             reply.reclaim();
@@ -8677,7 +9073,7 @@ describe('RpcJsUnitTest', function(){
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_14000
     * @tc.name    Invoke the writestring interface to write data to the messageparcel instance SendRequest Asynchronous
     *               Authentication onRemoteMessageRequest Server Processing
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_14000", 0, async function(done){
@@ -8706,7 +9102,7 @@ describe('RpcJsUnitTest', function(){
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_14100
     * @tc.name    Invoke the writestring interface to write data to the messageparcel instance sendMessageRequest Asynchronous
     *               Authentication onRemoteMessageRequest Server Processing
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_14100", 0, async function(done){
@@ -8735,7 +9131,7 @@ describe('RpcJsUnitTest', function(){
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_14200
     * @tc.name    Invoke the writestring interface to write data to the messageparcel instance. SendRequest asynchronously
     *               verifies the priority processing levels of onRemoteMessageRequest and onRemoteRequest
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_14200", 0, async function(done){
@@ -8764,7 +9160,7 @@ describe('RpcJsUnitTest', function(){
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_14300
     * @tc.name   Invoke the writestring interface to write data to the messageparcel instance. sendMessageRequest asynchronously verifies
     *               the priority processing levels of onRemoteMessageRequest and onRemoteRequest
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_14300", 0, async function(done){
@@ -8792,7 +9188,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_14400
     * @tc.name    writeString check param error Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_14400", 0, function(){
@@ -8816,7 +9212,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_14500
     * @tc.name    writeInterfaceToken Sequence memory alloc failed Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_14500", 0, function(){
@@ -8839,7 +9235,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_14600
     * @tc.name    writeInterfaceToken Write data to message sequence failed Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_14600", 0, function(){
@@ -8862,7 +9258,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_14700
     * @tc.name    readParcelable Sequence memory alloc failed Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_14700", 0, function(){
@@ -8885,7 +9281,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_14800
     * @tc.name    writeRemoteObject is proxy or remote object is invalid Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0   
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_14800", 0,async function(){
@@ -8906,7 +9302,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_14900
     * @tc.name    readParcelable is Call JS callback function failedv Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_14900", 0,async function(){
@@ -8932,7 +9328,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageParcel_15000
     * @tc.name    Call the writeinterfacetoken interface, write the interface descriptor, and read interfacetoken
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageParcel_15000", 0, function(){
@@ -8956,7 +9352,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_00100
      * @tc.name    Test the getwaittime basic method of messageoption
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_00100",0,function(){
@@ -8975,7 +9371,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_00200
      * @tc.name    Test the getwaittime boundary value of messageoption
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_00200",0,function(){
@@ -8996,7 +9392,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_00300
      * @tc.name    Test the getwaittime minimum out of range value of messageoption
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_00300",0,function(){
@@ -9015,7 +9411,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_00400
      * @tc.name    Test the getwaittime maxmum out of range value of messageoption
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_00400",0,function(){
@@ -9034,7 +9430,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_00500
      * @tc.name    Test the getflags basic method of messageoption
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_00500",0,function(){
@@ -9053,7 +9449,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_00600
      * @tc.name    Test the setflags basic method of messageoption
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_00600",0,function(){
@@ -9074,7 +9470,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_00700
      * @tc.name    Test the setflags exception value of messageoption
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_00700",0,function(){
@@ -9093,7 +9489,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_00800
      * @tc.name    Test the unqualified value of setflags of messageoption
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_00800",0,function(){
@@ -9112,7 +9508,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_00900
      * @tc.name    Test constant value detection of messageoption
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_00900",0,function(){
@@ -9131,7 +9527,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_01000
      * @tc.name    Basic method of testing messageoption
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_01000",0,async function(done){
@@ -9166,7 +9562,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_01100
      * @tc.name    Test the setflags of messageoption asynchronously and the sendrequest callback result
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_01100",0, async function(done){
@@ -9197,7 +9593,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_01200
      * @tc.name    MessageOption sendMessageRequest test
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_01200",0, async function(done){
@@ -9228,7 +9624,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_01300
     * @tc.name    setAsync sendMessageRequest test
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_01300",0, async function(done){
@@ -9246,7 +9642,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_01400
     * @tc.name    MessageOption sendMessageRequest test
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_01400",0, async function(done){
@@ -9276,7 +9672,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_01500
     * @tc.name    MessageOption setAsync is true test
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_01500",0, async function(done){
@@ -9306,7 +9702,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_MessageOption_01600
     * @tc.name    setAsync is false sendMessageRequest test
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_MessageOption_01600",0, async function(done){
@@ -9336,7 +9732,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_00100
      * @tc.name    Exception parameter validation of the created anonymous shared memory object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_00100",0,function(){
@@ -9353,7 +9749,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_00200
      * @tc.name    Call the getashmemsize interface to get the size of the shared memory object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_00200",0,function(){
@@ -9376,7 +9772,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_00300
      * @tc.name    Call the getashmemsize interface to get the size of the exception shared memory object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_00300",0,function(){
@@ -9399,7 +9795,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_00400
      * @tc.name    Call the getashmemsize interface to get the size of the maximum shared memory object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_00400",0,function(){
@@ -9419,7 +9815,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_00500
      * @tc.name    Call the getashmemsize interface to obtain the maximum size of the out of bounds shared memory object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_00500",0,function(){
@@ -9439,7 +9835,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_00600
      * @tc.name    Writeashmem exception validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_00600",0,function(){
@@ -9460,7 +9856,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_00700
      * @tc.name    Readfromashmem exception validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_00700",0,function(){
@@ -9481,7 +9877,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_00800
      * @tc.name    Mapashmem interface creates shared file mappings
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_00800",0,function(){
@@ -9500,7 +9896,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_00900
      * @tc.name    Mapashmem exception validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_00900",0,function(){
@@ -9519,7 +9915,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_01000
      * @tc.name    Mapreadandwriteashmem interface creates a shared file map with the protection level of read-write
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_01000",0,function(){
@@ -9538,7 +9934,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_01100
      * @tc.name    Mapreadandwriteashmem exception validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_01100",0,function(){
@@ -9559,7 +9955,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_01200
      * @tc.name    Mapreadonlyashmem interface creates a shared file map with the protection level of read-write
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_01200",0,function(){
@@ -9578,7 +9974,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_01300
      * @tc.name    Mapreadonlyashmem exception validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_01300",0,function(){
@@ -9600,7 +9996,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_01400
      * @tc.name    Setprotection: sets the protection level of the memory area to which the shared file is mapped
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_01400",0,function(){
@@ -9622,7 +10018,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_01500
      * @tc.name    Setprotection exception input parameter verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_01500",0,function(){
@@ -9640,7 +10036,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_01600
      * @tc.name    The writetoashmem interface writes the shared file associated with the object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_01600",0,function(){
@@ -9661,7 +10057,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_01700
      * @tc.name    Writetoashmem interface writes the shared file associated with the object (file boundary value)
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_01700",0,function(){
@@ -9683,7 +10079,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_01800
      * @tc.name    The writetoashmem interface writes the shared data associated with the object minimum boundary crossing file
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_01800",0,function(){
@@ -9707,7 +10103,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_01900
      * @tc.name    The writetoashmem interface writes the shared data associated with the object maximum boundary crossing file
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_01900",0,function(){
@@ -9731,7 +10127,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_02000
      * @tc.name    Writetoashmem interface: writes the boundary location to the shared file associated with the object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_02000",0,function(){
@@ -9752,7 +10148,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_02100
      * @tc.name    Writetoashmem interface: writes the shared file associated with the object at the out of bounds position
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_02100",0,function(){
@@ -9775,7 +10171,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_02200
      * @tc.name    After the permission is set, the writetoashmem interface writes the shared file associated with the object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_02200",0,function(){
@@ -9797,7 +10193,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_02300
      * @tc.name    Writetoashmem exception validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_02300",0,function(){
@@ -9818,7 +10214,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_02400
      * @tc.name    Read data from the shared file associated with readfromashmem
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_02400",0,function(){
@@ -9840,7 +10236,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_02500
      * @tc.name    Readfromashmem exception validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_02500",0,function(){
@@ -9865,7 +10261,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_02600
      * @tc.name    Createashmemfromexisting copies the ashmem object description and creates a new object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_02600",0,function(){
@@ -9890,7 +10286,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_02700
      * @tc.name    Create a shared memory object and call writeashmem to write the shared anonymous
       object into the messageparcel object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_02700",0,function(){
@@ -9917,7 +10313,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_02800
      * @tc.name    Create a non shared memory object and call writeashmem to write the messageparcel object
       object into the messageparcel object
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_02800",0,function(){
@@ -9937,7 +10333,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_02900
      * @tc.name    Test the ashmem object passed by messageparcel
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_02900",0,function(){
@@ -9955,7 +10351,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_03000
     * @tc.name    mapTypedAshmem interface creates shared file mappings
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_03000",0,function(){
@@ -9974,7 +10370,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_03100
     * @tc.name    mapTypedAshmem exception validation
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_03100",0,function(){
@@ -9995,7 +10391,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_03200
     * @tc.name    mapTypedAshmem exception errorcode validation
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_03200",0,function(){
@@ -10016,7 +10412,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_03300
     * @tc.name    mapReadWriteAshmem interface creates a shared file map with the protection level of read-write
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_03300",0,function(){
@@ -10035,7 +10431,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_03400
     * @tc.name    mapReadWriteAshmem exception validation
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_03400",0,function(){
@@ -10057,7 +10453,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_03500
     * @tc.name    Mapreadonlyashmem interface creates a shared file map with the protection level of read-write
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_03500",0,function(){
@@ -10077,7 +10473,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_03600
     * @tc.name    mapReadWriteAshmem exception validation
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_03600",0,function(){
@@ -10100,7 +10496,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_03700
     * @tc.name    setProtectionType exception input parameter verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_03700",0,function(){
@@ -10120,7 +10516,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_03800
     * @tc.name    The writetoashmem interface writes the shared file associated with the object
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_03800",0,function(){
@@ -10146,7 +10542,7 @@ describe('RpcJsUnitTest', function(){
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_03900
     * @tc.name    Create a non shared memory object and call setProtectionType to write the messageparcel object
     *               object into the messageparcel object
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_03900",0,function(){
@@ -10164,7 +10560,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_04000
     * @tc.name    Mapreadonlyashmem exception validation
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_04000",0,function(){
@@ -10186,7 +10582,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_04100
     * @tc.name    createAshmem check param error Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_04100",0,function(){
@@ -10205,7 +10601,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_04200
     * @tc.name    mapReadWriteAshmem exception validation 1900001
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_04200",0,function(){
@@ -10225,7 +10621,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_04300
     * @tc.name    createAshmem check param error Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_04300",0,function(){
@@ -10243,7 +10639,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_04400
     * @tc.name    setProtectionType exception validation
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_04400",0,function(){
@@ -10262,7 +10658,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_04500
     * @tc.name    setProtectionType check param error Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_04500",0,function(){
@@ -10282,7 +10678,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_04600
     * @tc.name    setProtectionType is 1900002 exception validation
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_04600",0,function(){
@@ -10302,7 +10698,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_04700
     * @tc.name    writeAshmem errCode 1900003 exception validation
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */       
     it("SUB_Softbus_RPC_Compatibility_Ashmem_04700",0,function(){
@@ -10324,7 +10720,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_04800
     * @tc.name    readAshmem exception validation
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_04800",0,function(){
@@ -10347,7 +10743,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_04900
     * @tc.name    mapTypedAshmem check param error Error message verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_04900",0,function(){
@@ -10369,7 +10765,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_05000
     * @tc.name    mapTypedAshmem exception validation
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3 
     */
     it("SUB_Softbus_RPC_Compatibility_Ashmem_05000",0,function(){
@@ -10390,7 +10786,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_00100
      * @tc.name    Call sendrequestresult interface to send data
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_00100",0,async function(done){
@@ -10421,7 +10817,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_00200
      * @tc.name    Test that messageparcel passes through the same process, and the client
      *             receives the reply message in promise
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_00200", 0,async function(done){
@@ -10469,7 +10865,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_00300
      * @tc.name    Test that messageparcel passes through the same process, and the client
      *             receives the reply message in the callback function
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_00300", 0,async function(done){
@@ -10521,7 +10917,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_00400
      * @tc.name    Iremoteobject, register death notification verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_00400", 0,async function(){
@@ -10541,7 +10937,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_00500
      * @tc.name    Do not get the server agent, do not create a remoteobject instance, and directly getcallingpid,
      *             getcallingpid, getcallingdeviceid, getlocaldeviceid
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_00500", 0,async function(){
@@ -10560,7 +10956,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_00600
      * @tc.name    Querylocalinterface searches for objects based on descriptors
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_00600", 0,async function(){
@@ -10581,7 +10977,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_00700
      * @tc.name    Getinterfacedescriptor to get the interface description
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_00700", 0,async function(){
@@ -10602,7 +10998,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_00800
      * @tc.name    IRemoteObject sendMessageRequest API Test
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_00800", 0,async function(done){
@@ -10650,7 +11046,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_00900
      * @tc.name    Test that messageparcel passes through the same process, and the client
      *             receives the reply message in the callback function
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_00900", 0,async function(done){
@@ -10706,7 +11102,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_01100
     * @tc.name    getDescriptor to get the interface description
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_01100", 0,async function(){
@@ -10732,7 +11128,7 @@ describe('RpcJsUnitTest', function(){
     * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_01200
     * @tc.name    Test that MessageSequence passes through the same process, and the client
     *             receives the reply message in the callback function
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_01200", 0,async function(done){
@@ -10787,7 +11183,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_01300
     * @tc.name    Iremoteobject, register death notification verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_01300", 0,async function(){
@@ -10804,7 +11200,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_01400
     * @tc.name    Iremoteobject, register death notification verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   0
     */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_01400", 0,async function(){
@@ -10823,7 +11219,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_01500
     * @tc.name    RemoteObject, registerDeathRecipient notification verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_01500", 0,async function(){
@@ -10841,7 +11237,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_01600
     * @tc.name    RemoteObject, unregisterDeathRecipient notification verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_IRemoteObject_01600", 0,async function(){
@@ -10859,7 +11255,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_00100
      * @tc.name    Call adddeathrecipient to register the death notification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_00100", 0,async function(){
@@ -10880,7 +11276,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_00200
      * @tc.name    Adddeathrecipient verifies the minimum boundary out of range value of the interface flag
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_00200", 0,async function(){
@@ -10898,7 +11294,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_00300
      * @tc.name    Adddeathrecipient verifies the maximum boundary out of range value of the interface flag
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_00300", 0,async function(){
@@ -10916,7 +11312,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_00400
      * @tc.name    Adddeathrecipient verifies the minimum boundary out of range value of the interface flag
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_00400", 0,async function(){
@@ -10934,7 +11330,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_00500
      * @tc.name    Adddeathrecipient verifies the maximum boundary out of range value of the interface flag
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_00500", 0,async function(){
@@ -10952,7 +11348,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_00600
      * @tc.name    Call isobjectdead to check whether the object is dead
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_00600", 0,async function(){
@@ -10976,7 +11372,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_00700
      * @tc.name    Getinterfacedescriptor to get the object interface description
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_00700", 0,async function(){
@@ -10993,7 +11389,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_00800
      * @tc.name    Querylocalinterface searches for objects based on descriptors
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_00800", 0,async function(){
@@ -11013,7 +11409,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_00900
      * @tc.name    Transaction constant validation
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_00900", 0, async function(){
@@ -11033,7 +11429,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_01000
     * @tc.name    Call isobjectdead to check whether the object is dead
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_01000", 0,async function(){
@@ -11060,7 +11456,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_01100
     * @tc.name    getDescriptor to get the object interface description
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_01100", 0,async function(){
@@ -11078,7 +11474,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_01200
     * @tc.name    getLocalInterface searches for objects based on descriptors
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_01200", 0,async function(){
@@ -11101,7 +11497,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_01300
     * @tc.name    Call registerDeathRecipient to register the death notification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_01300", 0,async function(){
@@ -11123,7 +11519,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_01400
     * @tc.name    registerDeathRecipient Validates the interface flags input parameter boundary value
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_01400", 0,async function(){
@@ -11142,7 +11538,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_01500
     * @tc.name    registerDeathRecipient Validates the interface flags input parameter boundary value
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_01500", 0,async function(){
@@ -11161,7 +11557,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_01600
     * @tc.name    registerDeathRecipient Validates the interface flags input parameter boundary value
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_01600", 0,async function(){
@@ -11180,7 +11576,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_01700
     * @tc.name    registerDeathRecipient Validates the interface flags input parameter boundary value
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_01700", 0,async function(){
@@ -11199,7 +11595,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_01800
     * @tc.name    getLocalInterface 1900005 searches for objects based on descriptors
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_RemoteProxy_01800", 0,async function(){
@@ -11222,7 +11618,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_00100
      * @tc.name    Create exception object and verify the function of flushcommands interface
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it('SUB_Softbus_RPC_Compatibility_IPCSkeleton_00100', 0, async function() {
@@ -11240,7 +11636,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_00200
      * @tc.name    Establish constructor object and verify the function of flushcommands interface
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it('SUB_Softbus_RPC_Compatibility_IPCSkeleton_00200', 0, async function() {
@@ -11258,7 +11654,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_00300
      * @tc.name    Create object, getinterfacedescriptor interface function verification
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it('SUB_Softbus_RPC_Compatibility_IPCSkeleton_00300', 0, async function() {
@@ -11277,7 +11673,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_00400
      * @tc.name    Call getCallingPid, getCallingUid to get the local value
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it('SUB_Softbus_RPC_Compatibility_IPCSkeleton_00400', 0, async function() {
@@ -11295,7 +11691,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_00500
      * @tc.name    Call getlocaldeviceid, getcallingdeviceid to get the local value
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it('SUB_Softbus_RPC_Compatibility_IPCSkeleton_00500', 0, async function() {
@@ -11314,7 +11710,7 @@ describe('RpcJsUnitTest', function(){
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_00600
      * @tc.name    Do not get the server agent, do not create a remoteobject instance, and directly getcallingpid,
      *             getcallingpid, getcallingdeviceid, getlocaldeviceid
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it('SUB_Softbus_RPC_Compatibility_IPCSkeleton_00600', 0, async function() {
@@ -11334,7 +11730,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_00700
      * @tc.name    Test the getcallingpid and getcallinguid basic methods of ipcskeleton
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_00700", 0,async function(done){
@@ -11367,7 +11763,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_00800
      * @tc.name    Basic method of testing ipcskeleton
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_00800", 0,async function(done){
@@ -11402,7 +11798,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_00900
      * @tc.name    Setcallingidentity interface flag input parameter is null authentication
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   0
      */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_00900", 0,async function(){
@@ -11419,7 +11815,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_01000
      * @tc.name    Setcallingidentity interface flag input parameter is 0 authentication
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_01000", 0,async function(){
@@ -11436,7 +11832,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_01100
      * @tc.name    Setcallingidentity interface flag input parameter is boundary value authentication
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_01100", 0,async function(){
@@ -11456,7 +11852,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_01200
      * @tc.name    Basic method of verifying ipcskeleton
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_01200",0,async function(done){
@@ -11503,7 +11899,7 @@ describe('RpcJsUnitTest', function(){
     /*
      * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_01300
      * @tc.name    IPCSkeleton sendMessageRequest API test
-     * @tc.desc    Function test
+     * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
      * @tc.level   3
      */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_01300", 0,async function(done){
@@ -11536,7 +11932,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_01400
     * @tc.name    Create an empty object and verify the function of the flushCmdBuffer interface
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_01400", 0, async function() {
@@ -11555,7 +11951,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_01500
     * @tc.name    Create an null object and verify the function of the flushCmdBuffer interface
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_01500", 0, async function() {
@@ -11574,7 +11970,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_01600
     * @tc.name    Basic method of testing ipcskeleton Communication failed
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_01600", 0,async function(){
@@ -11594,7 +11990,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_01700
     * @tc.name    Create an empty object and verify the function of the flushCmdBuffer interface Only remote object permitted.
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_01700", 0, async function() {
@@ -11615,7 +12011,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_01800
     * @tc.name    restoreCallingIdentity Interface flags input parameter boundary value verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_01800", 0,async function(){
@@ -11633,7 +12029,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_01900
     * @tc.name    restoreCallingIdentity Interface flags input parameter 0 value verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_01900", 0,async function(){
@@ -11651,7 +12047,7 @@ describe('RpcJsUnitTest', function(){
     /*
     * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_02000
     * @tc.name    restoreCallingIdentity Interface flags input parameter null value verification
-    * @tc.desc    Function test
+    * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   3
     */
     it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_02000", 0,async function(){

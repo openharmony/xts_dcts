@@ -439,7 +439,7 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0800, TestSize.L
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendFile_Fun_0900
  * @tc.name   : Send 4 files once
- * @tc.desc   : Test send file function
+ * @tc.desc   : [G-DISTRIBUTED-0206]禁止修改传输的默认协议，新增或者变更默认传输协议必须通过协商机制来实现
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
@@ -478,7 +478,7 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0900, TestSize.L
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0100
  * @tc.name   : test SendFile 8M By P2P
- * @tc.desc   : Test send file function
+ * @tc.desc   : [G-DISTRIBUTED-0206]禁止修改传输的默认协议，新增或者变更默认传输协议必须通过协商机制来实现
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */

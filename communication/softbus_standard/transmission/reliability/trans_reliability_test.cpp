@@ -1192,3 +1192,23 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_5100, Tes
     ret = RemoveSessionServer(DEF_PKG_NAME, sessionName.c_str());
     EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS-ctrl fail";
 }
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_5200
+ * @tc.name   : GetNodeKeyInfoTestCase
+ * @tc.desc   : GetNodeKeyInfo Performance Testing
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_GetNodeKey_Reli_5200, TestSize.Level3)
+{
+        int ret;
+        NodeBasicInfo info;
+        char udid[UDID_BUF_LEN] = {0};
+        (void)memset_s(&info, sizeof(NodeBasicInfo), 0, sizeof(NodeBasicInfo));
+        GetLocalNodeDeviceInfo(DEF_PKG_NAME, &info);
+        ret = GetNodeKeyInfo(DEF_PKG_NAME, info.networkId, NODE_KEY_UDID,
+            (uint8_t *)udid, UDID_BUF_LEN);
+        EXPECT_EQ(0, ret) <<  "GetNodeKeyInfoTestCase failed.";
+}
