@@ -13,116 +13,71 @@
  * limitations under the License.
  */
 
-import ApiMessage from '../common/apiMessage.js'
-import ApiResult from '../common/apiResult.js'
-import rpc from '@ohos.rpc'
-var logTag = "RpcClient";
-var CODE_INVOKE =1;
-var results;
+import ApiMessage from '../common/apiMessage.js';
+import ApiResult from '../common/apiResult.js';
+import rpc from '@ohos.rpc';
+let logTag = "RpcClient_RemoteHelper:  ";
+let CODE_INVOKE =1;
 export default class RemoteHelper{
-    testservice = undefined
-    gIRemoteObject = undefined
+    testservice = undefined;
+    gIRemoteObject = undefined;
     constructor(testservice,gIRemoteObject){
-        this.testservice = testservice
-	this.gIRemoteObject = gIRemoteObject
+        this.testservice = testservice;
+        this.gIRemoteObject = gIRemoteObject;
     }
 
+    async getReq(message) {
+        console.log(logTag + "getReq begin");
+        let messageParcel = rpc.MessageParcel.create();
+        console.log(logTag + "create object successfully.");
+        let messageParcelreply = rpc.MessageParcel.create();
+        let option = new rpc.MessageOption();
+        let writeResult = messageParcel.writeSequenceable(message);
+        await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
+        console.log(logTag + "sendRequest got result");
+        let ret = new ApiMessage(null, null, null, null, null, null, null);
+        let dataReply = messageParcelreply.readSequenceable(ret);
+        console.log(logTag + "run readSequenceable success, result is" + dataReply);
+        let retApi = JSON.parse(ret._apiResult);
+        let retApiResult = retApi._result;
+        console.log(logTag + " read success, results is" + retApiResult);
+        return retApiResult;
+}
 
     async startBackgroundRunning(){
         console.info(logTag + "_methodName is startBackgroundRunning");
         let message = new ApiMessage("openHarmony","testApi","startBackgroundRunning"," ",[],[]," ");
-        var messageParcel = rpc.MessageParcel.create();
-        console.log(logTag + "create object successfully.");
-        var messageParcelreply = rpc.MessageParcel.create();
-        var option = new rpc.MessageOption();
-        var writeResult = messageParcel.writeSequenceable(message);
-        await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-        console.log(logTag + "sendRequest got result");
-        var ret = new ApiMessage(null, null, null, null, null, null,null);
-        var dataReply = messageParcelreply.readSequenceable(ret);
-        console.log(logTag + "run readSequenceable success, result is" + dataReply);
-        results = JSON.parse(ret._apiResult);
-
-        console.log(logTag + " read success, results is" + results._result);
-        return results._result;
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
     }
 
     async stopBackgroundRunning(){
         console.info(logTag + "_methodName is stopBackgroundRunning");
         let message = new ApiMessage("openHarmony","testApi","stopBackgroundRunning"," ",[],[]," ");
-        var messageParcel = rpc.MessageParcel.create();
-        console.log(logTag + "create object successfully.");
-        var messageParcelreply = rpc.MessageParcel.create();
-        var option = new rpc.MessageOption();
-        var writeResult = messageParcel.writeSequenceable(message);
-        await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-        console.log(logTag + "sendRequest got result");
-        var ret = new ApiMessage(null, null, null, null, null, null,null);
-        var dataReply = messageParcelreply.readSequenceable(ret);
-        console.log(logTag + "run readSequenceable success, result is" + dataReply);
-        results = JSON.parse(ret._apiResult);
-
-        console.log(logTag + " read success, results is" + results._result);
-        return results._result;
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
     }
    async add(a,b) {
-            console.log(logTag+"_methodName is add");
+        console.log(logTag+"_methodName is add");
 	    let message = new ApiMessage("openHarmony","testApi","add"," ",
 		    ["number","number"],[String(a),String(b)]," ");
-
-            var messageParcel = rpc.MessageParcel.create();
-            console.log(logTag + "create object successfully.");
-            var messageParcelreply = rpc.MessageParcel.create();
-            var option = new rpc.MessageOption();
-            var writeResult = messageParcel.writeSequenceable(message);
-	    await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-            console.log(logTag + "sendRequest got result");
-            var ret = new ApiMessage(null, null, null, null, null, null,null);
-            var dataReply = messageParcelreply.readSequenceable(ret);
-            console.log(logTag + "run readSequenceable success, result is" + dataReply);
-            results = JSON.parse(ret._apiResult);
-
-	    console.log(logTag + " read success, results is" + results._result);
-	    return results._result;
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
     }
 
 
     async sub(a,b) {
         console.log(logTag+"_methodName is sub");
-            let message = new ApiMessage("openHarmony","testApi","sub"," ",
+        let message = new ApiMessage("openHarmony","testApi","sub"," ",
 		    ["number","number"],[String(a),String(b)]," ");
-            var messageParcel = rpc.MessageParcel.create();
-            console.log(logTag + "create object successfully.");
-            var messageParcelreply = rpc.MessageParcel.create();
-            var option = new rpc.MessageOption();
-            var writeResult = messageParcel.writeSequenceable(message);
-            await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-            console.log(logTag + "sendRequest got result");
-            var ret = new ApiMessage(null, null, null, null, null, null,null);
-            var dataReply = messageParcelreply.readSequenceable(ret);
-            console.log(logTag + "run readSequenceable success, result is" + dataReply);
-            results = JSON.parse(ret._apiResult);
-
-            console.log(logTag + " read success, results is" + results._result);
-            return results._result;
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
     }
     async createKvManager(){
         console.info(logTag + "_methodName is createKvManager");
         let message = new ApiMessage("openHarmony","testApi","createKvManager"," ",[],[]," ");
-        var messageParcel = rpc.MessageParcel.create();
-        console.log(logTag + "create object successfully.");
-        var messageParcelreply = rpc.MessageParcel.create();
-        var option = new rpc.MessageOption();
-        var writeResult = messageParcel.writeSequenceable(message);
-        await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-        console.log(logTag + "sendRequest got result");
-        var ret = new ApiMessage(null, null, null, null, null, null,null);
-        var dataReply = messageParcelreply.readSequenceable(ret);
-        console.log(logTag + "run readSequenceable success, result is" + dataReply);
-        results = JSON.parse(ret._apiResult);
-
-        console.log(logTag + " read success, results is" + results._result);
-        return results._result;
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
     }
 
     async getKvStore(storeId,SecurityLevel,encrypt){
@@ -132,39 +87,15 @@ export default class RemoteHelper{
         console.info(logTag + "_methodName is getKvStore");
         let message = new ApiMessage("openHarmony","testApi","getKvStore"," ",
         ["string","string","string"],[String(storeId),String(SecurityLevel),String(encrypt)]," ");
-        var messageParcel = rpc.MessageParcel.create();
-        console.log(logTag + "create object successfully.");
-        var messageParcelreply = rpc.MessageParcel.create();
-        var option = new rpc.MessageOption();
-        var writeResult = messageParcel.writeSequenceable(message);
-        await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-        console.log(logTag + "sendRequest got result");
-        var ret = new ApiMessage(null, null, null, null, null, null,null);
-        var dataReply = messageParcelreply.readSequenceable(ret);
-        console.log(logTag + "run readSequenceable success, result is" + dataReply);
-        results = JSON.parse(ret._apiResult);
-
-        console.log(logTag + " read success, results is" + results._result);
-        return results._result;
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
     }
     async closeKvStore(storeId){
         console.info(logTag + "_methodName is closeKvStore");
         let message = new ApiMessage("openHarmony","testApi","closeKvStore"," ",
         ["string"],[String(storeId)]," ");
-        var messageParcel = rpc.MessageParcel.create();
-        console.log(logTag + "create object successfully.");
-        var messageParcelreply = rpc.MessageParcel.create();
-        var option = new rpc.MessageOption();
-        var writeResult = messageParcel.writeSequenceable(message);
-        await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-        console.log(logTag + "sendRequest got result");
-        var ret = new ApiMessage(null, null, null, null, null, null,null);
-        var dataReply = messageParcelreply.readSequenceable(ret);
-        console.log(logTag + "run readSequenceable success, result is" + dataReply);
-        results = JSON.parse(ret._apiResult);
-
-        console.log(logTag + " read success, results is" + results._result);
-        return results._result;
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
     }
 
     async kvPut(key,value,valueType){
@@ -176,60 +107,24 @@ export default class RemoteHelper{
         let message = new ApiMessage("openHarmony","testApi","kvPut"," ",
 		    ["string",valueType,"string"],[String(key),value.toString(),String(valueType)]," ");
         console.info(logTag + " test key is: " + key + " value is " + value.toString())
-        var messageParcel = rpc.MessageParcel.create();
-        console.log(logTag + "create object successfully.");
-        var messageParcelreply = rpc.MessageParcel.create();
-        var option = new rpc.MessageOption();
-        var writeResult = messageParcel.writeSequenceable(message);
-        await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-        console.log(logTag + "sendRequest got result");
-        var ret = new ApiMessage(null, null, null, null, null, null,null);
-        var dataReply = messageParcelreply.readSequenceable(ret);
-        console.log(logTag + "run readSequenceable success, result is" + dataReply);
-        results = JSON.parse(ret._apiResult);
-
-        console.log(logTag + " read success, results is" + results._result);
-        return results._result;
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
     }
 
     async kvGet(key){
         console.info(logTag + "_methodName is kvGet");
         let message = new ApiMessage("openHarmony","testApi","kvGet"," ",
 		    ["string"],[String(key)]," ");
-        var messageParcel = rpc.MessageParcel.create();
-        console.log(logTag + "create object successfully.");
-        var messageParcelreply = rpc.MessageParcel.create();
-        var option = new rpc.MessageOption();
-        var writeResult = messageParcel.writeSequenceable(message);
-        await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-        console.log(logTag + "sendRequest got result");
-        var ret = new ApiMessage(null, null, null, null, null, null,null);
-        var dataReply = messageParcelreply.readSequenceable(ret);
-        console.log(logTag + "run readSequenceable success, result is" + dataReply);
-        results = JSON.parse(ret._apiResult);
-
-        console.log(logTag + " read success, results is" + results._result);
-        return results._result;
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
     }
 
     async kvDelete(key){
         console.info(logTag + "_methodName is kvDelete");
         let message = new ApiMessage("openHarmony","testApi","kvDelete"," ",
 		    ["string"],[String(key)]," ");
-        var messageParcel = rpc.MessageParcel.create();
-        console.log(logTag + "create object successfully.");
-        var messageParcelreply = rpc.MessageParcel.create();
-        var option = new rpc.MessageOption();
-        var writeResult = messageParcel.writeSequenceable(message);
-        await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-        console.log(logTag + "sendRequest got result");
-        var ret = new ApiMessage(null, null, null, null, null, null,null);
-        var dataReply = messageParcelreply.readSequenceable(ret);
-        console.log(logTag + "run readSequenceable success, result is" + dataReply);
-        results = JSON.parse(ret._apiResult);
-
-        console.log(logTag + " read success, results is" + results._result);
-        return results._result;
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
     }
 
     async kvSync(deviceID,mode){
@@ -238,20 +133,8 @@ export default class RemoteHelper{
         console.info(logTag + "_methodName is kvDelete");
         let message = new ApiMessage("openHarmony","testApi","kvSync"," ",
 		    ["string","string"],[String(deviceID),String(mode)]," ");
-        var messageParcel = rpc.MessageParcel.create();
-        console.log(logTag + "create object successfully.");
-        var messageParcelreply = rpc.MessageParcel.create();
-        var option = new rpc.MessageOption();
-        var writeResult = messageParcel.writeSequenceable(message);
-        await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-        console.log(logTag + "sendRequest got result");
-        var ret = new ApiMessage(null, null, null, null, null, null,null);
-        var dataReply = messageParcelreply.readSequenceable(ret);
-        console.log(logTag + "run readSequenceable success, result is" + dataReply);
-        results = JSON.parse(ret._apiResult);
-
-        console.log(logTag + " read success, results is" + results._result);
-        return results._result;
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
     }
 
     async getRdbStore(rdbStoreName){
@@ -259,20 +142,8 @@ export default class RemoteHelper{
         console.info(logTag + "_methodName is getRdbStore");
         let message = new ApiMessage("openHarmony","testApi","getRdbStore"," ",
 		    ["string"],[String(rdbStoreName)]," ");
-        var messageParcel = rpc.MessageParcel.create();
-        console.log(logTag + "create object successfully.");
-        var messageParcelreply = rpc.MessageParcel.create();
-        var option = new rpc.MessageOption();
-        var writeResult = messageParcel.writeSequenceable(message);
-        await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-        console.log(logTag + "sendRequest got result");
-        var ret = new ApiMessage(null, null, null, null, null, null,null);
-        var dataReply = messageParcelreply.readSequenceable(ret);
-        console.log(logTag + "run readSequenceable success, result is" + dataReply);
-        results = JSON.parse(ret._apiResult);
-
-        console.log(logTag + " read success, results is" + results._result);
-        return results._result;
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
     }
 
 }
