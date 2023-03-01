@@ -19,7 +19,7 @@ import deviceManager from '@ohos.distributedHardware.deviceManager';
 import TestApi from '../../../../../../../../../../../testtools/disjsTest/server/testApi.js';
 
 let context = featureAbility.getContext();
-globalThis.abilityContext = context;
+globalThis.abilityContext = context; 
 
 const CREATE_TABLE_TEST = "CREATE TABLE IF NOT EXISTS test (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
 
@@ -28,12 +28,6 @@ const STORE_CONFIG = {
     name: "RemoteRdb.db",
     securityLevel: data_rdb.SecurityLevel.S1
 };
-const valueBucket = {
-    "NAME": "Lisa",
-    "AGE": 18,
-    "SALARY": 100.5,
-    "CODES": new Uint8Array([1, 2, 3, 4, 5])
-}
 
 export default {
     
@@ -56,17 +50,22 @@ export default {
     
     async initDeviceMonitor() {
         console.log("create device manager before");
-        await deviceManager.createDeviceManager('com.ohos.distributerdbdisjs', (err, manager) => {
-            if (err) {
-                console.log("create device manager failed, err=" + err);
-                return;
-            }
-            dmInstance = manager;
-            console.log("create device manager success dmInstance: "+  JSON.stringify(dmInstance));
-            dmInstance.on("deviceStateChange", (data) => {
-                console.log("deviceStateChange: " + JSON.stringify(data));
+        try {
+            await deviceManager.createDeviceManager('com.ohos.distributerdbdisjs', (err, manager) => {
+                if (err) {
+                    console.log("create device manager failed, err=" + err);
+                    return;
+                }
+                let dmInstance = manager;
+                console.log("create device manager success dmInstance: "+  JSON.stringify(dmInstance));
+                dmInstance.on("deviceStateChange", (data) => {
+                    console.log("deviceStateChange: " + JSON.stringify(data));
+                });
             });
-        });
+        } catch (error) {
+            console.log("createDeviceManager error : " + error.message);
+        }
+
     },
     async createRDBStore(){
         console.log("first context " + context);
@@ -88,18 +87,25 @@ export default {
         let back = rdbStore.setDistributedTables(["test"]);
         back.then(() => {
             console.info("SetDistributedTables successfully.");
+            this.insertData();
         }).catch((err) => {
             console.info("SetDistributedTables failed, err: " + err.code);
         })
     },
 
     async insertData(){
+        const valueBucket = {
+            "name": "Lisa",
+            "age": 18,
+            "salary": 100.5,
+            "blobType": new Uint8Array([1, 2, 3, 4, 5])
+        }
         console.log("Insert insertData start.");
-        let promise = rdbStore.insert("test", valueBucket, data_rdb.ConflictResolution.ON_CONFLICT_REPLACE);
+        let promise = rdbStore.insert("test", valueBucket);
         promise.then((rowId) => {
             console.log("Insert is successful, rowId = " + rowId);
         }).catch((err) => {
-            console.log("Insert is failed err: "+err.code+err.message);
+            console.log("Insert is failed err: "+err.code+" "+err.message);
         })
         await promise;
     }

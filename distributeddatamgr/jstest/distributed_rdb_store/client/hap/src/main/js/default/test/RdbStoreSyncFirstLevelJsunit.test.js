@@ -25,12 +25,11 @@ import ability_featureAbility from '@ohos.ability.featureAbility'
 var context = ability_featureAbility.getContext();
 const CREATE_TABLE_TEST = "CREATE TABLE IF NOT EXISTS test (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
 const CREATE_TABLE_NAME = "CREATE TABLE IF NOT EXISTS test" 
-const CREATE_TABLE = " (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
 const STORE_CONFIG = {
     name: "RemoteRdb.db",
     securityLevel: data_Rdb.SecurityLevel.S1
 }
-const TEST_BUNDLE_NAME = 'com.ohos.distributerdbdisjs';
+
 var rdbStore = undefined;
 var resultSet = undefined;
 let dmInstance = null;
@@ -42,6 +41,7 @@ let remoteHelpers = null;
 let deviceId = null;
 let syncDeviceIds = undefined;
 let deviceList = undefined;
+const TEST_BUNDLE_NAME = 'com.ohos.distributerdbdisjs';
 
 
 function sleep(ms) {
@@ -85,6 +85,7 @@ describe('rdbSyncFirstLevelTest', function () {
                 console.log("deviceStateChange: " + JSON.stringify(data));
             });
         })
+
         function storeObserver(devices) {
             for (let i = 0; i < devices.length; i++) {
                 console.log('device=' + devices[i] + ' data changed');
@@ -101,15 +102,18 @@ describe('rdbSyncFirstLevelTest', function () {
 
     beforeEach(async function(done){
         console.info(logTag + "-----------------beforeEach 0 -----------------");
-
         done();
     })
 
     afterEach(async function (done) {
         console.info(logTag + '-----------------afterEach begin-----------------');
-        let deleletPre = new data_Rdb.RdbPredicates("test");
-        await rdbStore.delete(deleletPre);
-        console.info(logTag + "REMOTE afterEach delete rdbStore success");
+        try {
+            let deleletPre = new data_Rdb.RdbPredicates("test");
+            await rdbStore.delete(deleletPre);
+            console.info(logTag + "REMOTE afterEach delete rdbStore success");
+        } catch (error) {
+            console.info(logTag + "REMOTE afterEach delete rdbStore error: " + error.message);
+        }
         console.info(logTag + '-----------------afterEach end-----------------');
         done();
     })
@@ -119,6 +123,9 @@ describe('rdbSyncFirstLevelTest', function () {
         rdbStore = null;
         await data_Rdb.deleteRdbStore(context, "RemoteRdb.db").then(() => {
             console.info(logTag + "delete RemoteRdb success");
+        });
+        await data_Rdb.deleteRdbStore(context, "RemoteS2Rdb.db").then(() => {
+            console.info(logTag + "delete RemoteS2Rdb success");
         });
         await sleep(50);
         console.info(logTag + '-----------------afterAll end-----------------');
@@ -173,6 +180,7 @@ describe('rdbSyncFirstLevelTest', function () {
             expect().assertFail();
         })
         await promise;
+        
         done();
         console.info(logTag + "************* testRdbStoreInsert0001 end *************");
     })
@@ -630,5 +638,887 @@ describe('rdbSyncFirstLevelTest', function () {
         expect(2).assertEqual(resultSet.rowCount);
         done();
         console.info(logTag + "************* testRdbSyncTest0070 end *************");
+    })
+
+    /**
+    * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_0800
+    * @tc.name testRdbSyncTest0080
+    * @tc.desc Server rdbStore BatchInsert synchronization, and then delete synchronization,and then update synchronization
+    */
+    it("testRdbSyncTest0080", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0080 start");
+
+        //push data to remote device
+        {
+            var u8 = new Uint8Array([1, 2, 3]);
+            const valueBucket1 = {
+                "name": "liqiang",
+                "age": 18,
+                "salary": 100.55, 
+                "blobType": u8
+            }
+            const valueBucket2 = {
+                "name": "lucy",
+                "age": 23,
+                "salary": 200,
+                "blobType": u8
+            }
+            const valueBucket3 = {
+                "name": "update0080",
+                "age": 88,
+                "salary": 20.5,
+                "blobType": u8
+            }
+            const valueBuckets = [valueBucket1, valueBucket2, valueBucket3];
+            await rdbStore.batchInsert("test", valueBuckets).then((number) => {
+                console.info(logTag + "testRdbSyncTest0080 batchInsert number: "+ number);
+                expect(3).assertEqual(number);
+            }).catch((err) =>{
+                console.info(logTag + "testRdbSyncTest0080 err: " + err.message);
+                expect().assertFalse();
+            })
+        }
+        let predicates = new data_Rdb.RdbPredicates('test');
+        predicates.inDevices(syncDeviceIds);
+        await rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates, function (err, result) {
+            if (err) {
+                console.log("testRdbSyncTest0080 query error " + err);
+                expect().assertFail();
+                return;
+            }
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0080 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+        });
+        
+        predicates.equalTo("name", "liqiang");
+        await rdbStore.delete(predicates).then((number) => {
+            console.log("testRdbSyncTest0080 delete number: "+ number);
+            expect(1).assertEqual(number);
+        });
+        let promise = rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates);
+        let predicatesSelect = new data_Rdb.RdbPredicates('test');
+        promise.then((result) => {
+            console.log('testRdbSyncTest0080 sync done.');
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0080 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+        }).catch((err) => {
+            console.log('testRdbSyncTest0080 sync failed' + err.code);
+            expect().assertFalse();
+        });
+        await promise;
+        let resultSet = await rdbStore.query(predicatesSelect);
+        console.log('testRdbSyncTest0080 resultSet=' +resultSet.rowCount);
+        expect(2).assertEqual(resultSet.rowCount);
+
+        let  u8Arr1 = new Uint8Array([1,2,3,4,5]);
+        {
+            const valueBucketUp = {
+                "name": "liyaoyao",
+                "age": 10,
+                "salary": 654,
+                "blobType": u8Arr1
+            }
+            let preUpdate = new data_Rdb.RdbPredicates('test');
+            preUpdate.equalTo("name", "update0080");
+            let updatePromise = rdbStore.update(valueBucketUp, preUpdate);
+            await updatePromise.then(async (ret) => {
+                expect(1).assertEqual(ret);
+            }).catch((err) => {
+                console.info("testRdbSyncTest0080 update err: "+err.message);
+                expect(null).assertFail();
+            })
+        }
+        let promiseTwo = rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates);
+        promiseTwo.then((result) => {
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0080 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+        }).catch((err) => {
+            console.log('testRdbSyncTest0080 sync failed' + err.code);
+            expect().assertFalse();
+        })
+        await promise;
+
+        done();
+        console.info(logTag + "************* testRdbSyncTest0080 end *************");
+    })
+
+
+    /**
+    * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_0900
+    * @tc.name testRdbSyncTest0090
+    * @tc.desc Server rdbStore BatchInsert synchronization, and then delete synchronization, and then insert synchronization
+    */
+     it("testRdbSyncTest0090", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0090 start");
+
+        //push data to remote device
+        {
+            var u8 = new Uint8Array([1, 2, 3]);
+            const valueBucket1 = {
+                "name": "mimiy",
+                "age": 18,
+                "salary": 100.55,
+                "blobType": u8
+            }
+            const valueBucket2 = {
+                "name": "lucy",
+                "age": 23,
+                "salary": 200,
+                "blobType": u8
+            }
+            const valueBucket3 = {
+                "name": "jiajiahui",
+                "age": 88,
+                "salary": 20.5,
+                "blobType": u8
+            }
+            const valueBuckets = [valueBucket1, valueBucket2, valueBucket3];
+            await rdbStore.batchInsert("test", valueBuckets).then((number) => {
+                console.info(logTag + "testRdbSyncTest0090 batchInsert number: "+ number);
+                expect(3).assertEqual(number);
+            }).catch((err) =>{
+                console.info(logTag + "testRdbSyncTest0090 err: " + err.message);
+                expect().assertFalse();
+            })
+        }
+        let predicates = new data_Rdb.RdbPredicates('test');
+        predicates.inDevices(syncDeviceIds);
+        await rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates, function (err, result) {
+            if (err) {
+                console.log("testRdbSyncTest0090 query error " + err);
+                expect().assertFail();
+                return;
+            }
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0090 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+        });
+        
+        predicates.equalTo("name", "mimiy");
+        await rdbStore.delete(predicates).then((number) => {
+            expect(1).assertEqual(number);
+        });
+        let promise = rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates);
+        let predicatesSelect = new data_Rdb.RdbPredicates('test');
+        promise.then((result) => {
+            console.log('testRdbSyncTest0090 sync done.');
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0090 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+        }).catch((err) => {
+            console.log('testRdbSyncTest0090 sync failed' + err.code);
+            expect().assertFalse();
+        });
+        await promise;
+        let resultSet = await rdbStore.query(predicatesSelect);
+        console.log('testRdbSyncTest0090 resultSet=' +resultSet.rowCount);
+        expect(2).assertEqual(resultSet.rowCount);
+        resultSet = null;
+        let  u8Arr = new Uint8Array([1,2,3,4,5]);
+        try {
+            const valueBucket1 = {
+                "name": "xuewang09",
+                "age": 10,
+                "salary": 50.466,
+                "blobType": u8Arr
+            }
+            console.log('testRdbSyncTest0090 last insert before');
+            let insertPromise = rdbStore.insert("test", valueBucket1);
+            await insertPromise.then(async (ret) => {
+                console.log("testRdbSyncTest0090 insertLast ret: " + ret);
+            }).catch((err) => {
+                console.info("testRdbSyncTest0090 insert err: "+err.message);
+                expect(null).assertFail();
+            })
+        } catch (error) {
+            console.info("testRdbSyncTest0090 insert err: "+error.message);
+        }
+        let preLast = new data_Rdb.RdbPredicates('test');
+        let promiseTwo = rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, preLast);
+        promiseTwo.then((result) => {
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0090 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+        }).catch((err) => {
+            console.log('testRdbSyncTest0090 sync failed' + err.code);
+            expect().assertFalse();
+        })
+        await promiseTwo;
+
+        done();
+        console.info(logTag + "************* testRdbSyncTest0090 end *************");
+    })
+
+
+    /**
+    * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1000
+    * @tc.name testRdbSyncTest0100
+    * @tc.desc Server rdbStore BatchInsert synchronization callback, 
+    */
+    it("testRdbSyncTest0100", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0100 start");
+
+        //push data to remote device
+        {
+            var u8 = new Uint8Array([1, 2, 3]);
+            const valueBucket1 = {
+                "name": "mimiy",
+                "age": 18,
+                "salary": 100.55,
+                "blobType": u8
+            }
+            const valueBucket2 = {
+                "name": "lucy",
+                "age": 23,
+                "salary": 200,
+                "blobType": u8
+            }
+            const valueBucket3 = {
+                "name": "jiajiahui",
+                "age": 88,
+                "salary": 20.5,
+                "blobType": u8
+            }
+            const valueBucket4 = {
+                "name": "subby",
+                "age": 32,
+                "salary": 20.5,
+                "blobType": u8
+            }
+            const valueBucket5 = {
+                "name": "kang",
+                "age": 64,
+                "salary": 34444,
+                "blobType": u8
+            }
+            const valueBuckets = [valueBucket1, valueBucket2, valueBucket3,valueBucket4,valueBucket5];
+            for(var i = 0; i < 20; i++){
+                await rdbStore.batchInsert("test", valueBuckets).then((number) => {
+                    console.info(logTag + "testRdbSyncTest0100 batchInsert number: " + number + ", i = " + i);
+                    expect(5).assertEqual(number);
+                }).catch((err) =>{
+                    console.info(logTag + "testRdbSyncTest0100 err: " + err.message);
+                    expect().assertFalse();
+                })
+            }
+        }
+        let predicates = new data_Rdb.RdbPredicates('test');
+        predicates.inDevices(syncDeviceIds);
+        await rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates, function (err, result) {
+            if (err) {
+                console.log("testRdbSyncTest0100 query error " + err);
+                expect().assertFail();
+                return;
+            }
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0100 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+            done();
+        });
+        console.info(logTag + "************* testRdbSyncTest0100 end *************");
+    })
+
+
+    /**
+     * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1100
+     * @tc.name testRdbSyncTest0110
+     * @tc.desc Server rdbStore Insert first and synchronize salary Number.MIN_VALUE-1
+     */
+     it("testRdbSyncTest0110", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0110 start");
+        var u8 = new Uint8Array([1, 2, 3]);
+        {
+            const valueBucket = {
+                "name": "zhangsan",
+                "age": 18,
+                "salary": Number.MIN_VALUE-1,
+                "blobType": u8
+            }
+            await rdbStore.insert("test", valueBucket);
+            console.info("testRdbSyncTest0010 insert success");
+        }
+
+        let predicates = new data_Rdb.RdbPredicates('test');
+        predicates.equalTo("name", "zhangsan");
+        let resultSet = await rdbStore.query(predicates);
+        try {
+            expect(true).assertEqual(resultSet.goToFirstRow());
+            const id = resultSet.getLong(resultSet.getColumnIndex("id"));
+            const name = resultSet.getString(resultSet.getColumnIndex("name"));
+            console.info(logTag + "testRdbSyncTest0110 id=" + id + ", name=" + name);
+            expect("zhangsan").assertEqual(name);
+        } catch (e) {
+            console.info("testRdbSyncTest0110 insert error " + e);
+            expect().assertFail();
+        }
+        resultSet = null;
+        let syncPre = new data_Rdb.RdbPredicates('test');
+        syncPre.inDevices(syncDeviceIds);
+        let promise = rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, syncPre);
+        promise.then((result) => {
+            console.log('testRdbSyncTest0110 sync done.');
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0110 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+        }).catch((err) => {
+            console.log('testRdbSyncTest0110 sync failed' + err.code);
+            expect().assertFail();
+        })
+        await promise;
+        done();
+        console.info(logTag + "************* testRdbSyncTest0110 end *************");
+    })
+
+
+    /**
+    * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1200
+    * @tc.name testRdbSyncTest0120
+    * @tc.desc Server rdbStore BatchInsert synchronization, and then update synchronization，and then update synchronization
+    */
+     it("testRdbSyncTest0120", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0120 start");
+
+        //push data to remote device
+        {
+            var u8 = new Uint8Array([1, 2, 3]);
+            const valueBucket1 = {
+                "name": "mimiy",
+                "age": 18,
+                "salary": 100.55,
+                "blobType": u8
+            }
+            const valueBucket2 = {
+                "name": "lucy",
+                "age": 23,
+                "salary": 200,
+                "blobType": u8
+            }
+            const valueBucket3 = {
+                "name": "jiajiahui",
+                "age": 88,
+                "salary": 20.5,
+                "blobType": u8
+            }
+            const valueBuckets = [valueBucket1, valueBucket2, valueBucket3];
+            await rdbStore.batchInsert("test", valueBuckets).then((number) => {
+                console.info(logTag + "testRdbSyncTest0120 batchInsert number: "+ number);
+                expect(3).assertEqual(number);
+            }).catch((err) =>{
+                console.info(logTag + "testRdbSyncTest0120 err: " + err.message);
+                expect().assertFalse();
+            })
+        }
+        let predicates = new data_Rdb.RdbPredicates('test');
+        predicates.inDevices(syncDeviceIds);
+        await rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates, function (err, result) {
+            if (err) {
+                console.log("testRdbSyncTest0120 query error " + err);
+                expect().assertFail();
+                return;
+            }
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0120 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+        });
+        
+        let  u8ArrUp = new Uint8Array([1,2,3,4,5]);
+        {
+            const valueBucket1 = {
+                "name": "xuewang12Up",
+                "age": 10,
+                "salary": 50.366,
+                "blobType": u8ArrUp
+            }
+            let preUpdate = new data_Rdb.RdbPredicates('test');
+            preUpdate.equalTo("name", "mimiy");
+            let updatePromise = rdbStore.update(valueBucket1, preUpdate);
+            await updatePromise.then(async (ret) => {
+                expect(1).assertEqual(ret);
+                let resultSet = await rdbStore.query(predicates);
+                expect(true).assertEqual(resultSet.goToFirstRow());
+                const name = await resultSet.getString(resultSet.getColumnIndex("name"));
+                expect("xuewang12Up").assertEqual(name);
+                resultSet = null;
+            }).catch((err) => {
+                console.info("testRdbSyncTest0120 update err: "+err.message);
+                expect(null).assertFail();
+            })
+        }
+        let promise = rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates);
+        let predicatesSelect = new data_Rdb.RdbPredicates('test');
+        promise.then((result) => {
+            console.log('testRdbSyncTest0120 sync done.');
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0120 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+        }).catch((err) => {
+            console.log('testRdbSyncTest0120 sync failed' + err.code);
+            expect().assertFalse();
+        });
+        await promise;
+        let resultSet = await rdbStore.query(predicatesSelect);
+        console.log('testRdbSyncTest0120 resultSet=' +resultSet.rowCount);
+        expect(3).assertEqual(resultSet.rowCount);
+
+        let  u8Arr = new Uint8Array([1,2,3,4,5]);
+        {
+            const valueBucket1 = {
+                "name": "xuewang12Insert",
+                "age": 50,
+                "salary": 50.4,
+                "blobType": u8Arr
+            }
+            let insertPromise = rdbStore.insert("test", valueBucket1);
+            await insertPromise.then(async (ret) => {
+                let resultSet = await rdbStore.query(predicates);
+                expect(4).assertEqual(resultSet.rowCount);
+                resultSet = null;
+            }).catch((err) => {
+                console.info("testRdbSyncTest0120 insert err: "+err.message);
+                expect(null).assertFail();
+            })
+        }
+        let preLast = new data_Rdb.RdbPredicates('test');
+        let promiseTwo = rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, preLast);
+        promiseTwo.then((result) => {
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0120 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+        }).catch((err) => {
+            console.log('testRdbSyncTest0120 sync failed' + err.code);
+            expect().assertFalse();
+        })
+        await promiseTwo;
+        done();
+        console.info(logTag + "************* testRdbSyncTest0120 end *************");
+    })
+
+
+    /**
+     * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1300
+     * @tc.name testRdbSyncTest0130
+     * @tc.desc Server rdbStore Insert first and synchronize salary Number.MAX_VALUE+1
+    */
+    it("testRdbSyncTest0130", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0130 start");
+        var u8 = new Uint8Array([1, 2, 3]);
+        {
+            const valueBucket = {
+                "name": "xiaobin0130",
+                "age": 18,
+                "salary": Number.MAX_VALUE+1,
+                "blobType": u8
+            }
+            await rdbStore.insert("test", valueBucket);
+            console.info("testRdbSyncTest0130 insert success");
+        }
+
+        let predicates = new data_Rdb.RdbPredicates('test');
+        predicates.equalTo("name", "xiaobin0130");
+        let resultSet = await rdbStore.query(predicates);
+        try {
+            expect(true).assertEqual(resultSet.goToFirstRow());
+            const id = resultSet.getLong(resultSet.getColumnIndex("id"));
+            const name = resultSet.getString(resultSet.getColumnIndex("name"));
+            console.info(logTag + "testRdbSyncTest0130 id=" + id + ", name=" + name);
+            expect("xiaobin0130").assertEqual(name);
+        } catch (e) {
+            console.info("testRdbSyncTest0130 insert error " + e);
+            expect().assertFail();
+        }
+        resultSet = null;
+        let syncPre = new data_Rdb.RdbPredicates('test');
+        syncPre.inDevices(syncDeviceIds);
+        let promise = rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, syncPre);
+        promise.then((result) => {
+            console.log('testRdbSyncTest0130 sync done.');
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0130 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+        }).catch((err) => {
+            console.log('testRdbSyncTest0130 sync failed' + err.code);
+            expect().assertFail();
+        })
+        await promise;
+        done();
+        console.info(logTag + "************* testRdbSyncTest0130 end *************");
+    })
+
+
+    /**
+     * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1400
+     * @tc.name testRdbSyncTest0140
+     * @tc.desc Server rdbStore Insert first and synchronize,delete all
+    */
+     it("testRdbSyncTest0140", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0140 start");
+        var u8 = new Uint8Array([1, 2, 3]);
+        {
+            const valueBucket = {
+                "name": "xiaoLi0140",
+                "age": 18,
+                "salary": 1230,
+                "blobType": u8
+            }
+            await rdbStore.insert("test", valueBucket);
+            console.info("testRdbSyncTest0140 insert success");
+        }
+
+        let predicates = new data_Rdb.RdbPredicates('test');
+        predicates.equalTo("name", "xiaoLi0140");
+        let resultSet = await rdbStore.query(predicates);
+        try {
+            expect(true).assertEqual(resultSet.goToFirstRow());
+            const id = resultSet.getLong(resultSet.getColumnIndex("id"));
+            const name = resultSet.getString(resultSet.getColumnIndex("name"));
+            console.info(logTag + "testRdbSyncTest0140 id=" + id + ", name=" + name);
+            expect("xiaoLi0140").assertEqual(name);
+        } catch (e) {
+            console.info("testRdbSyncTest0140 insert error " + e);
+            expect().assertFail();
+        }
+        resultSet = null;
+        let syncPre = new data_Rdb.RdbPredicates('test');
+        syncPre.inDevices(syncDeviceIds);
+        let promise = rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, syncPre);
+        promise.then((result) => {
+            console.log('testRdbSyncTest0140 sync done.');
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0140 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+            }
+        }).catch((err) => {
+            console.log('testRdbSyncTest0140 sync failed' + err.code);
+            expect().assertFail();
+        })
+        await promise;
+        let deleletPre = new data_Rdb.RdbPredicates("test");
+        console.log('testRdbSyncTest0140 delete bdefore ' );
+        await rdbStore.delete(deleletPre);
+        console.log('testRdbSyncTest0140 delete after ' );
+        let delPromise = rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, syncPre);
+        delPromise.then((result) => {
+            console.log('testRdbSyncTest0140 sync done.');
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0140 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertTrue();
+                done();
+            }
+        }).catch((err) => {
+            console.log('testRdbSyncTest0140 sync failed' + err.code);
+            expect().assertFail();
+            done();
+        })
+        await delPromise;
+        console.info(logTag + "************* testRdbSyncTest0140 end *************");
+    })
+
+    /**
+     * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1600
+     * @tc.name testRdbSyncTest0160
+     * @tc.desc Server rdbStore Insert first and synchronize, Sync the null character of the pre-device id
+    */
+    it("testRdbSyncTest0160", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0160 start");
+        var u8 = new Uint8Array([1, 2, 3]);
+        {
+            const valueBucket = {
+                "name": "zhangsan",
+                "age": 18,
+                "salary": 100.5,
+                "blobType": u8
+            }
+            await rdbStore.insert("test", valueBucket);
+            console.info("testRdbSyncTest0160 insert success");
+        }
+
+        let predicates = new data_Rdb.RdbPredicates('test');
+        predicates.equalTo("name", "zhangsan");
+        let resultSet = await rdbStore.query(predicates);
+        try {
+            expect(true).assertEqual(resultSet.goToFirstRow());
+            const id = resultSet.getLong(resultSet.getColumnIndex("id"));
+            const name = resultSet.getString(resultSet.getColumnIndex("name"));
+            console.info(logTag + "testRdbSyncTest0160 id=" + id + ", name=" + name);
+            expect("zhangsan").assertEqual(name);
+        } catch (e) {
+            console.info("testRdbSyncTest0160 insert error " + e);
+            expect().assertFail();
+        }
+        resultSet = null;
+        let syncPre = new data_Rdb.RdbPredicates('emp');
+        syncPre.inDevices(" ");
+        let promise = rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, syncPre);
+        promise.then((result) => {
+            console.log('testRdbSyncTest0160 sync done.');
+            for (let i = 0; i < result.length; i++) {
+                console.log('testRdbSyncTest0160 device=' + result[i][0] + ' status=' + result[i][1]);
+                let status = result[i][1];
+                expect(status == 0).assertFail();
+                done();
+            }
+        }).catch((err) => {
+            console.log('testRdbSyncTest0160 sync failed' + err.code);
+            expect(err != null).assertTrue();
+            done();
+        })
+        await promise;
+        console.info(logTag + "************* testRdbSyncTest0160 end *************");
+    })
+
+
+    
+    /**
+     * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1700
+     * @tc.name testRdbSyncTest0170
+     * @tc.desc Server rdbStore Insert first and synchronize, Error in synchronization of pre-tableName
+     */
+     it("testRdbSyncTest0170", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0170 start");
+        var u8 = new Uint8Array([1, 2, 3]);
+        {
+            const valueBucket = {
+                "name": "zhangsan",
+                "age": 18,
+                "salary": 100.5,
+                "blobType": u8
+            }
+            await rdbStore.insert("test", valueBucket);
+            console.info("testRdbSyncTest0170 insert success");
+        }
+
+        let predicates = new data_Rdb.RdbPredicates('test');
+        predicates.equalTo("name", "zhangsan");
+        let resultSet = await rdbStore.query(predicates);
+        try {
+            expect(true).assertEqual(resultSet.goToFirstRow());
+            const id = resultSet.getLong(resultSet.getColumnIndex("id"));
+            const name = resultSet.getString(resultSet.getColumnIndex("name"));
+            console.info(logTag + "testRdbSyncTest0170 id=" + id + ", name=" + name);
+            expect("zhangsan").assertEqual(name);
+        } catch (e) {
+            console.info("testRdbSyncTest0170 insert error " + e);
+            expect().assertFail();
+        }
+        resultSet = null;
+        try {
+            let syncPre = new data_Rdb.RdbPredicates('emp');
+            syncPre.inDevices(syncDeviceIds);
+            let promise = await rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, syncPre);
+            promise.then((result) => {
+                console.log('testRdbSyncTest0170 sync done.');
+                for (let i = 0; i < result.length; i++) {
+                    console.log('testRdbSyncTest0170 device=' + result[i][0] + ' status=' + result[i][1]);
+                    let status = result[i][1];
+                    expect(status == 0).assertFail();
+                    done();
+                }
+            }).catch((err) => {
+                console.log('testRdbSyncTest0170 sync failed' + err.code);
+                expect().assertFail();
+                done();
+            })
+        } catch (error) {
+            console.log('testRdbSyncTest0170 sync failed error.code message: ' + error.code + error.message);
+            expect(error != null).assertTrue();
+            done();
+        }
+        console.info(logTag + "************* testRdbSyncTest0170 end *************");
+    })
+
+    /**
+     * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1800
+     * @tc.name testRdbSyncTest0180
+     * @tc.desc Server rdbStore Insert first and synchronize, Pass null in synchronous mode
+    */
+    it("testRdbSyncTest0180", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0180 start");
+        var u8 = new Uint8Array([1, 2, 3]);
+        {
+            const valueBucket = {
+                "name": "zhangsan",
+                "age": 18,
+                "salary": 100.5,
+                "blobType": u8
+            }
+            await rdbStore.insert("test", valueBucket);
+            console.info("testRdbSyncTest0180 insert success");
+        }
+
+        let predicates = new data_Rdb.RdbPredicates('test');
+        predicates.equalTo("name", "zhangsan");
+        let resultSet = await rdbStore.query(predicates);
+        try {
+            expect(true).assertEqual(resultSet.goToFirstRow());
+            const id = resultSet.getLong(resultSet.getColumnIndex("id"));
+            const name = resultSet.getString(resultSet.getColumnIndex("name"));
+            console.info(logTag + "testRdbSyncTest0180 id=" + id + ", name=" + name);
+            expect("zhangsan").assertEqual(name);
+        } catch (e) {
+            console.info("testRdbSyncTest0180 insert error " + e);
+            expect().assertFail();
+        }
+        resultSet = null;
+        try {
+            predicates.inDevices(syncDeviceIds);
+            let promise = rdbStore.sync(null, predicates);
+            promise.then((result) => {
+                console.log('testRdbSyncTest0180 sync done.');
+                for (let i = 0; i < result.length; i++) {
+                    console.log('testRdbSyncTest0180 device=' + result[i][0] + ' status=' + result[i][1]);
+                    let status = result[i][1];
+                    expect(status == 0).assertFail();
+                    done();
+                }
+            }).catch((err) => {
+                console.log('testRdbSyncTest0180 sync failed' + err.code);
+                expect(err != null).assertTrue();
+                done();
+            })
+        } catch (error) {
+            console.log('testRdbSyncTest0180 sync failed error.code message: ' + error.code + error.message);
+            expect().assertFail();
+            done();
+        }
+        await promise;
+        console.info(logTag + "************* testRdbSyncTest0180 end *************");
+    })
+
+    /**
+     * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1900
+     * @tc.name testRdbSyncTest0190
+     * @tc.desc Server get rdbStoreS2 level, Name different
+    */
+     it("testRdbSyncTest0190", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0190 start");
+        var rdbSecondStore = {};
+        const STORE_CONFIGS2 = {
+            name: "RemoteS2Rdb.db",
+            securityLevel: data_Rdb.SecurityLevel.S2
+        };
+        const CREATE_TABLE_TEST_S2 = "CREATE TABLE IF NOT EXISTS test (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
+
+        rdbSecondStore = await data_Rdb.getRdbStore(context, STORE_CONFIGS2);
+        console.info("testRdbSyncTest0190 create RemoteS2Rdb.db success");
+        await rdbSecondStore.executeSql(CREATE_TABLE_TEST_S2, null);
+        console.info(logTag + "create RemoteS2Rdb.db table success");
+        //setDistributedTables
+        let back = rdbSecondStore.setDistributedTables(["test"]);
+        back.then(() => {
+            console.info("SetDistributedTables successfully.");
+        }).catch((err) => {
+            console.info("SetDistributedTables failed, err: " + err.code);
+        })
+        await back;
+        var u8 = new Uint8Array([1, 2, 3]);
+        {
+            const valueBucket = {
+                "name": "S2Test",
+                "age": 18,
+                "salary": 100.5,
+                "blobType": u8
+            }
+            await rdbSecondStore.insert("test", valueBucket);
+            console.info("testRdbSyncTest0190 insert success");
+        }
+
+        let predicates = new data_Rdb.RdbPredicates('test');
+        predicates.equalTo("name", "S2Test");
+        let resultSet = await rdbSecondStore.query(predicates);
+        try {
+            expect(true).assertEqual(resultSet.goToFirstRow());
+            const id = resultSet.getLong(resultSet.getColumnIndex("id"));
+            const name = resultSet.getString(resultSet.getColumnIndex("name"));
+            console.info(logTag + "testRdbSyncTest0190 id=" + id + ", name=" + name);
+            expect("S2Test").assertEqual(name);
+        } catch (e) {
+            console.info("testRdbSyncTest0190 select error " + e);
+            expect().assertFail();
+        }
+        resultSet = null;
+        try {
+            predicates.inDevices(syncDeviceIds);
+            let promise = rdbSecondStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates);
+            promise.then((result) => {
+                console.log('testRdbSyncTest0190 sync done.');
+                for (let i = 0; i < result.length; i++) {
+                    console.log('testRdbSyncTest0190 device=' + result[i][0] + ' status=' + result[i][1]);
+                    let status = result[i][1];
+                    expect(status == 26).assertTrue();
+                    rdbSecondStore =null;
+                    done();
+                }
+            }).catch((err) => {
+                console.log('testRdbSyncTest0190 sync failed' + err.code);
+                expect().assertFail();
+                done();
+            })
+        } catch (error) {
+            console.log('testRdbSyncTest0190 sync failed error.code message: ' + error.code + error.message);
+            expect().assertFail();
+            done();
+        }
+        console.info(logTag + "************* testRdbSyncTest0190 end *************");
+    })
+
+    /**
+     * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2000
+     * @tc.name testRdbSyncTest0200
+     * @tc.desc Server rdbStore get rdbStoreS2 level, Name equal
+    */
+    it("testRdbSyncTest0200", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0200 start");
+        var rdbENStore = {};
+        const STORE_CONFIGS3 = {
+            name: "RemoteRdb.db",
+            securityLevel: data_Rdb.SecurityLevel.S2
+        };
+        const CREATE_TABLE_TEST_S3 = "CREATE TABLE IF NOT EXISTS testENSecond (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
+
+        rdbENStore = await data_Rdb.getRdbStore(context, STORE_CONFIGS3);
+        console.info("testRdbSyncTest0200 create RemoteRdb.db success");
+        await rdbENStore.executeSql(CREATE_TABLE_TEST_S3, null);
+        console.info(logTag + " testRdbSyncTest0200 create RemoteRdb.db table success");
+        //setDistributedTables
+        let back = rdbENStore.setDistributedTables(["testENSecond"]);
+        back.then(() => {
+            console.info("testRdbSyncTest0200 SetDistributedTables successfully.");
+            expect().assertFail();
+        }).catch((err) => {
+            console.info("testRdbSyncTest0200 SetDistributedTables failed, err: ${err}" + err.code);
+            expect(err != null).assertTrue();
+        })
+        await back;
+        done();
+        console.info(logTag + "************* testRdbSyncTest0200 end *************");
     })
 })
