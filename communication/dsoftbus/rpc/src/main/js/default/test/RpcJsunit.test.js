@@ -14,12 +14,11 @@
  */
 
 import rpc from "@ohos.rpc";
-import deviceManager from '@ohos.distributedHardware.deviceManager';
-import featureAbility from "@ohos.ability.featureAbility";
+import TestService from "./testService"
 import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from 'deccjsunit/index';
 
 let gIRemoteObject = null;
-let connectId = null;
+var testservice = null
 describe('RpcJsUnitTest', function(){
     console.info("-----------------------SUB_Softbus_RPC_Compatibility_MessageParce_Test is starting-----------------------");
 
@@ -250,7 +249,7 @@ describe('RpcJsUnitTest', function(){
 
         onRemoteDied() {
             console.info("server died");
-            expect(this.gIRemoteObject.unregisterDeathRecipient(this, 0)).assertEqual(null);
+            expect(this.proxy.unregisterDeathRecipient(this, 0)).assertTrue();
             let _done = this.done;
             setTimeout(function() {
                 _done()
@@ -279,35 +278,12 @@ describe('RpcJsUnitTest', function(){
 
     beforeAll(async function(done) {
         console.info('beforeAll called rpc');
-        function deviceManagerCallback(error, deviceManager) {
-            console.info("got deviceManager: " + deviceManager + ", error: " + error);
-            let deviceList = deviceManager.getTrustedDeviceListSync();
-            let deviceId = deviceList[0].deviceId;
-            console.info("online device id: " + deviceId);
-            let want = {
-                "bundleName":"com.ohos.rpctest",
-                "abilityName":"com.ohos.rpctest.ServiceAbility",
-                "deviceId":deviceId,
-                "flags": 256
-            };
-            let connect = {
-                onConnect:function (elementName, remoteProxy) {
-                    console.info('RpcClient: onConnect called,proxy: ' + (remoteProxy instanceof rpc.RemoteProxy));
-                    gIRemoteObject = remoteProxy;
-                    done();
-                },
-                onDisconnect:function (elementName) {
-                    console.info("RpcClient: onDisconnect");
-                },
-                onFailed:function () {
-                    console.info("RpcClient: onFailed");
-                    gIRemoteObject = null
-                }
-            };
-            connectId = featureAbility.connectAbility(want, connect);
-            connectId.info("connect ability got id: " + connectId);
-        }
-        deviceManager.createDeviceManager('ohos.rpc.test', deviceManagerCallback);
+        testservice = new TestService
+        await testservice.toConnectAbility().then(data => {
+            gIRemoteObject = data;
+            console.info("RpcClient: toConnectAbility data is： " + data);
+        })
+        done();
         console.info("beforeAll done");
     })
     beforeEach(function (){
@@ -3554,7 +3530,7 @@ describe('RpcJsUnitTest', function(){
             let a = [new MySequenceable(1, "aaa"), new MySequenceable(2, "bbb"),
                 new MySequenceable(3, "ccc")]
             data.writeParcelableArray(a);
-            await gIRemoteObject.sendMessageRequest(CODE_ALL_ARRAY_TYPE, data, reply, option,(result, err) => {
+            await gIRemoteObject.sendMessageRequest(CODE_ALL_ARRAY_TYPE, data, reply, option).then((result) => {
                 expect(result.errCode).assertEqual(0);
                 assertArrayElementEqual(result.reply.readByteArray(), [1, 2, 3]);
                 assertArrayElementEqual(result.reply.readShortArray(), [4, 5, 6]);
@@ -3610,15 +3586,33 @@ describe('RpcJsUnitTest', function(){
             data.writeParcelableArray(a);
             await gIRemoteObject.sendMessageRequest(CODE_ALL_ARRAY_TYPE, data, reply, option).then((result) => {
                 expect(result.errCode).assertEqual(0);
-                assertArrayElementEqual(result.reply.readByteArray(), [1, 2, 3]);
-                assertArrayElementEqual(result.reply.readShortArray(), [4, 5, 6]);
-                assertArrayElementEqual(result.reply.readIntArray(), [7, 8, 9]);
-                assertArrayElementEqual(result.reply.readLongArray(), [10, 11, 12]);
-                assertArrayElementEqual(result.reply.readFloatArray(), [1.1, 1.2, 1.3]);
-                assertArrayElementEqual(result.reply.readDoubleArray(), [2.1, 2.2, 2.3]);
-                assertArrayElementEqual(result.reply.readBooleanArray(), [true, true, false]);
-                assertArrayElementEqual(result.reply.readCharArray(), [65,97,122]);
-                assertArrayElementEqual(result.reply.readStringArray(), ['abc', 'seggg']);
+                let ByteArray = new Array();
+                result.reply.readByteArray(ByteArray)
+                assertArrayElementEqual(ByteArray, [1, 2, 3]);
+                let ShortArray = new Array();
+                result.reply.readShortArray(ShortArray)
+                assertArrayElementEqual(ShortArray, [4, 5, 6]);
+                let IntArray = new Array();
+                result.reply.readIntArray(IntArray)
+                assertArrayElementEqual(IntArray, [7, 8, 9]);
+                let LongArray = new Array();
+                result.reply.readLongArray(LongArray)
+                assertArrayElementEqual(LongArray, [10, 11, 12]);
+                let FloatArray = new Array();
+                result.reply.readFloatArray(FloatArray)
+                assertArrayElementEqual(FloatArray, [1.1, 1.2, 1.3]);
+                let DoubleArray = new Array();
+                result.reply.readDoubleArray(DoubleArray)
+                assertArrayElementEqual(DoubleArray, [2.1, 2.2, 2.3]);
+                let BooleanArray = new Array();
+                result.reply.readBooleanArray(BooleanArray)
+                assertArrayElementEqual(BooleanArray, [true, true, false]);
+                let CharArray = new Array();
+                result.reply.readCharArray(CharArray)
+                assertArrayElementEqual(CharArray, [65,97,122]);
+                let StringArray = new Array();
+                result.reply.readStringArray(StringArray);
+                assertArrayElementEqual(StringArray, ['abc', 'seggg']);
                 let b = [new MySequenceable(null, null), new MySequenceable(null, null),
                     new MySequenceable(null, null)];
                 result.reply.readParcelableArray(b);
@@ -7832,7 +7826,7 @@ describe('RpcJsUnitTest', function(){
             var data = rpc.MessageParcel.create();
             var reply = rpc.MessageParcel.create();
             var option = new rpc.MessageOption();
-            var sequenceable = new MySequenceable(1, 1);
+            var sequenceable = null;
             expect(data.writeSequenceable(sequenceable)).assertEqual(false);
         } catch (error) {
             expect(error == null).assertTrue();
@@ -8215,7 +8209,7 @@ describe('RpcJsUnitTest', function(){
             let a = [new MySequenceable(1, "aaa"), new MySequenceable(2, "bbb"),
                 new MySequenceable(3, "ccc")]
             expect(data.writeSequenceableArray(a)).assertTrue()
-            await gIRemoteObject.sendRequest(CODE_ALL_ARRAY_TYPE, data, reply, option,(result, err) => {
+            await gIRemoteObject.sendRequest(CODE_ALL_ARRAY_TYPE, data, reply, option).then((result) => {
                 expect(result.errCode).assertEqual(0)
                 assertArrayElementEqual(result.reply.readByteArray(), [1, 2, 3])
                 assertArrayElementEqual(result.reply.readShortArray(), [4, 5, 6])
@@ -8270,18 +8264,36 @@ describe('RpcJsUnitTest', function(){
                 new MySequenceable(3, "ccc")]
             expect(data.writeSequenceableArray(a)).assertTrue()
             await gIRemoteObject.sendRequest(CODE_ALL_ARRAY_TYPE, data, reply, option).then((result) => {
-                expect(result.errCode).assertEqual(0)
-                assertArrayElementEqual(result.reply.readByteArray(), [1, 2, 3])
-                assertArrayElementEqual(result.reply.readShortArray(), [4, 5, 6])
-                assertArrayElementEqual(result.reply.readIntArray(), [7, 8, 9])
-                assertArrayElementEqual(result.reply.readLongArray(), [10, 11, 12])
-                assertArrayElementEqual(result.reply.readFloatArray(), [1.1, 1.2, 1.3])
-                assertArrayElementEqual(result.reply.readDoubleArray(), [2.1, 2.2, 2.3])
-                assertArrayElementEqual(result.reply.readBooleanArray(), [true, true, false])
-                assertArrayElementEqual(result.reply.readCharArray(), [65,97,122])
-                assertArrayElementEqual(result.reply.readStringArray(), ['abc', 'seggg'])
-                let b = [new MySequenceable(null, null), new MySequenceable(null, null),
-                    new MySequenceable(null, null)]
+                expect(result.errCode).assertEqual(0);
+                    let ByteArray = new Array();
+                    result.reply.readByteArray(ByteArray)
+                    assertArrayElementEqual(ByteArray, [1, 2, 3]);
+                    let ShortArray = new Array();
+                    result.reply.readShortArray(ShortArray)
+                    assertArrayElementEqual(ShortArray, [4, 5, 6]);
+                    let IntArray = new Array();
+                    result.reply.readIntArray(IntArray)
+                    assertArrayElementEqual(IntArray, [7, 8, 9]);
+                    let LongArray = new Array();
+                    result.reply.readLongArray(LongArray)
+                    assertArrayElementEqual(LongArray, [10, 11, 12]);
+                    let FloatArray = new Array();
+                    result.reply.readFloatArray(FloatArray)
+                    assertArrayElementEqual(FloatArray, [1.1, 1.2, 1.3]);
+                    let DoubleArray = new Array();
+                    result.reply.readDoubleArray(DoubleArray)
+                    assertArrayElementEqual(DoubleArray, [2.1, 2.2, 2.3]);
+                    let BooleanArray = new Array();
+                    result.reply.readBooleanArray(BooleanArray)
+                    assertArrayElementEqual(BooleanArray, [true, true, false]);
+                    let CharArray = new Array();
+                    result.reply.readCharArray(CharArray)
+                    assertArrayElementEqual(CharArray, [65,97,122]);
+                    let StringArray = new Array();
+                    result.reply.readStringArray(StringArray);
+                    assertArrayElementEqual(StringArray, ['abc', 'seggg']);
+                    let b = [new MySequenceable(null, null), new MySequenceable(null, null),
+                        new MySequenceable(null, null)];
                 result.reply.readSequenceableArray(b)
                 for (let i = 0; i < b.length; i++) {
                     expect(b[i].str).assertEqual(a[i].str)
@@ -11017,7 +11029,7 @@ describe('RpcJsUnitTest', function(){
             data.writeChar(96);
             data.writeString("HelloWorld");
             data.writeParcelable(new MySequenceable(1, "aaa"));
-            gIRemoteObject.sendMessageRequest(CODE_ALL_TYPE, data, reply, option, (result, err) => {
+            gIRemoteObject.sendMessageRequest(CODE_ALL_TYPE, data, reply, option).then((result) => {
                 expect(result.errCode).assertEqual(0);
                 expect(result.reply.readByte()).assertEqual(1);
                 expect(result.reply.readShort()).assertEqual(2);
