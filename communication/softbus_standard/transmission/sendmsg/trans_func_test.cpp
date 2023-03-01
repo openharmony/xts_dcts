@@ -410,7 +410,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0600, TestSize.Le
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0700
  * @tc.name   : SendMessage Packet size 1K, proxy channel, send and receive successful
- * @tc.desc   : Test the SendMessage specification
+ * @tc.desc   : [G-DISTRIBUTED-0206]禁止修改传输的默认协议，新增或者变更默认传输协议必须通过协商机制来实现
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
@@ -497,7 +497,7 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_1000, TestSize.Le
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_P2P_Fun_0100
  * @tc.name   : SendByte By P2P Packet size 1B, send and receive successful
- * @tc.desc   : Test the SendByte specification
+ * @tc.desc   : [G-DISTRIBUTED-0206]禁止修改传输的默认协议，新增或者变更默认传输协议必须通过协商机制来实现
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
