@@ -13,11 +13,24 @@
  * limitations under the License.
  */
 
+import {Core} from 'deccjsunit/index';
+import featureAbility from '@ohos.ability.featureAbility';
+
 export default {
     onCreate() {
-        console.info("Application onCreate");
+        console.info('AceApplication onCreate');
+        const core = Core.getInstance()
+        core.init()
+        const configService = core.getDefaultService('config')
+        configService.setConfig(this)
+
+        console.info('Calc[IndexPage] grantPermission')
+        let context = featureAbility.getContext()
+        context.requestPermissionsFromUser(['ohos.permission.DISTRIBUTED_DATASYNC'], 666, function (result) {
+            console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser,'+result.requestCode)
+        })
     },
     onDestroy() {
-        console.info("Application onDestroy");
+        console.info('AceApplication onDestroy');
     }
 };
