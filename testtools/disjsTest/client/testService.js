@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 Huawei Device Co., Ltd.
+ * Copyright (C) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -104,6 +104,39 @@ export default class TestService {
                 console.info(logTag + "connect ability got id: " + connectId)
             })
         })
+    }
 
+    toConnectRdbAbility() {
+        console.info(logTag + " toConnectRdbAbility");
+        return new Promise(resolve=>{
+            let self = this;
+            deviceManager.createDeviceManager('distributerdbdisjs', (error, deviceManager) => {
+                self.getDeviceList(deviceManager);
+                console.info(logTag + "got deviceManager: " + deviceManager);
+                let deviceId = deviceList[0].deviceId;
+                console.info(logTag + "deviceid : " + deviceId);
+                console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList));
+                let want = {
+                    "bundleName": "com.ohos.distributerdbdisjs",
+                    "abilityName": "com.ohos.distributerdbdisjs.ServiceAbility",
+                    "deviceId": deviceId,
+                    "flags": 256
+                }
+                let connect = {
+                    onConnect: function (elementName, remoteProxy) {
+                        console.log(logTag + 'onConnect called, remoteProxy: ' + remoteProxy);
+                        resolve(remoteProxy);
+                    },
+                    onDisconnect: function (elementName) {
+                        console.log(logTag + "onDisconnect");
+                    },
+                    onFailed: function () {
+                        console.log(logTag + "onFailed");
+                    }
+                }
+                let connectId = featureAbility.connectAbility(want, connect);
+                console.info(logTag + "connect ability got id: " + connectId);
+            })
+        })
     }
 }
