@@ -19,6 +19,13 @@ export default class ServiceAbility extends ServiceExtension {
     onCreate(want) {
         // Called to return a FormBindingData object.
         console.info("DmsFwkStageServer ServiceAbility2 onCreate")
+        if(want.parameters != undefined){
+            if(want.parameters.startReason == "terminateSelf"){
+                setTimeout(()=>{
+                    this.context.terminateSelf()
+                }, 2000)
+            }
+        }
     }
 
     onConnect(want) {

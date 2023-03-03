@@ -22,6 +22,7 @@ export default class MainAbility extends Ability {
         AcManager.requestPermissionsFromUser(this.context, ['ohos.permission.DISTRIBUTED_DATASYNC'], function (result) {
             console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser')
         })
+        
     }
 
     onDestroy() {
