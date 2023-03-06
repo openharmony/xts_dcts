@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,12 +15,12 @@
 
 import rpc from "@ohos.rpc";
 import fileio from '@ohos.fileio';
-import deviceManager from '@ohos.distributedHardware.deviceManager';
 import featureAbility from "@ohos.ability.featureAbility";
+import TestService from "./testService"
 import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from 'deccjsunit/index';
 
 let gIRemoteObject = null;
-let connectId = null;
+var testservice = null;
 describe('FileioDistributedTest', function(){
     console.info("----------SUB_Storage_Fileio_Distributed JS Test is starting----------");
     const DISTRIBUTED_FILE_CONTENT = 'content';
@@ -103,38 +103,14 @@ describe('FileioDistributedTest', function(){
         }
     }
 
-    beforeAll(async function (done) {
+    beforeAll(async function(done) {
         console.info('beforeAll called fileio server');
-        function deviceManagerCallback(error, deviceManager) {
-            console.info("got deviceManager: " + deviceManager + ", error: " + error);
-            let deviceList = deviceManager.getTrustedDeviceListSync();
-            let deviceId = deviceList[0].deviceId;
-            console.info("online device id: " + deviceId);
-
-            let want = {
-                "bundleName": "com.ohos.fileiotest",
-                "abilityName": "com.ohos.fileiotest.ServiceAbility",
-                "deviceId": deviceId,
-                "flags": 256
-            }
-            let connect = {
-                onConnect: function (elementName, remoteProxy) {
-                    console.info('fileioClient: onConnect called,proxy: ' + (remoteProxy instanceof rpc.RemoteProxy));
-                    gIRemoteObject = remoteProxy;
-                    done();
-                },
-                onDisconnect: function (elementName) {
-                    console.info("fileioClient: onDisconnect");
-                },
-                onFailed: function () {
-                    console.info("fileioClient: onFailed");
-                    gIRemoteObject = null;
-                }
-            }
-            connectId = featureAbility.connectAbility(want, connect);
-            connectId.info("connect ability got id: " + connectId);
-        }
-        deviceManager.createDeviceManager('com.ohos.fileiotest', deviceManagerCallback);
+        testservice = new TestService
+        await testservice.toConnectAbility().then(data => {
+            gIRemoteObject = data;
+            console.info("fileioClient: toConnectAbility data is： " + data);
+        })
+        done();
         console.info("beforeAll done");
     })
     beforeEach(function () {
