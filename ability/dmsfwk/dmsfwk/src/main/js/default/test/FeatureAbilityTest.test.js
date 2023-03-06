@@ -16,14 +16,31 @@
 import rpc from "@ohos.rpc";
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 import featureAbility from "@ohos.ability.featureAbility";
+import TestService from "./testService";
+import "./testService";
 import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from 'deccjsunit/index';
 
 let gIRemoteObject = null;
-let connectId = null;
+let testservice = null;
+let localDeviceId = undefined;
+let dvList = [];
+let dvId = null;
+
+deviceManager.createDeviceManager('ohos.dms.test',async (error, deviceManager) =>{
+    console.info("CLIENT Create device manager success");
+    localDeviceId = deviceManager.getLocalDeviceInfoSync().deviceId;
+    console.info("local device id is: " + localDeviceId);
+    let deviceList = deviceManager.getTrustedDeviceListSync();
+    dvList = deviceList; 
+    let deviceId = deviceList[0].deviceId;
+    dvId = deviceId;
+    console.info("deviceid is: " + deviceId)
+    console.info("deviceList is: " + JSON.stringify(deviceList))
+})
+
 describe('dmsJsUnitTest', function(){
     console.info("-----------------------SUB_Softbus_dms_Compatibility_MessageParce_Test is starting-----------------------");
-    var dvList = [];
-    var dvId = null;
+
     class ConnectRemoteService {
         onConnectCallback(element, remote) {
             gIRemoteObject = remote;
@@ -42,55 +59,23 @@ describe('dmsJsUnitTest', function(){
             console.info('onConnectRemoteService onFailed errCode: ' + code)
         }     
     }
+    
+    function sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time))
+    }
 
-        function sleep(numberMillis){
-            var now = new Date();
-            var exitTime = now.getTime() + numberMillis;
-            while (true) {
-                now = new Date();
-                if (now.getTime() > exitTime)
-                    return;
-            }
-        }
-   
     beforeAll(async function(done) {
-        console.info('beforeAll called dms')
-        function deviceManagerCallback(error, deviceManager) {
-            console.info("got deviceManager: " + deviceManager + ", error: " + error)
-            let deviceList = deviceManager.getTrustedDeviceListSync()
-            let deviceId = deviceList[0].deviceId
-            dvList = deviceList;
-            dvId = deviceId;
-            console.info("online device id: " + deviceId)
-
-            let want = {
-                "bundleName":"com.ohos.dmstest",
-                "abilityName":"com.ohos.dmstest.ServiceAbility",
-                "deviceId":deviceId,
-                "flags": 256
-            }
-            let connect = {
-                onConnect:function (elementName, remoteProxy) {
-                    console.info('dmsClient: onConnect called,proxy: ' + (remoteProxy instanceof rpc.RemoteProxy))
-                    gIRemoteObject = remoteProxy
-                    done()
-                },
-                onDisconnect:function (elementName) {
-                    console.info("dmsClient: onDisconnect")
-                },
-                onFailed:function () {
-                    console.info("dmsClient: onFailed")
-                    gIRemoteObject = null
-                }
-            }
-            connectId = featureAbility.connectAbility(want, connect)
-            connectId.info("connect ability got id: " + connectId)
-        }
-        deviceManager.createDeviceManager('ohos.dms.test', deviceManagerCallback)
-        console.info("beforeAll done")
+        console.info('beforeAll called ');
+        testservice = new TestService
+        await testservice.toConnectAbility().then(data => {
+            gIRemoteObject = data;
+            console.info("toConnectAbility data is:" + data);
+        })
+        done();
+        console.info("beforeAll done");
     })
-    beforeEach(function (){
-        console.info(('beforeEach called'))
+    beforeEach(function () {
+        console.info('beforeEach called')
     })
     afterEach(function (){
         console.info('afterEach called')
@@ -242,7 +227,7 @@ describe('dmsJsUnitTest', function(){
       
 
     /*      
-     * @tc.number  SUB_ABILITY_FEATUREABILITY_onConnectRemoteService_00100
+     * @tc.number  SUB_ABILITY_FEATUREABILITY_onConnectRemoteService_00200
      * @tc.name    Call the writeinterfacetoken interface, write the interface descriptor, and read interfacetoken
      * @tc.desc    Function test
      * @tc.level   0
