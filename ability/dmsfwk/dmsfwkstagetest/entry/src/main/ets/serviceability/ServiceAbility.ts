@@ -51,7 +51,8 @@ export default class ServiceAbility extends ServiceExtension {
 
     onRequest(want, startId){
         console.info("DmsFwkStageServer ServiceAbility onRequest")
-
+        globalThis.extensionContext = this.context
+        globalThis.startAbilityReault = true
     }
 
     onDestroy() {

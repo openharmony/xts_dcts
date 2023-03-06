@@ -2,10 +2,10 @@
     "description": "Configuration for dms Tests",
     "driver": {
         "type": "JSUnitTest",
-        "test-timeout": "900000",
+        "test-timeout": "180000",
         "package": "com.ohos.dmstest",
 	"abilityName": "com.ohos.dmstest.MainAbility",
-        "shell-timeout": "900000"
+        "shell-timeout": "180000"
     },
     "kits": [
         {
