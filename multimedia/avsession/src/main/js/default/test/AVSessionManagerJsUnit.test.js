@@ -19,11 +19,12 @@ import featureAbility from '@ohos.ability.featureAbility';
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 import process from "@ohos.process";
 import audio from "@ohos.multimedia.audio";
+import TestService from "./testService";
+import "./testService";
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from 'deccjsunit/index';
 
 describe('AVSessionManagerJsUnit', function () {
     console.info("----------AVSession_Manager_Distributed JS Test is starting----------");
-    const SERVER_CHECK_SUCCESS = 'SUCCESS';
     const CODE_CAST_AUDIO = 1;
     let tag = "Application";
     let type = 'audio';
@@ -41,9 +42,24 @@ describe('AVSessionManagerJsUnit', function () {
         artist: "Eminem",
     };
     let gIRemoteObject = null;
-    let connectId = null;
     let audioManager;
     let localAudioDevice;
+    let testservice = null;
+    let localDeviceId = undefined;
+    let dvList = [];
+    let dvId = null;
+
+    deviceManager.createDeviceManager('com.example.myapplication',async (error, deviceManager) =>{
+        console.info("Client ceate device manager success");
+        localDeviceId = deviceManager.getLocalDeviceInfoSync().deviceId;
+        console.info("local device id is: " + localDeviceId);
+        let deviceList = deviceManager.getTrustedDeviceListSync();
+        dvList = deviceList;
+        let deviceId = deviceList[0].deviceId;
+        dvId = deviceId;
+        console.info("deviceid is: " + deviceId)
+        console.info("deviceList is: " + JSON.stringify(deviceList))
+    })
 
     function sleep(time) {
         return new Promise(resolve => setTimeout(resolve, time));
@@ -51,37 +67,6 @@ describe('AVSessionManagerJsUnit', function () {
 
     beforeAll(async function () {
         console.info('beforeAll called avsession server');
-        function deviceManagerCallback(error, deviceManager) {
-            console.info(`got deviceManager: ${deviceManager}, error: ${error}`);
-            let deviceList = deviceManager.getTrustedDeviceListSync();
-            let deviceId = deviceList[0].deviceId;
-            console.info(`online device id: ${deviceId}`);
-
-            let want = {
-                "bundleName": "com.example.myapplication",
-                "abilityName": "com.example.myapplication.ServiceAbility",
-                "deviceId": deviceId,
-                "flags": 256
-            }
-            let connect = {
-                onConnect: function (elementName, remoteProxy) {
-                    console.info(`onConnect called, proxy: ${remoteProxy instanceof rpc.RemoteProxy}`);
-                    gIRemoteObject = remoteProxy;
-                    done();
-                },
-                onDisconnect: function (elementName) {
-                    console.info('avsessionClient: onDisconnect');
-                },
-                onFailed: function () {
-                    console.info('avsessionClient: onFailed');
-                    gIRemoteObject = null;
-                }
-            }
-            connectId = featureAbility.connectAbility(want, connect);
-            connectId.info(`connect ability got id: ${connectId}`);
-        }
-        deviceManager.createDeviceManager('com.example.myapplication', deviceManagerCallback);
-
         await avSession.createAVSession(context, tag, type).then((data) => {
             session = data;
             sessionId = session.sessionId;
@@ -126,6 +111,14 @@ describe('AVSessionManagerJsUnit', function () {
             console.info(`Get device BusinessError: ${err.code}, message: ${err.message}`);
             expect(false).assertTrue();
         });
+
+        sleep(1500);
+        testservice = new TestService
+        await testservice.toConnectAbility().then(data => {
+            gIRemoteObject = data;
+            console.info("toConnectAbility data is:" + data);
+        })
+        done();
         console.info('beforeAll done');
     })
     beforeEach(async function () {
@@ -485,7 +478,7 @@ describe('AVSessionManagerJsUnit', function () {
         } else {
             session.on('outputDeviceChange', (callback) => {
                 if (callback.isRemote) {
-                    console.info(callback.audioDeviceId.size);
+                    console.info(callback.deviceId.size);
                     console.info(callback.deviceName.size);
                     console.info('outputDeviceChange callback registration successful');
                     expect(true).assertTrue();
@@ -515,7 +508,6 @@ describe('AVSessionManagerJsUnit', function () {
             })
             done();
         }
-
     })
 
     /**
@@ -575,7 +567,6 @@ describe('AVSessionManagerJsUnit', function () {
             })
             done();
         }
-
     })
 
     /**
@@ -1228,5 +1219,5 @@ describe('AVSessionManagerJsUnit', function () {
         }
     })
 
-    console.info("----------SUB_Storage_Fileio_Distributed JS Test is end----------");
+    console.info("----------SUB_Multimedia_AV_Session_Distributed JS Test is end----------");
 });
