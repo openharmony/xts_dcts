@@ -6,7 +6,23 @@
     },
     {
       "name": "mainability_description",
-      "value": "JS_Phone_Empty Rpc"
+      "value": "hap sample empty Rpc"
+    },
+    {
+        "name": "MainAbility_desc",
+        "value": "description"
+    },
+    {
+        "name": "MainAbility_label",
+        "value": "rpctest"
+    },
+    {
+        "name": "TestAbility_desc",
+        "value": "description"
+    },
+    {
+        "name": "TestAbility_label",
+        "value": "rpctest"
     }
   ]
 }
