@@ -13,4 +13,8 @@
  * limitations under the License.
  */
 
-require('./AVSessionManagerJsUnit.test.js')
+import AVSessionManagerJsUnit from './AVSessionManagerJsUnit.test.js'
+ 
+export default function testsuite() {
+    AVSessionManagerJsUnit()
+}
