@@ -1,11 +1,12 @@
 {
     "description": "Configuration for fileio Tests",
     "driver": {
-        "type": "JSUnitTest",
-        "test-timeout": "900000",
-        "package": "com.ohos.fileiotest",
-	"abilityName": "com.ohos.fileiotest.MainAbility",
-        "shell-timeout": "900000"
+        "type": "OHJSUnitTest",
+        "test-timeout": "600000",
+        "bundle-name": "com.ohos.fileiotest",
+        "package-name": "com.ohos.fileiotest",
+        "testcase-timeout": "60000",
+        "shell-timeout": "600000"
     },
     "kits": [
         {
