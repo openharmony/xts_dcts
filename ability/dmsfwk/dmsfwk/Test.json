@@ -1,11 +1,13 @@
 {
-    "description": "Configuration for dms Tests",
+    "description": "Configuration for hjunit demo Tests",
     "driver": {
-        "type": "JSUnitTest",
+        "type": "OHJSUnitTest",
         "test-timeout": "180000",
-        "package": "com.ohos.dmstest",
-	"abilityName": "com.ohos.dmstest.MainAbility",
-        "shell-timeout": "180000"
+        "bundle-name": "com.ohos.dmstest",
+        "package-name": "com.ohos.dmstest",
+        "abilityName": "com.ohos.dmstest.MainAbility",
+        "shell-timeout": "180000",
+		"testcase-timeout": 10000
     },
     "kits": [
         {
@@ -16,5 +18,4 @@
             "cleanup-apps": true
         }
     ]
-
 }
