@@ -13,4 +13,9 @@
  * limitations under the License.
  */
 
-require('./RdbStoreSyncFirstLevelJsunit.test.js')
+// require('./RdbStoreSyncFirstLevelJsunit.test.js')
+import RdbStoreSyncFirstLevelJsunit from './RdbStoreSyncFirstLevelJsunit.test.js'
+
+export default function testsuite(){
+    RdbStoreSyncFirstLevelJsunit()
+}
