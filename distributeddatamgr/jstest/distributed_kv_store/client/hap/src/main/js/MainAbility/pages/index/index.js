@@ -15,8 +15,8 @@
 import {Core} from 'deccjsunit/index'
 import featureAbility from '@ohos.ability.featureAbility';
 
-const injectRef = Object.getPrototypeOf(global) || global
-injectRef.regeneratorRuntime = require('@babel/runtime/regenerator')
+const injectRef = Object.getPrototypeOf(global) || global;
+injectRef.regeneratorRuntime = require('@babel/runtime/regenerator');
 
 var logTag = 'RpcClient';
 export default {
