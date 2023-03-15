@@ -17,6 +17,7 @@ import rpc from "@ohos.rpc";
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
+
 var results;
 var bundleName = "com.ohos.rpctest";
 var abilityName = "com.ohos.rpctest.ServiceAbility";
