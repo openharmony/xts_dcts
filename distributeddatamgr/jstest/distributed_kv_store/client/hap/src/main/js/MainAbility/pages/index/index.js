@@ -12,7 +12,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-import {Core} from 'deccjsunit/index'
+import {Core} from 'deccjsunit/index';
 import featureAbility from '@ohos.ability.featureAbility';
 
 const injectRef = Object.getPrototypeOf(global) || global;
@@ -28,7 +28,7 @@ export default {
         this.title = this.$t('strings.world');
       },
       onShow() {
-        console.info('onShow finish')
+        console.info('onShow finish');
       },
       onReady() {
       },
