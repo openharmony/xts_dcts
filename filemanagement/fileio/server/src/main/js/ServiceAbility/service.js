@@ -69,6 +69,7 @@ function getFileContent(fpath) {
         content = fileio.readTextSync(fpath);
         console.info("-------------- dest file content :" + content);
     } catch (e) {
+        content = "serverSide readTextSync failed";
         console.info("-------------- read dest file content failed." + e);
     }
     return content;
