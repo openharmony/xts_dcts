@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2021 Huawei Device Co., Ltd.
+* Copyright (c) 2023 Huawei Device Co., Ltd.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -12,23 +12,20 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-import {Core} from 'deccjsunit/index'
-import featureAbility from '@ohos.ability.featureAbility';
 
-const injectRef = Object.getPrototypeOf(global) || global
-injectRef.regeneratorRuntime = require('@babel/runtime/regenerator')
+const injectRef = Object.getPrototypeOf(global) || global;
+injectRef.regeneratorRuntime = require('@babel/runtime/regenerator');
 
-var logTag = 'RpcClient';
 export default {
     data: {
         title: '',
-	gIRemoteObject: undefined,
+        gIRemoteObject: undefined,
     },
     onInit() {
         this.title = this.$t('strings.world');
       },
       onShow() {
-        console.info('onShow finish')
+        console.info('onShow finish');
       },
       onReady() {
       },
