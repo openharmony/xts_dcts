@@ -4,9 +4,9 @@
         "type": "OHJSUnitTest",
         "bundle-name": "com.ohos.distributekvdisjs",
         "package-name": "com.ohos.distributekvdisjs",
-        "test-timeout": "60000",
-        "testcase-timeout": "1200000",
-        "shell-timeout": "60000"
+        "test-timeout": "120000",
+        "testcase-timeout": "120000",
+        "shell-timeout": "120000"
     },
     "kits": [
         {
