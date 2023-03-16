@@ -28,7 +28,7 @@ export default {
         context.requestPermissionsFromUser(['ohos.permission.DISTRIBUTED_DATASYNC'], 666, function (result) {
             console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser,'+result.requestCode);
             setTimeout(()=>{
-                require('./test/List.test');
+                require('../test/List.test');
                 core.execute();
             },1000)
         })
