@@ -1,9 +1,11 @@
 {
     "description": "Configuration for hjunit demo Tests",
     "driver": {
-        "type": "JSUnitTest",
-        "test-timeout": "1200000",
-        "package": "com.ohos.distributerdbdisjs",
+        "type": "OHJSUnitTest",
+        "test-timeout": "60000",
+        "testcase-timeout": 60000,
+        "bundle-name": "com.ohos.distributerdbdisjs",
+        "package-name": "com.ohos.distributerdbdisjs",
         "shell-timeout": "60000"
     },
     "kits": [
