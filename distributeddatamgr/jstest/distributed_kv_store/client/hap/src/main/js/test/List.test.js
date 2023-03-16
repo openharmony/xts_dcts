@@ -12,8 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import kvSyncTest from './KvStoreSecurityLevelJsunit.test.js'
+import kvSyncTest from './KvStoreSecurityLevelJsunit.test.js';
  
 export default function testsuite() {
-    kvSyncTest()
+    kvSyncTest();
 }
