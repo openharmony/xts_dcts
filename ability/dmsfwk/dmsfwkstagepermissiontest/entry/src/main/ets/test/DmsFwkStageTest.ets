@@ -17,6 +17,10 @@ import deviceManager from '@ohos.distributedHardware.deviceManager';
 import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
 import commonEvent from '@ohos.commonEvent';
 import rpc from '@ohos.rpc';
+import { UiDriver, BY } from '@ohos.UiTest';
+import abilityAccessCtrl from '@ohos.abilityAccessCtrl'
+let atManager = abilityAccessCtrl.createAtManager();
+
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
 let dvList;
 let dvId;
@@ -31,7 +35,39 @@ export default function DmsFwkStageTest() {
 
   describe('DmsFwkStageTest', function () {
 
+    function sleep(ms) {
+		  return new Promise(resolve => setTimeout(resolve, ms));
+	  }
+
+    async function getPermission() {
+		  console.info('getPermission is start');
+		  atManager.requestPermissionsFromUser(globalThis.abilityContext, ['ohos.permission.DISTRIBUTED_DATASYNC'], (data) => {
+		  console.info("request success" + JSON.stringify(data));
+		  })
+	  }
+
+    async function driveFn() {
+		  try {
+			  let driver = await UiDriver.create()
+			  console.info('come in driveFn')
+			  console.info('driver is ${JSON.stringify(driver)}')
+			  sleep(2000);
+			  let button = await driver.findComponent(BY.text('允许'));
+			  console.info('button is ${JSON.stringify(button)}');
+			  sleep(5000);
+			  await button.click();
+		  } catch (err) {
+			  console.info('err is ' + err);
+			  return;
+		  }
+	  }
+
     beforeAll(async function (done) {
+      await getPermission();
+	    sleep(5000);
+	    await driveFn();
+	    sleep(1000);
+
       function deviceManagerCallback(error, deviceManager) {
         console.info('LifeCycleTest before each called');
         let deviceList = deviceManager.getTrustedDeviceListSync();
@@ -60,11 +96,6 @@ export default function DmsFwkStageTest() {
     var TAG;
     var listKeyTemp = [];
     var listKeyTemp1 = [];
-
-
-    function sleep(time) {
-      return new Promise((resolve) => setTimeout(resolve, time))
-    }
 
     /*
      * @tc.number  SUB_DMS_StartControl_ConnectAbility_0200

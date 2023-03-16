@@ -16,8 +16,8 @@ import router from '@ohos.router';
 import AbilityDelegatorRegistry from '@ohos.application.abilityDelegatorRegistry'
 import { Hypium } from '@ohos/hypium'
 import testsuite from '../../test/List.test'
-import AcCtrl from '@ohos.abilityAccessCtrl'
-let AcManager = AcCtrl.createAtManager()
+
+
 @Entry
 @Component
 struct Index {
@@ -25,15 +25,12 @@ struct Index {
 
   aboutToAppear() {
     console.info("start run testcase!!!!")
-      AcManager.requestPermissionsFromUser(globalThis.abilityContext, ['ohos.permission.DISTRIBUTED_DATASYNC'], function (result) {
-        console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser')
-        var abilityDelegator: any
-        abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator()
-        var abilityDelegatorArguments: any
-        abilityDelegatorArguments = AbilityDelegatorRegistry.getArguments()
-        console.info('start run testcase!!!')
-        Hypium.hypiumTest(abilityDelegator, abilityDelegatorArguments, testsuite)
-      })
+    var abilityDelegator: any
+    abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator()
+    var abilityDelegatorArguments: any
+    abilityDelegatorArguments = AbilityDelegatorRegistry.getArguments()
+    console.info('start run testcase!!!')
+    Hypium.hypiumTest(abilityDelegator, abilityDelegatorArguments, testsuite)
   }
 
   build() {

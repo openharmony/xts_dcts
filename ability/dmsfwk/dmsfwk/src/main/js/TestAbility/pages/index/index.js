@@ -14,11 +14,13 @@
  */
 
 export default {
-    onCreate() {
-        console.info("Application onCreate");
+    data: {
+        title: ""
     },
-    onDestroy() {
-        console.info("Application onDestroy");
+    onInit() {
+        this.title = this.$t('strings.world');
     }
-};
+}
+
+
 
