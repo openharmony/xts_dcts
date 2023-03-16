@@ -16,18 +16,18 @@
 import rpc from '@ohos.rpc';
 import process from '@ohos.process';
 
-var logTag = "RpcClient";
-var CODE_INVOKE = 1;
+let logTag = "RpcClient_TestService:  ";
+let CODE_INVOKE = 1;
 import ApiMessage from '../common/apiMessage.js';
 import ApiResult from '../common/apiResult.js';
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
-var results;
-var isConnected = false;
-var bundleName = "com.ohos.distributekvdisjs";
-var abilityName = "com.ohos.distributekvdisjs.ServiceAbility";
-var deviceList;
+let results;
+let isConnected = false;
+let bundleName = "com.ohos.distributekvdisjs";
+let abilityName = "com.ohos.distributekvdisjs.ServiceAbility";
+let deviceList;
 
 export default class TestService {
     callback;
@@ -64,24 +64,24 @@ export default class TestService {
             }
         }).catch(function (e) {
             console.log(logTag + " sendRequest got exception: " + e.message);
-        })
+        });
     }
 
     getDeviceList(deviceManager) {
         deviceList = deviceManager.getTrustedDeviceListSync();
-        console.info(logTag + "getDeviceList success, deviceList id: " + JSON.stringify(deviceList))
+        console.info(logTag + "getDeviceList success, deviceList id: " + JSON.stringify(deviceList));
     }
 
     toConnectAbility() {
-        console.info(logTag + " toConnectAbility")
+        console.info(logTag + " toConnectAbility");
         return new Promise(resolve=>{
             let self = this;
             deviceManager.createDeviceManager('com.ohos.distributekvdisjs', (error, deviceManager) => {
                 self.getDeviceList(deviceManager);
-                console.info(logTag + "got deviceManager: " + deviceManager)
-                let deviceId = deviceList[0].deviceId
-                console.info(logTag + "deviceid : " + deviceId)
-                console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList))
+                console.info(logTag + "got deviceManager: " + deviceManager);
+                let deviceId = deviceList[0].deviceId;
+                console.info(logTag + "deviceid : " + deviceId);
+                console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList));
                 let want = {
                     "bundleName": bundleName,
                     "abilityName": abilityName,
@@ -90,18 +90,18 @@ export default class TestService {
                 }
                 let connect = {
                     onConnect: function (elementName, remoteProxy) {
-                        console.log('RpcClient: onConnect called, remoteProxy: ' + remoteProxy);
-                        resolve(remoteProxy)
+                        console.log(logTag + 'onConnect called, remoteProxy: ' + remoteProxy);
+                        resolve(remoteProxy);
                     },
                     onDisconnect: function (elementName) {
-                        console.log("RpcClient: onDisconnect")
+                        console.log(logTag + "onDisconnect");
                     },
                     onFailed: function () {
-                        console.log("RpcClient: onFailed")
+                        console.log(logTag + "onFailed");
                     }
                 }
-                let connectId = featureAbility.connectAbility(want, connect)
-                console.info(logTag + "connect ability got id: " + connectId)
+                let connectId = featureAbility.connectAbility(want, connect);
+                console.info(logTag + "connect ability got id: " + connectId);
             })
         })
     }
