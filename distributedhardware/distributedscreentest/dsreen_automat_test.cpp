@@ -18,11 +18,31 @@
 #include "nativetoken_kit.h"
 #include "token_setproc.h"
 #include "softbus_common.h"
+#include "accesstoken_kit.h"
 
 using namespace testing::ext;
+using namespace OHOS::DistributedHardware;
+using namespace OHOS::Security::AccessToken;
 
 int32_t g_dSreenOk = 0;
 int32_t g_dSleepOk = 1;
+static constexpr int32_t DEFAULT_API_VERSION = 8;
+
+static PermissionStateFull g_testState = {
+    .permissionName = "ohos.permission.CAMERA",
+    .isGeneral = true,
+    .resDeviceID = {"local"},
+    .grantStatus = {PermissionState::PERMISSION_GRANTED},
+    .grantFlags = {1}
+};
+
+static HapPolicyParams g_PolicyPramsl = {
+    .apl = APL_NORMAL,
+    .domain = "test.domain.A",
+    .permList = {},
+    .permStateList = {g_testState}
+};
+
 
 class DSreenAutomatTest : public testing::Test {
 public:
@@ -34,22 +54,34 @@ public:
 };
 void DSreenAutomatTest::SetUpTestCase(void)
 {
-    uint64_t tokenId;
-    const char *perms[2];
-    perms[0] = OHOS_PERMISSION_DISTRIBUTED_SOFTBUS_CENTER;
-    perms[1] = OHOS_PERMISSION_DISTRIBUTED_DATASYNC;
-    NativeTokenInfoParams infoTnstance = {
-        .dcapsNum = 0,
-        .permsNum = 2,
-        .aclsNum = 0,
-        .dcaps = NULL,
-        .perms = perms,
-        .acls = NULL,
-        .processName = "dsoftbus_service",
-        .aplStr = "system_core",
+    // uint64_t tokenId;
+    // const char *perms[2];
+    // perms[0] = OHOS_PERMISSION_DISTRIBUTED_SOFTBUS_CENTER;
+    // perms[1] = OHOS_PERMISSION_DISTRIBUTED_DATASYNC;
+    // NativeTokenInfoParams infoTnstance = {
+    //     .dcapsNum = 0,
+    //     .permsNum = 2,
+    //     .aclsNum = 0,
+    //     .dcaps = NULL,
+    //     .perms = perms,
+    //     .acls = NULL,
+    //     .processName = "dsoftbus_service",
+    //     .aplStr = "system_core",
+    // };
+    // tokenId = GetAccessTokenId(&infoTnstance);
+    // SetSelfTokenID(tokenId);
+
+    HapInfoParams info = {
+        .userID = 1,
+        .bundleName = "DctsdisScreenTest",
+        .instIndex = 0,
+        .appIDDesc = "testtesttesttest",
+        .apiVersion = DEFAULT_API_VERSION,
+        .isSystemApp = true
     };
-    tokenId = GetAccessTokenId(&infoTnstance);
-    SetSelfTokenID(tokenId);
+    AccessTokenIDEx tokenIdEx = {0};
+    tokenIdEx = AccessTokenKit::AllocHapToken(info, g_PolicyPramsl);
+    SetSelfTokenID(tokenIdEx.tokenIDEx);
     sleep(g_dSleepOk);
     system("pidof accesstoken_ser | xargs kill -9");
 }
