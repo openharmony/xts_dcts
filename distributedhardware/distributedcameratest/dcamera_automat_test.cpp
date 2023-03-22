@@ -159,278 +159,13 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_0900, TestSize.Level1)
 
 HWTEST_F(DCameraAutomatTest, DCameraTest_1000, TestSize.Level1)
 {
-    int32_t ret = PreviewOn(0, mainDemo);
-    EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAwbMode(sleepOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode incandescent fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAwbMode(cameraOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_1100, TestSize.Level1)
-{
-    int32_t ret = mainDemo->SetAeExpo();
-    EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetMetadata();
-    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
-    sleep(sleepOk);
-    ret = CaptureTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "CaptureTest fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_1200, TestSize.Level1)
-{
-    int32_t ret = VideoTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "VideoTest fail";
-    sleep(sleepOk);
-    ret = FlashLightTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "FlashLightTest fail";
-    sleep(sleepOk);
-    ret = OfflineTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "OfflineTest fail";
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_1300, TestSize.Level1)
-{
-    int32_t ret = PreviewOn(0, mainDemo);
-    EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAwbMode(cameraOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAwbMode(sleepOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode incandescent fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_1400, TestSize.Level1)
-{
-    int32_t ret = mainDemo->SetAeExpo();
-    EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
-    sleep(sleepOk);
-    ret = CaptureTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetMetadata();
-    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_1500, TestSize.Level1)
-{
-    int32_t ret = VideoTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "VideoTest fail";
-    sleep(sleepOk);
-    ret = OfflineTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "OfflineTest fail";
-    ret = FlashLightTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "FlashLightTest fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_1600, TestSize.Level1)
-{
-    int32_t ret = mainDemo->SetAwbMode(sleepOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode incandescent fail";
-    sleep(sleepOk);ret = PreviewOn(0, mainDemo);
-    EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAwbMode(cameraOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_1700, TestSize.Level1)
-{
-    int32_t ret = mainDemo->SetMetadata();
-    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAeExpo();
-    EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
-    sleep(sleepOk);
-    ret = CaptureTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_1800, TestSize.Level1)
-{
-    int32_t ret = FlashLightTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "FlashLightTest fail";
-    sleep(sleepOk);
-    ret = VideoTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "VideoTest fail";
-    sleep(sleepOk);
-    ret = OfflineTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "OfflineTest fail";
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_1900, TestSize.Level1)
-{
-    int32_t ret = mainDemo->SetAwbMode(cameraOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAwbMode(sleepOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode incandescent fail";
-    sleep(sleepOk);
-    ret = PreviewOn(1, mainDemo);
-    EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_2000, TestSize.Level1)
-{
-    int32_t ret = CaptureTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetMetadata();
-    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAeExpo();
-    EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_2100, TestSize.Level1)
-{
-    int32_t ret = OfflineTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "OfflineTest fail";
-    ret = FlashLightTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "FlashLightTest fail";
-    sleep(sleepOk);
-    ret = VideoTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "VideoTest fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_2200, TestSize.Level1)
-{
-    int32_t ret = mainDemo->SetAeExpo();
-    EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetMetadata();
-    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
-    sleep(sleepOk);
-    ret = CaptureTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_2300, TestSize.Level1)
-{
-    int32_t ret = PreviewOn(1, mainDemo);
-    EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAwbMode(sleepOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode incandescent fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAwbMode(cameraOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_2400, TestSize.Level1)
-{
-    int32_t ret = VideoTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "VideoTest fail";
-    sleep(sleepOk);
-    ret = FlashLightTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "FlashLightTest fail";
-    sleep(sleepOk);
-    ret = OfflineTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "OfflineTest fail";
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_2500, TestSize.Level1)
-{
-    int32_t ret = VideoTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "VideoTest fail";
-    sleep(sleepOk);
-    ret = FlashLightTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "FlashLightTest fail";
-    sleep(sleepOk);
-    ret = OfflineTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "OfflineTest fail";
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_2600, TestSize.Level1)
-{
-    int32_t ret = PreviewOn(1, mainDemo);
-    EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAwbMode(sleepOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode incandescent fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAwbMode(cameraOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_2700, TestSize.Level1)
-{
-    int32_t ret = mainDemo->SetAeExpo();
-    EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetMetadata();
-    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
-    sleep(sleepOk);
-    ret = CaptureTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_2800, TestSize.Level1)
-{
-    int32_t ret = VideoTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "VideoTest fail";
-    sleep(sleepOk);
-    ret = OfflineTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "OfflineTest fail";
-    ret = FlashLightTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "FlashLightTest fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_2900, TestSize.Level1)
-{
-    int32_t ret = PreviewOn(1, mainDemo);
-    EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAwbMode(cameraOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetAwbMode(sleepOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode incandescent fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_3000, TestSize.Level1)
-{
-    int32_t ret = mainDemo->SetAeExpo();
-    EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
-    sleep(sleepOk);
-    ret = CaptureTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
-    sleep(sleepOk);
-    ret = mainDemo->SetMetadata();
-    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
-    sleep(sleepOk);
-}
-
-HWTEST_F(DCameraAutomatTest, DCameraTest_3100, TestSize.Level1)
-{
     int32_t ret = PreviewOn(1, mainDemo);
     DHLOGI("DCameraTest_3100 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_3200, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_1100, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
     DHLOGI("DCameraTest_3200 = ", ret);
@@ -438,7 +173,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_3200, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_3300, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_1200, TestSize.Level1)
 {
     int32_t ret = PreviewOn(0, nullptr);
     DHLOGI("DCameraTest_3300 = ", ret);
@@ -446,7 +181,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_3300, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_3400, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_1300, TestSize.Level1)
 {
     int32_t ret = PreviewOn(-1, mainDemo);
     DHLOGI("DCameraTest_3400 = ", ret);
@@ -454,7 +189,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_3400, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_3500, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_1400, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(5);
     DHLOGI("DCameraTest_3500 = ", ret);
@@ -462,7 +197,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_3500, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_3600, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_1500, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
     DHLOGI("DCameraTest_3600 = ", ret);
@@ -470,7 +205,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_3600, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_3700, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_1600, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
     DHLOGI("DCameraTest_3700 = ", ret);
@@ -482,7 +217,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_3700, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_3800, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_1700, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
     DHLOGI("DCameraTest_3800 = ", ret);
@@ -494,7 +229,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_3800, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_3900, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_1800, TestSize.Level1)
 {
     int32_t ret = CaptureTest(nullptr);
     DHLOGI("DCameraTest_3900 = ", ret);
@@ -502,7 +237,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_3900, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_4000, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_1900, TestSize.Level1)
 {
     int32_t ret = VideoTest(nullptr);
     DHLOGI("DCameraTest_4000 = ", ret);
@@ -510,7 +245,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_4000, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_4100, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_2000, TestSize.Level1)
 {
     int32_t ret = FlashLightTest(nullptr);
     DHLOGI("DCameraTest_4100 = ", ret);
@@ -518,7 +253,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_4100, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_4200, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_2100, TestSize.Level1)
 {
     int32_t ret = OfflineTest(nullptr);
     DHLOGI("DCameraTest_4200 = ", ret);
@@ -526,7 +261,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_4200, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_4300, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_2200, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
     DHLOGI("DCameraTest_4300 = ", ret);
@@ -538,7 +273,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_4300, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_4400, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_2300, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
     DHLOGI("DCameraTest_4400 = ", ret);
@@ -550,7 +285,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_4400, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_4500, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_2400, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
     DHLOGI("DCameraTest_4500 = ", ret);
@@ -562,7 +297,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_4500, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_4600, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_2500, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
     DHLOGI("DCameraTest_4600 = ", ret);
@@ -574,7 +309,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_4600, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_4700, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_2600, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
     DHLOGI("DCameraTest_4700 = ", ret);
@@ -586,7 +321,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_4700, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_4800, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_2700, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
     DHLOGI("DCameraTest_4800 = ", ret);
@@ -598,7 +333,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_4800, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_4900, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_2800, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
     DHLOGI("DCameraTest_4900 = ", ret);
@@ -610,7 +345,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_4900, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_5000, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_2900, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
     DHLOGI("DCameraTest_5000 = ", ret);
@@ -622,7 +357,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_5000, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_5100, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_3000, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
     DHLOGI("DCameraTest_5100 = ", ret);
@@ -634,7 +369,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_5100, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_5200, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_3100, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
     DHLOGI("DCameraTest_5200 = ", ret);
@@ -646,7 +381,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_5200, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_5300, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_3200, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
     DHLOGI("DCameraTest_5300 = ", ret);
@@ -658,7 +393,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_5300, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_5400, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_3300, TestSize.Level1)
 {
     int32_t ret = CaptureTest(nullptr);
     DHLOGI("DCameraTest_5400 = ", ret);
@@ -670,7 +405,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_5400, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_5500, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_3400, TestSize.Level1)
 {
     int32_t ret = CaptureTest(nullptr);
     DHLOGI("DCameraTest_5500 = ", ret);
@@ -682,7 +417,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_5500, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_5600, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_3500, TestSize.Level1)
 {
     int32_t ret = CaptureTest(nullptr);
     DHLOGI("DCameraTest_5600 = ", ret);
@@ -694,7 +429,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_5600, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_5700, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_3600, TestSize.Level1)
 {
     int32_t ret = VideoTest(nullptr);
     DHLOGI("DCameraTest_5700 = ", ret);
@@ -706,7 +441,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_5700, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_5800, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_3700, TestSize.Level1)
 {
     int32_t ret = VideoTest(nullptr);
     DHLOGI("DCameraTest_5800 = ", ret);
@@ -718,7 +453,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_5800, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_5900, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_3800, TestSize.Level1)
 {
     int32_t ret = FlashLightTest(nullptr);
     DHLOGI("DCameraTest_5900 = ", ret);
@@ -730,7 +465,7 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_5900, TestSize.Level1)
     sleep(sleepOk);
 }
 
-HWTEST_F(DCameraAutomatTest, DCameraTest_6000, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_3900, TestSize.Level1)
 {
     int32_t ret = FlashLightTest(nullptr);
     DHLOGI("DCameraTest_6000 = ", ret);
