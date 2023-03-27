@@ -16,6 +16,7 @@
 import rpc from "@ohos.rpc";
 import fileio from '@ohos.fileio';
 import featureAbility from "@ohos.ability.featureAbility";
+import securityLabel from '@ohos.file.securityLabel';
 import TestService from "./testService"
 import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '@ohos/hypium';
 import {UiDriver, BY} from '@ohos.UiTest';
@@ -48,7 +49,7 @@ export default function FileioDistributedTest(){
         }
     
         /**
-         * 获取应用的分布式目录
+         * get app distributed file Path
          * @param testName 
          * @returns 
          */
@@ -78,13 +79,13 @@ export default function FileioDistributedTest(){
                 var option = new rpc.MessageOption();
     
                 var writeResult = data.writeString(path);
-                console.info(tcNumber + " : run writeString success, writeResult is " + writeResult);
-                console.info(tcNumber + " : run writeString success, data is " + data.readString());
+                console.info(tcNumber + " : client writeString success, data is " + data.readString());
                 expect(writeResult == true).assertTrue();
     
                 if (gIRemoteObject == undefined) {
                     console.info(tcNumber + " : gIRemoteObject undefined");
                 }
+
                 await gIRemoteObject.sendRequest(codeNumber, data, reply, option).then((result) => {
                     console.info(tcNumber + " : sendRequest success, result is " + result.errCode);
                     expect(result.errCode == 0).assertTrue();
@@ -94,7 +95,7 @@ export default function FileioDistributedTest(){
                     callback(resultToken);
                 }).catch((err) => {
                     console.info(tcNumber + " sendRequest has failed for : " + err);
-                    callback("Empty");
+                    callback("client sendRequest failed");
                 }).finally(() => {
                     data.reclaim();
                     reply.reclaim();
@@ -102,13 +103,13 @@ export default function FileioDistributedTest(){
                 })
             } catch (e) {
                 console.info(tcNumber + " has failed for : " + e);
-                callback("Empty");
+                callback("client sendRequest failed");
             }
         }
         
         function sleep(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
     
         async function getPermission() {
             console.info(`getPermission is start`);
@@ -116,7 +117,6 @@ export default function FileioDistributedTest(){
             let context = featureAbility.getContext()
             context.requestPermissionsFromUser(permissions, 666, (data) => {
                 console.info("request success" + JSON.stringify(data));
-    
             })
         }
         
@@ -135,7 +135,6 @@ export default function FileioDistributedTest(){
                 return;
             }
         }
-        
     
         beforeAll(async function(done) {
             console.info('beforeAll called fileio server');
@@ -3179,6 +3178,7 @@ export default function FileioDistributedTest(){
             console.info('fpath == ' + fpath);
             try {
                 let fd = fileio.openSync(fpath, 0o102, 0o777);
+                securityLabel.setSecurityLabelSync(fpath, "s0");
                 fileio.writeSync(fd, DISTRIBUTED_FILE_CONTENT);
                 console.info('-------------- test_fileio_write_file_000 : write file success.');
                 let fileContent = fileio.readTextSync(fpath);
@@ -3431,6 +3431,7 @@ export default function FileioDistributedTest(){
             let fpath = await getDistributedFilePath(tcNumber);
             try {
                 let fd = fileio.openSync(fpath, 0o102, 0o777);
+                securityLabel.setSecurityLabelSync(fpath, "s0");
                 console.info('------------------- start check server first... ');
                 await getServerFileInfo(tcNumber, fpath, CODE_FSYNC_FILE, done, function (serverFileSync) {
                     sleep(2000);
