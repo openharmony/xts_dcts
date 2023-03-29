@@ -53,8 +53,8 @@ export default function FileioDistributedTest(){
             }
             return basePath + "/" + testName;
         }
-		
-		    /**
+
+        /**
          * Send rpc request to get server-side verification result without done
          * @param tcNumber 
          * @param path 
@@ -192,7 +192,6 @@ export default function FileioDistributedTest(){
         afterAll(function () {
             console.info('afterAll called');
         })
-        
 
         /** 
          * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0000
@@ -2569,7 +2568,7 @@ export default function FileioDistributedTest(){
             }
             console.info("--------end test_fileio_delete_dir_sync_000--------");
         });
-        
+
         /**
          * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0000
          * @tc.name    test_fileio_create_file_sync_000
