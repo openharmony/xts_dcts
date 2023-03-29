@@ -75,13 +75,6 @@ function getFileContent(fpath) {
     return content;
 }
 
-const sleep = async function sleep(times) {
-    if (!times) {
-        times = 10;
-    }
-    await new Promise((res) => setTimeout(res, times));
-};
-
 const CODE_MK_DIR = 1;
 const CODE_RM_DIR = 2;
 const CODE_CREATE_FILE = 3;
@@ -95,7 +88,7 @@ class Stub extends rpc.RemoteObject {
         super(descriptor);
     }
 
-    async onRemoteRequest(code, data, reply, option) {
+    onRemoteRequest(code, data, reply, option) {
         try {
             console.info("onRemoteRequest: " + code)
             switch (code) {
@@ -120,9 +113,6 @@ class Stub extends rpc.RemoteObject {
                     console.info("case CODE_RM_DIR start");
                     let path = data.readString();
                     console.info("The server's readString result is " + path);
-                    console.info("CODE_RM_DIR begin");
-                    await sleep(3000);
-                    console.info("CODE_RM_DIR end");
                     let result;
                     try {
                         let dir = fileio.openDirSync(path);
@@ -157,9 +147,6 @@ class Stub extends rpc.RemoteObject {
                     console.info("case CODE_DELETE_FILE start");
                     let path = data.readString();
                     console.info("The server's readString result is " + path);
-                    console.info("CODE_DELETE_FILE begin");
-                    await sleep(3000);
-                    console.info("CODE_DELETE_FILE end");
                     let result;
                     try {
                         let fd = fileio.openSync(path);
