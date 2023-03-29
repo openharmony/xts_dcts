@@ -38,16 +38,6 @@ export default function FileioDistributedTest(){
         const CODE_GET_FILE_STAT = 6;
         const CODE_FSYNC_FILE = 7;
     
-        function sleep(numberMillis) {
-            var now = new Date();
-            var exitTime = now.getTime() + numberMillis;
-            while (true) {
-                now = new Date();
-                if (now.getTime() > exitTime)
-                    return;
-            }
-        }
-    
         /**
          * get app distributed file Path
          * @param testName 
@@ -62,6 +52,47 @@ export default function FileioDistributedTest(){
                 console.log("-------- getDistributedFilePath() failed for : " + e);
             }
             return basePath + "/" + testName;
+        }
+
+        /**
+         * Send rpc request to get server-side verification result without done
+         * @param tcNumber 
+         * @param path 
+         * @param codeNumber 
+         * @param callback 
+         */
+        async function getServerFileInfoFirst(tcNumber, path, codeNumber, callback) {
+            try {
+                var data = rpc.MessageParcel.create();
+                var reply = rpc.MessageParcel.create();
+                var option = new rpc.MessageOption();
+    
+                var writeResult = data.writeString(path);
+                console.info(tcNumber + " : client writeString success, data is " + data.readString());
+                expect(writeResult == true).assertTrue();
+    
+                if (gIRemoteObject == undefined) {
+                    console.info(tcNumber + " : gIRemoteObject undefined");
+                }
+
+                await gIRemoteObject.sendRequest(codeNumber, data, reply, option).then((result) => {
+                    console.info(tcNumber + " : sendRequest success, result is " + result.errCode);
+                    expect(result.errCode == 0).assertTrue();
+    
+                    var resultToken = result.reply.readString();
+                    console.info(tcNumber + " : run readString success, result is " + resultToken);
+                    callback(resultToken);
+                }).catch((err) => {
+                    console.info(tcNumber + " sendRequest has failed for : " + err);
+                    callback("client sendRequest failed");
+                }).finally(() => {
+                    data.reclaim();
+                    reply.reclaim();
+                })
+            } catch (e) {
+                console.info(tcNumber + " has failed for : " + e);
+                callback("client sendRequest failed");
+            }
         }
     
         /**
@@ -161,7 +192,7 @@ export default function FileioDistributedTest(){
         afterAll(function () {
             console.info('afterAll called');
         })
-    
+
         /** 
          * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0000
          * @tc.name    test_fileio_create_dir_sync_000
@@ -2493,7 +2524,7 @@ export default function FileioDistributedTest(){
             }
             console.info("--------end test_fileio_create_dir_sync_074--------");
         });
-    
+
         /** 
          * @tc.number  SUB_STORAGE_Distributed_FileIO_rmdirSync_0000
          * @tc.name    test_fileio_delete_dir_sync_000
@@ -2512,8 +2543,8 @@ export default function FileioDistributedTest(){
                 console.info('------------- test_fileio_delete_dir_sync_000 : client mkdirSync success.');
     
                 console.info('------ start check server first ... ');
-                await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
-                    console.info("test_fileio_delete_dir_sync_000 : getServerFileInfo serverDirCreate: " + serverDirCreate);
+                await getServerFileInfoFirst(tcNumber, dpath, CODE_MK_DIR, function (serverDirCreate) {
+                    console.info("test_fileio_delete_dir_sync_000 : getServerFileInfoFirst serverDirCreate: " + serverDirCreate);
                     expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
                 });
     
@@ -2537,7 +2568,7 @@ export default function FileioDistributedTest(){
             }
             console.info("--------end test_fileio_delete_dir_sync_000--------");
         });
-    
+
         /**
          * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0000
          * @tc.name    test_fileio_create_file_sync_000
@@ -3113,7 +3144,7 @@ export default function FileioDistributedTest(){
             }
             console.info("--------end test_fileio_create_file_sync_017--------");
         });
-    
+
         /**
          * @tc.number   SUB_STORAGE_Distributed_FileIO_UnlinkSync_0000
          * @tc.name     test_fileio_delete_file_sync_000
@@ -3138,8 +3169,8 @@ export default function FileioDistributedTest(){
                 fileio.closeSync(fd);
     
                 console.info('------ start check server first ... ');
-                await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
-                    console.info("test_fileio_delete_file_sync_000 getServerFileInfo serverFileCreate: " + serverFileCreate);
+                await getServerFileInfoFirst(tcNumber, fpath, CODE_CREATE_FILE, function (serverFileCreate) {
+                    console.info("test_fileio_delete_file_sync_000 getServerFileInfoFirst serverFileCreate: " + serverFileCreate);
                     expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
                 })
     
@@ -3219,8 +3250,8 @@ export default function FileioDistributedTest(){
                 console.info('------------- create file success.');
     
                 console.info('------ start check server first... ');
-                await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
-                    console.info("test_fileio_rename_file_sync_000 getServerFileInfo serverFileCreate: " + serverFileCreate);
+                await getServerFileInfoFirst(tcNumber, fpath, CODE_CREATE_FILE, function (serverFileCreate) {
+                    console.info("test_fileio_rename_file_sync_000 getServerFileInfoFirst serverFileCreate: " + serverFileCreate);
                     expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
                 })
     
@@ -3268,9 +3299,9 @@ export default function FileioDistributedTest(){
                 console.info('------------- create dir success.');
     
                 console.info('------ start check server first... ');
-                await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverFileCreate) {
+                await getServerFileInfoFirst(tcNumber, dpath, CODE_MK_DIR, function (serverFileCreate) {
                     sleep(1000);
-                    console.info("test_fileio_rename_dir_sync_000 getServerFileInfo serverFileCreate: " + serverFileCreate);
+                    console.info("test_fileio_rename_dir_sync_000 getServerFileInfoFirst serverFileCreate: " + serverFileCreate);
                     expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
                 })
     
@@ -3319,8 +3350,8 @@ export default function FileioDistributedTest(){
                 console.info('------------- create file success.');
     
                 console.info('------ start check server first... ');
-                await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
-                    console.info("test_fileio_copy_file_sync_000 getServerFileInfo serverFileCreate: " + serverFileCreate);
+                await getServerFileInfoFirst(tcNumber, fpath, CODE_CREATE_FILE, function (serverFileCreate) {
+                    console.info("test_fileio_copy_file_sync_000 getServerFileInfoFirst serverFileCreate: " + serverFileCreate);
                     expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
                 })
     
@@ -3370,7 +3401,6 @@ export default function FileioDistributedTest(){
                 let localStatInfo = "localStat.size = " + localStat.size + ",localStat.mode = " + localStat.mode;
                 console.info('------------------- test_fileio_file_statSync_000 localStatInfo = ' + localStatInfo);
     
-                console.info('------------------- start check server first... ');
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_STAT, done, function (serverFileStat) {
                     console.info("test_fileio_file_statSync_000 getServerFileInfo serverFileStat: " + serverFileStat);
                     expect(serverFileStat).assertEqual(localStatInfo);
@@ -3403,7 +3433,6 @@ export default function FileioDistributedTest(){
                 let localStatInfo = "localStat.size = " + localStat.size + ",localStat.mode = " + localStat.mode;
                 console.info('------------------- test_fileio_file_fstatSync_000 localStatInfo = ' + localStatInfo);
     
-                console.info('------------------- start check server first... ');
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_STAT, done, function (serverFileStat) {
                     console.info("test_fileio_file_fstatSync_000 getServerFileInfo serverFileStat: " + serverFileStat);
                     expect(serverFileStat).assertEqual(localStatInfo);
@@ -3432,7 +3461,6 @@ export default function FileioDistributedTest(){
             try {
                 let fd = fileio.openSync(fpath, 0o102, 0o777);
                 securityLabel.setSecurityLabelSync(fpath, "s0");
-                console.info('------------------- start check server first... ');
                 await getServerFileInfo(tcNumber, fpath, CODE_FSYNC_FILE, done, function (serverFileSync) {
                     sleep(2000);
                     console.info("test_fileio_file_fsyncSync_000 getServerFileInfo serverFileSync: " + JSON.stringify(serverFileSync));
