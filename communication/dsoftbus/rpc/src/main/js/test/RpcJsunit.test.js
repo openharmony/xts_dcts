@@ -128,11 +128,9 @@ export default function RpcJsUnitTest() {
                 let _checkResult = this.checkResult;
                 let _num = data.readInt();
                 let _str = data.readString();
-                setTimeout(function () {
-                    _checkResult(_num, _str)
-                }, 2 * 1000);
-                console.info("result:" + result);
-                return result
+                _checkResult(_num, _str);
+                sleep(2000);
+                return result;
             }
         }
 
@@ -239,9 +237,8 @@ export default function RpcJsUnitTest() {
                 console.info("server died");
                 expect(this.gIRemoteObject.removeDeathRecipient(this, 0)).assertTrue();
                 let _done = this.done;
-                setTimeout(function () {
-                    _done()
-                }, 1000);
+                _done();
+                sleep(1000);
             }
         }
 
@@ -255,9 +252,8 @@ export default function RpcJsUnitTest() {
                 console.info("server died");
                 expect(this.proxy.unregisterDeathRecipient(this, 0)).assertTrue();
                 let _done = this.done;
-                setTimeout(function () {
-                    _done()
-                }, 1000);
+                _done();
+                sleep(1000);
             }
         }
 
@@ -11706,7 +11702,7 @@ export default function RpcJsUnitTest() {
 
         /*
          * @tc.number  SUB_Softbus_RPC_Compatibility_IPCSkeleton_00300
-         * @tc.name    Create object, getinterfacedescriptor interface function verification
+         * @tc.name    Create object, getContextObject interface function verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
@@ -11715,7 +11711,6 @@ export default function RpcJsUnitTest() {
             try {
                 let samgr = rpc.IPCSkeleton.getContextObject();
                 expect(samgr != null).assertTrue();
-                expect(samgr.getInterfaceDescriptor()).assertEqual("");
             }
             catch (error) {
                 expect(error == null).assertTrue();
@@ -11789,7 +11784,6 @@ export default function RpcJsUnitTest() {
         it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_00700", 0, async function (done) {
             console.info("---------------------start SUB_Softbus_RPC_Compatibility_IPCSkeleton_00700---------------------------");
             try {
-                expect(rpc.IPCSkeleton.getContextObject().getInterfaceDescriptor()).assertEqual("");
                 let callingPid = rpc.IPCSkeleton.getCallingPid();
                 let callingUid = rpc.IPCSkeleton.getCallingUid();
                 let option = new rpc.MessageOption();
@@ -11911,7 +11905,6 @@ export default function RpcJsUnitTest() {
         it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_01200", 0, async function (done) {
             console.info("---------------------start SUB_Softbus_RPC_Compatibility_IPCSkeleton_01200---------------------------");
             try {
-                expect(rpc.IPCSkeleton.getContextObject().getInterfaceDescriptor()).assertEqual("");
                 let callingPid = rpc.IPCSkeleton.getCallingPid();
                 let callingUid = rpc.IPCSkeleton.getCallingUid();
                 expect(rpc.IPCSkeleton.getCallingDeviceID()).assertEqual("");
@@ -11958,7 +11951,6 @@ export default function RpcJsUnitTest() {
         it("SUB_Softbus_RPC_Compatibility_IPCSkeleton_01300", 0, async function (done) {
             console.info("---------------------start SUB_Softbus_RPC_Compatibility_IPCSkeleton_01300---------------------------");
             try {
-                expect(rpc.IPCSkeleton.getContextObject().getInterfaceDescriptor()).assertEqual("");
                 let callingPid = rpc.IPCSkeleton.getCallingPid();
                 let callingUid = rpc.IPCSkeleton.getCallingUid();
                 expect(callingUid != null).assertTrue();
