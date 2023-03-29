@@ -113,13 +113,13 @@ class Stub extends rpc.RemoteObject {
                     console.info("case CODE_RM_DIR start");
                     let path = data.readString();
                     console.info("The server's readString result is " + path);
-
-                    let checkResult = checkDirExists(path);
                     let result;
-                    if (checkResult == false) {
+                    try {
+                        let dir = fileio.openDirSync(path);
+                        result = reply.writeString("Server side dir synchronization creation failed!");
+                        dir.closeSync();
+                    } catch (error) {
                         result = reply.writeString("SUCCESS");
-                    } else {
-                        result = reply.writeString("Server side dir synchronization deletion failed.");
                     }
 
                     console.info("The server's writeString result is " + result);
@@ -147,12 +147,12 @@ class Stub extends rpc.RemoteObject {
                     console.info("case CODE_DELETE_FILE start");
                     let path = data.readString();
                     console.info("The server's readString result is " + path);
-
-                    let checkResult = checkFileExists(path);
                     let result;
-                    if (checkResult == true) {
-                        result = reply.writeString("Server side file synchronization deletion failed.");
-                    } else {
+                    try {
+                        let fd = fileio.openSync(path);
+                        result = reply.writeString("Server side file synchronization creation failed!");
+                        fileio.closeSync(fd);
+                    } catch (error) {
                         result = reply.writeString("SUCCESS");
                     }
 
