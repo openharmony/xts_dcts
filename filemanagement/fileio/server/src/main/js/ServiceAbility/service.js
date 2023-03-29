@@ -75,6 +75,13 @@ function getFileContent(fpath) {
     return content;
 }
 
+const sleep = async function sleep(times) {
+	if (!times) {
+		times = 10;
+	}
+	await new Promise((res) => setTimeout(res, times));
+};
+
 const CODE_MK_DIR = 1;
 const CODE_RM_DIR = 2;
 const CODE_CREATE_FILE = 3;
@@ -88,7 +95,7 @@ class Stub extends rpc.RemoteObject {
         super(descriptor);
     }
 
-    onRemoteRequest(code, data, reply, option) {
+    async onRemoteRequest(code, data, reply, option) {
         try {
             console.info("onRemoteRequest: " + code)
             switch (code) {
@@ -98,7 +105,7 @@ class Stub extends rpc.RemoteObject {
                     let path = data.readString()
                     console.info("The server's readString result is " + path);
                     let checkResult = checkDirExists(path);
-                    let result;
+					let result;
                     if (checkResult == true) {
                         result = reply.writeString("SUCCESS");
                     } else {
@@ -114,13 +121,15 @@ class Stub extends rpc.RemoteObject {
                     let path = data.readString();
                     console.info("The server's readString result is " + path);
 
-                    let checkResult = checkDirExists(path);
+					await sleep(3000);
                     let result;
-                    if (checkResult == false) {
-                        result = reply.writeString("SUCCESS");
-                    } else {
-                        result = reply.writeString("Server side dir synchronization deletion failed.");
-                    }
+                    try {
+						let dir = fileio.openDirSync(path);
+						result = reply.writeString("Server side dir synchronization creation failed!");
+						dir.closeSync();
+					} catch (error) {
+						result = reply.writeString("SUCCESS");
+					}
 
                     console.info("The server's writeString result is " + result);
                     return true;
@@ -147,14 +156,16 @@ class Stub extends rpc.RemoteObject {
                     console.info("case CODE_DELETE_FILE start");
                     let path = data.readString();
                     console.info("The server's readString result is " + path);
-
-                    let checkResult = checkFileExists(path);
+					
+					await sleep(3000);
                     let result;
-                    if (checkResult == true) {
-                        result = reply.writeString("Server side file synchronization deletion failed.");
-                    } else {
-                        result = reply.writeString("SUCCESS");
-                    }
+                    try {
+						let fd = fileio.openSync(path);
+						result = reply.writeString("Server side file synchronization creation failed!");
+						fileio.closeSync(fd);
+					} catch (error) {
+						result = reply.writeString("SUCCESS");
+					}
 
                     console.info("The server's writeString result is " + result);
                     return true;
