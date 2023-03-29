@@ -53,8 +53,8 @@ export default function FileioDistributedTest(){
             }
             return basePath + "/" + testName;
         }
-        
-        /**
+		
+		    /**
          * Send rpc request to get server-side verification result without done
          * @param tcNumber 
          * @param path 
@@ -94,7 +94,7 @@ export default function FileioDistributedTest(){
                 callback("client sendRequest failed");
             }
         }
-        
+    
         /**
          * Send rpc request to get server-side verification result
          * @param tcNumber 
@@ -193,101 +193,7 @@ export default function FileioDistributedTest(){
             console.info('afterAll called');
         })
         
-        /** 
-         * @tc.number  SUB_STORAGE_Distributed_FileIO_rmdirSync_0000
-         * @tc.name    test_fileio_delete_dir_sync_000
-         * @tc.desc    Function of API, test the rmdirSync() interface.
-         * @tc.level   0
-         */
-        it('test_fileio_delete_dir_sync_000', 0, async function (done) {
-            console.info("--------start test_fileio_delete_dir_sync_000--------");
-            let tcNumber = 'test_fileio_delete_dir_sync_000';
-            let dpath = await getDistributedFilePath(tcNumber) + 'd';
-            try {
-                fileio.mkdirSync(dpath);
-                let dir = fileio.opendirSync(dpath);
-                expect(dir !== null).assertTrue();
-                dir.closeSync();
-                console.info('------------- test_fileio_delete_dir_sync_000 : client mkdirSync success.');
-    
-                console.info('------ start check server first ... ');
-                await getServerFileInfoFirst(tcNumber, dpath, CODE_MK_DIR, function (serverDirCreate) {
-                    console.info("test_fileio_delete_dir_sync_000 : getServerFileInfoFirst serverDirCreate: " + serverDirCreate);
-                    expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
-                });
-    
-                fileio.rmdirSync(dpath);
-                try {
-                    fileio.opendirSync(dpath);
-                    console.info('------------- test_fileio_delete_dir_sync_000 : client rmdirSync failed.');
-                    expect(false).assertTrue();
-                } catch (e) {
-                    console.info('------------- test_fileio_delete_dir_sync_000 : check client rmdirSync success.');
-                }
-    
-                console.info('------ start check server second ... ');
-                await getServerFileInfo(tcNumber, dpath, CODE_RM_DIR, done, function (serverDirRemove) {
-                    console.info("test_fileio_delete_dir_sync_000 : getServerFileInfo serverDirRemove: " + serverDirRemove);
-                    expect(serverDirRemove).assertEqual(SERVER_CHECK_SUCCESS);
-                });
-            } catch (error) {
-                console.info('test_fileio_delete_dir_sync_000 has failed for : ' + error);
-                expect(false).assertTrue();
-            }
-            console.info("--------end test_fileio_delete_dir_sync_000--------");
-        });
-        
-        /**
-         * @tc.number   SUB_STORAGE_Distributed_FileIO_UnlinkSync_0000
-         * @tc.name     test_fileio_delete_file_sync_000
-         * @tc.desc     Function of API, unlinkSync()
-         * @tc.level    0
-         */
-        it('test_fileio_delete_file_sync_000', 0, async function (done) {
-            console.info("--------start test_fileio_delete_file_sync_000--------");
-            let tcNumber = 'test_fileio_delete_file_sync_000';
-            let fpath = await getDistributedFilePath(tcNumber);
-            console.info('fpath == ' + fpath);
-            try {
-                let fd = fileio.openSync(fpath, 0o102, 0o777);
-                console.info('------------ test_fileio_delete_file_sync_000 : create file ...');
-    
-                try {
-                    fileio.accessSync(fpath, 0);
-                } catch (e) {
-                    console.info('------------ test_fileio_delete_file_sync_000 : create file failed!');
-                    expect(false).assertTrue();
-                }
-                fileio.closeSync(fd);
-    
-                console.info('------ start check server first ... ');
-                await getServerFileInfoFirst(tcNumber, fpath, CODE_CREATE_FILE, function (serverFileCreate) {
-                    console.info("test_fileio_delete_file_sync_000 getServerFileInfoFirst serverFileCreate: " + serverFileCreate);
-                    expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
-                })
-    
-                fileio.unlinkSync(fpath);
-                console.info('------------ test_fileio_delete_file_sync_000 : delete file ...');
-                try {
-                    fileio.accessSync(fpath, 0);
-                    console.info('------------ test_fileio_delete_file_sync_000 : delete file failed!');
-                    expect(false).assertTrue();
-                } catch (e) {
-                    console.info('------------ test_fileio_delete_file_sync_000 : delete file success!');
-    
-                    console.info('------ start check server second ... ');
-                    await getServerFileInfo(tcNumber, fpath, CODE_DELETE_FILE, done, function (serverFileDelete) {
-                        console.info("test_fileio_delete_file_sync_000 getServerFileInfo serverFileDelete: " + serverFileDelete);
-                        expect(serverFileDelete).assertEqual(SERVER_CHECK_SUCCESS);
-                    })
-                }
-            } catch (e) {
-                console.info('test_fileio_delete_file_sync_000 has failed for : ' + e);
-                expect(false).assertTrue();
-            }
-            console.info("--------end test_fileio_delete_file_sync_000--------");
-        });
-        
+
         /** 
          * @tc.number  SUB_STORAGE_Distributed_FileIO_mkdirSync_0000
          * @tc.name    test_fileio_create_dir_sync_000
@@ -2619,7 +2525,51 @@ export default function FileioDistributedTest(){
             }
             console.info("--------end test_fileio_create_dir_sync_074--------");
         });
+
+        /** 
+         * @tc.number  SUB_STORAGE_Distributed_FileIO_rmdirSync_0000
+         * @tc.name    test_fileio_delete_dir_sync_000
+         * @tc.desc    Function of API, test the rmdirSync() interface.
+         * @tc.level   0
+         */
+        it('test_fileio_delete_dir_sync_000', 0, async function (done) {
+            console.info("--------start test_fileio_delete_dir_sync_000--------");
+            let tcNumber = 'test_fileio_delete_dir_sync_000';
+            let dpath = await getDistributedFilePath(tcNumber) + 'd';
+            try {
+                fileio.mkdirSync(dpath);
+                let dir = fileio.opendirSync(dpath);
+                expect(dir !== null).assertTrue();
+                dir.closeSync();
+                console.info('------------- test_fileio_delete_dir_sync_000 : client mkdirSync success.');
     
+                console.info('------ start check server first ... ');
+                await getServerFileInfoFirst(tcNumber, dpath, CODE_MK_DIR, function (serverDirCreate) {
+                    console.info("test_fileio_delete_dir_sync_000 : getServerFileInfoFirst serverDirCreate: " + serverDirCreate);
+                    expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                });
+    
+                fileio.rmdirSync(dpath);
+                try {
+                    fileio.opendirSync(dpath);
+                    console.info('------------- test_fileio_delete_dir_sync_000 : client rmdirSync failed.');
+                    expect(false).assertTrue();
+                } catch (e) {
+                    console.info('------------- test_fileio_delete_dir_sync_000 : check client rmdirSync success.');
+                }
+    
+                console.info('------ start check server second ... ');
+                await getServerFileInfo(tcNumber, dpath, CODE_RM_DIR, done, function (serverDirRemove) {
+                    console.info("test_fileio_delete_dir_sync_000 : getServerFileInfo serverDirRemove: " + serverDirRemove);
+                    expect(serverDirRemove).assertEqual(SERVER_CHECK_SUCCESS);
+                });
+            } catch (error) {
+                console.info('test_fileio_delete_dir_sync_000 has failed for : ' + error);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_fileio_delete_dir_sync_000--------");
+        });
+        
         /**
          * @tc.number  SUB_STORAGE_Distributed_FileIO_OpenSync_0000
          * @tc.name    test_fileio_create_file_sync_000
@@ -3195,6 +3145,57 @@ export default function FileioDistributedTest(){
             }
             console.info("--------end test_fileio_create_file_sync_017--------");
         });
+
+        /**
+         * @tc.number   SUB_STORAGE_Distributed_FileIO_UnlinkSync_0000
+         * @tc.name     test_fileio_delete_file_sync_000
+         * @tc.desc     Function of API, unlinkSync()
+         * @tc.level    0
+         */
+        it('test_fileio_delete_file_sync_000', 0, async function (done) {
+            console.info("--------start test_fileio_delete_file_sync_000--------");
+            let tcNumber = 'test_fileio_delete_file_sync_000';
+            let fpath = await getDistributedFilePath(tcNumber);
+            console.info('fpath == ' + fpath);
+            try {
+                let fd = fileio.openSync(fpath, 0o102, 0o777);
+                console.info('------------ test_fileio_delete_file_sync_000 : create file ...');
+    
+                try {
+                    fileio.accessSync(fpath, 0);
+                } catch (e) {
+                    console.info('------------ test_fileio_delete_file_sync_000 : create file failed!');
+                    expect(false).assertTrue();
+                }
+                fileio.closeSync(fd);
+    
+                console.info('------ start check server first ... ');
+                await getServerFileInfoFirst(tcNumber, fpath, CODE_CREATE_FILE, function (serverFileCreate) {
+                    console.info("test_fileio_delete_file_sync_000 getServerFileInfoFirst serverFileCreate: " + serverFileCreate);
+                    expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                })
+    
+                fileio.unlinkSync(fpath);
+                console.info('------------ test_fileio_delete_file_sync_000 : delete file ...');
+                try {
+                    fileio.accessSync(fpath, 0);
+                    console.info('------------ test_fileio_delete_file_sync_000 : delete file failed!');
+                    expect(false).assertTrue();
+                } catch (e) {
+                    console.info('------------ test_fileio_delete_file_sync_000 : delete file success!');
+    
+                    console.info('------ start check server second ... ');
+                    await getServerFileInfo(tcNumber, fpath, CODE_DELETE_FILE, done, function (serverFileDelete) {
+                        console.info("test_fileio_delete_file_sync_000 getServerFileInfo serverFileDelete: " + serverFileDelete);
+                        expect(serverFileDelete).assertEqual(SERVER_CHECK_SUCCESS);
+                    })
+                }
+            } catch (e) {
+                console.info('test_fileio_delete_file_sync_000 has failed for : ' + e);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_fileio_delete_file_sync_000--------");
+        });
     
         /**
          * @tc.number  SUB_STORAGE_Distributed_FileIO_writeFile_0000
@@ -3480,3 +3481,4 @@ export default function FileioDistributedTest(){
         console.info("----------SUB_Storage_Fileio_Distributed JS Test is end----------");
     });
 }
+
