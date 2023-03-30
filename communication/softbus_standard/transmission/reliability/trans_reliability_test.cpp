@@ -267,8 +267,9 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0900, Tes
 {
     int ret;
     ISessionListener* listener = (ISessionListener*)malloc(sizeof(ISessionListener));
+    (void)memset_s(listener, sizeof(ISessionListener), 0, sizeof(ISessionListener));
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, listener);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS fail[session listener only malloc]";
+    EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS fail[session listener only malloc]";
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
     EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS fail[session listener only malloc]";
 
