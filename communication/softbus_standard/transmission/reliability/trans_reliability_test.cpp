@@ -1142,7 +1142,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4700, Tes
 HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4800, TestSize.Level3)
 {
     int ret = CreateSessionServer(PKGNAME_MAX_OUT, SESSION_NAME_CTL, GetSessionListenser4Ctl());
-    EXPECT_EQ(SOFTBUS_TRANS_SESSION_ADDPKG_FAILED, ret) << "CreateSS-ctrl success";
+    EXPECT_EQ(SOFTBUS_INVALID_PARAM, ret) << "CreateSS-ctrl success";
     ret = RemoveSessionServer(PKGNAME_MAX_OUT, SESSION_NAME_CTL);
     EXPECT_EQ(SOFTBUS_INVALID_PARAM, ret) << "RemoveSS-ctrl fail";
 }
