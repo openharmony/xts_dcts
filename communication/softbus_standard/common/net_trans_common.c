@@ -318,6 +318,15 @@ static void OnDefNodeBasicInfoChanged(NodeBasicInfoType type, NodeBasicInfo* inf
     LOG("[cb]InfoChanged id: %s,name: %s", info->networkId, info->deviceName);
 }
 
+static void onDefNodeStatusChanged(NodeStatusType type, NodeStatus *status)
+{
+    if (status == NULL) {
+        LOG("[cb]StatusChanged: info is null, type[%d]", type);
+        return;
+    }
+    LOG("[cb]StatusChanged id: %s,status: %d", status->basicInfo.networkId, status->authStatus);
+}
+
 static int DataSessionOpened(int sessionId, int result)
 {
     // wait 1s, ensure set current session id
@@ -1172,7 +1181,6 @@ void SetCurrentSessionId4Proxy(int sessionId)
     g_currentSessionId4Proxy = sessionId;
 }
 
-
 int GetCurrentSessionId4Data(void)
 {
     return g_currentSessionId4Data;
@@ -1182,7 +1190,6 @@ int GetCurrentSessionId4Ctl(void)
 {
     return g_currentSessionId4Ctl;
 }
-
 
 int GetCurrentSessionId4Proxy(void)
 {
@@ -1200,6 +1207,7 @@ void TestSetUp(void)
     g_defNodeStateCallback.onNodeOnline = OnDefNodeOnline;
     g_defNodeStateCallback.onNodeOffline = OnDefNodeOffline;
     g_defNodeStateCallback.onNodeBasicInfoChanged = OnDefNodeBasicInfoChanged;
+    g_defNodeStateCallback.onNodeStatusChanged = onDefNodeStatusChanged;
 
     g_defDiscCallback.OnDeviceFound = OnDefDeviceFound;
     g_defDiscCallback.OnDiscoverFailed = OnDefDiscoverFail;
@@ -1212,6 +1220,7 @@ void TestSetUp(void)
         g_sessionlistener4Data->OnMessageReceived = DataMessageReceived;
         g_sessionlistener4Data->OnBytesReceived = DataBytesReceived;
     }
+
     if (g_sessionlistener4Ctl == NULL) {
         g_sessionlistener4Ctl = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlistener4Ctl->OnSessionOpened = ControlSessionOpened;
@@ -1219,6 +1228,7 @@ void TestSetUp(void)
         g_sessionlistener4Ctl->OnMessageReceived = ControlMessageReceived;
         g_sessionlistener4Ctl->OnBytesReceived = ControlBytesReceived;
     }
+
     if (g_sessionlistener4Pass == NULL) {
         g_sessionlistener4Pass = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlistener4Pass->OnSessionOpened = PassiveSessionOpened;
@@ -1226,6 +1236,7 @@ void TestSetUp(void)
         g_sessionlistener4Pass->OnMessageReceived = PassiveMessageReceived;
         g_sessionlistener4Pass->OnBytesReceived = PassiveBytesReceived;
     }
+
     if (g_sessionlistener4Perf == NULL) {
         g_sessionlistener4Perf = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlistener4Perf->OnSessionOpened = PerfSessionOpened;
@@ -1233,6 +1244,7 @@ void TestSetUp(void)
         g_sessionlistener4Perf->OnMessageReceived = PerfMessageReceived;
         g_sessionlistener4Perf->OnBytesReceived = PerfBytesReceived;
     }
+
     if (g_sessionlistener4Proxy == NULL) {
         g_sessionlistener4Proxy = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlistener4Proxy->OnSessionOpened = ProxySessionOpened;
@@ -1240,6 +1252,7 @@ void TestSetUp(void)
         g_sessionlistener4Proxy->OnMessageReceived = ProxyMessageReceived;
         g_sessionlistener4Proxy->OnBytesReceived = ProxyBytesReceived;
     }
+
     if (g_sessionlistener4Stream == NULL) {
         g_sessionlistener4Stream = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlistener4Stream->OnSessionOpened = StreamSessionOpened;

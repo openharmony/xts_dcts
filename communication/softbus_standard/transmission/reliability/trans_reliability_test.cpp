@@ -74,7 +74,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli__0100, Te
     int sessionId = 0;
     string data = "invalid session id";
     ret = SendBytes(sessionId, data.c_str(), data.length());
-    EXPECT_NE(SOFTBUS_OK, ret);
+    EXPECT_EQ(SOFTBUS_TRANS_INVALID_SESSION_ID, ret);
 }
 
 /**
@@ -96,7 +96,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli__0200, Te
 
     string data = "session closed";
     ret = SendBytes(sessionId, data.c_str(), data.length());
-    EXPECT_NE(SOFTBUS_OK, ret);
+    EXPECT_EQ(SOFTBUS_TRANS_INVALID_SESSION_ID, ret);
 }
 
 /**
@@ -172,7 +172,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli__0400, Te
     int sessionId = 0;
     string data = "invalid session id";
     ret = SendMessage(sessionId, data.c_str(), data.length());
-    EXPECT_NE(SOFTBUS_OK, ret);
+    EXPECT_EQ(SOFTBUS_TRANS_INVALID_SESSION_ID, ret);
 }
 
 /**
@@ -267,8 +267,9 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_0900, Tes
 {
     int ret;
     ISessionListener* listener = (ISessionListener*)malloc(sizeof(ISessionListener));
+    (void)memset_s(listener, sizeof(ISessionListener), 0, sizeof(ISessionListener));
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, listener);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS fail[session listener only malloc]";
+    EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS fail[session listener only malloc]";
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
     EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS fail[session listener only malloc]";
 
@@ -299,7 +300,6 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1000, Tes
     free(listener);
 }
 
-
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_1100
  * @tc.name   : RemoveSessionServer input pkg name null
@@ -311,7 +311,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1100, Tes
 {
     int ret;
     ret = RemoveSessionServer(NULL, SESSION_NAME_DATA);
-    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS success[pkg name null]";
+    EXPECT_EQ(SOFTBUS_INVALID_PARAM, ret) << "RemoveSS success[pkg name null]";
 
 }
 
@@ -327,7 +327,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1200, Tes
     int ret;
     
     ret = RemoveSessionServer(DEF_PKG_NAME, NULL);
-    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS success[session name null]";
+    EXPECT_EQ(SOFTBUS_INVALID_PARAM, ret) << "RemoveSS success[session name null]";
 }
 
 /**
@@ -341,7 +341,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_1300, Tes
 {
     int ret;
     ret = RemoveSessionServer(NULL, NULL);
-    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS success[all null]";
+    EXPECT_EQ(SOFTBUS_INVALID_PARAM, ret) << "RemoveSS success[all null]";
 }
 
 /**
@@ -650,7 +650,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_2600, Tes
 
     char mySname[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetMySessionName(MAX_SESSION_NUM + 1, mySname, SESSION_NAME_SIZE_MAX);
-    EXPECT_NE(SOFTBUS_OK, ret) << "GetMySessionName invalid sid[max+1]";
+    EXPECT_EQ(SOFTBUS_TRANS_SESSION_INFO_NOT_FOUND, ret) << "GetMySessionName invalid sid[max+1]";
 
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
@@ -673,7 +673,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_2700, Tes
 
     char mySname[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetMySessionName(sessionId + 1, mySname, SESSION_NAME_SIZE_MAX);
-    EXPECT_NE(SOFTBUS_OK, ret) << "GetMySessionName invalid sid[not open]";
+    EXPECT_EQ(SOFTBUS_TRANS_SESSION_INFO_NOT_FOUND, ret) << "GetMySessionName invalid sid[not open]";
 
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
@@ -786,7 +786,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3200, Tes
 
     char peerSname[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetPeerSessionName(MAX_SESSION_NUM + 1, peerSname, SESSION_NAME_SIZE_MAX);
-    EXPECT_NE(SOFTBUS_OK, ret) << "GetPeerSessionName invalid sid[max+1]";
+    EXPECT_EQ(SOFTBUS_TRANS_SESSION_INFO_NOT_FOUND, ret) << "GetPeerSessionName invalid sid[max+1]";
 
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
@@ -809,7 +809,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3300, Tes
 
     char peerSname[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetPeerSessionName(sessionId + 1, peerSname, SESSION_NAME_SIZE_MAX);
-    EXPECT_NE(SOFTBUS_OK, ret) << "GetPeerSessionName invalid sid[not open]";
+    EXPECT_EQ(SOFTBUS_TRANS_SESSION_INFO_NOT_FOUND, ret) << "GetPeerSessionName invalid sid[not open]";
    
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
@@ -923,7 +923,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3800, Tes
 
     char deviceId[SESSION_NAME_SIZE_MAX] = { 0 };
     ret = GetPeerDeviceId(MAX_SESSION_NUM + 1, deviceId, SESSION_NAME_SIZE_MAX);
-    EXPECT_NE(SOFTBUS_OK, ret) << "GetPeerDeviceId invalid sid[max+1]";
+    EXPECT_EQ(SOFTBUS_TRANS_SESSION_INFO_NOT_FOUND, ret) << "GetPeerDeviceId invalid sid[max+1]";
     
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
@@ -946,7 +946,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_3900, Tes
     char deviceId[SESSION_NAME_SIZE_MAX] = { 0 };
     sessionId = GetCurrentSessionId4Data();
     ret = GetPeerDeviceId(sessionId + 1, deviceId, SESSION_NAME_SIZE_MAX);
-    EXPECT_NE(SOFTBUS_OK, ret) << "GetPeerDeviceId invalid sid[not open]";
+    EXPECT_EQ(SOFTBUS_TRANS_SESSION_INFO_NOT_FOUND, ret) << "GetPeerDeviceId invalid sid[not open]";
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "CloseSessionAndRemoveSs4Data fail";
 }
@@ -1035,7 +1035,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4300, Tes
     int sessionId;
     string notExistSession = "Not Exist Session Name";
     ret = CreateSessionServer(DEF_PKG_NAME, notExistSession.c_str(), GetSessionListenser4Ctl());
-    EXPECT_NE(SOFTBUS_OK, ret) << "CreateSS-ctrl fail";
+    EXPECT_EQ(SOFTBUS_PERMISSION_DENIED, ret) << "CreateSS-ctrl fail";
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS-data fail";
 
@@ -1057,7 +1057,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4300, Tes
     // clean
     CloseSession(sessionId);
     ret = RemoveSessionServer(DEF_PKG_NAME, notExistSession.c_str());
-    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS-notExist fail";
+    EXPECT_EQ(SOFTBUS_PERMISSION_DENIED, ret) << "RemoveSS-notExist fail";
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
     EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS-data fail";
     sleep(timeout);
@@ -1117,28 +1117,12 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4600, Tes
 
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4700
- * @tc.name   : CreateSessionServer, input pkgName contains special char
- * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
- * @tc.type   : RELI
- * @tc.size   : MediumTest
- */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4700, TestSize.Level3)
-{
-    string pkgName = "com.communication.demo.max.len.#@$%!";
-    int ret = CreateSessionServer(pkgName.c_str(), SESSION_NAME_DATA, GetSessionListenser4Data());
-    EXPECT_NE(SOFTBUS_OK, ret) << "CreateSS-ctrl success";
-    ret = RemoveSessionServer(pkgName.c_str(), SESSION_NAME_DATA);
-    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS-ctrl success";
-}
-
-/**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4800
  * @tc.name   : CreateSessionServer, input pkgNameMax and sessionNameMax
  * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4800, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4700, TestSize.Level3)
 {
     int ret = CreateSessionServer(PKGNAME_MAX, SESSIONNAME_MAX, GetSessionListenser4Ctl());
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS-ctrl fail, pkgnamelen:"
@@ -1148,33 +1132,57 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4800, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4900
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4800
  * @tc.name   : CreateSessionServer, input pkgName Max+1 failed
+ * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
+ * @tc.type   : RELI
+ * @tc.size   : MediumTest
+ */
+HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4800, TestSize.Level3)
+{
+    int ret = CreateSessionServer(PKGNAME_MAX_OUT, SESSION_NAME_CTL, GetSessionListenser4Ctl());
+    EXPECT_EQ(SOFTBUS_INVALID_PARAM, ret) << "CreateSS-ctrl success";
+    ret = RemoveSessionServer(PKGNAME_MAX_OUT, SESSION_NAME_CTL);
+    EXPECT_EQ(SOFTBUS_INVALID_PARAM, ret) << "RemoveSS-ctrl fail";
+}
+
+/**
+ * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_4900
+ * @tc.name   : CreateSessionServer, input sessionName Max+1 failed
  * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
 HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_4900, TestSize.Level3)
 {
-    int ret = CreateSessionServer(PKGNAME_MAX_OUT, SESSION_NAME_CTL, GetSessionListenser4Ctl());
-    EXPECT_NE(SOFTBUS_OK, ret) << "CreateSS-ctrl success";
-    ret = RemoveSessionServer(PKGNAME_MAX_OUT, SESSION_NAME_CTL);
-    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS-ctrl fail";
+    int ret = CreateSessionServer(DEF_PKG_NAME, SESSIONNAME_MAX_OUT, GetSessionListenser4Ctl());
+    EXPECT_EQ(SOFTBUS_INVALID_PARAM, ret) << "CreateSS-ctrl success";
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSIONNAME_MAX_OUT);
+    EXPECT_EQ(SOFTBUS_INVALID_PARAM, ret) << "RemoveSS-ctrl success";
 }
 
 /**
  * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Reli_5000
- * @tc.name   : CreateSessionServer, input sessionName Max+1 failed
+ * @tc.name   : CreateSessionServer, input pkgName contains special char
  * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
  * @tc.type   : RELI
  * @tc.size   : MediumTest
  */
 HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_5000, TestSize.Level3)
 {
-    int ret = CreateSessionServer(DEF_PKG_NAME, SESSIONNAME_MAX_OUT, GetSessionListenser4Ctl());
-    EXPECT_NE(SOFTBUS_OK, ret) << "CreateSS-ctrl success";
-    ret = RemoveSessionServer(DEF_PKG_NAME, SESSIONNAME_MAX_OUT);
-    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS-ctrl success";
+    int ret = CreateSessionServer(DEF_PKG_NAME, SESSIONNAME_MAX, GetSessionListenser4Ctl());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS-ctrl fail";
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSIONNAME_MAX);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS-ctrl fail";
+    ret = CreateSessionServer(PKGNAME_MAX, SESSIONNAME_MAX, GetSessionListenser4Ctl());
+    EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS-ctrl fail";
+    ret = RemoveSessionServer(PKGNAME_MAX, SESSIONNAME_MAX);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS-ctrl fail";
+    string pkgName = "com.communication.demo.max.len.#@$%!";
+    ret = CreateSessionServer(pkgName.c_str(), SESSION_NAME_DATA, GetSessionListenser4Data());
+    EXPECT_EQ(SOFTBUS_INVALID_PKGNAME, ret) << "CreateSS-ctrl success";
+    ret = RemoveSessionServer(pkgName.c_str(), SESSION_NAME_DATA);
+    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS-ctrl success";
 }
 
 /**
@@ -1190,7 +1198,7 @@ HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_OpenSession_Reli_5100, Tes
     int ret = CreateSessionServer(DEF_PKG_NAME, sessionName.c_str(), GetSessionListenser4Ctl());
     EXPECT_EQ(SOFTBUS_PERMISSION_DENIED, ret) << "CreateSS-ctrl success";
     ret = RemoveSessionServer(DEF_PKG_NAME, sessionName.c_str());
-    EXPECT_NE(SOFTBUS_OK, ret) << "RemoveSS-ctrl fail";
+    EXPECT_EQ(SOFTBUS_PERMISSION_DENIED, ret) << "RemoveSS-ctrl fail";
 }
 
 /**

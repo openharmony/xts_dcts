@@ -470,6 +470,15 @@ static void OnNodeBasicInfoChanged(NodeBasicInfoType type, NodeBasicInfo* info)
     LOG("[cb]InfoChanged id: %s, name: %s", info->networkId, info->deviceName);
 }
 
+static void onDefNodeStatusChanged(NodeStatusType type, NodeStatus *status)
+{
+    if (status == NULL) {
+        LOG("[cb]StatusChanged: info is null, type[%d]", type);
+        return;
+    }
+    LOG("[cb]StatusChanged id: %s,status: %d", status->basicInfo.networkId, status->authStatus);
+}
+
 static void SetupCallback(void)
 {
     if (g_sessionlist4Data == NULL) {
@@ -526,6 +535,7 @@ static void SetupCallback(void)
         g_nodeStateCallback->onNodeOnline = OnNodeOnline;
         g_nodeStateCallback->onNodeOffline = OnNodeOffline;
         g_nodeStateCallback->onNodeBasicInfoChanged = OnNodeBasicInfoChanged;
+        g_nodeStateCallback->onNodeStatusChanged = onDefNodeStatusChanged;
     }
 
     if (g_sessionlist4Stream == NULL) {
