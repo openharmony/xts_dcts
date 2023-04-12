@@ -1521,5 +1521,152 @@ export default function rdbSyncFirstLevelTest(){
             }
             console.info(logTag + "************* testRdbSyncTest0190 end *************");
         })
+
+
+        /**
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2000
+         * @tc.name testRdbSyncTest0200
+         * @tc.desc Server get rdbStoreS2 level, Name different
+        */
+         it("testRdbSyncTest0200", 0, async function (done) {
+            console.info(logTag + "testRdbSyncTest0200 start");
+            var rdbSecondStore = {};
+            const STORE_CONFIGS2 = {
+                name: "RemoteRdb.db",
+                securityLevel: data_Rdb.SecurityLevel.S2
+            };
+            
+            rdbSecondStore = await data_Rdb.getRdbStore(context, STORE_CONFIGS2);
+            console.info("testRdbSyncTest0200 create RemoteRdb.db success");
+            await rdbSecondStore.executeSql(CREATE_TABLE_TEST, null);
+            console.info(logTag + "create RemoteRdb.db table success");
+            //setDistributedTables
+            let back = rdbSecondStore.setDistributedTables(["test"]);
+            back.then(() => {
+                console.info("testRdbSyncTest0200 SetDistributedTables successfully.");
+            }).catch((err) => {
+                console.info("testRdbSyncTest0200 SetDistributedTables failed, err: " + err.code);
+            })
+            await back;
+            var u8 = new Uint8Array([1, 2, 3]);
+            {
+                const valueBucket = {
+                    "name": "S2Test",
+                    "age": 18,
+                    "salary": 100.5,
+                    "blobType": u8
+                }
+                await rdbSecondStore.insert("test", valueBucket);
+                console.info("testRdbSyncTest0200 insert success");
+            }
+    
+            let predicates = new data_Rdb.RdbPredicates('test');
+            predicates.equalTo("name", "S2Test");
+            let resultSet = await rdbSecondStore.query(predicates);
+            try {
+                expect(true).assertEqual(resultSet.goToFirstRow());
+                const id = resultSet.getLong(resultSet.getColumnIndex("id"));
+                const name = resultSet.getString(resultSet.getColumnIndex("name"));
+                console.info(logTag + "testRdbSyncTest0200 id=" + id + ", name=" + name);
+                expect("S2Test").assertEqual(name);
+            } catch (e) {
+                console.info("testRdbSyncTest0200 select error " + e);
+                expect().assertFail();
+            }
+            resultSet = null;
+            try {
+                predicates.inDevices(syncDeviceIds);
+                let promise = rdbSecondStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates);
+                promise.then((result) => {
+                    console.log('testRdbSyncTest0200 sync done.');
+                    console.log('testRdbSyncTest0200 device=' + JSON.stringify(result));
+                    for (let i = 0; i < result.length; i++) {
+                        let status = result[i][1];
+                        console.log('testRdbSyncTest0200 device=' + result[i][0] + ' status=' + result[i][1]);
+                        console.log('testRdbSyncTest0200  status=' + status);
+                        expect(status == 0).assertTrue();
+                        rdbSecondStore = null;
+                        done();
+                    }
+                }).catch((err) => {
+                    console.log('testRdbSyncTest0200 sync failed' + err.code);
+                    expect().assertFail();
+                    done();
+                })
+            } catch (error) {
+                console.log('testRdbSyncTest0200 sync failed error.code message: ' + error.code + error.message);
+                expect().assertFail();
+                done();
+            }
+            console.info(logTag + "************* testRdbSyncTest0200 end *************");
+        })
+
+        /**
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2100
+         * @tc.name testRdbSyncTest0210
+         * @tc.desc Server rdbStore get rdbStoreS2 level, Name equal
+        */
+        it("testRdbSyncTest0210", 0, async function (done) {
+            console.info(logTag + "testRdbSyncTest0210 start");
+            var rdbENStore = {};
+            const STORE_CONFIGS3 = {
+                name: "RemoteRdb.db",
+                securityLevel: data_Rdb.SecurityLevel.S2
+            };
+            const CREATE_TABLE_TEST_S3 = "CREATE TABLE IF NOT EXISTS testENSecond (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
+    
+            rdbENStore = await data_Rdb.getRdbStore(context, STORE_CONFIGS3);
+            console.info("testRdbSyncTest0210 create RemoteRdb.db success");
+            await rdbENStore.executeSql(CREATE_TABLE_TEST_S3, null);
+            console.info(logTag + " testRdbSyncTest0210 create RemoteRdb.db table success");
+            try{
+            //setDistributedTables
+            let back =rdbENStore.setDistributedTables(["testENSSecond"]);
+            back.then(() => {
+                console.info("testRdbSyncTest0210 SetDistributedTables successfully.");
+                console.info("testRdbSyncTest0210 SetDistributedTables back: " + JSON.stringify(back));
+                expect().assertFail()
+                done();
+            }).catch((err) => {
+                console.info("testRdbSyncTest0210 SetDistributedTables failed, err: " + JSON.stringify(err));
+                expect(err.code == 14800000).assertTrue()
+                done();
+            })
+            }catch(error){
+                console.info("testRdbSyncTest0210 SetDistributedTables failed, error: " + JSON.stringify(error));
+                expect().assertFail();
+                done();
+            }
+            console.info(logTag + "************* testRdbSyncTest0210 end *************");
+        })
+
+
+        /**
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2200
+         * @tc.name testRdbSyncTest0220
+         * @tc.desc Server get rdbStoreS2 level, Name different
+        */
+        it("testRdbSyncTest0220", 0, async function (done) {
+        console.info(logTag + "testRdbSyncTest0220 start");
+        let predicates = new data_Rdb.RdbPredicates('test');
+        try {
+            let promise = rdbStore.remoteQuery(deviceId, "test", predicates, ["id", "name", "age", "salary", "blobType"]);
+            console.info(`testRdbSyncTest0220 deviceId:  `+ deviceId);
+            promise.then((resultSet) => {
+              console.info(`testRdbSyncTest0220 ResultSet column names: ${resultSet.columnNames}`);
+              console.info(`testRdbSyncTest0220 ResultSet row count: ${resultSet.rowCount}`);
+              expect(resultSet.rowCount).assertEqual(1);
+            }).catch((err) => {
+              console.error(`testRdbSyncTest0220 Failed to remoteQuery, err: ` + JSON.stringify(err));
+              expect().assertFail();
+            })
+        } catch (error) {
+            console.error(`testRdbSyncTest0220 Failed to remoteQuery, error: ` + JSON.stringify(error));
+            expect().assertFail();
+        }
+        done();
+        console.info(logTag + "************* testRdbSyncTest0220 end *************");
+        })
+
     })
 }
