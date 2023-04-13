@@ -1653,18 +1653,26 @@ export default function rdbSyncFirstLevelTest(){
             let promise = rdbStore.remoteQuery(deviceId, "test", predicates, ["id", "name", "age", "salary", "blobType"]);
             console.info(`testRdbSyncTest0220 deviceId:  `+ deviceId);
             promise.then((resultSet) => {
-              console.info(`testRdbSyncTest0220 ResultSet column names: ${resultSet.columnNames}`);
               console.info(`testRdbSyncTest0220 ResultSet row count: ${resultSet.rowCount}`);
+              resultSet.goToFirstRow();
+              const name = resultSet.getString(resultSet.getColumnIndex("name"));
+              const age = resultSet.getLong(resultSet.getColumnIndex("age"));
+              console.info(`testRdbSyncTest0220 ResultSet name: ` + JSON.stringify(name));
+              console.info(`testRdbSyncTest0220 ResultSet age: ` + JSON.stringify(age));
               expect(resultSet.rowCount).assertEqual(1);
+              expect(name).assertEqual("Lisa");
+              expect(age).assertEqual(18);
+              done();
             }).catch((err) => {
               console.error(`testRdbSyncTest0220 Failed to remoteQuery, err: ` + JSON.stringify(err));
               expect().assertFail();
+              done();
             })
         } catch (error) {
             console.error(`testRdbSyncTest0220 Failed to remoteQuery, error: ` + JSON.stringify(error));
             expect().assertFail();
+            done();
         }
-        done();
         console.info(logTag + "************* testRdbSyncTest0220 end *************");
         })
 
