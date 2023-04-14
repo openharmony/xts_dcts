@@ -15,7 +15,14 @@
             ],
             "type": "AppInstallKit",
             "cleanup-apps": true
+        },
+        {
+            "type": "ShellKit",
+			"run-command": [
+			],
+            "teardown-command": [
+                "rm -rf /mnt/hmdfs/100/account/merge_view/data/com.ohos.fileiotest/*"
+            ]
         }
     ]
-
 }
