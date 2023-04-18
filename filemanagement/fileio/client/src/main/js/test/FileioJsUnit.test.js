@@ -17,7 +17,6 @@ import rpc from "@ohos.rpc";
 import fileio from '@ohos.fileio';
 import featureAbility from "@ohos.ability.featureAbility";
 import securityLabel from '@ohos.file.securityLabel';
-import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import TestService from "./testService"
 import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '@ohos/hypium';
 import {UiDriver, BY} from '@ohos.UiTest';
@@ -145,13 +144,7 @@ export default function FileioDistributedTest(){
     
         async function getPermission() {
             console.info(`getPermission is start`);
-            // let atManager = abilityAccessCtrl.createAtManager();
-            let permissions = [
-            'ohos.permission.DISTRIBUTED_DATASYNC',
-            'ohos.permission.MANAGE_LOCAL_ACCOUNTS',
-            'ohos.permission.ACCESS_SERVICE_DM'
-            ];
-
+            let permissions = ['ohos.permission.DISTRIBUTED_DATASYNC'];
             let context = featureAbility.getContext()
             context.requestPermissionsFromUser(permissions, 666, (data) => {
                 console.info("request success" + JSON.stringify(data));
