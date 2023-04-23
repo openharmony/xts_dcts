@@ -22,6 +22,9 @@
       },
       {
         "name": "ohos.permission.GET_BUNDLE_INFO"
+      },
+      {
+        "name": "ohos.permission.ACCESS_SERVICE_DM"
       }
     ],
     "package": "com.ohos.dmstest",

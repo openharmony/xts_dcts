@@ -57,6 +57,22 @@ export default function DmsFwkFaTest() {
       }
     }
 
+    async function driveClick() {
+      try {
+          let driver = await UiDriver.create();
+          console.info(`come in driveFn`);
+          console.info(`driver is ${JSON.stringify(driver)}`);
+          sleep(2000);
+          let button = await driver.findComponent(BY.text('知道了'));
+          console.info(`button is ${JSON.stringify(button)}`);
+          sleep(5000);
+          await button.click();
+      } catch (err) {
+          console.info('err is ' + err);
+          return;
+      }
+    }
+
     beforeAll(async function (done) {
       console.info('beforeAll called dms')
       await getPermission();
@@ -89,6 +105,8 @@ export default function DmsFwkFaTest() {
 
     afterAll(async function (done) {
       console.info('afterAll called')
+      await driveClick();
+      sleep(5000);
       done()
     })
 
@@ -309,6 +327,516 @@ export default function DmsFwkFaTest() {
           done();
         })
       }, 3000);
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0010
+    * @tc.name    StartRemoteAbilityForResult remote MainAbility is success
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0010", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0010 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            deviceId: dvId,
+            bundleName: "com.acts.example.dmsfwkstageserver",
+            abilityName: "MainAbility2",
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0010 data is' + data.resultCode);
+          expect(data.resultCode).assertEqual(100);
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0010 is failed ' + err.code);
+          expect().assertFail();
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0010 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0010 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0010 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0020
+    * @tc.name    StartRemoteAbilityForResult deviceId is null
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0020", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0020 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            deviceId: '',
+            bundleName: "com.acts.example.dmsfwkstageserver",
+            abilityName: "MainAbility2",
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0020 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0020 is failed ' + err.code);
+          expect(err.code).assertEqual(1)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0020 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0020 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0020 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0030
+    * @tc.name    StartRemoteAbilityForResult deviceId is Does not exist
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0030", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0030 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            bundleName: "com.acts.example.dmsfwkstageserver",
+            abilityName: "MainAbility2",
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0030 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0030 is failed ' + err.code);
+          expect(err.code).assertEqual(1)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0030 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0030 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0030 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0040
+    * @tc.name    StartRemoteAbilityForResult deviceId is undefined
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0040", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0040 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            deviceId: undefined,
+            bundleName: "com.acts.example.dmsfwkstageserver",
+            abilityName: "MainAbility2",
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0040 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0040 is failed ' + err.code);
+          expect(err.code).assertEqual(1)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0040 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0040 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0040 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0050
+    * @tc.name    StartRemoteAbilityForResult deviceId is err
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0050", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0050 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            deviceId: '12345678+./xts',
+            bundleName: "com.acts.example.dmsfwkstageserver",
+            abilityName: "MainAbility2",
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0050 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0050 is failed ' + err.code);
+          expect(err.code).assertEqual(9)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0050 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0050 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0050 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0060
+    * @tc.name    StartRemoteAbilityForResult bundleName is null
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0060", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0060 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            deviceId: dvId,
+            bundleName: "",
+            abilityName: "MainAbility2",
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0060 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0060 is failed ' + err.code);
+          expect(err.code).assertEqual(1)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0060 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0060 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0060 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0070
+    * @tc.name    StartRemoteAbilityForResult bundleName is Does not exist
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0070", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0070 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            deviceId: dvId,
+            abilityName: "MainAbility2",
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0070 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0070 is failed ' + err.code);
+          expect(err.code).assertEqual(1)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0070 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0070 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0070 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0080
+    * @tc.name    StartRemoteAbilityForResult bundleName is undefined
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0080", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0080 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            deviceId: dvId,
+            bundleName: undefined,
+            abilityName: "MainAbility2",
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0080 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0080 is failed ' + err.code);
+          expect(err.code).assertEqual(1)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0080 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0080 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0080 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0090
+    * @tc.name    StartRemoteAbilityForResult bundleName is err
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0090", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0090 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            deviceId: dvId,
+            bundleName: "com.acts.example",
+            abilityName: "MainAbility2",
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0090 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0090 is failed ' + err.code);
+          expect(err.code).assertEqual(9)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0090 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0090 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0090 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0100
+    * @tc.name    StartRemoteAbilityForResult abilityName is null
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0100", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0100 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            deviceId: dvId,
+            bundleName: "com.acts.example.dmsfwkstageserver",
+            abilityName: "",
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0100 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0100 is failed ' + err.code);
+          expect(err.code).assertEqual(1)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0100 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0100 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0100 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0110
+    * @tc.name    StartRemoteAbilityForResult abilityName is Does not exist
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0110", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0110 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            deviceId: dvId,
+            bundleName: "com.acts.example.dmsfwkstageserver",
+            // abilityName: "MainAbility2",
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0110 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0110 is failed ' + err.code);
+          expect(err.code).assertEqual(1)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0110 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0110 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0110 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0120
+    * @tc.name    StartRemoteAbilityForResult abilityName is undefined
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0120", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0120 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            deviceId: dvId,
+            bundleName: 'com.acts.example.dmsfwkstageserver',
+            abilityName: undefined,
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0120 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0120 is failed ' + err.code);
+          expect(err.code).assertEqual(1)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0120 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0120 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0120 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0130
+    * @tc.name    StartRemoteAbilityForResult abilityName is err
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0130", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0130 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+            deviceId: dvId,
+            bundleName: "com.acts.example.dmsfwkstageserver",
+            abilityName: "123456",
+            parameters: {
+              startReason: "terminateSelfWithResult"
+            }
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0130 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0130 is failed ' + err.code);
+          expect(err.code).assertEqual(9)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0130 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0130 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0130 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StartAbilityResult_0140
+    * @tc.name    StartRemoteAbilityForResult want is null
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_0140", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_0140 is start---------------");
+      try {
+        featureAbility.startAbilityForResult({
+          "want": {
+          }
+        }).then((data) => {
+          console.info('SUB_DMS_StartAbilityResult_0140 data is' + data.resultCode);
+          expect().assertFail();
+          done();
+        }).catch((err) => {
+          console.info('SUB_DMS_StartAbilityResult_0140 is failed ' + err.code);
+          expect(err.code).assertEqual(1)
+          done();
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartAbilityResult_0140 catch' + err.code);
+        console.info('SUB_DMS_StartAbilityResult_0140 catch' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_0140 is end---------------");
     });
   })
 }

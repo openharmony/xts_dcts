@@ -19,12 +19,14 @@ import deviceManager from '@ohos.distributedHardware.deviceManager';
 import featureAbility from "@ohos.ability.featureAbility";
 import { UiDriver, BY } from '@ohos.UiTest';
 import TestService from "./testService";
+import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
 
 let dvList = [];
 let dvId = null;
 let gIRemoteObject = null;
 let testservice = null;
 let localDeviceId = undefined;
+let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
 
 deviceManager.createDeviceManager('ohos.dms.test', async (error, deviceManager) => {
     console.info("CLIENT Create device manager success");
@@ -729,6 +731,96 @@ export default function dmsJsUnitTest() {
             }
             await sleep(1000);
             console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1700 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_1900
+         * @tc.name    Start the remote Ability after kill process of distributedsche.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_1900", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1900 start------------------------");
+            try {
+                console.info("SUB_DMS_OpenHarmony_StartAbility_1900 dvList:" + dvList.length);
+                let numDevices = dvList.length;
+                if (numDevices === 0) {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1900 no device found');
+                    expect(numDevices === 0).assertFail();
+                };
+                abilityDelegator.executeShellCommand("pidof distributedsche", (err, data) => {
+                    console.info("SUB_DMS_OpenHarmony_StartAbility_1900:" + data.stdResult)
+                    abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
+                        console.info("SUB_DMS_OpenHarmony_StartAbility_1900:" + data.stdResult)
+                    })
+                })
+                let params;
+                let wantValue = {
+                    bundleName: "com.ohos.dmstest",
+                    abilityName: "com.ohos.dmstest.ServiceAbility",
+                    deviceId: dvId,
+                    parameters: params
+                };
+                console.info('SUB_DMS_OpenHarmony_StartAbility_1900 want=' + JSON.stringify(wantValue));
+                await featureAbility.startAbility({
+                    want: wantValue
+                }).then((data) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1900 data' + JSON.stringify(data));
+                    expect(data == 0).assertTrue();
+                    done();
+                });
+            } catch (error) {
+                console.info("SUB_DMS_OpenHarmony_StartAbility_1900:error = " + error);
+                expect().assertFail();
+                done();
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1900 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_2000
+         * @tc.name    Start the remote Ability after kill process of softbus_server.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_2000", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_2000 start------------------------");
+            try {
+                console.info("SUB_DMS_OpenHarmony_StartAbility_2000 dvList:" + dvList.length);
+                let numDevices = dvList.length;
+                if (numDevices === 0) {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_2000 no device found');
+                    expect(numDevices === 0).assertFail();
+                };
+                abilityDelegator.executeShellCommand("pidof softbus_server", (err, data) => {
+                    console.info("SUB_DMS_OpenHarmony_StartAbility_2000:" + data.stdResult)
+                    abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
+                        console.info("SUB_DMS_OpenHarmony_StartAbility_2000:" + data.stdResult)
+                    })
+                })
+                let params;
+                let wantValue = {
+                    bundleName: "com.ohos.dmstest",
+                    abilityName: "com.ohos.dmstest.ServiceAbility",
+                    deviceId: dvId,
+                    parameters: params
+                };
+                console.info('SUB_DMS_OpenHarmony_StartAbility_2000 want=' + JSON.stringify(wantValue));
+                await featureAbility.startAbility({
+                    want: wantValue
+                }).then((data) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_2000 data' + JSON.stringify(data));
+                    expect(data == 0).assertTrue();
+                    done();
+                });
+            } catch (error) {
+                console.info("SUB_DMS_OpenHarmony_StartAbility_2000:error = " + error);
+                expect().assertFail();
+                done();
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_2000 end------------------------");
         });
     })
 }
