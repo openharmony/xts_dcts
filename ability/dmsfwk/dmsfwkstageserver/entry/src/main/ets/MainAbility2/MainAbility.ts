@@ -32,7 +32,7 @@ export default class MainAbility2 extends Ability {
                 setTimeout(() => {
                     console.log("[Demo] MainAbility terminateSelfWithResult")
                     this.context.terminateSelfWithResult({
-                        resultCode: 1,
+                        resultCode: 100,
                         want:{
                             bundleName:"com.example.configuration",
                             abilityName:"com.example.configuration.MainAbility"

@@ -78,6 +78,10 @@
       {
         "name": "ohos.permission.GET_DISTRIBUTED_DEVICE_INFO",
         "reason": "ohos.permission.GET_DISTRIBUTED_DEVICE_INFO"
+      },
+      {
+        "name": "ohos.permission.ACCESS_SERVICE_DM",
+        "reason": "ohos.permission.ACCESS_SERVICE_DM"
       }
     ],
     "js": [
