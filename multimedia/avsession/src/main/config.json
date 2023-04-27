@@ -25,6 +25,9 @@
       },
       {
         "name": "ohos.permission.MANAGE_MEDIA_RESOURCES"
+      },
+      {
+        "name": "ohos.permission.ACCESS_SERVICE_DM"
       }
     ],
     "package": "com.example.myapplication",
