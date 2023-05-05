@@ -10,29 +10,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import("//test/xts/tools/build/suite.gni")
+import("../../../../tools/build/suite.gni")
 
 module_output_path = "dcts/distributeddatamgr"
-
-###############################################################################################
 config("module_private_config") {
   visibility = [ ":*" ]
   include_dirs = [
-    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/include/permission",
-    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/include/account",
-    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/include",
-    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/include/broadcaster",
-    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter/include/utils",
-    "//foundation/distributeddatamgr/kv_store/frameworks/innerkitsimpl/distributeddatafwk/include",
-    "//foundation/distributeddatamgr/kv_store/frameworks/innerkitsimpl/distributeddatafwk/src",
-    "//foundation/distributeddatamgr/kv_store/interfaces/innerkits/app_distributeddata/include",
-    "//commonlibrary/c_utils/base/include",
-    "//utils/system/safwk/native/ include",
-    "../include",
-    "../../../../interfaces/innerkits/distributeddata",
     "//third_party/json/single_include",
-    "//base/powermgr/power_manager/interfaces/innerkits/native/include",
-    "../../common",
     "../../../common",
   ]
 }
@@ -47,18 +31,15 @@ ohos_moduletest_suite("DctsdisDataTest") {
 
   configs = [ ":module_private_config" ]
 
-  deps = [
-    "//foundation/distributeddatamgr/datamgr_service/services/distributeddataservice/adapter:distributeddata_adapter",
-    "//foundation/distributeddatamgr/kv_store/interfaces/innerkits/distributeddata:distributeddata_inner",
-    "//third_party/googletest:gtest_main",
-  ]
+  deps = [ "//third_party/googletest:gtest_main" ]
 
   external_deps = [
     "c_utils:utils",
+    "datamgr_service:distributeddata_adapter",
     "hiviewdfx_hilog_native:libhilog",
     "ipc:ipc_core",
+    "kv_store:distributeddata_inner",
   ]
   subsystem_name = "distributeddatamgr"
   part_name = "kv_store"
 }
-###########################################################################################

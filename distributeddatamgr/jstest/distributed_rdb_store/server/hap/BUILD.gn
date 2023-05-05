@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//test/xts/tools/build/suite.gni")
+import("../../../../../../tools/build/suite.gni")
 
 ohos_hap_assist_suite("distributerdbdisjs_server") {
   hap_profile = "./src/main/config.json"
