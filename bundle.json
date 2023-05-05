@@ -14,9 +14,9 @@
         "subsystem": "xts",
         "syscap": [],
         "features": [],
-        "adapted_system_type": [],
-        "rom": "",
-        "ram": "",
+        "adapted_system_type": ["standard"],
+        "rom": "0",
+        "ram": "0",
         "deps": {
             "components": [],
             "third_party": []

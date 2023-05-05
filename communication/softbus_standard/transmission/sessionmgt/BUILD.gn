@@ -1,4 +1,4 @@
-# Copyright (C) 2021-2022 Huawei Device Co., Ltd.
+# Copyright (C) 2021-2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,9 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//test/xts/tools/build/suite.gni")
+import("../../../../../tools/build/suite.gni")
 
 module_output_path = "dcts/softbus_base/transmission/sessionmgt"
+dsoftbus_root_path = "../../../../../../../foundation/communication/dsoftbus"
+wifi_root_path = "../../../../../../../foundation/communication/wifi/wifi"
+
 ohos_moduletest_suite("DctsSoftBusTransSessionFunTest") {
   module_out_path = module_output_path
   sources = [
@@ -24,32 +27,31 @@ ohos_moduletest_suite("DctsSoftBusTransSessionFunTest") {
 
   include_dirs = [
     "../../common",
-    "//third_party/cJSON",
-    "//commonlibrary/c_utils/base/include",
-    "//foundation/communication/dsoftbus/core/common/include",
-    "//foundation/communication/dsoftbus/adapter/common/include",
-    "//foundation/communication/dsoftbus/interfaces/kits/common",
-    "//foundation/communication/dsoftbus/interfaces/kits/bus_center",
-    "//foundation/communication/dsoftbus/interfaces/kits/discovery",
-    "//foundation/communication/dsoftbus/interfaces/kits/transport",
 
-    "//foundation/communication/wifi/wifi/frameworks/native/include",
-    "//foundation/communication/wifi/wifi/frameworks/native/interfaces",
-    "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include",
-    "//foundation/communication/wifi/wifi/services/wifi_standard/wifi_framework/wifi_toolkit/net_helper",
-    "//foundation/communication/wifi/wifi/services/wifi_standard/wifi_framework/wifi_toolkit/log",
-    "//base/security/access_token/interfaces/innerkits/accesstoke/include",
-    "//base/security/access_token/interfaces/innerkits/nativetoken/include",
-    "//base/security/access_token/interfaces/innerkits/token_setproc/include",
+    "$dsoftbus_root_path/core/common/include",
+    "$dsoftbus_root_path/adapter/common/include",
+    "$dsoftbus_root_path/interfaces/kits/common",
+    "$dsoftbus_root_path/interfaces/kits/bus_center",
+    "$dsoftbus_root_path/interfaces/kits/discovery",
+    "$dsoftbus_root_path/interfaces/kits/transport",
+
+    "$wifi_root_path/frameworks/native/include",
+    "$wifi_root_path/frameworks/native/interfaces",
+
+    "$wifi_root_path/services/wifi_standard/wifi_framework/wifi_toolkit/net_helper",
+    "$wifi_root_path/services/wifi_standard/wifi_framework/wifi_toolkit/log",
   ]
 
-  deps = [
-    "//base/security/access_token/interfaces/innerkits/nativetoken:libnativetoken",
-    "//base/security/access_token/interfaces/innerkits/token_setproc:libtoken_setproc",
-    "//foundation/communication/wifi/wifi/frameworks/native:wifi_sdk",
-    "//third_party/googletest:gtest_main",
+  deps = [ "//third_party/googletest:gtest_main" ]
+  external_deps = [
+    "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
+    "c_utils:utils",
+    "dsoftbus:softbus_client",
+    "ipc:ipc_core",
+    "wifi:wifi_sdk",
   ]
-  external_deps = [ "dsoftbus:softbus_client" ]
   subsystem_name = "communication"
   part_name = "dsoftbus"
 }
