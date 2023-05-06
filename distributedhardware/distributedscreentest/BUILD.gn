@@ -36,8 +36,7 @@ ohos_moduletest_suite("DctsdisSreenTest") {
     "$base_root/foundation/communication/dsoftbus/interfaces/kits/common",
   ]
 
-  include_dirs +=
-      [ "$base_root/foundation/multimedia/player_framework/interfaces/inner_api/native" ]
+  include_dirs += [ "$base_root/foundation/multimedia/player_framework/interfaces/inner_api/native" ]
 
   sources = [
     "decoder_demo.cpp",
