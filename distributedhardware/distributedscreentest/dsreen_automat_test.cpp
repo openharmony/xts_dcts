@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -76,9 +76,12 @@ void DSreenAutomatTest::TearDown(void) {}
 DSreenAutomatTest::DSreenAutomatTest(void) {}
 
 /**
- * @tc.number    : DSreenTest_0100
- * @tc.name      : StartMirror parameter test
+ * @tc.number    : DCameraTest_0100
+ * @tc.name      ：StartMirror()
  * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ * @tc.desc      : The distributed screen starts mirroring the screen
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
  */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0100, TestSize.Level1)
 {
@@ -88,8 +91,11 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_0100, TestSize.Level1)
 
 /**
  * @tc.number    : DSreenTest_0200
- * @tc.name      : StopMirror parameter test
+ * @tc.name      ：StopMirror()
  * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ * @tc.desc      : The distributed screen stops the image projection
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
  */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0200, TestSize.Level1)
 {
@@ -99,8 +105,11 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_0200, TestSize.Level1)
 
 /**
  * @tc.number    : DSreenTest_0300
- * @tc.name      : StartExpand parameter test
+ * @tc.name      ：StartExpand()
  * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ * @tc.desc      : Distributed screens begin to expand the projection
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
  */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0300, TestSize.Level1)
 {
@@ -110,8 +119,11 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_0300, TestSize.Level1)
 
 /**
  * @tc.number    : DSreenTest_0400
- * @tc.name      : StopExpand parameter test
+ * @tc.name      ：StopExpand()
  * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ * @tc.desc      : The distributed screen stops extending the projection
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
  */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0400, TestSize.Level1)
 {
@@ -121,8 +133,11 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_0400, TestSize.Level1)
 
 /**
  * @tc.number    : DSreenTest_0500
- * @tc.name      : CreateWindow parameter test
+ * @tc.name      ：CreateWindow()
  * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ * @tc.desc      : Distributed screen Creates a small window on the remote device
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
  */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0500, TestSize.Level1)
 {
@@ -132,8 +147,11 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_0500, TestSize.Level1)
 
 /**
  * @tc.number    : DSreenTest_0600
- * @tc.name      : QueryRemoteDeviceInfo parameter test
+ * @tc.name      ：QueryRemoteDeviceInfo()
  * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ * @tc.desc      : Distributed screen Displays information about remote devices
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
  */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0600, TestSize.Level1)
 {
@@ -143,8 +161,11 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_0600, TestSize.Level1)
 
 /**
  * @tc.number    : DSreenTest_0700
- * @tc.name      : QueryRemoteScreenInfo parameter test
+ * @tc.name      ：QueryRemoteScreenInfo()
  * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ * @tc.desc      : Distributed screen Displays information about remote screens
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
  */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0700, TestSize.Level1)
 {
@@ -152,6 +173,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_0700, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "QueryRemoteScreenInfo fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_0800
+ * @tc.name      ：Call the start image projection and stop image projection to check whether it succeeds
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0800, TestSize.Level1)
 {
     int ret = StartMirror(0);
@@ -160,6 +188,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_0800, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_0900
+ * @tc.name      ：Call to start and stop the extended projection to see if it is successful
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_0900, TestSize.Level1)
 {
     int ret = StartExpand(0);
@@ -168,6 +203,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_0900, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_1000, TestSize.Level1)
 {
     int ret = StartMirror(0);
@@ -178,6 +220,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_1000, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_1100, TestSize.Level1)
 {
     int ret = StartExpand(0);
@@ -188,6 +237,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_1100, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_1200, TestSize.Level1)
 {
     int ret = StartMirror(0);
@@ -198,6 +254,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_1200, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_1300, TestSize.Level1)
 {
     int ret = StartExpand(0);
@@ -208,6 +271,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_1300, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_1400, TestSize.Level1)
 {
     int ret = StartMirror(0);
@@ -218,6 +288,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_1400, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_1500, TestSize.Level1)
 {
     int ret = StartMirror(0);
@@ -228,6 +305,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_1500, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_1600, TestSize.Level1)
 {
     int ret = StartExpand(0);
@@ -238,6 +322,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_1600, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_1700, TestSize.Level1)
 {
     int ret = StartExpand(0);
@@ -248,6 +339,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_1700, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_1800, TestSize.Level1)
 {
     int ret = CreateWindow(0);
@@ -258,6 +356,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_1800, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_1900, TestSize.Level1)
 {
     int ret = StartExpand(0);
@@ -270,6 +375,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_1900, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_2000, TestSize.Level1)
 {
     int ret = StartMirror(0);
@@ -282,6 +394,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_2000, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_2100, TestSize.Level1)
 {
     int ret = StartExpand(0);
@@ -294,6 +413,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_2100, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_1000
+ * @tc.name      ：Scramble the method invocation order to see if the method invocation fails
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_2200, TestSize.Level1)
 {
     int ret = CreateWindow(0);
@@ -312,48 +438,104 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_2200, TestSize.Level1)
     EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_2300
+ * @tc.name      ：StartMirror method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_2300, TestSize.Level1)
 {
     int ret = StartMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_2400
+ * @tc.name      ：StopMirror method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_2400, TestSize.Level1)
 {
     int ret = StopMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StopMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_2500
+ * @tc.name      ：StartExpand method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_2500, TestSize.Level1)
 {
     int ret = StartExpand(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartExpand fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_2600
+ * @tc.name      ：StopExpand method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_2600, TestSize.Level1)
 {
     int ret = StopExpand(2);
     EXPECT_NE(g_dSreenOk, ret) << "StopExpand fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_2700
+ * @tc.name      ：CreateWindow method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_2700, TestSize.Level1)
 {
     int ret = CreateWindow(2);
     EXPECT_NE(g_dSreenOk, ret) << "CreateWindow fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_2800
+ * @tc.name      ：QueryRemoteDeviceInfo method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_2800, TestSize.Level1)
 {
     int ret = QueryRemoteDeviceInfo(2);
     EXPECT_NE(g_dSreenOk, ret) << "QueryRemoteDeviceInfo fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_2900
+ * @tc.name      ：QueryRemoteScreenInfo method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_2900, TestSize.Level1)
 {
     int ret = QueryRemoteScreenInfo(2);
     EXPECT_NE(g_dSreenOk, ret) << "QueryRemoteScreenInfo fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_3000
+ * @tc.name      ：StartMirror and StopMirror method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_3000, TestSize.Level1)
 {
     int ret = StartMirror(2);
@@ -362,6 +544,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_3000, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "StopMirror fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_3100
+ * @tc.name      ：StartMirror and StartExpand method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_3100, TestSize.Level1)
 {
     int ret = StartMirror(2);
@@ -370,6 +559,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_3100, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "StartExpand fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_3200
+ * @tc.name      ：StartMirror and CreateWindow method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_3200, TestSize.Level1)
 {
     int ret = StartMirror(2);
@@ -378,6 +574,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_3200, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "CreateWindow fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_3300
+ * @tc.name      ：StartMirror and QueryRemoteDeviceInfo method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_3300, TestSize.Level1)
 {
     int ret = StartMirror(2);
@@ -386,6 +589,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_3300, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "QueryRemoteDeviceInfo fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_3400
+ * @tc.name      ：StartMirror and QueryRemoteScreenInfo method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_3400, TestSize.Level1)
 {
     int ret = StartMirror(2);
@@ -394,6 +604,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_3400, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "QueryRemoteScreenInfo fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_3500
+ * @tc.name      ：StartMirror and StopExpand method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_3500, TestSize.Level1)
 {
     int ret = StartMirror(2);
@@ -402,6 +619,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_3500, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "StopExpand fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_3600
+ * @tc.name      ：StopMirror and StartExpand method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_3600, TestSize.Level1)
 {
     int ret = StopMirror(2);
@@ -410,6 +634,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_3600, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "StartExpand fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_3700
+ * @tc.name      ：StopMirror and CreateWindow method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_3700, TestSize.Level1)
 {
     int ret = StopMirror(2);
@@ -418,6 +649,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_3700, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "CreateWindow fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_3800
+ * @tc.name      ：StopMirror and QueryRemoteDeviceInfo method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_3800, TestSize.Level1)
 {
     int ret = StopMirror(2);
@@ -426,6 +664,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_3800, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "QueryRemoteDeviceInfo fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_3900
+ * @tc.name      ：StopMirror and QueryRemoteScreenInfo method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_3900, TestSize.Level1)
 {
     int ret = StopMirror(2);
@@ -434,6 +679,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_3900, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "QueryRemoteScreenInfo fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_4000
+ * @tc.name      ：StopMirror and StopExpand method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_4000, TestSize.Level1)
 {
     int ret = StopMirror(2);
@@ -442,6 +694,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_4000, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "StopExpand fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_4100
+ * @tc.name      ：StartExpand and CreateWindow method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_4100, TestSize.Level1)
 {
     int ret = StartExpand(2);
@@ -450,6 +709,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_4100, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "CreateWindow fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_4200
+ * @tc.name      ：StartExpand and QueryRemoteDeviceInfo method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_4200, TestSize.Level1)
 {
     int ret = StartExpand(2);
@@ -458,6 +724,13 @@ HWTEST_F(DSreenAutomatTest, DSreenTest_4200, TestSize.Level1)
     EXPECT_NE(g_dSreenOk, ret) << "QueryRemoteDeviceInfo fail";
 }
 
+/**
+ * @tc.number    : DSreenTest_4300
+ * @tc.name      ：StartExpand and StopExpand method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
 HWTEST_F(DSreenAutomatTest, DSreenTest_4300, TestSize.Level1)
 {
     int ret = StartExpand(2);
