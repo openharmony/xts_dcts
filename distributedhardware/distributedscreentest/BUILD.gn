@@ -1,4 +1,4 @@
-# Copyright (C) 2022 Huawei Device Co., Ltd.
+# Copyright (C) 2022-2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,6 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+base_root = "../../../../../"
 import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "dcts/distributedhardware"
@@ -18,25 +19,24 @@ module_output_path = "dcts/distributedhardware"
 ohos_moduletest_suite("DctsdisSreenTest") {
   module_out_path = module_output_path
   include_dirs = [
-    "//foundation/distributedhardware/distributed_screen/services/common/utils/include",
-    "//foundation/distributedhardware/distributed_screen/interfaces/innerkits/native_cpp/screen_sink/include",
-    "///foundation/distributedhardware/distributed_screen/interfaces/innerkits/native_cpp/screen_source/include",
-    "//foundation/distributedhardware/distributed_screen/interfaces/innerkits/native_cpp/screen_source/include/callback",
-    "//foundation/distributedhardware/distributed_hardware_fwk/common/utils/include",
-    "//foundation/window/window_manager//interfaces/innerkits/dm",
-    "//foundation/distributedhardware/distributed_screen/services/screenclient/include",
-    "//foundation/window/window_manager//interfaces/innerkits/wm",
-    "//foundation/distributedhardware/distributed_screen/common/include",
-    "//foundation/distributedhardware/distributed_hardware_fwk/common/log/include",
-    "//foundation/distributedhardware/distributed_hardware_fwk/utils/include/log",
-    "//base/security/access_token/interfaces/innerkits/accesstoke/include",
-    "//base/security/access_token/interfaces/innerkits/nativetoken/include",
-    "//base/security/access_token/interfaces/innerkits/token_setproc/include",
-    "//foundation/communication/dsoftbus/interfaces/kits/common",
+    "$base_root/foundation/distributedhardware/distributed_screen/services/common/utils/include",
+    "$base_root/foundation/distributedhardware/distributed_screen/interfaces/innerkits/native_cpp/screen_sink/include",
+    "$base_root/foundation/distributedhardware/distributed_screen/interfaces/innerkits/native_cpp/screen_source/include",
+    "$base_root/foundation/distributedhardware/distributed_screen/interfaces/innerkits/native_cpp/screen_source/include/callback",
+    "$base_root/foundation/distributedhardware/distributed_hardware_fwk/common/utils/include",
+    "$base_root/foundation/window/window_manager/interfaces/innerkits/dm",
+    "$base_root/foundation/distributedhardware/distributed_screen/services/screenclient/include",
+    "$base_root/foundation/window/window_manager/interfaces/innerkits/wm",
+    "$base_root/foundation/distributedhardware/distributed_screen/common/include",
+    "$base_root/foundation/distributedhardware/distributed_hardware_fwk/common/log/include",
+    "$base_root/foundation/distributedhardware/distributed_hardware_fwk/utils/include/log",
+    "$base_root/base/security/access_token/interfaces/innerkits/accesstoke/include",
+    "$base_root/base/security/access_token/interfaces/innerkits/nativetoken/include",
+    "$base_root/base/security/access_token/interfaces/innerkits/token_setproc/include",
+    "$base_root/foundation/communication/dsoftbus/interfaces/kits/common",
   ]
 
-  include_dirs +=
-      [ "foundation/multimedia/player_framework/interfaces/inner_api/native" ]
+  include_dirs += [ "$base_root/foundation/multimedia/player_framework/interfaces/inner_api/native" ]
 
   sources = [
     "decoder_demo.cpp",
@@ -51,18 +51,18 @@ ohos_moduletest_suite("DctsdisSreenTest") {
   ]
 
   deps = [
-    "//base/security/access_token/interfaces/innerkits/nativetoken:libnativetoken",
-    "//base/security/access_token/interfaces/innerkits/token_setproc:libtoken_setproc",
-    "//foundation/communication/dsoftbus/adapter:softbus_adapter",
-    "//foundation/communication/dsoftbus/sdk:softbus_client",
-    "//foundation/distributedhardware/distributed_screen/common:distributed_screen_utils",
-    "//foundation/distributedhardware/distributed_screen/interfaces/innerkits/native_cpp/screen_sink:distributed_screen_sink_sdk",
-    "//foundation/distributedhardware/distributed_screen/interfaces/innerkits/native_cpp/screen_source:distributed_screen_source_sdk",
-    "//foundation/distributedhardware/distributed_screen/services/screenclient:distributed_screen_client",
-    "//foundation/graphic/graphic_2d/rosen/modules/render_service_client:librender_service_client",
-    "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy:samgr_proxy",
-    "//foundation/window/window_manager/dm:libdm",
-    "//foundation/window/window_manager/wm:libwm",
+    "$base_root/base/security/access_token/interfaces/innerkits/nativetoken:libnativetoken",
+    "$base_root/base/security/access_token/interfaces/innerkits/token_setproc:libtoken_setproc",
+    "$base_root/foundation/communication/dsoftbus/adapter:softbus_adapter",
+    "$base_root/foundation/communication/dsoftbus/sdk:softbus_client",
+    "$base_root/foundation/distributedhardware/distributed_screen/common:distributed_screen_utils",
+    "$base_root/foundation/distributedhardware/distributed_screen/interfaces/innerkits/native_cpp/screen_sink:distributed_screen_sink_sdk",
+    "$base_root/foundation/distributedhardware/distributed_screen/interfaces/innerkits/native_cpp/screen_source:distributed_screen_source_sdk",
+    "$base_root/foundation/distributedhardware/distributed_screen/services/screenclient:distributed_screen_client",
+    "$base_root/foundation/graphic/graphic_2d/rosen/modules/render_service_client:librender_service_client",
+    "$base_root/foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy:samgr_proxy",
+    "$base_root/foundation/window/window_manager/dm:libdm",
+    "$base_root/foundation/window/window_manager/wm:libwm",
   ]
 
   external_deps = [

@@ -1,4 +1,4 @@
-# Copyright (c) 2022 - 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2022-2023 - 2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,6 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+base_root = "../../../../../"
 import("//test/xts/tools/build/suite.gni")
 module_output_path = "dcts/hdf"
 
@@ -29,25 +30,25 @@ ohos_moduletest_suite("DctsdisCameraTest") {
 
   include_dirs = [
     "./include",
-    "//drivers/peripheral/distributed_camera/hdi_service/include/dcamera_host",
-    "//drivers/peripheral/distributed_camera/hdi_service/include/dcamera_device",
-    "//drivers/peripheral/distributed_camera/hdi_service/include/dstream_operator",
-    "//drivers/peripheral/distributed_camera/hdi_service/include/dstream_provider",
-    "//drivers/peripheral/distributed_camera/hdi_service/include/utils",
-    "//drivers/hdf_core/framework/include/utils",
-    "//drivers/hdf_core/adapter/uhdf2/include/hdi",
-    "//drivers/hdf_core/adapter/uhdf2/osal/include",
-    "//drivers/peripheral/display/interfaces/include",
-    "//drivers/peripheral/camera/interfaces/include",
-    "//drivers/peripheral/camera/hal/utils",
-    "//drivers/peripheral/camera/hal/include",
+    "$base_root/drivers/peripheral/distributed_camera/hdi_service/include/dcamera_host",
+    "$base_root/drivers/peripheral/distributed_camera/hdi_service/include/dcamera_device",
+    "$base_root/drivers/peripheral/distributed_camera/hdi_service/include/dstream_operator",
+    "$base_root/drivers/peripheral/distributed_camera/hdi_service/include/dstream_provider",
+    "$base_root/drivers/peripheral/distributed_camera/hdi_service/include/utils",
+    "$base_root/drivers/hdf_core/framework/include/utils",
+    "$base_root/drivers/hdf_core/adapter/uhdf2/include/hdi",
+    "$base_root/drivers/hdf_core/adapter/uhdf2/osal/include",
+    "$base_root/drivers/peripheral/display/interfaces/include",
+    "$base_root/drivers/peripheral/camera/interfaces/include",
+    "$base_root/drivers/peripheral/camera/hal/utils",
+    "$base_root/drivers/peripheral/camera/hal/include",
   ]
 
   deps = [
-    "//drivers/hdf_core/adapter/uhdf2/hdi:libhdi",
-    "//drivers/hdf_core/adapter/uhdf2/ipc:libhdf_ipc_adapter",
-    "//drivers/peripheral/distributed_camera/hdi_service:libdistributed_camera_hdf_service_1.0",
-    "//third_party/jsoncpp:jsoncpp",
+    "$base_root/drivers/hdf_core/adapter/uhdf2/hdi:libhdi",
+    "$base_root/drivers/hdf_core/adapter/uhdf2/ipc:libhdf_ipc_adapter",
+    "$base_root/drivers/peripheral/distributed_camera/hdi_service:libdistributed_camera_hdf_service_1.0",
+    "$base_root/third_party/jsoncpp:jsoncpp",
   ]
 
   cflags = [
