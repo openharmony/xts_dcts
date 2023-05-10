@@ -40,8 +40,8 @@ ohos_moduletest_suite("DctsdisCameraTest") {
     "$base_root/drivers/hdf_core/adapter/uhdf2/osal/include",
     "$base_root/drivers/peripheral/display/interfaces/include",
     "$base_root/drivers/peripheral/camera/interfaces/include",
-    "$base_root/drivers/peripheral/camera/hal/utils",
-    "$base_root/drivers/peripheral/camera/hal/include",
+    "$base_root/drivers/peripheral/camera/vdi_base/common/utils",
+    "$base_root/drivers/peripheral/camera/vdi_base/common/include",
   ]
 
   deps = [
