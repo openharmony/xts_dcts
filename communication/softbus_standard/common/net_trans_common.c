@@ -445,7 +445,8 @@ static void ControlBytesReceived(int sessionId, const void* data, unsigned int d
         LOG("[cb][ctrl]ByteRec invalid data=null sid[%d]", sessionId);
         return;
     }
-    g_recvByteStat4Control[sessionId]++;
+    int sid = sessionId % MAX_SESSION_NUM;
+    g_recvByteStat4Control[sid]++;
 }
 
 static void ControlMessageReceived(int sessionId, const void* data, unsigned int dataLen)
@@ -459,7 +460,8 @@ static void ControlMessageReceived(int sessionId, const void* data, unsigned int
         LOG("[cb][ctrl]MessageRec invalid data=null sid[%d]", sessionId);
         return;
     }
-    g_recvMsgStat4Control[sessionId]++;
+    int sid = sessionId % MAX_SESSION_NUM;
+    g_recvMsgStat4Control[sid]++;
 }
 
 static int PassiveSessionOpened(int sessionId, int result)
