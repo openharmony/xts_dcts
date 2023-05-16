@@ -108,11 +108,11 @@ describe('kvSyncTest', function () {
         })
         deviceManager.createDeviceManager(TEST_BUNDLE_NAME,async (error, deviceManager) =>{
             console.info(logTag + "CLIENT Create device manager success");
-            localDeviceId = deviceManager.getLocalDeviceInfoSync().deviceId;
+            localDeviceId = deviceManager.getLocalDeviceInfoSync().networkId;
             console.info(logTag + "local device id is: " + localDeviceId);
 
             deviceList = deviceManager.getTrustedDeviceListSync();
-            deviceId = deviceList[0].deviceId;
+            deviceId = deviceList[0].networkId;
             syncDeviceIds = [deviceId];
         })
         console.info(logTag + '-----------------beforeAll end-----------------');

@@ -79,7 +79,7 @@ export default class TestService {
             deviceManager.createDeviceManager('com.ohos.distributekvdisjs', (error, deviceManager) => {
                 self.getDeviceList(deviceManager);
                 console.info(logTag + "got deviceManager: " + deviceManager);
-                let deviceId = deviceList[0].deviceId;
+                let deviceId = deviceList[0].networkId;
                 console.info(logTag + "deviceid : " + deviceId);
                 console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList));
                 let want = {
@@ -113,7 +113,7 @@ export default class TestService {
             deviceManager.createDeviceManager('distributerdbdisjs', (error, deviceManager) => {
                 self.getDeviceList(deviceManager);
                 console.info(logTag + "got deviceManager: " + deviceManager);
-                let deviceId = deviceList[0].deviceId;
+                let deviceId = deviceList[0].networkId;
                 console.info(logTag + "deviceid : " + deviceId);
                 console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList));
                 let want = {
