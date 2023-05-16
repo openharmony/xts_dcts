@@ -68,7 +68,7 @@ ohos_moduletest_suite("DctsdisSreenTest") {
   external_deps = [
     "access_token:libaccesstoken_sdk",
     "hiviewdfx_hilog_native:libhilog",
-    "multimedia_player_framework:media_client",
+    "player_framework:media_client",
   ]
 
   subsystem_name = "distributedhardware"
