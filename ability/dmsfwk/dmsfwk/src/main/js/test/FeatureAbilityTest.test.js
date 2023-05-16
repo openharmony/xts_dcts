@@ -151,12 +151,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_0100 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0100 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0100 err: ' + err.message);
+                    expect(err.code).assertEqual(9);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_0100:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -190,12 +196,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_0200 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0200 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0200 err: ' + err.message);
+                    expect(err.code).assertEqual(1);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_0200:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -229,12 +241,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_0300 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0300 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0300 err: ' + err.message);
+                    expect(err.code).assertEqual(1);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_0300:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -267,12 +285,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_0400 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0400 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0400 err: ' + err.message);
+                    expect(err.code).assertEqual(1);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_0400:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -306,12 +330,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_0500 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0500 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0500 err: ' + err.message);
+                    expect(err.code).assertEqual(9);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_0500:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -345,12 +375,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_0600 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0600 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0600 err: ' + err.message);
+                    expect(err.code).assertEqual(1);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_0600:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -384,12 +420,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_0700 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0700 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0700 err: ' + err.message);
+                    expect(err.code).assertEqual(1);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_0700:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -422,12 +464,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_0800 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0800 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0800 err: ' + err.message);
+                    expect(err.code).assertEqual(1);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_0800:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -461,12 +509,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_0900 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0900 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_0900 err: ' + err.message);
+                    expect(err.code).assertEqual(9);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_0900:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -499,12 +553,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_1100 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1100 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1100 err: ' + err.message);
+                    expect(err.code).assertEqual(1);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_1100:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -538,18 +598,24 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_1200 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1200 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1200 err: ' + err.message);
+                    expect(err.code).assertEqual(9);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_1200:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
             console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1200 end------------------------");
         });
-        
+
         /*
         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_1300
         * @tc.name    Start the remote Ability with dvId.
@@ -579,10 +645,15 @@ export default function dmsJsUnitTest() {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_1300 data' + JSON.stringify(data));
                     expect(data == 0).assertTrue();
                     done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1300 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1300 err: ' + err.message);
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_1300:error = " + error);
-                expect(false).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -611,12 +682,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_1400 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1400 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1400 err: ' + err.message);
+                    expect(err.code).assertEqual(202);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_1400:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -645,12 +722,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_1500 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1500 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1500 err: ' + err.message);
+                    expect(err.code).assertEqual(1);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_1500:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -679,12 +762,18 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_1600 data' + JSON.stringify(data));
-                    expect(data == 0).assertFail();
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1600 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1600 err: ' + err.message);
+                    expect(err.code).assertEqual(202);
+                    expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_1600:error = " + error);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             }
             await sleep(1000);
@@ -721,6 +810,11 @@ export default function dmsJsUnitTest() {
                         console.info('SUB_DMS_OpenHarmony_StartAbility_1700 data' + JSON.stringify(data));
                         expect(data == 0).assertTrue();
                         done();
+                    }).catch((err) => {
+                        console.info('SUB_DMS_OpenHarmony_StartAbility_1700 err: ' + err.code);
+                        console.info('SUB_DMS_OpenHarmony_StartAbility_1700 err: ' + err.message);
+                        expect().assertFail();
+                        done();
                     });
                     console.info("SUB_DMS_OpenHarmony_StartAbility_1700 running at : " + i + ",here");
                 }
@@ -735,7 +829,7 @@ export default function dmsJsUnitTest() {
 
         /*
          * @tc.number  SUB_DMS_OpenHarmony_StartAbility_1900
-         * @tc.name    Start the remote Ability after kill process of distributedsche.
+         * @tc.name    Start the remote Ability.
          * @tc.desc    Function test
          * @tc.level   0
         */
@@ -748,18 +842,14 @@ export default function dmsJsUnitTest() {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_1900 no device found');
                     expect(numDevices === 0).assertFail();
                 };
-                abilityDelegator.executeShellCommand("pidof distributedsche", (err, data) => {
-                    console.info("SUB_DMS_OpenHarmony_StartAbility_1900:" + data.stdResult)
-                    abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
-                        console.info("SUB_DMS_OpenHarmony_StartAbility_1900:" + data.stdResult)
-                    })
-                })
                 let params;
                 let wantValue = {
                     bundleName: "com.ohos.dmstest",
-                    abilityName: "com.ohos.dmstest.ServiceAbility",
+                    abilityName: "com.ohos.dmstest.MainAbility",
                     deviceId: dvId,
-                    parameters: params
+                    parameters: {
+                        "startReason": "terminateSelf"
+                    }
                 };
                 console.info('SUB_DMS_OpenHarmony_StartAbility_1900 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
@@ -767,6 +857,11 @@ export default function dmsJsUnitTest() {
                 }).then((data) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_1900 data' + JSON.stringify(data));
                     expect(data == 0).assertTrue();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1900 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_1900 err: ' + err.message);
+                    expect().assertFail();
                     done();
                 });
             } catch (error) {
@@ -813,6 +908,11 @@ export default function dmsJsUnitTest() {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_2000 data' + JSON.stringify(data));
                     expect(data == 0).assertTrue();
                     done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_2000 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_2000 err: ' + err.message);
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info("SUB_DMS_OpenHarmony_StartAbility_2000:error = " + error);
@@ -821,6 +921,56 @@ export default function dmsJsUnitTest() {
             }
             await sleep(1000);
             console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_2000 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_2100
+         * @tc.name    Start the remote Ability after kill process of distributedsche.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_2100", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_2100 start------------------------");
+            try {
+                console.info("SUB_DMS_OpenHarmony_StartAbility_2100 dvList:" + dvList.length);
+                let numDevices = dvList.length;
+                if (numDevices === 0) {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_2100 no device found');
+                    expect(numDevices === 0).assertFail();
+                };
+                abilityDelegator.executeShellCommand("pidof distributedsche", (err, data) => {
+                    console.info("SUB_DMS_OpenHarmony_StartAbility_2100:" + data.stdResult)
+                    abilityDelegator.executeShellCommand("kill -9" + data.stdResult, (err, data) => {
+                        console.info("SUB_DMS_OpenHarmony_StartAbility_2100:" + data.stdResult)
+                    })
+                })
+                let params;
+                let wantValue = {
+                    bundleName: "com.ohos.dmstest",
+                    abilityName: "com.ohos.dmstest.ServiceAbility",
+                    deviceId: dvId,
+                    parameters: params
+                };
+                console.info('SUB_DMS_OpenHarmony_StartAbility_2100 want=' + JSON.stringify(wantValue));
+                await featureAbility.startAbility({
+                    want: wantValue
+                }).then((data) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_2100 data' + JSON.stringify(data));
+                    expect(data == 0).assertTrue();
+                    done();
+                }).catch((err) => {
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_2100 err: ' + err.code);
+                    console.info('SUB_DMS_OpenHarmony_StartAbility_2100 err: ' + err.message);
+                    expect().assertFail();
+                    done();
+                });
+            } catch (error) {
+                console.info("SUB_DMS_OpenHarmony_StartAbility_2100:error = " + error);
+                expect().assertFail();
+                done();
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_2100 end------------------------");
         });
     })
 }

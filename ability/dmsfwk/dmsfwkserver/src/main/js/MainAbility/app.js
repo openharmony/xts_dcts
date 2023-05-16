@@ -29,6 +29,9 @@ export default {
         context.requestPermissionsFromUser(['ohos.permission.DISTRIBUTED_DATASYNC'], 666, function (result) {
             console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser,'+result.requestCode)
         })
+        setTimeout(()=>{
+            particleAbility.terminateSelf()
+        },2000)
     },
     onDestroy() {
         console.info('AceApplication onDestroy');

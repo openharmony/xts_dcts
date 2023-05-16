@@ -18,11 +18,12 @@ import rpc from "@ohos.rpc";
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 import featureAbility from "@ohos.ability.featureAbility";
 import { UiDriver, BY } from '@ohos.UiTest';
+import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
 
 let connectId = null;
 let dvList = [];
 let dvId = null;
-let TAG;
+let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
 
 export default function DmsFwkFaTest() {
 
@@ -59,17 +60,17 @@ export default function DmsFwkFaTest() {
 
     async function driveClick() {
       try {
-          let driver = await UiDriver.create();
-          console.info(`come in driveFn`);
-          console.info(`driver is ${JSON.stringify(driver)}`);
-          sleep(2000);
-          let button = await driver.findComponent(BY.text('知道了'));
-          console.info(`button is ${JSON.stringify(button)}`);
-          sleep(5000);
-          await button.click();
+        let driver = await UiDriver.create();
+        console.info(`come in driveFn`);
+        console.info(`driver is ${JSON.stringify(driver)}`);
+        sleep(2000);
+        let button = await driver.findComponent(BY.text('知道了'));
+        console.info(`button is ${JSON.stringify(button)}`);
+        sleep(5000);
+        await button.click();
       } catch (err) {
-          console.info('err is ' + err);
-          return;
+        console.info('err is ' + err);
+        return;
       }
     }
 
@@ -100,7 +101,13 @@ export default function DmsFwkFaTest() {
 
     afterEach(async function (done) {
       console.info('afterEach called')
-      setTimeout(done, 4000)
+      await featureAbility.disconnectAbility(connectId).then((data) => {
+        console.info('disconnectAbility called success');
+      }).catch((err) => {
+        console.info('disconnectAbility called error ' + err.message);
+      })
+      sleep(2000);
+      done();
     })
 
     afterAll(async function (done) {
@@ -109,225 +116,6 @@ export default function DmsFwkFaTest() {
       sleep(5000);
       done()
     })
-
-    /*
-     * @tc.number  SUB_DMS_ConnectAbility_0210
-     * @tc.name    Filed connect remote invisible service without permission.
-     * @tc.desc    Function test
-     * @tc.level   0
-     */
-    it("SUB_DMS_ConnectAbility_0210", 0, async function (done) {
-      console.info("---------------SUB_DMS_ConnectAbility_0210 is start---------------")
-      TAG = "SUB_DMS_ConnectAbility_0210";
-      try {
-        featureAbility.connectAbility({
-          deviceId: dvId,
-          bundleName: "com.acts.example.dmsfwkstageserver",
-          abilityName: "ServiceAbility2"
-        }, {
-          onConnect: (elementName, proxy) => {
-            expect().assertFail();
-            done();
-          },
-          onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0210  onDisConnect: ' + JSON.stringify(elementName));
-            expect().assertFail();
-            done();
-          },
-          onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0210  onFailed: ' + code);
-            expect(code).assertEqual(0)
-            done();
-          }
-        });
-      } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0210 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0210 catch: ' + err.message);
-        done();
-      }
-    });
-
-    /*
-      * @tc.number  SUB_DMS_ConnectAbility_0230
-      * @tc.name    Filed connect remote invisible service without permission.
-      * @tc.desc    Function test
-      * @tc.level   0
-      */
-    it("SUB_DMS_ConnectAbility_0230", 0, async function (done) {
-      console.info("---------------SUB_DMS_ConnectAbility_0230 is start---------------")
-      TAG = "SUB_DMS_ConnectAbility_0230";
-      featureAbility.startAbility({
-        "want": {
-          deviceId: dvId,
-          bundleName: "com.acts.example.dmsfwkstageserver",
-          abilityName: "ServiceAbility"
-        }
-      }).then((data) => {
-        console.info('SUB_DMS_ConnectAbility_0230 data: ' + JSON.stringify(data));
-        expect(data).assertEqual(0)
-        done()
-      })
-    });
-    
-    /*
-    * @tc.number  SUB_DMS_ConnectAbility_0240
-    * @tc.name    Filed connect remote invisible service without permission.
-    * @tc.desc    Function test
-    * @tc.level   0
-    */
-    it("SUB_DMS_ConnectAbility_0240", 0, async function (done) {
-      console.info("---------------SUB_DMS_ConnectAbility_0240 is start---------------")
-      TAG = "SUB_DMS_ConnectAbility_0240";
-      try {
-        featureAbility.startAbility({
-          "want": {
-            deviceId: dvId,
-            bundleName: "com.acts.example.dmsfwkstageserver",
-            abilityName: "MainAbility2",
-            parameters: {
-              "startReason": "terminateSelf"
-            }
-          }
-        }).then((data) => {
-          console.info('SUB_DMS_ConnectAbility_0230 data: ' + JSON.stringify(data));
-          expect(data).assertEqual(0)
-          done()
-        }).catch((err) => {
-          console.info('SUB_DMS_ConnectAbility_0240 err: ' + err.code);
-          console.info('SUB_DMS_ConnectAbility_0240 err: ' + err.message);
-          expect().assertFail();
-          done();
-        })
-      } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0240 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0240 catch: ' + err.message);
-        expect().assertFail();
-        done();
-      }
-    });
-
-    /*
-     * @tc.number  SUB_DMS_ConnectAbility_0260
-     * @tc.name    Filed connect remote invisible service without permission.
-     * @tc.desc    Function test
-     * @tc.level   0
-     */
-    it("SUB_DMS_ConnectAbility_0260", 0, async function (done) {
-      console.info("---------------SUB_DMS_ConnectAbility_0260 is start---------------")
-      TAG = "SUB_DMS_ConnectAbility_0260";
-      try {
-        featureAbility.startAbility({
-          "want": {
-            deviceId: "12423748651348643464315313463431",
-            bundleName: "com.acts.example.dmsfwkstageserver",
-            abilityName: "MainAbility2"
-          }
-        }, (err) => {
-          console.info('SUB_DMS_ConnectAbility_0260 err: ' + err.code);
-          console.info('SUB_DMS_ConnectAbility_0260 err: ' + err.message);
-          expect(err.code).assertEqual(9)
-          expect(err.message).assertEqual("StartAbility Failed")
-          done()
-        });
-      } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0260 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0260 catch: ' + err.message);
-        expect().assertFail();
-        done();
-      }
-    });
-
-    /*
-    * @tc.number  SUB_DMS_ConnectAbility_0270
-    * @tc.name    Filed connect remote invisible service without permission.
-    * @tc.desc    Function test
-    * @tc.level   0
-    */
-    it("SUB_DMS_ConnectAbility_0270", 0, async function (done) {
-      console.info("---------------SUB_DMS_ConnectAbility_0270 is start---------------")
-      TAG = "SUB_DMS_ConnectAbility_0270";
-      try {
-        featureAbility.startAbility({
-          "want": {
-            deviceId: dvId,
-            bundleName: "com.acts.example.dmsfwkstageserver",
-            abilityName: "MainAbility3",
-            parameters: {
-              "startReason": "terminateSelf"
-            }
-          }
-        }, (err) => {
-          console.info('SUB_DMS_ConnectAbility_0270 err: ' + err.code);
-          console.info('SUB_DMS_ConnectAbility_0270 err: ' + err.message);
-          expect(err.code).assertEqual(1)
-          expect(err.message).assertEqual("StartAbility Failed")
-          done()
-        });
-      } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0270 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0270 catch: ' + err.message);
-        expect().assertFail();
-        done();
-      }
-    });
-
-    /*
-     * @tc.number  SUB_DMS_ConnectAbility_0220
-     * @tc.name    Filed connect remote invisible service without permission.
-     * @tc.desc    Function test
-     * @tc.level   0
-     */
-    it("SUB_DMS_ConnectAbility_0220", 0, async function (done) {
-      console.info("---------------SUB_DMS_ConnectAbility_0220 is start---------------")
-      TAG = "SUB_DMS_ConnectAbility_0220";
-      let connectId;
-      try {
-        connectId = featureAbility.connectAbility({
-          deviceId: dvId,
-          bundleName: "com.acts.example.dmsfwkstageserver",
-          abilityName: "ServiceAbility"
-        }, {
-          onConnect: (elementName, proxy) => {
-            let option = new rpc.MessageOption();
-            let data = new rpc.MessageParcel();
-            let reply = new rpc.MessageParcel();
-            data.writeInt(1);
-            data.writeInt(99);
-            proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('sendRequest success');
-              let msg = result.reply.readInt();
-              console.info(' onConnectRemoteService001 msg: ' + msg)
-              expect(msg == 100).assertTrue();
-            }).catch((e) => {
-              console.log('sendRequest error:' + e);
-              expect().assertFail();
-              done();
-            });
-          },
-          onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0220  onDisConnect: ' + JSON.stringify(elementName));
-            expect().assertFail();
-            done();
-          },
-          onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0220  onFailed: ' + code);
-            done();
-          }
-        });
-      } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0220 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0220 catch: ' + err.message);
-        expect(err.code).assertEqual(0);
-        done();
-      }
-      setTimeout(() => {
-        featureAbility.disconnectAbility(connectId, (err, data) => {
-          console.info('SUB_DMS_ConnectAbility_0220 disconnectAbility err: ' + err.code);
-          console.info('SUB_DMS_ConnectAbility_0220 disconnectAbilityerr: ' + err.message);
-          done();
-        })
-      }, 3000);
-    });
 
     /*
     * @tc.number  SUB_DMS_StartAbilityResult_0010
@@ -837,6 +625,773 @@ export default function DmsFwkFaTest() {
       }
       await sleep(1000);
       console.info("---------------SUB_DMS_StartAbilityResult_0140 is end---------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_ConnectAbility_0010
+     * @tc.name    Connect the remote ServiceAbility.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_ConnectAbility_0010", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0010 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "ServiceAbility"
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0010 msg: ' + msg)
+              expect(msg == 100).assertTrue();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0010  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0010  onFailed: ' + code);
+            expect().assertFail();
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0010 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0010 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0010 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_ConnectAbility_0020
+     * @tc.name    Connect the remote Service with null bundlename.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_ConnectAbility_0020", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0020 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: dvId,
+          bundleName: "",
+          abilityName: "ServiceAbility"
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0020 msg: ' + msg)
+              expect(msg == 100).assertFail();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0020  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0020  onFailed: ' + code);
+            expect(code).assertEqual(0);
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0020 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0020 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0020 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_ConnectAbility_0030
+     * @tc.name    Disconnect the remote ServiceAbility.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_ConnectAbility_0030", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0030 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "ServiceAbility"
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0030 msg: ' + msg)
+              expect(msg == 100).assertTrue();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0030  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0030  onFailed: ' + code);
+            expect().assertFail();
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0030 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0030 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      featureAbility.disconnectAbility(connectId, (err, data) => {
+        console.info('SUB_DMS_ConnectAbility_0030 disconnectAbility err: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0030 disconnectAbilityerr: ' + err.message);
+        expect(err.code).assertEqual(0);
+        done();
+      })
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0030 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_ConnectAbility_0040
+     * @tc.name    Connect the remote Service with Wrong ServiceAbility.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_ConnectAbility_0040", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0040 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "WrongServiceAbility"
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0040 msg: ' + msg)
+              expect(msg == 100).assertFail();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0040  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0040  onFailed: ' + code);
+            expect(code).assertEqual(0);
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0040 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0040 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0040 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_ConnectAbility_0050
+     * @tc.name    Connect the remote Service with Wrong deviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_ConnectAbility_0050", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0050 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: "123456",
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "ServiceAbility"
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0050 msg: ' + msg)
+              expect(msg == 100).assertFail();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0050  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0050  onFailed: ' + code);
+            expect(code).assertEqual(0);
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0050 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0050 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0050 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_ConnectAbility_0060
+     * @tc.name    Connect the remote Service with null ServiceAbility.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_ConnectAbility_0060", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0060 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: ""
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0060 msg: ' + msg)
+              expect(msg == 100).assertFail();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0060  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0060  onFailed: ' + code);
+            expect(code).assertEqual(0);
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0060 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0060 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0060 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_ConnectAbility_0070
+     * @tc.name    Connect the remote Service without bundleName.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_ConnectAbility_0070", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0070 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: dvId,
+          abilityName: "ServiceAbility"
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0070 msg: ' + msg)
+              expect(msg == 100).assertFail();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0070  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0070  onFailed: ' + code);
+            expect(code).assertEqual(0);
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0070 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0070 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0070 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_ConnectAbility_0080
+     * @tc.name    Connect the remote Service with wrong bundleName.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_ConnectAbility_0080", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0080 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.Wrongdmsfwkstageserver",
+          abilityName: "ServiceAbility"
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0080 msg: ' + msg)
+              expect(msg == 100).assertFail();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0080  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0080  onFailed: ' + code);
+            expect(code).assertEqual(0);
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0080 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0080 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0080 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_ConnectAbility_0090
+     * @tc.name    Connect the remote Service with bundleName is undefined.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_ConnectAbility_0090", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0090 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: dvId,
+          bundleName: undefined,
+          abilityName: "ServiceAbility"
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0090 msg: ' + msg)
+              expect(msg == 100).assertFail();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0090  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0090  onFailed: ' + code);
+            expect(code).assertEqual(0);
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0090 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0090 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0090 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_ConnectAbility_0100
+     * @tc.name    Connect the remote Service without abilityName.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_ConnectAbility_0100", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0100 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstageserver"
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0100 msg: ' + msg)
+              expect(msg == 100).assertFail();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0100  onFailed: ' + code);
+            expect(code).assertEqual(0);
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0100 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0100 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0100 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_ConnectAbility_0110
+     * @tc.name    Connect the remote Service with abilityName is undefined.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_ConnectAbility_0110", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0110 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: undefined
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0110 msg: ' + msg)
+              expect(msg == 100).assertFail();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0110  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0110  onFailed: ' + code);
+            expect(code).assertEqual(0);
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0110 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0110 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0110 end------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_ConnectAbility_0120
+    * @tc.name    Connect the remote Service with deviceid is undefined.
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_ConnectAbility_0120", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0120 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: undefined,
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "ServiceAbility"
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0120 msg: ' + msg)
+              expect(msg == 100).assertFail();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0120  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0120  onFailed: ' + code);
+            expect(code).assertEqual(0);
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0120 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0120 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0120 end------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_ConnectAbility_0130
+    * @tc.name    Connect the remote Service without deviceid.
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_ConnectAbility_0130", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0130 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "ServiceAbility"
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_ConnectAbility_0130 msg: ' + msg)
+              expect(msg == 100).assertFail();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_ConnectAbility_0130  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_ConnectAbility_0130  onFailed: ' + code);
+            expect(code).assertEqual(0);
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0130 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0130 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0130 end------------------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_ConnectAbility_0140
+    * @tc.name    Connect the remote ServiceAbility fot ten times.
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_ConnectAbility_0140", 0, async function (done) {
+      console.info("-----------------SUB_DMS_ConnectAbility_0140 start------------------------");
+      let connectId;
+      try {
+        for (let i = 0; i < 10; i++) {
+          connectId = featureAbility.connectAbility({
+            deviceId: dvId,
+            bundleName: "com.acts.example.dmsfwkstageserver",
+            abilityName: "ServiceAbility"
+          }, {
+            onConnect: (elementName, proxy) => {
+              let option = new rpc.MessageOption();
+              let data = new rpc.MessageParcel();
+              let reply = new rpc.MessageParcel();
+              data.writeInt(1);
+              data.writeInt(99);
+              proxy.sendRequest(1, data, reply, option).then((result) => {
+                console.log('sendRequest success');
+                let msg = result.reply.readInt();
+                console.info(' SUB_DMS_ConnectAbility_0140 msg: ' + msg)
+                expect(msg == 100).assertTrue();
+                done();
+              }).catch((e) => {
+                console.log('sendRequest error:' + e);
+                expect().assertFail();
+                done();
+              });
+            },
+            onDisConnect: (elementName) => {
+              console.info('SUB_DMS_ConnectAbility_0140  onDisConnect: ' + JSON.stringify(elementName));
+              expect().assertFail();
+              done();
+            },
+            onFailed: (code) => {
+              console.info('SUB_DMS_ConnectAbility_0140  onFailed: ' + code);
+              expect().assertFail();
+              done();
+            }
+          });
+          featureAbility.disconnectAbility(connectId, (err, data) => {
+            console.info('SUB_DMS_ConnectAbility_0140 disconnectAbility err: ' + err.code);
+            console.info('SUB_DMS_ConnectAbility_0140 disconnectAbilityerr: ' + err.message);
+            expect(err.code).assertEqual(0);
+            done();
+          })
+          console.info("SUB_DMS_ConnectAbility_0140 running at : " + i + ",here");
+        }
+      } catch (err) {
+        console.info('SUB_DMS_ConnectAbility_0140 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbility_0140 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_ConnectAbility_0140 end------------------------");
     });
   })
 }
