@@ -41,7 +41,7 @@ export default class TestService {
                 self.getDeviceList(deviceManager);
                 console.info("RpcClient:  got deviceManager: " + deviceManager)
                 let networkId = deviceList[0].networkId
-                console.info("RpcClient: deviceid : " + deviceId)
+                console.info("RpcClient: deviceid : " + networkId)
                 console.info("RpcClient: online deviceList id: " + JSON.stringify(deviceList))
                 let want = {
                     "bundleName": bundleName,
