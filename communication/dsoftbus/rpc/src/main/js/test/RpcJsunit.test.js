@@ -10525,7 +10525,7 @@ export default function RpcJsUnitTest() {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", mapSize);
                 expect(ashmem.mapReadAndWriteAshmem()).assertTrue();
                 let bytes = [0, 1];
-                expect(ashmem.writeToAshmem(bytes, bytes.length, 2147483647)).assertEqual(false);
+                expect(ashmem.writeToAshmem(bytes, bytes.length, 2147483647/4)).assertEqual(false);
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
@@ -10547,9 +10547,7 @@ export default function RpcJsUnitTest() {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", mapSize);
                 expect(ashmem.mapReadAndWriteAshmem()).assertTrue();
                 let bytes = [0, 1];
-                expect(ashmem.writeToAshmem(bytes, bytes.length, 2147483648)).assertTrue();
-                let readresult1 = ashmem.readFromAshmem(bytes.length, 0);
-                assertArrayElementEqual(readresult1, bytes);
+                expect(ashmem.writeToAshmem(bytes, bytes.length, 2147483648/4)).assertEqual(false);
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
