@@ -22,7 +22,7 @@ ohos_hap_assist_suite("DctsAVSessionServerTest") {
   certificate_profile = "./signature/openharmony_sx.p7b"
   hap_name = "DctsAVSessionServerTest"
   subsystem_name = "multimedia"
-  part_name = "multimedia_av_session"
+  part_name = "av_session"
 }
 ohos_js_assets("avsession_js_assets") {
   source_dir = "./src/main/js"
