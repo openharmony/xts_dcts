@@ -24,7 +24,6 @@
 #include <surface.h>
 #include <display_type.h>
 #include "constants.h"
-#include "camera.h"
 #include "distributed_hardware_log.h"
 #include "iconsumer_surface.h"
 #include "v1_0/ioffline_stream_operator.h"
@@ -68,10 +67,6 @@ public:
             DHLOGI("demo test:Exiting OnBufferAvailable end");
         }
     }
-    void SetCallback(const std::function<void(void*, const uint32_t)> callback)
-    {
-        callback_ = callback;
-    }
 private:
     std::function<void(void*, uint32_t)> callback_;
     sptr<IConsumerSurface> consumer_;
@@ -81,8 +76,7 @@ class StreamCustomer {
 public:
     StreamCustomer();
     ~StreamCustomer();
-    sptr<OHOS::IBufferProducer> CreateProducer(CaptureMode mode,
-        const std::function<void(void*, uint32_t)> callback);
+    sptr<OHOS::IBufferProducer> CreateProducer(CaptureMode mode, const std::function<void(void*, uint32_t)> callback);
 
 private:
     sptr<OHOS::IConsumerSurface> consumer_ = nullptr;

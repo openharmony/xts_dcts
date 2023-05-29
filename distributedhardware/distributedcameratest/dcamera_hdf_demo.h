@@ -25,7 +25,6 @@
 #include <display_type.h>
 #include "constants.h"
 #include "camera_metadata_operator.h"
-#include "camera.h"
 #include "display_type.h"
 #include "v1_0/icamera_device.h"
 #include "v1_0/icamera_host.h"
@@ -43,9 +42,16 @@ namespace OHOS {
 namespace DistributedHardware {
 using namespace OHOS::Camera;
 using namespace OHOS::HDI::Camera::V1_0;
+using CameraAbility = OHOS::Camera::CameraMetadata;
+using CameraSetting = OHOS::Camera::CameraMetadata;
 #define CAMERA_CAPTURE_ENCODE_TYPE OHOS::HDI::Camera::V1_0::ENCODE_TYPE_JPEG
 #define CAMERA_VIDEO_ENCODE_TYPE OHOS::HDI::Camera::V1_0::ENCODE_TYPE_H264
-#define CAMERA_FORMAT PIXEL_FMT_YCRCB_420_SP
+
+#ifdef DCAMERA_DRIVER_YUV
+        #define CAMERA_FORMAT PIXEL_FMT_YCRCB_420_SP
+#else
+        #define CAMERA_FORMAT PIXEL_FMT_RGBA_8888
+#endif
 
 typedef enum {
     STREAM_ID_PREVIEW = 1001,
