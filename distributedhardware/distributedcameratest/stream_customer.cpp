@@ -15,7 +15,6 @@
 
 #include "stream_customer.h"
 #include "distributed_hardware_log.h"
-#include "video_key_info.h"
 
 namespace OHOS {
 namespace DistributedHardware {
@@ -30,8 +29,7 @@ sptr<OHOS::IBufferProducer> StreamCustomer::CreateProducer(CaptureMode mode,
         return nullptr;
     }
     sptr<IBufferConsumerListener> listener = nullptr;
-    if (mode == CAPTURE_PREVIEW) {
-    } else if (mode == CAPTURE_SNAPSHOT) {
+    if (mode == CAPTURE_SNAPSHOT) {
         listener = new TestBuffersConsumerListener(consumer_, callback);
     } else if (mode == CAPTURE_VIDEO) {
         listener = new TestBuffersConsumerListener(consumer_, callback);
