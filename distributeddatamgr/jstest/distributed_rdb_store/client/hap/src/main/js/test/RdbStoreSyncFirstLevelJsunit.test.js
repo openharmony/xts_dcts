@@ -1674,5 +1674,40 @@ export default function rdbSyncFirstLevelTest(){
         console.info(logTag + "************* testRdbSyncTest0220 end *************");
         })
 
+
+        /**
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2300
+         * @tc.name testRdbSyncTest0230
+         * @tc.desc Server get rdbStoreS2 level, Name different
+        */
+         it("testRdbSyncTest0230", 0, async function (done) {
+            console.info(logTag + "testRdbSyncTest0230 start");
+            var rdbSecondStore = {};
+            const STORE_CONFIG023 = {
+                name: "RemoteRdb.db",
+                securityLevel: data_Rdb.SecurityLevel.S2
+            };
+            rdbSecondStore = await data_Rdb.getRdbStore(context, STORE_CONFIG);
+            console.info(`testRdbSyncTest0230 S1 Get RdbStore successfully.`);
+            try{
+                let promise = data_Rdb.getRdbStore(context, STORE_CONFIG023);
+                await promise.then(async (rdbStore) => {
+                  rdbSecondStore = rdbStore;
+                  console.info(`testRdbSyncTest0230 Get RdbStore successfully.`);
+                  expect().assertFail();
+                  done();
+                }).catch((err) => {
+                  console.error(`testRdbSyncTest0230 Get RdbStore failed, code is ${err.code},message is ${err.message}`);
+                  expect(err.code).assertEqual(14800000);
+                  done();
+                })
+            }catch(error){
+                console.error(`testRdbSyncTest0230 Get RdbStore failed error, code is ${error.code},message is ${error.message}`);
+                expect().assertFail();
+                done();
+            }
+            console.info(logTag + "************* testRdbSyncTest0230 end *************");
+        })
+
     })
 }
