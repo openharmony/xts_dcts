@@ -109,7 +109,7 @@ export default function rdbSyncFirstLevelTest(){
                 localDeviceId = deviceManager.getLocalDeviceInfoSync().deviceId;
                 console.info(logTag + "local device id is: " + localDeviceId);
                 deviceList = deviceManager.getTrustedDeviceListSync();
-                deviceId = deviceList[0].deviceId;
+                deviceId = deviceList[0].networkId;
                 syncDeviceIds = [deviceId];
                 dmInstance = deviceManager;
                 dmInstance.on("deviceStateChange", (data) => {
@@ -1533,9 +1533,8 @@ export default function rdbSyncFirstLevelTest(){
             var rdbSecondStore = {};
             const STORE_CONFIGS2 = {
                 name: "RemoteRdb.db",
-                securityLevel: data_Rdb.SecurityLevel.S2
+                securityLevel: data_Rdb.SecurityLevel.S1
             };
-            
             rdbSecondStore = await data_Rdb.getRdbStore(context, STORE_CONFIGS2);
             console.info("testRdbSyncTest0200 create RemoteRdb.db success");
             await rdbSecondStore.executeSql(CREATE_TABLE_TEST, null);
@@ -1611,10 +1610,9 @@ export default function rdbSyncFirstLevelTest(){
             var rdbENStore = {};
             const STORE_CONFIGS3 = {
                 name: "RemoteRdb.db",
-                securityLevel: data_Rdb.SecurityLevel.S2
+                securityLevel: data_Rdb.SecurityLevel.S1
             };
             const CREATE_TABLE_TEST_S3 = "CREATE TABLE IF NOT EXISTS testENSecond (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
-    
             rdbENStore = await data_Rdb.getRdbStore(context, STORE_CONFIGS3);
             console.info("testRdbSyncTest0210 create RemoteRdb.db success");
             await rdbENStore.executeSql(CREATE_TABLE_TEST_S3, null);
