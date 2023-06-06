@@ -38,13 +38,13 @@ export default class TestService {
             deviceManager.createDeviceManager('com.ohos.fileiotest', (error, deviceManager) => {
                 self.getDeviceList(deviceManager);
                 console.info("fileioClient:  got deviceManager: " + deviceManager)
-                let deviceId = deviceList[0].deviceId
-                console.info("fileioClient: deviceid : " + deviceId)
+                let networkId = deviceList[0].networkId
+                console.info("fileioClient: deviceid : " + networkId)
                 console.info("fileioClient: online deviceList id: " + JSON.stringify(deviceList))
                 let want = {
                     "bundleName": bundleName,
                     "abilityName": abilityName,
-                    "deviceId": deviceId,
+                    "deviceId": networkId,
                     "flags": 256
                 }
                 let connect = {
