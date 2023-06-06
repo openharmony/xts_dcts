@@ -30,11 +30,11 @@ let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
 
 deviceManager.createDeviceManager('ohos.dms.test', async (error, deviceManager) => {
     console.info("CLIENT Create device manager success");
-    localDeviceId = deviceManager.getLocalDeviceInfoSync().deviceId;
+    localDeviceId = deviceManager.getLocalDeviceInfoSync().networkId;
     console.info("local device id is: " + localDeviceId);
     let deviceList = deviceManager.getTrustedDeviceListSync();
     dvList = deviceList;
-    let deviceId = deviceList[0].deviceId;
+    let deviceId = deviceList[0].networkId;
     dvId = deviceId;
     console.info("deviceid is: " + deviceId);
     console.info("deviceList is: " + JSON.stringify(deviceList));

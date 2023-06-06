@@ -84,7 +84,7 @@ export default function DmsFwkFaTest() {
       function deviceManagerCallback(error, deviceManagers) {
         console.info("got deviceManager: " + deviceManagers + ", error: " + error)
         let deviceList = deviceManagers.getTrustedDeviceListSync()
-        let deviceId = deviceList[0].deviceId
+        let deviceId = deviceList[0].networkId
         dvList = deviceList;
         dvId = deviceId;
         console.info("online device id: " + deviceId)
