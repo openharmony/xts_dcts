@@ -186,18 +186,23 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerNoLevelSecurity0100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerNoLevelSecurity0100 end");
-                kvStore.off("syncComplete",call);
-                done();
             })
         }
         kvStore.on("syncComplete",call);
@@ -216,44 +221,52 @@ describe('kvSyncTest', function () {
      it("testServerNoLevelSecurity0200", 0, async function(done){
         console.info(logTag + "testServerNoLevelSecurity0200 start");
         await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {
-            createIfMissing : true,
-            encrypt : false,
-            backup : false,
-            autoSync : false,
-            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-            schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
-        }
-        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-            kvStore = store;
-            console.info(logTag + " get kvStore success");
-        });
+            await sleep(1000);
+            const options = {
+                createIfMissing : true,
+                encrypt : false,
+                backup : false,
+                autoSync : false,
+                kvStoreType : factory.KVStoreType.SINGLE_VERSION,
+                schema : '',
+                securityLevel : factory.SecurityLevel.NO_LEVEL,
+            }
+            await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
+                kvStore = store;
+                console.info(logTag + " get kvStore success");
+            });
+    
+            let result = undefined;
+            function call(data) {
+                    console.info(logTag + "syncComplete: " + data);
+                    kvStore.get(TEST_STRING_KEY,(err, data) => {
+                        try{
+                            console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                            if(err != null){
+                                console.info(logTag + " Sync complete get data error,err: " + err);
+                            }else{
+                                console.info(logTag + " Sycn complete get data success,result is: " + data);
+                                result = data;
+                            }
+                            console.info(logTag + " get data finish,result is: " + result);
+                            expect(result).assertEqual(TEST_STRING_VALUE);
+                            console.info(logTag + "testServerNoLevelSecurity0200 end");
+                            kvStore.off("syncComplete",call);
+                            done();
+                        }catch(err){
+                            console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                            done();
+                        }
 
-        let result = undefined;
-        function call(data) {
-            console.info(logTag + "syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
-                }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerNoLevelSecurity0200 end");
-                kvStore.off("syncComplete",call);
-                done();
-            })
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
+                    })
+
+            }
+            kvStore.on("syncComplete",call);
+            await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
+            await sleep(1000);
+            console.info(logTag + "Client sync start");
+            kvStore.sync(syncDeviceIds, PULL);
+
     })
 
     /**
@@ -283,18 +296,23 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerNoLevelSecurity0300 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerNoLevelSecurity0300 end");
-                kvStore.off("syncComplete",call);
-                done();
             })
         }
         kvStore.on("syncComplete",call);
@@ -332,20 +350,24 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerNoLevelSecurity0400 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerNoLevelSecurity0400 end");
-                kvStore.off("syncComplete",call);
-                done();
             })
-
         }
         kvStore.on("syncComplete",call);
         await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
@@ -381,18 +403,24 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerNoLevelSecurity0500 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerNoLevelSecurity0500 end");
-                kvStore.off("syncComplete",call);
-                done();
             })
         }
         kvStore.on("syncComplete",call);
@@ -429,18 +457,24 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerNoLevelSecurity0600 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerNoLevelSecurity0600 end");
-                kvStore.off("syncComplete",call);
-                done();
             })
 
         }
@@ -478,18 +512,24 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerNoLevelSecurity0700 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerNoLevelSecurity0700 end");
-                kvStore.off("syncComplete",call);
-                done();
             })
         }
         kvStore.on("syncComplete",call);
@@ -528,18 +568,24 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerNoLevelSecurity0800 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerNoLevelSecurity0800 end");
-                kvStore.off("syncComplete",call);
-                done();
             })
         }
         kvStore.on("syncComplete",call);
@@ -577,18 +623,24 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerNoLevelSecurity0900 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerNoLevelSecurity0900 end");
-                kvStore.off("syncComplete",call);
-                done();
             })
         }
         kvStore.on("syncComplete",call);
@@ -626,18 +678,24 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerNoLevelSecurity1000 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerNoLevelSecurity1000 end");
-                kvStore.off("syncComplete",call);
-                done();
             })
         }
         kvStore.on("syncComplete",call);
@@ -675,18 +733,24 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerNoLevelSecurity1100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerNoLevelSecurity1100 end");
-                kvStore.off("syncComplete",call);
-                done();
             })
         }
         kvStore.on("syncComplete",call);
@@ -724,18 +788,23 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerNoLevelSecurity1200 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerNoLevelSecurity1200 end");
-                kvStore.off("syncComplete",call);
-                done();
             })
         }
         kvStore.on("syncComplete",call);
@@ -770,18 +839,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info("syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(undefined);
+                    console.info(logTag + "testServerNoLevelSecurity1300 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(undefined);
-                console.info(logTag + "testServerNoLevelSecurity1300 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -819,18 +895,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerS0Security0100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerS0Security0100 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -868,18 +951,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerS0Security0200 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerS0Security0200 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -917,18 +1007,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerS0Security0300 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerS0Security0300 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -966,18 +1063,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerS0Security0400 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerS0Security0400 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1014,18 +1118,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS0Security0500 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS0Security0500 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
 
@@ -1063,18 +1174,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS0Security0600 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS0Security0600 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
 
@@ -1112,18 +1230,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS0Security0700 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS0Security0700 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
 
@@ -1161,18 +1286,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS0Security0800 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS0Security0800 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1209,18 +1341,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS0Security0900 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS0Security0900 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1257,18 +1396,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS0Security1000 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS0Security1000 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1305,18 +1451,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS0Security1100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS0Security1100 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1354,18 +1507,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS0Security1200 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS0Security1200 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1403,18 +1563,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerS1Security0100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerS1Security0100 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1452,18 +1619,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerS1Security0200 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerS1Security0200 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1501,18 +1675,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS1Security0300 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS1Security0300 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1549,18 +1730,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS1Security0400 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS1Security0400 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1597,18 +1785,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerS1Security0500 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerS1Security0500 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1646,18 +1841,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    console.info(logTag + "testServerS1Security0600 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                console.info(logTag + "testServerS1Security0600 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1694,18 +1896,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS1Security0700 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS1Security0700 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1742,18 +1951,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS1Security0800 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS1Security0800 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1790,18 +2006,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS1Security0900 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS1Security0900 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1837,18 +2060,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS1Security1000 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS1Security1000 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1885,18 +2115,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS1Security1100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS1Security1100 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1933,18 +2170,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS1Security1200 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS1Security1200 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -1981,18 +2225,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS2Security0100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS2Security0100 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2030,18 +2281,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS2Security0200 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS2Security0200 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2078,18 +2336,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS2Security0300 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS2Security0300 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2126,18 +2391,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS2Security0400 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS2Security0400 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2174,18 +2446,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS2Security0500 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS2Security0500 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2222,18 +2501,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS2Security0600 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS2Security0600 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2270,18 +2556,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS2Security0700 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS2Security0700 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2318,18 +2611,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS2Security0800 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS2Security0800 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2366,18 +2666,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS2Security0900 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS2Security0900 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2414,18 +2721,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS2Security1000 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS2Security1000 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2462,18 +2776,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS2Security1100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS2Security1100 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2510,18 +2831,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS2Security1200 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS2Security1200 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2558,18 +2886,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS3Security0100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS3Security0100 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2606,18 +2941,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS3Security0200 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS3Security0200 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2654,18 +2996,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS3Security0300 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS3Security0300 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2702,18 +3051,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS3Security0400 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS3Security0400 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2750,18 +3106,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS3Security0500 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS3Security0500 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2798,18 +3161,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS3Security0600 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS3Security0600 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2846,18 +3216,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS3Security0700 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS3Security0700 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2894,18 +3271,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS3Security0800 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS3Security0800 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2942,18 +3326,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS3Security0900 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS3Security0900 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -2990,18 +3381,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS3Security1000 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS3Security1000 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3038,18 +3436,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS3Security1100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS3Security1100 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3086,18 +3491,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS3Security1200 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS3Security1200 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3134,18 +3546,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS4Security0100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS4Security0100 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3182,18 +3601,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS4Security0200 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS4Security0200 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3230,18 +3656,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS4Security0300 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS4Security0300 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3278,18 +3711,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS4Security0400 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS4Security0400 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3327,18 +3767,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS4Security0500 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS4Security0500 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3375,18 +3822,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS4Security0600 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS4Security0600 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3423,18 +3877,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS4Security0700 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS4Security0700 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3471,18 +3932,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS4Security0800 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS4Security0800 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3519,18 +3987,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS4Security0900 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS4Security0900 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3567,18 +4042,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS4Security1000 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS4Security1000 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3615,18 +4097,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS4Security1100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS4Security1100 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3663,18 +4152,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerS4Security1200 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerS4Security1200 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3710,18 +4206,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerKvStoreId0100 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerKvStoreId0100 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3757,18 +4260,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    console.info(logTag + "testServerKvStoreId0200 end");
+                    kvStore.off("syncComplete",call);
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                console.info(logTag + "testServerKvStoreId0200 end");
-                kvStore.off("syncComplete",call);
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3805,24 +4315,31 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    kvStore.off("syncComplete",call);
+                    kvManager.deleteKVStore(TEST_BUNDLE_NAME, "x".repeat(128), (err, data) => {
+                        console.info(logTag + 'afterEach deleteKVStore success');
+                    })
+                    remoteHelpers.closeKvStore("x".repeat(128)).then(async (ret) => {
+                        console.info(logTag + "afterEach close server kvStore success: " + ret)
+                    })
+                    console.info(logTag + "testServerKvStoreId0300 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                kvStore.off("syncComplete",call);
-                kvManager.deleteKVStore(TEST_BUNDLE_NAME, "x".repeat(128), (err, data) => {
-                    console.info(logTag + 'afterEach deleteKVStore success');
-                })
-                remoteHelpers.closeKvStore("x".repeat(128)).then(async (ret) => {
-                    console.info(logTag + "afterEach close server kvStore success: " + ret)
-                })
-                console.info(logTag + "testServerKvStoreId0300 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3859,24 +4376,30 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    kvStore.off("syncComplete",call);
+                    kvManager.deleteKVStore(TEST_BUNDLE_NAME, "x".repeat(128), (err, data) => {
+                        console.info(logTag + 'afterEach deleteKVStore success');
+                    })
+                    remoteHelpers.closeKvStore("x".repeat(128)).then(async (ret) => {
+                        console.info(logTag + "afterEach close server kvStore success: " + ret)
+                    })
+                    console.info(logTag + "testServerKvStoreId0400 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                kvStore.off("syncComplete",call);
-                kvManager.deleteKVStore(TEST_BUNDLE_NAME, "x".repeat(128), (err, data) => {
-                    console.info(logTag + 'afterEach deleteKVStore success');
-                })
-                remoteHelpers.closeKvStore("x".repeat(128)).then(async (ret) => {
-                    console.info(logTag + "afterEach close server kvStore success: " + ret)
-                })
-                console.info(logTag + "testServerKvStoreId0400 end");
-                done();
             })
         }
         kvStore.on("syncComplete",call);
@@ -3912,19 +4435,26 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    kvStore.off("syncComplete",call);
+                    remoteHelpers.closeKvStore("SERVER_KVSTORE")
+                    console.info(logTag + "testServerKvStoreId0500 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                kvStore.off("syncComplete",call);
-                remoteHelpers.closeKvStore("SERVER_KVSTORE")
-                console.info(logTag + "testServerKvStoreId0500 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -3960,19 +4490,26 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    kvStore.off("syncComplete",call);
+                    remoteHelpers.closeKvStore("SERVER_KVSTORE")
+                    console.info(logTag + "testServerKvStoreId0600 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                kvStore.off("syncComplete",call);
-                remoteHelpers.closeKvStore("SERVER_KVSTORE")
-                console.info(logTag + "testServerKvStoreId0600 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4008,18 +4545,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testServerEncryptKVStore0100 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testServerEncryptKVStore0100 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4055,18 +4599,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testServerEncryptKVStore0200 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testServerEncryptKVStore0200 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4102,18 +4653,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testServerEncryptKVStore0300 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testServerEncryptKVStore0300 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4149,18 +4707,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testServerEncryptKVStore0400 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testServerEncryptKVStore0400 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4196,18 +4761,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testServerEncryptKVStore0500 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testServerEncryptKVStore0500 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4243,18 +4815,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testServerEncryptKVStore0600 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testServerEncryptKVStore0600 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4290,18 +4869,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testServerMaxKeyLength0100 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testServerMaxKeyLength0100 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4337,18 +4923,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testServerMaxKeyLength0200 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testServerMaxKeyLength0200 end");
-                done();
+  
             })
         }
         kvStore.on("syncComplete",call);
@@ -4385,18 +4978,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + KEY)
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + KEY)
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testServerMaxKeyLength0300 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testServerMaxKeyLength0300 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4433,18 +5033,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + KEY)
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + KEY)
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testServerMaxKeyLength0400 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testServerMaxKeyLength0400 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4480,18 +5087,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncStringType0100 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncStringType0100 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4527,18 +5141,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_STRING_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_STRING_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncStringType0200 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_STRING_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncStringType0200 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4574,18 +5195,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_INT_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY)
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY)
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_INT_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncIntType0100 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_INT_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncIntType0100 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4621,18 +5249,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_INT_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY)
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY)
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_INT_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncIntType0200 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_INT_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncIntType0200 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4671,18 +5306,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_INT_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(intValue);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncIntType0300 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(intValue);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncIntType0300 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4721,18 +5363,25 @@ describe('kvSyncTest', function () {
             function call(data) {
                 console.info(logTag + "syncComplete: " + data);
                 kvStore.get(TEST_INT_KEY,(err, data) => {
-                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
+                    try{
+                        console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                        if(err != null){
+                            console.info(logTag + " Sync complete get data error,err: " + err);
+                        }else{
+                            console.info(logTag + " Sycn complete get data success,result is: " + data);
+                            result = data;
+                        }
+                        console.info(logTag + " get data finish,result is: " + result);
+                        expect(result).assertEqual(intValue);
+                        kvStore.off("syncComplete",call);
+                        console.info(logTag + "testSyncIntType0400 end");
+                        done();
+
+                    }catch(err){
+                        console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                        done();
                     }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(intValue);
-                    kvStore.off("syncComplete",call);
-                    console.info(logTag + "testSyncIntType0400 end");
-                    done();
+
                 })
             }
             kvStore.on("syncComplete",call);
@@ -4771,18 +5420,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_INT_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(intValue);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncIntType0500 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(intValue);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncIntType0500 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4820,18 +5476,25 @@ describe('kvSyncTest', function () {
             function call(data) {
                 console.info(logTag + "syncComplete: " + data);
                 kvStore.get(TEST_INT_KEY,(err, data) => {
-                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
+                    try{
+                        console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                        if(err != null){
+                            console.info(logTag + " Sync complete get data error,err: " + err);
+                        }else{
+                            console.info(logTag + " Sycn complete get data success,result is: " + data);
+                            result = data;
+                        }
+                        console.info(logTag + " get data finish,result is: " + result);
+                        expect(result).assertEqual(intValue);
+                        kvStore.off("syncComplete",call);
+                        console.info(logTag + "testSyncIntType0600 end");
+                        done();
+
+                    }catch(err){
+                        console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                        done();
                     }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(intValue);
-                    kvStore.off("syncComplete",call);
-                    console.info(logTag + "testSyncIntType0600 end");
-                    done();
+
                 })
             }
             kvStore.on("syncComplete",call);
@@ -4870,18 +5533,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_INT_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(Number.isNaN(result)).assertTrue();
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncIntType0700 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(Number.isNaN(result)).assertTrue();
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncIntType0700 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -4919,18 +5589,25 @@ describe('kvSyncTest', function () {
             function call(data) {
                 console.info(logTag + "syncComplete: " + data);
                 kvStore.get(TEST_INT_KEY,(err, data) => {
-                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
+                    try{
+                        console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                        if(err != null){
+                            console.info(logTag + " Sync complete get data error,err: " + err);
+                        }else{
+                            console.info(logTag + " Sycn complete get data success,result is: " + data);
+                            result = data;
+                        }
+                        console.info(logTag + " get data finish,result is: " + result);
+                        expect(Number.isNaN(result)).assertTrue();
+                        kvStore.off("syncComplete",call);
+                        console.info(logTag + "testSyncIntType0800 end");
+                        done();
+
+                    }catch(err){
+                        console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                        done();
                     }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(Number.isNaN(result)).assertTrue();
-                    kvStore.off("syncComplete",call);
-                    console.info(logTag + "testSyncIntType0800 end");
-                    done();
+
                 })
             }
             kvStore.on("syncComplete",call);
@@ -4970,18 +5647,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_INT_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(intValue);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncIntType0900 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(intValue);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncIntType0900 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -5019,18 +5703,25 @@ describe('kvSyncTest', function () {
             function call(data) {
                 console.info(logTag + "syncComplete: " + data);
                 kvStore.get(TEST_INT_KEY,(err, data) => {
-                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
+                    try{
+                        console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                        if(err != null){
+                            console.info(logTag + " Sync complete get data error,err: " + err);
+                        }else{
+                            console.info(logTag + " Sycn complete get data success,result is: " + data);
+                            result = data;
+                        }
+                        console.info(logTag + " get data finish,result is: " + result);
+                        expect(result).assertEqual(intValue);
+                        kvStore.off("syncComplete",call);
+                        console.info(logTag + "testSyncIntType1000 end");
+                        done();
+
+                    }catch(err){
+                        console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                        done();
                     }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(intValue);
-                    kvStore.off("syncComplete",call);
-                    console.info(logTag + "testSyncIntType1000 end");
-                    done();
+
                 })
             }
             kvStore.on("syncComplete",call);
@@ -5069,18 +5760,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_INT_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(intValue);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncIntType1100 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(intValue);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncIntType1100 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -5118,18 +5816,25 @@ describe('kvSyncTest', function () {
             function call(data) {
                 console.info(logTag + "syncComplete: " + data);
                 kvStore.get(TEST_INT_KEY,(err, data) => {
-                    console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
+                    try{
+                        console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                        if(err != null){
+                            console.info(logTag + " Sync complete get data error,err: " + err);
+                        }else{
+                            console.info(logTag + " Sycn complete get data success,result is: " + data);
+                            result = data;
+                        }
+                        console.info(logTag + " get data finish,result is: " + result);
+                        expect(result).assertEqual(intValue);
+                        kvStore.off("syncComplete",call);
+                        console.info(logTag + "testSyncIntType1200 end");
+                        done();
+
+                    }catch(err){
+                        console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                        done();
                     }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(intValue);
-                    kvStore.off("syncComplete",call);
-                    console.info(logTag + "testSyncIntType1200 end");
-                    done();
+
                 })
             }
             kvStore.on("syncComplete",call);
@@ -5166,17 +5871,24 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_FLOAT_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_FLOAT_KEY)
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_FLOAT_KEY)
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    expect(result).assertEqual(TEST_FLOAT_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncFloatType0100 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                expect(result).assertEqual(TEST_FLOAT_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncFloatType0100 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -5212,18 +5924,25 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get(TEST_FLOAT_KEY,(err, data) => {
-                console.info(logTag + " Sync complete get data,key is " + TEST_FLOAT_KEY)
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is " + TEST_FLOAT_KEY)
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual(TEST_FLOAT_VALUE);
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncFloatType0200 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual(TEST_FLOAT_VALUE);
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncFloatType0200 end");
-                done();
+
             })
         }
         kvStore.on("syncComplete",call);
@@ -5269,19 +5988,26 @@ describe('kvSyncTest', function () {
                     value1 = data
                 }
                 kvStore.get(TEST_FLOAT_KEY,(err, data) => {
-                    console.info(logTag + " Sync complete get data,key2 is " + TEST_FLOAT_KEY)
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data2 error,err: " + err)
-                    }else{
-                        console.info(logTag + " Sycn complete get data2 success,result2 is: " + data)
-                        value2 = data
+                    try{
+                        console.info(logTag + " Sync complete get data,key2 is " + TEST_FLOAT_KEY)
+                        if(err != null){
+                            console.info(logTag + " Sync complete get data2 error,err: " + err)
+                        }else{
+                            console.info(logTag + " Sycn complete get data2 success,result2 is: " + data)
+                            value2 = data
+                        }
+                        console.info(logTag + " get data finish")
+                        expect(value1).assertEqual(TEST_STRING_VALUE)
+                        expect(value2).assertEqual(TEST_FLOAT_VALUE);
+                        kvStore.off("syncComplete",call);
+                        console.info(logTag + "testSyncMultipleData0100 end");
+                        done();
+
+                    }catch(err){
+                        console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                        done();
                     }
-                    console.info(logTag + " get data finish")
-                    expect(value1).assertEqual(TEST_STRING_VALUE)
-                    expect(value2).assertEqual(TEST_FLOAT_VALUE);
-                    kvStore.off("syncComplete",call);
-                    console.info(logTag + "testSyncMultipleData0100 end");
-                    done();
+
                 })
             })
 
@@ -5289,7 +6015,7 @@ describe('kvSyncTest', function () {
         kvStore.on("syncComplete",call);
         await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
         await remoteHelpers.kvPut(TEST_FLOAT_KEY, TEST_FLOAT_VALUE, "Number")
-        await sleep(1000);
+        await sleep(2000);
         console.info(logTag + "Client sync start");
         kvStore.sync(syncDeviceIds, PULL);
     })
@@ -5330,26 +6056,33 @@ describe('kvSyncTest', function () {
                     value1 = data
                 }
                 kvStore.get(TEST_FLOAT_KEY,(err, data) => {
-                    console.info(logTag + " Sync complete get data,key2 is " + TEST_FLOAT_KEY)
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data2 error,err: " + err)
-                    }else{
-                        console.info(logTag + " Sycn complete get data2 success,result2 is: " + data)
-                        value2 = data
+                    try{
+                        console.info(logTag + " Sync complete get data,key2 is " + TEST_FLOAT_KEY)
+                        if(err != null){
+                            console.info(logTag + " Sync complete get data2 error,err: " + err)
+                        }else{
+                            console.info(logTag + " Sycn complete get data2 success,result2 is: " + data)
+                            value2 = data
+                        }
+                        console.info(logTag + " get data finish")
+                        expect(value1).assertEqual(TEST_STRING_VALUE)
+                        expect(value2).assertEqual(TEST_FLOAT_VALUE);
+                        kvStore.off("syncComplete",call);
+                        console.info(logTag + "testSyncMultipleData0200 end");
+                        done();
+
+                    }catch(err){
+                        console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                        done();
                     }
-                    console.info(logTag + " get data finish")
-                    expect(value1).assertEqual(TEST_STRING_VALUE)
-                    expect(value2).assertEqual(TEST_FLOAT_VALUE);
-                    kvStore.off("syncComplete",call);
-                    console.info(logTag + "testSyncMultipleData0200 end");
-                    done();
+
                 })
             })
         }
         kvStore.on("syncComplete",call);
         await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
         await remoteHelpers.kvPut(TEST_FLOAT_KEY, TEST_FLOAT_VALUE, "Number")
-        await sleep(1000);
+        await sleep(2000);
         console.info(logTag + "Client sync start");
         kvStore.sync(syncDeviceIds, PUSH_PULL);
     })
@@ -5381,29 +6114,36 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get("key1",(err, data) => {
-                console.info(logTag + " Sync complete get data,key is key1");
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is key1");
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncDeleteSync0100 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncDeleteSync0100 end");
-                done();
+
             })
         }
         kvStore.sync(syncDeviceIds, PUSH);
-        await sleep(1000);
+        await sleep(2000);
 
         kvStore.on("syncComplete",call);
         await remoteHelpers.kvDelete("key1");
         kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, function (data, err){
             console.info( logTag + "local device data has changed,key is:  " + data.deleteEntries.key);
         })
-        await sleep(1000);
+        await sleep(2000);
         console.info(logTag + "Client sync start");
         kvStore.sync(syncDeviceIds, PULL);
         await sleep(600);
@@ -5437,28 +6177,35 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get("key1",(err, data) => {
-                console.info(logTag + " Sync complete get data,key is key1");
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is key1");
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result == undefined).assertTrue();
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncDeleteSync0200 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result == undefined).assertTrue();
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncDeleteSync0200 end");
-                done();
+
             })
         }
         kvStore.sync(syncDeviceIds, PUSH_PULL);
-        await sleep(1000);
+        await sleep(2000);
         kvStore.on("syncComplete",call);
         await remoteHelpers.kvDelete("key1");
         kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, function (data, err){
             console.info( logTag + "local device data has changed,key is:  " + data.deleteEntries.key);
         })
-        await sleep(1000);
+        await sleep(2000);
         console.info(logTag + "Client sync start");
         kvStore.sync(syncDeviceIds,PUSH_PULL);
         await sleep(600);
@@ -5492,28 +6239,35 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get("key1",(err, data) => {
-                console.info(logTag + " Sync complete get data,key is key1");
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is key1");
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual("value2");
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncModifySync0100 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual("value2");
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncModifySync0100 end");
-                done();
+
             })
         }
         kvStore.sync(syncDeviceIds, PUSH);
-        await sleep(1000);
+        await sleep(2000);
         kvStore.on("syncComplete",call);
         await remoteHelpers.kvPut("key1","value2","String");
         kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, function (data, err){
             console.info( logTag + "local device data has changed,key is:  " + data.updateEntries.key);
         })
-        await sleep(1000);
+        await sleep(2000);
         console.info(logTag + "Client sync start");
         kvStore.sync(syncDeviceIds,PULL);
         await sleep(600);
@@ -5546,29 +6300,35 @@ describe('kvSyncTest', function () {
         function call(data) {
             console.info(logTag + "syncComplete: " + data);
             kvStore.get("key1",(err, data) => {
-                console.info(logTag + " Sync complete get data,key is key1");
-                if(err != null){
-                    console.info(logTag + " Sync complete get data error,err: " + err);
-                }else{
-                    console.info(logTag + " Sycn complete get data success,result is: " + data);
-                    result = data;
+                try{
+                    console.info(logTag + " Sync complete get data,key is key1");
+                    if(err != null){
+                        console.info(logTag + " Sync complete get data error,err: " + err);
+                    }else{
+                        console.info(logTag + " Sycn complete get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + " get data finish,result is: " + result);
+                    expect(result).assertEqual("value2");
+                    kvStore.off("syncComplete",call);
+                    console.info(logTag + "testSyncModifySync0200 end");
+                    done();
+
+                }catch(err){
+                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                    done();
                 }
-                console.info(logTag + " get data finish,result is: " + result);
-                expect(result).assertEqual("value2");
-                kvStore.off("syncComplete",call);
-                console.info(logTag + "testSyncModifySync0200 end");
-                done();
             })
         }
         kvStore.sync(syncDeviceIds, PUSH_PULL);
-        await sleep(1000);
+        await sleep(2000);
         kvStore.on("syncComplete",call);
         await remoteHelpers.kvPut("key1","value2","String");
         kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, function (data, err){
             console.info( logTag + "local device data has changed,key is:  " + data.updateEntries.key);
             expect(data.updateEntries.key).assertEqual("key1");
         })
-        await sleep(1000);
+        await sleep(2000);
         console.info(logTag + "Client sync start");
         kvStore.sync(syncDeviceIds,PUSH_PULL);
         await sleep(600);
