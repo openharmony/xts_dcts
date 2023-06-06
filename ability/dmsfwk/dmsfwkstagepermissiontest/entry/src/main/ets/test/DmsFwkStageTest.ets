@@ -71,10 +71,10 @@ export default function DmsFwkStageTest() {
       function deviceManagerCallback(error, deviceManager) {
         console.info('LifeCycleTest before each called');
         let deviceList = deviceManager.getTrustedDeviceListSync();
-        let deviceId = deviceList[0].deviceId;
+        let deviceId = deviceList[0].networkId;
         dvList = deviceList;
         dvId = deviceId;
-        localDeviceId = deviceManager.getLocalDeviceInfoSync().deviceId;
+        localDeviceId = deviceManager.getLocalDeviceInfoSync().networkId;
       }
       deviceManager.createDeviceManager('com.acts.example.dmsfwkstageserver', deviceManagerCallback)
       await sleep(1000);
