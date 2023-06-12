@@ -40,7 +40,7 @@ export default class TestService {
             deviceManager.createDeviceManager('ohos.dmstest.test', (error, deviceManager) => {
                 self.getDeviceList(deviceManager);
                 console.info("dmsClient:  got deviceManager: " + deviceManager);
-                let deviceId = deviceList[0].deviceId;
+                let deviceId = deviceList[0].networkId;
                 console.info("dmsClient: deviceid : " + deviceId);
                 console.info("dmsClient: online deviceList id: " + JSON.stringify(deviceList));
                 let want = {
