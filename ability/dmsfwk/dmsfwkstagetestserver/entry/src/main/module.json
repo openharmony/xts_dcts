@@ -15,6 +15,7 @@
     "pages": "$profile:main_pages",
     "abilities": [
       {
+        "continuable":true,
         "name": "com.example.lifecycletest.MainAbility",
         "srcEntrance": "./ets/MainAbility/MainAbility.ts",
         "description": "$string:phone_entry_main",
@@ -64,6 +65,9 @@
       },
       {
         "name": "ohos.permission.ACCESS_SERVICE_DM"
+      },
+      {
+        "name": "ohos.permission.MANAGE_MISSIONS"
       }
     ]
   }

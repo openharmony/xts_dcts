@@ -12,8 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Ability from '@ohos.app.ability.UIAbility'
-import AcCtrl from '@ohos.abilityAccessCtrl'
+import Ability from '@ohos.app.ability.UIAbility';
+import AcCtrl from '@ohos.abilityAccessCtrl';
+import AbilityConstant from '@ohos.app.ability.AbilityConstant';
+
 let AcManager = AcCtrl.createAtManager()
 export default class MainAbility extends Ability {
     onCreate(want, launchParam) {
@@ -22,6 +24,9 @@ export default class MainAbility extends Ability {
         AcManager.requestPermissionsFromUser(this.context, ['ohos.permission.DISTRIBUTED_DATASYNC'], function (result) {
             console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser')
         })
+        setTimeout(()=>{
+            this.context.terminateSelf()
+        },2000)
         
     }
 
@@ -49,5 +54,11 @@ export default class MainAbility extends Ability {
     onBackground() {
         // Ability has back to background
         console.log("[Demo] MainAbility onBackground")
+    }
+
+    onContinue(wantParams) {
+        console.log('onContinue');
+        wantParams['myData'] = 'my1234567';
+        return AbilityConstant.OnContinueResult.AGREE;
     }
 };

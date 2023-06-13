@@ -19,6 +19,8 @@ import commonEvent from '@ohos.commonEventManager';
 import rpc from '@ohos.rpc';
 import { UiDriver, BY } from '@ohos.UiTest';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import distributedMissionManager from '@ohos.distributedMissionManager';
+import missionManager from '@ohos.app.ability.missionManager';
 
 let atManager = abilityAccessCtrl.createAtManager();
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
@@ -77,6 +79,8 @@ export default function DmsFwkStageTest() {
         dvList = deviceList;
         dvId = deviceId;
         localDeviceId = deviceManager.getLocalDeviceInfoSync().networkId;
+        console.info('deviceId is' + dvId);
+        console.info('localDeviceId is' + localDeviceId);
       }
       deviceManager.createDeviceManager('com.acts.example.dmsfwkstageserver', deviceManagerCallback)
       await sleep(1000);
@@ -2073,6 +2077,714 @@ export default function DmsFwkStageTest() {
         expect().assertFail();
         done();
       }
+    });
+
+    /*
+     * @tc.number  SUB_DMS_registerMissionListener_0010
+     * @tc.name    registerMissionListener successful.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_registerMissionListener_0010", 0, async function (done) {
+      console.info("-----------------SUB_DMS_registerMissionListener_0010 start------------------------");
+      let TAG = "SUB_DMS_registerMissionListener_0010";
+      function NotifyMissionsChanged(deviceId) {
+        console.info(TAG + 'NotifyMissionsChanged deviceId ' + JSON.stringify(deviceId));
+      }
+      function NotifySnapshot(deviceId, missionId) {
+        console.info(TAG + 'NotifySnapshot deviceId ' + JSON.stringify(deviceId));
+        console.info(TAG + 'NotifySnapshot missionId ' + JSON.stringify(missionId));
+      }
+      function NotifyNetDisconnect(deviceId, state) {
+        console.info(TAG + 'NotifyNetDisconnect deviceId ' + JSON.stringify(deviceId));
+        console.info(TAG + 'NotifyNetDisconnect state ' + JSON.stringify(state));
+      }
+      try {
+        await distributedMissionManager.registerMissionListener({
+          deviceId: dvId
+        }, {
+          notifyMissionsChanged: NotifyMissionsChanged,
+          notifySnapshot: NotifySnapshot,
+          notifyNetDisconnect: NotifyNetDisconnect
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect(data).assertEqual(undefined);
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect().assertFail();
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_registerMissionListener_0010 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_registerMissionListener_0020
+     * @tc.name    registerMissionListener with wrong deviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_registerMissionListener_0020", 0, async function (done) {
+      console.info("-----------------SUB_DMS_registerMissionListener_0020 start------------------------");
+      let TAG = "SUB_DMS_registerMissionListener_0020";
+      function NotifyMissionsChanged(deviceId) {
+        console.info(TAG + 'NotifyMissionsChanged deviceId ' + JSON.stringify(deviceId));
+      }
+      function NotifySnapshot(deviceId, missionId) {
+        console.info(TAG + 'NotifySnapshot deviceId ' + JSON.stringify(deviceId));
+        console.info(TAG + 'NotifySnapshot missionId ' + JSON.stringify(missionId));
+      }
+      function NotifyNetDisconnect(deviceId, state) {
+        console.info(TAG + 'NotifyNetDisconnect deviceId ' + JSON.stringify(deviceId));
+        console.info(TAG + 'NotifyNetDisconnect state ' + JSON.stringify(state));
+      }
+      try {
+        await distributedMissionManager.registerMissionListener({
+          deviceId: "1234"
+        }, {
+          notifyMissionsChanged: NotifyMissionsChanged,
+          notifySnapshot: NotifySnapshot,
+          notifyNetDisconnect: NotifyNetDisconnect
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(401);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_registerMissionListener_0020 end------------------------");
+    });
+    
+    /*
+     * @tc.number  SUB_DMS_registerMissionListener_0030
+     * @tc.name    registerMissionListener with null deviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_registerMissionListener_0030", 0, async function (done) {
+      console.info("-----------------SUB_DMS_registerMissionListener_0030 start------------------------");
+      let TAG = "SUB_DMS_registerMissionListener_0030";
+      function NotifyMissionsChanged(deviceId) {
+        console.info(TAG + 'NotifyMissionsChanged deviceId ' + JSON.stringify(deviceId));
+      }
+      function NotifySnapshot(deviceId, missionId) {
+        console.info(TAG + 'NotifySnapshot deviceId ' + JSON.stringify(deviceId));
+        console.info(TAG + 'NotifySnapshot missionId ' + JSON.stringify(missionId));
+      }
+      function NotifyNetDisconnect(deviceId, state) {
+        console.info(TAG + 'NotifyNetDisconnect deviceId ' + JSON.stringify(deviceId));
+        console.info(TAG + 'NotifyNetDisconnect state ' + JSON.stringify(state));
+      }
+      try {
+        await distributedMissionManager.registerMissionListener({
+          deviceId: ' '
+        }, {
+          notifyMissionsChanged: NotifyMissionsChanged,
+          notifySnapshot: NotifySnapshot,
+          notifyNetDisconnect: NotifyNetDisconnect
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(401);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_registerMissionListener_0030 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_registerMissionListener_0040
+     * @tc.name    registerMissionListener with localDeviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_registerMissionListener_0040", 0, async function (done) {
+      console.info("-----------------SUB_DMS_registerMissionListener_0040 start------------------------");
+      let TAG = "SUB_DMS_registerMissionListener_0040";
+      function NotifyMissionsChanged(deviceId) {
+        console.info(TAG + 'NotifyMissionsChanged deviceId ' + JSON.stringify(deviceId));
+      }
+      function NotifySnapshot(deviceId, missionId) {
+        console.info(TAG + 'NotifySnapshot deviceId ' + JSON.stringify(deviceId));
+        console.info(TAG + 'NotifySnapshot missionId ' + JSON.stringify(missionId));
+      }
+      function NotifyNetDisconnect(deviceId, state) {
+        console.info(TAG + 'NotifyNetDisconnect deviceId ' + JSON.stringify(deviceId));
+        console.info(TAG + 'NotifyNetDisconnect state ' + JSON.stringify(state));
+      }
+      try {
+        await distributedMissionManager.registerMissionListener({
+          deviceId: localDeviceId
+        }, {
+          notifyMissionsChanged: NotifyMissionsChanged,
+          notifySnapshot: NotifySnapshot,
+          notifyNetDisconnect: NotifyNetDisconnect
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(401);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_registerMissionListener_0040 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_startSyncRemoteMissions_0010
+     * @tc.name    startSyncRemoteMissions successful.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_startSyncRemoteMissions_0010", 0, async function (done) {
+      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0010 start------------------------");
+      let TAG = "SUB_DMS_startSyncRemoteMissions_0010";
+      try {
+        await distributedMissionManager.startSyncRemoteMissions({
+          deviceId: dvId,
+          fixConflict: false,
+          tag: 0
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect(data).assertEqual(undefined);
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect().assertFail();
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0010 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_startSyncRemoteMissions_0020
+     * @tc.name    startSyncRemoteMissions with wrong deviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_startSyncRemoteMissions_0020", 0, async function (done) {
+      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0020 start------------------------");
+      let TAG = "SUB_DMS_registerMissionListener_0010";
+      try {
+        await distributedMissionManager.startSyncRemoteMissions({
+          deviceId: "12345",
+          fixConflict: false,
+          tag: 0
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(401);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0020 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_startSyncRemoteMissions_0030
+     * @tc.name    startSyncRemoteMissions with null deviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_startSyncRemoteMissions_0030", 0, async function (done) {
+      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0030 start------------------------");
+      let TAG = "SUB_DMS_startSyncRemoteMissions_0030";
+      try {
+        await distributedMissionManager.startSyncRemoteMissions({
+          deviceId: ' ',
+          fixConflict: false,
+          tag: 0
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(401);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0030 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_startSyncRemoteMissions_0040
+     * @tc.name    startSyncRemoteMissions with localDeviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_startSyncRemoteMissions_0040", 0, async function (done) {
+      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0040 start------------------------");
+      let TAG = "SUB_DMS_startSyncRemoteMissions_0040";
+      try {
+        await distributedMissionManager.startSyncRemoteMissions({
+          deviceId: localDeviceId,
+          fixConflict: false,
+          tag: 0
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(401);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0040 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_stopSyncRemoteMissions_0010
+     * @tc.name    stopSyncRemoteMissions successful.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_stopSyncRemoteMissions_0010", 0, async function (done) {
+      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0010 start------------------------");
+      let TAG = "SUB_DMS_stopSyncRemoteMissions_0010";
+      try {
+        await distributedMissionManager.stopSyncRemoteMissions({
+          deviceId: dvId
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect(data).assertEqual(undefined);
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect().assertFail();
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0010 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_stopSyncRemoteMissions_0020
+     * @tc.name    stopSyncRemoteMissions with wrong deviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_stopSyncRemoteMissions_0020", 0, async function (done) {
+      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0020 start------------------------");
+      let TAG = "SUB_DMS_stopSyncRemoteMissions_0020";
+      try {
+        await distributedMissionManager.stopSyncRemoteMissions({
+          deviceId: "12345"
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(16300501);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0020 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_stopSyncRemoteMissions_0030
+     * @tc.name    stopSyncRemoteMissions with null deviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_stopSyncRemoteMissions_0030", 0, async function (done) {
+      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0030 start------------------------");
+      let TAG = "SUB_DMS_stopSyncRemoteMissions_0030";
+      try {
+        await distributedMissionManager.stopSyncRemoteMissions({
+          deviceId: ' '
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(16300501);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0030 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_stopSyncRemoteMissions_0040
+     * @tc.name    stopSyncRemoteMissions with localDeviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_stopSyncRemoteMissions_0040", 0, async function (done) {
+      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0040 start------------------------");
+      let TAG = "SUB_DMS_stopSyncRemoteMissions_0040";
+      try {
+        await distributedMissionManager.stopSyncRemoteMissions({
+          deviceId: localDeviceId
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(16300501);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0040 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_unRegisterMissionListener_0010
+     * @tc.name    unRegisterMissionListener with wrong deviceId after registerMissionListener.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_unRegisterMissionListener_0010", 0, async function (done) {
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_0010 start------------------------");
+      let TAG = "SUB_DMS_unRegisterMissionListener_0010";
+      try {
+        await distributedMissionManager.unRegisterMissionListener({
+          deviceId: "12345"
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(16300501);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_0010 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_unRegisterMissionListener_0020
+     * @tc.name    unRegisterMissionListener successful.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_unRegisterMissionListener_0020", 0, async function (done) {
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_0020 start------------------------");
+      let TAG = "SUB_DMS_unRegisterMissionListener_0020";
+      try {
+        await distributedMissionManager.unRegisterMissionListener({
+          deviceId: dvId
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect(data).assertEqual(undefined);
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect().assertFail();
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_0020 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_unRegisterMissionListener_0030
+     * @tc.name    unRegisterMissionListener with wrong deviceId befoer registerMissionListener.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_unRegisterMissionListener_0030", 0, async function (done) {
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_0030 start------------------------");
+      let TAG = "SUB_DMS_unRegisterMissionListener_0030";
+      try {
+        await distributedMissionManager.unRegisterMissionListener({
+          deviceId: "12345"
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(16300501);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_0030 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_unRegisterMissionListener_0040
+     * @tc.name    unRegisterMissionListener before registerMissionListener.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_unRegisterMissionListener_0040", 0, async function (done) {
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_0040 start------------------------");
+      let TAG = "SUB_DMS_unRegisterMissionListener_0040";
+      try {
+        await distributedMissionManager.unRegisterMissionListener({
+          deviceId: dvId
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(16300501);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_0040 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_unRegisterMissionListener_0050
+     * @tc.name    unRegisterMissionListener with localDeviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_unRegisterMissionListener_0050", 0, async function (done) {
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_0050 start------------------------");
+      let TAG = "SUB_DMS_unRegisterMissionListener_0050";
+      try {
+        await distributedMissionManager.unRegisterMissionListener({
+          deviceId: localDeviceId
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(16300501);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_0050 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_continueMission_0010
+     * @tc.name    continueMission with wrong srcDeviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+    */
+    it("SUB_DMS_continueMission_0010", 0, async function (done) {
+      console.info("-----------------SUB_DMS_continueMission_0010 start------------------------");
+      let TAG = "SUB_DMS_continueMission_0010";
+      let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
+        console.info(TAG + 'getMissionInfos err,' + err);
+      });
+      console.info(TAG + 'allLocalMissions info,' + JSON.stringify(allLocalMissions));
+      console.info(TAG + 'allLocalMissions[0] info,' + JSON.stringify(allLocalMissions[0]));
+      let localMissionId = await allLocalMissions[0].missionId;
+      console.info(TAG + 'localMissionId is,' + localMissionId);
+
+      function onContinueDone(resultCode) {
+        console.info(TAG + 'onContinueDone resultCode: ' + JSON.stringify(resultCode));
+      };
+      try {
+        await distributedMissionManager.continueMission({
+          srcDeviceId: '12345',
+          dstDeviceId: dvId,
+          missionId: localMissionId,
+          wantParam: {"key": "value"}
+        }, {
+          onContinueDone: onContinueDone
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect(error.code).assertEqual(16300505);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_continueMission_0010 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_continueMission_0020
+     * @tc.name    continueMission successful.
+     * @tc.desc    Function test
+     * @tc.level   0
+    */
+    it("SUB_DMS_continueMission_0020", 0, async function (done) {
+      console.info("-----------------SUB_DMS_continueMission_0020 start------------------------");
+      let TAG = "SUB_DMS_continueMission_0020";
+      let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
+        console.info(TAG + 'getMissionInfos err,' + err);
+      });
+      console.info(TAG + 'allLocalMissions info,' + JSON.stringify(allLocalMissions));
+      console.info(TAG + 'allLocalMissions[0] info,' + JSON.stringify(allLocalMissions[0]));
+      let localMissionId = await allLocalMissions[0].missionId;
+      console.info(TAG + 'localMissionId is,' + localMissionId);
+
+      function onContinueDone(resultCode) {
+        console.info(TAG + 'onContinueDone resultCode: ' + JSON.stringify(resultCode));
+      };
+      try {
+        await distributedMissionManager.continueMission({
+          srcDeviceId: localDeviceId,
+          dstDeviceId: dvId,
+          missionId: localMissionId,
+          wantParam: {"key": "value"}
+        }, {
+          onContinueDone: onContinueDone
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect(data).assertEqual(undefined);
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+          expect().assertFail();
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_continueMission_0020 end------------------------");
     });
   })
 }
