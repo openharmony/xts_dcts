@@ -49,7 +49,7 @@ export default function DmsFwkStageTest() {
 		    console.info("request success" + JSON.stringify(data));
 		  })
 	  }
-	
+
 	  async function driveFn() {
 		  try {
 			  let driver = await UiDriver.create()
@@ -384,7 +384,6 @@ export default function DmsFwkStageTest() {
       console.log("------------SUB_DMS_connectServiceExtensionAbility_0400 end-------------");
     });
 
-    
     /*
      * @tc.number  SUB_DMS_connectServiceExtensionAbility_0500
      * @tc.name    Connect the remote Ability with error deviceId.
@@ -501,7 +500,7 @@ export default function DmsFwkStageTest() {
           console.info("SUB_DMS_connectServiceExtensionAbility_0900:" + data.stdResult)
         })
       })
-      
+
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
         deviceId:dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -741,7 +740,7 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StartControl_ConnectAbility_0100 catch: ' + err.message);
       }
     });
-    
+
     /*
      * @tc.number  SUB_DMS_StartControl_ConnectAbility_0400
      * @tc.name    Filed connect remote invisible service without permission.
@@ -1105,7 +1104,6 @@ export default function DmsFwkStageTest() {
       }
     });
 
-    
     /*
      * @tc.number  SUB_DMS_Extension_ConnectAbility_0100
      * @tc.name    ServiceExtension Connect the remote Ability.
@@ -1367,7 +1365,6 @@ export default function DmsFwkStageTest() {
       console.log("------------SUB_DMS_Extension_ConnectAbility_0400 end-------------");
     });
 
-    
     /*
      * @tc.number  SUB_DMS_Extension_ConnectAbility_0500
      * @tc.name    ServiceExtension Connect the remote Ability with error deviceId.
@@ -1483,7 +1480,7 @@ export default function DmsFwkStageTest() {
           console.info("SUB_DMS_Extension_ConnectAbility_0900:" + data.stdResult)
         })
       })
-      
+
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
         deviceId:dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -1618,7 +1615,7 @@ export default function DmsFwkStageTest() {
       await sleep(1000);
       console.info("---------------SUB_DMS_Extension_ConnectAbility_0180 is end---------------" + extensionConnectId)
     });
-    
+
     /*
      * @tc.number  SUB_DMS_Extension_ConnectAbility_0190
      * @tc.name    ServiceExtension Connect the remote Ability.
@@ -1723,7 +1720,7 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100 catch: ' + err.message);
       }
     });
-    
+
     /*
      * @tc.number  SUB_DMS_StartControl_Extension_ConnectAbility_0400
      * @tc.name    ServiceExtension Filed connect remote invisible service without permission.
@@ -2172,7 +2169,7 @@ export default function DmsFwkStageTest() {
       await sleep(1000);
       console.info("-----------------SUB_DMS_registerMissionListener_0020 end------------------------");
     });
-    
+
     /*
      * @tc.number  SUB_DMS_registerMissionListener_0030
      * @tc.name    registerMissionListener with null deviceId.
@@ -2689,6 +2686,120 @@ export default function DmsFwkStageTest() {
       }
       await sleep(1000);
       console.info("-----------------SUB_DMS_unRegisterMissionListener_0050 end------------------------");
+    });
+
+    /**
+    * @tc.number   SUB_DMS_on_0010
+    * @tc.name     register on successful.
+    * @tc.desc     Test on function
+    * @tc.level    0
+    */
+    it('SUB_DMS_on_0010', 0, function (done) {
+      console.info("---------------------SUB_DMS_on_0010 start---------------------------");
+      let TAG = "SUB_DMS_on_0010";
+      function onCall(data) {
+        console.info(TAG + " onCall : result : " + JSON.stringify(data));
+        if (data.info) {
+          console.info(TAG + " onCall : srcDeviceId = " + data.info.srcDeviceId);
+          console.info(TAG + " onCall : bundleName = " + data.info.bundleName);
+        }
+      }
+      try {
+        distributedMissionManager.on('continueStateChange', onCall);
+        done();
+      } catch {
+        expect().assertFail();
+        done();
+      }
+      console.info("---------------------SUB_DMS_on_0010 end---------------------------");
+    });
+
+    /**
+    * @tc.number   SUB_DMS_off_0010
+    * @tc.name     unRegister off successful.
+    * @tc.desc     Test off function
+    * @tc.level    0
+    */
+    it('SUB_DMS_off_0010', 0, function (done) {
+      console.info("---------------------SUB_DMS_off_0010 start---------------------------");
+      let TAG = "SUB_DMS_off_0010";
+      function offCall(data) {
+        console.info(TAG + " offCall: result : " + JSON.stringify(data));
+      }
+      try {
+        distributedMissionManager.off('continueStateChange', offCall);
+        done();
+      } catch {
+        expect().assertFail();
+        done();
+      }
+      console.info("---------------------SUB_DMS_off_0010 end---------------------------");
+    });
+
+    /**
+    * @tc.number   SUB_DMS_continueMission_0030
+    * @tc.name     continueMission with wrong bundleName.
+    * @tc.desc     Test continueMission callback function
+    * @tc.level    0
+    */
+    it('SUB_DMS_continueMission_0030', 0, async function (done) {
+      console.info("---------------------SUB_DMS_continueMission_0030 start---------------------------");
+      let TAG = "SUB_DMS_continueMission_0030";
+      function onContinueDone(result)
+      {
+        expect(result.code).assertEqual(401);
+        console.info(TAG + " onContinueDone:result = " + JSON.stringify(result));
+      }
+      try {
+        let param = {
+          srcDeviceId: localDeviceId,
+          dstDeviceId: dvId,
+          bundleName: "test",
+          wantParam: {"key": "value"}
+        };
+        await distributedMissionManager.continueMission(param, onContinueDone);
+        done();
+      } catch (error) {
+        expect().assertFail();
+        console.info(TAG + ' catch: ' + JSON.stringify(error));
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------------SUB_DMS_continueMission_0030 end---------------------------");
+    });
+
+    /**
+    * @tc.number   SUB_DMS_continueMission_0040
+    * @tc.name     continueMission with wrong bundleName.
+    * @tc.desc     Test continueMission promise function
+    * @tc.level    0
+    */
+    it('SUB_DMS_continueMission_0040', 0, async function (done) {
+      console.info("---------------------SUB_DMS_continueMission_0040 start---------------------------");
+      let TAG = "SUB_DMS_continueMission_0040";
+      try {
+        let param = {
+          srcDeviceId: localDeviceId,
+          dstDeviceId: dvId,
+          bundleName: "test",
+          wantParam: {"key": "value"}
+        };
+        await distributedMissionManager.continueMission(param).then(data =>{
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' result: ' + JSON.stringify(error));
+          expect(error.code).assertEqual(401);
+          done();
+        });
+      } catch (error) {
+        expect().assertFail();
+        console.info(TAG + ' catch: ' + JSON.stringify(error));
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------------SUB_DMS_continueMission_0040 end---------------------------");
     });
 
     /*
