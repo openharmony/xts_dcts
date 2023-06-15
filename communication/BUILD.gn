@@ -19,6 +19,8 @@ group("communication") {
       "dsoftbus/rpc:DctsRpcJsTest",
       "dsoftbus/rpcserver:DctsRpcJsServer",
       "softbus_standard/dsoftbusTest:dsoftbusTest",
+      "dsoftbus_request/rpc:DctsRpcRequestJsTest",
+      "dsoftbus_request/rpcserver:DctsRpcRequestJsServer",
       "softbus_standard/transmission/reliability:DctsSoftBusTransReliabilityTest",
       "softbus_standard/transmission/sendfile:DctsSoftBusTransFileFunTest",
       "softbus_standard/transmission/sendmsg:DctsSoftBusTransFunTest",

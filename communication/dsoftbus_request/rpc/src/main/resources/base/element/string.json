@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "rpctest"
+    },
+    {
+      "name": "mainability_description",
+      "value": "hap sample empty Rpc"
+    },
+    {
+        "name": "MainAbility_desc",
+        "value": "description"
+    },
+    {
+        "name": "MainAbility_label",
+        "value": "rpctest"
+    },
+    {
+        "name": "TestAbility_desc",
+        "value": "description"
+    },
+    {
+        "name": "TestAbility_label",
+        "value": "rpctest"
+    }
+  ]
+}
