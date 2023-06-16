@@ -329,13 +329,13 @@ export default function RpcRequestJsUnitTest() {
         });
 
         /*
-        * @tc.number  SUB_Softbus_IPC_Compatibility_onRemoteMessageRequest_00900
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_00900
         * @tc.name    Invoke async_onRemoteMessageRequest to process information in synchronization mode and call back in AsyncCallback mode
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */   
-        it("SUB_Softbus_IPC_Compatibility_onRemoteMessageRequest_00900", 0, function(done){
-            console.info("--------------------start SUB_Softbus_IPC_Compatibility_onRemoteMessageRequest_00900--------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_00900", 0, function(done){
+            console.info("--------------------start SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_00900--------------------");
             try{
                 function sendMessageRequestCallback(result) {
                     try{
@@ -359,17 +359,17 @@ export default function RpcRequestJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("--------------------end SUB_Softbus_IPC_Compatibility_onRemoteMessageRequest_00900--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_00900--------------------");
         });
 
         /*
-        * @tc.number  SUB_Softbus_IPC_Compatibility_onRemoteMessageRequest_01000
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01000
         * @tc.name    Invoke async_onRemoteMessageRequest to process information in asynchronous mode and call back in AsyncCallback mode
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */   
-        it("SUB_Softbus_IPC_Compatibility_onRemoteMessageRequest_01000", 0, function(done){
-            console.info("--------------------start SUB_Softbus_IPC_Compatibility_onRemoteMessageRequest_01000--------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01000", 0, function(done){
+            console.info("--------------------start SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01000--------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -393,7 +393,7 @@ export default function RpcRequestJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("--------------------end SUB_Softbus_IPC_Compatibility_onRemoteMessageRequest_01000--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01000--------------------");
         });               
         console.info("-----------------------SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_Test is end-----------------------");
     });
