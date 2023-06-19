@@ -91,7 +91,7 @@ class Stub extends rpc.RemoteObject {
         try{
             console.info("onRemoteRequest: " + code);
             if (code === 2){
-                console.info("case 1 start");
+                console.info("The processing mode of code value 1 is enabled on the server");
                 let tmp1 = data.readString();
                 let result =  reply.writeString("onRemoteRequest invoking");
                 return true;
@@ -108,11 +108,11 @@ class Stub extends rpc.RemoteObject {
         try{
             console.info("async onRemoteMessageRequest: " + code);
             if (code === 1){
-                console.info("case 1 start");
+                console.info("The processing mode of code value 1 is enabled on the server");
                 let tmp1 = data.readString();
                 let result =  reply.writeString("async onRemoteMessageRequest invoking");
             } else if (code === 2){
-                console.info("case 2 start");
+                console.info("The processing mode of code value 2 is enabled on the server");
                 let tmp1 = data.readString();
                 let result =  reply.writeString("async onRemoteMessageRequest invoking");
             }else {
