@@ -18,6 +18,8 @@ group("communication") {
     deps = [
       "dsoftbus/rpc:DctsRpcJsTest",
       "dsoftbus/rpcserver:DctsRpcJsServer",
+      "dsoftbus_request/rpc:DctsRpcRequestJsTest",
+      "dsoftbus_request/rpcserver:DctsRpcRequestJsServer",
       "softbus_standard/dsoftbusTest:dsoftbusTest",
       "softbus_standard/transmission/reliability:DctsSoftBusTransReliabilityTest",
       "softbus_standard/transmission/sendfile:DctsSoftBusTransFileFunTest",
