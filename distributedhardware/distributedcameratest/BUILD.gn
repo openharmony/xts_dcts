@@ -67,7 +67,7 @@ ohos_moduletest_suite("SubDctsdisCameraTest") {
 
   defines = [
     "HI_LOG_ENABLE",
-    "DH_LOG_TAG=\"DCameraHdfTest\"",
+    "DH_LOG_TAG=\"SubDctsdisCameraTest\"",
     "LOG_DOMAIN=0xD004100",
   ]
 

@@ -46,7 +46,7 @@ ohos_moduletest_suite("SubDctsdisScreenTest") {
 
   defines = [
     "HI_LOG_ENABLE",
-    "DH_LOG_TAG=\"DctsSdisScreenTest\"",
+    "DH_LOG_TAG=\"SubDctsdisScreenTest\"",
     "LOG_DOMAIN=0xD004100",
   ]
 

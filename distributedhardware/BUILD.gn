@@ -17,8 +17,8 @@ group("distributedhardware") {
   testonly = true
   if (is_standard_system) {
     deps = [
-      "distributedcameratest:DctsdisCameraTest",
-      "distributedscreentest:DctsdisSreenTest",
+      "distributedcameratest:SubDctsdisCameraTest",
+      "distributedscreentest:SubDctsdisScreenTest",
     ]
   }
 }
