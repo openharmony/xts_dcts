@@ -74,74 +74,14 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_0100, TestSize.Level1)
 }
 
 /**
- * @tc.number    : DCameraTest_0200
- * @tc.name      : SetAwbMode()
- * @tc.desc      : [STD-DISTRIBUTED-0101]禁止修改分布式相机交互协议
- * @tc.desc      : Set Awb Mode is 0, success is returned
- * @tc.type      : FUNC
- * @tc.size      : Medium test
- */
-HWTEST_F(DCameraAutomatTest, DCameraTest_0200, TestSize.Level1)
-{
-    int32_t ret = mainDemo->SetAwbMode(sleepOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode incandescent fail";
-    sleep(sleepOk);
-}
-
-/**
- * @tc.number    : DCameraTest_0300
- * @tc.name      : SetAwbMode()
- * @tc.desc      : [STD-DISTRIBUTED-0101]禁止修改分布式相机交互协议
- * @tc.desc      : the Set Awb Mode is 2, success is returned
- * @tc.type      : FUNC
- * @tc.size      : Medium test
- */
-HWTEST_F(DCameraAutomatTest, DCameraTest_0300, TestSize.Level1)
-{
-    int32_t ret = mainDemo->SetAwbMode(cameraOk);
-    EXPECT_EQ(cameraOk, ret) << "SetAwbMode fail";
-    sleep(sleepOk);
-}
-
-/**
- * @tc.number    : DCameraTest_0400
- * @tc.name      ：mainDemo->SetAeExpo()
- * @tc.desc      : [STD-DISTRIBUTED-0101]禁止修改分布式相机交互协议
- * @tc.desc      : Set the exposure mode update parameters
- * @tc.type      : FUNC
- * @tc.size      : Medium test
- */
-HWTEST_F(DCameraAutomatTest, DCameraTest_0400, TestSize.Level1)
-{
-    int32_t ret = mainDemo->SetAeExpo();
-    EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
-    sleep(sleepOk);
-}
-
-/**
- * @tc.number    : DCameraTest_0500
- * @tc.name      ：mainDemo->SetMetadata()
- * @tc.desc      : [STD-DISTRIBUTED-0101]禁止修改分布式相机交互协议
- * @tc.desc      : Set the parameters required for taking pictures and recording videos
- * @tc.type      : FUNC
- * @tc.size      : Medium test
- */
-HWTEST_F(DCameraAutomatTest, DCameraTest_0500, TestSize.Level1)
-{
-    int32_t ret = mainDemo->SetMetadata();
-    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
-    sleep(sleepOk);
-}
-
-/**
- * @tc.number    : DCameraTest_0600
+ * @tc.number    : DCameraTest_0100
  * @tc.name      : CaptureTest()
  * @tc.desc      : [STD-DISTRIBUTED-0101]禁止修改分布式相机交互协议
  * @tc.desc      : Take pictures with a remote camera and save them locally
  * @tc.type      : FUNC
  * @tc.size      : Medium test
  */
-HWTEST_F(DCameraAutomatTest, DCameraTest_0600, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_0200, TestSize.Level1)
 {
     int32_t ret = CaptureTest(mainDemo);
     EXPECT_EQ(cameraOk, ret) << "CaptureTest fail";
@@ -156,10 +96,70 @@ HWTEST_F(DCameraAutomatTest, DCameraTest_0600, TestSize.Level1)
  * @tc.type      : FUNC
  * @tc.size      : Medium test
  */
-HWTEST_F(DCameraAutomatTest, DCameraTest_0700, TestSize.Level1)
+HWTEST_F(DCameraAutomatTest, DCameraTest_0300, TestSize.Level1)
 {
     int32_t ret = VideoTest(mainDemo);
     EXPECT_EQ(cameraOk, ret) << "VideoTest fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : DCameraTest_0200
+ * @tc.name      : SetAwbMode()
+ * @tc.desc      : [STD-DISTRIBUTED-0101]禁止修改分布式相机交互协议
+ * @tc.desc      : Set Awb Mode is 0, success is returned
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, DCameraTest_0400, TestSize.Level1)
+{
+    int32_t ret = mainDemo->SetAwbMode(sleepOk);
+    EXPECT_EQ(cameraOk, ret) << "SetAwbMode incandescent fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : DCameraTest_0300
+ * @tc.name      : SetAwbMode()
+ * @tc.desc      : [STD-DISTRIBUTED-0101]禁止修改分布式相机交互协议
+ * @tc.desc      : the Set Awb Mode is 2, success is returned
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, DCameraTest_0500, TestSize.Level1)
+{
+    int32_t ret = mainDemo->SetAwbMode(cameraOk);
+    EXPECT_EQ(cameraOk, ret) << "SetAwbMode fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : DCameraTest_0400
+ * @tc.name      ：mainDemo->SetAeExpo()
+ * @tc.desc      : [STD-DISTRIBUTED-0101]禁止修改分布式相机交互协议
+ * @tc.desc      : Set the exposure mode update parameters
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, DCameraTest_0600, TestSize.Level1)
+{
+    int32_t ret = mainDemo->SetAeExpo();
+    EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : DCameraTest_0500
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : [STD-DISTRIBUTED-0101]禁止修改分布式相机交互协议
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, DCameraTest_0700, TestSize.Level1)
+{
+    int32_t ret = mainDemo->SetMetadata();
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
     sleep(sleepOk);
 }
 

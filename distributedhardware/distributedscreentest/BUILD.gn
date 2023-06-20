@@ -16,7 +16,7 @@ import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "dcts/distributedhardware"
 
-ohos_moduletest_suite("DctsdisSreenTest") {
+ohos_moduletest_suite("SubDctsdisScreenTest") {
   module_out_path = module_output_path
   include_dirs = [
     "$base_root/foundation/distributedhardware/distributed_screen/services/common/utils/include",
@@ -46,7 +46,7 @@ ohos_moduletest_suite("DctsdisSreenTest") {
 
   defines = [
     "HI_LOG_ENABLE",
-    "DH_LOG_TAG=\"DSreenClientTest\"",
+    "DH_LOG_TAG=\"DctsSdisScreenTest\"",
     "LOG_DOMAIN=0xD004100",
   ]
 

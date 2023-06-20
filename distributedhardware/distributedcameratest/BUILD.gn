@@ -19,7 +19,7 @@ config("dcamera_hdf_demo_config") {
   visibility = [ ":*" ]
 }
 
-ohos_moduletest_suite("DctsdisCameraTest") {
+ohos_moduletest_suite("SubDctsdisCameraTest") {
   module_out_path = module_output_path
   install_enable = true
   sources = [
