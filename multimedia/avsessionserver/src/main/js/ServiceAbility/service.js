@@ -15,13 +15,50 @@
 
 import rpc from "@ohos.rpc"
 import avSession from '@ohos.multimedia.avsession';
+import backgroundTaskManager from '@ohos.backgroundTaskManager';
+import wantAgent from '@ohos.wantAgent';
+
+function startContinuousTask() {
+    let wantAgentInfo = {
+        wants: [
+            {
+                bundleName: 'com.example.myapplication',
+                abilityName: 'com.example.myapplication.ServiceAbility'
+            }
+        ],
+        operationType: wantAgent.OperationType.START_SERVICE,
+        requestCode: 0,
+        wantAgetnFlags: [wantAgent.WantAgentFlags.UPDATE_PRESENT_FLAG]
+    };
+
+    wantAgent.getWantAgent(wantAgentInfo).then((wantAgentObj) => {
+        backgroundTaskManager.startBackgroundRunning(featureAbility.getContext(),
+            backgroundTaskManager.BackgroundMode.MULTI_DEVICE_CONNECTION, wantAgentObj).then(() => {
+            console.info(`Operation startBackgroundRunning succeeded`);
+        }).catch((error) => {
+            console.error(`Operation startBackgroundRunning failed. code is ${error.code}, message is ${error.message}`);
+        });
+    });
+}
+
+function stopContinuousTask() {
+    backgroundTaskManager.stopBackgroundRunning(featureAbility.getContext()).then(() => {
+        console.info(`Operation stopBackgroundRunning failed cause: ${err}`);
+    }) .catch((error) => {
+        console.error(`Operation stopBackgroundRunning failed. code is ${error.code}, message is ${error.message}`);
+    })
+}
 
 export default {
     onStart() {
-        console.info('AVSessionServer: onStart')
+        console.info('AVSessionServer: onStart');
+        startContinuousTask();
+        console.info('AVSessionServer: startContinuousTask');
     },
     onStop() {
-        console.info('AVSessionServer: onStop')
+        console.info('AVSessionServer: onStop');
+        stopContinuousTask();
+        console.info('AVSessionServer: stopContinuousTask');
     },
     onCommand(want, startId) {
         console.info('AVSessionServer: onCommand, want: ' + JSON.stringify(want) + ', startId: ' + startId)
