@@ -23,7 +23,7 @@ function startContinuousTask() {
         wants: [
             {
                 bundleName: "com.ohos.rpctest",
-                abilityName: "com.ohos.rpctest.MainAbility"
+                abilityName: "com.ohos.rpctest.ServiceAbility"
             }
         ],
         operationType: wantAgent.OperationType.START_SERVICE,
@@ -34,7 +34,7 @@ function startContinuousTask() {
     wantAgent.getWantAgent(wantAgentInfo).then((wantAgentObj) => {
         try{
             backgroundTaskManager.startBackgroundRunning(featureAbility.getContext(),
-            backgroundTaskManager.BackgroundMode.DATA_TRANSFER, wantAgentObj).then(() => {
+            backgroundTaskManager.BackgroundMode.MULTI_DEVICE_CONNECTION, wantAgentObj).then(() => {
             console.info("Operation startBackgroundRunning succeeded");
         }).catch((err) => {
             console.error("Operation startBackgroundRunning failed Cause: " + err);
