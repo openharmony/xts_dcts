@@ -88,7 +88,7 @@ export default function RpcRequestJsUnitTest() {
 
         /*
         * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_00100
-        * @tc.name    Verifying the processing of the MessageSequence Asynchronous callback information of the async_onRemoteMessageRequest interface
+        * @tc.name    Verifying the processing of the MessageSequence synchronous callback information of the async_onRemoteMessageRequest interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */       
@@ -117,7 +117,7 @@ export default function RpcRequestJsUnitTest() {
 
         /*
         * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_00200
-        * @tc.name    Verifying the processing of the MessageSequence synchronous callback information of the async_onRemoteMessageRequest interface
+        * @tc.name    Verifying the processing of the MessageSequence Asynchronous callback information of the async_onRemoteMessageRequest interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */   
@@ -146,7 +146,7 @@ export default function RpcRequestJsUnitTest() {
 
         /*
         * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_00300
-        * @tc.name    Verifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information Asynchronously
+        * @tc.name    Verifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information synchronously
         *               invoked by the MessageSequence interface of the onRemoteMessageRequest interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
@@ -176,7 +176,7 @@ export default function RpcRequestJsUnitTest() {
 
         /*
         * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_00400
-        * @tc.name    Verifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information synchronously
+        * @tc.name    Verifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information Asynchronously
         *               invoked by the MessageSequence interface of the onRemoteMessageRequest interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
@@ -206,7 +206,7 @@ export default function RpcRequestJsUnitTest() {
         
         /*
         * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_00500
-        * @tc.name    Verifying the processing of the MessageParcel Asynchronous callback information of the async_onRemoteMessageRequest interface
+        * @tc.name    Verifying the processing of the MessageParcel synchronous callback information of the async_onRemoteMessageRequest interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */   
@@ -237,7 +237,7 @@ export default function RpcRequestJsUnitTest() {
 
         /*
         * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_00600
-        * @tc.name    Verifying the processing of the MessageParcel synchronous callback information of the async_onRemoteMessageRequest interface
+        * @tc.name    Verifying the processing of the MessageParcel Asynchronous callback information of the async_onRemoteMessageRequest interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */   
@@ -267,7 +267,7 @@ export default function RpcRequestJsUnitTest() {
         
         /*
         * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_00700
-        * @tc.name    Verifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information in Asynchronous
+        * @tc.name    Verifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information in synchronous
         *               invoking of the aa interface MessageParcel
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
@@ -299,7 +299,7 @@ export default function RpcRequestJsUnitTest() {
         
         /*
         * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_00800
-        * @tc.name    Verifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information in synchronous
+        * @tc.name    Verifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information in Asynchronous
         *                invoking of the aa interface MessageParcel
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
@@ -364,7 +364,7 @@ export default function RpcRequestJsUnitTest() {
 
         /*
         * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01000
-        * @tc.name    Invoke async_onRemoteMessageRequest to process information in asynchronous mode and call back in AsyncCallback mode
+        * @tc.name    Invoke async_onRemoteMessageRequest to process information in Asynchronous mode and call back in AsyncCallback mode
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */   
