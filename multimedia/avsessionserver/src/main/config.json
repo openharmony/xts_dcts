@@ -28,6 +28,9 @@
       },
       {
         "name": "ohos.permission.ACCESS_SERVICE_DM"
+      },
+      {
+        "name": "ohos.permission.KEEP_BACKGROUND_RUNNING"
       }
     ],
     "package": "com.example.myapplication",

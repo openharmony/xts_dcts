@@ -40,13 +40,13 @@ export default class TestService {
             deviceManager.createDeviceManager('com.example.myapplication', (error, deviceManager) => {
                 self.getDeviceList(deviceManager);
                 console.info("avsessionClient:  got deviceManager: " + deviceManager)
-                let deviceId = deviceList[0].deviceId
-                console.info("avsessionClient: deviceid : " + deviceId)
+                let networkId = deviceList[0].networkId
+                console.info("avsessionClient: networkId : " + networkId)
                 console.info("avsessionClient: online deviceList id: " + JSON.stringify(deviceList))
                 let want = {
                     "bundleName": bundleName,
                     "abilityName": abilityName,
-                    "deviceId": deviceId,
+                    "deviceId": networkId,
                     "flags": 256
                 }
                 let connect = {
