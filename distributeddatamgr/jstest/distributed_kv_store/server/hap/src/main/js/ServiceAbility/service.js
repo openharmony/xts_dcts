@@ -14,25 +14,72 @@
  */
 
 import Stub from '../../../../../../../../../testtools/disjsTest/server/service.js'
+import backgroundTaskManager from '@ohos.backgroundTaskManager';
+import featureAbility from '@ohos.ability.featureAbility';
+import wantAgent from '@ohos.wantAgent';
+
+function startContinuousTask() {
+    let wantAgentInfo = {
+        wants: [
+            {
+                bundleName: "com.ohos.distributekvdisjs",
+                abilityName: "com.ohos.distributekvdisjs.ServiceAbility"
+            }
+        ],
+        operationType: wantAgent.OperationType.START_SERVICE,
+        requestCode: 0,
+        wantAgentFlags: [wantAgent.WantAgentFlags.UPDATE_PRESENT_FLAG]
+    };
+
+    wantAgent.getWantAgent(wantAgentInfo).then((wantAgentObj) => {
+        try{
+            backgroundTaskManager.startBackgroundRunning(featureAbility.getContext(),
+            backgroundTaskManager.BackgroundMode.MULTI_DEVICE_CONNECTION, wantAgentObj).then(() => {
+            console.info("Operation startBackgroundRunning succeeded");
+        }).catch((err) => {
+            console.error("Operation startBackgroundRunning failed Cause: " + err);
+        });
+        }catch(error){
+            console.error(`Operation startBackgroundRunning failed. code is ${error.code} message is ${error.message}`);
+        }
+    });
+}
+
+function stopContinuousTask() {
+    try{
+        backgroundTaskManager.stopBackgroundRunning(featureAbility.getContext()).then(() => {
+            console.info("Operation stopBackgroundRunning succeeded");
+        }).catch((err) => {
+            console.error("Operation stopBackgroundRunning failed Cause: " + err);
+        });
+    }catch(error){
+        console.error(`Operation stopBackgroundRunning failed. code is ${error.code} message is ${error.message}`);
+    }
+}
+
 
 export default {
     onStart() {
-        console.log('RpcServer: onStart')
+        console.log('RpcServer: onStart');
+        startContinuousTask();
+        console.info('RpcServer: startContinuousTask');
     },
     onStop() {
-        console.log('RpcServer: onStop')
+        console.log('RpcServer: onStop');
+        stopContinuousTask();
+        console.info('RpcServer: stopContinuousTask');
     },
     onCommand(want, startId) {
-        console.log('RpcServer: onCommand, want: ' + JSON.stringify(want) + ', startId: ' + startId)
+        console.log('RpcServer: onCommand, want: ' + JSON.stringify(want) + ', startId: ' + startId);
     },
     onConnect(want) {
-        console.log('RpcServer: service onConnect called.')
-        return new Stub("disjsAbility")
+        console.log('RpcServer: service onConnect called.');
+        return new Stub("disjsAbility");
     },
     onDisconnect(want) {
-        console.log('RpcServer: service onDisConnect called.')
+        console.log('RpcServer: service onDisConnect called.');
     },
     onReconnect(want) {
-        console.log('RpcServer: service onReConnect called.')
+        console.log('RpcServer: service onReConnect called.');
     }
 }
