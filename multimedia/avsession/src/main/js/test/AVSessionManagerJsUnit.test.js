@@ -31,20 +31,20 @@ export default function AVSessionManagerJsUnit() {
         let tag = "Application";
         let type = 'audio';
         let context = featureAbility.getContext();
-        let session;
-        let controller;
-        let sessionId;
+        let session = null;
+        let controller = null;
+        let sessionId = "";
         let pid = process.pid;
         let uid = process.uid;
-        let sessionToken;
-        let audioDevices;
-        let remoteDeviceId;
+        let sessionToken = null;
+        let audioDevices = [];
+        let remoteDeviceId = 0;
         let metadata1 = {
             assetId: "121278",
             artist: "Eminem",
         };
         let gIRemoteObject = null;
-        let audioManager;
+        let audioManager = null;
         let localAudioDevice;
         let testservice = null;
         let localDeviceId = undefined;
@@ -122,7 +122,7 @@ export default function AVSessionManagerJsUnit() {
                 expect(false).assertTrue();
             })
             audioManager = audio.getAudioManager().getRoutingManager();
-            await audioManager.getDevices(audio.DeviceFlag.DISTRIBUTED_OUTPUT_DEVICES_FLAG).then((data) => {
+            await audioManager.getDevices(5).then((data) => {
                 console.info('get remote device success');
                 audioDevices = data;
                 remoteDeviceId = audioDevices[0].id;
