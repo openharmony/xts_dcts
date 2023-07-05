@@ -16,37 +16,47 @@
 import rpc from "@ohos.rpc"
 import avSession from '@ohos.multimedia.avsession';
 import backgroundTaskManager from '@ohos.backgroundTaskManager';
+import featureAbility from '@ohos.ability.featureAbility';
 import wantAgent from '@ohos.wantAgent';
 
 function startContinuousTask() {
     let wantAgentInfo = {
         wants: [
             {
-                bundleName: 'com.example.myapplication',
-                abilityName: 'com.example.myapplication.ServiceAbility'
+                bundleName: "com.example.myapplication",
+                abilityName: "com.example.myapplication.ServiceAbility"
             }
         ],
         operationType: wantAgent.OperationType.START_SERVICE,
         requestCode: 0,
-        wantAgetnFlags: [wantAgent.WantAgentFlags.UPDATE_PRESENT_FLAG]
+        wantAgentFlags: [wantAgent.WantAgentFlags.UPDATE_PRESENT_FLAG]
     };
 
     wantAgent.getWantAgent(wantAgentInfo).then((wantAgentObj) => {
-        backgroundTaskManager.startBackgroundRunning(featureAbility.getContext(),
+        try {
+            backgroundTaskManager.startBackgroundRunning(featureAbility.getContext(),
             backgroundTaskManager.BackgroundMode.MULTI_DEVICE_CONNECTION, wantAgentObj).then(() => {
-            console.info(`Operation startBackgroundRunning succeeded`);
-        }).catch((error) => {
+                console.info(`Operation startBackgroundRunning succeeded`);
+            }).catch((error) => {
+                console.error(`Operation startBackgroundRunning failed. code is ${error.code}, message is ${error.message}`);
+            });
+        } catch (error) {
             console.error(`Operation startBackgroundRunning failed. code is ${error.code}, message is ${error.message}`);
-        });
+        }
     });
 }
 
 function stopContinuousTask() {
-    backgroundTaskManager.stopBackgroundRunning(featureAbility.getContext()).then(() => {
-        console.info(`Operation stopBackgroundRunning failed cause: ${err}`);
-    }) .catch((error) => {
+    try {
+        backgroundTaskManager.stopBackgroundRunning(featureAbility.getContext()).then(() => {
+            console.info(`Operation stopBackgroundRunning failed cause: ${err}`);
+        }) .catch((error) => {
+            console.error(`Operation stopBackgroundRunning failed. code is ${error.code}, message is ${error.message}`);
+        })
+    } catch (error) {
         console.error(`Operation stopBackgroundRunning failed. code is ${error.code}, message is ${error.message}`);
-    })
+    }
+
 }
 
 export default {
