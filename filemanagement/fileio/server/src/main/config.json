@@ -23,6 +23,9 @@
       {
         "name": "ohos.permission.GET_BUNDLE_INFO"
       },
+	  {
+        "name": "ohos.permission.KEEP_BACKGROUND_RUNNING"
+      },
       {
         "name": "ohos.permission.MANAGE_LOCAL_ACCOUNTS"
       },
@@ -68,6 +71,11 @@
         "launchType": "standard"
       },
       {
+	"backgroundModes": [
+          "dataTransfer",
+          "location",
+          "multiDeviceConnection"
+          ],
         "srcPath": "ServiceAbility",
         "name": ".ServiceAbility",
         "icon": "$media:icon",
