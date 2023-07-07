@@ -1205,6 +1205,7 @@ export default function RpcJsUnitTest() {
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
+                reply.reclaim();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_02900---------------------------");
         });
@@ -1238,6 +1239,7 @@ export default function RpcJsUnitTest() {
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
+                reply.reclaim();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_03000---------------------------");
         });
@@ -5117,6 +5119,7 @@ export default function RpcJsUnitTest() {
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
+                reply.reclaim();
                 done();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_15700---------------------------");
@@ -6111,6 +6114,7 @@ export default function RpcJsUnitTest() {
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
+                reply.reclaim();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_03000---------------------------");
         });
