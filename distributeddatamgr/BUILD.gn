@@ -35,7 +35,7 @@ ohos_shared_library("disDataProcess") {
     "access_token:libtoken_setproc",
     "c_utils:utils",
     "device_manager:devicemanagersdk",
-    "hiviewdfx_hilog_native:libhilog",
+    "hilog:libhilog",
     "ipc:ipc_core",
     "kv_store:distributeddata_inner",
   ]
