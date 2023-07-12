@@ -501,7 +501,7 @@ export default function dmsJsUnitTest() {
                 let wantValue = {
                     bundleName: "com.ohos.dmstest",
                     abilityName: "com.ohos.dmstest.ServiceAbility",
-                    deviceId: "undefined",
+                    deviceId: undefined,
                     parameters: params
                 };
                 console.info('SUB_DMS_OpenHarmony_StartAbility_0900 want=' + JSON.stringify(wantValue));
@@ -514,7 +514,7 @@ export default function dmsJsUnitTest() {
                 }).catch((err) => {
                     console.info('SUB_DMS_OpenHarmony_StartAbility_0900 err: ' + err.code);
                     console.info('SUB_DMS_OpenHarmony_StartAbility_0900 err: ' + err.message);
-                    expect(err.code).assertEqual(9);
+                    expect(err.code).assertEqual(1);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
@@ -971,6 +971,667 @@ export default function dmsJsUnitTest() {
             }
             await sleep(1000);
             console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_2100 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0010
+         * @tc.name    Start the remote Ability with error bundlename.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0010", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0010 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0010";
+            let params;
+            let wantValue = {
+                bundleName: "com.ohos.Wrongdmstest",
+                abilityName: "com.ohos.dmstest.ServiceAbility",
+                deviceId: dvId,
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(9);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0010 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0020
+         * @tc.name    Start the remote Ability with bundlename is undefined.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0020", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0020 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0020";
+            let params;
+            let wantValue = {
+                bundleName: undefined,
+                abilityName: "com.ohos.dmstest.ServiceAbility",
+                deviceId: dvId,
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(1);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0020 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0030
+         * @tc.name    Start the remote Ability with bundlename is null.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0030", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0030 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0030";
+            let params;
+            let wantValue = {
+                bundleName: "",
+                abilityName: "com.ohos.dmstest.ServiceAbility",
+                deviceId: dvId,
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(1);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0030 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0040
+         * @tc.name    Start the remote Ability without bundlename.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0040", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0040 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0040";
+            let params;
+            let wantValue = {
+                abilityName: "com.ohos.dmstest.ServiceAbility",
+                deviceId: dvId,
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(1);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0040 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0050
+         * @tc.name    Start the remote Ability with abilityname is error.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0050", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0050 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0050";
+            let params;
+            let wantValue = {
+                bundleName: "com.ohos.dmstest",
+                abilityName: "com.ohos.dmstest.WrongAbility",
+                deviceId: dvId,
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(9);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0050 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0060
+         * @tc.name    Start the remote Ability with abilityname is undefined.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0060", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0060 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0060";
+            let params;
+            let wantValue = {
+                bundleName: "com.ohos.dmstest",
+                abilityName: undefined,
+                deviceId: dvId,
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(1);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0060 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0070
+         * @tc.name    Start the remote Ability with abilityname is null.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0070", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0070 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0070";
+            let params;
+            let wantValue = {
+                bundleName: "com.ohos.dmstest",
+                abilityName: "",
+                deviceId: dvId,
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(1);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0070 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0080
+         * @tc.name    Start the remote Ability without abilityname.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0080", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0080 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0080";
+            let params;
+            let wantValue = {
+                bundleName: "com.ohos.dmstest",
+                deviceId: dvId,
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(1);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0080 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0090
+         * @tc.name    Start the remote Ability with deviceId is undefined.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0090", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0090 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0090";
+            let params;
+            let wantValue = {
+                bundleName: "com.ohos.dmstest",
+                abilityName: "com.ohos.dmstest.ServiceAbility",
+                deviceId: undefined,
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(1);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0090 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0110
+         * @tc.name    Start the remote Ability without deviceId.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0110", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0110 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0110";
+            let params;
+            let wantValue = {
+                bundleName: "com.ohos.dmstest",
+                abilityName: "com.ohos.dmstest.ServiceAbility",
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(1);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0110 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0120
+         * @tc.name    Start the remote Ability with error deviceId.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0120", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0120 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0120";
+            let params;
+            let wantValue = {
+                bundleName: "com.ohos.dmstest",
+                abilityName: "com.ohos.dmstest.ServiceAbility",
+                deviceId: "1234",
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(9);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0120 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0130
+         * @tc.name    Start the remote Ability with dvId.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0130", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0130 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0130";
+            console.info(TAG + " dvList:" + dvList.length);
+            let numDevices = dvList.length;
+            if (numDevices === 0) {
+                console.info(TAG + ' no device found');
+                expect(numDevices === 0).assertFail();
+            };
+            let params;
+            let wantValue = {
+                bundleName: "com.ohos.dmstest",
+                abilityName: "com.ohos.dmstest.ServiceAbility",
+                deviceId: dvId,
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect().assertFail();
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect(data == 0).assertTrue();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0130 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0140
+         * @tc.name    Start the remote Ability with parmter is undefined .
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0140", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0140 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0140";
+            let wantValue = undefined;
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(202);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0140 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0150
+         * @tc.name    Start the remote Ability without parmter.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0150", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0150 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0150";
+            let wantValue = {};
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(1);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0150 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0160
+         * @tc.name    Start the remote Ability with parmter is null.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0160", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0160 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0160";
+            let wantValue = "";
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect(error.code).assertEqual(202);
+                        expect(error.message).assertEqual("StartAbility Failed");
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect().assertFail();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0160 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0170
+         * @tc.name    Start the remote Ability with 10 times.
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0170", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0170 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0170";
+            console.info(TAG + " dvList:" + dvList.length);
+            let numDevices = dvList.length;
+            if (numDevices === 0) {
+                console.info(TAG + ' no device found');
+                expect(numDevices === 0).assertFail();
+            };
+            let params;
+            let wantValue = {
+                bundleName: "com.ohos.dmstest",
+                abilityName: "com.ohos.dmstest.ServiceAbility",
+                deviceId: dvId,
+                parameters: params
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            for (let i = 0; i < 10; i++) {
+                featureAbility.startAbility({
+                    want: wantValue
+                }, (error, data) => {
+                    try {
+                        if (error && error.code !== 0) {
+                            console.error(TAG + ' fail, error: ' + error.code);
+                            expect().assertFail();
+                        } else {
+                            console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                            expect(data == 0).assertTrue();
+                        }
+                    } catch (error) {
+                        console.info(TAG + ":error = " + error);
+                        expect().assertFail();
+                    }
+                    console.info(TAG + " running at : " + i + ",here");
+                    done();
+                });
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0170 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0190
+         * @tc.name    Start the remote Ability .
+         * @tc.desc    Function test
+         * @tc.level   0
+        */
+        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0190", 0, async function (done) {
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0190 start------------------------");
+            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0190";
+            console.info(TAG + " dvList:" + dvList.length);
+            let numDevices = dvList.length;
+            if (numDevices === 0) {
+                console.info(TAG + ' no device found');
+                expect(numDevices === 0).assertFail();
+            };
+            let wantValue = {
+                bundleName: "com.ohos.dmstest",
+                abilityName: "com.ohos.dmstest.MainAbility",
+                deviceId: dvId,
+                parameters: {
+                    "startReason": "terminateSelf"
+                }
+            };
+            console.info(TAG + ' want=' + JSON.stringify(wantValue));
+            featureAbility.startAbility({
+                want: wantValue
+            }, (error, data) => {
+                try {
+                    if (error && error.code !== 0) {
+                        console.error(TAG + ' fail, error: ' + error.code);
+                        expect().assertFail();
+                    } else {
+                        console.log(TAG + ' success, data: ' + JSON.stringify(data));
+                        expect(data == 0).assertTrue();
+                    }
+                } catch (error) {
+                    console.info(TAG + ":error = " + error);
+                    expect().assertFail();
+                }
+                done();
+            });
+            await sleep(1000);
+            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0190 end------------------------");
         });
     })
 }
