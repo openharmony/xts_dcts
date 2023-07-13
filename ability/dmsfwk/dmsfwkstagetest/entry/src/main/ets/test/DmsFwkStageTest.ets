@@ -40,37 +40,37 @@ export default function DmsFwkStageTest() {
   describe('DmsFwkStageTest', function () {
 
     function sleep(ms) {
-		  return new Promise(resolve => setTimeout(resolve, ms));
-	  }
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
-	  async function getPermission() {
-		  console.info('getPermission is start');
-		  atManager.requestPermissionsFromUser(globalThis.abilityContext, ['ohos.permission.DISTRIBUTED_DATASYNC'], (data) => {
-		    console.info("request success" + JSON.stringify(data));
-		  })
-	  }
+    async function getPermission() {
+      console.info('getPermission is start');
+      atManager.requestPermissionsFromUser(globalThis.abilityContext, ['ohos.permission.DISTRIBUTED_DATASYNC'], (data) => {
+        console.info("request success" + JSON.stringify(data));
+      })
+    }
 
-	  async function driveFn() {
-		  try {
-			  let driver = await UiDriver.create()
-			  console.info('come in driveFn')
-			  console.info('driver is ${JSON.stringify(driver)}')
-			  sleep(2000);
-			  let button = await driver.findComponent(BY.text('允许'));
-			  console.info('button is ${JSON.stringify(button)}');
-			  sleep(5000);
-			  await button.click();
-		  } catch (err) {
-			  console.info('err is ' + err);
-			  return;
-		  }
-	  }
+    async function driveFn() {
+      try {
+        let driver = await UiDriver.create()
+        console.info('come in driveFn')
+        console.info('driver is ${JSON.stringify(driver)}')
+        sleep(2000);
+        let button = await driver.findComponent(BY.text('允许'));
+        console.info('button is ${JSON.stringify(button)}');
+        sleep(5000);
+        await button.click();
+      } catch (err) {
+        console.info('err is ' + err);
+        return;
+      }
+    }
 
     beforeAll(async function (done) {
       await getPermission();
-	    sleep(5000);
-	    await driveFn();
-	    sleep(1000);
+      sleep(5000);
+      await driveFn();
+      sleep(1000);
 
       function deviceManagerCallback(error, deviceManager) {
         console.info('LifeCycleTest before each called');
@@ -92,9 +92,9 @@ export default function DmsFwkStageTest() {
       await globalThis.abilityContext.startServiceExtensionAbility({
         bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
-      }).then((data)=>{
+      }).then((data) => {
         console.info('DmsFwkStageTest startServiceExtensionAbility called success');
-      }).catch((err)=>{
+      }).catch((err) => {
         console.info('DmsFwkStageTest startServiceExtensionAbility called error ' + err.message);
       })
       await sleep(4000);
@@ -103,16 +103,16 @@ export default function DmsFwkStageTest() {
 
     afterEach(async function (done) {
       console.info('DmsFwkStageTest after each called');
-      await globalThis.abilityContext.disconnectServiceExtensionAbility(connectId).then((data)=>{
+      await globalThis.abilityContext.disconnectServiceExtensionAbility(connectId).then((data) => {
         console.info('DmsFwkStageTest disconnectServiceExtensionAbility called success');
-      }).catch((err)=>{
+      }).catch((err) => {
         console.info('DmsFwkStageTest disconnectServiceExtensionAbility called error ' + err.message);
       })
       await sleep(1000)
-      if(globalThis.extensionContext != undefined){
-        await globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId).then((data)=>{
+      if (globalThis.extensionContext != undefined) {
+        await globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId).then((data) => {
           console.info('DmsFwkStageTest extensionContext disconnectServiceExtensionAbility called success');
-        }).catch((err)=>{
+        }).catch((err) => {
           console.info('DmsFwkStageTest extensionContext disconnectServiceExtensionAbility called error ' + err.message);
         })
       }
@@ -132,12 +132,12 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_connectServiceExtensionAbility_0100 is start---------------")
       TAG = "SUB_DMS_connectServiceExtensionAbility_0100";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -146,19 +146,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_connectServiceExtensionAbility_0100 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_connectServiceExtensionAbility_0100 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
-              done();
+            console.log('SUB_DMS_connectServiceExtensionAbility_0100 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_connectServiceExtensionAbility_0100 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
+            done();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0100  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -178,12 +178,12 @@ export default function DmsFwkStageTest() {
       console.log("------------SUB_DMS_connectServiceExtensionAbility_0200 start-------------");
       TAG = "SUB_DMS_connectServiceExtensionAbility_0200";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -192,18 +192,18 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_connectServiceExtensionAbility_0200 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_connectServiceExtensionAbility_0200 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
+            console.log('SUB_DMS_connectServiceExtensionAbility_0200 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_connectServiceExtensionAbility_0200 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0200  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -211,12 +211,12 @@ export default function DmsFwkStageTest() {
       });
       await sleep(3000);
       connectId2 = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -225,19 +225,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_connectServiceExtensionAbility_0200 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_connectServiceExtensionAbility_0200 onConnectRemoteService001 msg: ' + msg);
-              expect(msg).assertEqual(100)
-              done();
+            console.log('SUB_DMS_connectServiceExtensionAbility_0200 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_connectServiceExtensionAbility_0200 onConnectRemoteService001 msg: ' + msg);
+            expect(msg).assertEqual(100)
+            done();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0200  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -258,12 +258,12 @@ export default function DmsFwkStageTest() {
       console.log("------------SUB_DMS_connectServiceExtensionAbility_0300 start-------------");
       TAG = "SUB_DMS_connectServiceExtensionAbility_0300";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -272,26 +272,26 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_connectServiceExtensionAbility_0300 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_connectServiceExtensionAbility_0300 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
-              done();
+            console.log('SUB_DMS_connectServiceExtensionAbility_0300 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_connectServiceExtensionAbility_0300 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
+            done();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0300  onFailed: ' + code);
           expect().assertFail();
           done();
         }
       });
       await sleep(3000);
-      globalThis.abilityContext.disconnectServiceExtensionAbility(connectId, (err, data)=>{
+      globalThis.abilityContext.disconnectServiceExtensionAbility(connectId, (err, data) => {
         expect(undefined).assertEqual(data)
       })
       await sleep(1000);
@@ -308,12 +308,12 @@ export default function DmsFwkStageTest() {
       console.log("------------SUB_DMS_connectServiceExtensionAbility_0400 start-------------");
       TAG = "SUB_DMS_connectServiceExtensionAbility_0400";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -322,18 +322,18 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_connectServiceExtensionAbility_0400 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_connectServiceExtensionAbility_0400 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
+            console.log('SUB_DMS_connectServiceExtensionAbility_0400 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_connectServiceExtensionAbility_0400 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0400  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -341,12 +341,12 @@ export default function DmsFwkStageTest() {
       });
       await sleep(3000);
       connectId2 = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -355,28 +355,28 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_connectServiceExtensionAbility_0400 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_connectServiceExtensionAbility_0400 onConnectRemoteService001 msg: ' + msg);
-              expect(msg).assertEqual(100)
+            console.log('SUB_DMS_connectServiceExtensionAbility_0400 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_connectServiceExtensionAbility_0400 onConnectRemoteService001 msg: ' + msg);
+            expect(msg).assertEqual(100)
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0400  onFailed: ' + code);
           expect().assertFail();
         }
       });
       await sleep(1000);
-      globalThis.abilityContext.disconnectServiceExtensionAbility(connectId, (err, data)=>{
+      globalThis.abilityContext.disconnectServiceExtensionAbility(connectId, (err, data) => {
         expect(undefined).assertEqual(data)
       })
       await sleep(1000);
-      globalThis.abilityContext.disconnectServiceExtensionAbility(connectId2, (err, data)=>{
+      globalThis.abilityContext.disconnectServiceExtensionAbility(connectId2, (err, data) => {
         console.info('SUB_DMS_connectServiceExtensionAbility_0400  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
         expect(undefined).assertEqual(data);
         done();
@@ -394,20 +394,20 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_connectServiceExtensionAbility_0500 is start---------------")
       TAG = "SUB_DMS_connectServiceExtensionAbility_0500";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:"1111212151561315616131515643115616",
+        deviceId: "1111212151561315616131515643115616",
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
+        onConnect: (elementName, proxy) => {
           expect().assertFail();
           done();
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0500  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0500 code: ' + code);
           expect(code).assertEqual(401)
           done();
@@ -428,21 +428,21 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_connectServiceExtensionAbility_0700 is start---------------")
       TAG = "SUB_DMS_connectServiceExtensionAbility_0700";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "WrongServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
+        onConnect: (elementName, proxy) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0700  onConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0700  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0700  onFailed: ' + code);
           expect(code).assertEqual(401);
           done();
@@ -462,20 +462,20 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_connectServiceExtensionAbility_0800 is start---------------")
       TAG = "SUB_DMS_connectServiceExtensionAbility_0800";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver.err",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
+        onConnect: (elementName, proxy) => {
           expect().assertFail();
           done();
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0800  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0800  onFailed: ' + code);
           expect(code).assertEqual(401)
           done();
@@ -494,20 +494,20 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_connectServiceExtensionAbility_0900", 0, async function (done) {
       console.info("---------------SUB_DMS_connectServiceExtensionAbility_0900 is start---------------")
       TAG = "SUB_DMS_connectServiceExtensionAbility_0900";
-      abilityDelegator.executeShellCommand("pidof softbus_server", (err, data)=>{
+      abilityDelegator.executeShellCommand("pidof softbus_server", (err, data) => {
         console.info("SUB_DMS_connectServiceExtensionAbility_0900:" + data.stdResult)
-        abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data)=>{
+        abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
           console.info("SUB_DMS_connectServiceExtensionAbility_0900:" + data.stdResult)
         })
       })
 
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -516,19 +516,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_connectServiceExtensionAbility_0900 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_connectServiceExtensionAbility_0900 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
-              done();
+            console.log('SUB_DMS_connectServiceExtensionAbility_0900 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_connectServiceExtensionAbility_0900 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
+            done();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0900  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0900  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -547,19 +547,19 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_connectServiceExtensionAbility_0110", 0, async function (done) {
       console.info("---------------SUB_DMS_connectServiceExtensionAbility_0110 is start---------------")
       TAG = "SUB_DMS_connectServiceExtensionAbility_0110";
-      abilityDelegator.executeShellCommand("pidof distributedsche", (err, data)=>{
+      abilityDelegator.executeShellCommand("pidof distributedsche", (err, data) => {
         console.info("SUB_DMS_connectServiceExtensionAbility_0110:" + data.stdResult)
-        abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data)=>{
+        abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
           console.info("SUB_DMS_connectServiceExtensionAbility_0110:" + data.stdResult)
         })
       })
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -568,19 +568,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_connectServiceExtensionAbility_0110 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_connectServiceExtensionAbility_0110 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
-              done();
+            console.log('SUB_DMS_connectServiceExtensionAbility_0110 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_connectServiceExtensionAbility_0110 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
+            done();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0110  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0110  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -600,11 +600,11 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_connectServiceExtensionAbility_0180 is start---------------")
       TAG = "SUB_DMS_connectServiceExtensionAbility_0180";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
+        onConnect: (elementName, proxy) => {
           expect(proxy != null).assertTrue();
           expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
           expect(elementName.abilityName).assertEqual("ServiceAbility");
@@ -614,19 +614,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_connectServiceExtensionAbility_0180 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_connectServiceExtensionAbility_0180 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
-              done()
+            console.log('SUB_DMS_connectServiceExtensionAbility_0180 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_connectServiceExtensionAbility_0180 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
+            done()
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0180  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0180  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -647,11 +647,11 @@ export default function DmsFwkStageTest() {
       let RemoteObj;
       TAG = "SUB_DMS_connectServiceExtensionAbility_0190";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
+        onConnect: (elementName, proxy) => {
           expect(proxy != null).assertTrue();
           RemoteObj = proxy;
           let option = new rpc.MessageOption();
@@ -660,18 +660,18 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_connectServiceExtensionAbility_0190 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_connectServiceExtensionAbility_0190 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
+            console.log('SUB_DMS_connectServiceExtensionAbility_0190 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_connectServiceExtensionAbility_0190 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0190  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_connectServiceExtensionAbility_0190  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -683,11 +683,11 @@ export default function DmsFwkStageTest() {
       let reply = new rpc.MessageParcel();
       data.writeInt(123);
       RemoteObj.sendRequest(1, data, reply, option).then((result) => {
-          console.log('SUB_DMS_connectServiceExtensionAbility_0190 sendRequest success');
-          let msg = result.reply.readInt();
-          console.info('SUB_DMS_connectServiceExtensionAbility_0190 onConnectRemoteService001 msg: ' + msg);
-          expect(msg == 123).assertTrue();
-          done();
+        console.log('SUB_DMS_connectServiceExtensionAbility_0190 sendRequest success');
+        let msg = result.reply.readInt();
+        console.info('SUB_DMS_connectServiceExtensionAbility_0190 onConnectRemoteService001 msg: ' + msg);
+        expect(msg == 123).assertTrue();
+        done();
       })
       console.info("---------------SUB_DMS_connectServiceExtensionAbility_0190 is end---------------" + connectId)
     });
@@ -701,13 +701,13 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_ConnectAbility_0100", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_ConnectAbility_0100 is start---------------")
       TAG = "SUB_DMS_StartControl_ConnectAbility_0100";
-      try{
+      try {
         connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
         }, {
-          onConnect: (elementName, proxy)=>{
+          onConnect: (elementName, proxy) => {
             expect(proxy != null).assertTrue();
             expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
             expect(elementName.abilityName).assertEqual("ServiceAbility");
@@ -717,25 +717,25 @@ export default function DmsFwkStageTest() {
             data.writeInt(1);
             data.writeInt(99);
             proxy.sendRequest(1, data, reply, option).then((result) => {
-                console.log('SUB_DMS_StartControl_ConnectAbility_0100 sendRequest success');
-                let msg = result.reply.readInt();
-                console.info('SUB_DMS_StartControl_ConnectAbility_0100 onConnectRemoteService001 msg: ' + msg);
-                expect(msg == 100).assertTrue();
-                done();
+              console.log('SUB_DMS_StartControl_ConnectAbility_0100 sendRequest success');
+              let msg = result.reply.readInt();
+              console.info('SUB_DMS_StartControl_ConnectAbility_0100 onConnectRemoteService001 msg: ' + msg);
+              expect(msg == 100).assertTrue();
+              done();
             })
           },
-          onDisConnect: (elementName)=>{
+          onDisConnect: (elementName) => {
             console.info('SUB_DMS_StartControl_ConnectAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
-          onFailed: (code)=>{
+          onFailed: (code) => {
             console.info('SUB_DMS_StartControl_ConnectAbility_0100  onFailed: ' + code);
             expect().assertFail();
             done();
           }
         });
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_ConnectAbility_0100 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_ConnectAbility_0100 catch: ' + err.message);
       }
@@ -750,27 +750,27 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_ConnectAbility_0400", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_ConnectAbility_0400 is start---------------")
       TAG = "SUB_DMS_StartControl_ConnectAbility_0400";
-      try{
+      try {
         connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility2"
         }, {
-          onConnect: (elementName, proxy)=>{
+          onConnect: (elementName, proxy) => {
             expect().assertFail();
             done();
           },
-          onDisConnect: (elementName)=>{
+          onDisConnect: (elementName) => {
             console.info('SUB_DMS_StartControl_ConnectAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
-          onFailed: (code)=>{
+          onFailed: (code) => {
             console.info('SUB_DMS_StartControl_ConnectAbility_0400  onFailed: ' + code);
             done();
           }
         });
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_ConnectAbility_0400 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_ConnectAbility_0400 catch: ' + err.message);
       }
@@ -785,13 +785,13 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_ConnectAbility_0300", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_ConnectAbility_0300 is start---------------")
       TAG = "SUB_DMS_StartControl_ConnectAbility_0300";
-      try{
+      try {
         connectId = globalThis.abilityContext.connectServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
         }, {
-          onConnect: (elementName, proxy)=>{
+          onConnect: (elementName, proxy) => {
             expect(proxy != null).assertTrue();
             expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
             expect(elementName.abilityName).assertEqual("ServiceAbility");
@@ -801,25 +801,25 @@ export default function DmsFwkStageTest() {
             data.writeInt(1);
             data.writeInt(99);
             proxy.sendRequest(1, data, reply, option).then((result) => {
-                console.log('SUB_DMS_StartControl_ConnectAbility_0300 sendRequest success');
-                let msg = result.reply.readInt();
-                console.info('SUB_DMS_StartControl_ConnectAbility_0300 onConnectRemoteService001 msg: ' + msg);
-                expect(msg == 100).assertTrue();
-                done();
+              console.log('SUB_DMS_StartControl_ConnectAbility_0300 sendRequest success');
+              let msg = result.reply.readInt();
+              console.info('SUB_DMS_StartControl_ConnectAbility_0300 onConnectRemoteService001 msg: ' + msg);
+              expect(msg == 100).assertTrue();
+              done();
             })
           },
-          onDisConnect: (elementName)=>{
+          onDisConnect: (elementName) => {
             console.info('SUB_DMS_StartControl_ConnectAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
-          onFailed: (code)=>{
+          onFailed: (code) => {
             console.info('SUB_DMS_StartControl_ConnectAbility_0300  onFailed: ' + code);
             expect().assertFail();
             done();
           }
         });
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_ConnectAbility_0300 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_ConnectAbility_0300 catch: ' + err.message);
       }
@@ -834,19 +834,19 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_StartAbility_0100", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_StartAbility_0100 is start---------------")
       TAG = "SUB_DMS_StartControl_StartAbility_0100";
-      try{
+      try {
         connectId = globalThis.abilityContext.startServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_StartAbility_0100 startService result: ' + err.code + " " + err.message);
-		  console.info('SUB_DMS_StartControl_StartAbility_0100 startService err.code: ' + err.code);
-		  console.info('SUB_DMS_StartControl_StartAbility_0100 startService err.message: ' + err.message);
+          console.info('SUB_DMS_StartControl_StartAbility_0100 startService err.code: ' + err.code);
+          console.info('SUB_DMS_StartControl_StartAbility_0100 startService err.message: ' + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_StartAbility_0100 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_StartAbility_0100 catch: ' + err.message);
         expect().assertFail();
@@ -863,19 +863,19 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_StartAbility_0200", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_StartAbility_0200 is start---------------")
       TAG = "SUB_DMS_StartControl_StartAbility_0200";
-      try{
+      try {
         connectId = globalThis.abilityContext.startServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageservererr",
           abilityName: "ServiceAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_StartAbility_0200 startService result: ' + err.code + " " + err.message);
-		  console.info('SUB_DMS_StartControl_StartAbility_0200 startService err.code: ' + err.code);
-		  console.info('SUB_DMS_StartControl_StartAbility_0200 startService err.message: ' + err.message);
+          console.info('SUB_DMS_StartControl_StartAbility_0200 startService err.code: ' + err.code);
+          console.info('SUB_DMS_StartControl_StartAbility_0200 startService err.message: ' + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_StartAbility_0200 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_StartAbility_0200 catch: ' + err.message);
         expect().assertFail();
@@ -892,19 +892,19 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_StartAbility_0300", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_StartAbility_0300 is start---------------")
       TAG = "SUB_DMS_StartControl_StartAbility_0300";
-      try{
+      try {
         connectId = globalThis.abilityContext.startServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbilityErr"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_StartAbility_0300 startService result: ' + err.code + " " + err.message);
-		  console.info('SUB_DMS_StartControl_StartAbility_0300 startService err.code: ' + err.code);
-		  console.info('SUB_DMS_StartControl_StartAbility_0300 startService err.message: ' + err.message);
+          console.info('SUB_DMS_StartControl_StartAbility_0300 startService err.code: ' + err.code);
+          console.info('SUB_DMS_StartControl_StartAbility_0300 startService err.message: ' + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_StartAbility_0300 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_StartAbility_0300 catch: ' + err.message);
         expect().assertFail();
@@ -921,17 +921,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_StartAbility_0400", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_StartAbility_0400 is start---------------")
       TAG = "SUB_DMS_StartControl_StartAbility_0400";
-      try{
+      try {
         connectId = globalThis.abilityContext.startServiceExtensionAbility({
-          deviceId:"dvId",
+          deviceId: "dvId",
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_StartAbility_0400 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_StartAbility_0400 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_StartAbility_0400 catch: ' + err.message);
         expect().assertFail();
@@ -948,20 +948,20 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_StartAbility_0500", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_StartAbility_0500 is start---------------")
       TAG = "SUB_DMS_StartControl_StartAbility_0500";
-      try{
+      try {
         connectId = globalThis.abilityContext.startServiceExtensionAbility({
-          deviceId:"",
+          deviceId: "",
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_StartAbility_0400 startService result: ' + err);
           console.info('SUB_DMS_StartControl_StartAbility_0400 startService result: ' + err);
           console.info('SUB_DMS_StartControl_StartAbility_0400 startService result: ' + err);
         })
         await sleep(3000)
-          expect(globalThis.startAbilityReault).assertTrue();
-          done();
-      }catch(err){
+        expect(globalThis.startAbilityReault).assertTrue();
+        done();
+      } catch (err) {
         console.info('SUB_DMS_StartControl_StartAbility_0500 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_StartAbility_0500 catch: ' + err.message);
         expect().assertFail();
@@ -978,17 +978,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_StartAbility_0700", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_StartAbility_0700 is start---------------")
       TAG = "SUB_DMS_StartControl_StartAbility_0700";
-      try{
+      try {
         connectId = globalThis.abilityContext.startAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver.err",
           abilityName: "MainAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_StartAbility_0700 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(401);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_StartAbility_0700 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_StartAbility_0700 catch: ' + err.message);
         expect().assertFail();
@@ -1005,17 +1005,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_StartAbility_0800", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_StartAbility_0800 is start---------------")
       TAG = "SUB_DMS_StartControl_StartAbility_0800";
-      try{
+      try {
         connectId = globalThis.abilityContext.startAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "MainAbility.err"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_StartAbility_0800 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(401);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_StartAbility_0800 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_StartAbility_0800 catch: ' + err.message);
         expect().assertFail();
@@ -1032,17 +1032,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_StartAbility_0900", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_StartAbility_0900 is start---------------")
       TAG = "SUB_DMS_StartControl_StartAbility_0900";
-      try{
+      try {
         connectId = globalThis.abilityContext.startAbility({
-          deviceId:"dvId",
+          deviceId: "dvId",
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "MainAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_StartAbility_0900 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(401);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_StartAbility_0900 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_StartAbility_0900 catch: ' + err.message);
         expect().assertFail();
@@ -1050,26 +1050,26 @@ export default function DmsFwkStageTest() {
       }
     });
 
-     /*
-     * @tc.number  SUB_DMS_StartControl_StartAbility_1000
-     * @tc.name    Filed start remote ability with null device.
-     * @tc.desc    Function test
-     * @tc.level   0
-     */
-     it("SUB_DMS_StartControl_StartAbility_1000", 0, async function (done) {
+    /*
+    * @tc.number  SUB_DMS_StartControl_StartAbility_1000
+    * @tc.name    Filed start remote ability with null device.
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartControl_StartAbility_1000", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_StartAbility_1000 is start---------------")
       TAG = "SUB_DMS_StartControl_StartAbility_1000";
-      try{
+      try {
         connectId = globalThis.abilityContext.startAbility({
           deviceId: "",
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "MainAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_StartAbility_1000 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_StartAbility_1000 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_StartAbility_1000 catch: ' + err.message);
         expect().assertFail();
@@ -1086,17 +1086,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_StartAbility_1100", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_StartAbility_1100 is start---------------")
       TAG = "SUB_DMS_StartControl_StartAbility_1100";
-      try{
+      try {
         connectId = globalThis.abilityContext.startServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "MainAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_StartAbility_1100 startService result: ' + err.code);
           expect(err.code).assertEqual(16000001);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_StartAbility_1100 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_StartAbility_1100 catch: ' + err.message);
         expect().assertFail();
@@ -1114,12 +1114,12 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_Extension_ConnectAbility_0100 is start---------------")
       TAG = "SUB_DMS_Extension_ConnectAbility_0100";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -1128,19 +1128,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_Extension_ConnectAbility_0100 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_Extension_ConnectAbility_0100 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
-              done();
+            console.log('SUB_DMS_Extension_ConnectAbility_0100 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_Extension_ConnectAbility_0100 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
+            done();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0100  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -1160,12 +1160,12 @@ export default function DmsFwkStageTest() {
       console.log("------------SUB_DMS_Extension_ConnectAbility_0200 start-------------");
       TAG = "SUB_DMS_Extension_ConnectAbility_0200";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -1174,18 +1174,18 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_Extension_ConnectAbility_0200 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_Extension_ConnectAbility_0200 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
+            console.log('SUB_DMS_Extension_ConnectAbility_0200 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_Extension_ConnectAbility_0200 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0200  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -1193,12 +1193,12 @@ export default function DmsFwkStageTest() {
       });
       await sleep(3000);
       extensionConnectId2 = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -1207,19 +1207,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_Extension_ConnectAbility_0200 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_Extension_ConnectAbility_0200 onConnectRemoteService001 msg: ' + msg);
-              expect(msg).assertEqual(100)
-              done();
+            console.log('SUB_DMS_Extension_ConnectAbility_0200 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_Extension_ConnectAbility_0200 onConnectRemoteService001 msg: ' + msg);
+            expect(msg).assertEqual(100)
+            done();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0200  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -1229,22 +1229,22 @@ export default function DmsFwkStageTest() {
       console.log("------------SUB_DMS_Extension_ConnectAbility_0200 end-------------" + extensionConnectId);
     });
 
-     /*
-     * @tc.number  SUB_DMS_Extension_ConnectAbility_0300
-     * @tc.name    ServiceExtension Disconnect the remote Ability.
-     * @tc.desc    Function test
-     * @tc.level   0
-     */
-     it("SUB_DMS_Extension_ConnectAbility_0300", 0, async function (done) {
+    /*
+    * @tc.number  SUB_DMS_Extension_ConnectAbility_0300
+    * @tc.name    ServiceExtension Disconnect the remote Ability.
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_Extension_ConnectAbility_0300", 0, async function (done) {
       console.log("------------SUB_DMS_Extension_ConnectAbility_0300 start-------------");
       TAG = "SUB_DMS_Extension_ConnectAbility_0300";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -1253,26 +1253,26 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_Extension_ConnectAbility_0300 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_Extension_ConnectAbility_0300 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
-              done();
+            console.log('SUB_DMS_Extension_ConnectAbility_0300 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_Extension_ConnectAbility_0300 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
+            done();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0300  onFailed: ' + code);
           expect().assertFail();
           done();
         }
       });
       await sleep(3000);
-      globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId, (err, data)=>{
+      globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId, (err, data) => {
         expect(undefined).assertEqual(data)
       })
       await sleep(1000);
@@ -1289,12 +1289,12 @@ export default function DmsFwkStageTest() {
       console.log("------------SUB_DMS_Extension_ConnectAbility_0400 start-------------");
       TAG = "SUB_DMS_Extension_ConnectAbility_0400";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -1303,18 +1303,18 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_Extension_ConnectAbility_0400 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_Extension_ConnectAbility_0400 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
+            console.log('SUB_DMS_Extension_ConnectAbility_0400 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_Extension_ConnectAbility_0400 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0400  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -1322,12 +1322,12 @@ export default function DmsFwkStageTest() {
       });
       await sleep(3000);
       extensionConnectId2 = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -1336,28 +1336,28 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_Extension_ConnectAbility_0400 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_Extension_ConnectAbility_0400 onConnectRemoteService001 msg: ' + msg);
-              expect(msg).assertEqual(100)
+            console.log('SUB_DMS_Extension_ConnectAbility_0400 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_Extension_ConnectAbility_0400 onConnectRemoteService001 msg: ' + msg);
+            expect(msg).assertEqual(100)
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0400  onFailed: ' + code);
           expect().assertFail();
         }
       });
       await sleep(1000);
-      globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId, (err, data)=>{
+      globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId, (err, data) => {
         expect(undefined).assertEqual(data)
       })
       await sleep(1000);
-      globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId2, (err, data)=>{
+      globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId2, (err, data) => {
         console.info('SUB_DMS_Extension_ConnectAbility_0400  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
         expect(undefined).assertEqual(data);
         done();
@@ -1375,20 +1375,20 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_Extension_ConnectAbility_0500 is start---------------")
       TAG = "SUB_DMS_Extension_ConnectAbility_0500";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:"1111212151561315616131515643115616",
+        deviceId: "1111212151561315616131515643115616",
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
+        onConnect: (elementName, proxy) => {
           expect().assertFail();
           done();
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0500  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0500 code: ' + code);
           expect(code).assertEqual(401)
           done();
@@ -1408,21 +1408,21 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_Extension_ConnectAbility_0700 is start---------------")
       TAG = "SUB_DMS_Extension_ConnectAbility_0700";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "WrongServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
+        onConnect: (elementName, proxy) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0700  onConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0700  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0700  onFailed: ' + code);
           expect(code).assertEqual(401);
           done();
@@ -1442,20 +1442,20 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_Extension_ConnectAbility_0800 is start---------------")
       TAG = "SUB_DMS_Extension_ConnectAbility_0800";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver.err",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
+        onConnect: (elementName, proxy) => {
           expect().assertFail();
           done();
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0800  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0800  onFailed: ' + code);
           expect(code).assertEqual(401)
           done();
@@ -1474,20 +1474,20 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_Extension_ConnectAbility_0900", 0, async function (done) {
       console.info("---------------SUB_DMS_Extension_ConnectAbility_0900 is start---------------")
       TAG = "SUB_DMS_Extension_ConnectAbility_0900";
-      abilityDelegator.executeShellCommand("pidof softbus_server", (err, data)=>{
+      abilityDelegator.executeShellCommand("pidof softbus_server", (err, data) => {
         console.info("SUB_DMS_Extension_ConnectAbility_0900:" + data.stdResult)
-        abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data)=>{
+        abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
           console.info("SUB_DMS_Extension_ConnectAbility_0900:" + data.stdResult)
         })
       })
 
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -1496,19 +1496,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_Extension_ConnectAbility_0900 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_Extension_ConnectAbility_0900 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
-              done();
+            console.log('SUB_DMS_Extension_ConnectAbility_0900 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_Extension_ConnectAbility_0900 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
+            done();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0900  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0900  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -1527,19 +1527,19 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_Extension_ConnectAbility_0110", 0, async function (done) {
       console.info("---------------SUB_DMS_Extension_ConnectAbility_0110 is start---------------")
       TAG = "SUB_DMS_Extension_ConnectAbility_0110";
-      abilityDelegator.executeShellCommand("pidof distributedsche", (err, data)=>{
+      abilityDelegator.executeShellCommand("pidof distributedsche", (err, data) => {
         console.info("SUB_DMS_Extension_ConnectAbility_0900:" + data.stdResult)
-        abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data)=>{
+        abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
           console.info("SUB_DMS_Extension_ConnectAbility_0900:" + data.stdResult)
         })
       })
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
-          if(proxy == null){
+        onConnect: (elementName, proxy) => {
+          if (proxy == null) {
             return;
           }
           let option = new rpc.MessageOption();
@@ -1548,19 +1548,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_Extension_ConnectAbility_0110 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_Extension_ConnectAbility_0110 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
-              done();
+            console.log('SUB_DMS_Extension_ConnectAbility_0110 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_Extension_ConnectAbility_0110 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
+            done();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0110  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0110  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -1580,11 +1580,11 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_Extension_ConnectAbility_0180 is start---------------")
       TAG = "SUB_DMS_Extension_ConnectAbility_0180";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
+        onConnect: (elementName, proxy) => {
           expect(proxy != null).assertTrue();
           expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
           expect(elementName.abilityName).assertEqual("ServiceAbility");
@@ -1594,19 +1594,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_Extension_ConnectAbility_0180 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_Extension_ConnectAbility_0180 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
-              done()
+            console.log('SUB_DMS_Extension_ConnectAbility_0180 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_Extension_ConnectAbility_0180 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
+            done()
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0180  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0180  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -1627,11 +1627,11 @@ export default function DmsFwkStageTest() {
       let RemoteObj;
       TAG = "SUB_DMS_Extension_ConnectAbility_0190";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-        deviceId:dvId,
+        deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
         abilityName: "ServiceAbility"
       }, {
-        onConnect: (elementName, proxy)=>{
+        onConnect: (elementName, proxy) => {
           expect(proxy != null).assertTrue();
           RemoteObj = proxy;
           let option = new rpc.MessageOption();
@@ -1640,18 +1640,18 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_Extension_ConnectAbility_0190 sendRequest success');
-              let msg = result.reply.readInt();
-              console.info('SUB_DMS_Extension_ConnectAbility_0190 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
+            console.log('SUB_DMS_Extension_ConnectAbility_0190 sendRequest success');
+            let msg = result.reply.readInt();
+            console.info('SUB_DMS_Extension_ConnectAbility_0190 onConnectRemoteService001 msg: ' + msg);
+            expect(msg == 100).assertTrue();
           })
         },
-        onDisConnect: (elementName)=>{
+        onDisConnect: (elementName) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0190  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
-        onFailed: (code)=>{
+        onFailed: (code) => {
           console.info('SUB_DMS_Extension_ConnectAbility_0190  onFailed: ' + code);
           expect().assertFail();
           done();
@@ -1663,11 +1663,11 @@ export default function DmsFwkStageTest() {
       let reply = new rpc.MessageParcel();
       data.writeInt(123);
       RemoteObj.sendRequest(1, data, reply, option).then((result) => {
-          console.log('SUB_DMS_Extension_ConnectAbility_0190 sendRequest success');
-          let msg = result.reply.readInt();
-          console.info('SUB_DMS_Extension_ConnectAbility_0190 onConnectRemoteService001 msg: ' + msg);
-          expect(msg == 123).assertTrue();
-          done();
+        console.log('SUB_DMS_Extension_ConnectAbility_0190 sendRequest success');
+        let msg = result.reply.readInt();
+        console.info('SUB_DMS_Extension_ConnectAbility_0190 onConnectRemoteService001 msg: ' + msg);
+        expect(msg == 123).assertTrue();
+        done();
       })
       console.info("---------------SUB_DMS_Extension_ConnectAbility_0190 is end---------------" + extensionConnectId)
     });
@@ -1681,13 +1681,13 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_Extension_ConnectAbility_0100", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_ConnectAbility_0100 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_ConnectAbility_0100";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
         }, {
-          onConnect: (elementName, proxy)=>{
+          onConnect: (elementName, proxy) => {
             expect(proxy != null).assertTrue();
             expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
             expect(elementName.abilityName).assertEqual("ServiceAbility");
@@ -1697,25 +1697,25 @@ export default function DmsFwkStageTest() {
             data.writeInt(1);
             data.writeInt(99);
             proxy.sendRequest(1, data, reply, option).then((result) => {
-                console.log('SUB_DMS_StartControl_Extension_ConnectAbility_0100 sendRequest success');
-                let msg = result.reply.readInt();
-                console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100 onConnectRemoteService001 msg: ' + msg);
-                expect(msg == 100).assertTrue();
-                done();
+              console.log('SUB_DMS_StartControl_Extension_ConnectAbility_0100 sendRequest success');
+              let msg = result.reply.readInt();
+              console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100 onConnectRemoteService001 msg: ' + msg);
+              expect(msg == 100).assertTrue();
+              done();
             })
           },
-          onDisConnect: (elementName)=>{
+          onDisConnect: (elementName) => {
             console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
-          onFailed: (code)=>{
+          onFailed: (code) => {
             console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100  onFailed: ' + code);
             expect().assertFail();
             done();
           }
         });
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100 catch: ' + err.message);
       }
@@ -1730,27 +1730,27 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_Extension_ConnectAbility_0400", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_ConnectAbility_0400 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_ConnectAbility_0400";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility2"
         }, {
-          onConnect: (elementName, proxy)=>{
+          onConnect: (elementName, proxy) => {
             expect().assertFail();
             done();
           },
-          onDisConnect: (elementName)=>{
+          onDisConnect: (elementName) => {
             console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
-          onFailed: (code)=>{
+          onFailed: (code) => {
             console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0400  onFailed: ' + code);
             done();
           }
         });
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0400 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0400 catch: ' + err.message);
       }
@@ -1765,13 +1765,13 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_Extension_ConnectAbility_0300", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_ConnectAbility_0300 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_ConnectAbility_0300";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
         }, {
-          onConnect: (elementName, proxy)=>{
+          onConnect: (elementName, proxy) => {
             expect(proxy != null).assertTrue();
             expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
             expect(elementName.abilityName).assertEqual("ServiceAbility");
@@ -1781,25 +1781,25 @@ export default function DmsFwkStageTest() {
             data.writeInt(1);
             data.writeInt(99);
             proxy.sendRequest(1, data, reply, option).then((result) => {
-                console.log('SUB_DMS_StartControl_Extension_ConnectAbility_0300 sendRequest success');
-                let msg = result.reply.readInt();
-                console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0300 onConnectRemoteService001 msg: ' + msg);
-                expect(msg == 100).assertTrue();
-                done();
+              console.log('SUB_DMS_StartControl_Extension_ConnectAbility_0300 sendRequest success');
+              let msg = result.reply.readInt();
+              console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0300 onConnectRemoteService001 msg: ' + msg);
+              expect(msg == 100).assertTrue();
+              done();
             })
           },
-          onDisConnect: (elementName)=>{
+          onDisConnect: (elementName) => {
             console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
-          onFailed: (code)=>{
+          onFailed: (code) => {
             console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0300  onFailed: ' + code);
             expect().assertFail();
             done();
           }
         });
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0300 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0300 catch: ' + err.message);
       }
@@ -1814,17 +1814,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControlExtension__StartAbility_0100", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0100 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0100";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.startServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_0100 startService result: ' + + err.code + " " + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0100 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0100 catch: ' + err.message);
         expect().assertFail();
@@ -1841,17 +1841,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_Extension_StartAbility_0200", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0200 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0200";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.startServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageservererr",
           abilityName: "ServiceAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_0200 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0200 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0200 catch: ' + err.message);
         expect().assertFail();
@@ -1868,17 +1868,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_Extension_StartAbility_0300", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0300 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0300";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.startServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbilityErr"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_0300 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0300 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0300 catch: ' + err.message);
         expect().assertFail();
@@ -1895,17 +1895,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_Extension_StartAbility_0400", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0400 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0400";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.startServiceExtensionAbility({
-          deviceId:"dvId",
+          deviceId: "dvId",
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_0400 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0400 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0400 catch: ' + err.message);
         expect().assertFail();
@@ -1922,18 +1922,18 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_Extension_StartAbility_0500", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0500 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0500";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.startServiceExtensionAbility({
-          deviceId:"",
+          deviceId: "",
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_0500 startService result: ' + err);
         })
         await sleep(3000)
-          expect(globalThis.startAbilityReault).assertTrue();
-          done();
-      }catch(err){
+        expect(globalThis.startAbilityReault).assertTrue();
+        done();
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0500 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0500 catch: ' + err.message);
         expect().assertFail();
@@ -1947,20 +1947,20 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-     it("SUB_DMS_StartControl_Extension_StartAbility_0700", 0, async function (done) {
+    it("SUB_DMS_StartControl_Extension_StartAbility_0700", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0700 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0700";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.startAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver.err",
           abilityName: "MainAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_0700 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(401);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0700 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0700 catch: ' + err.message);
         expect().assertFail();
@@ -1977,17 +1977,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_Extension_StartAbility_0800", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0800 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0800";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.startAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "MainAbility.err"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_0800 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(401);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0800 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0800 catch: ' + err.message);
         expect().assertFail();
@@ -2004,17 +2004,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_Extension_StartAbility_0900", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0900 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0900";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.startAbility({
-          deviceId:"dvId",
+          deviceId: "dvId",
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "MainAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_0900 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(401);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0900 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0900 catch: ' + err.message);
         expect().assertFail();
@@ -2031,17 +2031,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_Extension_StartAbility_1000", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_1000 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_1000";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.startAbility({
           deviceId: "",
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "MainAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_1000 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_1000 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_StartAbility_1000 catch: ' + err.message);
         expect().assertFail();
@@ -2058,17 +2058,17 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StartControl_Extension_StartAbility_1100", 0, async function (done) {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_1100 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_1100";
-      try{
+      try {
         extensionConnectId = globalThis.extensionContext.startServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "MainAbility"
-        },(err, data)=>{
+        }, (err, data) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_1100 startService result: ' + + err.code + " " + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_1100 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_StartAbility_1100 catch: ' + err.message);
         expect().assertFail();
@@ -2688,6 +2688,188 @@ export default function DmsFwkStageTest() {
       console.info("-----------------SUB_DMS_unRegisterMissionListener_0050 end------------------------");
     });
 
+    /*
+     * @tc.number  SUB_DMS_registerMissionListener_CallBack_0010
+     * @tc.name    registerMissionListener successful.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_registerMissionListener_CallBack_0010", 0, async function (done) {
+      console.info("-----------------SUB_DMS_registerMissionListener_CallBack_0010 start------------------------");
+      let TAG = "SUB_DMS_registerMissionListener_CallBack_0010";
+      function NotifyMissionsChanged(deviceId) {
+        console.info(TAG + 'NotifyMissionsChanged deviceId ' + JSON.stringify(deviceId));
+      }
+      function NotifySnapshot(deviceId, missionId) {
+        console.info(TAG + 'NotifySnapshot deviceId ' + JSON.stringify(deviceId));
+        console.info(TAG + 'NotifySnapshot missionId ' + JSON.stringify(missionId));
+      }
+      function NotifyNetDisconnect(deviceId, state) {
+        console.info(TAG + 'NotifyNetDisconnect deviceId ' + JSON.stringify(deviceId));
+        console.info(TAG + 'NotifyNetDisconnect state ' + JSON.stringify(state));
+      }
+      distributedMissionManager.registerMissionListener({
+        deviceId: dvId
+      }, {
+        notifyMissionsChanged: NotifyMissionsChanged,
+        notifySnapshot: NotifySnapshot,
+        notifyNetDisconnect: NotifyNetDisconnect
+      }, (error, data) => {
+        try {
+          if (error && error.code !== 0) {
+            console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+            console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+            expect().assertFail();
+          } else {
+            console.info('registerMissionListener finished');
+            console.info(TAG + ' finished: ' + JSON.stringify(data));
+            expect(data).assertEqual(undefined);
+          }
+        } catch (error) {
+          console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+          console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+          expect().assertFail();
+        }
+        done();
+      });
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_registerMissionListener_CallBack_0010 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_startSyncRemoteMissions_CallBack_0010
+     * @tc.name    startSyncRemoteMissions successful.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_startSyncRemoteMissions_CallBack_0010", 0, async function (done) {
+      console.info("-----------------SUB_DMS_startSyncRemoteMissions_CallBack_0010 start------------------------");
+      let TAG = "SUB_DMS_startSyncRemoteMissions_CallBack_0010";
+      distributedMissionManager.startSyncRemoteMissions({
+        deviceId: dvId,
+        fixConflict: false,
+        tag: 0
+      }, (error, data) => {
+        try {
+          if (error && error.code !== 0) {
+            console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+            console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+            expect().assertFail();
+          } else {
+            console.info('startSyncRemoteMissions finished');
+            console.info(TAG + ' finished: ' + JSON.stringify(data));
+            expect(data).assertEqual(undefined);
+          }
+        } catch (error) {
+          console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+          console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+          expect().assertFail();
+        }
+        done();
+      });
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_startSyncRemoteMissions_CallBack_0010 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_stopSyncRemoteMissions_CallBack_0010
+     * @tc.name    stopSyncRemoteMissions successful.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_stopSyncRemoteMissions_CallBack_0010", 0, async function (done) {
+      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_CallBack_0010 start------------------------");
+      let TAG = "SUB_DMS_stopSyncRemoteMissions_CallBack_0010";
+      distributedMissionManager.stopSyncRemoteMissions({
+        deviceId: dvId
+      }, (error, data) => {
+        try {
+          if (error && error.code !== 0) {
+            console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+            console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+            expect().assertFail();
+          } else {
+            console.info('stopSyncRemoteMissions finished');
+            console.info(TAG + ' finished: ' + JSON.stringify(data));
+            expect(data).assertEqual(undefined);
+          }
+        } catch (error) {
+          console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+          console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+          expect().assertFail();
+        }
+        done();
+      });
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_CallBack_0010 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_unRegisterMissionListener_CallBack_0010
+     * @tc.name    unRegisterMissionListener with wrong deviceId after registerMissionListener.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_unRegisterMissionListener_CallBack_0010", 0, async function (done) {
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_CallBack_0010 start------------------------");
+      let TAG = "SUB_DMS_unRegisterMissionListener_CallBack_0010";
+      distributedMissionManager.unRegisterMissionListener({
+        deviceId: '12345'
+      }, (error, data) => {
+        try {
+          if (error && error.code !== 0) {
+            console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+            console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+            expect(error.code).assertEqual(16300501);
+          } else {
+            console.info('unRegisterMissionListener finished');
+            console.info(TAG + ' finished: ' + JSON.stringify(data));
+            expect().assertFail();
+          }
+        } catch (error) {
+          console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+          console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+          expect().assertFail();
+        }
+        done();
+      });
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_CallBack_0010 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_unRegisterMissionListener_CallBack_0020
+     * @tc.name    unRegisterMissionListener successful.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_unRegisterMissionListener_CallBack_0020", 0, async function (done) {
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_CallBack_0020 start------------------------");
+      let TAG = "SUB_DMS_unRegisterMissionListener_CallBack_0020";
+      distributedMissionManager.unRegisterMissionListener({
+        deviceId: dvId
+      }, (error, data) => {
+        try {
+          if (error && error.code !== 0) {
+            console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+            console.info(TAG + ' failed: ' + JSON.stringify(error.message));
+            expect().assertFail();
+          } else {
+            console.info('unRegisterMissionListener finished');
+            console.info(TAG + ' finished: ' + JSON.stringify(data));
+            expect(data).assertEqual(undefined);
+          }
+        } catch (error) {
+          console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+          console.info(TAG + ' catch: ' + JSON.stringify(error.message));
+          expect().assertFail();
+        }
+        done();
+      });
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_unRegisterMissionListener_CallBack_0020 end------------------------");
+    });
+
     /**
     * @tc.number   SUB_DMS_on_0010
     * @tc.name     register on successful.
@@ -2737,16 +2919,15 @@ export default function DmsFwkStageTest() {
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_0030
+    * @tc.number   SUB_DMS_continueMission_CallBack_0010
     * @tc.name     continueMission with wrong bundleName.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_0030', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_0030 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_0030";
-      function onContinueDone(result)
-      {
+    it('SUB_DMS_continueMission_CallBack_0010', 0, async function (done) {
+      console.info("---------------------SUB_DMS_continueMission_CallBack_0010 start---------------------------");
+      let TAG = "SUB_DMS_continueMission_CallBack_0010";
+      function onContinueDone(result) {
         expect(result.code).assertEqual(401);
         console.info(TAG + " onContinueDone:result = " + JSON.stringify(result));
       }
@@ -2755,7 +2936,7 @@ export default function DmsFwkStageTest() {
           srcDeviceId: localDeviceId,
           dstDeviceId: dvId,
           bundleName: "test",
-          wantParam: {"key": "value"}
+          wantParam: { "key": "value" }
         };
         await distributedMissionManager.continueMission(param, onContinueDone);
         done();
@@ -2765,31 +2946,31 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_0030 end---------------------------");
+      console.info("---------------------SUB_DMS_continueMission_CallBack_0010 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_0040
+    * @tc.number   SUB_DMS_continueMission_0010
     * @tc.name     continueMission with wrong bundleName.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_0040', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_0040 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_0040";
+    it('SUB_DMS_continueMission_0010', 0, async function (done) {
+      console.info("---------------------SUB_DMS_continueMission_0010 start---------------------------");
+      let TAG = "SUB_DMS_continueMission_0010";
       try {
         let param = {
           srcDeviceId: localDeviceId,
           dstDeviceId: dvId,
           bundleName: "test",
-          wantParam: {"key": "value"}
+          wantParam: { "key": "value" }
         };
-        await distributedMissionManager.continueMission(param).then(data =>{
+        await distributedMissionManager.continueMission(param).then(data => {
           console.info(TAG + ' finished: ' + JSON.stringify(data));
           expect().assertFail();
           done();
         }).catch(error => {
-          console.info(TAG + ' result: ' + JSON.stringify(error));
+          console.info(TAG + ' failed: ' + JSON.stringify(error));
           expect(error.code).assertEqual(401);
           done();
         });
@@ -2799,26 +2980,261 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
+      console.info("---------------------SUB_DMS_continueMission_0010 end---------------------------");
+    });
+
+    /**
+    * @tc.number   SUB_DMS_continueMission_0020
+    * @tc.name     continueMission with null bundleName.
+    * @tc.desc     Test continueMission promise function
+    * @tc.level    0
+    */
+    it('SUB_DMS_continueMission_0020', 0, async function (done) {
+      console.info("---------------------SUB_DMS_continueMission_0020 start---------------------------");
+      let TAG = "SUB_DMS_continueMission_0020";
+      try {
+        let param = {
+          srcDeviceId: localDeviceId,
+          dstDeviceId: dvId,
+          bundleName: " ",
+          wantParam: { "key": "value" }
+        };
+        await distributedMissionManager.continueMission(param).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error));
+          expect(error.code).assertEqual(401);
+          done();
+        });
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------------SUB_DMS_continueMission_0020 end---------------------------");
+    });
+
+    /**
+    * @tc.number   SUB_DMS_continueMission_0030
+    * @tc.name     continueMission with undefined bundleName.
+    * @tc.desc     Test continueMission promise function
+    * @tc.level    0
+    */
+    it('SUB_DMS_continueMission_0030', 0, async function (done) {
+      console.info("---------------------SUB_DMS_continueMission_0030 start---------------------------");
+      let TAG = "SUB_DMS_continueMission_0030";
+      try {
+        let param = {
+          srcDeviceId: localDeviceId,
+          dstDeviceId: dvId,
+          bundleName: undefined,
+          wantParam: { "key": "value" }
+        };
+        await distributedMissionManager.continueMission(param).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error));
+          expect().assertFail();
+          done();
+        });
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error));
+        expect(error.code).assertEqual(401);
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------------SUB_DMS_continueMission_0030 end---------------------------");
+    });
+
+    /**
+    * @tc.number   SUB_DMS_continueMission_0040
+    * @tc.name     continueMission with wrong srcDeviceId.
+    * @tc.desc     Test continueMission promise function
+    * @tc.level    0
+    */
+    it('SUB_DMS_continueMission_0040', 0, async function (done) {
+      console.info("---------------------SUB_DMS_continueMission_0040 start---------------------------");
+      let TAG = "SUB_DMS_continueMission_0040";
+      try {
+        let param = {
+          srcDeviceId: '12345',
+          dstDeviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstagetest",
+          wantParam: { "key": "value" }
+        };
+        await distributedMissionManager.continueMission(param).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error));
+          expect(error.code).assertEqual(16300505);
+          done();
+        });
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
       console.info("---------------------SUB_DMS_continueMission_0040 end---------------------------");
     });
 
+    /**
+    * @tc.number   SUB_DMS_continueMission_0050
+    * @tc.name     continueMission with undefined srcDeviceId.
+    * @tc.desc     Test continueMission promise function
+    * @tc.level    0
+    */
+    it('SUB_DMS_continueMission_0050', 0, async function (done) {
+      console.info("---------------------SUB_DMS_continueMission_0050 start---------------------------");
+      let TAG = "SUB_DMS_continueMission_0050";
+      try {
+        let param = {
+          srcDeviceId: undefined,
+          dstDeviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstagetest",
+          wantParam: { "key": "value" }
+        };
+        await distributedMissionManager.continueMission(param).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error));
+          expect().assertFail();
+          done();
+        });
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error));
+        expect(error.code).assertEqual(401);
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------------SUB_DMS_continueMission_0050 end---------------------------");
+    });
+
+    /**
+    * @tc.number   SUB_DMS_continueMission_0060
+    * @tc.name     continueMission with wrong dstDeviceId.
+    * @tc.desc     Test continueMission promise function
+    * @tc.level    0
+    */
+    it('SUB_DMS_continueMission_0060', 0, async function (done) {
+      console.info("---------------------SUB_DMS_continueMission_0060 start---------------------------");
+      let TAG = "SUB_DMS_continueMission_0060";
+      try {
+        let param = {
+          srcDeviceId: localDeviceId,
+          dstDeviceId: '12345',
+          bundleName: "com.acts.example.dmsfwkstagetest",
+          wantParam: { "key": "value" }
+        };
+        await distributedMissionManager.continueMission(param).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error));
+          expect(error.code).assertEqual(16300501);
+          done();
+        });
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------------SUB_DMS_continueMission_0060 end---------------------------");
+    });
+
+    /**
+    * @tc.number   SUB_DMS_continueMission_0070
+    * @tc.name     continueMission with null dstDeviceId.
+    * @tc.desc     Test continueMission promise function
+    * @tc.level    0
+    */
+    it('SUB_DMS_continueMission_0070', 0, async function (done) {
+      console.info("---------------------SUB_DMS_continueMission_0070 start---------------------------");
+      let TAG = "SUB_DMS_continueMission_0070";
+      try {
+        let param = {
+          srcDeviceId: localDeviceId,
+          dstDeviceId: ' ',
+          bundleName: "com.acts.example.dmsfwkstagetest",
+          wantParam: { "key": "value" }
+        };
+        await distributedMissionManager.continueMission(param).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error));
+          expect(error.code).assertEqual(16300501);
+          done();
+        });
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------------SUB_DMS_continueMission_0070 end---------------------------");
+    });
+
+    /**
+    * @tc.number   SUB_DMS_continueMission_0080
+    * @tc.name     continueMission with undefined dstDeviceId.
+    * @tc.desc     Test continueMission promise function
+    * @tc.level    0
+    */
+    it('SUB_DMS_continueMission_0080', 0, async function (done) {
+      console.info("---------------------SUB_DMS_continueMission_0080 start---------------------------");
+      let TAG = "SUB_DMS_continueMission_0080";
+      try {
+        let param = {
+          srcDeviceId: localDeviceId,
+          dstDeviceId: undefined,
+          bundleName: "com.acts.example.dmsfwkstagetest",
+          wantParam: { "key": "value" }
+        };
+        await distributedMissionManager.continueMission(param).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error));
+          expect().assertFail();
+          done();
+        });
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error));
+        expect(error.code).assertEqual(401);
+        done();
+      }
+      await sleep(1000);
+      console.info("---------------------SUB_DMS_continueMission_0080 end---------------------------");
+    });
+
     /*
-     * @tc.number  SUB_DMS_continueMission_0010
+     * @tc.number  SUB_DMS_continueMission_0090
      * @tc.name    continueMission with wrong srcDeviceId.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_continueMission_0010", 0, async function (done) {
-      console.info("-----------------SUB_DMS_continueMission_0010 start------------------------");
-      let TAG = "SUB_DMS_continueMission_0010";
+    it("SUB_DMS_continueMission_0090", 0, async function (done) {
+      console.info("-----------------SUB_DMS_continueMission_0090 start------------------------");
+      let TAG = "SUB_DMS_continueMission_0090";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
-      console.info(TAG + 'allLocalMissions info,' + JSON.stringify(allLocalMissions));
-      console.info(TAG + 'allLocalMissions[0] info,' + JSON.stringify(allLocalMissions[0]));
       let localMissionId = await allLocalMissions[0].missionId;
       console.info(TAG + 'localMissionId is,' + localMissionId);
-
       function onContinueDone(resultCode) {
         console.info(TAG + 'onContinueDone resultCode: ' + JSON.stringify(resultCode));
       };
@@ -2827,7 +3243,7 @@ export default function DmsFwkStageTest() {
           srcDeviceId: '12345',
           dstDeviceId: dvId,
           missionId: localMissionId,
-          wantParam: {"key": "value"}
+          wantParam: { "key": "value" }
         }, {
           onContinueDone: onContinueDone
         }).then(data => {
@@ -2836,37 +3252,204 @@ export default function DmsFwkStageTest() {
           done();
         }).catch(error => {
           console.info(TAG + ' failed: ' + JSON.stringify(error.code));
-          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
           expect(error.code).assertEqual(16300505);
           done();
         })
       } catch (error) {
         console.info(TAG + ' catch: ' + JSON.stringify(error.code));
-        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_continueMission_0010 end------------------------");
+      console.info("-----------------SUB_DMS_continueMission_0090 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_continueMission_0020
+     * @tc.number  SUB_DMS_continueMission_0100
+     * @tc.name    continueMission with undefined srcDeviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+    */
+    it("SUB_DMS_continueMission_0100", 0, async function (done) {
+      console.info("-----------------SUB_DMS_continueMission_0100 start------------------------");
+      let TAG = "SUB_DMS_continueMission_0100";
+      let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
+        console.info(TAG + 'getMissionInfos err,' + err);
+      });
+      let localMissionId = await allLocalMissions[0].missionId;
+      console.info(TAG + 'localMissionId is,' + localMissionId);
+      function onContinueDone(resultCode) {
+        console.info(TAG + 'onContinueDone resultCode: ' + JSON.stringify(resultCode));
+      };
+      try {
+        await distributedMissionManager.continueMission({
+          srcDeviceId: undefined,
+          dstDeviceId: dvId,
+          missionId: localMissionId,
+          wantParam: { "key": "value" }
+        }, {
+          onContinueDone: onContinueDone
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          expect().assertFail();
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        expect(error.code).assertEqual(401);
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_continueMission_0100 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_continueMission_0110
+     * @tc.name    continueMission with wrong dstDeviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+    */
+    it("SUB_DMS_continueMission_0110", 0, async function (done) {
+      console.info("-----------------SUB_DMS_continueMission_0110 start------------------------");
+      let TAG = "SUB_DMS_continueMission_0110";
+      let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
+        console.info(TAG + 'getMissionInfos err,' + err);
+      });
+      let localMissionId = await allLocalMissions[0].missionId;
+      console.info(TAG + 'localMissionId is,' + localMissionId);
+      function onContinueDone(resultCode) {
+        console.info(TAG + 'onContinueDone resultCode: ' + JSON.stringify(resultCode));
+      };
+      try {
+        await distributedMissionManager.continueMission({
+          srcDeviceId: localDeviceId,
+          dstDeviceId: '12345',
+          missionId: localMissionId,
+          wantParam: { "key": "value" }
+        }, {
+          onContinueDone: onContinueDone
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          expect(error.code).assertEqual(16300501);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_continueMission_0110 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_continueMission_0120
+     * @tc.name    continueMission with null dstDeviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+    */
+    it("SUB_DMS_continueMission_0120", 0, async function (done) {
+      console.info("-----------------SUB_DMS_continueMission_0120 start------------------------");
+      let TAG = "SUB_DMS_continueMission_0120";
+      let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
+        console.info(TAG + 'getMissionInfos err,' + err);
+      });
+      let localMissionId = await allLocalMissions[0].missionId;
+      console.info(TAG + 'localMissionId is,' + localMissionId);
+      function onContinueDone(resultCode) {
+        console.info(TAG + 'onContinueDone resultCode: ' + JSON.stringify(resultCode));
+      };
+      try {
+        await distributedMissionManager.continueMission({
+          srcDeviceId: localDeviceId,
+          dstDeviceId: ' ',
+          missionId: localMissionId,
+          wantParam: { "key": "value" }
+        }, {
+          onContinueDone: onContinueDone
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          expect(error.code).assertEqual(16300501);
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        expect().assertFail();
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_continueMission_0120 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_continueMission_0130
+     * @tc.name    continueMission with undefined dstDeviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+    */
+    it("SUB_DMS_continueMission_0130", 0, async function (done) {
+      console.info("-----------------SUB_DMS_continueMission_0130 start------------------------");
+      let TAG = "SUB_DMS_continueMission_0130";
+      let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
+        console.info(TAG + 'getMissionInfos err,' + err);
+      });
+      let localMissionId = await allLocalMissions[0].missionId;
+      console.info(TAG + 'localMissionId is,' + localMissionId);
+      function onContinueDone(resultCode) {
+        console.info(TAG + 'onContinueDone resultCode: ' + JSON.stringify(resultCode));
+      };
+      try {
+        await distributedMissionManager.continueMission({
+          srcDeviceId: localDeviceId,
+          dstDeviceId: undefined,
+          missionId: localMissionId,
+          wantParam: { "key": "value" }
+        }, {
+          onContinueDone: onContinueDone
+        }).then(data => {
+          console.info(TAG + ' finished: ' + JSON.stringify(data));
+          expect().assertFail();
+          done();
+        }).catch(error => {
+          console.info(TAG + ' failed: ' + JSON.stringify(error.code));
+          expect().assertFail();
+          done();
+        })
+      } catch (error) {
+        console.info(TAG + ' catch: ' + JSON.stringify(error.code));
+        expect(error.code).assertEqual(401);
+        done();
+      }
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_continueMission_0130 end------------------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_continueMission_0140
      * @tc.name    continueMission successful.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_continueMission_0020", 0, async function (done) {
-      console.info("-----------------SUB_DMS_continueMission_0020 start------------------------");
-      let TAG = "SUB_DMS_continueMission_0020";
+    it("SUB_DMS_continueMission_0140", 0, async function (done) {
+      console.info("-----------------SUB_DMS_continueMission_0140 start------------------------");
+      let TAG = "SUB_DMS_continueMission_0140";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
-      console.info(TAG + 'allLocalMissions info,' + JSON.stringify(allLocalMissions));
-      console.info(TAG + 'allLocalMissions[0] info,' + JSON.stringify(allLocalMissions[0]));
       let localMissionId = await allLocalMissions[0].missionId;
       console.info(TAG + 'localMissionId is,' + localMissionId);
-
       function onContinueDone(resultCode) {
         console.info(TAG + 'onContinueDone resultCode: ' + JSON.stringify(resultCode));
       };
@@ -2884,18 +3467,16 @@ export default function DmsFwkStageTest() {
           done();
         }).catch(error => {
           console.info(TAG + ' failed: ' + JSON.stringify(error.code));
-          console.info(TAG + ' failed: ' + JSON.stringify(error.message));
           expect().assertFail();
           done();
         })
       } catch (error) {
         console.info(TAG + ' catch: ' + JSON.stringify(error.code));
-        console.info(TAG + ' catch: ' + JSON.stringify(error.message));
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_continueMission_0020 end------------------------");
+      console.info("-----------------SUB_DMS_continueMission_0140 end------------------------");
     });
   })
 }

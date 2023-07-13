@@ -628,6 +628,44 @@ export default function DmsFwkFaTest() {
     });
 
     /*
+    * @tc.number  SUB_DMS_StartAbilityResult_CallBack_0010
+    * @tc.name    StartRemoteAbilityForResult remote MainAbility is success
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StartAbilityResult_CallBack_0010", 0, async function (done) {
+      console.info("---------------SUB_DMS_StartAbilityResult_CallBack_0010 is start---------------");
+      let TAG = 'SUB_DMS_StartAbilityResult_CallBack_0010';
+      let wantValue = {
+        deviceId: dvId,
+        bundleName: "com.acts.example.dmsfwkstageserver",
+        abilityName: "MainAbility2",
+        parameters: {
+          startReason: "terminateSelfWithResult"
+        }
+      }
+      featureAbility.startAbilityForResult({
+        want: wantValue
+      }, (error, data) => {
+        try {
+          if (error && error.code !== 0) {
+            console.error(TAG + ' fail, error: ' + error.code);
+            expect().assertFail();
+          } else {
+            console.log(TAG + ' success, data: ' + JSON.stringify(data));
+            expect(data.resultCode).assertEqual(100);
+          }
+        } catch (error) {
+          console.info(TAG + ":error = " + error);
+          expect().assertFail();
+        }
+        done();
+      });
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StartAbilityResult_CallBack_0010 is end---------------");
+    });
+
+    /*
      * @tc.number  SUB_DMS_ConnectAbility_0010
      * @tc.name    Connect the remote ServiceAbility.
      * @tc.desc    Function test
