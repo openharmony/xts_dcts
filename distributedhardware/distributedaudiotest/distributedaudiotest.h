@@ -28,6 +28,7 @@
 #include "audio_manager.h"
 #include "audio_types.h"
 #include "daudio_errcode.h"
+#include "distributed_hardware_log.h"
 
 const std::string CMD_QUIT = "quit";
 const std::string CMD_FIND = "find";
@@ -101,18 +102,16 @@ struct WAV_HEADER {
     uint32_t subchunk2Size = 0;
 };
 using WavHdr = struct WAV_HEADER;
-
 int32_t InitTestDemo();
 std::string FindAudioDevice();
-std::string OpenSpk(const std::string &devId);
+std::string OpenSpk();
 std::string StartRender();
 std::string StopRender();
 std::string CloseSpk();
-std::string OpenMic(const std::string &devId);
+std::string OpenMic();
 std::string StartCapture();
 std::string StopCapture();
 std::string CloseMic();
 std::string SetVolume(std::string vol);
 std::string GetVolume();
-
 #endif
