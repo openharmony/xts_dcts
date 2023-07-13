@@ -14,13 +14,14 @@
  */
 
 #include <gtest/gtest.h>
-#include "distributedaudiotest.h"
+#include "./distributedaudiotest.h"
 
 using namespace testing::ext;
 using namespace OHOS::DistributedHardware;
 
 int32_t g_audioOk = 0;
 int32_t g_audioDelay = 5;
+std::string res = "true";
 
 class DAudioAutomatTest : public testing::Test {
 public:
@@ -30,109 +31,94 @@ public:
     void TearDown();
     DAudioAutomatTest();
 };
-void DAudioAutomatTest::SetUpTestCase(void){}
+void DAudioAutomatTest::SetUpTestCase(void){
+    int ret = InitTestDemo();
+    if (ret != g_audioOk) {
+        DHLOGI("demo test:InitTestDemo error");
+        return;
+    }
+}
 void DAudioAutomatTest::TearDownTestCase(void) {}
 void DAudioAutomatTest::SetUp(void) {}
 void DAudioAutomatTest::TearDown(void) {}
 DAudioAutomatTest::DAudioAutomatTest(void) {}
 
-
-/**
- * @tc.number    : DCameraTest_0100
- * @tc.name      ：StartMirror()
- * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
- * @tc.desc      : The distributed screen starts mirroring the screen
- * @tc.type      : FUNC
- * @tc.size      : Medium test
- */
 HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0001, TestSize.Level1)
 {
-    int32_t ret = InitTestDemo();
-    EXPECT_EQ(g_audioOk, ret) << "InitTestDemo fail";
+    std::string ret = FindAudioDevice();
+    EXPECT_EQ(res, ret) << "FindAudioDevice fail";
     sleep(g_audioDelay);
 }
 
-/**
- * @tc.number    : DCameraTest_0100
- * @tc.name      ：StartMirror()
- * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
- * @tc.desc      : The distributed screen starts mirroring the screen
- * @tc.type      : FUNC
- * @tc.size      : Medium test
- */
 HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0002, TestSize.Level1)
 {
-    std::string ret = FindAudioDevice();
-    EXPECT_EQ(g_audioOk, atoi(ret.c_str())) << "FindAudioDevice fail";
+    std::string ret = OpenSpk();
+    EXPECT_EQ(res, ret) << "OpenSpk fail";
     sleep(g_audioDelay);
 }
 
 HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0003, TestSize.Level1)
 {
-    std::string ret = OpenSpk("2");
-    EXPECT_EQ(g_audioOk, atoi(ret.c_str())) << "OpenSpk fail";
+    std::string ret = StartRender();
+    EXPECT_EQ(res, ret) << "StartRender fail";
     sleep(g_audioDelay);
 }
 
 HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0004, TestSize.Level1)
 {
-    std::string ret = StartRender();
-    EXPECT_EQ(g_audioOk, atoi(ret.c_str())) << "StartRender fail";
+    std::string ret = StopRender();
+    EXPECT_EQ(res, ret) << "StopRender fail";
     sleep(g_audioDelay);
 }
 
 HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0005, TestSize.Level1)
 {
-    std::string ret = StopRender();
-    EXPECT_EQ(g_audioOk, atoi(ret.c_str())) << "StopRender fail";
+    std::string ret = CloseSpk();
+    EXPECT_EQ(res, ret) << "CloseSpk fail";
     sleep(g_audioDelay);
 }
 
 HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0006, TestSize.Level1)
 {
-    std::string ret = CloseSpk();
-    EXPECT_EQ(g_audioOk, atoi(ret.c_str())) << "CloseSpk fail";
+    std::string ret = OpenMic();
+    EXPECT_EQ(res, ret) << "OpenMic fail";
     sleep(g_audioDelay);
 }
 
 HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0007, TestSize.Level1)
 {
-    std::string ret = OpenMic("2");
-    EXPECT_EQ(g_audioOk, atoi(ret.c_str())) << "OpenMic fail";
+    std::string ret = StartCapture();
+    EXPECT_EQ(res, ret) << "StartCapture fail";
     sleep(g_audioDelay);
 }
 
 HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0008, TestSize.Level1)
 {
-    std::string ret = StartCapture();
-    EXPECT_EQ(g_audioOk, atoi(ret.c_str())) << "StartCapture fail";
+    std::string ret = StopCapture();
+    EXPECT_EQ(res, ret) << "StopCapture fail";
     sleep(g_audioDelay);
 }
 
 HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0009, TestSize.Level1)
 {
-    std::string ret = StopCapture();
-    EXPECT_EQ(g_audioOk, atoi(ret.c_str())) << "StopCapture fail";
+    std::string ret = CloseMic();
+    EXPECT_EQ(res, ret) << "CloseMic fail";
     sleep(g_audioDelay);
 }
 
 HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0010, TestSize.Level1)
 {
-    std::string ret = CloseMic();
-    EXPECT_EQ(g_audioOk, atoi(ret.c_str())) << "CloseMic fail";
+    std::string ret = SetVolume("5");
+    EXPECT_EQ(res, ret) << "SetVolume five fail";
+    sleep(g_audioDelay);
+    ret = SetVolume("1");
+    EXPECT_EQ(res, ret) << "SetVolume one fail";
     sleep(g_audioDelay);
 }
 
 HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0011, TestSize.Level1)
 {
-    std::string ret = SetVolume("5");
-    EXPECT_EQ(g_audioOk, atoi(ret.c_str())) << "SetVolume fail";
-    sleep(g_audioDelay);
-}
-
-HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0012, TestSize.Level1)
-{
     std::string ret = GetVolume();
-    EXPECT_EQ(g_audioOk, atoi(ret.c_str())) << "GetVolume fail";
+    EXPECT_EQ(res, ret) << "GetVolume fail";
     sleep(g_audioDelay);
 }
