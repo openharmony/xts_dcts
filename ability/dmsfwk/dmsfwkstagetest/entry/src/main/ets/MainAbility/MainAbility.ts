@@ -14,11 +14,27 @@
  */
 import Ability from '@ohos.app.ability.UIAbility';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
+import wantConstant from '@ohos.app.ability.wantConstant';
 
 export default class MainAbility extends Ability {
+    localStorage: LocalStorage;
+
     onCreate(want, launchParam) {
         console.log("[Demo] MainAbility onCreate")
         globalThis.abilityWant = want;
+        if (launchParam.launchReason == AbilityConstant.LaunchReason.CONTINUATION) {
+            this.localStorage = new LocalStorage();
+            this.context.restoreWindowStage(this.localStorage);
+        }
+    }
+
+    onNewWant(want, launchParam) {
+        console.log("[Demo] MainAbility onNewWant")
+        globalThis.abilityWant = want;
+        if (launchParam.launchReason == AbilityConstant.LaunchReason.CONTINUATION) {
+            this.localStorage = new LocalStorage();
+            this.context.restoreWindowStage(this.localStorage);
+        }
     }
 
     onDestroy() {
@@ -28,6 +44,13 @@ export default class MainAbility extends Ability {
     onWindowStageCreate(windowStage) {
         // Main window is created, set main page for this ability
         console.log("[Demo] MainAbility onWindowStageCreate")
+        globalThis.abilityContext = this.context;
+        windowStage.setUIContent(this.context, "MainAbility/pages/MainAbility_pages", null)
+    }
+
+    onWindowStageRestore(windowStage) {
+        // Main window is created, set main page for this ability
+        console.log("[Demo] MainAbility onWindowStageRestore")
         globalThis.abilityContext = this.context;
         windowStage.setUIContent(this.context, "MainAbility/pages/MainAbility_pages", null)
     }
@@ -49,7 +72,9 @@ export default class MainAbility extends Ability {
 
     onContinue(wantParams) {
         console.log('onContinue');
-        wantParams['myData'] = 'my1234567';
+        console.info(`onContinue version = ${wantParams.version}, targetDevice: ${wantParams.targetDevice}`);
+        wantParams['ohos.extra.param.key.supportContinueSourceExit'] = false;
+        wantParams['ohos.extra.param.key.supportContinuePageStack'] = false;
         return AbilityConstant.OnContinueResult.AGREE;
     }
 };
