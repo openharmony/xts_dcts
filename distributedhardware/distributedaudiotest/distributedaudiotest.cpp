@@ -300,7 +300,7 @@ std::string StartRender()
 
 std::string StopRender()
 {
-    if (g_render == nullptr) {
+    if (g_render == nullptr || g_spkStatus == DEVICE_OPEN) {
         return "true";
     }
 
