@@ -1181,7 +1181,7 @@ export default function RpcRequestJsUnitTest() {
         
         /*
         * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02900
-        * @tc.name    readString is read data from message sequence failed Error verification
+        * @tc.name    readParcelable is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   0   
         */
