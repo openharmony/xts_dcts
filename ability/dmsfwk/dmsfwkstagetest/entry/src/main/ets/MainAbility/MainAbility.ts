@@ -73,8 +73,8 @@ export default class MainAbility extends Ability {
     onContinue(wantParams) {
         console.log('onContinue');
         console.info(`onContinue version = ${wantParams.version}, targetDevice: ${wantParams.targetDevice}`);
-        wantParams['ohos.extra.param.key.supportContinueSourceExit'] = false;
-        wantParams['ohos.extra.param.key.supportContinuePageStack'] = false;
+        wantParams[wantConstant.Params.SUPPORT_CONTINUE_PAGE_STACK_KEY] = false;
+        wantParams[wantConstant.Params.SUPPORT_CONTINUE_SOURCE_EXIT_KEY] = false;
         return AbilityConstant.OnContinueResult.AGREE;
     }
 };
