@@ -1,0 +1,21 @@
+{
+    "description": "Configuration for Screen Tests",
+    "driver": {
+        "type": "OHJSUnitTest",
+        "test-timeout": "180000",
+        "shell-timeout": "180000",
+        "bundle-name": "cpm.ohos.distributedscreenjstest",
+        "package-name": "com.ohos.distributedscreenjstest",
+        
+		"testcase-timeout": 10000
+    },
+    "kits": [
+        {
+            "test-file-name": [
+                "SubDctsdisScreenJsTest.hap"
+            ],
+            "type": "AppInstallKit",
+            "cleanup-apps": true
+        }
+    ]
+}
