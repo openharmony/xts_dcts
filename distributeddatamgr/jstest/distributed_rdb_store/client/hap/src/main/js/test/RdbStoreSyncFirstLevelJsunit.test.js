@@ -1505,7 +1505,7 @@ export default function rdbSyncFirstLevelTest(){
                         let status = result[i][1];
                         console.log('testRdbSyncTest0190 device=' + result[i][0] + ' status=' + result[i][1]);
                         console.log('testRdbSyncTest0190  status=' + status);
-                        expect(status == 26).assertTrue();
+                        expect(status == 1).assertTrue();
                         rdbSecondStore = null;
                         done();
                     }
