@@ -338,14 +338,14 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_getDeviceType_0012 end------------------------");
         })
 		
-		/*
-         * @tc.number  SUB_DH_releaseDeviceManager_0015
+        /*
+         * @tc.number  SUB_DH_releaseDeviceManager_0013
          * @tc.name    Releases the {@code DeviceManager} instance that is no longer used.
          * @tc.desc    Function test
          * @tc.level   0
-        */
-        it("SUB_DH_releaseDeviceManager_0015", 0, async function (done) {
-            console.info("-----------------SUB_DH_releaseDeviceManager_0015 start------------------------");
+         */
+        it("SUB_DH_releaseDeviceManager_0013", 0, async function (done) {
+            console.info("-----------------SUB_DH_releaseDeviceManager_0013 start------------------------");
             var mFilterOption = {
                 targetPkgName: "com.ohos.distributedscreenjstest",
                 sortType: 0,
@@ -371,7 +371,7 @@ export default function distributedDeviceManager() {
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DH_releaseDeviceManager_0015 end------------------------");
+            console.info("-----------------SUB_DH_releaseDeviceManager_0013 end------------------------");
         })
     })
 }
