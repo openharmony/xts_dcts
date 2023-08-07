@@ -1,13 +1,12 @@
 {
-    "description": "Configuration for Screen Tests",
+    "description": "Configuration for hjunit demo Tests",
     "driver": {
         "type": "OHJSUnitTest",
-        "test-timeout": "180000",
-        "shell-timeout": "180000",
-        "bundle-name": "cpm.ohos.distributedscreenjstest",
+        "bundle-name": "com.ohos.distributedscreenjstest",
         "package-name": "com.ohos.distributedscreenjstest",
-        
-		"testcase-timeout": 10000
+        "test-timeout": "1200000",
+        "testcase-timeout": "600000",
+        "shell-timeout": "1200000"
     },
     "kits": [
         {

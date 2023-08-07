@@ -2,15 +2,15 @@
   "string": [
     {
       "name": "app_name",
-      "value": "SubDctsdisScreenJsTest"
+      "value": "distributedscreenjstest"
     },
     {
       "name": "mainability_description",
-      "value": "JS_Phone_Empty DH"
+      "value": "JS_Phone_Empty device"
     },
     {
-        "name": "MainAbility_desc",
-        "value": "description"
+      "name": "MainAbility_desc",
+      "value": "distributedscreenjstest"
     },
     {
         "name": "MainAbility_label",
