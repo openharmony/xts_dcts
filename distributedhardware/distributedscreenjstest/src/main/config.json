@@ -30,8 +30,7 @@
             "tablet",
             "tv",
             "wearable",
-            "default",
-            "2in1"
+            "default"
         ],
         "distro": {
             "deliveryWithInstall": true,
