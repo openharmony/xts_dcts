@@ -22,23 +22,3 @@ group("distributeddatatest") {
     ]
   }
 }
-
-ohos_shared_library("disDataProcess") {
-  sources = [ "./cpptest/process_common/process_msg.cpp" ]
-
-  visibility = [ ":*" ]
-  include_dirs = [ "../common" ]
-
-  external_deps = [
-    "access_token:libaccesstoken_sdk",
-    "access_token:libnativetoken",
-    "access_token:libtoken_setproc",
-    "c_utils:utils",
-    "device_manager:devicemanagersdk",
-    "hilog:libhilog",
-    "ipc:ipc_core",
-    "kv_store:distributeddata_inner",
-  ]
-  subsystem_name = "distributeddatamgr"
-  part_name = "kv_store"
-}
