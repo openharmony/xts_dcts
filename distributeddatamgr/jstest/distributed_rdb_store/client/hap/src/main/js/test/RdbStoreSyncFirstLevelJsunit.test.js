@@ -1307,7 +1307,8 @@ export default function rdbSyncFirstLevelTest(){
             }
             resultSet = null;
             let syncPre = new data_Rdb.RdbPredicates('emp');
-            syncPre.inDevices(" ");
+            let devId = [""];
+            syncPre.inDevices(devId);
             let promise = rdbStore.sync(data_Rdb.SyncMode.SYNC_MODE_PUSH, syncPre);
             promise.then((result) => {
                 console.log('testRdbSyncTest0160 sync done.');
