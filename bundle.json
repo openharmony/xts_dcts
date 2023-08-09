@@ -1,5 +1,5 @@
 {
-    "name": "@ohos/xts_dcts",
+    "name": "@ohos/dcts",
     "description": "dcts",
     "version": "3.1",
     "license": "Apache License 2.0",
@@ -10,7 +10,7 @@
     "dirs": {},
     "scripts": {},
     "component": {
-        "name": "xts_dcts",
+        "name": "dcts",
         "subsystem": "xts",
         "syscap": [],
         "features": [],
