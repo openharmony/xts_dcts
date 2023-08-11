@@ -13,7 +13,7 @@
 
 #import("//hit/build/suite.gni")
 import("test_packages.gni")
-ohos_test_suite("dcts") {
+ohos_test_suite("xts_dcts") {
   deps = selected_packages
 }
 
