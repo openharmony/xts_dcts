@@ -131,11 +131,11 @@ export default function distributedDeviceManager() {
 
                 dmInstance.startDiscovering(discoverParam);
                 console.log("startDiscovering success");
-                expect().assertTrue();
+                expect(true).assertTrue();
                 done();
             } catch(err) {
                 console.error("startDiscovering errCode:" + err.code + ",errMessage:" + err.message);
-                expect().assertFail();
+                expect(false).assertFail();
                 done();
             }
             await sleep(1000);
@@ -273,7 +273,7 @@ export default function distributedDeviceManager() {
                 
             } catch (err) {
                 console.info("bindTarget errCode:" + err.code + ",errMessage:" + err.message);
-                expect().assertFail();
+                expect(false).assertFail();
                 done();
             }
             await sleep(1000);
@@ -417,16 +417,16 @@ export default function distributedDeviceManager() {
             if (deviceId !== null) {
                 dmInstance.unbindTarget(deviceId);
                 console.log("unbindTarget success");
-                expect().assertTrue();
+                expect(true).assertTrue();
                 done();
             } else {
                 console.log("unbindTarget deviceId is null");
-                expect().assertTrue();
+                expect(true).assertTrue();
                 done();
             }
         } catch (err) {
             console.info("unbindTarget errCode:" + err.code + ",errMessage:" + err.message);
-            expect().assertFail();
+            expect(false).assertFail();
             done();
         }
         await sleep(1000);
@@ -444,11 +444,11 @@ export default function distributedDeviceManager() {
         try {
             dmInstance.stopDiscovering();
             console.log("stopDiscovering success");
-            expect().assertTrue();
+            expect(true).assertTrue();
             done();
         } catch (err) {
             console.info("stopDiscovering errCode:" + err.code + ",errMessage:" + err.message);
-            expect().assertFail();
+            expect(false).assertFail();
             done();
         }
         await sleep(1000);
