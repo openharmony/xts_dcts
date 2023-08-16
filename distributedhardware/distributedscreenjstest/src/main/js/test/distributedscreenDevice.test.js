@@ -253,7 +253,7 @@ export default function distributedDeviceManager() {
                 "targetPkgName" : "com.ohos.distributedDeviceManager.screen",
                 "appName" : "SubDctsdisScreenJsTest",
                 "appOperation": "想要连接本机。",
-                "customDescription": "device manager device manager device manager device manager device manager device manager device manager device manager"
+                "customDescription": "device manager"
             };
             try {
                 if (deviceId !== null) {
@@ -262,7 +262,7 @@ export default function distributedDeviceManager() {
                         console.info("bindTarget fail errCode:" + err.code + ",errMessage:" + err.message);
                     }
                     console.log("bindTarget:" + JSON.stringify(data));
-                    expect(data != nullptr).assertTrue();
+                    expect(data != null).assertTrue();
                     done();
                     })
                 } else {
