@@ -17,13 +17,13 @@
 
 #include "wifi_utils.h"
 
-using std::unique_ptr;
+using std::shared_ptr;
 using namespace OHOS::Wifi;
 
 const static int WIFI_SA_ID = 1125;
 const static int TWO_SECOND = 2;
 const static int FIVE_SECOND = 5;
-static unique_ptr<WifiDevice> wifiDevicePtr = WifiDevice::GetInstance(WIFI_SA_ID);
+static shared_ptr<WifiDevice> wifiDevicePtr = WifiDevice::GetInstance(WIFI_SA_ID);
 
 int WiFiUtils::EnableWifi()
 {
