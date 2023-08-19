@@ -85,7 +85,7 @@ void DcameraHdfDemo::GetStreamOpt()
     int rc = 0;
 
     if (streamOperator_ == nullptr) {
-        const sptr<IStreamOperatorCallback> streamOperatorCallback = new DemoStreamOperatorCallback();
+        const sptr<IStreamOperatorCallback> streamOperatorCallback(new DemoStreamOperatorCallback());
         rc = demoCameraDevice_->GetStreamOperator(streamOperatorCallback, streamOperator_);
         if (rc != HDI::Camera::V1_0::NO_ERROR) {
             DHLOGE("demo test: GetStreamOpt GetStreamOperator fail");
@@ -258,7 +258,7 @@ RetCode DcameraHdfDemo::InitCameraDevice()
     GetCameraConnectionType(ability_);
     GetFaceDetectMaxNum(ability_);
 
-    sptr<DemoCameraDeviceCallback> callback = new DemoCameraDeviceCallback();
+    sptr<DemoCameraDeviceCallback> callback(new DemoCameraDeviceCallback());
     rc = demoCameraHost_->OpenCamera(cameraIds_.front(), callback, demoCameraDevice_);
     if (rc != HDI::Camera::V1_0::NO_ERROR || demoCameraDevice_ == nullptr) {
         DHLOGE("demo test: InitCameraDevice OpenCamera failed");
@@ -307,7 +307,7 @@ RetCode DcameraHdfDemo::InitSensors()
 
 void DcameraHdfDemo::StoreImage(const char *bufStart, const uint32_t size) const
 {
-    DHLOGI("demo test:StoreImage buf_start == %p size == %d", bufStart, size);
+    DHLOGI("demo test:StoreImage size == %d", size);
     constexpr uint32_t pathLen = 64;
     char path[pathLen] = {0};
     char prefix[] = "/data/";
@@ -344,7 +344,7 @@ void DcameraHdfDemo::StoreVideo(const char *bufStart, const uint32_t size) const
     if (ret == -1) {
         DHLOGE("demo test:write video file error %s.....", strerror(errno));
     }
-    DHLOGI("demo test:StoreVideo buf_start == %p size == %d", bufStart, size);
+    DHLOGI("demo test:StoreVideo size == %d", size);
 }
 
 void DcameraHdfDemo::OpenVideoFile()
@@ -569,7 +569,7 @@ RetCode DcameraHdfDemo::StartPreviewStream()
 
 RetCode DcameraHdfDemo::ReleaseAllStream()
 {
-    std::vector<int> streamIds = {};
+    std::vector<int> streamIds;
     DHLOGI("demo test: ReleaseAllStream enter");
 
     if (isPreviewOn_ != 1) {
@@ -760,7 +760,7 @@ RetCode DcameraHdfDemo::StreamOffline(const int streamId)
     int rc = 0;
     constexpr size_t offlineDelayTime = 4;
     DHLOGI("demo test: StreamOffline enter");
-    sptr<IStreamOperatorCallback> streamOperatorCallback = new DemoStreamOperatorCallback();
+    sptr<IStreamOperatorCallback> streamOperatorCallback(new DemoStreamOperatorCallback());
     sptr<IOfflineStreamOperator> offlineStreamOperator = nullptr;
     std::vector<int> streamIds;
     streamIds.push_back(streamId);
@@ -1118,13 +1118,14 @@ int32_t DemoCameraDeviceCallback::OnResult(uint64_t timestamp, const std::vector
                 camera_metadata_item_t entry;
                 int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_CONTROL_EXPOSURE_MODE, &entry);
                 if (ret != 0) {
-                    DHLOGE("demo test: get OHOS_CONTROL_EXPOSURE_MODE error");
                     return RC_ERROR;
                 }
                 exposureMode = *(entry.data.u8);
                 DHLOGI("demo test: exposureMode %d", exposureMode);
                 break;
             }
+            default:
+                return RC_ERROR;
         }
     }
 
@@ -1133,7 +1134,8 @@ int32_t DemoCameraDeviceCallback::OnResult(uint64_t timestamp, const std::vector
 
 int32_t DemoCameraHostCallback::OnCameraStatus(const std::string& cameraId, CameraStatus status)
 {
-    DHLOGI("%s, enter.", __func__);
+    DHLOGI("%s, enter. cameraId = %s, status = %d",
+        __func__, cameraId.c_str(), static_cast<int>(status));
     return RC_OK;
 }
 
@@ -1153,26 +1155,27 @@ int32_t DemoCameraHostCallback::OnCameraEvent(const std::string& cameraId, Camer
 
 int32_t DemoStreamOperatorCallback::OnCaptureStarted(int32_t captureId, const std::vector<int32_t>& streamIds)
 {
-    DHLOGI("%s, enter.", __func__);
+    DHLOGI("%s, enter. captureId = %d, streamIds size = %d", __func__, captureId, streamIds.size());
     return RC_OK;
 }
 
 int32_t DemoStreamOperatorCallback::OnCaptureEnded(int32_t captureId, const std::vector<CaptureEndedInfo>& infos)
 {
-    DHLOGI("%s, enter.", __func__);
+    DHLOGI("%s, enter. captureId = %d, infos size = %d", __func__, captureId, infos.size());
     return RC_OK;
 }
 
 int32_t DemoStreamOperatorCallback::OnCaptureError(int32_t captureId, const std::vector<CaptureErrorInfo>& infos)
 {
-    DHLOGI("%s, enter.", __func__);
+    DHLOGI("%s, enter. captureId = %d, infos size = %d", __func__, captureId, infos.size());
     return RC_OK;
 }
 
 int32_t DemoStreamOperatorCallback::OnFrameShutter(int32_t captureId,
     const std::vector<int32_t>& streamIds, uint64_t timestamp)
 {
-    DHLOGI("%s, enter.", __func__);
+    DHLOGI("%s, enter. captureId = %d, streamIds size = %d, timestamp = %llu", __func__,
+        captureId, streamIds.size(), timestamp);
     return RC_OK;
 }
 
