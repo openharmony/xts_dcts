@@ -467,13 +467,13 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01100
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01100
         * @tc.name    Writes the specified anonymous shared object to this MessageSequence
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */   
-        it("SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01100", 0, function(){
-            console.info("--------------------start SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01100--------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01100", 0, function(){
+            console.info("--------------------start SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01100--------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ashmem = rpc.Ashmem.create("ashmem", 1024);
@@ -485,17 +485,17 @@ export default function RpcRequestJsUnitTest() {
             }finally{
                 data.reclaim();
             }
-            console.info("--------------------end SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01100--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01100--------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01200
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01200
         * @tc.name    Test the function of serializing the readAshmem interface in MessageSequence mode
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */   
-        it("SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01200", 0, function(){
-            console.info("--------------------start SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01200--------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01200", 0, function(){
+            console.info("--------------------start SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01200--------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ashmem = rpc.Ashmem.create("ashmem", 1024);
@@ -509,17 +509,17 @@ export default function RpcRequestJsUnitTest() {
             }finally{
                 data.reclaim();
             }
-            console.info("--------------------end SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01200--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01200--------------------");
         });  
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01300
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01300
         * @tc.name    Test the function of serializing the writeAshmem interface in MessageParcel mode
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */   
-        it("SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01300", 0, function(){
-            console.info("--------------------start SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01300--------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01300", 0, function(){
+            console.info("--------------------start SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01300--------------------");
             try{
                 var data = rpc.MessageParcel.create();
                 let ashmem = rpc.Ashmem.create("ashmem", 1024);
@@ -532,17 +532,17 @@ export default function RpcRequestJsUnitTest() {
             }finally{
                 data.reclaim();
             }
-            console.info("--------------------end SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01300--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01300--------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01400
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01400
         * @tc.name    Test the function of serializing the readAshmem interface in MessageParcel mode
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */   
-        it("SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01400", 0, function(){
-            console.info("--------------------start SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01400--------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01400", 0, function(){
+            console.info("--------------------start SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01400--------------------");
             try{
                 var data = rpc.MessageParcel.create();
                 let ashmem = rpc.Ashmem.create("ashmem", 1024);
@@ -557,17 +557,17 @@ export default function RpcRequestJsUnitTest() {
             }finally{
                 data.reclaim();
             }
-            console.info("--------------------end SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01400--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01400--------------------");
         });  
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01500
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01500
         * @tc.name    To test the function of handling the exception of the writeAshmem interface in MessageSequence mode
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */   
-        it("SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01500", 0, function(){
-            console.info("--------------------start SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01500--------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01500", 0, function(){
+            console.info("--------------------start SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01500--------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ashmem = "";
@@ -581,17 +581,17 @@ export default function RpcRequestJsUnitTest() {
             }finally{
                 data.reclaim();
             }
-            console.info("--------------------end SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01500--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01500--------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01600
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01600
         * @tc.name    To test the function of handling the exception of the writeAshmem interface in MessageParcel mode
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */   
-        it("SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01600", 0, function(){
-            console.info("--------------------start SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01600--------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01600", 0, function(){
+            console.info("--------------------start SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01600--------------------");
             try{
                 var data = rpc.MessageParcel.create();
                 let weitedata = data.writeAshmem();
@@ -602,17 +602,17 @@ export default function RpcRequestJsUnitTest() {
             }finally{
                 data.reclaim();
             }
-            console.info("--------------------end SUB_Softbus_RPC_Compatibility_onRemoteMessageRequest_01600--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_01600--------------------");
         });         
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00100
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00100
         * @tc.name    writeRemoteObject is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00100", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00100---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00100", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00100---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let testRemoteObject = new TestRemoteObject("testObject");
@@ -623,17 +623,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00100---------------------------");
         });        
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00200
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00200
         * @tc.name    readRemoteObject is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00200", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00200---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00200", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00200---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let testRemoteObject = new TestRemoteObject("testObject");
@@ -645,17 +645,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             } 
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00200---------------------------");
         });         
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00300
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00300
         * @tc.name    readRemoteObject is proxy or remote object is invalid Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00300", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00300---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00300", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00300---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.readRemoteObject();
@@ -666,17 +666,17 @@ export default function RpcRequestJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00300---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00400
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00400
         * @tc.name    writeInterfaceToken is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00400", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00400---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00400", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00400---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -686,17 +686,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00400---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00500
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00500
         * @tc.name    readInterfaceToken is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00500", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00500---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00500", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00500---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.writeInterfaceToken("rpctest");
@@ -707,17 +707,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00500---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00600
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00600
         * @tc.name    setSize is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00600", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00600---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00600", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00600---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -727,17 +727,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00600---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00700
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00700
         * @tc.name    setCapacity is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00700", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00700---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00700", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00700---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -747,17 +747,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00700---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00800
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00800
         * @tc.name    rewindRead is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00800", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00800---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00800", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00800---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -767,17 +767,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00800---------------------------");
         });  
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00900
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00900
         * @tc.name    rewindWrite is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00900", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00900---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00900", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00900---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -787,17 +787,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_00900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_00900---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01000
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01000
         * @tc.name    writeByte is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01000", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01000---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01000", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01000---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -807,17 +807,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01000---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01100
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01100
         * @tc.name    readByte is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01100", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01100---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01100", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01100---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -827,17 +827,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01100---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01200
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01200
         * @tc.name    writeShort is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01200", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01200---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01200", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01200---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -847,17 +847,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01200---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01300
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01300
         * @tc.name    readShort is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01300", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01300---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01300", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01300---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.writeShort(0);
@@ -868,17 +868,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01300---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01400
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01400
         * @tc.name    writeInt is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01400", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01400---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01400", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01400---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -888,17 +888,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01400---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01500
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01500
         * @tc.name    readInt is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01500", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01500---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01500", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01500---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.writeInt(0);
@@ -909,17 +909,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01500---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01600
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01600
         * @tc.name    writeLong is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01600", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01600---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01600", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01600---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -929,17 +929,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01600---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01700
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01700
         * @tc.name    readLong is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01700", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01700---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01700", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01700---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.writeLong(0);
@@ -950,17 +950,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01700---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01800
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01800
         * @tc.name    writeFloat is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01800", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01800---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01800", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01800---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -970,17 +970,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01800---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01900
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01900
         * @tc.name    readFloat is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01900", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01900---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01900", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01900---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.writeFloat(1.0);
@@ -991,17 +991,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_01900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_01900---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02000
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02000
         * @tc.name    writeDouble is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02000", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02000---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02000", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02000---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -1011,17 +1011,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02000---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02100
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02100
         * @tc.name    readDouble is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02100", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02100---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02100", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02100---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.writeDouble(1.0);
@@ -1032,17 +1032,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02100---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02200
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02200
         * @tc.name    writeBoolean is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02200", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02200---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02200", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02200---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -1052,17 +1052,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02200---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02300
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02300
         * @tc.name    readBoolean is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02300", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02300---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02300", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02300---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.writeBoolean(true);
@@ -1073,17 +1073,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02300---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02400
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02400
         * @tc.name    writeChar is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02400", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02400---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02400", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02400---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -1093,17 +1093,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02400---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02500
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02500
         * @tc.name    readChar is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02500", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02500---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02500", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02500---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.writeChar(56);
@@ -1114,17 +1114,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02500---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02600
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02600
         * @tc.name    writeString is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02600", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02600---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02600", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02600---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -1134,17 +1134,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02600---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02700
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02700
         * @tc.name    readString is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02700", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02700---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02700", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02700---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.writeString("rpc");
@@ -1155,17 +1155,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02700---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02800
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02800
         * @tc.name    writeParcelable is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02800", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02800---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02800", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02800---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let sequenceable = new MySequenceable(1, "aaa");
@@ -1176,17 +1176,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02800---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02900
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02900
         * @tc.name    readParcelable is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02900", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02900---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02900", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02900---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let sequenceable = new MySequenceable(1, "aaa");
@@ -1199,17 +1199,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_02900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_02900---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03000
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03000
         * @tc.name    writeByteArray is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03000", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03000---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03000", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03000---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [1, 2, 3, 4, 5];
@@ -1220,17 +1220,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03000---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03100
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03100
         * @tc.name    readByteArray is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03100", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03100---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03100", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03100---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [1, 2, 3, 4, 5];
@@ -1242,17 +1242,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03100---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03200
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03200
         * @tc.name    writeShortArray is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03200", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03200---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03200", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03200---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [1, 2, 3, 4, 5];
@@ -1263,17 +1263,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03200---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03300
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03300
         * @tc.name    readShortArray is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03300", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03300---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03300", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03300---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [1, 2, 3, 4, 5];
@@ -1285,17 +1285,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03300---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03400
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03400
         * @tc.name    writeIntArray is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03400", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03400---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03400", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03400---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [1, 2, 3, 4, 5];
@@ -1306,17 +1306,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03400---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03500
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03500
         * @tc.name    readIntArray is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03500", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03500---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03500", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03500---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [1, 2, 3, 4, 5];
@@ -1328,17 +1328,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03500---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03600
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03600
         * @tc.name    writeLongArray is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03600", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03600---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03600", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03600---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [1, 2, 3, 4, 5];
@@ -1349,17 +1349,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03600---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03700
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03700
         * @tc.name    readLongArray is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03700", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03700---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03700", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03700---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [1, 2, 3, 4, 5];
@@ -1371,17 +1371,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03700---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03800
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03800
         * @tc.name    writeFloatArray is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03800", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03800---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03800", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03800---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [1.1, 2.2, 3.3];
@@ -1392,17 +1392,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03800---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03900
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03900
         * @tc.name    readFloatArray is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03900", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03900---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03900", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03900---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [1.1, 2.2, 3.3];
@@ -1414,17 +1414,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_03900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_03900---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04000
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04000
         * @tc.name    writeDoubleArray is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04000", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04000---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04000", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04000---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [11.1, 22.2, 33.3];
@@ -1435,17 +1435,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04000---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04100
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04100
         * @tc.name    readDoubleArray is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04100", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04100---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04100", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04100---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [11.1, 22.2, 33.3];
@@ -1457,17 +1457,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04100---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04200
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04200
         * @tc.name    writeBooleanArray is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04200", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04200---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04200", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04200---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [false, true, false];
@@ -1478,17 +1478,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04200---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04300
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04300
         * @tc.name    readBooleanArray is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04300", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04300---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04300", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04300---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [false, true, false];
@@ -1500,17 +1500,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04300---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04400
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04400
         * @tc.name    writeCharArray is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04400", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04400---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04400", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04400---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [97, 98, 88];
@@ -1521,17 +1521,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04400---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04500
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04500
         * @tc.name    readCharArray is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04500", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04500---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04500", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04500---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = [97, 98, 88];
@@ -1543,17 +1543,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04500---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04600
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04600
         * @tc.name    writeStringArray is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04600", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04600---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04600", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04600---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = ["abc", "def"];
@@ -1564,17 +1564,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04600---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04700
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04700
         * @tc.name    readStringArray is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04700", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04700---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04700", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04700---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ByteArrayVar = ["abc", "def"];
@@ -1586,17 +1586,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04700---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04800
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04800
         * @tc.name    writeNoException is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04800", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04800---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04800", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04800---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -1606,17 +1606,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04800---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04900
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04900
         * @tc.name    readException is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04900", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04900---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04900", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04900---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 data.reclaim();
@@ -1626,17 +1626,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_04900 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_04900 ---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05000
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05000
         * @tc.name    writeParcelableArray is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05000", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05000---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05000", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05000---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let a = [new MySequenceable(1, "aaa"), new MySequenceable(2, "bbb"),
@@ -1648,17 +1648,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05000---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05100
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05100
         * @tc.name    readParcelableArray is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05100", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05100---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05100", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05100---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let a = [new MySequenceable(1, "aaa"), new MySequenceable(2, "bbb"),
@@ -1672,17 +1672,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05100 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05100 ---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05200
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05200
         * @tc.name    writeRemoteObjectArray is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05200", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05200---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05200", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05200---------------------------");
             try{
                 let count = 0;
                 function checkResult(num, str) {
@@ -1705,17 +1705,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05200---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05300
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05300
         * @tc.name    readRemoteObjectArray is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05300", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05300---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05300", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05300---------------------------");
             try{
                 let count = 0;
                 function checkResult(num, str) {
@@ -1739,17 +1739,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05300 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05300 ---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05400
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05400
         * @tc.name    dupFileDescriptor is call os dup function failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05400", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05400---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05400", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05400---------------------------");
             try{
                 rpc.MessageSequence.dupFileDescriptor(-1);
             } catch (error) {
@@ -1757,17 +1757,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05400 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05400 ---------------------------");
         });         
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05500
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05500
         * @tc.name    writeFileDescriptor is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05500", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05500---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05500", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05500---------------------------");
             try{
                 let context = FA.getContext();
                 await context.getFilesDir().then(async function(path) {
@@ -1784,17 +1784,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05500 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05500 ---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05600
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05600
         * @tc.name    readFileDescriptor is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05600", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05600---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05600", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05600---------------------------");
             try{
                 let context = FA.getContext();
                 await context.getFilesDir().then(async function(path) {
@@ -1812,17 +1812,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05600 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05600 ---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05700
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05700
         * @tc.name    writeAshmem is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05700", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05700---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05700", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05700---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", 1024);
@@ -1835,17 +1835,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05700 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05700 ---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05800
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05800
         * @tc.name     readAshmem is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05800", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05800---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05800", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05800---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", 1024);
@@ -1859,17 +1859,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05800 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05800 ---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05900
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05900
         * @tc.name    writeRawData is write data to message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05900", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05900---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05900", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05900---------------------------");
             try{
                 var data = new rpc.MessageSequence();
                 let arr = ["aaa", 1, 2, 3];
@@ -1880,17 +1880,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_05900 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_05900 ---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_06000
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_06000
         * @tc.name    readRawData is read data from message sequence failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_06000", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_06000---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_06000", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_06000---------------------------");
             try{
                 var data = new rpc.MessageSequence();
                 let rawdata = [1, 2, 3]
@@ -1902,59 +1902,59 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_MessageSequence_errorcode_06000 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_errorcode_06000 ---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_errorcode_00100
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_errorcode_00100
         * @tc.name    registerDeathRecipient is only proxy object permitted Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_IRemoteObject_errorcode_00100", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_IRemoteObject_errorcode_00100---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_errorcode_00100", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_errorcode_00100---------------------------");
             try{
                 let recipient = new TestAbilityStub("Test1223");
                 recipient.registerDeathRecipient(null, 0)
             } catch (error) {
-                console.info("SUB_Softbus_RPC_Compatibility_MessageSequence_testcase error is:" + error);
-                console.info("SUB_Softbus_RPC_Compatibility_MessageSequence_testcase error is:" + error.code);
+                console.info("SUB_DSoftbus_RPC_Compatibility_MessageSequence_testcase error is:" + error);
+                console.info("SUB_DSoftbus_RPC_Compatibility_MessageSequence_testcase error is:" + error.code);
                 let errCode = `${rpc.ErrorCode.ONLY_PROXY_OBJECT_PERMITTED_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_IRemoteObject_errorcode_00100 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_errorcode_00100 ---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_IRemoteObject_errorcode_00200
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_errorcode_00200
         * @tc.name    unregisterDeathRecipient is only proxy object permitted Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_IRemoteObject_errorcode_00200", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_IRemoteObject_errorcode_00200---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_errorcode_00200", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_errorcode_00200---------------------------");
             try{
                 let recipient = new TestAbilityStub("Test1223");
                 recipient.unregisterDeathRecipient(null, 0);
             } catch (error) {
-                console.info("SUB_Softbus_RPC_Compatibility_MessageSequence_testcase error is:" + error);
-                console.info("SUB_Softbus_RPC_Compatibility_MessageSequence_testcase error is:" + error.code);
+                console.info("SUB_DSoftbus_RPC_Compatibility_MessageSequence_testcase error is:" + error);
+                console.info("SUB_DSoftbus_RPC_Compatibility_MessageSequence_testcase error is:" + error.code);
                 let errCode = `${rpc.ErrorCode.ONLY_PROXY_OBJECT_PERMITTED_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_IRemoteObject_errorcode_00200 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_errorcode_00200 ---------------------------");
         });        
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_Ashmem_errorcode_00100
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_errorcode_00100
         * @tc.name    writeAshmem is write to ashmem failed Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   0   
+        * @tc.level   3  
         */
-        it("SUB_Softbus_RPC_Compatibility_Ashmem_errorcode_00100", 0,async function(){
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_Ashmem_errorcode_00100---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_errorcode_00100", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_errorcode_00100---------------------------");
             try{
                 let ashmem = rpc.Ashmem.create("ashmem", 4);
                 ashmem.mapReadWriteAshmem();
@@ -1967,17 +1967,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_Ashmem_errorcode_00100 ---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_errorcode_00100 ---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_errorcode_00100
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_errorcode_00100
         * @tc.name    getLocalInterface is only remote object permitted Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_Softbus_RPC_Compatibility_RemoteProxy_errorcode_00100", 0, async function () {
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_RemoteProxy_errorcode_00100---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_errorcode_00100", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_errorcode_00100---------------------------");
             try {
                 gIRemoteObject.getLocalInterface('Test2');
             } catch (error) {
@@ -1985,17 +1985,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_RemoteProxy_errorcode_00100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_errorcode_00100---------------------------");
         }); 
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_errorcode_00200
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_errorcode_00200
         * @tc.name    registerDeathRecipient is only remote object permitted Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_Softbus_RPC_Compatibility_RemoteProxy_errorcode_00200", 0, async function () {
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_RemoteProxy_errorcode_00200---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_errorcode_00200", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_errorcode_00200---------------------------");
             try {
                 let recipient = new MyDeathRecipient();
                 gIRemoteObject.registerDeathRecipient(recipient, "");
@@ -2004,17 +2004,17 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_RemoteProxy_errorcode_00200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_errorcode_00200---------------------------");
         });
         
         /*
-        * @tc.number  SUB_Softbus_RPC_Compatibility_RemoteProxy_errorcode_00300
+        * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_errorcode_00300
         * @tc.name    unregisterDeathRecipient is proxy or remote object is invalid Error verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_Softbus_RPC_Compatibility_RemoteProxy_errorcode_00300", 0, async function () {
-            console.info("---------------------start SUB_Softbus_RPC_Compatibility_RemoteProxy_errorcode_00300---------------------------");
+        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_errorcode_00300", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_errorcode_00300---------------------------");
             try {
                 let recipient = new MyDeathRecipient();
                 gIRemoteObject.registerDeathRecipient(recipient, "");
@@ -2024,7 +2024,7 @@ export default function RpcRequestJsUnitTest() {
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_Softbus_RPC_Compatibility_RemoteProxy_errorcode_00300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_errorcode_00300---------------------------");
         });        
         console.info("-----------------------SUB_DSoftbus_RPC_Compatibility_onRemoteMessageRequest_Test is end-----------------------");
     });
