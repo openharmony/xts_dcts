@@ -75,6 +75,7 @@ export default function AVSessionManagerJsUnit() {
                 console.info("request success" + JSON.stringify(data));
             })
         }
+
         async function driveFn() {
             try {
                 let driver = await UiDriver.create()
@@ -98,40 +99,7 @@ export default function AVSessionManagerJsUnit() {
             await driveFn();
             sleep(100);
 
-            await avSession.createAVSession(context, tag, type).then((data) => {
-                session = data;
-                sessionId = session.sessionId;
-                sessionToken = { sessionId, pid, uid };
-                console.info(sessionToken.pid);
-                console.info(sessionToken.uid);
-            }).catch((err) => {
-                console.info(`Session create BusinessError: ${err.code}, message: ${err.message}`);
-                expect(false).assertTrue();
-            });
-            await session.activate().then(() => {
-                console.info('Session activate');
-            }).catch((err) => {
-                console.info(`Session activate BusinessError: ${err.code}, message: ${err.message}`);
-                expect(false).assertTrue();
-            })
-
-            await session.setAVMetadata(metadata1).then(() => {
-                console.info('Set artist successfully');
-            }).catch((err) => {
-                console.info(`Set artist BusinessError: ${err.code}, message: ${err.message}`);
-                expect(false).assertTrue();
-            })
             audioManager = audio.getAudioManager().getRoutingManager();
-            await audioManager.getDevices(5).then((data) => {
-                console.info('get remote device success');
-                audioDevices = data;
-                remoteDeviceId = audioDevices[0].id;
-                audioDevices[0].name = 'name';
-                audioDevices[0].address = 'address';
-            }).catch((err) => {
-                console.info(`Get device BusinessError: ${err.code}, message: ${err.message}`);
-                expect(false).assertTrue();
-            });
 
             await audioManager.getDevices(audio.DeviceFlag.OUTPUT_DEVICES_FLAG).then((data) => {
                 console.info('get localDevice successfully');
@@ -152,16 +120,47 @@ export default function AVSessionManagerJsUnit() {
             done();
             console.info('beforeAll done');
         })
+
         beforeEach(async function () {
-            await sleep(1000);
+            await sleep(500);
+            await avSession.createAVSession(context, tag, type).then((data) => {
+                session = data;
+                sessionId = session.sessionId;
+                sessionToken = { sessionId, pid, uid };
+                console.info(sessionToken.pid);
+                console.info(sessionToken.uid);
+            }).catch((err) => {
+                console.info(`Session create BusinessError: ${err.code}, message: ${err.message}`);
+                expect(false).assertTrue();
+            });
+            await session.activate().then(() => {
+                console.info('Session activate');
+            }).catch((err) => {
+                console.info(`Session activate BusinessError: ${err.code}, message: ${err.message}`);
+                expect(false).assertTrue();
+            })
+            await session.setAVMetadata(metadata1).then(() => {
+                console.info('Set artist successfully');
+            }).catch((err) => {
+                console.info(`Set AVMetadata error, error code: ${err.code}, error message: ${err.message}`);
+                expect(false).assertTrue();
+            })
+            await sleep(500);
             console.info('beforeEach called');
         })
-        afterEach(function () {
+
+        afterEach(async function () {
+            await sleep(500);
+            await session.destroy().catch((err) => {
+                console.info(`Destroy session error, error code:: ${err.code}, error message: ${err.message}`);
+                expect(false).assertTrue();
+            });
+            await sleep(500);
             console.info('afterEach called');
         })
+
         afterAll(async function (done) {
             console.info('afterAll called');
-            await session.destroy();
             done();
         })
 
