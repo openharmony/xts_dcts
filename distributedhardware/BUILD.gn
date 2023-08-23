@@ -19,6 +19,7 @@ group("distributedhardware") {
     deps = [
       "distributedaudiotest:SubDctsdisAudioTest",
       "distributedcameratest:SubDctsdisCameraTest",
+      "distributedinputtest:SubDistributedInputTest",
       "distributedscreenjstest:SubDctsdisScreenJsTest",
       "distributedscreentest:SubDctsdisScreenTest",
     ]

@@ -1,0 +1,107 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+base_root = "../../../../../"
+import("//test/xts/tools/build/suite.gni")
+
+module_out_path = "dcts/distributedhardware"
+
+ohos_moduletest_suite("SubDistributedInputTest") {
+  module_out_path = module_out_path
+  include_dirs = [
+    "$base_root/foundation/distributedhardware/distributed_hardware_fwk/av_transport/common/include",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/inner_kits/include",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/inner_kits/src",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/include",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src",
+    "$base_root/foundation/distributedhardware/distributed_input/services/include",
+    "$base_root/foundation/distributedhardware/distributed_input/frameworks/include",
+    "$base_root/foundation/distributedhardware/distributed_input/common/include",
+    "$base_root/foundation/distributedhardware/distributed_hardware_fwk/common/log/include",
+    "$base_root/foundation/distributedhardware/distributed_hardware_fwk/common/utils/include",
+    "$base_root/third_party/json/include",
+    "$base_root/foundation/distributedhardware/distributed_input/utils/include/include",
+    "$base_root/foundation/distributedhardware/distributed_hardware_fwk/interfaces/inner_kits/include",
+    "$base_root/foundation/distributedhardware/distributed_hardware_fwk/interfaces/inner_kits/include/ipc",
+    "$base_root/foundation/distributedhardware/distributed_input/utils/include",
+  ]
+
+  sources = [
+    "$base_root/foundation/distributedhardware/distributed_input/common/include/white_list_util.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/inner_kits/src/distributed_input_kit.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/inner_kits/test/unittest/mock/mock_distributed_input_client.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/add_white_list_infos_call_back_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/add_white_list_infos_call_back_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/del_white_list_infos_call_back_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/del_white_list_infos_call_back_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/distributed_input_source_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/get_sink_screen_infos_call_back_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/get_sink_screen_infos_call_back_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/input_node_listener_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/input_node_listener_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/prepare_d_input_call_back_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/prepare_d_input_call_back_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/register_d_input_call_back_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/register_d_input_call_back_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/sharing_dhid_listener_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/sharing_dhid_listener_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/simulation_event_listener_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/simulation_event_listener_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/start_d_input_call_back_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/start_d_input_call_back_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/start_stop_d_inputs_call_back_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/start_stop_d_inputs_call_back_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/start_stop_result_call_back_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/start_stop_result_call_back_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/stop_d_input_call_back_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/stop_d_input_call_back_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/unprepare_d_input_call_back_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/unprepare_d_input_call_back_stub.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/unregister_d_input_call_back_proxy.cpp",
+    "$base_root/foundation/distributedhardware/distributed_input/interfaces/ipc/src/unregister_d_input_call_back_stub.cpp",
+    "distributed_input_test.cpp",
+  ]
+
+  cflags = [
+    "-Wall",
+    "-Werror",
+    "-g3",
+    "-Dprivate=public",
+    "-Dprotected=public",
+  ]
+
+  defines = [
+    "HI_LOG_ENABLE",
+    "DH_LOG_TAG=\"SubDistributedInputTest\"",
+    "LOG_DOMAIN=0xD004100",
+  ]
+
+  deps = [
+    "$base_root/foundation/distributedhardware/distributed_input/utils:libdinput_utils",
+    #"$base_root/third_party/libevdev:libevdev",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "config_policy:configpolicy_util",
+    "dsoftbus:softbus_client",
+    "eventhandler:libeventhandler",
+    "ipc:ipc_core",
+    "safwk:system_ability_fwk",
+    "samgr:samgr_proxy",
+  ]
+
+  cflags_cc = [ "-DHILOG_ENABLE" ]
+  subsystem_name = "distributedhardware"
+  part_name = "distributed_input"
+}
