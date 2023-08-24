@@ -2,7 +2,7 @@
   "string": [
     {
       "name": "app_name",
-      "value": "distributedscreenjstest"
+      "value": "distributeddevicejstest"
     },
     {
       "name": "mainability_description",
@@ -10,7 +10,7 @@
     },
     {
       "name": "MainAbility_desc",
-      "value": "distributedscreenjstest"
+      "value": "distributeddevicejstest"
     },
     {
         "name": "MainAbility_label",

@@ -1,6 +1,6 @@
 {
     "app": {
-        "bundleName": "com.ohos.distributedscreenjstest",
+        "bundleName": "com.ohos.distributeddevicejstest",
         "vendor": "example",
         "version": {
             "code": 1000000,
@@ -21,7 +21,7 @@
                 "name": "ohos.permission.ACCESS_SERVICE_DM"
             }
         ],
-        "package": "com.ohos.distributedscreenjstest",
+        "package": "com.ohos.distributeddevicejstest",
         "name": ".entry",
         "mainAbility": ".MainAbility",
         "srcPath": "",

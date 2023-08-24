@@ -2,8 +2,8 @@
     "description": "Configuration for hjunit demo Tests",
     "driver": {
         "type": "OHJSUnitTest",
-        "bundle-name": "com.ohos.distributedscreenjstest",
-        "package-name": "com.ohos.distributedscreenjstest",
+        "bundle-name": "com.ohos.distributeddevicejstest",
+        "package-name": "com.ohos.distributeddevicejstest",
         "test-timeout": "1200000",
         "testcase-timeout": "600000",
         "shell-timeout": "1200000"
@@ -11,7 +11,7 @@
     "kits": [
         {
             "test-file-name": [
-                "SubDctsdisScreenJsTest.hap"
+                "SubDctsdisDeviceJsTest.hap"
             ],
             "type": "AppInstallKit",
             "cleanup-apps": true

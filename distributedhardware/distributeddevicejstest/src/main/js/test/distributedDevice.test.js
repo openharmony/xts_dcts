@@ -89,7 +89,7 @@ export default function distributedDeviceManager() {
         it("SUB_DH_createDeviceManager_0001", 0, async function (done) {
             console.info("-----------------SUB_DH_createDeviceManager_0001 start------------------------");
             try {
-                dmInstance = deviceManager.createDeviceManager("com.ohos.distributedscreenjstest");
+                dmInstance = deviceManager.createDeviceManager("com.ohos.distributeddevicejstest");
                 if (!dmInstance) { 
                     console.error("createDeviceManager errCode:" + err.code + ",errMessage:" + err.message);
                     expect(false).assertFail();
@@ -250,8 +250,8 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_bindTarget_0007 start------------------------");
             let bindParam = {
                 "bindType" : 1,
-                "targetPkgName" : "com.ohos.distributedDeviceManager.screen",
-                "appName" : "SubDctsdisScreenJsTest",
+                "targetPkgName" : "com.ohos.distributedDeviceManager",
+                "appName" : "SubDctsdisDeviceJsTest",
                 "appOperation": "想要连接本机。",
                 "customDescription": "device manager"
             };
@@ -464,7 +464,7 @@ export default function distributedDeviceManager() {
         it("SUB_DH_releaseDeviceManager_0015", 0, async function (done) {
             console.info("-----------------SUB_DH_releaseDeviceManager_0015 start------------------------");
             var mFilterOption = {
-                targetPkgName: "com.ohos.distributedscreenjstest",
+                targetPkgName: "com.ohos.distributeddevicejstest",
                 sortType: 0,
                 filter: JSON.stringify({
                     key: 'test',

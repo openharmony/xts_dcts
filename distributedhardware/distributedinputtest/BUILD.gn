@@ -86,10 +86,7 @@ ohos_moduletest_suite("SubDistributedInputTest") {
     "LOG_DOMAIN=0xD004100",
   ]
 
-  deps = [
-    "$base_root/foundation/distributedhardware/distributed_input/utils:libdinput_utils",
-    #"$base_root/third_party/libevdev:libevdev",
-  ]
+  deps = [ "$base_root/foundation/distributedhardware/distributed_input/utils:libdinput_utils" ]
 
   external_deps = [
     "c_utils:utils",
