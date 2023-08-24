@@ -89,7 +89,7 @@ export default function distributedDeviceManager() {
         it("SUB_DH_createDeviceManager_0001", 0, async function (done) {
             console.info("-----------------SUB_DH_createDeviceManager_0001 start------------------------");
             try {
-                dmInstance = deviceManager.createDeviceManager("com.ohos.distributeddevicejstest");
+                dmInstance = deviceManager.createDeviceManager("com.ohos.distributedscreenjstest");
                 if (!dmInstance) { 
                     console.error("createDeviceManager errCode:" + err.code + ",errMessage:" + err.message);
                     expect(false).assertFail();
@@ -464,7 +464,7 @@ export default function distributedDeviceManager() {
         it("SUB_DH_releaseDeviceManager_0015", 0, async function (done) {
             console.info("-----------------SUB_DH_releaseDeviceManager_0015 start------------------------");
             var mFilterOption = {
-                targetPkgName: "com.ohos.distributeddevicejstest",
+                targetPkgName: "com.ohos.distributedscreenjstest",
                 sortType: 0,
                 filter: JSON.stringify({
                     key: 'test',
