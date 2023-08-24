@@ -2,8 +2,8 @@
     "description": "Configuration for hjunit demo Tests",
     "driver": {
         "type": "OHJSUnitTest",
-        "bundle-name": "com.ohos.distributeddevicejstest",
-        "package-name": "com.ohos.distributeddevicejstest",
+        "bundle-name": "com.ohos.distributedscreenjstest",
+        "package-name": "com.ohos.distributedscreenjstest",
         "test-timeout": "1200000",
         "testcase-timeout": "600000",
         "shell-timeout": "1200000"
