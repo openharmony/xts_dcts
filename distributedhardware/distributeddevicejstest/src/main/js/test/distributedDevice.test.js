@@ -250,8 +250,8 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_bindTarget_0007 start------------------------");
             let bindParam = {
                 "bindType" : 1,
-                "targetPkgName" : "com.ohos.distributedDeviceManager.screen",
-                "appName" : "SubDctsdisScreenJsTest",
+                "targetPkgName" : "com.ohos.distributedDeviceManager",
+                "appName" : "SubDctsdisDeviceJsTest",
                 "appOperation": "想要连接本机。",
                 "customDescription": "device manager"
             };

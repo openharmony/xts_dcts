@@ -24,23 +24,23 @@ using namespace OHOS::DistributedHardware;
 using namespace std;
 using namespace OHOS;
 
-void DistributedInputInnerTest::SetUp()
+void DistributedInputTest::SetUp()
 {
 }
 
-void DistributedInputInnerTest::TearDown()
+void DistributedInputTest::TearDown()
 {
 }
 
-void DistributedInputInnerTest::SetUpTestCase()
+void DistributedInputTest::SetUpTestCase()
 {
 }
 
-void DistributedInputInnerTest::TearDownTestCase()
+void DistributedInputTest::TearDownTestCase()
 {
 }
 
-void DistributedInputInnerTest::TestPrepareDInputCallback::OnResult(
+void DistributedInputTest::TestPrepareDInputCallback::OnResult(
     const std::string& deviceId, const int32_t& status)
 {
     (void)deviceId;
@@ -48,7 +48,7 @@ void DistributedInputInnerTest::TestPrepareDInputCallback::OnResult(
     return;
 }
 
-void DistributedInputInnerTest::TestUnprepareDInputCallback::OnResult(
+void DistributedInputTest::TestUnprepareDInputCallback::OnResult(
     const std::string& deviceId, const int32_t& status)
 {
     (void)deviceId;
@@ -56,7 +56,7 @@ void DistributedInputInnerTest::TestUnprepareDInputCallback::OnResult(
     return;
 }
 
-void DistributedInputInnerTest::TestStartDInputCallback::OnResult(
+void DistributedInputTest::TestStartDInputCallback::OnResult(
     const std::string& deviceId, const uint32_t& inputTypes, const int32_t& status)
 {
     (void)deviceId;
@@ -65,7 +65,7 @@ void DistributedInputInnerTest::TestStartDInputCallback::OnResult(
     return;
 }
 
-void DistributedInputInnerTest::TestStopDInputCallback::OnResult(
+void DistributedInputTest::TestStopDInputCallback::OnResult(
     const std::string& deviceId, const uint32_t& inputTypes, const int32_t& status)
 {
     (void)deviceId;
@@ -74,7 +74,7 @@ void DistributedInputInnerTest::TestStopDInputCallback::OnResult(
     return;
 }
 
-void DistributedInputInnerTest::TestStartStopDInputCallback::OnResultDhids(
+void DistributedInputTest::TestStartStopDInputCallback::OnResultDhids(
     const std::string &devId, const int32_t &status)
 {
     (void)devId;
@@ -82,7 +82,7 @@ void DistributedInputInnerTest::TestStartStopDInputCallback::OnResultDhids(
     return;
 }
 
-void DistributedInputInnerTest::TestInputNodeListener::OnNodeOnLine(const std::string srcDevId,
+void DistributedInputTest::TestInputNodeListener::OnNodeOnLine(const std::string srcDevId,
     const std::string sinkDevId, const std::string sinkNodeId, const std::string sinkNodeDesc)
 {
     (void)srcDevId;
@@ -92,7 +92,7 @@ void DistributedInputInnerTest::TestInputNodeListener::OnNodeOnLine(const std::s
     return;
 }
 
-void DistributedInputInnerTest::TestInputNodeListener::OnNodeOffLine(const std::string srcDevId,
+void DistributedInputTest::TestInputNodeListener::OnNodeOffLine(const std::string srcDevId,
     const std::string sinkDevId, const std::string sinkNodeId)
 {
     (void)srcDevId;
@@ -101,7 +101,7 @@ void DistributedInputInnerTest::TestInputNodeListener::OnNodeOffLine(const std::
     return;
 }
 
-int32_t DistributedInputInnerTest::TestSimulationEventListenerStub::OnSimulationEvent(
+int32_t DistributedInputTest::TestSimulationEventListenerStub::OnSimulationEvent(
     uint32_t type, uint32_t code, int32_t value)
 {
     (void)type;
@@ -110,7 +110,7 @@ int32_t DistributedInputInnerTest::TestSimulationEventListenerStub::OnSimulation
     return DH_SUCCESS;
 }
 
-int DistributedInputInnerTest::CheckSourceProxy() const
+int DistributedInputTest::CheckSourceProxy() const
 {
     OHOS::sptr<OHOS::ISystemAbilityManager> systemAbilityManager =
         OHOS::SystemAbilityManagerClient::GetInstance().GetSystemAbilityManager();
@@ -134,7 +134,7 @@ int DistributedInputInnerTest::CheckSourceProxy() const
     return DH_SUCCESS;
 }
 
-int DistributedInputInnerTest::CheckSinkProxy() const
+int DistributedInputTest::CheckSinkProxy() const
 {
     OHOS::sptr<OHOS::ISystemAbilityManager> systemAbilityManager =
         OHOS::SystemAbilityManagerClient::GetInstance().GetSystemAbilityManager();
@@ -158,7 +158,7 @@ int DistributedInputInnerTest::CheckSinkProxy() const
     return DH_SUCCESS;
 }
 
-HWTEST_F(DistributedInputInnerTest, PrepareRemoteInput01, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, PrepareRemoteInput01, testing::ext::TestSize.Level0)
 {
     string deviceId = "PrepareRemoteInput01";
     sptr<TestPrepareDInputCallback> callback(new TestPrepareDInputCallback());
@@ -166,7 +166,7 @@ HWTEST_F(DistributedInputInnerTest, PrepareRemoteInput01, testing::ext::TestSize
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, PrepareRemoteInput02, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, PrepareRemoteInput02, testing::ext::TestSize.Level0)
 {
     string deviceId = "";
     sptr<TestPrepareDInputCallback> callback = nullptr;
@@ -174,7 +174,7 @@ HWTEST_F(DistributedInputInnerTest, PrepareRemoteInput02, testing::ext::TestSize
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, PrepareRemoteInput03, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, PrepareRemoteInput03, testing::ext::TestSize.Level0)
 {
     std::string srcId = "PrepareRemoteInput_test";
     std::string sinkId = "PrepareRemoteInput_test";
@@ -183,7 +183,7 @@ HWTEST_F(DistributedInputInnerTest, PrepareRemoteInput03, testing::ext::TestSize
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, PrepareRemoteInput04, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, PrepareRemoteInput04, testing::ext::TestSize.Level0)
 {
     std::string srcId = "";
     std::string sinkId = "";
@@ -192,7 +192,7 @@ HWTEST_F(DistributedInputInnerTest, PrepareRemoteInput04, testing::ext::TestSize
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, UnprepareRemoteInput01, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, UnprepareRemoteInput01, testing::ext::TestSize.Level0)
 {
     string deviceId = "UnprepareRemoteInput01";
     sptr<TestUnprepareDInputCallback> callback(new TestUnprepareDInputCallback());
@@ -200,7 +200,7 @@ HWTEST_F(DistributedInputInnerTest, UnprepareRemoteInput01, testing::ext::TestSi
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, UnprepareRemoteInput02, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, UnprepareRemoteInput02, testing::ext::TestSize.Level0)
 {
     string deviceId = "";
     sptr<TestUnprepareDInputCallback> callback = nullptr;
@@ -208,7 +208,7 @@ HWTEST_F(DistributedInputInnerTest, UnprepareRemoteInput02, testing::ext::TestSi
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, UnprepareRemoteInput03, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, UnprepareRemoteInput03, testing::ext::TestSize.Level0)
 {
     std::string srcId = "PrepareRemoteInput_src";
     std::string sinkId = "PrepareRemoteInput_sink";
@@ -217,7 +217,7 @@ HWTEST_F(DistributedInputInnerTest, UnprepareRemoteInput03, testing::ext::TestSi
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, UnprepareRemoteInput04, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, UnprepareRemoteInput04, testing::ext::TestSize.Level0)
 {
     std::string srcId = "";
     std::string sinkId = "";
@@ -226,7 +226,7 @@ HWTEST_F(DistributedInputInnerTest, UnprepareRemoteInput04, testing::ext::TestSi
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StartRemoteInput01, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StartRemoteInput01, testing::ext::TestSize.Level0)
 {
     string deviceId = "StartRemoteInput01";
     sptr<TestStartDInputCallback> callback(new TestStartDInputCallback());
@@ -235,7 +235,7 @@ HWTEST_F(DistributedInputInnerTest, StartRemoteInput01, testing::ext::TestSize.L
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StartRemoteInput02, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StartRemoteInput02, testing::ext::TestSize.Level0)
 {
     string deviceId = "";
     sptr<TestStartDInputCallback> callback = nullptr;
@@ -244,7 +244,7 @@ HWTEST_F(DistributedInputInnerTest, StartRemoteInput02, testing::ext::TestSize.L
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StartRemoteInput03, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StartRemoteInput03, testing::ext::TestSize.Level0)
 {
     std::string sinkId = "StartRemoteInput_sink";
     std::vector<std::string> dhIds = {"dhIds_test"};
@@ -253,7 +253,7 @@ HWTEST_F(DistributedInputInnerTest, StartRemoteInput03, testing::ext::TestSize.L
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StartRemoteInput04, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StartRemoteInput04, testing::ext::TestSize.Level0)
 {
     std::string sinkId = "";
     std::vector<std::string> dhIds;
@@ -262,7 +262,7 @@ HWTEST_F(DistributedInputInnerTest, StartRemoteInput04, testing::ext::TestSize.L
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StartRemoteInput05, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StartRemoteInput05, testing::ext::TestSize.Level0)
 {
     string srcId = "StartRemoteInput01-src";
     string sinkId = "StartRemoteInput01-sink";
@@ -272,7 +272,7 @@ HWTEST_F(DistributedInputInnerTest, StartRemoteInput05, testing::ext::TestSize.L
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StartRemoteInput06, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StartRemoteInput06, testing::ext::TestSize.Level0)
 {
     string srcId = "";
     string sinkId = "";
@@ -282,7 +282,7 @@ HWTEST_F(DistributedInputInnerTest, StartRemoteInput06, testing::ext::TestSize.L
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StartRemoteInput07, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StartRemoteInput07, testing::ext::TestSize.Level0)
 {
     string srcId = "StartRemoteInput01-src";
     string sinkId = "StartRemoteInput01-sink";
@@ -292,7 +292,7 @@ HWTEST_F(DistributedInputInnerTest, StartRemoteInput07, testing::ext::TestSize.L
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StartRemoteInput08, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StartRemoteInput08, testing::ext::TestSize.Level0)
 {
     string srcId = "";
     string sinkId = "";
@@ -302,7 +302,7 @@ HWTEST_F(DistributedInputInnerTest, StartRemoteInput08, testing::ext::TestSize.L
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StopRemoteInput01, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StopRemoteInput01, testing::ext::TestSize.Level0)
 {
     string deviceId = "StopRemoteInput01";
     sptr<TestStopDInputCallback> callback(new TestStopDInputCallback());
@@ -311,7 +311,7 @@ HWTEST_F(DistributedInputInnerTest, StopRemoteInput01, testing::ext::TestSize.Le
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StopRemoteInput02, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StopRemoteInput02, testing::ext::TestSize.Level0)
 {
     string deviceId = "";
     sptr<TestStopDInputCallback> callback = nullptr;
@@ -320,7 +320,7 @@ HWTEST_F(DistributedInputInnerTest, StopRemoteInput02, testing::ext::TestSize.Le
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StopRemoteInput03, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StopRemoteInput03, testing::ext::TestSize.Level0)
 {
     std::string sinkId = "StartRemoteInput_test";
     std::vector<std::string> dhIds = {"dhIds_test"};
@@ -329,7 +329,7 @@ HWTEST_F(DistributedInputInnerTest, StopRemoteInput03, testing::ext::TestSize.Le
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StopRemoteInput04, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StopRemoteInput04, testing::ext::TestSize.Level0)
 {
     std::string sinkId = "";
     std::vector<std::string> dhIds;
@@ -338,7 +338,7 @@ HWTEST_F(DistributedInputInnerTest, StopRemoteInput04, testing::ext::TestSize.Le
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StopRemoteInput05, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StopRemoteInput05, testing::ext::TestSize.Level0)
 {
     string srcId = "StopRemoteInput03-src";
     string sinkId = "StopRemoteInput03-sink";
@@ -348,7 +348,7 @@ HWTEST_F(DistributedInputInnerTest, StopRemoteInput05, testing::ext::TestSize.Le
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StopRemoteInput06, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StopRemoteInput06, testing::ext::TestSize.Level0)
 {
     string srcId = "";
     string sinkId = "";
@@ -358,7 +358,7 @@ HWTEST_F(DistributedInputInnerTest, StopRemoteInput06, testing::ext::TestSize.Le
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StopRemoteInput07, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StopRemoteInput07, testing::ext::TestSize.Level0)
 {
     string srcId = "StartRemoteInput01-src";
     string sinkId = "StartRemoteInput01-sink";
@@ -368,7 +368,7 @@ HWTEST_F(DistributedInputInnerTest, StopRemoteInput07, testing::ext::TestSize.Le
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, StopRemoteInput08, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, StopRemoteInput08, testing::ext::TestSize.Level0)
 {
     string srcId = "";
     string sinkId = "";
@@ -378,7 +378,7 @@ HWTEST_F(DistributedInputInnerTest, StopRemoteInput08, testing::ext::TestSize.Le
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, IsNeedFilterOut01, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, IsNeedFilterOut01, testing::ext::TestSize.Level0)
 {
     string deviceId = "IsNeedFilterOut01";
     BusinessEvent event;
@@ -390,7 +390,7 @@ HWTEST_F(DistributedInputInnerTest, IsNeedFilterOut01, testing::ext::TestSize.Le
     EXPECT_EQ(true, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, IsNeedFilterOut02, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, IsNeedFilterOut02, testing::ext::TestSize.Level0)
 {
     string deviceId;
     BusinessEvent event;
@@ -398,7 +398,7 @@ HWTEST_F(DistributedInputInnerTest, IsNeedFilterOut02, testing::ext::TestSize.Le
     EXPECT_EQ(true, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, IsNeedFilterOut03, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, IsNeedFilterOut03, testing::ext::TestSize.Level0)
 {
     string deviceId = "IsNeedFilterOut01";
     BusinessEvent event;
@@ -416,7 +416,7 @@ HWTEST_F(DistributedInputInnerTest, IsNeedFilterOut03, testing::ext::TestSize.Le
  * @tc.type: FUNC
  * @tc.require: SR000GNECO
  */
-HWTEST_F(DistributedInputInnerTest, IsTouchEventNeedFilterOut01, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, IsTouchEventNeedFilterOut01, testing::ext::TestSize.Level0)
 {
     std::string sourceWinId = "123";
     SinkScreenInfo sinkScreenInfo = DInputContext::GetInstance().GetSinkScreenInfo(sourceWinId);
@@ -447,77 +447,77 @@ HWTEST_F(DistributedInputInnerTest, IsTouchEventNeedFilterOut01, testing::ext::T
     EXPECT_EQ(false, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, IsStartDistributedInput01, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, IsStartDistributedInput01, testing::ext::TestSize.Level0)
 {
     uint32_t flag = 1;
     DInputServerType retFlag = DistributedInputKit::IsStartDistributedInput(flag);
     EXPECT_EQ(DInputServerType::NULL_SERVER_TYPE, retFlag);
 }
 
-HWTEST_F(DistributedInputInnerTest, IsStartDistributedInput02, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, IsStartDistributedInput02, testing::ext::TestSize.Level0)
 {
     std::string dhId = "IsStartDistributedInput02";
     bool ret = DistributedInputKit::IsStartDistributedInput(dhId);
     EXPECT_EQ(true, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, IsStartDistributedInput03, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, IsStartDistributedInput03, testing::ext::TestSize.Level0)
 {
     std::string dhId = "";
     bool ret = DistributedInputKit::IsStartDistributedInput(dhId);
     EXPECT_EQ(true, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, RegisterInputNodeListener01, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, RegisterInputNodeListener01, testing::ext::TestSize.Level0)
 {
     sptr<TestInputNodeListener> listener(new TestInputNodeListener());
     int32_t ret = DistributedInputKit::RegisterInputNodeListener(listener);
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, RegisterInputNodeListener02, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, RegisterInputNodeListener02, testing::ext::TestSize.Level0)
 {
     sptr<TestInputNodeListener> listener = nullptr;
     int32_t ret = DistributedInputKit::RegisterInputNodeListener(listener);
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, UnregisterInputNodeListener01, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, UnregisterInputNodeListener01, testing::ext::TestSize.Level0)
 {
     sptr<TestInputNodeListener> listener(new TestInputNodeListener());
     int32_t ret = DistributedInputKit::UnregisterInputNodeListener(listener);
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, UnregisterInputNodeListener02, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, UnregisterInputNodeListener02, testing::ext::TestSize.Level0)
 {
     sptr<TestInputNodeListener> listener = nullptr;
     int32_t ret = DistributedInputKit::UnregisterInputNodeListener(listener);
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, RegisterSimulationEventListener01, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, RegisterSimulationEventListener01, testing::ext::TestSize.Level0)
 {
     sptr<TestSimulationEventListenerStub> listener(new TestSimulationEventListenerStub());
     int32_t ret = DistributedInputKit::RegisterSimulationEventListener(listener);
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, RegisterSimulationEventListener02, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, RegisterSimulationEventListener02, testing::ext::TestSize.Level0)
 {
     sptr<TestSimulationEventListenerStub> listener = nullptr;
     int32_t ret = DistributedInputKit::RegisterSimulationEventListener(listener);
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, UnregisterSimulationEventListener01, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, UnregisterSimulationEventListener01, testing::ext::TestSize.Level0)
 {
     sptr<TestSimulationEventListenerStub> listener(new TestSimulationEventListenerStub());
     int32_t ret = DistributedInputKit::UnregisterSimulationEventListener(listener);
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputInnerTest, UnregisterSimulationEventListener02, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, UnregisterSimulationEventListener02, testing::ext::TestSize.Level0)
 {
     sptr<TestSimulationEventListenerStub> listener = nullptr;
     int32_t ret = DistributedInputKit::UnregisterSimulationEventListener(listener);

@@ -11,7 +11,7 @@
     "kits": [
         {
             "test-file-name": [
-                "SubDctsdisScreenJsTest.hap"
+                "SubDctsdisDeviceJsTest.hap"
             ],
             "type": "AppInstallKit",
             "cleanup-apps": true
