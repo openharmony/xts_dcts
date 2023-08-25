@@ -101,12 +101,6 @@ export default function DmsFwkFaTest() {
 
     afterEach(async function (done) {
       console.info('afterEach called')
-      await featureAbility.disconnectAbility(connectId).then((data) => {
-        console.info('disconnectAbility called success');
-      }).catch((err) => {
-        console.info('disconnectAbility called error ' + err.message);
-      })
-      sleep(2000);
       done();
     })
 
