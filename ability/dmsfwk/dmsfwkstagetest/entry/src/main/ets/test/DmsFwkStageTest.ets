@@ -3946,12 +3946,23 @@ export default function DmsFwkStageTest() {
     */
     it('SUB_DMS_continueMission_CallBack_0140', 0, async function (done) {
       console.info("---------------------SUB_DMS_continueMission_CallBack_0140 start---------------------------");
+
+      let localMissionId;
       let TAG = "SUB_DMS_continueMission_CallBack_0140";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
-      let localMissionId = await allLocalMissions[0].missionId;
-      console.info(TAG + 'localMissionId is,' + localMissionId);
+
+      for (let i = 0; i < (allLocalMissions as Object[]).length; i++ ){
+        console.info(TAG + 'allLocalMissions is,' + allLocalMissions[i]);
+        if (allLocalMissions[i].want.bundleName == "com.acts.example.dmsfwkstagetest") {
+          localMissionId = allLocalMissions[i].missionId;
+          console.info(TAG + 'localMissionId is,' + localMissionId);
+          break;
+        } else {
+          console.info(TAG + 'localMissionId is not find,' + localMissionId);
+        }
+      }
       function onContinueDone(resultCode) {
         console.info(TAG + 'onContinueDone resultCode: ' + JSON.stringify(resultCode));
       };
