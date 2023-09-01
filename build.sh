@@ -107,7 +107,7 @@ do_make()
                         MUSL_ARGS="--gn-args use_musl=false --gn-args use_custom_libcxx=true --gn-args use_custom_clang=true"			
 		    fi
         fi
-       ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true $MUSL_ARGS --target-cpu $TARGET_ARCH --get-warning-list=false --stat-ccache=false --compute-overlap-rate=false --deps-guard=false --generate-ninja-trace=false --gn-args skip_generate_module_list_file=true
+       ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true $MUSL_ARGS --target-cpu $TARGET_ARCH --get-warning-list=false --stat-ccache=true --compute-overlap-rate=false --deps-guard=false --generate-ninja-trace=false --gn-args skip_generate_module_list_file=true
     else
        if [ "$BUILD_TARGET" = "dcts dcts_ivi dcts_intellitv dcts_wearable" ]; then
          ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target "dcts" --build-target "dcts_ivi" --build-target "dcts_intellitv" --build-target "dcts_wearable" --build-target "deploy_testtools"
