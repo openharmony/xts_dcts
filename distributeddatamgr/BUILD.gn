@@ -15,12 +15,12 @@ group("distributeddatatest") {
   testonly = true
   if (is_standard_system) {
     deps = [
+      "jstest/distributed_data_object/client/hap:distributedobjectdisjs_test",
+      "jstest/distributed_data_object/server/hap:distributedobjectdisjs_server",
       "jstest/distributed_kv_store/client/hap:distributekvdisjs_test",
       "jstest/distributed_kv_store/server/hap:distributekvdisjs_server",
       "jstest/distributed_rdb_store/client/hap:distributerdbdisjs_test",
       "jstest/distributed_rdb_store/server/hap:distributerdbdisjs_server",
-      "jstest/distributed_data_object/client/hap:distributedobjectdisjs_test",
-      "jstest/distributed_data_object/server/hap:distributedobjectdisjs_server",
     ]
   }
 }
