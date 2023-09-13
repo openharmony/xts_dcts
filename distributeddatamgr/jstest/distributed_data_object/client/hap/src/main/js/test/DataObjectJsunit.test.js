@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 Huawei Device Co., Ltd.
+ * Copyright (C) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,7 +17,6 @@ import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '
 import deviceManager from '@ohos.distributedHardware.deviceManager';
 import TestService from '../../../../../../../../../testtools/disjsTest/client/testService.js';
 import RemoteHelper from '../../../../../../../../../testtools/disjsTest/client/remoteHelper.js';
-//import factory from '@ohos.data.distributedData';
 import { UiDriver, BY } from '@ohos.UiTest'
 import featureAbility from '@ohos.ability.featureAbility';
 import distributedObject from '@ohos.data.distributedDataObject';
@@ -60,7 +59,6 @@ function sleep(ms) {
 async function getPermission() {
     console.info(`getPermission is start`);
     let permissions = ['ohos.permission.DISTRIBUTED_DATASYNC'];
-   // let context = featureAbility.getContext();
     context.requestPermissionsFromUser(permissions, 666, (data) => {
         console.info("request success" + JSON.stringify(data));
 
@@ -92,8 +90,7 @@ describe('dataObjectTest', function () {
         sleep(5000);
         await driveFn();
         sleep(2000);
-        
-      //  context = featureAbility.getContext();
+
         testservice = new TestService();
         console.info(logTag + "deviceId: " + deviceId);
      
