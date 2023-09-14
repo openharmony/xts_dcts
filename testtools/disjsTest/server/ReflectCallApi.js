@@ -16,7 +16,7 @@
 //@ts-nocheck
 import testApi from './testApi.js';
 
-var logTag = "RpcServer_Call:  ";
+var logTag = "[RpcServer_Call:  ]";
 
 export default class ReflectCallApi {
   getModuleObj() {
