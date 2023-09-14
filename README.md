@@ -54,7 +54,9 @@ OpenHarmony supports the following system types:
 
 ## Constraints<a name="section119744591305"></a>
 
-Test cases for the mini system must be developed based on C, and those for the small system must be developed based on C++.
+Test cases for the mini system must be developed based on C, the small system must be developed based on C++, and the standard system must be developed based on C++ or js.
+1. Currently the DCTS supports the standard system.
+2. Screenless devices do not support PIN authentication networking and do not support DCTS test。
 
 ## Usage Guidelines<a name="section137768191623"></a>
 
