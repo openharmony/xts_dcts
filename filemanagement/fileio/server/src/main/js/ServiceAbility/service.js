@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,6 +15,7 @@
 
 import rpc from "@ohos.rpc";
 import fileio from '@ohos.fileio';
+import fs from '@ohos.file.fs';
 import backgroundTaskManager from '@ohos.backgroundTaskManager';
 import wantAgent from '@ohos.wantAgent';
 import featureAbility from '@ohos.ability.featureAbility';
@@ -87,7 +88,7 @@ export default {
 function checkDirExists(destDirPath) {
     console.info("start check dir :" + destDirPath);
     try {
-        fileio.accessSync(destDirPath, 0);
+        fs.accessSync(destDirPath);
         console.info('------------------- dest dir exists.');
         return true;
     } catch (e) {
@@ -99,7 +100,7 @@ function checkDirExists(destDirPath) {
 function checkFileExists(destFilePath,) {
     console.info("start check file :" + destFilePath);
     try {
-        fileio.accessSync(destFilePath, 0);
+        fs.accessSync(destFilePath);
         console.info('------------------- ' + destFilePath + ' exists.');
         return true;
     } catch (e) {
@@ -112,7 +113,7 @@ function getFileContent(fpath) {
     console.info("start get file content:" + fpath);
     let content = "";
     try {
-        content = fileio.readTextSync(fpath);
+        content = fs.readTextSync(fpath);
         console.info("-------------- dest file content :" + content);
     } catch (e) {
         content = "serverSide readTextSync failed";
@@ -160,11 +161,10 @@ class Stub extends rpc.RemoteObject {
                     let path = data.readString();
                     console.info("The server's readString result is " + path);
                     let result;
-                    try {
-                        let dir = fileio.openDirSync(path);
-                        result = reply.writeString("Server side dir synchronization creation failed!");
-                        dir.closeSync();
-                    } catch (error) {
+                    let accessRes = fs.accessSync(path);
+                    if (accessRes == true) {
+                        result = reply.writeString("Server side dir synchronization delete failed!");
+                    } else {
                         result = reply.writeString("SUCCESS");
                     }
 
@@ -195,9 +195,9 @@ class Stub extends rpc.RemoteObject {
                     console.info("The server's readString result is " + path);
                     let result;
                     try {
-                        let fd = fileio.openSync(path);
-                        result = reply.writeString("Server side file synchronization creation failed!");
-                        fileio.closeSync(fd);
+                        let file = fs.openSync(path);
+                        result = reply.writeString("Server side file synchronization delete failed!");
+                        fs.closeSync(file);
                     } catch (error) {
                         result = reply.writeString("SUCCESS");
                     }
@@ -242,8 +242,9 @@ class Stub extends rpc.RemoteObject {
                     console.info("The server's readString result is " + path);
                     let result;
                     try{
-                        let fd = fileio.openSync(path, 0o2);
-                        fileio.fsyncSync(fd);
+                        let file = fs.openSync(path, fs.OpenMode.READ_WRITE);
+                        fs.fsyncSync(file.fd);
+                        fs.closeSync(file);
                         console.info("sync data succeed");
                         result = reply.writeString("SUCCESS");
                     } catch (e) {

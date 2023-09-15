@@ -15,6 +15,7 @@
 
 import rpc from "@ohos.rpc";
 import fileio from '@ohos.fileio';
+import fs from '@ohos.file.fs';
 import featureAbility from "@ohos.ability.featureAbility";
 import securityLabel from '@ohos.file.securityLabel';
 import TestService from "./testService"
@@ -53,6 +54,27 @@ export default function FileioDistributedTest(){
             }
             return basePath + "/" + testName;
         }
+
+        /**
+         * prepare file
+         * @param fpath 
+         * @returns 
+         */
+        async function prepareFile(fpath) {
+            try {
+              let file = fs.openSync(fpath, fs.OpenMode.CREATE | fs.OpenMode.READ_WRITE);
+              fs.truncateSync(file.fd);
+              securityLabel.setSecurityLabelSync(fpath, "s0");
+              fs.writeSync(file.fd, DISTRIBUTED_FILE_CONTENT);
+              fs.fsyncSync(file.fd);
+              fs.closeSync(file);
+              return true;
+            } 
+            catch (e) {
+              console.log('Failed to prepareFile for ' + e)
+              return false
+            }
+          }
 
         /**
          * Send rpc request to get server-side verification result without done
@@ -3475,6 +3497,728 @@ export default function FileioDistributedTest(){
                 expect(false).assertTrue();
             }
             console.info("---------------------end test_fileio_file_fsyncSync_000---------------------------");
+        });
+
+        /**
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_OpenSync_0000
+         * @tc.name    test_filefs_create_file_sync_000
+         * @tc.desc    Function of API, mode=OpenMode.READ_ONLY(0o0)
+         * @tc.level   0
+         */
+        it('test_filefs_create_file_sync_000', 0, async function (done) {
+            console.info("--------start test_filefs_create_file_sync_000--------");
+            let tcNumber = 'test_filefs_create_file_sync_000';
+            let fpath = await getDistributedFilePath(tcNumber);
+            console.info('fpath == ' + fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.READ_ONLY | fs.OpenMode.CREATE);
+                expect(fs.accessSync(fpath)).assertTrue();
+                console.info('------------- create file success.');
+                
+                console.info('------ start check server... ');
+                await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
+                    console.info("test_filefs_create_file_sync_000 getServerFileInfo serverFileCreate: " + serverFileCreate);
+                    expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                })
+    
+                console.info('------------ start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(fpath);
+            } catch (e) {
+                console.info('test_filefs_create_file_sync_000 has failed for : ' + e);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_create_file_sync_000--------");
+        });
+
+        /**
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_OpenSync_0100
+         * @tc.name    test_filefs_create_file_sync_001
+         * @tc.desc    Function of API, mode=OpenMode.WRITE_ONLY(0o1)
+         * @tc.level   0
+         */
+         it('test_filefs_create_file_sync_001', 0, async function (done) {
+            console.info("--------start test_filefs_create_file_sync_001--------");
+            let tcNumber = 'test_filefs_create_file_sync_001';
+            let fpath = await getDistributedFilePath(tcNumber);
+            console.info('fpath == ' + fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.WRITE_ONLY | fs.OpenMode.CREATE);
+                console.info('------------- create file success.');
+    
+                console.info('------ start check server... ');
+                await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
+                    console.info("test_filefs_create_file_sync_001 getServerFileInfo serverFileCreate: " + serverFileCreate);
+                    expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                })
+    
+                console.info('------------ start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(fpath);
+            } catch (e) {
+                console.info('test_filefs_create_file_sync_001 has failed for : ' + e);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_create_file_sync_001--------");
+        });
+
+        /**
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_OpenSync_0200
+         * @tc.name    test_filefs_create_file_sync_002
+         * @tc.desc    Function of API, mode=OpenMode.READ_WRITE(0o2)
+         */
+         it('test_filefs_create_file_sync_002', 0, async function (done) {
+            console.info("--------start test_filefs_create_file_sync_002--------");
+            let tcNumber = 'test_filefs_create_file_sync_002';
+            let fpath = await getDistributedFilePath(tcNumber);
+            console.info('fpath == ' + fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+                console.info('------------- create file success.');
+    
+                console.info('------ start check server... ');
+                await getServerFileInfo(tcNumber, fpath, CODE_CREATE_FILE, done, function (serverFileCreate) {
+                    console.info("test_filefs_create_file_sync_002 getServerFileInfo serverFileCreate: " + serverFileCreate);
+                    expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                })
+    
+                console.info('------------ start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(fpath);
+            } catch (e) {
+                console.info('test_filefs_create_file_sync_002 has failed for : ' + e);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_create_file_sync_002--------");
+        });
+
+        /**
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_writeFile_0000
+         * @tc.name    test_filefs_write_file_000
+         * @tc.desc    Function of API,test writeSync() interface,default write from current offset
+         * @tc.level   0
+         */
+         it('test_filefs_write_file_000', 0, async function (done) {
+            console.info("---------------------start test_filefs_write_file_000---------------------------");
+            let tcNumber = 'test_filefs_write_file_000';
+            let fpath = await getDistributedFilePath(tcNumber);
+            console.info('fpath == ' + fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+                securityLabel.setSecurityLabelSync(fpath, "s0");
+                fs.writeSync(file.fd, DISTRIBUTED_FILE_CONTENT);
+                console.info('-------------- test_filefs_write_file_000 : write file success.');
+                let fileContent = fs.readTextSync(fpath);
+                console.info("-------------- test_filefs_write_file_000 : fileContent =" + fileContent);
+                expect(DISTRIBUTED_FILE_CONTENT === fileContent).assertTrue();
+    
+                console.info('------------------- start check server... ');
+                sleep(1000);
+                await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
+                    console.info("-------------- test_filefs_write_file_000 : getServerFileInfo serverFileContent =" + serverFileContent);
+                    expect(serverFileContent).assertEqual(DISTRIBUTED_FILE_CONTENT);
+                })
+    
+                console.info('-------------- start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(fpath);
+            } catch (e) {
+                console.info('test_filefs_write_file_000 has failed for : ' + e);
+                expect(false).assertTrue();
+            }
+            console.info("---------------------end test_filefs_write_file_000---------------------------");
+        });
+
+        /**
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_writeFile_0100
+         * @tc.name    test_filefs_write_file_001
+         * @tc.desc    Function of API,test writeSync() interface,mode=WRITE_ONLY ,encoding = 'utf-8'.
+         * @tc.level   0
+         */
+         it('test_filefs_write_file_001', 0, async function (done) {
+            console.info("---------------------start test_filefs_write_file_001---------------------------");
+            let tcNumber = 'test_filefs_write_file_001';
+            let fpath = await getDistributedFilePath(tcNumber);
+            console.info('fpath == ' + fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.WRITE_ONLY | fs.OpenMode.CREATE);
+                securityLabel.setSecurityLabelSync(fpath, "s0");
+                fs.writeSync(file.fd, DISTRIBUTED_FILE_CONTENT,{encoding: 'utf-8',});
+                console.info('-------------- test_filefs_write_file_001 : write file success.');
+                let fileContent = fs.readTextSync(fpath);
+                console.info("-------------- test_filefs_write_file_001 : fileContent =" + fileContent);
+                expect(DISTRIBUTED_FILE_CONTENT === fileContent).assertTrue();
+    
+                console.info('------------------- start check server... ');
+                sleep(1000);
+                await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
+                    console.info("-------------- test_filefs_write_file_001 : getServerFileInfo serverFileContent =" + serverFileContent);
+                    expect(serverFileContent).assertEqual(DISTRIBUTED_FILE_CONTENT);
+                })
+    
+                console.info('-------------- start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(fpath);
+            } catch (e) {
+                console.info('test_filefs_write_file_001 has failed for : ' + e);
+                expect(false).assertTrue();
+            }
+            console.info("---------------------end test_filefs_write_file_001---------------------------");
+        });
+
+        /**
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_writeFile_0200
+         * @tc.name    test_filefs_write_file_002
+         * @tc.desc    Function of API,test writeSync() interface,mode=WRITE_ONLY, offset(option): 1.
+         * @tc.level   0
+         */
+         it('test_filefs_write_file_002', 0, async function (done) {
+            console.info("---------------------start test_filefs_write_file_002---------------------------");
+            let tcNumber = 'test_filefs_write_file_002';
+            let fpath = await getDistributedFilePath(tcNumber);
+            console.info('fpath == ' + fpath);
+            await prepareFile(fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.WRITE_ONLY);
+                securityLabel.setSecurityLabelSync(fpath, "s0");
+                fs.writeSync(file.fd, DISTRIBUTED_FILE_CONTENT,{offset: 1,});
+                console.info('-------------- test_filefs_write_file_002 : write file success.');
+                let fileContent = fs.readTextSync(fpath);
+                console.info("-------------- test_filefs_write_file_002 : fileContent =" + fileContent);
+                expect(fileContent.length == DISTRIBUTED_FILE_CONTENT.length + 1).assertTrue();
+
+                console.info('------------------- start check server... ');
+                sleep(1000);
+                await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
+                    console.info("-------------- test_filefs_write_file_002 : getServerFileInfo serverFileContent =" + serverFileContent);
+                    expect(serverFileContent.length).assertEqual(DISTRIBUTED_FILE_CONTENT.length + 1);
+                })
+    
+                console.info('-------------- start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(fpath);
+            } catch (e) {
+                console.info('test_filefs_write_file_002 has failed for : ' + e);
+                expect(false).assertTrue();
+            }
+            console.info("---------------------end test_filefs_write_file_002---------------------------");
+        });
+
+        /**
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_writeFile_0300
+         * @tc.name    test_filefs_write_file_003
+         * @tc.desc    Function of API,test writeSync() interface,mode=WRITE_ONLY, length(position) = 1.
+         * @tc.level   0
+         */
+         it('test_filefs_write_file_003', 0, async function (done) {
+            console.info("---------------------start test_filefs_write_file_003---------------------------");
+            let tcNumber = 'test_filefs_write_file_003';
+            let fpath = await getDistributedFilePath(tcNumber);
+            console.info('fpath == ' + fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.WRITE_ONLY | fs.OpenMode.CREATE);
+                securityLabel.setSecurityLabelSync(fpath, "s0");
+                fs.writeSync(file.fd, DISTRIBUTED_FILE_CONTENT,{
+                    length: 1,
+                });
+                console.info('-------------- test_filefs_write_file_003 : write file success.');
+                let fileContent = fs.readTextSync(fpath);
+                console.info("-------------- test_filefs_write_file_003 : fileContent =" + fileContent);
+                expect(fileContent.length == 1).assertTrue();
+                console.info("-------------- readTextSync success" + fileContent);
+
+                console.info('------------------- start check server... ');
+                sleep(1000);
+                await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
+                    console.info("-------------- test_filefs_write_file_003 : getServerFileInfo serverFileContent =" + serverFileContent);
+                    expect(serverFileContent.length == 1).assertTrue();
+                })
+
+                console.info('-------------- start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(fpath);
+            } catch (e) {
+                console.info('test_filefs_write_file_003 has failed for : ' + e);
+                expect(false).assertTrue();
+            }
+            console.info("---------------------end test_filefs_write_file_003---------------------------");
+        });
+
+        /**
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_writeFile_0400
+         * @tc.name    test_filefs_write_file_004
+         * @tc.desc    Function of API,test writeSync() interface ,mode=WRITE_ONLY, length(position) = 1, offset(position) = 1.
+         * @tc.level   0
+         */
+        it('test_filefs_write_file_004', 0, async function (done) {
+            console.info("---------------------start test_filefs_write_file_004---------------------------");
+            let tcNumber = 'test_filefs_write_file_004';
+            let fpath = await getDistributedFilePath(tcNumber);
+            console.info('fpath == ' + fpath);
+            await prepareFile(fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.WRITE_ONLY);
+                securityLabel.setSecurityLabelSync(fpath, "s0");
+                fs.writeSync(file.fd, DISTRIBUTED_FILE_CONTENT,{
+                    offset: 1,
+                    length: 1,
+                });
+                console.info('-------------- test_filefs_write_file_004 : write file success.');
+                let fileContent = fs.readTextSync(fpath);
+                console.info("-------------- test_filefs_write_file_004 : fileContent =" + fileContent);
+                expect(fileContent.length == DISTRIBUTED_FILE_CONTENT.length).assertTrue();
+    
+                console.info('------------------- start check server... ');
+                sleep(1000);
+                await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
+                    console.info("-------------- test_filefs_write_file_004 : getServerFileInfo serverFileContent =" + serverFileContent);
+                    expect(serverFileContent.length == DISTRIBUTED_FILE_CONTENT.length).assertTrue();
+                })
+
+                console.info('-------------- start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(fpath);
+            } catch (e) {
+                console.info('test_filefs_write_file_004 has failed for : ' + e);
+                expect(false).assertTrue();
+            }
+            console.info("---------------------end test_filefs_write_file_004---------------------------");
+        });
+
+        /**
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_RenameFileSync_0000
+         * @tc.name    test_filefs_rename_file_sync_000
+         * @tc.desc    Function of API, Test the renameSync interface, rename the file.
+         * @tc.level   0
+         */
+         it('test_filefs_rename_file_sync_000', 0, async function (done) {
+            console.info("--------start test_filefs_rename_file_sync_000--------");
+            let tcNumber = 'test_filefs_rename_file_sync_000';
+            let fpath = await getDistributedFilePath(tcNumber);
+            console.info('fpath == ' + fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+                fs.accessSync(fpath);
+                console.info('------------- create file success.');
+    
+                console.info('------ start check server first... ');
+                await getServerFileInfoFirst(tcNumber, fpath, CODE_CREATE_FILE, function (serverFileCreate) {
+                    console.info("test_filefs_rename_file_sync_000 getServerFileInfoFirst serverFileCreate: " + serverFileCreate);
+                    expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                })
+    
+                let newPath = fpath + "_rename";
+                console.info('------------ test_filefs_rename_file_sync_000 : newPath = ' + newPath);
+                fs.renameSync(fpath, newPath);
+    
+                try {
+                    fs.accessSync(newPath);
+                    console.info('------------ test_filefs_rename_file_sync_000 : rename file success!');
+                } catch (error) {
+                    console.info('------------ test_filefs_rename_file_sync_000 : rename file failed!');
+                    console.info('test_filefs_rename_file_sync_000 has failed for : ' + error);
+                    expect(false).assertTrue();
+                }
+    
+                console.info('------ start check server second... ');
+                await getServerFileInfo(tcNumber, newPath, CODE_CREATE_FILE, done, function (serverFileRename) {
+                    console.info("test_filefs_rename_file_sync_000 getServerFileInfo serverFileRename: " + serverFileRename);
+                    expect(serverFileRename).assertEqual(SERVER_CHECK_SUCCESS);
+                })
+
+                console.info('-------------- start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(newPath);
+            } catch (e) {
+                console.info('test_filefs_rename_file_sync_000 has failed for : ' + e);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_rename_file_sync_000--------");
+        });
+
+        /**
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_RenameFileSync_0100
+         * @tc.name    test_filefs_rename_file_sync_001
+         * @tc.desc    Function of API, Test the renameSync interface, rename the file across directory.
+         * @tc.level   0
+         */
+         it('test_filefs_rename_file_sync_001', 0, async function (done) {
+            console.info("--------start test_filefs_rename_file_sync_001--------");
+            let tcNumber = 'test_filefs_rename_file_sync_001';
+            let dpath = await getDistributedFilePath(tcNumber);
+            let fpath = dpath + '/file_000';
+            fs.mkdirSync(dpath);
+            fs.mkdirSync(dpath + '/dir_000');
+            console.info('fpath == ' + fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+                fs.accessSync(fpath);
+                console.info('------------- create file success.');
+    
+                console.info('------ start check server first... ');
+                await getServerFileInfoFirst(tcNumber, fpath, CODE_CREATE_FILE, function (serverFileCreate) {
+                    console.info("test_filefs_rename_file_sync_001 getServerFileInfoFirst serverFileCreate: " + serverFileCreate);
+                    expect(serverFileCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                })
+    
+                let newPath = fpath + "_rename";
+                console.info('------------ test_filefs_rename_file_sync_001 : newPath = ' + newPath);
+                fs.renameSync(fpath, newPath);
+    
+                try {
+                    fs.accessSync(newPath);
+                    console.info('------------ test_filefs_rename_file_sync_001 : rename file success!');
+                } catch (error) {
+                    console.info('------------ test_filefs_rename_file_sync_001 : rename file failed!');
+                    console.info('test_filefs_rename_file_sync_001 has failed for : ' + error);
+                    expect(false).assertTrue();
+                }
+    
+                console.info('------ start check server second... ');
+                await getServerFileInfo(tcNumber, newPath, CODE_CREATE_FILE, done, function (serverFileRename) {
+                    console.info("test_filefs_rename_file_sync_001 getServerFileInfo serverFileRename: " + serverFileRename);
+                    expect(serverFileRename).assertEqual(SERVER_CHECK_SUCCESS);
+                })
+                
+                console.info('-------------- start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(newPath);
+            } catch (e) {
+                console.info('test_filefs_rename_file_sync_001 has failed for : ' + e);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_rename_file_sync_001--------");
+        });
+
+        /** 
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_readSync_0000
+         * @tc.name    test_filefs_read_file_sync_000
+         * @tc.desc    Test the distributed file readSync interface
+         * @tc.level   0
+         */
+        it('test_filefs_read_file_sync_000', 0, async function (done) {
+            console.info("--------start test_filefs_read_file_sync_000--------");
+            let tcNumber = 'test_filefs_read_file_sync_000';
+            let fpath = await getDistributedFilePath(tcNumber);
+            await prepareFile(fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.READ_WRITE);
+                let readLen = fs.readSync(file.fd, new ArrayBuffer(4096));
+                console.info('-------------- test_filefs_read_file_sync_000 : read file success.' + readLen);
+                expect(DISTRIBUTED_FILE_CONTENT.length == readLen).assertTrue();
+                console.info('------ client filefs_read_file success.');
+    
+                console.info('------ start check server... ');
+                sleep(1000);
+                await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileRead) {
+                    console.info("test_filefs_read_file_sync_000 : getServerFileInfo serverFileRead: " + serverFileRead);
+                    expect(serverFileRead).assertEqual(DISTRIBUTED_FILE_CONTENT);
+                });
+    
+                console.info('-------------- start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(fpath);
+            } catch (error) {
+                console.info('test_filefs_read_file_sync_000 has failed for : ' + error);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_read_file_sync_000--------");
+        });
+
+        /** 
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_read_0000
+         * @tc.name    test_filefs_read_file_async_000
+         * @tc.desc    Test the distributed file read interface Promise.
+         * @tc.level   0
+         */
+        it('test_filefs_read_file_async_000', 0, async function (done) {
+            console.info("--------start test_filefs_read_file_async_000--------");
+            let tcNumber = 'test_filefs_read_file_async_000';
+            let fpath = await getDistributedFilePath(tcNumber);
+            await prepareFile(fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.READ_WRITE);
+                let readLen =  await fs.read(file.fd, new ArrayBuffer(4096));
+                expect(DISTRIBUTED_FILE_CONTENT.length == readLen).assertTrue();
+                console.info('------ client filefs_read_file success.');
+    
+                console.info('------ start check server... ');
+                sleep(1000);
+                await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileRead) {
+                    console.info("test_filefs_read_file_async_000 : getServerFileInfo serverFileRead: " + serverFileRead);
+                    expect(serverFileRead).assertEqual(DISTRIBUTED_FILE_CONTENT);
+                });
+
+                console.info('-------------- start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(fpath);
+            } catch (error) {
+                console.info('test_filefs_read_file_async_000 has failed for : ' + error);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_read_file_async_000--------");
+        });
+
+        /** 
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_read_0100
+         * @tc.name    test_filefs_read_file_async_001
+         * @tc.desc    Test the distributed file read interface Callback.
+         * @tc.level   0
+         */
+        it('test_filefs_read_file_async_001', 0, async function (done) {
+            console.info("--------start test_filefs_read_file_async_001--------");
+            let tcNumber = 'test_filefs_read_file_async_001';
+            let fpath = await getDistributedFilePath(tcNumber);
+            await prepareFile(fpath);
+            try {
+                let file = fs.openSync(fpath, fs.OpenMode.READ_WRITE);
+                fs.read(file.fd, new ArrayBuffer(4096), (err, readlen) => {
+                    if (err) {
+                      console.log('fileIO_test_read_async_001 err package1: ' + JSON.stringify(err));
+                      expect(false).assertTrue();
+                    }
+                    expect(DISTRIBUTED_FILE_CONTENT.length == readlen).assertTrue();
+                })
+                console.info('------ client filefs_read_file success.');
+    
+                console.info('------ start check server... ');
+                sleep(1000);
+                await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileRead) {
+                    console.info("test_filefs_read_file_async_001 : getServerFileInfo serverFileRead: " + serverFileRead);
+                    expect(serverFileRead).assertEqual(DISTRIBUTED_FILE_CONTENT);
+                });
+
+                console.info('-------------- start clean test environment.');
+                fs.closeSync(file);
+                fs.unlinkSync(fpath);
+            } catch (error) {
+                console.info('test_filefs_read_file_async_001 has failed for : ' + error);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_read_file_async_001--------");
+        });
+
+        /** 
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_mkdirSync_0000
+         * @tc.name    test_filefs_create_dir_sync_000
+         * @tc.desc    Test the distributed file mkdirSync interface
+         * @tc.level   0
+         */
+        it('test_filefs_create_dir_sync_000', 0, async function (done) {
+            console.info("--------start test_filefs_create_dir_sync_000--------");
+            let tcNumber = 'test_filefs_create_dir_sync_000';
+            let dpath = await getDistributedFilePath(tcNumber) + 'd';
+            try {
+                fs.mkdirSync(dpath);
+                expect(fs.accessSync(dpath)).assertTrue();
+                console.info('------ client filefs_mkdirSync success.');
+    
+                console.info('------ start check server... ');
+                await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                    console.info("test_filefs_create_dir_sync_000 : getServerFileInfo serverDirCreate: " + serverDirCreate);
+                    expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                });
+                
+                console.info('-------------- start clean test environment.');
+                fs.rmdirSync(dpath);
+            } catch (error) {
+                console.info('test_filefs_create_dir_sync_000 has failed for : ' + error);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_create_dir_sync_000--------");
+        });
+
+        /** 
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_mkdir_0000
+         * @tc.name    test_filefs_create_dir_async_000
+         * @tc.desc    Test the distributed file mkdir interfaces. Promise.
+         * Create a directory, verify normal function.
+         * @tc.level   0
+         */
+        it('test_filefs_create_dir_async_000', 0, async function (done) {
+            console.info("--------start test_filefs_create_dir_async_000--------");
+            let tcNumber = 'test_filefs_create_dir_async_000';
+            let dpath = await getDistributedFilePath(tcNumber) + 'd';
+            try {
+                await fs.mkdir(dpath);
+                expect(fs.accessSync(dpath)).assertTrue();
+                console.info('------ client filefs_mkdirSync success.');
+    
+                console.info('------ start check server... ');
+                await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                    console.info("test_filefs_create_dir_async_000 : getServerFileInfo serverDirCreate: " + serverDirCreate);
+                    expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                });
+                
+                console.info('-------------- start clean test environment.');
+                fs.rmdirSync(dpath);
+            } catch (error) {
+                console.info('test_filefs_create_dir_async_000 has failed for : ' + error);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_create_dir_async_000--------");
+        });
+
+        /** 
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_mkdir_0100
+         * @tc.name    test_filefs_create_dir_async_001
+         * @tc.desc    Test the distributed file mkdir interfaces. Callback.
+         * Create a directory, verify normal function.
+         * @tc.level   0
+         */
+        it('test_filefs_create_dir_async_001', 0, async function (done) {
+            console.info("--------start test_filefs_create_dir_async_001--------");
+            let tcNumber = 'test_filefs_create_dir_async_001';
+            let dpath = await getDistributedFilePath(tcNumber) + 'd';
+            try {
+                fs.mkdir(dpath, (err) => {
+                    if(err) {
+                      console.log('test_filefs_create_dir_async_001 error package: ' + JSON.stringify(err));
+                      expect(false).assertTrue();
+                    }
+                    expect(fs.accessSync(dpath)).assertTrue();
+                });
+                console.info('------ client filefs_mkdirSync success.');
+    
+                console.info('------ start check server... ');
+                await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
+                    console.info("test_filefs_create_dir_async_001 : getServerFileInfo serverDirCreate: " + serverDirCreate);
+                    expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                });
+                
+                console.info('-------------- start clean test environment.');
+                fs.rmdirSync(dpath);
+            } catch (error) {
+                console.info('test_filefs_create_dir_async_001 has failed for : ' + error);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_create_dir_async_001--------");
+        });
+
+        /** 
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_rmdirSync_0000
+         * @tc.name    test_filefs_delete_dir_sync_000
+         * @tc.desc    Function of API, test the distributed file rmdirSync() interface.
+         * @tc.level   0
+         */
+        it('test_filefs_delete_dir_sync_000', 0, async function (done) {
+            console.info("--------start test_filefs_delete_dir_sync_000--------");
+            let tcNumber = 'test_filefs_delete_dir_sync_000';
+            let dpath = await getDistributedFilePath(tcNumber) + 'd';
+            try {
+                fs.mkdirSync(dpath);
+                expect(fs.accessSync(dpath)).assertTrue();
+                console.info('------------- test_filefs_delete_dir_sync_000 : client mkdirSync success.');
+    
+                console.info('------ start check server first ... ');
+                await getServerFileInfoFirst(tcNumber, dpath, CODE_MK_DIR, function (serverDirCreate) {
+                    console.info("test_filefs_delete_dir_sync_000 : getServerFileInfoFirst serverDirCreate: " + serverDirCreate);
+                    expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                });
+    
+                fs.rmdirSync(dpath);
+                if (fs.accessSync(dpath) == true) {
+                    console.info('------------- test_filefs_delete_dir_sync_000 : client rmdirSync failed.');
+                } else {
+                    console.info('------------- test_filefs_delete_dir_sync_000 : check client rmdirSync success.');
+                }
+    
+                console.info('------ start check server second ... ');
+                await getServerFileInfo(tcNumber, dpath, CODE_RM_DIR, done, function (serverDirDelete) {
+                    console.info("test_filefs_delete_dir_sync_000 : getServerFileInfo serverDirDelete: " + serverDirDelete);
+                    expect(serverDirDelete).assertEqual(SERVER_CHECK_SUCCESS);
+                });
+            } catch (error) {
+                console.info('test_filefs_delete_dir_sync_000 has failed for : ' + error);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_delete_dir_sync_000--------");
+        });
+
+        /** 
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_rmdir_0000
+         * @tc.name    test_filefs_delete_dir_async_000
+         * @tc.desc    Function of API, test the distributed file rmdir() interface. Promise.
+         * @tc.level   0
+         */
+        it('test_filefs_delete_dir_async_000', 0, async function (done) {
+            console.info("--------start test_filefs_delete_dir_async_000--------");
+            let tcNumber = 'test_filefs_delete_dir_async_000';
+            let dpath = await getDistributedFilePath(tcNumber) + 'd';
+            try {
+                fs.mkdirSync(dpath);
+                expect(fs.accessSync(dpath)).assertTrue();
+                console.info('------------- test_filefs_delete_dir_async_000 : client mkdirSync success.');
+    
+                console.info('------ start check server first ... ');
+                await getServerFileInfoFirst(tcNumber, dpath, CODE_MK_DIR, function (serverDirCreate) {
+                    console.info("test_filefs_delete_dir_async_000 : getServerFileInfoFirst serverDirCreate: " + serverDirCreate);
+                    expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                });
+    
+                await fs.rmdir(dpath);
+                if (fs.accessSync(dpath) == true) {
+                    console.info('------------- test_filefs_delete_dir_async_000 : client rmdir failed.');
+                } else {
+                    console.info('------------- test_filefs_delete_dir_async_000 : check client rmdir success.');
+                }
+    
+                console.info('------ start check server second ... ');
+                await getServerFileInfo(tcNumber, dpath, CODE_RM_DIR, done, function (serverDirDelete) {
+                    console.info("test_filefs_delete_dir_async_000 : getServerFileInfo serverDirDelete: " + serverDirDelete);
+                    expect(serverDirDelete).assertEqual(SERVER_CHECK_SUCCESS);
+                });
+            } catch (error) {
+                console.info('test_filefs_delete_dir_async_000 has failed for : ' + error);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_delete_dir_async_000--------");
+        });
+
+        /** 
+         * @tc.number  SUB_STORAGE_Distributed_Filefs_rmdir_0100
+         * @tc.name    test_filefs_delete_dir_async_001
+         * @tc.desc    Function of API, test the distributed file rmdir() interface. Callback.
+         * @tc.level   0
+         */
+        it('test_filefs_delete_dir_async_001', 0, async function (done) {
+            console.info("--------start test_filefs_delete_dir_async_001--------");
+            let tcNumber = 'test_filefs_delete_dir_async_001';
+            let dpath = await getDistributedFilePath(tcNumber) + 'd';
+            try {
+                fs.mkdirSync(dpath);
+                expect(fs.accessSync(dpath)).assertTrue();
+                console.info('------------- test_filefs_delete_dir_async_001 : client mkdirSync success.');
+    
+                console.info('------ start check server first ... ');
+                await getServerFileInfoFirst(tcNumber, dpath, CODE_MK_DIR, function (serverDirCreate) {
+                    console.info("test_filefs_delete_dir_async_001 : getServerFileInfoFirst serverDirCreate: " + serverDirCreate);
+                    expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
+                });
+    
+                fs.rmdir(dpath, (err) => {
+                    if(err) {
+                      console.log('test_filefs_delete_dir_async_001 error package: ' + JSON.stringify(err));
+                      expect(false).assertTrue();
+                    }
+                    expect(!fs.accessSync(dpath)).assertTrue();
+                });
+                if (fs.accessSync(dpath) == true) {
+                    console.info('------------- test_filefs_delete_dir_async_001 : client rmdir failed.');
+                } else {
+                    console.info('------------- test_filefs_delete_dir_async_001 : check client rmdir success.');
+                }
+    
+                console.info('------ start check server second ... ');
+                await getServerFileInfo(tcNumber, dpath, CODE_RM_DIR, done, function (serverDirDelete) {
+                    console.info("test_filefs_delete_dir_async_001 : getServerFileInfo serverDirDelete: " + serverDirDelete);
+                    expect(serverDirDelete).assertEqual(SERVER_CHECK_SUCCESS);
+                });
+            } catch (error) {
+                console.info('test_filefs_delete_dir_async_001 has failed for : ' + error);
+                expect(false).assertTrue();
+            }
+            console.info("--------end test_filefs_delete_dir_async_001--------");
         });
     
         console.info("----------SUB_Storage_Fileio_Distributed JS Test is end----------");
