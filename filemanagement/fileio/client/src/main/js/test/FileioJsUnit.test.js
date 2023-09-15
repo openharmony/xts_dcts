@@ -3686,6 +3686,7 @@ export default function FileioDistributedTest(){
                 let fileContent = fs.readTextSync(fpath);
                 console.info("-------------- test_filefs_write_file_002 : fileContent =" + fileContent);
                 expect(fileContent.length == DISTRIBUTED_FILE_CONTENT.length + 1).assertTrue();
+
                 console.info('------------------- start check server... ');
                 sleep(1000);
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
@@ -3725,12 +3726,14 @@ export default function FileioDistributedTest(){
                 console.info("-------------- test_filefs_write_file_003 : fileContent =" + fileContent);
                 expect(fileContent.length == 1).assertTrue();
                 console.info("-------------- readTextSync success" + fileContent);
+
                 console.info('------------------- start check server... ');
                 sleep(1000);
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
                     console.info("-------------- test_filefs_write_file_003 : getServerFileInfo serverFileContent =" + serverFileContent);
                     expect(serverFileContent.length == 1).assertTrue();
                 })
+
                 console.info('-------------- start clean test environment.');
                 fs.closeSync(file);
                 fs.unlinkSync(fpath);
@@ -3771,6 +3774,7 @@ export default function FileioDistributedTest(){
                     console.info("-------------- test_filefs_write_file_004 : getServerFileInfo serverFileContent =" + serverFileContent);
                     expect(serverFileContent.length == DISTRIBUTED_FILE_CONTENT.length).assertTrue();
                 })
+
                 console.info('-------------- start clean test environment.');
                 fs.closeSync(file);
                 fs.unlinkSync(fpath);
@@ -3821,7 +3825,8 @@ export default function FileioDistributedTest(){
                     console.info("test_filefs_rename_file_sync_000 getServerFileInfo serverFileRename: " + serverFileRename);
                     expect(serverFileRename).assertEqual(SERVER_CHECK_SUCCESS);
                 })
-    
+
+                console.info('-------------- start clean test environment.');
                 fs.closeSync(file);
                 fs.unlinkSync(newPath);
             } catch (e) {
@@ -3874,7 +3879,8 @@ export default function FileioDistributedTest(){
                     console.info("test_filefs_rename_file_sync_001 getServerFileInfo serverFileRename: " + serverFileRename);
                     expect(serverFileRename).assertEqual(SERVER_CHECK_SUCCESS);
                 })
-    
+                
+                console.info('-------------- start clean test environment.');
                 fs.closeSync(file);
                 fs.unlinkSync(newPath);
             } catch (e) {
@@ -3942,6 +3948,7 @@ export default function FileioDistributedTest(){
                     console.info("test_filefs_read_file_async_000 : getServerFileInfo serverFileRead: " + serverFileRead);
                     expect(serverFileRead).assertEqual(DISTRIBUTED_FILE_CONTENT);
                 });
+
                 console.info('-------------- start clean test environment.');
                 fs.closeSync(file);
                 fs.unlinkSync(fpath);
@@ -3980,6 +3987,7 @@ export default function FileioDistributedTest(){
                     console.info("test_filefs_read_file_async_001 : getServerFileInfo serverFileRead: " + serverFileRead);
                     expect(serverFileRead).assertEqual(DISTRIBUTED_FILE_CONTENT);
                 });
+
                 console.info('-------------- start clean test environment.');
                 fs.closeSync(file);
                 fs.unlinkSync(fpath);
@@ -4010,7 +4018,8 @@ export default function FileioDistributedTest(){
                     console.info("test_filefs_create_dir_sync_000 : getServerFileInfo serverDirCreate: " + serverDirCreate);
                     expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
                 });
-    
+                
+                console.info('-------------- start clean test environment.');
                 fs.rmdirSync(dpath);
             } catch (error) {
                 console.info('test_filefs_create_dir_sync_000 has failed for : ' + error);
@@ -4040,7 +4049,8 @@ export default function FileioDistributedTest(){
                     console.info("test_filefs_create_dir_async_000 : getServerFileInfo serverDirCreate: " + serverDirCreate);
                     expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
                 });
-    
+                
+                console.info('-------------- start clean test environment.');
                 fs.rmdirSync(dpath);
             } catch (error) {
                 console.info('test_filefs_create_dir_async_000 has failed for : ' + error);
@@ -4075,7 +4085,8 @@ export default function FileioDistributedTest(){
                     console.info("test_filefs_create_dir_async_001 : getServerFileInfo serverDirCreate: " + serverDirCreate);
                     expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
                 });
-
+                
+                console.info('-------------- start clean test environment.');
                 fs.rmdirSync(dpath);
             } catch (error) {
                 console.info('test_filefs_create_dir_async_001 has failed for : ' + error);
@@ -4213,3 +4224,4 @@ export default function FileioDistributedTest(){
         console.info("----------SUB_Storage_Fileio_Distributed JS Test is end----------");
     });
 }
+
