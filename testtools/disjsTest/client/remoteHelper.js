@@ -16,8 +16,11 @@
 import ApiMessage from '../common/apiMessage.js';
 import ApiResult from '../common/apiResult.js';
 import rpc from '@ohos.rpc';
-let logTag = "RpcClient_RemoteHelper:  ";
+
+let logTag = "[RpcClient_RemoteHelper:  ]";
 let CODE_INVOKE =1;
+let CODE_INVOKE_TESTCASE = 99;
+
 export default class RemoteHelper{
     testservice = undefined;
     gIRemoteObject = undefined;
@@ -40,9 +43,35 @@ export default class RemoteHelper{
         console.log(logTag + "run readSequenceable success, result is" + dataReply);
         let retApi = JSON.parse(ret._apiResult);
         let retApiResult = retApi._result;
-        console.log(logTag + " read success, results is" + retApiResult);
+        console.log(logTag + "***********   read success, results is " + retApiResult + "**************");
         return retApiResult;
-}
+    }
+
+    async getReqTestCase(message) {
+        console.log(logTag + "getReq begin");
+        let messageParcel = rpc.MessageParcel.create();
+        console.log(logTag + "create object successfully.");
+        let messageParcelreply = rpc.MessageParcel.create();
+        let option = new rpc.MessageOption();
+        let writeResult = messageParcel.writeSequenceable(message);
+        await this.gIRemoteObject.sendRequest(CODE_INVOKE_TESTCASE, messageParcel, messageParcelreply, option);
+        console.log(logTag + "sendRequest got result");
+        let ret = new ApiMessage(null, null, null, null, null, null, null);
+        let dataReply = messageParcelreply.readSequenceable(ret);
+        console.log(logTag + "run readSequenceable success, result is" + dataReply);
+        let retApi = JSON.parse(ret._apiResult);
+        let retApiResult = retApi._result;
+        console.log(logTag + "***********   read success, results is " + retApiResult + "**************");
+        return retApiResult;
+    }
+
+    async setTestCaseName(name){
+        console.info(logTag + " **************** _methodName is setTestCaseName **************** ");
+        let message = new ApiMessage("openHarmony","testApi","setTestCaseName"," ",
+        ["string"],[String(name)]," ");
+        let resGetReq = await this.getReqTestCase(message);
+        return resGetReq;
+    }
 
     async startBackgroundRunning(){
         console.info(logTag + "_methodName is startBackgroundRunning");
@@ -142,6 +171,31 @@ export default class RemoteHelper{
         console.info(logTag + "_methodName is getRdbStore");
         let message = new ApiMessage("openHarmony","testApi","getRdbStore"," ",
 		    ["string"],[String(rdbStoreName)]," ");
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
+    }
+
+    async createObject(objectname, age, isVis){
+        console.info(logTag + " **************** _methodName is createObject **************** ");
+        let message = new ApiMessage("openHarmony","testApi","createObject"," ",
+        ["string","string","string"],[String(objectname),String(age),String(isVis)]," ");
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
+    }
+
+    async setSessionId(sessionId){
+        console.info(logTag + " **************** _methodName is setSessionId **************** ");
+        let message = new ApiMessage("openHarmony","testApi","setSessionId"," ",
+        ["string"],[String(sessionId)]," ");
+        let resGetReq = await this.getReq(message);
+        return resGetReq;
+    }
+
+    async objectPut(key,value){
+        console.info(logTag + "**************** _methodName is objectPut ****************");
+        let message = new ApiMessage("openHarmony","testApi","objectPut"," ",
+		    ["string","string"],[String(key),String(value)]," ");
+        console.info(logTag + "key=" + key + " value=" + value)
         let resGetReq = await this.getReq(message);
         return resGetReq;
     }

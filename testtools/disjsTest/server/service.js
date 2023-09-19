@@ -19,7 +19,8 @@ import ApiResult from '../common/apiResult.js';
 import ReflectCallApi from './ReflectCallApi.js';
 
 let CODE_INVOKE = 1;
-let logTag = "RpcServer:  ";
+let CODE_INVOKE_TESTCASE = 99;
+let logTag = "[RpcServer:  ]";
 
 export default class Stub extends rpc.RemoteObject {
     constructor(descriptor) {
@@ -29,7 +30,7 @@ export default class Stub extends rpc.RemoteObject {
 
     onRemoteRequest(code, data, reply, option) {
         try {
-            console.log(logTag +" ============onRemoteRequest: code is" + code);
+            console.log(logTag +" ===================  onRemoteRequest: code is " + code + "  ===================");
             switch (code) {
                 case CODE_INVOKE:
                 {
@@ -54,6 +55,21 @@ export default class Stub extends rpc.RemoteObject {
 
                     testBundle._apiResult=JSON.stringify(resultCall);
 		            console.log(logTag +" The testBundle is " + JSON.stringify(testBundle));
+                    let result = reply.writeSequenceable(testBundle);
+                    console.log(logTag +" writeSequenceable result is " + result);
+                    return true;
+                }
+                case CODE_INVOKE_TESTCASE:
+                {
+                    console.info(logTag +" ===================  case CODE_INVOKE_TESTCASE start ===================  ");
+                    let testBundle = new ApiMessage(null, null, null, null, null, null, null);
+                    var tmp = data.readSequenceable(testBundle);
+                    console.log( logTag +" read result is " + tmp + JSON.stringify(testBundle));
+
+                    let resultCall = new ApiResult();
+                    resultCall._resultCode = true;
+                    resultCall._result = 1;
+                    testBundle._apiResult=JSON.stringify(resultCall);
                     let result = reply.writeSequenceable(testBundle);
                     console.log(logTag +" writeSequenceable result is " + result);
                     return true;

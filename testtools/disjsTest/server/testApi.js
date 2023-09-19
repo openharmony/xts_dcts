@@ -18,11 +18,15 @@ import featureAbility from '@ohos.ability.featureAbility';
 import wantAgent from '@ohos.wantAgent';
 import dataRdb from '@ohos.data.rdb';
 import ApiResult from '../common/apiResult';
+import distributedObject from '@ohos.data.distributedDataObject';
 const TEST_BUNDLE_NAME = 'com.ohos.distributekvdisjs';
-let logTag = "RpcServer_TestApi:  ";
+let logTag = "[[RpcServer_TestApi:  ]]";
 let kvManager = undefined;
 let kvStore = undefined;
 let rdbStore = undefined;
+
+let g_object = undefined;
+let context = undefined;
 
 
 export default class TestApi{
@@ -211,8 +215,79 @@ export default class TestApi{
             rdbStore = store;
             return String(true);
         }).catch((err) => {
-            console.info(logTag + " get rdbStore error, err: " + err);
+            console.info(logTag + " get rdbStore error, err: " + err.code + err.message);
             return String(err);
         });
     }
+
+    async createObject(objectname, age, isVis){
+        try{
+            console.info(logTag + "************* createObject begin ************* ");
+            
+            console.info(logTag + "context 1= " + context);
+            context = featureAbility.getContext();
+            console.info(logTag + "context 2= " + context);
+            if (context == undefined || context == null) {
+                console.info(logTag + "error: context = undefined");
+                return false;
+            }
+
+            g_object = undefined;
+            let rename = objectname;
+            let reage = Number(age);
+            let reisVis = Boolean(isVis);
+
+            console.info(logTag + "objectname=" + objectname + "  age=" + age + "  isVis=" + isVis);
+            console.info(logTag + "rename=" + rename + "  reage=" + reage + "  reisVis=" + reisVis);
+
+            g_object = distributedObject.create(context, {name: rename, age: reage, isVis: reisVis});
+            if (g_object == undefined || g_object == null) {
+                console.info(logTag + "error:  g_object = undefined");
+                return false;
+            }
+            console.info(logTag + "createObject success");
+            console.info(logTag + g_object.name + "  " + g_object.age + "  " + g_object.isVis);
+
+        }catch (err) {
+            console.info(logTag + "createObject error, err: "+ err.code + err.message);
+        }
+    }
+
+    async setSessionId(sessionId){
+        try{
+            console.info(logTag + "************* setSessionId begin ************* ");
+            console.info(logTag +"g_object=" + g_object);
+            if (g_object == undefined || g_object == null) {
+                console.info(logTag + "error:  g_object = undefined");
+                return false;
+            }
+            g_object.setSessionId(sessionId).then(() => {
+                console.info(logTag + "remote join session success. sessionId=" + sessionId);
+            }).catch((error) => {
+                console.info(logTag + "remote join session error: " + error.code + error.message);
+                return false;
+            });
+        }catch (err) {
+            console.info(logTag + "setSessionId error, err: "+ err.code + err.message);
+        }
+    }
+    
+    async objectPut(key,value){
+        console.info(logTag + "objectPut key=" + key + "  value=" + value );
+        if(key == "name"){
+            g_object.name = value;
+            console.info(logTag + "objectPut success. name=" + g_object.name);
+        }else if(key == "age"){
+            g_object.age = Number(value);
+            console.info(logTag + "objectPut success. age=" + g_object.age);
+        }else if(key == "isVis"){
+            if(value == "false"){
+                g_object.isVis = false;
+            }else{
+                g_object.isVis = Boolean(value);
+            }
+            console.info(logTag + "objectPut success. isVis=" + g_object.isVis);
+        }
+    }
+
 }
