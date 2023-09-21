@@ -5845,7 +5845,7 @@ export default function kvSyncTest() {
         })
 
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0400
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_1300
          * @tc.name testSyncIntType1300
          * @tc.desc Sync int type data MaxValue+1
          */
@@ -5901,7 +5901,7 @@ export default function kvSyncTest() {
         })
 
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0500
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_1400
          * @tc.name testSyncIntType1400
          * @tc.desc Sync int type data
          */
