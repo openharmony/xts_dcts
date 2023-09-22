@@ -265,7 +265,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
 
         })
 
@@ -373,7 +373,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -482,7 +482,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -592,7 +592,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -702,7 +702,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -811,7 +811,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
 
@@ -976,7 +976,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -1088,7 +1088,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -1645,7 +1645,7 @@ export default function kvSyncTest() {
             await sleep(1000);
             console.info(logTag + "Client sync start");
 
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -1866,7 +1866,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -4624,7 +4624,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -4732,7 +4732,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -4840,7 +4840,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -5166,7 +5166,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -5844,6 +5844,117 @@ export default function kvSyncTest() {
             kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
+        /**
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_1300
+         * @tc.name testSyncIntType1300
+         * @tc.desc Sync int type data MaxValue+1
+         */
+         it("testSyncIntType1300", 0, async function (done) {
+            console.info(logTag + "testSyncIntType1300 start");
+            await remoteHelpers.getKvStore(TEST_STORE_ID, "NO_LEVEL", false);
+            await sleep(1000);
+            const options = {
+                createIfMissing: true,
+                encrypt: false,
+                backup: false,
+                autoSync: false,
+                kvStoreType: factory.KVStoreType.SINGLE_VERSION,
+                schema: '',
+                securityLevel: factory.SecurityLevel.NO_LEVEL,
+            }
+            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+                kvStore = store;
+                console.info(logTag + " get kvStore success");
+            })
+            let result = undefined;
+            let intValue = Number.MAX_VALUE+1;
+            console.info(logTag + "testSyncIntType1300  intValue " + intValue);
+            function call(data) {
+                console.info(logTag + "syncComplete: " + data);
+                kvStore.get(TEST_INT_KEY, (err, data) => {
+                    try {
+                        console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
+                        if (err != null) {
+                            console.info(logTag + " Sync complete get data error,err: " + err);
+                        } else {
+                            console.info(logTag + " Sycn complete get data success,result is: " + data);
+                            result = data;
+                        }
+                        console.info(logTag + " get data finish,result is: " + result);
+                        expect(result).assertEqual(intValue);
+                        kvStore.off("syncComplete", call);
+                        console.info(logTag + "testSyncIntType1300 end");
+                        done();
+
+                    } catch (err) {
+                        console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                        done();
+                    }
+
+                })
+            }
+            kvStore.on("syncComplete", call);
+            await remoteHelpers.kvPut(TEST_INT_KEY, intValue, "Number");
+            await sleep(1000);
+            console.info(logTag + "Client sync start");
+            kvStore.sync(syncDeviceIds, PULL);
+        })
+
+        /**
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_1400
+         * @tc.name testSyncIntType1400
+         * @tc.desc Sync int type data
+         */
+         it("testSyncIntType1400", 0, async function (done) {
+            console.info(logTag + "testSyncIntType1400 start");
+            await remoteHelpers.getKvStore(TEST_STORE_ID, "NO_LEVEL", false);
+            await sleep(1000);
+            const options = {
+                createIfMissing: true,
+                encrypt: false,
+                backup: false,
+                autoSync: false,
+                kvStoreType: factory.KVStoreType.SINGLE_VERSION,
+                schema: '',
+                securityLevel: factory.SecurityLevel.NO_LEVEL,
+            }
+            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+                kvStore = store;
+                console.info(logTag + " get kvStore success");
+            })
+            let result = undefined;
+            let intValue = Number.MIN_VALUE-1;
+            console.info(logTag + "testSyncIntType1400  intValue " + intValue);
+            function call(data) {
+                console.info(logTag + "syncComplete: " + data);
+                kvStore.get(TEST_INT_KEY, (err, data) => {
+                    try {
+                        console.info(logTag + "testSyncIntType1400 Sync complete get data,key is " + TEST_INT_KEY);
+                        if (err != null) {
+                            console.info(logTag + "testSyncIntType1400 Sync complete get data error,err: " + err);
+                        } else {
+                            console.info(logTag + "testSyncIntType1400 Sycn complete get data success,result is: " + data);
+                            result = data;
+                        }
+                        console.info(logTag + "testSyncIntType1400 get data finish,result is: " + result);
+                        expect(result).assertEqual(intValue);
+                        kvStore.off("syncComplete", call);
+                        console.info(logTag + "testSyncIntType1400 end");
+                        done();
+
+                    } catch (err) {
+                        console.error('testSyncIntType1400 catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                        done();
+                    }
+
+                })
+            }
+            kvStore.on("syncComplete", call);
+            await remoteHelpers.kvPut(TEST_INT_KEY, intValue, "Number");
+            await sleep(1000);
+            console.info(logTag + "Client sync start");
+            kvStore.sync(syncDeviceIds, PULL);
+        })
 
         /**
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCFLOATTYPE_0100
@@ -6333,120 +6444,5 @@ export default function kvSyncTest() {
             kvStore.sync(syncDeviceIds, PUSH_PULL);
             await sleep(600);
         })
-
-
-        /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0400
-         * @tc.name testSyncIntType0400
-         * @tc.desc Sync int type data MaxValue+1
-         */
-         it("testSyncIntType0400", 0, async function (done) {
-            console.info(logTag + "testSyncIntType0400 start");
-            await remoteHelpers.getKvStore(TEST_STORE_ID, "NO_LEVEL", false);
-            await sleep(1000);
-            const options = {
-                createIfMissing: true,
-                encrypt: false,
-                backup: false,
-                autoSync: false,
-                kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
-                securityLevel: factory.SecurityLevel.NO_LEVEL,
-            }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
-                kvStore = store;
-                console.info(logTag + " get kvStore success");
-            })
-            let result = undefined;
-            let intValue = Number.MAX_VALUE+1;
-            console.info(logTag + "testSyncIntType0400  intValue " + intValue);
-            function call(data) {
-                console.info(logTag + "syncComplete: " + data);
-                kvStore.get(TEST_INT_KEY, (err, data) => {
-                    try {
-                        console.info(logTag + " Sync complete get data,key is " + TEST_INT_KEY);
-                        if (err != null) {
-                            console.info(logTag + " Sync complete get data error,err: " + err);
-                        } else {
-                            console.info(logTag + " Sycn complete get data success,result is: " + data);
-                            result = data;
-                        }
-                        console.info(logTag + " get data finish,result is: " + result);
-                        expect(result).assertEqual(intValue);
-                        kvStore.off("syncComplete", call);
-                        console.info(logTag + "testSyncIntType0400 end");
-                        done();
-
-                    } catch (err) {
-                        console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                        done();
-                    }
-
-                })
-            }
-            kvStore.on("syncComplete", call);
-            await remoteHelpers.kvPut(TEST_INT_KEY, intValue, "Number");
-            await sleep(1000);
-            console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
-        })
-
-
-        /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0500
-         * @tc.name testSyncIntType0500
-         * @tc.desc Sync int type data
-         */
-         it("testSyncIntType0500", 0, async function (done) {
-            console.info(logTag + "testSyncIntType0500 start");
-            await remoteHelpers.getKvStore(TEST_STORE_ID, "NO_LEVEL", false);
-            await sleep(1000);
-            const options = {
-                createIfMissing: true,
-                encrypt: false,
-                backup: false,
-                autoSync: false,
-                kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
-                securityLevel: factory.SecurityLevel.NO_LEVEL,
-            }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
-                kvStore = store;
-                console.info(logTag + " get kvStore success");
-            })
-            let result = undefined;
-            let intValue = Number.MIN_VALUE-1;
-            console.info(logTag + "testSyncIntType0500  intValue " + intValue);
-            function call(data) {
-                console.info(logTag + "syncComplete: " + data);
-                kvStore.get(TEST_INT_KEY, (err, data) => {
-                    try {
-                        console.info(logTag + "testSyncIntType0500 Sync complete get data,key is " + TEST_INT_KEY);
-                        if (err != null) {
-                            console.info(logTag + "testSyncIntType0500 Sync complete get data error,err: " + err);
-                        } else {
-                            console.info(logTag + "testSyncIntType0500 Sycn complete get data success,result is: " + data);
-                            result = data;
-                        }
-                        console.info(logTag + "testSyncIntType0500 get data finish,result is: " + result);
-                        expect(result).assertEqual(intValue);
-                        kvStore.off("syncComplete", call);
-                        console.info(logTag + "testSyncIntType0400 end");
-                        done();
-
-                    } catch (err) {
-                        console.error('testSyncIntType0500 catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                        done();
-                    }
-
-                })
-            }
-            kvStore.on("syncComplete", call);
-            await remoteHelpers.kvPut(TEST_INT_KEY, intValue, "Number");
-            await sleep(1000);
-            console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
-        })
-        
     })
 }
