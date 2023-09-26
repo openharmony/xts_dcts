@@ -265,7 +265,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
 
         })
 
@@ -373,7 +373,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
         /**
@@ -482,7 +482,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
         /**
@@ -592,7 +592,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
         /**
@@ -702,7 +702,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
         /**
@@ -811,7 +811,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
 
@@ -976,7 +976,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
         /**
@@ -1088,7 +1088,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
         /**
@@ -1645,7 +1645,7 @@ export default function kvSyncTest() {
             await sleep(1000);
             console.info(logTag + "Client sync start");
 
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
         /**
@@ -1866,7 +1866,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
         /**
@@ -4624,7 +4624,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
         /**
@@ -4732,7 +4732,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
         /**
@@ -4840,7 +4840,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
         /**
@@ -5166,7 +5166,7 @@ export default function kvSyncTest() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PUSH_PULL);
+            kvStore.sync(syncDeviceIds, PULL);
         })
 
         /**
