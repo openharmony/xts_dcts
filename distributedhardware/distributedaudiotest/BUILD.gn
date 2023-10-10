@@ -21,7 +21,7 @@ ohos_moduletest_suite("SubDctsdisAudioTest") {
   include_dirs = [
     "$base_root/drivers\peripheral\audio\interfaces\include",
     "$base_root/foundation/distributedhardware/distributed_hardware_fwk/common/log/include",
-    "$base_root/foundation/distributedhardware/distributed_audio/hdf_service/distributed_audio/hdi_service/common/include",
+    "$base_root/drivers/peripheral/distributed_audio/hdi_service/common/include",
     "$base_root/foundation/distributedhardware/distributed_hardware_fwk/utils/include/log",
   ]
 
