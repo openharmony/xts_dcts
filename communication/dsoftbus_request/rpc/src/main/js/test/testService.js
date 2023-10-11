@@ -13,12 +13,9 @@
  * limitations under the License.
  */
 
-import rpc from "@ohos.rpc";
-import deviceManager from '@ohos.distributedHardware.deviceManager';
+import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
-
-var results;
 var bundleName = "com.ohos.rpcrequesttest";
 var abilityName = "com.ohos.rpcrequesttest.ServiceAbility";
 var deviceList;
@@ -29,7 +26,8 @@ export default class TestService {
     }
 
     getDeviceList(deviceManager) {
-        deviceList = deviceManager.getTrustedDeviceListSync();
+
+        deviceList = deviceManager.getAvailableDeviceListSync();
         console.info("getDeviceList success, deviceList id: " + JSON.stringify(deviceList))
     }
 
@@ -37,9 +35,11 @@ export default class TestService {
         console.info("RpcClient:  toConnectAbility")
         return new Promise(resolve=>{
             let self = this;
-            deviceManager.createDeviceManager('ohos.rpc.test', (error, deviceManager) => {
-                self.getDeviceList(deviceManager);
-                console.info("RpcClient:  got deviceManager: " + deviceManager)
+
+            let dmInstance = deviceManager.createDeviceManager('ohos.rpc.test');
+
+            self.getDeviceList(dmInstance);
+                console.info("RpcClient:  got deviceManager: " + dmInstance)
                 let networkId = deviceList[0].networkId
                 console.info("RpcClient: deviceid : " + networkId)
                 console.info("RpcClient: online deviceList id: " + JSON.stringify(deviceList))
@@ -63,8 +63,7 @@ export default class TestService {
                 }
                 let connectId = featureAbility.connectAbility(want, connect)
                 console.info("RpcClient: connect ability got id: " + connectId)
-            })
-        })
 
+            })
     }
 }
