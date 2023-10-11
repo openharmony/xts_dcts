@@ -111,19 +111,17 @@ class Stub extends rpc.RemoteObject {
                 console.info("The processing mode of code value 1 is enabled on the server");
                 let tmp1 = data.readString();
                 let result =  reply.writeString("async onRemoteMessageRequest invoking");
+                return true;
             } else if (code === 2){
                 console.info("The processing mode of code value 2 is enabled on the server");
                 let tmp1 = data.readString();
                 let result =  reply.writeString("async onRemoteMessageRequest invoking");
+                return true;
             }else {
                 console.error("async onRemoteMessageRequest default case " + code);
                 return super.onRemoteMessageRequest(code, data, reply, option);
             }
-            await new Promise((resolve)=>{
-                console.info("new promise")
-                setTimeout(resolve,100);
-            })
-            return true;
+            
         } catch (error) {
             console.info("async onRemoteMessageRequest: " + error);
         }
