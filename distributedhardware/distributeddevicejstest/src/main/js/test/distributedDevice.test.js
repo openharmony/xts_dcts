@@ -490,5 +490,41 @@ export default function distributedDeviceManager() {
             await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1500 end------------------------");
         })
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_1600
+         * @tc.name    Releases the {@code DeviceManager} instance that is no longer used.
+         * @tc.desc    Function test
+         * @tc.level   0
+         */
+        it("SUB_DH_DeviceManager_Dcts_1600", 0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_1600 start------------------------");
+            var mFilterOption = {
+                targetPkgName: "com.ohos.distributedscreenjstest",
+                sortType: 0,
+                filter: JSON.stringify({
+                    key: 'test',
+                    value: 0
+                })
+            }
+            try {
+                dmInstance.off('replyResult');
+                dmInstance.off('discoverSuccess');
+                dmInstance.off('discoverFail');
+                dmInstance.off('serviceDie');
+                dmInstance.off('deviceStateChange');
+				dmInstance.off('deviceNameChange');
+                deviceManager.releaseDeviceManager(dmInstance);
+                console.log("releaseDeviceManager success");
+                expect(true).assertTrue();
+                done();
+            } catch (err) {
+                console.info("releaseDeviceManager errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 11600101).assertTrue();
+                done();
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_1600 end------------------------");
+        })
     })
 }
