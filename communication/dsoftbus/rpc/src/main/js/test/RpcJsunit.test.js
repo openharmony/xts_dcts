@@ -22,7 +22,7 @@ import { UiDriver, BY } from '@ohos.UiTest'
 export default function RpcJsUnitTest() {
 
     describe('RpcJsUnitTest', function () {
-        console.info("-----------------------SUB_DSoftbus_RPC_Compatibility_MessageParce_Test is starting-----------------------");
+        console.info("-----------------------SUB_DSoftbus_RPC_API_MessageParce_Test is starting-----------------------");
 
         const K = 1024;
         const M = 1024 * 1024;
@@ -338,13 +338,13 @@ export default function RpcJsUnitTest() {
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_00100
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0010
         * @tc.name    Call the writeinterfacetoken interface, write the interface descriptor, and read interfacetoken
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_00100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_00100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0010", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0010---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -363,18 +363,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_00100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0010---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_00200
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0020
         * @tc.name    The writeInterfaceToken interface is looping, the interface descriptor is written, and the 
         *               InterfaceToken is read
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_00200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_00200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0020", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0020---------------------------");
             try {
                 for (let i = 0; i < 5; i++) {
                     var data = rpc.MessageSequence.create();
@@ -395,18 +395,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_00200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0020---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_00300
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0030
         * @tc.name    Call the WriteInterfaceToken interface, write the maximum length interface descriptor, and read 
         *               the InterfaceToken
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_00300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_00300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0030", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0030---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -428,18 +428,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_00300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0030---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_00400
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0040
         * @tc.name    The WriteInterfaceToken interface is called, the exceeding-length interface descriptor is written,
         *               and the InterfaceToken is read
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_00400", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_00400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0040", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0040---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = "";
@@ -454,18 +454,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_00400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0040---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_00500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0050
         * @tc.name    Call the writeinterfacetoken interface to write a non string interface descriptor 
         *           and read interfacetoken
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_00500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_00500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0050", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0050---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = 123;
@@ -477,18 +477,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_00500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0050---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_00600
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0060
         * @tc.name    Call the writeshortarray interface, write the array to the MessageSequence instance,
         *             and call readshortarray to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_00600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_00600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0060", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0060---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -507,18 +507,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_00600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0060---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_00700
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0070
         * @tc.name    Call the writeshortarray interface, write the short integer array to the MessageSequence instance,
         *             and call readshortarray (datain: number []) to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_00700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_00700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0070", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0070---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -542,17 +542,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_00700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0070---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_00800
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0080
         * @tc.name    Writeshortarray interface, boundary value verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_00800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_00800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0080", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0080---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -571,17 +571,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_00800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0080---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_00900
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0090
         * @tc.name    Writeshortarray interface, illegal value validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_00900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_00900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0090", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0090---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -601,17 +601,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_00900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0090---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_01000
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0100
         * @tc.name    Writeshortarray interface, transmission length verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_01000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_01000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0100", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0100---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let eShortArryData = [];
@@ -626,18 +626,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_01000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0100---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_01100
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0110
         * @tc.name    Call the writelongarray interface, write the long integer array to the MessageSequence instance,
         *             and call readlongarray to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_01100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_01100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0110", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0110---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -656,18 +656,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_01100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0110---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_01200
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0120
         * @tc.name    Call the writelongarray interface, write the long integer array to the MessageSequence instance,
         *             and call readlongarray (datain: number []) to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_01200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_01200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0120", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0120---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -691,17 +691,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_01200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0120---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_01300
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0130
         * @tc.name    Writelongarray interface, boundary value verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_01300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_01300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0130", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0130---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -722,17 +722,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_01300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0130---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_01400
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0140
         * @tc.name    Writelongarray interface, long type precision verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_01400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_01400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0140", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0140---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -754,17 +754,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_01400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0140---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_01500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0150
         * @tc.name    Writelongarray Indicates an interface for verifying the input length
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_01500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_01500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0150", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0150---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let wLongArryData = [];
@@ -779,18 +779,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_01500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0150---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_01600
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0160
         * @tc.name    Call the writedoublearray interface, write the array to the MessageSequence instance,
         *             and call readdoublearra to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_01600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_01600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0160", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0160---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -809,18 +809,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_01600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0160---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_01700
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0170
         * @tc.name    Call the writedoublearray interface, write the array to the MessageSequence instance,
         *             and call readdoublearra (datain: number []) to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_01700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_01700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0170", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0170---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -844,17 +844,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_01700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0170---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_01800
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0180
         * @tc.name    Writedoublearray interface, boundary value verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_01800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_01800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0180", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0180---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -873,17 +873,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_01800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0180---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_01900
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0190
         * @tc.name    Writedoublearray interface, illegal value validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_01900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_01900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0190", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0190---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -904,17 +904,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_01900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0190---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_02000
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0200
         * @tc.name    Writedoublearray interface, Out-of-bounds value verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_02000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_02000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0200", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0200---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let eDoubleArryData = [];
@@ -929,18 +929,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_02000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0200---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_02100
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0210
         * @tc.name    Call the writebooleanarray interface, write the array to the MessageSequence instance,
         *             and call readbooleanarray to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_02100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_02100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0210", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0210---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -959,18 +959,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_02100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0210---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_02200
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0220
         * @tc.name    Call the writebooleanarray interface, write the array to the MessageSequence instance,
         *             and call readbooleanarray (datain: number []) to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_02200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_02200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0220", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0220---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -998,17 +998,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_02200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0220---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_02300
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0230
         * @tc.name    Writebooleanarray interface, illegal value validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_02300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_02300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0230", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0230---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1028,17 +1028,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_02300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0230---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_02400
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0240
         * @tc.name    Writebooleanarray Interface for length verification of input parameters
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_02400", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_02400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0240", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0240---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let wBooleanArryData = [];
@@ -1057,18 +1057,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_02400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0240---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_02500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0250
         * @tc.name    Call the writechararray interface, write the array to the MessageSequence instance,
         *             and call readchararray to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_02500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_02500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0250", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0250---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1087,18 +1087,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_02500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0250---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_02600
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0260
         * @tc.name    Call the writechararray interface, write the array to the MessageSequence instance,
         *             and call readchararray (datain: number []) to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_02600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_02600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0260", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0260---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1122,17 +1122,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_02600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0260---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_02700
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0270
         * @tc.name    Writechararray interface, illegal value validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_02700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_02700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0270", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0270---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1153,17 +1153,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_02700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0270---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_02800
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0280
         * @tc.name    Writechararray Indicates the length of an interface input parameter
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_02800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_02800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0280", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0280---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let errorCharArryData = [];
@@ -1178,18 +1178,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_02800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0280---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_02900
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_02900
         * @tc.name    Call the writestringarray interface, write the array to the MessageSequence instance,
         *             and call readstringarray (datain: number []) to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_02900", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_02900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_02900", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_02900---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1207,18 +1207,18 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 reply.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_02900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_02900---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_03000
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0300
         * @tc.name    Call the writestringarray interface, write the array to the MessageSequence instance,
         *             and call readstringarray() to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_03000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_03000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0300", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0300---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1241,17 +1241,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 reply.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_03000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0300---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_03100
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0310
         * @tc.name    Writestringarray interface, illegal value validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_03100", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_03100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0310", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0310---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let errorStringArryData = ['abc', 123, 'beauty'];
@@ -1264,17 +1264,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_03100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0310---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_03200
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0320
         * @tc.name    writeStringArray Interface for length verification of input parameters
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_03200", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_03200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0320", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0320---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let wStringArryData = [];
@@ -1287,18 +1287,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_03200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0320---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_03300
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0330
         * @tc.name    Call the writebytearray interface, write the array to the MessageSequence instance,
         *             and call readbytearray to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_03300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_03300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0330", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0330---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1318,18 +1318,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_03300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0330---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_03400
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0340
         * @tc.name    Call the writebytearray interface, write the array to the MessageSequence instance,
         *             and call readbytearray (datain: number []) to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_03400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_03400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0340", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0340---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1351,17 +1351,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_03400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0340---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_03500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0350
         * @tc.name    Writebytearray interface, boundary value verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_03500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_03500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0350", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0350---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1386,17 +1386,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_03500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0350---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_03600
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0360
         * @tc.name    Writebytearray interface, illegal value validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_03600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_03600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0360", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0360---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1420,17 +1420,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_03600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0360---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_03700
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0370
         * @tc.name    Writebytearray Interface，input parameter length verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_03700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_03700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0370", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0370---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let ByteArraylet = [];
@@ -1445,18 +1445,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_03700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0370---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_03800
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0380
         * @tc.name    Call the writeintarray interface, write the array to the MessageSequence instance,
         *             and call readintarray to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_03800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_03800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0380", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0380---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1475,18 +1475,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_03800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0380---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_03900
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0390
         * @tc.name    Call the writeintarray interface, write the array to the MessageSequence instance,
         *             and call readintarray (datain: number []) to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_03900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_03900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0390", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0390---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1510,17 +1510,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_03900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0390---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_04000
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0400
             * @tc.name    Writeintarray interface, boundary value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_04000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_04000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0400", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0400---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1538,17 +1538,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 reply.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_04000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0400---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_04100
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0410
             * @tc.name    Writeintarray interface, illegal value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_04100", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_04100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0410", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0410---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1571,17 +1571,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 reply.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_04100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0410---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_04200
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0420
             * @tc.name    Writeintarray interface, input parameter length verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_04200", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_04200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0420", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0420---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let intArryData = [];
@@ -1596,18 +1596,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_04200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0420---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_04300
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0430
             * @tc.name    Call the writefloatarray interface, write the array to the MessageSequence instance,
             *             and call readfloatarray to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_04300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_04300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0430", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0430---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1626,18 +1626,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_04300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0430---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_04400
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0440
             * @tc.name    Call the writefloatarray interface, write the array to the MessageSequence instance,
             *             and call readfloatarray (datain: number []) to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_04400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_04400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0440", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0440---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1658,17 +1658,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_04400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0440---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_04500
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0450
             * @tc.name    Writefloatarray interface, parameter boundary value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_04500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_04500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0450", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0450---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1690,17 +1690,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_04500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0450---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_04600
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0460
             * @tc.name    Writefloatarray interface, boundary value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_04600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_04600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0460", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0460---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1722,17 +1722,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_04600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0460---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_04700
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0470
             * @tc.name    Writefloatarray interface, Longest array verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_04700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_04700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0470", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0470---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let floatArryData = [];
@@ -1747,18 +1747,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_04700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0470---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_04800
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0480
             * @tc.name    Call the writeShort interface to write the short integer data to the MessageSequence instance,
             *             and call readshort to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_04800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_04800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0480", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0480---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1777,17 +1777,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_04800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0480---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_04900
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0490
             * @tc.name    WriteShort interface, boundary value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_04900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_04900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0490", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0490---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1813,17 +1813,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_04900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0490---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_05000
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0500
             * @tc.name    WriteShort interface, Boundary value minimum value out of bounds verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_05000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_05000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0500", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0500---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1841,17 +1841,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_05000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0500---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_05100
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0510
             * @tc.name    WriteShort interface, Boundary value maximum value out of bounds verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_05100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_05100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0510", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0510---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1869,18 +1869,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_05100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0510---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_05200
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0520
             * @tc.name    Call writelong interface to write long integer data to MessageSequence instance
             *             and call readlong to read data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_05200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_05200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0520", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0520---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1899,18 +1899,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_05200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0520---------------------------");
         });
 
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_05300
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0530
             * @tc.name    Writelong interface, Verification of maximum accuracy value
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_05300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_05300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0530", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0530---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1929,17 +1929,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_05300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0530---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_05400
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0540
             * @tc.name    Writelong interface, Minimum loss accuracy verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_05400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_05400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0540", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0540---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1958,17 +1958,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_05400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0540---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_05500
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0550
             * @tc.name    Writelong interface, Maximum loss accuracy verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_05500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_05500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0550", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0550---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1988,17 +1988,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_05500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0550---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_05600
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0560
             * @tc.name    Call the parallel interface to read and write data to the double instance
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_05600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_05600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0560", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0560---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2017,17 +2017,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_05600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0560---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_05700
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0570
             * @tc.name    Writedouble interface, boundary value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_05700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_05700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0570", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0570---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2045,17 +2045,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 reply.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_05700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0570---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_05800
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0580
             * @tc.name    Writedouble interface, Minimum boundary value out of bounds verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_05800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_05800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0580", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0580---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2073,17 +2073,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 reply.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_05800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0580---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_05900
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0590
             * @tc.name    Writedouble interface, illegal value validation
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_05900", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_05900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0590", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0590---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = "1.79E+465312156";
@@ -2095,18 +2095,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_05900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0590---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_06000
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0600
             * @tc.name    Invoke the writeboolean interface to write the data true to the MessageSequence 
             *               instance and invoke the readboolean interface to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_06000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_06000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0600", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0600---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2125,18 +2125,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_06000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0600---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_06100
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0610
             * @tc.name    Call the writeboolean interface to write the data to the MessageSequence instance,
             *             and call readboolean to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_06100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_06100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0610", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0610---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2155,17 +2155,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_06100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0610---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_06200
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0620
             * @tc.name    Writeboolean interface, illegal value number type verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_06200", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_06200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0620", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0620---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 data.writeBoolean(9);
@@ -2176,17 +2176,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_06200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0620---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_06300
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0630
             * @tc.name    Writeboolean interface, illegal value string type verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_06300", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_06300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0630", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0630---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = "true";
@@ -2198,18 +2198,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_06300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0630---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_06400
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0640
             * @tc.name    Call the writechar interface to write the minimum data to the MessageSequence instance,
             *               and call readchar to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_06400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_06400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0640", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0640---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2228,18 +2228,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_06400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0640---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_06500
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0650
             * @tc.name    Call the writechar interface to write the maximum data to the MessageSequence instance,
             *              and call readchar to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_06500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_06500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0650", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0650---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2258,18 +2258,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_06500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0650---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_06600
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0660
             * @tc.name    Call the writechar interface to write the minimum out of range data to the MessageSequence instance,
             *              and call readchar to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_06600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_06600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0660", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0660---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2288,18 +2288,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_06600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0660---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_06700
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0670
             * @tc.name    Call the writechar interface to write the maximum out of range data to the MessageSequence instance,
             *              and call readchar to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_06700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_06700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0670", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0670---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2318,17 +2318,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_06700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0670---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_06800
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0680
             * @tc.name    Writechar interface, illegal value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_06800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_06800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0680", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0680---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = 'ades';
@@ -2340,18 +2340,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_06800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0680---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_06900
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0690
             * @tc.name    Call the writestring interface to write the data to the MessageSequence instance,
             *             and call readstring() to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_06900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_06900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0690", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0690---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2373,17 +2373,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_06900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0690---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_07000
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0700
             * @tc.name    Writestring interface Maximum data out of range verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_07000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_07000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0700", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0700---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = '';
@@ -2398,17 +2398,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_07000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0700---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_07100
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0710
             * @tc.name    Writestring interface, illegal value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_07100", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_07100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0710", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0710---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = 123;
@@ -2420,18 +2420,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_07100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0710---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_07200
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0720
             * @tc.name    Call the writebyte interface to write data to the MessageSequence instance,
             *             and call readbyte to read data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_07200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_07200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0720", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0720---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2450,17 +2450,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_07200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0720---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_07300
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0730
             * @tc.name    Writebyte interface, boundary value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_07300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_07300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0730", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0730---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2486,17 +2486,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_07300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0730---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_07400
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0740
             * @tc.name    Writebyte interface, Maximum boundary value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_07400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_07400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0740", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0740---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2514,17 +2514,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_07400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0740---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_07500
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0750
             * @tc.name    Writebyte interface, Minimum boundary value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_07500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_07500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0750", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0750---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2542,17 +2542,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_07500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0750---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_07600
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0760
             * @tc.name    Writebyte interface, illegal value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_07600", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_07600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0760", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0760---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 data.writeByte("error");
@@ -2563,18 +2563,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_07600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0760---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_07700
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0770
             * @tc.name    Call the writeint interface to write the data to the MessageSequence instance,
             *             and call readint to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_07700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_07700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0770", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0770---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2593,17 +2593,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_07700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0770---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_07800
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0780
             * @tc.name    Writeint interface, boundary value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_07800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_07800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0780", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0780---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2629,17 +2629,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_07800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0780---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_07900
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0790
             * @tc.name    Writeint interface, Verification of minimum boundary overrun value
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_07900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_07900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0790", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0790---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2657,17 +2657,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_07900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0790---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_08000
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0800
             * @tc.name    Writeint interface, Verification of maximum boundary overrun value
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_08000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_08000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0800", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0800---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2685,17 +2685,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_08000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0800---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_08100
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0810
             * @tc.name    Writeint interface, illegal value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_08100", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_08100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0810", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0810---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 data.writeInt("error");
@@ -2706,18 +2706,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_08100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0810---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_08200
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0820
             * @tc.name    Call the writefloat interface to write data to the MessageSequence instance,
             *             and call readfloat to read data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_08200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_08200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0820", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0820---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2736,17 +2736,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_08200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0820---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_08300
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0830
             * @tc.name    Writefloat interface, Minimum boundary value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_08300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_08300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0830", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0830---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2766,17 +2766,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_08300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0830---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_08400
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0840
             * @tc.name    Writefloat interface, Maximum boundary value verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_08400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_08400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0840", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0840---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2795,17 +2795,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_08400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0840---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_08500
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0850
             * @tc.name    Writefloat interface, Verification of maximum boundary overrun value
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_08500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_08500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0850", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0850---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2824,17 +2824,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_08500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0850---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_08600
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0860
             * @tc.name    Writefloat interface, Verification of minimum boundary overrun value
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_08600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_08600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0860", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0860---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -2853,17 +2853,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_08600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0860---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_08700
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0870
             * @tc.name    Writefloat interface, illegal value validation
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_08700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_08700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0870", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0870---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = 'a';
@@ -2875,18 +2875,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_08700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0870---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_08800
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0880
         * @tc.name    Call the getRawDataCapacity interface to get the maximum amount of raw data that a MessageSequence 
         *               can hold
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_08800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_08800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0880", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0880---------------------------");
             try {
                 var parcel = new rpc.MessageSequence();
                 var reply = new rpc.MessageSequence();
@@ -2908,17 +2908,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_08800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0880---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_08900
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0890
         * @tc.name    Test MessageSequence to deliver rawdata data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_08900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_08900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0890", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0890---------------------------");
             try {
                 var parcel = new rpc.MessageSequence();
                 var reply = new rpc.MessageSequence();
@@ -2942,17 +2942,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_08900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0890---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_09000
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0900
         * @tc.name    Test MessageSequence to pass abnormal rawdata data, and expand the capacity for verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_09000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_09000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0900", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0900---------------------------");
             try {
                 var parcel = new rpc.MessageSequence();
                 var reply = new rpc.MessageSequence();
@@ -2981,17 +2981,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_09000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0900---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_09100
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0910
         * @tc.name    Test MessageSequence to pass exception rawdata data data interception verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_09100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_09100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0910", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0910---------------------------");
             try {
                 var parcel = new rpc.MessageSequence();
                 var reply = new rpc.MessageSequence();
@@ -3019,17 +3019,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_09100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0910---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_09200
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0920
         * @tc.name    Test MessageSequence to deliver out-of-bounds RawData data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_09200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_09200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0920", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0920---------------------------");
             try {
                 var parcel = new rpc.MessageSequence();
                 var reply = new rpc.MessageSequence();
@@ -3053,17 +3053,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_09200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0920---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_09300
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0930
         * @tc.name    Test MessageSequence to deliver illegal RawData data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_09300", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_09300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0930", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0930---------------------------");
             try {
                 var parcel = new rpc.MessageSequence();
                 let arr = ["aaa", 1, 2, 3];
@@ -3075,17 +3075,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 parcel.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_09300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0930---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_09400
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0940
         * @tc.name    Call the writeremoteobject interface to serialize the remote object
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_09400", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_09400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0940", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0940---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let testRemoteObject = new TestRemoteObject("testObject");
@@ -3096,18 +3096,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_09400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0940---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_09500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0950
         * @tc.name    Invoke the writeremoteobject interface to serialize a remote object and transfer the object. 
         *               The object parameter is empty
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_09500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_09500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0950", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0950---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = new TestRemoteObject(null);
@@ -3117,17 +3117,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_09500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0950---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_09600
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0960
         * @tc.name    Call the writeremoteobject interface to serialize the remote object and pass in the empty object
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3   
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_09600", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_09600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0960", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0960---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = {};
@@ -3135,23 +3135,23 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 let errCode = `${rpc.ErrorCode.PROXY_OR_REMOTE_OBJECT_INVALID_ERROR}`;
                 expect(error.code == errCode).assertTrue();
-                console.info("SUB_DSoftbus_RPC_Compatibility_MessageSequence_09600: errorMessage " + error.message);
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0960: errorMessage " + error.message);
                 expect(error.message != null).assertTrue();
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_09600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0960---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_09700
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0970
         * @tc.name    Call the writeParcelable interface to write the custom serialized
         *             object to the MessageSequence instance
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_09700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_09700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0970", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0970---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let sequenceable = new MySequenceable(1, "aaa");
@@ -3163,18 +3163,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_09700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0970---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_09800
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0980
         * @tc.name    Call the writeParcelable interface to write the custom serialized
         *             object to the MessageSequence instance, Migration to read
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_09800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_09800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0980", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0980---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let sequenceable = new MySequenceable(1, "aaa");
@@ -3186,18 +3186,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_09800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0980---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_09900
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0990
             * @tc.name    After the server finishes processing, write noexception first before writing the result,
             *             and the client calls readexception to judge whether the server is abnormal
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_09900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_09900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0990", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0990---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -3217,18 +3217,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_09900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0990---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_10000
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1000
             * @tc.name    If the data on the server is abnormal, the client calls readexception
             *             to judge whether the server is abnormal
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_10000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_10000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1000", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1000---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -3248,17 +3248,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_10000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1000---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_10100
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_10100
             * @tc.name    Serializable object marshaling and unmarshalling test
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_10100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_10100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_10100", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_10100---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -3280,17 +3280,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_10100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_10100---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_10200
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1020
             * @tc.name    Non serializable object marshaling test
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_10200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_10200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1020", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1020---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let sequenceable = new MySequenceable(1, 1);
@@ -3303,17 +3303,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_10200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1020---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_10300
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1030
             * @tc.name    The server did not send a serializable object, and the client was ungrouped
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_10300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_10300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1030", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1030---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -3333,18 +3333,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_10300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1030---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_10400
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1040
             * @tc.name    Call the writeParcelable interface to write the custom serialized object to the
             *             MessageSequence instance, and call readParcelable to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_10400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_10400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1040", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1040---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -3366,18 +3366,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_10400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1040---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_10500
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1050
             * @tc.name    Call the writeParcelablearray interface to write the custom serialized object array (1, 2, 3) to
             *              the MessageSequence instance, and call readParcelablearray to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_10500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_10500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1050", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1050---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -3403,18 +3403,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_10500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1050---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_10600
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1060
             * @tc.name    Call the writeParcelablearray interface to write the custom serialized object to the
             *             MessageSequence instance, and call readParcelablearray to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_10600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_10600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1060", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1060---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -3440,18 +3440,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_10600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1060---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_10700
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1070
             * @tc.name    Call the writeParcelablearray interface to write the custom
             *             serialized object to the MessageSequence instance
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_10700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_10700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1070", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1070---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let sequenceable = 1;
@@ -3463,18 +3463,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_10700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1070---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_10800
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1080
             * @tc.name    Call the writeremoteobjectarray interface to write the object array to the MessageSequence
             *             instance, and call readremoteobjectarray to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_10800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_10800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1080", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1080---------------------------");
             try {
                 let count = 0;
                 function checkResult(num, str) {
@@ -3496,7 +3496,7 @@ export default function RpcJsUnitTest() {
                 data.writeRemoteObjectArray(listeners);
                 expect(gIRemoteObject != undefined).assertTrue();
                 await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECTARRAY, data, reply, option).then((result) => {
-                    console.info("SUB_DSoftbus_RPC_Compatibility_MessageSequence_10800: sendMessageRequest is " + result.errCode);
+                    console.info("SUB_DSoftbus_RPC_API_MessageSequence_1080: sendMessageRequest is " + result.errCode);
                     expect(result.errCode).assertEqual(0);
                     expect(result.code).assertEqual(CODE_WRITE_REMOTEOBJECTARRAY);
                     expect(result.data).assertEqual(data);
@@ -3509,18 +3509,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_10800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1080---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_10900
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1090
             * @tc.name    Call the writeremoteobjectarray interface to write the object array to the MessageSequence instance,
             *             and call readremoteobjectarray (objects: iremoteobject []) to read the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_10900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_10900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1090", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1090---------------------------");
             try {
                 let count = 0;
                 function checkResult(num, str) {
@@ -3542,7 +3542,7 @@ export default function RpcJsUnitTest() {
                 data.writeRemoteObjectArray(listeners);
                 expect(gIRemoteObject != undefined).assertTrue();
                 await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECTARRAY, data, reply, option).then((result) => {
-                    console.info("SUB_DSoftbus_RPC_Compatibility_MessageSequence_10900: sendMessageRequest is " + result.errCode);
+                    console.info("SUB_DSoftbus_RPC_API_MessageSequence_1090: sendMessageRequest is " + result.errCode);
                     expect(result.errCode == 0).assertTrue();
                 });
             } catch (error) {
@@ -3552,17 +3552,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_10900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1090---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_11000
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1100
             * @tc.name    Test MessageSequence to deliver the reply message received in promise across processes
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_11000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_11000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1100", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1100---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -3600,18 +3600,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_11000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1100---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_11100
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1110
             * @tc.name    Test the cross process delivery of MessageSequence and receive the reply message
             *             in the callback function
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_11100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_11100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1110", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1110---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -3655,18 +3655,18 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_11100--------------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_MessageSequence_1110--------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_11200
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1120
             * @tc.name    Test the cross process transmission of MessageSequence.
             *             After receiving the reply message in promise, read letious types of arrays in order
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_11200", 0, async function (done) {
-            console.info("--------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_11200--------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1120", 0, async function (done) {
+            console.info("--------------------start SUB_DSoftbus_RPC_API_MessageSequence_1120--------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -3709,19 +3709,19 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_11200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1120---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_11300
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1130
             * @tc.name    Test MessageSequence cross process delivery. After receiving the reply message in promise,
             *             the client constructs an empty array in sequence and reads the data from the reply message
             *             into the corresponding array
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_11300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_11300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1130", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1130---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -3782,17 +3782,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_11300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1130---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_11400
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1140
             * @tc.name    Test MessageSequence to pass an object of type iremoteobject across processes
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it('SUB_DSoftbus_RPC_Compatibility_MessageSequence_11400', 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_11400---------------------------");
+        it('SUB_DSoftbus_RPC_API_MessageSequence_1140', 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1140---------------------------");
             function checkResult(num, str) {
                 expect(num).assertEqual(123);
                 expect(str).assertEqual("rpcListenerTest");
@@ -3817,17 +3817,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_11400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1140---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_11500
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1150
             * @tc.name    Test MessageSequence to pass an array of iremoteobject objects across processes
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it('SUB_DSoftbus_RPC_Compatibility_MessageSequence_11500', 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_11500---------------------------");
+        it('SUB_DSoftbus_RPC_API_MessageSequence_1150', 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1150---------------------------");
             let count = 0;
             function checkResult(num, str) {
                 expect(num).assertEqual(123);
@@ -3860,18 +3860,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_11500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1150---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_11600
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1160
             * @tc.name    Test MessageSequence to pass the array of iremoteobject objects across processes. The server
             *             constructs an empty array in onremoterequest and reads it from MessageSequence
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it('SUB_DSoftbus_RPC_Compatibility_MessageSequence_11600', 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_11600---------------------------");
+        it('SUB_DSoftbus_RPC_API_MessageSequence_1160', 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1160---------------------------");
             let count = 0;
             function checkResult(num, str) {
                 expect(num).assertEqual(123);
@@ -3905,17 +3905,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_11600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1160---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_11700
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1170
             * @tc.name    Invoke the rewindRead interface,Set 0-bit offset and read the data after offset
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_11700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_11700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1170", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1170---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -3937,17 +3937,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_11700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1170---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_11800
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1180
             * @tc.name    Invoke the rewindRead interface,Set 1-bit offset and read the data after offset
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_11800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_11700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1180", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1170---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -3968,17 +3968,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_11800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1180---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_11900
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1190
             * @tc.name    Invoke the rewindWrite interface, Set 0-bit offset and write the data after offset
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_11900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_11800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1190", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1180---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -3998,17 +3998,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_11900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1190---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_12000
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1200
             * @tc.name    Invoke the rewindWrite interface, Set 1-bit offset and write the data after offset
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_12000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_12000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1200", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1200---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4028,18 +4028,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_12000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1200---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_12100
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1210
             * @tc.name    setCapacity Sets the storage capacity of the null MessageSequence instance. The getCapacity
                         obtains the current MessageSequence capacity
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_12100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_12100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1210", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1210---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4061,18 +4061,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_12100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1210---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_12200
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1220
             * @tc.name    setCapacity Sets the storage capacity of the MessageSequence instance. The getCapacity
                         obtains the current MessageSequence capacity
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_12200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_12200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1220", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1220---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4093,17 +4093,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_12200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1220---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_12300
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1230
             * @tc.name    Setcapacity test: size limit verification of MessageSequence instance
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_12300", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_12300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1230", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1230---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 expect(data.getCapacity()).assertEqual(0);
@@ -4118,17 +4118,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_12300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1230---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_12400
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1240
         * @tc.name    SetCapacity Tests the storage capacity threshold of the MessageSequence instance
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_12400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_12400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1240", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1240---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4151,17 +4151,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_12400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1240---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_12500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1250
         * @tc.name    Setcapacity test storage capacity boundary value verification of MessageSequence instance
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_12500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_12500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1250", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1250---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 expect(data.getSize()).assertEqual(0);
@@ -4175,18 +4175,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_12500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1250---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_12600
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1260
             * @tc.name    setSize Sets the size of the data contained in the MessageSequence instance. The getSize command
                         reads the data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_12600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_12600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1260", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1260---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4209,18 +4209,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_12600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1260---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_12700
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1270
             * @tc.name    SetSize: Increases the value of the data contained in the MessageSequence instance by 1,
                         Write setSize
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_12700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_12700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1270", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1270---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4243,17 +4243,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_12700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1270---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_12800
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1280
             * @tc.name    Verify the MessageSequence instance SetSize setting and the instance capacitydata qualification verification
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_12800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_12800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1280", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1280---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 expect(data.getSize()).assertEqual(0);
@@ -4269,18 +4269,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_12800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1280---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_12900
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1290
             * @tc.name    setSize Sets the storage capacity of the MessageSequence instance to decrease by one.
                         The getSize obtains the current MessageSequence capacity
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_12900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_12900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1290", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1290---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4303,17 +4303,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_12900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1290---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_13000
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1300
             * @tc.name    Validate the setSize boundary value in the MessageSequence instance
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_13000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_13000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1300", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1300---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 expect(data.getCapacity()).assertEqual(0);
@@ -4326,17 +4326,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_13000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1300---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_13100
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1310
             * @tc.name    Verify that setSize is out of bounds in a MessageSequence instance
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_13100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_13100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1310", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1310---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 data.setSize(0);
@@ -4350,17 +4350,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_13100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1310---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_13200
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1320
             * @tc.name    Obtains the write and read positions of the MessageSequence
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_13200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_13200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1320", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1320---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4382,17 +4382,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_13200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1320---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_13300
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1330
             * @tc.name    Obtaining the Writable and Readable Byte Spaces of MessageSequence
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_13300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_13300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1330", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1330---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4413,17 +4413,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_13300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1330---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_13400
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1340
             * @tc.name    Obtains the writeable and readable byte space and read position of the MessageSequence
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_13400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_13400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1340", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1340---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4447,17 +4447,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_13400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1340---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_13500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1350
         * @tc.name    Get the space size of MessageSequence to pass rawdata data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_13500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_13500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1350", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1350---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4481,17 +4481,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_13500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1350---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_13600
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1360
             * @tc.name    Test fixed MessageSequence space size to pass rawData data
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_13600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_13600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1360", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1360---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 expect(data.getRawDataCapacity()).assertEqual(128 * M);
@@ -4513,51 +4513,51 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_13600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1360---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_13700
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1370
             * @tc.name    Test MessageSequence delivery file descriptor object
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_13700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_13700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1370", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1370---------------------------");
             try {
                 let testab = new TestProxy(gIRemoteObject).asObject();
                 expect(testab != null).assertTrue();
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_13700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1370---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_13800
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1380
             * @tc.name    Test that the asObject interface is called by a RemoteObject and returns itself
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_13800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_13800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1380", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1380---------------------------");
             try {
                 let testRemoteObject = new TestRemoteObject("testObject");
                 expect(testRemoteObject.asObject() != null).assertTrue();
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_13800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1380---------------------------");
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_13900
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1390
             * @tc.name    MessageSequence sendMessageRequest API test
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3 
             */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_13900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_13900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1390", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1390---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let rawdata = [1, 2, 3];
@@ -4579,18 +4579,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_13900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1390---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_14000
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1400
         * @tc.name    Invoke the writestring interface to write data to the MessageSequence instance sendMessageRequest Asynchronous
         *               Authentication onRemoteMessageRequest Server Processing
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_14000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_14000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1400", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1400---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -4609,19 +4609,19 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_14000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1400---------------------------");
         });
 
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_14100
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1410
         * @tc.name    Invoke the writestring interface to write data to the MessageSequence instance. sendMessageRequest asynchronously
         *               verifies the priority processing levels of onRemoteMessageRequest and onRemoteRequest
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_14100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_14100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1410", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1410---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -4640,17 +4640,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_14100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1410---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_14200
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1420
         * @tc.name    readParcelable is Call JS callback function failedv Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_14200", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_14200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1420", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1420---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let sequenceable = new MySequenceableCode(1, "aaa");
@@ -4666,18 +4666,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_14200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1420---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_14300
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1430
         * @tc.name    Invoke the writeinterfacetoken interface, write the interface descriptor, and verify the error 
         *               code that fails to be read from the interfacetoken interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_14300", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_14300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1430", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1430---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = "hello ruan zong xian";
@@ -4692,17 +4692,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_14300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1430---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_14400
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1440
         * @tc.name    writeString check param error Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_14400", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_14400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1440", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1440---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = '';
@@ -4717,17 +4717,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_14400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1440---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_14500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1450
         * @tc.name    writeInterfaceToken Sequence memory alloc failed Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_14500", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_14500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1450", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1450---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 data.setSize(0);
@@ -4741,17 +4741,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_14500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1450---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_14600
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1460
         * @tc.name    writeInterfaceToken Write data to message sequence failed Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_14600", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_14600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1460", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1460---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 data.setSize(true);
@@ -4765,17 +4765,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_14600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1460---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_14700
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1470
         * @tc.name    readParcelable Sequence memory alloc failed Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_14700", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_14700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1470", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1470---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let sequenceable = new MySequenceable(1, "aaa");
@@ -4790,17 +4790,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_14700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1470---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_14800
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1480
         * @tc.name    writeRemoteObject is proxy or remote object is invalid Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3    
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_14800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_14800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1480", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1480---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = {};
@@ -4812,17 +4812,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_14800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1480---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_14900
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1490
         * @tc.name    Basic test of the rewindWrite interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_14900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_14900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1490", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1490---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4848,17 +4848,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_14900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1490---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_15000
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1500
         * @tc.name    RewindWrite interface write position cheap extension test
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_15000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_15000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1500", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1500---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4882,17 +4882,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_15000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1500---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_15100
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1510
         * @tc.name    Test the boundary value of the rewindWrite interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_15100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_15100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1510", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1510---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = '';
@@ -4910,17 +4910,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_15100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1510---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_15200
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1520
         * @tc.name    Test the critical value of the rewindWrite interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_15200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_15200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1520", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1520---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = '';
@@ -4933,23 +4933,23 @@ export default function RpcJsUnitTest() {
                 data.rewindWrite((token.length * 2 + 6) + 1);
                 expect(data.getWritePosition()).assertEqual(token.length * 2 + 6);
             } catch (error) {
-                console.info("SUB_DSoftbus_RPC_Compatibility_MessageSequence_15200 errorMessage " + error.message);
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1520 errorMessage " + error.message);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_15200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1520---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_15300
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1530
         * @tc.name    Basic test of the rewindRead interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_15300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_15300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1530", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1530---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
@@ -4973,17 +4973,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_15300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1530---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_15400
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1540
         * @tc.name    rewindRead interface write position cheap extension test
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_15400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_15400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1540", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1540---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 data.writeInt(16);
@@ -5005,17 +5005,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_15400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1540---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_15500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1550
         * @tc.name    Test the boundary value of the rewindRead interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_15500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_15500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1550", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1550---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = '';
@@ -5034,17 +5034,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_15500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1550---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_15600
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1560
         * @tc.name    Test the critical value of the rewindRead interface 
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_15600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_15600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1560", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1560---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = '';
@@ -5058,23 +5058,23 @@ export default function RpcJsUnitTest() {
                 data.rewindRead((token.length * 2 + 6) + 1);
                 expect(data.getReadPosition()).assertEqual(token.length * 2 + 6);
             } catch (error) {
-                console.info("SUB_DSoftbus_RPC_Compatibility_MessageSequence_15600 errorMessage " + error.message);
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1560 errorMessage " + error.message);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_15600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1560---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_15700
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1570
         * @tc.name    Test the function of the getWritePosition interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_15700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_15700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1570", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1570---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -5122,17 +5122,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_15700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1570---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_15800
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1580
         * @tc.name    Test on the null value of the getWritePosition interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_15800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_15800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1580", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1580---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let str = "";
@@ -5144,17 +5144,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_15800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1580---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_15900
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1590
         * @tc.name    Test the function of the getReadPosition interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_15900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_15900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1590", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1590---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -5202,17 +5202,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_15900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1590---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageSequence_16000
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1600
         * @tc.name    Test on the null value of the getReadPosition interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageSequence_16000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageSequence_16000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1600", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1600---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let str = "";
@@ -5225,17 +5225,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageSequence_16000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1600---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_00100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0010
          * @tc.name    Call the writeinterfacetoken interface, write the interface descriptor, and read interfacetoken
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_00100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_00100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0010", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0010---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5254,18 +5254,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_00100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0010---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_00200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0020
          * @tc.name    The writeInterfaceToken interface is looping, the interface descriptor is written, and the
                         InterfaceToken is read
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_00200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_00200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0020", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0020---------------------------");
             try {
                 for (let i = 0; i < 5; i++) {
                     var data = rpc.MessageParcel.create();
@@ -5286,18 +5286,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_00200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0020---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_00300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0030
          * @tc.name    Call the WriteInterfaceToken interface, write the maximum length interface descriptor, and read
                         the InterfaceToken
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_00300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_00300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0030", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0030---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5319,18 +5319,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_00300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0030---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_00400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0040
          * @tc.name    The WriteInterfaceToken interface is called, the exceeding-length interface descriptor is written,
                         and the InterfaceToken is read
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_00400", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_00400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0040", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0040---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let token = "";
@@ -5343,18 +5343,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_00400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0040---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_00500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0050
          * @tc.name    Call the writeinterfacetoken interface to write a non string interface descriptor
                        and read interfacetoken
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_00500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_00500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0050", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0050---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let token = 123;
@@ -5364,18 +5364,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_00500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0050---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_00600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0060
          * @tc.name    Call the writeshortarray interface, write the array to the messageparcel instance,
          *             and call readshortarray to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_00600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_00600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0060", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0060---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5394,18 +5394,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_00600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0060---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_00700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0070
          * @tc.name    Call the writeshortarray interface, write the short integer array to the messageparcel instance,
          *             and call readshortarray (datain: number []) to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_00700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_00700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0070", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0070---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5429,17 +5429,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_00700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0070---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_00800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0080
          * @tc.name    Writeshortarray interface, boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_00800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_00800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0080", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0080---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5458,17 +5458,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_00800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0080---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_00900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0090
          * @tc.name    Writeshortarray interface, illegal value validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_00900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_00900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0090", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0090---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5488,17 +5488,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_00900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0090---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_01000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0100
          * @tc.name    Writeshortarray interface, transmission length verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_01000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_01000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0100", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0100---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let eShortArryData = [];
@@ -5511,18 +5511,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_01000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0100---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_01100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0110
          * @tc.name    Call the writelongarray interface, write the long integer array to the messageparcel instance,
          *             and call readlongarray to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_01100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_01100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0110", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0110---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5541,18 +5541,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_01100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0110---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_01200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0120
          * @tc.name    Call the writelongarray interface, write the long integer array to the messageparcel instance,
          *             and call readlongarray (datain: number []) to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_01200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_01200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0120", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0120---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5576,17 +5576,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_01200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0120---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_01300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0130
          * @tc.name    Writelongarray interface, boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_01300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_01300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0130", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0130---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5607,17 +5607,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_01300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0130---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_01400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0140
          * @tc.name    Writelongarray interface, long type precision verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_01400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_01400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0140", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0140---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5639,17 +5639,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_01400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0140---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_01500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0150
          * @tc.name    Writelongarray Indicates an interface for verifying the input length
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_01500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_01500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0150", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0150---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let wLongArryData = [];
@@ -5662,18 +5662,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_01500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0150---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_01600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0160
          * @tc.name    Call the writedoublearray interface, write the array to the messageparcel instance,
          *             and call readdoublearra to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_01600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_01600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0160", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0160---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5692,18 +5692,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_01600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0160---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_01700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0170
          * @tc.name    Call the writedoublearray interface, write the array to the messageparcel instance,
          *             and call readdoublearra (datain: number []) to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_01700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_01700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0170", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0170---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5727,17 +5727,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_01700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0170---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_01800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0180
          * @tc.name    Writedoublearray interface, boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_01800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_01800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0180", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0180---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5756,17 +5756,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_01800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0180---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_01900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0190
          * @tc.name    Writedoublearray interface, illegal value validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_01900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_01900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0190", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0190---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5787,17 +5787,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_01900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0190---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_02000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0200
          * @tc.name    Writedoublearray interface, Out-of-bounds value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_02000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_02000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0200", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0200---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let eDoubleArryData = [];
@@ -5810,18 +5810,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_02000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0200---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_02100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0210
          * @tc.name    Call the writebooleanarray interface, write the array to the messageparcel instance,
          *             and call readbooleanarray to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_02100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_02100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0210", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0210---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5840,18 +5840,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_02100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0210---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_02200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0220
          * @tc.name    Call the writebooleanarray interface, write the array to the messageparcel instance,
          *             and call readbooleanarray (datain: number []) to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_02200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_02200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0220", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0220---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5879,17 +5879,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_02200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0220---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_02300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0230
          * @tc.name    Writebooleanarray interface, illegal value validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_02300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_02300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0230", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0230---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5909,17 +5909,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_02300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0230---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_02400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0240
          * @tc.name    Writebooleanarray Interface for length verification of input parameters
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_02400", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_02400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0240", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0240---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let wBooleanArryData = [];
@@ -5936,18 +5936,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_02400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0240---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_02500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0250
          * @tc.name    Call the writechararray interface, write the array to the messageparcel instance,
          *             and call readchararray to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_02500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_02500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0250", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0250---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -5966,18 +5966,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_02500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0250---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_02600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0260
          * @tc.name    Call the writechararray interface, write the array to the messageparcel instance,
          *             and call readchararray (datain: number []) to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_02600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_02600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0260", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0260---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6001,17 +6001,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_02600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0260---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_02700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0270
          * @tc.name    Writechararray interface, illegal value validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_02700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_02700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0270", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0270---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6031,17 +6031,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_02700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0270---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_02800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0280
          * @tc.name    Writechararray Indicates the length of an interface input parameter
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_02800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_02800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0280", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0280---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let errorCharArryData = [];
@@ -6054,18 +6054,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_02800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0280---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_02900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0290
          * @tc.name    Call the writestringarray interface, write the array to the messageparcel instance,
          *             and call readstringarray (datain: number []) to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_02900", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_02900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0290", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0290---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6082,18 +6082,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_02900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0290---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_03000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0300
          * @tc.name    Call the writestringarray interface, write the array to the messageparcel instance,
          *             and call readstringarray() to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_03000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_03000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0300", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0300---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6116,17 +6116,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 reply.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_03000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0300---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_03100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0310
          * @tc.name    Writestringarray interface, illegal value validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_03100", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_03100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0310", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0310---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let errorStringArryData = ['abc', 123, 'beauty'];
@@ -6136,17 +6136,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_03100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0310---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_03200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0320
          * @tc.name    writeStringArray Interface for length verification of input parameters
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_03200", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_03200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0320", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0320---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let wStringArryData = [];
@@ -6159,18 +6159,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_03200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0320---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_03300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0330
          * @tc.name    Call the writebytearray interface, write the array to the messageparcel instance,
          *             and call readbytearray to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_03300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_03300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0330", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0330---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6189,18 +6189,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_03300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0330---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_03400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0340
          * @tc.name    Call the writebytearray interface, write the array to the messageparcel instance,
          *             and call readbytearray (datain: number []) to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_03400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_03400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0340", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0340---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6221,17 +6221,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_03400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0340---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_03500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0350
          * @tc.name    Writebytearray interface, boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_03500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_03500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0350", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0350---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6255,17 +6255,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_03500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0350---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_03600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0360
          * @tc.name    Writebytearray interface, illegal value validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_03600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_03600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0360", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0360---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6289,17 +6289,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_03600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0360---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_03700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0370
          * @tc.name    Writebytearray Interface，input parameter length verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_03700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_03700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0370", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0370---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let ByteArraylet = [];
@@ -6312,18 +6312,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_03700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0370---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_03800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0380
          * @tc.name    Call the writeintarray interface, write the array to the messageparcel instance,
          *             and call readintarray to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_03800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_03800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0380", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0380---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6342,18 +6342,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_03800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0380---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_03900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0390
          * @tc.name    Call the writeintarray interface, write the array to the messageparcel instance,
          *             and call readintarray (datain: number []) to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_03900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_03900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0390", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0390---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6377,17 +6377,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_03900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0390---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_04000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0400
          * @tc.name    Writeintarray interface, boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_04000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_04000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0400", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0400---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6405,17 +6405,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 reply.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_04000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0400---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_04100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0410
          * @tc.name    Writeintarray interface, illegal value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_04100", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_04100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0410", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0410---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6438,17 +6438,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 reply.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_04100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0410---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_04200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0420
          * @tc.name    Writeintarray interface, input parameter length verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_04200", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_04200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0420", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0420---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let intArryData = [];
@@ -6461,18 +6461,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_04200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0420---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_04300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0430
          * @tc.name    Call the writefloatarray interface, write the array to the messageparcel instance,
          *             and call readfloatarray to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_04300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_04300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0430", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0430---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6491,18 +6491,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_04300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0430---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_04400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0440
          * @tc.name    Call the writefloatarray interface, write the array to the messageparcel instance,
          *             and call readfloatarray (datain: number []) to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_04400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_04400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0440", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0440---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6523,17 +6523,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_04400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0440---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_04500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0450
          * @tc.name    Writefloatarray interface, parameter boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_04500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_04500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0450", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0450---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6555,17 +6555,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_04500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0450---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_04600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0460
          * @tc.name    Writefloatarray interface, boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_04600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_04600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0460", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0460---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6587,17 +6587,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_04600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0460---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_04700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0470
          * @tc.name    Writefloatarray interface, Longest array verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_04700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_04700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0470", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0470---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let floatArryData = [];
@@ -6610,18 +6610,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_04700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0470---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_04800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0480
          * @tc.name    Call the writeShort interface to write the short integer data to the messageparcel instance,
          *             and call readshort to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_04800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_04800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0480", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0480---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6640,17 +6640,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_04800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0480---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_04900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0490
          * @tc.name    WriteShort interface, boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_04900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_04900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0490", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0490---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6676,17 +6676,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_04900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0490---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_05000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0500
          * @tc.name    WriteShort interface, Boundary value minimum value out of bounds verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_05000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_05000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0500", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0500---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6704,17 +6704,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_05000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0500---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_05100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0510
          * @tc.name    WriteShort interface, Boundary value maximum value out of bounds verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_05100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_05100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0510", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0510---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6732,18 +6732,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_05100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0510---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_05200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0520
          * @tc.name    Call writelong interface to write long integer data to messageparcel instance
          *             and call readlong to read data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_05200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_05200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0520", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0520---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6762,18 +6762,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_05200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0520---------------------------");
         });
 
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_05300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0530
          * @tc.name    Writelong interface, Verification of maximum accuracy value
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_05300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_05300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0530", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0530---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6792,17 +6792,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_05300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0530---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_05400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0540
          * @tc.name    Writelong interface, Minimum loss accuracy verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_05400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_05400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0540", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0540---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6821,17 +6821,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_05400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0540---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_05500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0550
          * @tc.name    Writelong interface, Maximum loss accuracy verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_05500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_05500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0550", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0550---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6851,17 +6851,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_05500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0550---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_05600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0560
          * @tc.name    Call the parallel interface to read and write data to the double instance
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_05600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_05600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0560", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0560---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6880,17 +6880,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_05600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0560---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_05700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0570
          * @tc.name    Writedouble interface, boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_05700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_05700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0570", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0570---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6908,17 +6908,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 reply.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_05700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0570---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_05800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0580
          * @tc.name    Writedouble interface, Minimum boundary value out of bounds verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_05800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_05800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0580", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0580---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6936,17 +6936,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 reply.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_05800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0580---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_05900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0590
          * @tc.name    Writedouble interface, illegal value validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_05900", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_05900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0590", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0590---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let token = "1.79E+465312156";
@@ -6956,18 +6956,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_05900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0590---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_06000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0600
          * @tc.name    Invoke the writeboolean interface to write the data true to the MessageSequence instance 
          *              and invoke the readboolean interface to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_06000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_06000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0600", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0600---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -6986,18 +6986,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_06000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0600---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_06100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0610
          * @tc.name    Call the writeboolean interface to write the data to the messageparcel instance,
          *             and call readboolean to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_06100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_06100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0610", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0610---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7016,17 +7016,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_06100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0610---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_06200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0620
          * @tc.name    Writeboolean interface, illegal value number type verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_06200", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_06200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0620", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0620---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 expect(data.writeBoolean(9)).assertEqual(false);
@@ -7035,17 +7035,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_06200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0620---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_06300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0630
          * @tc.name    Writeboolean interface, illegal value string type verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_06300", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_06300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0630", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0630---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let token = "true";
@@ -7055,18 +7055,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_06300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0630---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_06400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0640
          * @tc.name    Call the writechar interface to write the minimum data to the messageparcel instance,
          *               and call readchar to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_06400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_06400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0640", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0640---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7085,18 +7085,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_06400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0640---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_06500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0650
          * @tc.name    Call the writechar interface to write the maximum data to the messageparcel instance,
          *              and call readchar to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_06500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_06500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0650", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0650---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7115,18 +7115,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_06500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0650---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_06600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0660
          * @tc.name    Call the writechar interface to write the minimum out of range data to the messageparcel instance,
          *              and call readchar to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_06600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_06600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0660", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0660---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7145,18 +7145,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_06600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0660---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_06700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0670
          * @tc.name    Call the writechar interface to write the maximum out of range data to the messageparcel instance,
          *              and call readchar to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_06700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_06700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0670", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0670---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7175,17 +7175,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_06700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0670---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_06800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0680
          * @tc.name    Writechar interface, illegal value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_06800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_06800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0680", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0680---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let token = 'ades';
@@ -7195,18 +7195,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_06800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0680---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_06900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0690
          * @tc.name    Call the writestring interface to write the data to the messageparcel instance,
          *             and call readstring() to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_06900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_06900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0690", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0690---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7228,17 +7228,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_06900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0690---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_07000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0700
          * @tc.name    Writestring interface Maximum data out of range verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_07000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_07000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0700", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0700---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let token = '';
@@ -7251,17 +7251,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_07000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0700---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_07100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0710
          * @tc.name    Writestring interface, illegal value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_07100", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_07100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0710", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0710---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let token = 123;
@@ -7271,18 +7271,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_07100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0710---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_07200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0720
          * @tc.name    Call the writebyte interface to write data to the messageparcel instance,
          *             and call readbyte to read data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_07200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_07200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0720", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0720---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7301,17 +7301,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_07200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0720---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_07300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0730
          * @tc.name    Writebyte interface, boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_07300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_07300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0730", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0730---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7337,17 +7337,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_07300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0730---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_07400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0740
          * @tc.name    Writebyte interface, Maximum boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_07400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_07400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0740", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0740---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7365,17 +7365,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_07400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0740---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_07500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0750
          * @tc.name    Writebyte interface, Minimum boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_07500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_07500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0750", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0750---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7393,17 +7393,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_07500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0750---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_07600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0760
          * @tc.name    Writebyte interface, illegal value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_07600", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_07600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0760", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0760---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 expect(data.writeByte("error")).assertEqual(false);
@@ -7412,18 +7412,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_07600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0760---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_07700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0770
          * @tc.name    Call the writeint interface to write the data to the messageparcel instance,
          *             and call readint to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_07700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_07700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0770", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0770---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7442,17 +7442,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_07700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0770---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_07800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0780
          * @tc.name    Writeint interface, boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_07800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_07800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0780", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0780---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7478,17 +7478,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_07800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0780---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_07900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0790
          * @tc.name    Writeint interface, Verification of minimum boundary overrun value
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_07900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_07900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0790", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0790---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7506,17 +7506,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_07900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0790---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_08000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0800
          * @tc.name    Writeint interface, Verification of maximum boundary overrun value
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_08000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_08000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0800", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0800---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7534,17 +7534,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_08000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0800---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_08100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0810
          * @tc.name    Writeint interface, illegal value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_08100", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_08100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0810", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0810---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 expect(data.writeInt("error")).assertEqual(false);
@@ -7553,18 +7553,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_08100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0810---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_08200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0820
          * @tc.name    Call the writefloat interface to write data to the messageparcel instance,
          *             and call readfloat to read data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_08200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_08200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0820", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0820---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7583,17 +7583,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_08200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0820---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_08300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0830
          * @tc.name    Writefloat interface, Minimum boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_08300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_08300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0830", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0830---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7612,17 +7612,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_08300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0830---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_08400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0840
          * @tc.name    Writefloat interface, Maximum boundary value verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_08400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_08400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0840", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0840---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7641,17 +7641,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_08400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0840---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_08500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0850
          * @tc.name    Writefloat interface, Verification of maximum boundary overrun value
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_08500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_08500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0850", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0850---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7670,17 +7670,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_08500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0850---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_08600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0860
          * @tc.name    Writefloat interface, Verification of minimum boundary overrun value
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_08600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_08600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0860", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0860---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -7699,17 +7699,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_08600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0860---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_08700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0870
          * @tc.name    Writefloat interface, illegal value validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_08700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_08700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0870", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0870---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let token = 'a';
@@ -7719,18 +7719,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_08700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0870---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_08800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0880
          * @tc.name    Call the getRawDataCapacity interface to get the maximum amount of raw data that a MessageParcel
                          can hold
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_08800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_08800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0880", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0880---------------------------");
             try {
                 var parcel = new rpc.MessageParcel();
                 var reply = new rpc.MessageParcel();
@@ -7752,17 +7752,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_08800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0880---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_08900
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0890
         * @tc.name    Test messageparcel to deliver rawdata data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_08900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_08900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0890", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0890---------------------------");
             try {
                 var parcel = new rpc.MessageParcel();
                 var reply = new rpc.MessageParcel();
@@ -7786,17 +7786,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_08900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0890---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_09000
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0900
         * @tc.name    Test messageparcel to pass abnormal rawdata data, and expand the capacity for verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_09000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_09000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0900", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0900---------------------------");
             try {
                 var parcel = new rpc.MessageParcel();
                 var reply = new rpc.MessageParcel();
@@ -7825,17 +7825,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_09000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0900---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_09100
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0910
         * @tc.name    Test messageparcel to pass exception rawdata data data interception verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_09100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_09100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0910", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0910---------------------------");
             try {
                 var parcel = new rpc.MessageParcel();
                 var reply = new rpc.MessageParcel();
@@ -7863,17 +7863,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_09100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0910---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_09200
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0920
         * @tc.name    Test messageParcel to deliver out-of-bounds RawData data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_09200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_09200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0920", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0920---------------------------");
             try {
                 var parcel = new rpc.MessageParcel();
                 var reply = new rpc.MessageParcel();
@@ -7897,17 +7897,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_09200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0920---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_09300
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0930
         * @tc.name    Test messageParcel to deliver illegal RawData data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_09300", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_09300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0930", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0930---------------------------");
             try {
                 var parcel = new rpc.MessageParcel();
                 let arr = ["aaa", 1, 2, 3];
@@ -7919,17 +7919,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 parcel.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_09300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0930---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_09400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0940
          * @tc.name    Call the writeremoteobject interface to serialize the remote object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_09400", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_09400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0940", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0940---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let testRemoteObject = new TestRemoteObject("testObject");
@@ -7940,17 +7940,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_09400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0940---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_09500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0950
          * @tc.name    Call the writeremoteobject interface to serialize the remote object and pass in the empty object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_09500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_09500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0950", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0950---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let token = new TestRemoteObject(null);
@@ -7960,17 +7960,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_09500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0950---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_09600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0960
          * @tc.name    Call the writeremoteobject interface to serialize the remote object and pass in the constructor object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_09600", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_09600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0960", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0960---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let token = {}
@@ -7980,18 +7980,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_09600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0960---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_09700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0970
          * @tc.name    Call the writesequenceable interface to write the custom serialized
          *             object to the messageparcel instance
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_09700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_09700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0970", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0970---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let sequenceable = new MySequenceable(1, "aaa");
@@ -8003,18 +8003,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_09700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0970---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_09800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0980
          * @tc.name    Call the writesequenceable interface to write the custom serialized
          *             object to the messageparcel instance, Migration to read
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_09800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_09800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0980", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0980---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let sequenceable = new MySequenceable(1, "aaa");
@@ -8026,18 +8026,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_09800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0980---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_09900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_0990
          * @tc.name    After the server finishes processing, write noexception first before writing the result,
          *             and the client calls readexception to judge whether the server is abnormal
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_09900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_09900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_0990", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_0990---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -8057,18 +8057,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_09900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_0990---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_10000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1000
          * @tc.name    If the data on the server is abnormal, the client calls readexception
          *             to judge whether the server is abnormal
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_10000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1000", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1000---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -8088,17 +8088,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_10000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1000---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_10100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1010
          * @tc.name    Serializable object marshaling and unmarshalling test
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_10100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1010", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1010---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -8120,17 +8120,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_10100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1010---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_10200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1020
          * @tc.name    Non serializable object marshaling test
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_10200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1020", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1020---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -8144,17 +8144,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_10200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1020---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_10300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1030
          * @tc.name    The server did not send a serializable object, and the client was ungrouped
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_10300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1030", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1030---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -8174,18 +8174,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_10300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1030---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_10400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1040
          * @tc.name    Call the writesequenceable interface to write the custom serialized object to the
          *             messageparcel instance, and call readsequenceable to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_10400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1040", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1040---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -8207,18 +8207,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_10400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1040---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_10500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1050
          * @tc.name    Call the writesequenceablearray interface to write the custom serialized object array (1, 2, 3) to
          *              the messageparcel instance, and call readsequenceablearray to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_10500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1050", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1050---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -8244,18 +8244,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_10500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1050---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_10600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1060
          * @tc.name    Call the writesequenceablearray interface to write the custom serialized object to the
          *             messageparcel instance, and call readsequenceablearray to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_10600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1060", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1060---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -8281,18 +8281,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_10600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1060---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_10700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1070
          * @tc.name    Call the writesequenceablearray interface to write the custom
          *             serialized object to the messageparcel instance
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_10700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1070", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1070---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let sequenceable = 1;
@@ -8302,18 +8302,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_10700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1070---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_10800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1080
          * @tc.name    Call the writeremoteobjectarray interface to write the object array to the messageparcel
          *             instance, and call readremoteobjectarray to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_10800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1080", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1080---------------------------");
             try {
                 let count = 0
                 function checkResult(num, str) {
@@ -8333,11 +8333,11 @@ export default function RpcJsUnitTest() {
                 new TestListener("rpcListener2", checkResult),
                 new TestListener("rpcListener3", checkResult)];
                 let result = data.writeRemoteObjectArray(listeners);
-                console.info("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10800: writeRemoteObjectArray is " + result);
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1080: writeRemoteObjectArray is " + result);
                 expect(result).assertTrue();
                 expect(gIRemoteObject != undefined).assertTrue();
                 await gIRemoteObject.sendRequest(CODE_WRITE_REMOTEOBJECTARRAY, data, reply, option).then((result) => {
-                    console.info("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10800: sendRequest is " + result.errCode);
+                    console.info("SUB_DSoftbus_RPC_API_MessageParcel_1080: sendRequest is " + result.errCode);
                     expect(result.errCode).assertEqual(0);
                     expect(result.code).assertEqual(CODE_WRITE_REMOTEOBJECTARRAY);
                     expect(result.data).assertEqual(data);
@@ -8350,18 +8350,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_10800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1080---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_10900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1090
          * @tc.name    Call the writeremoteobjectarray interface to write the object array to the messageparcel instance,
          *             and call readremoteobjectarray (objects: iremoteobject []) to read the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_10900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1090", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1090---------------------------");
             try {
                 let count = 0
                 function checkResult(num, str) {
@@ -8385,7 +8385,7 @@ export default function RpcJsUnitTest() {
                 expect(result).assertTrue();
                 expect(gIRemoteObject != undefined).assertTrue();
                 await gIRemoteObject.sendRequest(CODE_WRITE_REMOTEOBJECTARRAY, data, reply, option).then((result) => {
-                    console.info("SUB_DSoftbus_RPC_Compatibility_MessageParcel_10900: sendRequest is " + result.errCode);
+                    console.info("SUB_DSoftbus_RPC_API_MessageParcel_1090: sendRequest is " + result.errCode);
                     expect(result.errCode == 0).assertTrue();
                 });
             } catch (error) {
@@ -8395,17 +8395,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_10900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1090---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1100
          * @tc.name    Test messageparcel to deliver the reply message received in promise across processes
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_11000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_11000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1100", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1100---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -8443,18 +8443,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1100---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1110
          * @tc.name    Test the cross process delivery of messageparcel and receive the reply message
          *             in the callback function
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_11100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_11100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1110", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1110---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -8498,18 +8498,18 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11100--------------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_MessageParcel_1110--------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1120
          * @tc.name    Test the cross process transmission of messageparcel.
          *             After receiving the reply message in promise, read letious types of arrays in order
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_11200", 0, async function (done) {
-            console.info("--------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_11200--------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1120", 0, async function (done) {
+            console.info("--------------------start SUB_DSoftbus_RPC_API_MessageParcel_1120--------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -8552,19 +8552,19 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1120---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1130
          * @tc.name    Test messageparcel cross process delivery. After receiving the reply message in promise,
          *             the client constructs an empty array in sequence and reads the data from the reply message
          *             into the corresponding array
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_11300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_11300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1130", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1130---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -8625,17 +8625,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1130---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1140
          * @tc.name    Test messageparcel to pass an object of type iremoteobject across processes
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it('SUB_DSoftbus_RPC_Compatibility_MessageParcel_11400', 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_11400---------------------------");
+        it('SUB_DSoftbus_RPC_API_MessageParcel_1140', 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1140---------------------------");
             function checkResult(num, str) {
                 expect(num).assertEqual(123);
                 expect(str).assertEqual("rpcListenerTest");
@@ -8661,17 +8661,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1140---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1150
          * @tc.name    Test messageparcel to pass an array of iremoteobject objects across processes
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it('SUB_DSoftbus_RPC_Compatibility_MessageParcel_11500', 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_11500---------------------------");
+        it('SUB_DSoftbus_RPC_API_MessageParcel_1150', 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1150---------------------------");
 
             let count = 0;
             function checkResult(num, str) {
@@ -8705,18 +8705,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1150---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1160
          * @tc.name    Test messageparcel to pass the array of iremoteobject objects across processes. The server
          *             constructs an empty array in onremoterequest and reads it from messageparcel
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it('SUB_DSoftbus_RPC_Compatibility_MessageParcel_11600', 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_11600---------------------------");
+        it('SUB_DSoftbus_RPC_API_MessageParcel_1160', 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1160---------------------------");
             let count = 0;
             function checkResult(num, str) {
                 expect(num).assertEqual(123);
@@ -8750,17 +8750,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1160---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1170
          * @tc.name    Invoke the rewindRead interface,Set 0-bit offset and read the data after offset
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_11700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_11700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1170", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1170---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -8782,17 +8782,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1170---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1180
          * @tc.name    Invoke the rewindRead interface,Set 1-bit offset and read the data after offset
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_11800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_11700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1180", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1170---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -8813,17 +8813,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1180---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1190
          * @tc.name    Invoke the rewindWrite interface, Set 0-bit offset and write the data after offset
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_11900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_11800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1190", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1180---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -8843,17 +8843,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1190---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_12000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1200
          * @tc.name    Invoke the rewindWrite interface, Set 1-bit offset and write the data after offset
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_12000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_12000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1200", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1200---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -8873,18 +8873,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_12000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1200---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_12100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1210
          * @tc.name    setCapacity Sets the storage capacity of the null MessageParcel instance. The getCapacity
                        obtains the current MessageParcel capacity
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_12100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_12100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1210", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1210---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -8906,18 +8906,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_12100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1210---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_12200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1220
          * @tc.name    setCapacity Sets the storage capacity of the MessageParcel instance. The getCapacity
                        obtains the current MessageParcel capacity
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_12200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_12200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1220", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1220---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -8938,17 +8938,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_12200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1220---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_12300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1230
          * @tc.name    Setcapacity test: size limit verification of messageparcel instance
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_12300", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_12300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1230", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1230---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 expect(data.getCapacity()).assertEqual(0);
@@ -8963,17 +8963,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_12300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1230---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_12400
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1240
         * @tc.name    SetCapacity Tests the storage capacity threshold of the MessageParcel instance
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_12400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_12400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1240", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1240---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -8996,41 +8996,41 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_12400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1240---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_12500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1250
         * @tc.name    Setcapacity test storage capacity boundary value verification of messageparcel instance
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_12500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_12500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1250", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1250---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 expect(data.getSize()).assertEqual(0);
                 expect(data.setCapacity(M)).assertTrue();
                 expect(data.getCapacity()).assertEqual(M);
-                console.info("SUB_DSoftbus_RPC_Compatibility_MessageParcel_12500: setCapacity " + data.setCapacity(2 * G));
-                console.info("SUB_DSoftbus_RPC_Compatibility_MessageParcel_12500: setCapacity " + data.getCapacity());
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1250: setCapacity " + data.setCapacity(2 * G));
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1250: setCapacity " + data.getCapacity());
             } catch (error) {
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_12500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1250---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_12600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1260
          * @tc.name    setSize Sets the size of the data contained in the MessageParcel instance. The getSize command
                         reads the data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_12600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_12600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1260", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1260---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -9052,18 +9052,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_12600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1260---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_12700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1270
          * @tc.name    SetSize: Increases the value of the data contained in the MessageParcel instance by 1,
                         Write setSize
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_12700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_12700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1270", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1270---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -9085,17 +9085,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_12700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1270---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_12800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1280
          * @tc.name    Verify the messageparcel instance SetSize setting and the instance capacitydata qualification verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_12800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_12800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1280", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1280---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 expect(data.getSize()).assertEqual(0);
@@ -9110,18 +9110,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_12800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1280---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_12900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1290
          * @tc.name    setSize Sets the storage capacity of the MessageParcel instance to decrease by one.
                        The getSize obtains the current MessageParcel capacity
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_12900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_12900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1290", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1290---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -9144,17 +9144,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_12900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1290---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_13000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1300
          * @tc.name    Validate the setSize boundary value in the MessageParcel instance
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_13000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_13000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1300", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1300---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 expect(data.getCapacity()).assertEqual(0);
@@ -9167,17 +9167,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_13000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1300---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_13100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1310
          * @tc.name    Verify that setSize is out of bounds in a MessageParcel instance
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_13100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_13100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1310", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1310---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 expect(data.setSize(0)).assertTrue();
@@ -9191,17 +9191,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_13100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1310---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_13200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1320
          * @tc.name    Obtains the write and read positions of the MessageParcel
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_13200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_13200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1320", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1320---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -9223,17 +9223,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_13200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1320---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_13300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1330
          * @tc.name    Obtaining the Writable and Readable Byte Spaces of MessageParcel
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_13300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_13300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1330", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1330---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -9254,17 +9254,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_13300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1330---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_13400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1340
          * @tc.name    Obtains the writeable and readable byte space and read position of the MessageParcel
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_13400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_13400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1340", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1340---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -9288,17 +9288,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_13400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1340---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_13500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1350
         * @tc.name    Get the space size of messageparcel to pass rawdata data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_13500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_13500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1350", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1350---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
@@ -9322,17 +9322,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_13500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1350---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_13600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1360
          * @tc.name    Test fixed MessageParcel space size to pass rawData data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_13600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_13600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1360", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1360---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 expect(data.getRawDataCapacity()).assertEqual(128 * M);
@@ -9354,51 +9354,51 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_13600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1360---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_13700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1370
          * @tc.name    Test messageparcel delivery file descriptor object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_13700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_13700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1370", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1370---------------------------");
             try {
                 let testab = new TestProxy(gIRemoteObject).asObject();
                 expect(testab != null).assertTrue();
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_13700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1370---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_13800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1380
          * @tc.name    Test that the asObject interface is called by a RemoteObject and returns itself
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_13800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_13800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1380", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1380---------------------------");
             try {
                 let testRemoteObject = new TestRemoteObject("testObject");
                 expect(testRemoteObject.asObject() != null).assertTrue();
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_13800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1380---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_13900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1390
          * @tc.name    MessageParcel sendMessageRequest API test
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_13900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_13900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1390", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1390---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let rawdata = [1, 2, 3];
@@ -9420,18 +9420,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_13900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1390---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_14000
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1400
         * @tc.name    Invoke the writestring interface to write data to the messageparcel instance SendRequest Asynchronous
         *               Authentication onRemoteMessageRequest Server Processing
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_14000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_14000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1400", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1400---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -9450,18 +9450,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_14000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1400---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_14100
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1410
         * @tc.name    Invoke the writestring interface to write data to the messageparcel instance sendMessageRequest Asynchronous
         *               Authentication onRemoteMessageRequest Server Processing
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_14100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_14100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1410", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1410---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -9480,18 +9480,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_14100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1410---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_14200
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1420
         * @tc.name    Invoke the writestring interface to write data to the messageparcel instance. SendRequest asynchronously
         *               verifies the priority processing levels of onRemoteMessageRequest and onRemoteRequest
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_14200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_14200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1420", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1420---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -9510,18 +9510,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_14200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1420---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_14300
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1430
         * @tc.name   Invoke the writestring interface to write data to the messageparcel instance. sendMessageRequest asynchronously verifies
         *               the priority processing levels of onRemoteMessageRequest and onRemoteRequest
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_14300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_14300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1430", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1430---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -9540,17 +9540,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_14300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1430---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_14400
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1440
         * @tc.name    writeString check param error Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_14400", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_14400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1440", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1440---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = '';
@@ -9565,17 +9565,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_14400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1440---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_14500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1450
         * @tc.name    writeInterfaceToken Sequence memory alloc failed Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_14500", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_14500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1450", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1450---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 data.setSize(0);
@@ -9589,17 +9589,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_14500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1450---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_14600
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1460
         * @tc.name    writeInterfaceToken Write data to message sequence failed Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_14600", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_14600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1460", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1460---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 data.setSize(true);
@@ -9613,17 +9613,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_14600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1460---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_14700
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1470
         * @tc.name    readParcelable Sequence memory alloc failed Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_14700", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_14700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1470", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1470---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let sequenceable = new MySequenceable(1, "aaa");
@@ -9638,17 +9638,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_14700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1470---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_14800
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1480
         * @tc.name    writeRemoteObject is proxy or remote object is invalid Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3    
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_14800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_14800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1480", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1480---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = {};
@@ -9660,20 +9660,20 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_14800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1480---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_14900
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1490
         * @tc.name    readParcelable is Call JS callback function failedv Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_14900", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_14900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1490", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1490---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
-                console.info("SUB_DSoftbus_RPC_Compatibility_MessageParcel_14900: create object successfully.");
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1490: create object successfully.");
                 let sequenceable = new MySequenceableCode(1, "aaa");
                 data.writeParcelable(sequenceable);
                 data.setCapacity(0);
@@ -9687,18 +9687,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_14900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1490---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_15000
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageParcel_1500
         * @tc.name    Invoke the writeinterfacetoken interface, write the interface descriptor, and verify the error code 
         *               that fails to be read from the interfacetoken interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageParcel_15000", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_15000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageParcel_1500", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageParcel_1500---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 let token = "hello ruan zong xian";
@@ -9713,17 +9713,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_15000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1500---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_00100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_0100
          * @tc.name    Test the getwaittime basic method of messageoption
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_00100", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_00100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_0100", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_0100---------------------------");
             try {
                 let option = new rpc.MessageOption();
                 expect(option.getWaitTime()).assertEqual(rpc.MessageOption.TF_WAIT_TIME);
@@ -9732,17 +9732,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_00100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0100---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_00200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_0200
          * @tc.name    Test the getwaittime boundary value of messageoption
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_00200", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_00200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_0200", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_0200---------------------------");
             try {
                 let option = new rpc.MessageOption();
                 expect(option.getWaitTime()).assertEqual(rpc.MessageOption.TF_WAIT_TIME);
@@ -9753,17 +9753,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_00200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0200---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_00300
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_0300
          * @tc.name    Test the getwaittime minimum out of range value of messageoption
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_00300", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_00300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_0300", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_0300---------------------------");
             try {
                 let option = new rpc.MessageOption();
                 expect(option.getWaitTime()).assertEqual(rpc.MessageOption.TF_WAIT_TIME);
@@ -9772,17 +9772,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_00300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0300---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_00400
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_0400
          * @tc.name    Test the getwaittime maxmum out of range value of messageoption
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_00400", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_00400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_0400", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_0400---------------------------");
             try {
                 let option = new rpc.MessageOption();
                 expect(option.getWaitTime()).assertEqual(rpc.MessageOption.TF_WAIT_TIME);
@@ -9791,17 +9791,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_00400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0400---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_00500
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_0500
          * @tc.name    Test the getflags basic method of messageoption
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_00500", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_00500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_0500", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_0500---------------------------");
             try {
                 let option = new rpc.MessageOption();
                 expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_SYNC);
@@ -9810,17 +9810,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_00500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0500---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_00600
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_0600
          * @tc.name    Test the setflags basic method of messageoption
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_00600", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_00600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_0600", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_0600---------------------------");
             try {
                 let option = new rpc.MessageOption();
                 expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_SYNC);
@@ -9831,17 +9831,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_00600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0600---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_00700
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_0700
          * @tc.name    Test the setflags exception value of messageoption
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_00700", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_00700---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_0700", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_0700---------------------------");
             try {
                 let option = new rpc.MessageOption();
                 expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_SYNC);
@@ -9850,17 +9850,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_00700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0700---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_00800
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_0800
          * @tc.name    Test the unqualified value of setflags of messageoption
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_00800", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_00800---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_0800", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_0800---------------------------");
             try {
                 let option = new rpc.MessageOption();
                 expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_SYNC);
@@ -9869,17 +9869,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_00800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0800---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_00900
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_0900
          * @tc.name    Test constant value detection of messageoption
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_00900", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_00900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_0900", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_0900---------------------------");
             try {
                 expect(rpc.MessageOption.TF_SYNC).assertEqual(0);
                 expect(rpc.MessageOption.TF_ASYNC).assertEqual(1);
@@ -9888,17 +9888,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_00900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0900---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_01000
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_1000
          * @tc.name    Basic method of testing messageoption
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_01000", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_01000---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_1000", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_1000---------------------------");
             try {
 
                 var data = rpc.MessageParcel.create();
@@ -9924,17 +9924,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_01000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_1000---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_01100
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_1100
          * @tc.name    Test the setflags of messageoption asynchronously and the sendrequest callback result
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_01100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_01100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_1100", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_1100---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -9956,17 +9956,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_01100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_1100---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_01200
+         * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_1200
          * @tc.name    MessageOption sendMessageRequest test
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_01200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_01200---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_1200", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_1200---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -9988,17 +9988,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_01200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_1200---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_01300
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_1300
         * @tc.name    setAsync sendMessageRequest test
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_01300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_01300---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_1300", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_1300---------------------------");
             try {
                 let option = new rpc.MessageOption();
                 option.setAsync(3);
@@ -10006,17 +10006,17 @@ export default function RpcJsUnitTest() {
                 expect(error != null).assertTrue();
             }
             done();
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_01300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_1300---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_01400
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_1400
         * @tc.name    MessageOption sendMessageRequest test
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_01400", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_01400---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_1400", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_1400---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -10037,17 +10037,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_01400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_1400---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_01500
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_1500
         * @tc.name    MessageOption setAsync is true test
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_01500", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_01500---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_1500", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_1500---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -10068,17 +10068,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_01500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_1500---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageOption_01600
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageOption_1600
         * @tc.name    setAsync is false sendMessageRequest test
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_MessageOption_01600", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageOption_01600---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageOption_1600", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageOption_1600---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -10099,34 +10099,34 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageOption_01600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_1600---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_00100
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_0100
          * @tc.name    Exception parameter validation of the created anonymous shared memory object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_00100", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_00100---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_0100", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_0100---------------------------");
             try {
                 expect(rpc.Ashmem.createAshmem("JsAshmemTest", -1) == null).assertTrue();
                 expect(rpc.Ashmem.createAshmem(null, 1024) == null).assertTrue();
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_00100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0100---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_00200
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_0200
          * @tc.name    Call the getashmemsize interface to get the size of the shared memory object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_00200", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_00200---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_0200", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_0200---------------------------");
             try {
                 let mapSize = 2 * G - 1;
                 let jsash = "";
@@ -10140,17 +10140,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_00200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0200---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_00300
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_0300
          * @tc.name    Call the getashmemsize interface to get the size of the exception shared memory object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_00300", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_00300---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_0300", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_0300---------------------------");
             try {
                 let mapSize = 2 * G - 1;
                 let jsash = "";
@@ -10164,17 +10164,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_00300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0300---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_00400
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_0400
          * @tc.name    Call the getashmemsize interface to get the size of the maximum shared memory object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_00400", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_00400---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_0400", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_0400---------------------------");
             try {
                 let mapSize = 2 * G - 1;
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", mapSize);
@@ -10185,17 +10185,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_00400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0400---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_00500
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_500
          * @tc.name    Call the getashmemsize interface to obtain the maximum size of the out of bounds shared memory object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_00500", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_00500---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_0500", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_0500---------------------------");
             try {
                 let mapSize = 2 * G;
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", mapSize);
@@ -10206,17 +10206,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_00500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0500---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_00600
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_0600
          * @tc.name    Writeashmem exception validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_00600", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_00600---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_0600", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_0600---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 4096);
                 expect(ashmem != null).assertTrue();
@@ -10230,17 +10230,17 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_00600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0600---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_00700
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_0700
          * @tc.name    Verifying the Readfromashmem Interface and Disabling the Ashmem Interface
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_00700", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_00700---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_0700", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_0700---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 4096);
                 expect(ashmem != null).assertTrue();
@@ -10252,17 +10252,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_00700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0700---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_00800
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_0800
          * @tc.name    Mapashmem interface creates shared file mappings
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_00800", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_00800---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_0800", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_0800---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 4096);
                 expect(ashmem != null).assertTrue();
@@ -10272,17 +10272,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_00800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0800---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_00900
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_0900
          * @tc.name    Mapashmem exception validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_00900", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_00900---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_0900", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_0900---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", (2 * G - 1));
                 expect(ashmem != null).assertTrue();
@@ -10292,17 +10292,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_00900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0900---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_01000
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_1000
          * @tc.name    Mapreadandwriteashmem interface creates a shared file map with the protection level of read-write
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_01000", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_01000---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_1000", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_1000---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 1024);
                 expect(ashmem != null).assertTrue();
@@ -10312,17 +10312,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_01000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1000---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_01100
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_1100
          * @tc.name    Mapreadandwriteashmem exception validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_01100", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_01100---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_1100", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_1100---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 4096);
                 expect(ashmem != null).assertTrue();
@@ -10334,17 +10334,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_01100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1100---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_01200
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_1200
          * @tc.name    Mapreadonlyashmem interface createAshmem a shared file map with the protection level of read-write
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_01200", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_01200---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_1200", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_1200---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 4096);
                 expect(ashmem != null).assertTrue();
@@ -10354,17 +10354,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_01200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1200---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_01300
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_1300
          * @tc.name    Mapreadonlyashmem exception validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_01300", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_01300---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_1300", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_1300---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 1024);
                 expect(ashmem != null).assertTrue();
@@ -10376,17 +10376,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_01300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1300---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_01400
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_1400
          * @tc.name    Setprotection: sets the protection level of the memory area to which the shared file is mapped
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_01400", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_01400---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_1400", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_1400---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 1024);
                 expect(ashmem.setProtection(rpc.Ashmem.PROT_WRITE)).assertTrue();
@@ -10399,17 +10399,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_01400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1400---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_01500
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_1500
          * @tc.name    Setprotection exception input parameter verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_01500", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_01500---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_1500", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_1500---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 1024);
                 expect(ashmem.setProtection(3)).assertTrue();
@@ -10418,17 +10418,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_01500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1500---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_01600
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_1600
          * @tc.name    The writetoashmem interface writes the shared file associated with the object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_01600", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_01600---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_1600", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_1600---------------------------");
             try {
                 let mapSize = 4096;
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", mapSize);
@@ -10440,17 +10440,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_01600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1600---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_01700
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_1700
          * @tc.name    Writetoashmem interface writes the shared file associated with the object (file boundary value)
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_01700", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_01700---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_1700", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_1700---------------------------");
             try {
                 let mapSize = 4096;
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", mapSize);
@@ -10463,17 +10463,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_01700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1700---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_01800
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_1800
          * @tc.name    The writetoashmem interface writes the shared data associated with the object minimum boundary crossing file
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_01800", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_01800---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_1800", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_1800---------------------------");
             try {
                 let mapSize = 4096;
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", mapSize);
@@ -10488,17 +10488,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_01800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1800---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_01900
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_1900
          * @tc.name    The writetoashmem interface writes the shared data associated with the object maximum boundary crossing file
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_01900", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_01900---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_1900", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_1900---------------------------");
             try {
                 let mapSize = 4096;
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", mapSize);
@@ -10513,17 +10513,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_01900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1900---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_02000
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_2000
          * @tc.name    Writetoashmem interface: writes the boundary location to the shared file associated with the object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_02000", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_02000---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_2000", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_2000---------------------------");
             try {
                 let mapSize = 2 * M;
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", mapSize);
@@ -10535,17 +10535,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_02000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2000---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_02100
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_2100
          * @tc.name    Writetoashmem interface: writes the shared file associated with the object at the out of bounds position
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_02100", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_02100---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_2100", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_2100---------------------------");
             try {
                 let mapSize = 2 * M;
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", mapSize);
@@ -10557,17 +10557,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_02100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2100---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_02200
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_2200
          * @tc.name    After the permission is set, the writetoashmem interface writes the shared file associated with the object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_02200", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_02200---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_2200", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_2200---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 4096);
                 expect(ashmem.mapReadAndWriteAshmem()).assertTrue();
@@ -10580,17 +10580,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_02200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2200---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_02300
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_2300
          * @tc.name    Writetoashmem exception validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_02300", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_02300---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_2300", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_2300---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 4096);
                 expect(ashmem.mapReadAndWriteAshmem()).assertTrue();
@@ -10602,17 +10602,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_02300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2300---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_02400
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_2400
          * @tc.name    Read data from the shared file associated with readfromashmem
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_02400", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_02400---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_2400", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_2400---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 4096);
                 expect(ashmem.mapReadAndWriteAshmem()).assertTrue();
@@ -10625,17 +10625,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_02400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2400---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_02500
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_2500
          * @tc.name    Readfromashmem exception validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_02500", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_02500---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_2500", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_2500---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 4096);
                 expect(ashmem.mapReadAndWriteAshmem()).assertTrue();
@@ -10650,18 +10650,18 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_02500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2500---------------------------");
         })
 
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_02600
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_2600
          * @tc.name    Createashmemfromexisting copies the ashmem object description and creates a new object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_02600", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_02600---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_2600", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_2600---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 4096);
                 expect(ashmem.mapReadAndWriteAshmem()).assertTrue();
@@ -10677,18 +10677,18 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_02600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2600---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_02700
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_2700
          * @tc.name    Create a shared memory object and call writeashmem to write the shared anonymous
           object into the messageparcel object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_02700", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_02700---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_2700", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_2700---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 1024);
                 var data = rpc.MessageParcel.create();
@@ -10706,18 +10706,18 @@ export default function RpcJsUnitTest() {
             } finally{
                 data.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_02700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2700---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_02800
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_2800
          * @tc.name    Create a non shared memory object and call writeashmem to write the messageparcel object
           object into the messageparcel object
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_02800", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_02800---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_2800", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_2800---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var data2 = rpc.MessageParcel.create();
@@ -10728,17 +10728,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 data2.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_02800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2800---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_02900
+         * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_2900
          * @tc.name    Test the ashmem object passed by messageparcel
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_02900", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_02900---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_2900", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_2900---------------------------");
             try {
                 let ashmem = rpc.Ashmem.createAshmem("JsAshmemTest", 1024);
                 expect(ashmem.setProtection(rpc.Ashmem.PROT_EXEC)).assertTrue();
@@ -10747,17 +10747,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_02900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2900---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_03000
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_3000
         * @tc.name    mapTypedAshmem interface creates shared file mappings
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_03000", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_03000---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_3000", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_3000---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", 4 * K);
                 expect(ashmem != null).assertTrue();
@@ -10767,17 +10767,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_03000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3000---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_03100
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_3100
         * @tc.name    mapTypedAshmem exception validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_03100", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_03100---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_3100", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_3100---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", (2 * G - 1));
                 expect(ashmem != null).assertTrue();
@@ -10789,17 +10789,17 @@ export default function RpcJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_03100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3100---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_03200
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_3200
         * @tc.name    mapTypedAshmem exception errorcode validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_03200", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_03200---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_3200", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_3200---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", (2 * G));
                 expect(ashmem != null).assertTrue();
@@ -10811,81 +10811,81 @@ export default function RpcJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_03200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3200---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_03300
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_3300
         * @tc.name    mapReadWriteAshmem interface creates a shared file map with the protection level of read-write
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_03300", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_03300---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_3300", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_3300---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", K);
                 ashmem.mapReadWriteAshmem();
-                console.info("SUB_DSoftbus_RPC_Compatibility_Ashmem_03300: run mapReadWriteAshmem is success");
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3300: run mapReadWriteAshmem is success");
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_03300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3300---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_03400
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_3400
         * @tc.name    mapReadWriteAshmem exception validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_03400", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_03400---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_3400", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_3400---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", 4096);
                 expect(ashmem != null).assertTrue();
                 ashmem.mapTypedAshmem(rpc.Ashmem.PROT_READ);
                 ashmem.unmapAshmem();
                 ashmem.mapReadWriteAshmem();
-                console.info("SUB_DSoftbus_RPC_Compatibility_Ashmem_03400: run mapReadWriteAshmem is success");
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3400: run mapReadWriteAshmem is success");
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_03400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3400---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_03500
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_3500
         * @tc.name    Mapreadonlyashmem interface creates a shared file map with the protection level of read-write
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_03500", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_03500---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_3500", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_3500---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", 4096);
                 expect(ashmem != null).assertTrue();
                 ashmem.mapReadonlyAshmem();
-                console.info("SUB_DSoftbus_RPC_Compatibility_Ashmem_03500: run mapReadonlyAshmem is success");
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3500: run mapReadonlyAshmem is success");
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_03500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3500---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_03600
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_3600
         * @tc.name    MapReadWriteAshmem level setting, exception verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_03600", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_03600---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_3600", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_3600---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", K);
                 ashmem.setProtectionType(rpc.Ashmem.PROT_WRITE);
@@ -10893,44 +10893,44 @@ export default function RpcJsUnitTest() {
                 ashmem.mapReadWriteAshmem();
                 ashmem.setProtectionType(rpc.Ashmem.PROT_NONE);
                 ashmem.setProtectionType(rpc.Ashmem.PROT_READ);
-                console.info("SUB_DSoftbus_RPC_Compatibility_Ashmem_03600: run is success");
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3600: run is success");
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_03600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3600---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_03700
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_3700
         * @tc.name    setProtectionType exception input parameter verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_03700", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_03700---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_3700", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_3700---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", K);
                 expect(ashmem != null).assertTrue();
                 ashmem.setProtectionType(3);
-                console.info("SUB_DSoftbus_RPC_Compatibility_Ashmem_03700: run setProtectionType is success");
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3700: run setProtectionType is success");
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_03700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3700---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_03800
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_3800
         * @tc.name    setProtectionType: Set the protection level and writeToAshmem write verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_03800", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_03800---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_3800", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_3800---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", 4096);
                 expect(ashmem != null).assertTrue();
@@ -10946,18 +10946,18 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_03800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3800---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_03900
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_3900
         * @tc.name    Create a non shared memory object and call setProtectionType to write the messageparcel object
         *               object into the messageparcel object
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_03900", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_03900---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_3900", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_3900---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", K);
                 ashmem.setProtectionType(rpc.Ashmem.PROT_EXEC);
@@ -10966,17 +10966,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_03900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3900---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_04000
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_4000
         * @tc.name    Verify that the read-only memory deletion ID is abnormal
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_04000", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_04000---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_4000", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_4000---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", K);
                 expect(ashmem != null).assertTrue();
@@ -10986,24 +10986,24 @@ export default function RpcJsUnitTest() {
                 ashmem.mapReadonlyAshmem();
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
-                console.info("SUB_DSoftbus_RPC_Compatibility_Ashmem_04000: run mapReadonlyAshmem is success");
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4000: run mapReadonlyAshmem is success");
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_04000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_4000---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_04100
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_4100
         * @tc.name    createAshmem Check Parameter Out-of-Bounds Error Message Verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_04100", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_04100---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_4100", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_4100---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("ashmem", (2 * G + 1));
-                console.info("SUB_DSoftbus_RPC_Compatibility_Ashmem_04100: ashmem " + ashmem);
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4100: ashmem " + ashmem);
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
@@ -11011,17 +11011,17 @@ export default function RpcJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_04100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_4100---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_04200
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_4200
         * @tc.name    mapReadWriteAshmem exception validation 1900001
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_04200", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_04200---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_4200", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_4200---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("ashmem", (4 * G - 1));
                 expect(ashmem != null).assertTrue();
@@ -11033,17 +11033,17 @@ export default function RpcJsUnitTest() {
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_04200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_4200---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_04300
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_4300
         * @tc.name    createAshmem check param error Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_04300", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_04300---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_4300", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_4300---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("ashmem", 0);
                 ashmem.unmapAshmem();
@@ -11053,38 +11053,38 @@ export default function RpcJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_04300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_4300---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_04400
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_4400
         * @tc.name    setProtectionType exception validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_04400", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_04400---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_4400", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_4400---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("ashmem", 1024 * 1024);
                 expect(ashmem != null).assertTrue();
                 ashmem.setProtectionType(0);
-                console.info("SUB_DSoftbus_RPC_Compatibility_Ashmem_04400: run setProtectionType is success");
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4400: run setProtectionType is success");
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
                 expect(error).assertEqual(null);
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_04400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_4400---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_04500
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_4500
         * @tc.name    setProtectionType check param error Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_04500", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_04500---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_4500", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_4500---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("ashmem", 1024 * 1024);
                 expect(ashmem != null).assertTrue();
@@ -11096,17 +11096,17 @@ export default function RpcJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_04500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_4500---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_04600
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_4600
         * @tc.name    setProtectionType is 1900002 exception validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_04600", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_04600---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_4600", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_4600---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("ashmem", 1024 * 1024);
                 expect(ashmem != null).assertTrue();
@@ -11118,17 +11118,17 @@ export default function RpcJsUnitTest() {
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_04600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_4600---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_04700
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_4700
         * @tc.name    writeAshmem errCode 1900003 exception validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_04700", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_04700---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_4700", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_4700---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var data2 = rpc.MessageSequence.create();
@@ -11141,17 +11141,17 @@ export default function RpcJsUnitTest() {
                 data.reclaim();
                 data2.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_04700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_4700---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_04800
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_4800
         * @tc.name    readAshmem exception validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_04800", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_04800---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_4800", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_4800---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("ashmem", 1024);
                 expect(ashmem != null).assertTrue();
@@ -11166,17 +11166,17 @@ export default function RpcJsUnitTest() {
                 let errCode = `${rpc.ErrorCode.READ_FROM_ASHMEM_ERROR}`;
                 expect(error.code != errCode).assertEqual(null);
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_04800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_4800---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_04900
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_4900
         * @tc.name    mapTypedAshmem check param error Error message verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_04900", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_04900---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_4900", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_4900---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", (2 * G - 1));
                 expect(ashmem != null).assertTrue();
@@ -11189,17 +11189,17 @@ export default function RpcJsUnitTest() {
                 expect(error.code == errCode).assertTrue();
                 expect(error != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_04900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_4900---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_Ashmem_05000
+        * @tc.number  SUB_DSoftbus_RPC_API_Ashmem_5000
         * @tc.name    mapTypedAshmem exception validation
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_Ashmem_05000", 0, function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_Ashmem_05000---------------------------");
+        it("SUB_DSoftbus_RPC_API_Ashmem_5000", 0, function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_Ashmem_5000---------------------------");
             try {
                 let ashmem = rpc.Ashmem.create("JsAshmemTest", (2 * G - 1));
                 expect(ashmem != null).assertTrue();
@@ -11211,17 +11211,17 @@ export default function RpcJsUnitTest() {
                 expect(error.code != errCode).assertTrue();
                 expect(error != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_Ashmem_05000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_5000---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00100
+         * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_0100
          * @tc.name    Call sendrequestresult interface to send data
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00100---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_0100", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_0100---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -11242,18 +11242,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0100---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00200
+         * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_0200
          * @tc.name    Test that messageparcel passes through the same process, and the client
          *             receives the reply message in promise
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00200---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_0200", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_0200---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -11291,18 +11291,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0200---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00300
+         * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_0300
          * @tc.name    Test that messageparcel passes through the same process, and the client
          *             receives the reply message in the callback function
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00300---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_0300", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_0300---------------------------");
             try {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -11344,17 +11344,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00300--------------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0300--------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00400
+         * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_0400
          * @tc.name    addDeathRecipient, register death notification verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00400", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00400---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_0400", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_0400---------------------------");
             try {
                 let object = new TestAbilityStub("Test1");
                 expect(object.addDeathRecipient(null, 0)).assertEqual(false);
@@ -11363,18 +11363,18 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0400---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00500
+         * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_0500
          * @tc.name    Do not get the server agent, do not create a remoteobject instance, and directly getcallingpid,
          *             getcallingpid, getcallingdeviceid, getlocaldeviceid
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00500---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_0500", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_0500---------------------------");
             try {
                 expect(rpc.IPCSkeleton.getCallingPid() != null).assertTrue();
                 expect(rpc.IPCSkeleton.getCallingUid() != null).assertTrue();
@@ -11383,17 +11383,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0500---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00600
+         * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_0600
          * @tc.name    Querylocalinterface searches for objects based on descriptors
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00600", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00600---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_0600", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_0600---------------------------");
             try {
                 let object = new TestAbilityStub("Test1");
                 expect(object.isObjectDead()).assertEqual(false);
@@ -11404,17 +11404,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0600---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00700
+         * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_0700
          * @tc.name    Getinterfacedescriptor to get the interface description
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00700---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_0700", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_0700---------------------------");
             try {
                 let object = new TestAbilityStub("Test1223");
                 expect(object.isObjectDead()).assertEqual(false);
@@ -11425,17 +11425,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0700---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00800
+         * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_0800
          * @tc.name    IRemoteObject sendMessageRequest API Test
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00800---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_0800", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_0800---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -11473,18 +11473,18 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0800---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00900
+         * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_0900
          * @tc.name    Test that messageparcel passes through the same process, and the client
          *             receives the reply message in the callback function
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00900", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00900---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_0900", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_0900---------------------------");
             try {
                 let object = new TestAbilityStub("TestAbilityStub");
                 var data = rpc.MessageParcel.create();
@@ -11529,17 +11529,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_00900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0900---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01100
+        * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_1100
         * @tc.name    getDescriptor to get the interface description
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01100", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01100---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_1100", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_1100---------------------------");
             try {
                 let object = new TestAbilityMessageStub("Test1223");
                 let result = object.isObjectDead();
@@ -11554,18 +11554,18 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_1100---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01200
+        * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_1200
         * @tc.name    Test that MessageSequence passes through the same process, and the client
         *             receives the reply message in the callback function
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01200---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_1200", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_1200---------------------------");
             try {
                 let object = new TestAbilityMessageStub("TestAbilityMessageStub");
                 var data = rpc.MessageSequence.create();
@@ -11610,89 +11610,89 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_1200---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01300
+        * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_1300
         * @tc.name    Iremoteobject, register death notification verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01300", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01300---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_1300", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_1300---------------------------");
             try {
                 let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
                 gIRemoteObject.registerDeathRecipient(recipient, 0);
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_1300---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01400
+        * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_1400
         * @tc.name    Iremoteobject, register death notification verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3 
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01400", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01400---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_1400", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_1400---------------------------");
             try {
                 let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
                 gIRemoteObject.registerDeathRecipient(recipient, 0);
                 gIRemoteObject.unregisterDeathRecipient(recipient, 0);
-                console.info("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01400:run unregisterDeathRecipient is done");
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_1400:run unregisterDeathRecipient is done");
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_1400---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01500
+        * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_1500
         * @tc.name    RemoteObject, registerDeathRecipient notification verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01500---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_1500", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_1500---------------------------");
             try {
                 let object = new TestAbilityMessageStub("Test1");
                 object.registerDeathRecipient(null, 0);
-                console.info("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01500:run registerDeathRecipient is done");
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_1500:run registerDeathRecipient is done");
             } catch (error) {
                 expect(error != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_1500---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01600
+        * @tc.number  SUB_DSoftbus_RPC_API_IRemoteObject_1600
         * @tc.name    RemoteObject, unregisterDeathRecipient notification verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01600", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01600---------------------------");
+        it("SUB_DSoftbus_RPC_API_IRemoteObject_1600", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IRemoteObject_1600---------------------------");
             try {
                 let object = new TestAbilityMessageStub("Test1");
                 object.unregisterDeathRecipient(null, 0);
-                console.info("SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01600:run unregisterDeathRecipient result is done");
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_1600:run unregisterDeathRecipient result is done");
             } catch (error) {
                 expect(error != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IRemoteObject_01600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_1600---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00100
+         * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_0100
          * @tc.name    Call adddeathrecipient to register the death notification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00100", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00100---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_0100", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_0100---------------------------");
             try {
                 let recipient = new MyDeathRecipient(gIRemoteObject, null);
                 expect(gIRemoteObject.addDeathRecipient(recipient, 0)).assertTrue();
@@ -11703,17 +11703,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0100---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00200
+         * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_0200
          * @tc.name    Adddeathreceiver Verify the minimum boundary value of the interface flag
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00200", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00200---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_0200", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_0200---------------------------");
             try {
                 let recipient = new MyDeathRecipient(gIRemoteObject, null);
                 expect(gIRemoteObject.addDeathRecipient(recipient, -(2 * G))).assertTrue();
@@ -11721,17 +11721,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0200---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00300
+         * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_0300
          * @tc.name    Adddeathreceiver Verify the maximum boundary value of the interface flag
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00300", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00300---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_0300", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_0300---------------------------");
             try {
                 let recipient = new MyDeathRecipient(gIRemoteObject, null);
                 expect(gIRemoteObject.addDeathRecipient(recipient, (2 * G - 1))).assertTrue();
@@ -11739,17 +11739,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0300---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00400
+         * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_0400
          * @tc.name    Adddeathreceiver verifies the minimum out-of-bounds value of the interface flag
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00400", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00400---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_0400", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_0400---------------------------");
             try {
                 let recipient = new MyDeathRecipient(gIRemoteObject, null);
                 expect(gIRemoteObject.addDeathRecipient(recipient, 2 * G)).assertTrue();
@@ -11757,17 +11757,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0400---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00500
+         * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_0500
          * @tc.name    Adddeathreceiver verifies the maximum out-of-bounds value of the interface flag
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00500---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_0500", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_0500---------------------------");
             try {
                 let recipient = new MyDeathRecipient(gIRemoteObject, null);
                 expect(gIRemoteObject.addDeathRecipient(recipient, -(2 * G + 1))).assertTrue();
@@ -11775,17 +11775,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0500---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00600
+         * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_0600
          * @tc.name   Verification of the death notification callback scenario
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00600", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00600---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_0600", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_0600---------------------------");
             try {
                 let recipient = new MyDeathRecipient(gIRemoteObject, null);
                 expect(gIRemoteObject.isObjectDead() == false).assertTrue();
@@ -11799,34 +11799,34 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0600---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00700
+         * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_0700
          * @tc.name    Getinterfacedescriptor to get the object interface description
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00700---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_0700", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_0700---------------------------");
             try {
                 let object = new TestAbilityStub("Test0300");
                 expect(object.getInterfaceDescriptor()).assertEqual("Test0300");
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0700---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00800
+         * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_0800
          * @tc.name    Querylocalinterface searches for objects based on descriptors
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00800---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_0800", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_0800---------------------------");
             try {
                 let object = new TestAbilityStub("Test0400");
                 expect(object.isObjectDead()).assertEqual(false);
@@ -11836,17 +11836,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0800---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00900
+         * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_0900
          * @tc.name    Transaction constant validation
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00900", 0, async function () {
-            console.info("----------------------------SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00900 is starting-------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_0900", 0, async function () {
+            console.info("----------------------------SUB_DSoftbus_RPC_API_RemoteProxy_0900 is starting-------------");
             try {
                 expect(rpc.RemoteProxy.PING_TRANSACTION).assertEqual(1599098439);
                 expect(rpc.RemoteProxy.DUMP_TRANSACTION).assertEqual(1598311760);
@@ -11856,17 +11856,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_00900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0900---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01000
+        * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_1000
         * @tc.name    Call isobjectdead to check whether the object is dead
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01000---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_1000", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_1000---------------------------");
             try {
                 let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
                 let isDead = gIRemoteObject.isObjectDead();
@@ -11883,17 +11883,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1000---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01100
+        * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_1100
         * @tc.name    getDescriptor to get the object interface description
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01100", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01100---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_1100", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_1100---------------------------");
             try {
                 let object = new TestAbilityStub("Test0300");
                 let result = object.getDescriptor();
@@ -11901,17 +11901,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1100---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01200
+        * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_1200
         * @tc.name    getLocalInterface searches for objects based on descriptors
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01200", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01200---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_1200", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_1200---------------------------");
             try {
                 let object = new TestAbilityStub("Test0400");
                 let result = object.isObjectDead();
@@ -11924,17 +11924,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1200---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01300
+        * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_1300
         * @tc.name    Call registerDeathRecipient to register the death notification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01300", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01300---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_1300", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_1300---------------------------");
             try {
                 let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
                 gIRemoteObject.registerDeathRecipient(recipient, 0);
@@ -11942,120 +11942,120 @@ export default function RpcJsUnitTest() {
                 gIRemoteObject.unregisterDeathRecipient(recipient, 0);
                 gIRemoteObject.unregisterDeathRecipient(recipient, 0);
                 gIRemoteObject.unregisterDeathRecipient(recipient, 0);
-                console.info("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01300: unregisterDeathRecipient2 is success");
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1300: unregisterDeathRecipient2 is success");
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1300---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01400
+        * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_1400
         * @tc.name    registerDeathRecipient Validates the interface flags input parameter boundary value
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01400", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01400---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_1400", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_1400---------------------------");
             try {
                 let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
                 gIRemoteObject.registerDeathRecipient(recipient, -(2 * G));
                 gIRemoteObject.unregisterDeathRecipient(recipient, -(2 * G));
-                console.info("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01400: unregisterDeathRecipient2 is success");
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1400: unregisterDeathRecipient2 is success");
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1400---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01500
+        * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_1500
         * @tc.name    registerDeathRecipient Validates the interface flags input parameter boundary value
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01500---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_1500", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_1500---------------------------");
             try {
                 let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
                 gIRemoteObject.registerDeathRecipient(recipient, (2 * G - 1));
                 gIRemoteObject.unregisterDeathRecipient(recipient, (2 * G - 1));
-                console.info("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01500: unregisterDeathRecipient2 is success");
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1500: unregisterDeathRecipient2 is success");
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1500---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01600
+        * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_1600
         * @tc.name    registerDeathRecipient Validates the interface flags input parameter boundary value
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01600", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01600---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_1600", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_1600---------------------------");
             try {
                 let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
                 gIRemoteObject.registerDeathRecipient(recipient, 2 * G);
                 gIRemoteObject.unregisterDeathRecipient(recipient, 2 * G);
-                console.info("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01600: unregisterDeathRecipient2 is success");
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1600: unregisterDeathRecipient2 is success");
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1600---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01700
+        * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_1700
         * @tc.name    registerDeathRecipient Validates the interface flags input parameter boundary value
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01700---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_1700", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_1700---------------------------");
             try {
                 let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
                 gIRemoteObject.registerDeathRecipient(recipient, -(2 * G + 1));
                 gIRemoteObject.unregisterDeathRecipient(recipient, -(2 * G + 1));
-                console.info("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01700: unregisterDeathRecipient is success");
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1700: unregisterDeathRecipient is success");
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1700---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01800
+        * @tc.number  SUB_DSoftbus_RPC_API_RemoteProxy_1800
         * @tc.name    getLocalInterface 1900005 searches for objects based on descriptors
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01800---------------------------");
+        it("SUB_DSoftbus_RPC_API_RemoteProxy_1800", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_RemoteProxy_1800---------------------------");
             try {
                 let object = new TestAbilityStub("Test0400");
                 let result = object.isObjectDead();
                 expect(result).assertEqual(false);
                 object.modifyLocalInterface(object, "Test2");
-                console.info("SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01800: run modifyLocalInterface success");
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1800: run modifyLocalInterface success");
                 object.getLocalInterface(null);
             } catch (error) {
                 let errCode = `${rpc.ErrorCode.ONLY_PROXY_OBJECT_PERMITTED_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_RemoteProxy_01800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1800---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00100
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_0100
          * @tc.name    Create exception object and verify the function of flushcommands interface
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it('SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00100', 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00100---------------------------");
+        it('SUB_DSoftbus_RPC_API_IPCSkeleton_0100', 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_0100---------------------------");
             try {
                 let remoteObject = new TestRemoteObject("aaa");
                 expect(rpc.IPCSkeleton.flushCommands(remoteObject)).assertEqual(101);
@@ -12063,17 +12063,17 @@ export default function RpcJsUnitTest() {
             catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0100---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00200
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_0200
          * @tc.name    Establish constructor object and verify the function of flushcommands interface
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it('SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00200', 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00200---------------------------");
+        it('SUB_DSoftbus_RPC_API_IPCSkeleton_0200', 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_0200---------------------------");
             try {
                 let remoteObject = {};
                 expect(rpc.IPCSkeleton.flushCommands(remoteObject)).assertEqual(101);
@@ -12081,17 +12081,17 @@ export default function RpcJsUnitTest() {
             catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0200---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00300
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_0300
          * @tc.name    Create object, getinterfacedescriptor interface function verification
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it('SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00300', 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00300---------------------------");
+        it('SUB_DSoftbus_RPC_API_IPCSkeleton_0300', 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_0300---------------------------");
             try {
                 let samgr = rpc.IPCSkeleton.getContextObject();
                 expect(samgr != null).assertTrue();
@@ -12100,17 +12100,17 @@ export default function RpcJsUnitTest() {
             catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0300---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00400
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_0400
          * @tc.name    Call getCallingPid, getCallingUid to get the local value
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it('SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00400', 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00400---------------------------");
+        it('SUB_DSoftbus_RPC_API_IPCSkeleton_0400', 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_0400---------------------------");
             try {
                 expect(rpc.IPCSkeleton.getCallingPid() != null).assertTrue();
                 expect(rpc.IPCSkeleton.getCallingUid() != null).assertTrue();
@@ -12118,17 +12118,17 @@ export default function RpcJsUnitTest() {
             catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0400---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00500
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_0500
          * @tc.name    Call getlocaldeviceid, getcallingdeviceid to get the local value
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it('SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00500', 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00500---------------------------");
+        it('SUB_DSoftbus_RPC_API_IPCSkeleton_0500', 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_0500---------------------------");
             try {
                 expect(rpc.IPCSkeleton.getLocalDeviceID() != null).assertTrue();
                 expect(rpc.IPCSkeleton.getCallingDeviceID() != null).assertTrue();
@@ -12136,18 +12136,18 @@ export default function RpcJsUnitTest() {
             catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0500---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00600
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_0600
          * @tc.name    Do not get the server agent, do not create a remoteobject instance, and directly getcallingpid,
          *             getcallingpid, getcallingdeviceid, getlocaldeviceid
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it('SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00600', 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00600---------------------------");
+        it('SUB_DSoftbus_RPC_API_IPCSkeleton_0600', 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_0600---------------------------");
             try {
                 expect(rpc.IPCSkeleton.getCallingPid() != null).assertTrue();
                 expect(rpc.IPCSkeleton.getCallingUid() != null).assertTrue();
@@ -12157,17 +12157,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0600---------------------------");
         })
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00700
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_0700
          * @tc.name    Test the getcallingpid and getcallinguid basic methods of ipcskeleton
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00700", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00700---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_0700", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_0700---------------------------");
             try {
                 expect(rpc.IPCSkeleton.getContextObject().getInterfaceDescriptor()).assertEqual("");
                 let callingPid = rpc.IPCSkeleton.getCallingPid();
@@ -12191,17 +12191,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0700---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00800
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_0800
          * @tc.name    Basic method of testing ipcskeleton
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00800", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00800---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_0800", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_0800---------------------------");
             try {
                 let callingPid = rpc.IPCSkeleton.getCallingPid();
                 let callingUid = rpc.IPCSkeleton.getCallingUid();
@@ -12227,51 +12227,51 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0800---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00900
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_0900
          * @tc.name    Setcallingidentity interface flag input parameter is null authentication
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3 
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00900", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00900---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_0900", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_0900---------------------------");
             try {
                 let id = "";
                 expect(rpc.IPCSkeleton.setCallingIdentity(id)).assertTrue();
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_00900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0900---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01000
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_1000
          * @tc.name    Setcallingidentity interface flag input parameter is 0 authentication
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01000---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_1000", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_1000---------------------------");
             try {
                 let id = 0;
                 expect(rpc.IPCSkeleton.setCallingIdentity(id)).assertTrue();
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1000---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01100
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_1100
          * @tc.name    Setcallingidentity interface flag input parameter is boundary value authentication
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01100", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01100---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_1100", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_1100---------------------------");
             try {
                 let id = "";
                 for (let i = 0; i < (40 * K - 1); i++) {
@@ -12281,17 +12281,17 @@ export default function RpcJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1100---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01200
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_1200
          * @tc.name    Basic method of verifying ipcskeleton
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01200", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01200---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_1200", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_1200---------------------------");
             try {
                 expect(rpc.IPCSkeleton.getContextObject().getInterfaceDescriptor()).assertEqual("");
                 let callingPid = rpc.IPCSkeleton.getCallingPid();
@@ -12329,17 +12329,17 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01200---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1200---------------------------");
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01300
+         * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_1300
          * @tc.name    IPCSkeleton sendMessageRequest API test
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
          * @tc.level   3
          */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01300", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01300---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_1300", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_1300---------------------------");
             try {
                 expect(rpc.IPCSkeleton.getContextObject().getInterfaceDescriptor()).assertEqual("");
                 let callingPid = rpc.IPCSkeleton.getCallingPid();
@@ -12363,144 +12363,144 @@ export default function RpcJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01300---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1300---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01400
+        * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_1400
         * @tc.name    Create an empty object and verify the function of the flushCmdBuffer interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01400", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01400---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_1400", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_1400---------------------------");
             try {
                 let remoteObject = new TestRemoteObject("aaa");
                 let ret = rpc.IPCSkeleton.flushCmdBuffer(remoteObject);
-                console.info("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01400 RpcServer: flushCmdBuffer is success");
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1400 RpcServer: flushCmdBuffer is success");
             }
             catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01400---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1400---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01500
+        * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_1500
         * @tc.name    Create an null object and verify the function of the flushCmdBuffer interface
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01500", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01500---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_1500", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_1500---------------------------");
             try {
                 let remoteObject = {};
                 let ret = rpc.IPCSkeleton.flushCmdBuffer(remoteObject);
-                console.info("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01500 RpcServer: flushCmdBuffer is success");
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1500 RpcServer: flushCmdBuffer is success");
             }
             catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01500---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1500---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01600
+        * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_1600
         * @tc.name    Basic method of testing ipcskeleton Communication failed
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01600", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01600---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_1600", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_1600---------------------------");
             try {
                 let object = rpc.IPCSkeleton.getContextObject();
                 object.getDescriptor();
-                console.info("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01600: is success");
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1600: is success");
             } catch (error) {
                 let errCode = `${rpc.ErrorCode.COMMUNICATION_ERROR}`;
                 expect(error.message != null).assertTrue();
                 expect(error.code == errCode).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01600---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1600---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01700
+        * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_1700
         * @tc.name    Create an empty object and verify the function of the flushCmdBuffer interface Only remote object permitted.
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01700", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01700---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_1700", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_1700---------------------------");
             try {
                 let remoteObject = null;
                 rpc.IPCSkeleton.flushCmdBuffer(remoteObject);
-                console.info("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01700 RpcServer: flushCmdBuffer is success");
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1700 RpcServer: flushCmdBuffer is success");
             }
             catch (error) {
                 let errCode = `${rpc.ErrorCode.ONLY_REMOTE_OBJECT_PERMITTED_ERROR}`;
                 expect(error.message != null).assertTrue();
                 expect(error.code != errCode).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01700---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1700---------------------------");
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01800
+        * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_1800
         * @tc.name    restoreCallingIdentity Interface flags input parameter boundary value verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01800", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01800---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_1800", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_1800---------------------------");
             try {
                 let id = "";
                 rpc.IPCSkeleton.restoreCallingIdentity(id);
-                console.info("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01800 restoreCallingIdentity is success");
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1800 restoreCallingIdentity is success");
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01800---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1800---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01900
+        * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_1900
         * @tc.name    restoreCallingIdentity Interface flags input parameter 0 value verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01900", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01900---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_1900", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_1900---------------------------");
             try {
                 let id = 0;
                 rpc.IPCSkeleton.restoreCallingIdentity(id);
-                console.info("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01900 restoreCallingIdentity is success");
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1900 restoreCallingIdentity is success");
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_01900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1900---------------------------");
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_02000
+        * @tc.number  SUB_DSoftbus_RPC_API_IPCSkeleton_2000
         * @tc.name    restoreCallingIdentity Interface flags input parameter null value verification
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_02000", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_02000---------------------------");
+        it("SUB_DSoftbus_RPC_API_IPCSkeleton_2000", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_2000---------------------------");
             try {
                 let id = "";
                 for (let i = 0; i < (40 * K - 1); i++) {
                     id += "a";
                 }
                 rpc.IPCSkeleton.restoreCallingIdentity(id);
-                console.info("SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_02000 restoreCallingIdentity is success");
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_2000 restoreCallingIdentity is success");
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_IPCSkeleton_02000---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_2000---------------------------");
         });
-        console.info("-----------------------SUB_DSoftbus_RPC_Compatibility_MessageParce_Test is end-----------------------");
+        console.info("-----------------------SUB_DSoftbus_RPC_API_MessageParce_Test is end-----------------------");
     });
 }
