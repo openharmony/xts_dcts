@@ -98,14 +98,14 @@ export default function DmsFwkStageTest() {
     var listKeyTemp1 = [];
 
     /*
-     * @tc.number  SUB_DMS_StartControl_ConnectAbility_0200
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100
      * @tc.name    Connec the remote Ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_ConnectAbility_0200", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_ConnectAbility_0200 is start---------------")
-      TAG = "SUB_DMS_StartControl_ConnectAbility_0200";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100";
       try{
         globalThis.abilityContext.connectServiceExtensionAbility({
           deviceId:dvId,
@@ -113,28 +113,28 @@ export default function DmsFwkStageTest() {
           abilityName: "com.ohos.dmstest.ServiceAbility"
         }, {
           onConnect: (elementName, proxy)=>{
-            console.info('SUB_DMS_StartControl_ConnectAbility_0200  onConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100  onConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onDisConnect: (elementName)=>{
-            console.info('SUB_DMS_StartControl_ConnectAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code)=>{
-            console.info('SUB_DMS_StartControl_ConnectAbility_0200  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100  onFailed: ' + code);
             expect(code).assertEqual(16000050)
             done();
           }
         });
       }catch(err){
-        console.info('SUB_DMS_StartControl_ConnectAbility_0200  catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_ConnectAbility_0200  catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100  catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100  catch: ' + err.message);
         expect().assertFail();
         done();
       }
-      console.info("---------------SUB_DMS_StartControl_ConnectAbility_0200 is end---------------")
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100 is end---------------")
     });
     
   })

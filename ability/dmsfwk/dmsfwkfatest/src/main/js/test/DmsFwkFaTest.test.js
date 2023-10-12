@@ -112,13 +112,13 @@ export default function DmsFwkFaTest() {
     })
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0010
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2800
     * @tc.name    StartRemoteAbilityForResult remote MainAbility is success
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0010", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0010 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2800", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2800 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -130,32 +130,32 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0010 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2800 data is' + data.resultCode);
           expect(data.resultCode).assertEqual(100);
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0010 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2800 is failed ' + err.code);
           expect().assertFail();
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0010 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0010 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2800 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2800 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0010 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2800 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0020
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2600
     * @tc.name    StartRemoteAbilityForResult deviceId is null
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0020", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0020 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2600", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2600 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -167,32 +167,32 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0020 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2600 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0020 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2600 is failed ' + err.code);
           expect(err.code).assertEqual(1)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0020 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0020 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2600 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2600 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0020 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2600 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0030
+    * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900
     * @tc.name    StartRemoteAbilityForResult deviceId is Does not exist
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0030", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0030 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -203,32 +203,32 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0030 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0030 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 is failed ' + err.code);
           expect(err.code).assertEqual(1)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0030 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0030 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0030 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0040
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2500
     * @tc.name    StartRemoteAbilityForResult deviceId is undefined
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0040", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0040 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2500", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2500 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -240,32 +240,32 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0040 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2500 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0040 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2500 is failed ' + err.code);
           expect(err.code).assertEqual(1)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0040 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0040 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2500 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2500 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0040 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2500 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0050
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2700
     * @tc.name    StartRemoteAbilityForResult deviceId is err
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0050", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0050 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2700", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2700 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -277,32 +277,32 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0050 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2700 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0050 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2700 is failed ' + err.code);
           expect(err.code).assertEqual(9)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0050 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0050 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2700 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2700 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0050 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2700 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0060
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2300
     * @tc.name    StartRemoteAbilityForResult bundleName is null
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0060", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0060 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2300", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2300 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -314,32 +314,32 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0060 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2300 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0060 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2300 is failed ' + err.code);
           expect(err.code).assertEqual(1)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0060 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0060 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2300 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2300 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0060 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2300 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0070
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1600
     * @tc.name    StartRemoteAbilityForResult bundleName is Does not exist
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0070", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0070 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1600", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1600 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -350,32 +350,32 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0070 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1600 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0070 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1600 is failed ' + err.code);
           expect(err.code).assertEqual(1)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0070 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0070 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1600 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1600 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0070 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1600 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0080
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2200
     * @tc.name    StartRemoteAbilityForResult bundleName is undefined
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0080", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0080 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2200", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2200 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -387,32 +387,32 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0080 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2200 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0080 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2200 is failed ' + err.code);
           expect(err.code).assertEqual(1)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0080 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0080 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2200 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2200 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0080 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2200 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0090
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2400
     * @tc.name    StartRemoteAbilityForResult bundleName is err
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0090", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0090 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2400", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2400 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -424,32 +424,32 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0090 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2400 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0090 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2400 is failed ' + err.code);
           expect(err.code).assertEqual(9)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0090 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0090 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2400 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2400 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0090 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2400 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0100
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2000
     * @tc.name    StartRemoteAbilityForResult abilityName is null
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0100", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0100 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2000", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2000 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -461,32 +461,32 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0100 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2000 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0100 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2000 is failed ' + err.code);
           expect(err.code).assertEqual(1)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0100 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0100 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2000 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2000 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0100 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2000 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0110
-    * @tc.name    StartRemoteAbilityForResult abilityName is Does not exist
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1500
+    * @tc.name    StartRemoteAbilityForResult without abilityName 
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0110", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0110 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1500", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1500 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -498,32 +498,32 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0110 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1500 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0110 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1500 is failed ' + err.code);
           expect(err.code).assertEqual(1)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0110 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0110 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1500 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1500 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0110 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1500 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0120
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1900
     * @tc.name    StartRemoteAbilityForResult abilityName is undefined
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0120", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0120 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1900", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1900 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -535,32 +535,32 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0120 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1900 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0120 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1900 is failed ' + err.code);
           expect(err.code).assertEqual(1)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0120 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0120 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1900 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1900 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0120 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1900 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0130
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2100
     * @tc.name    StartRemoteAbilityForResult abilityName is err
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0130", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0130 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2100", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2100 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
@@ -572,64 +572,64 @@ export default function DmsFwkFaTest() {
             }
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0130 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2100 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0130 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2100 is failed ' + err.code);
           expect(err.code).assertEqual(9)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0130 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0130 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2100 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2100 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0130 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2100 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_0140
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1800
     * @tc.name    StartRemoteAbilityForResult want is null
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_0140", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_0140 is start---------------");
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1800", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1800 is start---------------");
       try {
         featureAbility.startAbilityForResult({
           "want": {
           }
         }).then((data) => {
-          console.info('SUB_DMS_StartAbilityResult_0140 data is' + data.resultCode);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1800 data is' + data.resultCode);
           expect().assertFail();
           done();
         }).catch((err) => {
-          console.info('SUB_DMS_StartAbilityResult_0140 is failed ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1800 is failed ' + err.code);
           expect(err.code).assertEqual(1)
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartAbilityResult_0140 catch' + err.code);
-        console.info('SUB_DMS_StartAbilityResult_0140 catch' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1800 catch' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1800 catch' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_0140 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1800 is end---------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_StartAbilityResult_CallBack_0010
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1400
     * @tc.name    StartRemoteAbilityForResult remote MainAbility is success
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartAbilityResult_CallBack_0010", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartAbilityResult_CallBack_0010 is start---------------");
-      let TAG = 'SUB_DMS_StartAbilityResult_CallBack_0010';
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1400", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1400 is start---------------");
+      let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1400';
       let wantValue = {
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -656,17 +656,17 @@ export default function DmsFwkFaTest() {
         done();
       });
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartAbilityResult_CallBack_0010 is end---------------");
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1400 is end---------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_ConnectAbility_0010
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300
      * @tc.name    Connect the remote ServiceAbility.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_ConnectAbility_0010", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0010 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -683,7 +683,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0010 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 msg: ' + msg)
               expect(msg == 100).assertTrue();
               done();
             }).catch((e) => {
@@ -693,34 +693,34 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0010  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0010  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300  onFailed: ' + code);
             expect().assertFail();
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0010 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0010 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0010 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_ConnectAbility_0020
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_02000356
      * @tc.name    Connect the remote Service with null bundlename.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_ConnectAbility_0020", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0020 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -737,7 +737,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0020 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200 msg: ' + msg)
               expect(msg == 100).assertFail();
               done();
             }).catch((e) => {
@@ -747,34 +747,34 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0020  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0020  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200  onFailed: ' + code);
             expect(code).assertEqual(0);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0020 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0020 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0020 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_ConnectAbility_0030
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900
      * @tc.name    Disconnect the remote ServiceAbility.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_ConnectAbility_0030", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0030 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -791,7 +791,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0030 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 msg: ' + msg)
               expect(msg == 100).assertTrue();
             }).catch((e) => {
               console.log('sendRequest error:' + e);
@@ -800,40 +800,40 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0030  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0030  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900  onFailed: ' + code);
             expect().assertFail();
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0030 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0030 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       featureAbility.disconnectAbility(connectId, (err, data) => {
-        console.info('SUB_DMS_ConnectAbility_0030 disconnectAbility err: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0030 disconnectAbilityerr: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 disconnectAbility err: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 disconnectAbilityerr: ' + err.message);
         expect(err.code).assertEqual(0);
         done();
       })
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0030 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_ConnectAbility_0040
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100
      * @tc.name    Connect the remote Service with Wrong ServiceAbility.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_ConnectAbility_0040", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0040 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -850,7 +850,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0040 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100 msg: ' + msg)
               expect(msg == 100).assertFail();
               done();
             }).catch((e) => {
@@ -860,34 +860,34 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0040  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0040  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100  onFailed: ' + code);
             expect(code).assertEqual(0);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0040 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0040 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0040 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_ConnectAbility_0050
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0800
      * @tc.name    Connect the remote Service with Wrong deviceId.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_ConnectAbility_0050", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0050 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0800", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0800 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -904,7 +904,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0050 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0800 msg: ' + msg)
               expect(msg == 100).assertFail();
               done();
             }).catch((e) => {
@@ -914,34 +914,34 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0050  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0800  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0050  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0800  onFailed: ' + code);
             expect(code).assertEqual(0);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0050 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0050 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0800 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0800 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0050 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0800 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_ConnectAbility_0060
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2600
      * @tc.name    Connect the remote Service with null ServiceAbility.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_ConnectAbility_0060", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0060 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2600", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2600 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -958,7 +958,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0060 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2600 msg: ' + msg)
               expect(msg == 100).assertFail();
               done();
             }).catch((e) => {
@@ -968,34 +968,34 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0060  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2600  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0060  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2600  onFailed: ' + code);
             expect(code).assertEqual(0);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0060 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0060 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2600 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2600 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0060 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2600 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_ConnectAbility_0070
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200
      * @tc.name    Connect the remote Service without bundleName.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_ConnectAbility_0070", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0070 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -1011,7 +1011,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0070 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200 msg: ' + msg)
               expect(msg == 100).assertFail();
               done();
             }).catch((e) => {
@@ -1021,34 +1021,34 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0070  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0070  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200  onFailed: ' + code);
             expect(code).assertEqual(0);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0070 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0070 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0070 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_ConnectAbility_0080
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0700
      * @tc.name    Connect the remote Service with wrong bundleName.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_ConnectAbility_0080", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0080 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0700", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0700 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -1065,7 +1065,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0080 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0700 msg: ' + msg)
               expect(msg == 100).assertFail();
               done();
             }).catch((e) => {
@@ -1075,34 +1075,34 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0080  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0700  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0080  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0700  onFailed: ' + code);
             expect(code).assertEqual(0);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0080 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0080 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0700 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0700 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0080 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0700 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_ConnectAbility_0090
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2700
      * @tc.name    Connect the remote Service with bundleName is undefined.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_ConnectAbility_0090", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0090 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2700", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2700 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -1119,7 +1119,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0090 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2700 msg: ' + msg)
               expect(msg == 100).assertFail();
               done();
             }).catch((e) => {
@@ -1129,34 +1129,34 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0090  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2700  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0090  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2700  onFailed: ' + code);
             expect(code).assertEqual(0);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0090 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0090 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2700 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2700 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0090 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2700 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_ConnectAbility_0100
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100
      * @tc.name    Connect the remote Service without abilityName.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_ConnectAbility_0100", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0100 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -1172,7 +1172,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0100 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100 msg: ' + msg)
               expect(msg == 100).assertFail();
               done();
             }).catch((e) => {
@@ -1182,34 +1182,34 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0100  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100  onFailed: ' + code);
             expect(code).assertEqual(0);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0100 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0100 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0100 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_ConnectAbility_0110
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2800
      * @tc.name    Connect the remote Service with abilityName is undefined.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_ConnectAbility_0110", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0110 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2800", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2800 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -1226,7 +1226,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0110 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2800 msg: ' + msg)
               expect(msg == 100).assertFail();
               done();
             }).catch((e) => {
@@ -1236,34 +1236,34 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0110  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2800  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0110  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2800  onFailed: ' + code);
             expect(code).assertEqual(0);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0110 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0110 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2800 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2800 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0110 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2800 end------------------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_ConnectAbility_0120
+    * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2900
     * @tc.name    Connect the remote Service with deviceid is undefined.
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_ConnectAbility_0120", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0120 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2900", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2900 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -1280,7 +1280,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0120 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2900 msg: ' + msg)
               expect(msg == 100).assertFail();
               done();
             }).catch((e) => {
@@ -1290,34 +1290,34 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0120  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2900  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0120  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2900  onFailed: ' + code);
             expect(code).assertEqual(0);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0120 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0120 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2900 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2900 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0120 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2900 end------------------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_ConnectAbility_0130
+    * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300
     * @tc.name    Connect the remote Service without deviceid.
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_ConnectAbility_0130", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0130 start------------------------");
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300 start------------------------");
       let connectId;
       try {
         connectId = featureAbility.connectAbility({
@@ -1333,7 +1333,7 @@ export default function DmsFwkFaTest() {
             proxy.sendRequest(1, data, reply, option).then((result) => {
               console.log('sendRequest success');
               let msg = result.reply.readInt();
-              console.info(' SUB_DMS_ConnectAbility_0130 msg: ' + msg)
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300 msg: ' + msg)
               expect(msg == 100).assertFail();
               done();
             }).catch((e) => {
@@ -1343,28 +1343,28 @@ export default function DmsFwkFaTest() {
             });
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_ConnectAbility_0130  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_ConnectAbility_0130  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300  onFailed: ' + code);
             expect(code).assertEqual(0);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0130 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0130 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0130 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300 end------------------------");
     });
 
     /*
-    * @tc.number  SUB_DMS_ConnectAbility_0140
+    * @tc.number  SUB_DMS_StandardOs_stability_StabilityTest_0100
     * @tc.name    Connect the remote ServiceAbility fot ten times.
     * @tc.desc    Function test
     * @tc.level   0
