@@ -3386,14 +3386,14 @@ export default function DmsFwkStageTest() {
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueability_ComponentTransfer_0400
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0400
     * @tc.name     register on successful.
     * @tc.desc     Test on function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueability_ComponentTransfer_0400', 0, function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueability_ComponentTransfer_0400 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueability_ComponentTransfer_0400";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0400', 0, function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0400 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0400";
       function onCall(data) {
         console.info(TAG + " onCall : result : " + JSON.stringify(data));
         if (data.info) {
@@ -3408,18 +3408,18 @@ export default function DmsFwkStageTest() {
         expect().assertFail();
         done();
       }
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueability_ComponentTransfer_0400 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0400 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueability_ComponentTransfer_0300
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0300
     * @tc.name     unRegister off successful.
     * @tc.desc     Test off function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueability_ComponentTransfer_0300', 0, function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueability_ComponentTransfer_0300 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueability_ComponentTransfer_0300";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0300', 0, function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0300 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0300";
       function offCall(data) {
         console.info(TAG + " offCall: result : " + JSON.stringify(data));
       }
@@ -3430,18 +3430,18 @@ export default function DmsFwkStageTest() {
         expect().assertFail();
         done();
       }
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueability_ComponentTransfer_0300 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0300 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1000
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1000
     * @tc.name     continueMission with wrong bundleName.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1000', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1000 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1000";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1000', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1000 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1000";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: localDeviceId,
@@ -3465,18 +3465,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1000 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1000 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0900
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0900
     * @tc.name     continueMission with null bundleName.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0900', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0900 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0900";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0900', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0900 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0900";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: localDeviceId,
@@ -3500,18 +3500,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0900 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0900 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0800
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0800
     * @tc.name     continueMission with undefined bundleName.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0800', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0800 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0800";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0800', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0800 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0800";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: localDeviceId,
@@ -3535,18 +3535,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0800 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0800 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1500
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1500
     * @tc.name     continueMission with wrong srcDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1500', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1500 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1500";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1500', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1500 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1500";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: '12345',
@@ -3570,18 +3570,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1500 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1500 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1400
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1400
     * @tc.name     continueMission with undefined srcDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1400', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1400 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1400";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1400', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1400 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1400";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: undefined,
@@ -3605,18 +3605,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1400 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1400 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1300
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1300
     * @tc.name     continueMission with wrong dstDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1300', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1300 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1300";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1300', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1300 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1300";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: localDeviceId,
@@ -3640,18 +3640,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1300 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1300 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1200
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1200
     * @tc.name     continueMission with null dstDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1200', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1200 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1200";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1200', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1200 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1200";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: localDeviceId,
@@ -3675,18 +3675,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1200 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1200 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1100
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1100
     * @tc.name     continueMission with undefined dstDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1100', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1100 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1100";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1100', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1100 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1100";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: localDeviceId,
@@ -3710,18 +3710,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1100 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1100 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0600
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0600
     * @tc.name     continueMission with wrong srcDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0600', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0600 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0600";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0600', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0600 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0600";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -3755,18 +3755,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0600 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0600 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0500
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0500
     * @tc.name     continueMission with undefined srcDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0500', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0500 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0500";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0500', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0500 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0500";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -3800,18 +3800,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0500 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0500 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0400
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0400
     * @tc.name     continueMission with wrong dstDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0400', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0400 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0400";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0400', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0400 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0400";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -3845,18 +3845,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0400 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0400 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0300
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0300
     * @tc.name     continueMission with null dstDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0300', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0300 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0300";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0300', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0300 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0300";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -3890,18 +3890,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0300 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0300 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0200
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0200
     * @tc.name     continueMission with undefined dstDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0200', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0200 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0200";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0200', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0200 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0200";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -3935,20 +3935,20 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0200 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0200 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0700
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0700
     * @tc.name     continue successful.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0700', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0700 start---------------------------");
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0700', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0700 start---------------------------");
 
       let localMissionId;
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0700";
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0700";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -3991,18 +3991,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_0700 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0700 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2400
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2400
     * @tc.name     continueMission with wrong bundleName.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2400', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2400 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2400";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2400', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2400 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2400";
       try {
         let param = {
           srcDeviceId: localDeviceId,
@@ -4025,18 +4025,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2400 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2400 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_02300
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_02300
     * @tc.name     continueMission with null bundleName.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_02300', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_02300 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_02300";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_02300', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_02300 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_02300";
       try {
         let param = {
           srcDeviceId: localDeviceId,
@@ -4059,18 +4059,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_02300 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_02300 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2200
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2200
     * @tc.name     continueMission with undefined bundleName.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2200', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2200 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2200";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2200', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2200 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2200";
       try {
         let param = {
           srcDeviceId: localDeviceId,
@@ -4093,18 +4093,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2200 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2200 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2900
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2900
     * @tc.name     continueMission with wrong srcDeviceId.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2900', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2900 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2900";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2900', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2900 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2900";
       try {
         let param = {
           srcDeviceId: '12345',
@@ -4127,18 +4127,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2900 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2900 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2800
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2800
     * @tc.name     continueMission with undefined srcDeviceId.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2800', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2800 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2800";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2800', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2800 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2800";
       try {
         let param = {
           srcDeviceId: undefined,
@@ -4161,18 +4161,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2800 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2800 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2700
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2700
     * @tc.name     continueMission with wrong dstDeviceId.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2700', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2700 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2700";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2700', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2700 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2700";
       try {
         let param = {
           srcDeviceId: localDeviceId,
@@ -4195,18 +4195,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2700 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2700 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2600
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2600
     * @tc.name     continueMission with null dstDeviceId.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2600', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2600 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2600";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2600', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2600 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2600";
       try {
         let param = {
           srcDeviceId: localDeviceId,
@@ -4229,18 +4229,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2600 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2600 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2500
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2500
     * @tc.name     continueMission with undefined dstDeviceId.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2500', 0, async function (done) {
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2500 start---------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2500";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2500', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2500 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2500";
       try {
         let param = {
           srcDeviceId: localDeviceId,
@@ -4263,18 +4263,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2500 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2500 end---------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2000
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2000
      * @tc.name    continueMission with wrong srcDeviceId.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2000", 0, async function (done) {
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2000 start------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2000";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2000", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2000 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2000";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -4306,18 +4306,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2000 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2000 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1900
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1900
      * @tc.name    continueMission with undefined srcDeviceId.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1900", 0, async function (done) {
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1900 start------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1900";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1900", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1900 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1900";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -4349,18 +4349,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1900 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1900 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1800
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1800
      * @tc.name    continueMission with wrong dstDeviceId.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1800", 0, async function (done) {
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1800 start------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1800";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1800", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1800 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1800";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -4392,18 +4392,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1800 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1800 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1700
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1700
      * @tc.name    continueMission with null dstDeviceId.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1700", 0, async function (done) {
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1700 start------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1700";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1700", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1700 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1700";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -4435,18 +4435,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1700 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1700 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1600
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1600
      * @tc.name    continueMission with undefined dstDeviceId.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1600", 0, async function (done) {
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1600 start------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1600";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1600", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1600 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1600";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -4478,19 +4478,19 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_1600 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1600 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2100
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2100
      * @tc.name    continueMission successful.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2100", 0, async function (done) {
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2100 start------------------------");
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2100", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2100 start------------------------");
       let localMissionId;
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2100";
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2100";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -4531,18 +4531,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_continuationAbility_2100 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2100 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_1000
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200
      * @tc.name    setMissionContinueState ContinueState is INACTIVE successful.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_1000", 0, async function (done) {
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_1000 start------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_1000";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200";
       let param = AbilityConstant.ContinueState.INACTIVE;
       try {
         continueState = globalThis.abilityContext.setMissionContinueState(param
@@ -4562,18 +4562,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_1000 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_1100
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300
      * @tc.name    setMissionContinueState ContinueState is ACTIVE successful.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_1100", 0, async function (done) {
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_1100 start------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_1100";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300";
       let param = AbilityConstant.ContinueState.ACTIVE;
       try {
         continueState = globalThis.abilityContext.setMissionContinueState(param
@@ -4593,18 +4593,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_1100 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_0700
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900
      * @tc.name    setMissionContinueState ContinueState is INACTIVE successful.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_0700", 0, async function (done) {
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_0700 start------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_0700";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900";
       let param = AbilityConstant.ContinueState.INACTIVE;
       continueState = globalThis.abilityContext.setMissionContinueState(param, (err, result) => {
         try {
@@ -4624,18 +4624,18 @@ export default function DmsFwkStageTest() {
         done();
       });
       await sleep(1000);
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_0700 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_0800
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800
      * @tc.name    setMissionContinueState ContinueState is ACTIVE successful.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_0800", 0, async function (done) {
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_0800 start------------------------");
-      let TAG = "SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_0800";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800";
       let param = AbilityConstant.ContinueState.ACTIVE;
       continueState = globalThis.abilityContext.setMissionContinueState(param, (err, result) => {
         try {
@@ -4655,7 +4655,7 @@ export default function DmsFwkStageTest() {
         done();
       });
       await sleep(1000);
-      console.info("-----------------SUB_DMS_StandardOs_collaboration_continueAbility_ComponentTransfer_0800 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800 end------------------------");
     });
     
     /*
