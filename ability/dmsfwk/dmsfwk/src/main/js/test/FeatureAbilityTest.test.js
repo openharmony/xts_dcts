@@ -125,18 +125,18 @@ export default function dmsJsUnitTest() {
         })
 
         /*
-        * @tc.number  SUB_DMS_OpenHarmony_StartAbility_0100
-        * @tc.name    Start the remote Ability with error bundlename.
+        * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800
+        * @tc.name    Start remote Ability with error bundlename.
         * @tc.desc    Function test
         * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_0100", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0100 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0100 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0100 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -146,42 +146,42 @@ export default function dmsJsUnitTest() {
                     deviceId: dvId,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_0100 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0100 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0100 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0100 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800 err: ' + err.message);
                     expect(err.code).assertEqual(9);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0100:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0100 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_0200
-         * @tc.name    Start the remote Ability with bundlename is undefined.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600
+         * @tc.name    Start remote Ability with bundlename is undefined.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_0200", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0200 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0200 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0200 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -191,42 +191,42 @@ export default function dmsJsUnitTest() {
                     deviceId: dvId,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_0200 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0200 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0200 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0200 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600 err: ' + err.message);
                     expect(err.code).assertEqual(1);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0200:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0200 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_0300
-         * @tc.name    Start the remote Ability with bundlename is null.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700
+         * @tc.name    Start remote Ability with bundlename is null.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_0300", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0300 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0300 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0300 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -236,42 +236,42 @@ export default function dmsJsUnitTest() {
                     deviceId: dvId,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_0300 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0300 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0300 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0300 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700 err: ' + err.message);
                     expect(err.code).assertEqual(1);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0300:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0300 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_0400
-         * @tc.name    Start the remote Ability without bundlename.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900
+         * @tc.name    Start remote Ability without bundlename.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_0400", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0400 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0400 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0400 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -280,42 +280,42 @@ export default function dmsJsUnitTest() {
                     deviceId: dvId,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_0400 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0400 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0400 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0400 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900 err: ' + err.message);
                     expect(err.code).assertEqual(1);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0400:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0400 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_0500
-         * @tc.name    Start the remote Ability with abilityname is error.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500
+         * @tc.name    Start remote Ability with abilityname is error.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_0500", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0500 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0500 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0500 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -325,42 +325,42 @@ export default function dmsJsUnitTest() {
                     deviceId: dvId,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_0500 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0500 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0500 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0500 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500 err: ' + err.message);
                     expect(err.code).assertEqual(9);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0500:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0500 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_0600
-         * @tc.name    Start the remote Ability with abilityname is undefined.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300
+         * @tc.name    Start remote Ability with abilityname is undefined.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_0600", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0600 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0600 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0600 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -370,42 +370,42 @@ export default function dmsJsUnitTest() {
                     deviceId: dvId,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_0600 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0600 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0600 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0600 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300 err: ' + err.message);
                     expect(err.code).assertEqual(1);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0600:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0600 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300 end------------------------");
         });
 
         /*
-        * @tc.number  SUB_DMS_OpenHarmony_StartAbility_0700
-        * @tc.name    Start the remote Ability with abilityname is null.
+        * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400
+        * @tc.name   Start remote Ability with abilityname is null.
         * @tc.desc    Function test
         * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_0700", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0700 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0700 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0700 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -415,42 +415,42 @@ export default function dmsJsUnitTest() {
                     deviceId: dvId,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_0700 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0700 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0700 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0700 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400 err: ' + err.message);
                     expect(err.code).assertEqual(1);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0700:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0700 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_0800
-         * @tc.name    Start the remote Ability without abilityname.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800
+         * @tc.name   Start remote Ability without abilityname.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_0800", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0800 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0800 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0800 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -459,42 +459,42 @@ export default function dmsJsUnitTest() {
                     deviceId: dvId,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_0800 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0800 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0800 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0800 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800 err: ' + err.message);
                     expect(err.code).assertEqual(1);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0800:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0800 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_0900
-         * @tc.name    Start the remote Ability with deviceId is undefined.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900
+         * @tc.name   Start remote Ability with deviceId is undefined.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_0900", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0900 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0900 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0900 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -504,42 +504,42 @@ export default function dmsJsUnitTest() {
                     deviceId: undefined,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_0900 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0900 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0900 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_0900 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900 err: ' + err.message);
                     expect(err.code).assertEqual(1);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_0900:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_0900 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_1100
-         * @tc.name    Start the remote Ability without deviceId.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000
+         * @tc.name   Start remote Ability without deviceId.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_1100", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1100 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1100 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1100 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -548,42 +548,42 @@ export default function dmsJsUnitTest() {
                     abilityName: "com.ohos.dmstest.ServiceAbility",
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_1100 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1100 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1100 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1100 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000 err: ' + err.message);
                     expect(err.code).assertEqual(1);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1100:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1100 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_1200
-         * @tc.name    Start the remote Ability with error deviceId.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100
+         * @tc.name   Start remote Ability with error deviceId.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_1200", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1200 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1200 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1200 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -593,42 +593,42 @@ export default function dmsJsUnitTest() {
                     deviceId: "1234",
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_1200 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1200 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1200 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1200 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100 err: ' + err.message);
                     expect(err.code).assertEqual(9);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1200:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1200 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100 end------------------------");
         });
 
         /*
-        * @tc.number  SUB_DMS_OpenHarmony_StartAbility_1300
-        * @tc.name    Start the remote Ability with dvId.
+        * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000
+        * @tc.name   Start remote Ability with dvId.
         * @tc.desc    Function test
         * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_1300", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1300 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1300 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1300 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -638,161 +638,161 @@ export default function dmsJsUnitTest() {
                     deviceId: dvId,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_1300 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1300 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000 data' + JSON.stringify(data));
                     expect(data == 0).assertTrue();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1300 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1300 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000 err: ' + err.message);
                     expect().assertFail();
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1300:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1300 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_1400
-         * @tc.name    Start the remote Ability with parmter is undefined .
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200
+         * @tc.name   Start remote Ability with parmter is undefined .
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_1400", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1400 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1400 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1400 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
                 let wantValue = undefined;
-                console.info('SUB_DMS_OpenHarmony_StartAbility_1400 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1400 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1400 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1400 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200 err: ' + err.message);
                     expect(err.code).assertEqual(202);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1400:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1400 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_1500
-         * @tc.name    Start the remote Ability without parmter.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100
+         * @tc.name   Start remote Ability without parmter.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_1500", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1500 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1500 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1500 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
                 let wantValue = {};
-                console.info('SUB_DMS_OpenHarmony_StartAbility_1500 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1500 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1500 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1500 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100 err: ' + err.message);
                     expect(err.code).assertEqual(1);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1500:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1500 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_1600
-         * @tc.name    Start the remote Ability with parmter is null.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300
+         * @tc.name   Start remote Ability with parmter is null.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_1600", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1600 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1600 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1600 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
                 let wantValue = "";
-                console.info('SUB_DMS_OpenHarmony_StartAbility_1600 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1600 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300 data' + JSON.stringify(data));
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1600 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1600 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300 err: ' + err.message);
                     expect(err.code).assertEqual(202);
                     expect(err.message).assertEqual("StartAbility Failed");
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1600:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1600 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_1700
-         * @tc.name    Start the remote Ability with 10 times.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600
+         * @tc.name   Start remote Ability with 10 times.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_1700", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1700 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1700 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1700 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 no device found');
                     expect(numDevices === 0).assertFail();
                 }
                 let params;
@@ -802,44 +802,44 @@ export default function dmsJsUnitTest() {
                     deviceId: dvId,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_1700 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 want=' + JSON.stringify(wantValue));
                 for (let i = 0; i < 10; i++) {
                     await featureAbility.startAbility({
                         want: wantValue
                     }).then((data) => {
-                        console.info('SUB_DMS_OpenHarmony_StartAbility_1700 data' + JSON.stringify(data));
+                        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 data' + JSON.stringify(data));
                         expect(data == 0).assertTrue();
                         done();
                     }).catch((err) => {
-                        console.info('SUB_DMS_OpenHarmony_StartAbility_1700 err: ' + err.code);
-                        console.info('SUB_DMS_OpenHarmony_StartAbility_1700 err: ' + err.message);
+                        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 err: ' + err.code);
+                        console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 err: ' + err.message);
                         expect().assertFail();
                         done();
                     });
-                    console.info("SUB_DMS_OpenHarmony_StartAbility_1700 running at : " + i + ",here");
+                    console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 running at : " + i + ",here");
                 }
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1700:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1700 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_1900
-         * @tc.name    Start the remote Ability.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200
+         * @tc.name   Start remote Ability.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_1900", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1900 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1900 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1900 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200 no device found');
                     expect(numDevices === 0).assertFail();
                 };
                 let params;
@@ -851,47 +851,47 @@ export default function dmsJsUnitTest() {
                         "startReason": "terminateSelf"
                     }
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_1900 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1900 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200 data' + JSON.stringify(data));
                     expect(data == 0).assertTrue();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1900 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_1900 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200 err: ' + err.message);
                     expect().assertFail();
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_1900:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_1900 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_2000
-         * @tc.name    Start the remote Ability after kill process of softbus_server.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500
+         * @tc.name    Start remote Ability after kill process of softbus_server.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_2000", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_2000 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_2000 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_2000 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 no device found');
                     expect(numDevices === 0).assertFail();
                 };
                 abilityDelegator.executeShellCommand("pidof softbus_server", (err, data) => {
-                    console.info("SUB_DMS_OpenHarmony_StartAbility_2000:" + data.stdResult)
+                    console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500:" + data.stdResult)
                     abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
-                        console.info("SUB_DMS_OpenHarmony_StartAbility_2000:" + data.stdResult)
+                        console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500:" + data.stdResult)
                     })
                 })
                 let params;
@@ -901,47 +901,47 @@ export default function dmsJsUnitTest() {
                     deviceId: dvId,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_2000 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_2000 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 data' + JSON.stringify(data));
                     expect(data == 0).assertTrue();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_2000 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_2000 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 err: ' + err.message);
                     expect().assertFail();
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_2000:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_2000 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_2100
-         * @tc.name    Start the remote Ability after kill process of distributedsche.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400
+         * @tc.name    Start remote Ability after kill process of distributedsche.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_2100", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_2100 start------------------------");
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400 start------------------------");
             try {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_2100 dvList:" + dvList.length);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400 dvList:" + dvList.length);
                 let numDevices = dvList.length;
                 if (numDevices === 0) {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_2100 no device found');
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400 no device found');
                     expect(numDevices === 0).assertFail();
                 };
                 abilityDelegator.executeShellCommand("pidof distributedsche", (err, data) => {
-                    console.info("SUB_DMS_OpenHarmony_StartAbility_2100:" + data.stdResult)
+                    console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400:" + data.stdResult)
                     abilityDelegator.executeShellCommand("kill -9" + data.stdResult, (err, data) => {
-                        console.info("SUB_DMS_OpenHarmony_StartAbility_2100:" + data.stdResult)
+                        console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400:" + data.stdResult)
                     })
                 })
                 let params;
@@ -951,37 +951,37 @@ export default function dmsJsUnitTest() {
                     deviceId: dvId,
                     parameters: params
                 };
-                console.info('SUB_DMS_OpenHarmony_StartAbility_2100 want=' + JSON.stringify(wantValue));
+                console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400 want=' + JSON.stringify(wantValue));
                 await featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_2100 data' + JSON.stringify(data));
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400 data' + JSON.stringify(data));
                     expect(data == 0).assertTrue();
                     done();
                 }).catch((err) => {
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_2100 err: ' + err.code);
-                    console.info('SUB_DMS_OpenHarmony_StartAbility_2100 err: ' + err.message);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400 err: ' + err.code);
+                    console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400 err: ' + err.message);
                     expect().assertFail();
                     done();
                 });
             } catch (error) {
-                console.info("SUB_DMS_OpenHarmony_StartAbility_2100:error = " + error);
+                console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400:error = " + error);
                 expect().assertFail();
                 done();
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_2100 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0010
-         * @tc.name    Start the remote Ability with error bundlename.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1100
+         * @tc.name    Start remote Ability with error bundlename.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0010", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0010 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0010";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1100", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1100 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1100";
             let params;
             let wantValue = {
                 bundleName: "com.ohos.Wrongdmstest",
@@ -1009,18 +1009,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0010 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1100 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0020
-         * @tc.name    Start the remote Ability with bundlename is undefined.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0900
+         * @tc.name    Start remote Ability with bundlename is undefined.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0020", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0020 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0020";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0900", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0900 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0900";
             let params;
             let wantValue = {
                 bundleName: undefined,
@@ -1048,18 +1048,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0020 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0900 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0030
-         * @tc.name    Start the remote Ability with bundlename is null.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1000
+         * @tc.name    Start remote Ability with bundlename is null.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0030", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0030 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0030";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1000", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1000 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1000";
             let params;
             let wantValue = {
                 bundleName: "",
@@ -1087,18 +1087,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0030 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1000 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0040
-         * @tc.name    Start the remote Ability without bundlename.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0200
+         * @tc.name   Start remote Ability without bundlename.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0040", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0040 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0040";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0200", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0200 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0200";
             let params;
             let wantValue = {
                 abilityName: "com.ohos.dmstest.ServiceAbility",
@@ -1125,18 +1125,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0040 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0200 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0050
-         * @tc.name    Start the remote Ability with abilityname is error.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0800
+         * @tc.name   Start remote Ability with abilityname is error.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0050", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0050 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0050";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0800", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0800 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0800";
             let params;
             let wantValue = {
                 bundleName: "com.ohos.dmstest",
@@ -1164,18 +1164,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0050 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0800 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0060
-         * @tc.name    Start the remote Ability with abilityname is undefined.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0600
+         * @tc.name    Start remote Ability with abilityname is undefined.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0060", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0060 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0060";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0600", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0600 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0600";
             let params;
             let wantValue = {
                 bundleName: "com.ohos.dmstest",
@@ -1203,18 +1203,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0060 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0600 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0070
-         * @tc.name    Start the remote Ability with abilityname is null.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0700
+         * @tc.name    Start remote Ability with abilityname is null.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0070", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0070 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0070";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0700", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0700 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0700";
             let params;
             let wantValue = {
                 bundleName: "com.ohos.dmstest",
@@ -1242,18 +1242,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0070 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0700 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0080
-         * @tc.name    Start the remote Ability without abilityname.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0100
+         * @tc.name    Start remote Ability without abilityname.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0080", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0080 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0080";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0100", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0100 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0100";
             let params;
             let wantValue = {
                 bundleName: "com.ohos.dmstest",
@@ -1280,18 +1280,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0080 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0100 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0090
-         * @tc.name    Start the remote Ability with deviceId is undefined.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1200
+         * @tc.name    Start remote Ability with deviceId is undefined.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0090", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0090 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0090";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1200", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1200 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1200";
             let params;
             let wantValue = {
                 bundleName: "com.ohos.dmstest",
@@ -1319,18 +1319,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0090 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1200 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0110
-         * @tc.name    Start the remote Ability without deviceId.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0300
+         * @tc.name    Start remote Ability without deviceId.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0110", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0110 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0110";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0300", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0300 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0300";
             let params;
             let wantValue = {
                 bundleName: "com.ohos.dmstest",
@@ -1357,18 +1357,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0110 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0300 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0120
-         * @tc.name    Start the remote Ability with error deviceId.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1400
+         * @tc.name    Start remote Ability with error deviceId.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0120", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0120 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0120";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1400", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1400 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1400";
             let params;
             let wantValue = {
                 bundleName: "com.ohos.dmstest",
@@ -1396,18 +1396,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0120 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1400 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0130
-         * @tc.name    Start the remote Ability with dvId.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1300
+         * @tc.name    Start remote Ability with dvId.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0130", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0130 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0130";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1300", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1300 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1300";
             console.info(TAG + " dvList:" + dvList.length);
             let numDevices = dvList.length;
             if (numDevices === 0) {
@@ -1440,18 +1440,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0130 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1300 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0140
-         * @tc.name    Start the remote Ability with parmter is undefined .
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1500
+         * @tc.name    Start remote Ability with parmter is undefined .
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0140", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0140 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0140";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1500", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1500 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1500";
             let wantValue = undefined;
             console.info(TAG + ' want=' + JSON.stringify(wantValue));
             featureAbility.startAbility({
@@ -1473,18 +1473,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0140 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1500 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0150
-         * @tc.name    Start the remote Ability without parmter.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0400
+         * @tc.name    Start remote Ability without parmter.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0150", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0150 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0150";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0400", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0400 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0400";
             let wantValue = {};
             console.info(TAG + ' want=' + JSON.stringify(wantValue));
             featureAbility.startAbility({
@@ -1506,18 +1506,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0150 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0400 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0160
-         * @tc.name    Start the remote Ability with parmter is null.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1600
+         * @tc.name    Start remote Ability with parmter is null.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0160", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0160 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0160";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1600", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1600 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1600";
             let wantValue = "";
             console.info(TAG + ' want=' + JSON.stringify(wantValue));
             featureAbility.startAbility({
@@ -1539,18 +1539,18 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0160 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1600 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0170
-         * @tc.name    Start the remote Ability with 10 times.
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700
+         * @tc.name    Start remote Ability with 10 times.
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0170", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0170 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0170";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700";
             console.info(TAG + " dvList:" + dvList.length);
             let numDevices = dvList.length;
             if (numDevices === 0) {
@@ -1586,18 +1586,18 @@ export default function dmsJsUnitTest() {
                 });
             }
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0170 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700 end------------------------");
         });
 
         /*
-         * @tc.number  SUB_DMS_OpenHarmony_StartAbility_CallBack_0190
-         * @tc.name    Start the remote Ability .
+         * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0500
+         * @tc.name    Start remote Ability .
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_OpenHarmony_StartAbility_CallBack_0190", 0, async function (done) {
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0190 start------------------------");
-            let TAG = "SUB_DMS_OpenHarmony_StartAbility_CallBack_0190";
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0500", 0, async function (done) {
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0500 start------------------------");
+            let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0500";
             console.info(TAG + " dvList:" + dvList.length);
             let numDevices = dvList.length;
             if (numDevices === 0) {
@@ -1631,7 +1631,7 @@ export default function dmsJsUnitTest() {
                 done();
             });
             await sleep(1000);
-            console.info("-----------------SUB_DMS_OpenHarmony_StartAbility_CallBack_0190 end------------------------");
+            console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0500 end------------------------");
         });
     })
 }

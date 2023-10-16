@@ -113,14 +113,14 @@ export default function DmsFwkStageTest() {
     var TAG;
 
     /*
-     * @tc.number  SUB_DMS_connectServiceExtensionAbility_0100
-     * @tc.name    Connect the remote Ability.
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900
+     * @tc.name    Connect remote Ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_connectServiceExtensionAbility_0100", 0, async function (done) {
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0100 is start---------------")
-      TAG = "SUB_DMS_connectServiceExtensionAbility_0100";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -136,43 +136,43 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_connectServiceExtensionAbility_0100 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_connectServiceExtensionAbility_0100 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
             done();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0100  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900  onFailed: ' + code);
           expect().assertFail();
           done();
         }
       });
       await sleep(1000);
       await globalThis.abilityContext.disconnectServiceExtensionAbility(connectId , (err , data) => {
-        console.info('SUB_DMS_connectServiceExtensionAbility_0100  disconnectServiceExtensionAbility is success : ' + data);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900  disconnectServiceExtensionAbility is success : ' + data);
         expect(data).assertEqual(undefined)
         done()
       });
       await sleep(1000);
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0100 is end--------------- " + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900 is end--------------- " + connectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_connectServiceExtensionAbility_0200
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800
      * @tc.name    ConnecAbility failed after connect the remote Ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_connectServiceExtensionAbility_0200", 0, async function (done) {
-      console.log("------------SUB_DMS_connectServiceExtensionAbility_0200 start-------------");
-      TAG = "SUB_DMS_connectServiceExtensionAbility_0200";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800", 0, async function (done) {
+      console.log("------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 start-------------");
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -188,19 +188,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_connectServiceExtensionAbility_0200 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_connectServiceExtensionAbility_0200 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0200  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800  onFailed: ' + code);
           expect().assertFail();
           done();
         }
@@ -221,50 +221,50 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_connectServiceExtensionAbility_0200 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_connectServiceExtensionAbility_0200 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 onConnectRemoteService001 msg: ' + msg);
             expect(msg).assertEqual(100)
             done();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0200  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800  onFailed: ' + code);
           expect().assertFail();
           done();
         }
       });
       await sleep(1000);
       await globalThis.abilityContext.disconnectServiceExtensionAbility(connectId , (err , data) => {
-        console.info('SUB_DMS_connectServiceExtensionAbility_0200  disconnectServiceExtensionAbility is success : ' + data);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800  disconnectServiceExtensionAbility is success : ' + data);
         expect(data).assertEqual(undefined)
         done()
       });
       await sleep(1000);
       await globalThis.abilityContext.disconnectServiceExtensionAbility(connectId2 , (err , data) => {
-        console.info('SUB_DMS_connectServiceExtensionAbility_0200  disconnectServiceExtensionAbility is success : ' + data);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800  disconnectServiceExtensionAbility is success : ' + data);
         expect(data).assertEqual(undefined)
         done()
       });
       await sleep(1000);
-      console.log("------------SUB_DMS_connectServiceExtensionAbility_0200 end-------------" + connectId);
+      console.log("------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 end-------------" + connectId);
     });
 
 
     /*
-     * @tc.number  SUB_DMS_connectServiceExtensionAbility_0300
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200
      * @tc.name    Disconnect the remote Ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_connectServiceExtensionAbility_0300", 0, async function (done) {
-      console.log("------------SUB_DMS_connectServiceExtensionAbility_0300 start-------------");
-      TAG = "SUB_DMS_connectServiceExtensionAbility_0300";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200", 0, async function (done) {
+      console.log("------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200 start-------------");
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -280,43 +280,43 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_connectServiceExtensionAbility_0300 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_connectServiceExtensionAbility_0300 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
             done();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0300  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200  onFailed: ' + code);
           expect().assertFail();
           done();
         }
       });
       await sleep(1000);
       await globalThis.abilityContext.disconnectServiceExtensionAbility(connectId , (err , data) => {
-        console.info('SUB_DMS_connectServiceExtensionAbility_0300  disconnectServiceExtensionAbility is success : ' + data);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200  disconnectServiceExtensionAbility is success : ' + data);
         expect(data).assertEqual(undefined)
         done()
       });
       await sleep(1000);
-      console.log("------------SUB_DMS_connectServiceExtensionAbility_0300 end-------------");
+      console.log("------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200 end-------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_connectServiceExtensionAbility_0400
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100
      * @tc.name    Disconnect the remote Ability failed after connectAbility.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_connectServiceExtensionAbility_0400", 0, async function (done) {
-      console.log("------------SUB_DMS_connectServiceExtensionAbility_0400 start-------------");
-      TAG = "SUB_DMS_connectServiceExtensionAbility_0400";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100", 0, async function (done) {
+      console.log("------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 start-------------");
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -332,19 +332,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_connectServiceExtensionAbility_0400 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_connectServiceExtensionAbility_0400 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0400  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100  onFailed: ' + code);
           expect().assertFail();
           done();
         }
@@ -365,19 +365,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_connectServiceExtensionAbility_0400 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_connectServiceExtensionAbility_0400 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 onConnectRemoteService001 msg: ' + msg);
             expect(msg).assertEqual(100)
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0400  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100  onFailed: ' + code);
           expect().assertFail();
         }
       });
@@ -388,22 +388,22 @@ export default function DmsFwkStageTest() {
       })
       await sleep(1000);
       await globalThis.abilityContext.disconnectServiceExtensionAbility(connectId2 , (err , data) => {
-        console.info('SUB_DMS_connectServiceExtensionAbility_0400  disconnectServiceExtensionAbility is success : ' + data);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100  disconnectServiceExtensionAbility is success : ' + data);
         expect(data).assertEqual(undefined)
         done()
       });
-      console.log("------------SUB_DMS_connectServiceExtensionAbility_0400 end-------------");
+      console.log("------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 end-------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_connectServiceExtensionAbility_0500
-     * @tc.name    Connect the remote Ability with error deviceId.
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500
+     * @tc.name    Connect remote Ability with error deviceId.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_connectServiceExtensionAbility_0500", 0, async function (done) {
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0500 is start---------------")
-      TAG = "SUB_DMS_connectServiceExtensionAbility_0500";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
         deviceId: "1111212151561315616131515643115616",
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -414,64 +414,64 @@ export default function DmsFwkStageTest() {
           done();
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0500  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0500 code: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500 code: ' + code);
           expect(code).assertEqual(401)
           done();
         }
       });
       await sleep(1000);
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0500 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500 is end---------------" + connectId)
     });
 
 
     /*
-     * @tc.number  SUB_DMS_connectServiceExtensionAbility_0700
-     * @tc.name    Connect the remote Ability with wrong abilityName.
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300
+     * @tc.name    Connect remote Ability with wrong abilityName.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_connectServiceExtensionAbility_0700", 0, async function (done) {
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0700 is start---------------")
-      TAG = "SUB_DMS_connectServiceExtensionAbility_0700";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "WrongServiceAbility"
       }, {
         onConnect: (elementName, proxy) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0700  onConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300  onConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0700  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0700  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300  onFailed: ' + code);
           expect(code).assertEqual(401);
           done();
         }
       });
       await sleep(1000);
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0700 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300 is end---------------" + connectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_connectServiceExtensionAbility_0800
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400
      * @tc.name    Connect the remote Ability with error bundle.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_connectServiceExtensionAbility_0800", 0, async function (done) {
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0800 is start---------------")
-      TAG = "SUB_DMS_connectServiceExtensionAbility_0800";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver.err",
@@ -482,33 +482,33 @@ export default function DmsFwkStageTest() {
           done();
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0800  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0800  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400  onFailed: ' + code);
           expect(code).assertEqual(401)
           done();
         }
       });
       await sleep(1000);
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0800 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400 is end---------------" + connectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_connectServiceExtensionAbility_0900
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700
      * @tc.name    Connect the remote Ability after kill process of softbus_server.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_connectServiceExtensionAbility_0900", 0, async function (done) {
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0900 is start---------------")
-      TAG = "SUB_DMS_connectServiceExtensionAbility_0900";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700";
       abilityDelegator.executeShellCommand("pidof softbus_server", (err, data) => {
-        console.info("SUB_DMS_connectServiceExtensionAbility_0900:" + data.stdResult)
+        console.info("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700:" + data.stdResult)
         abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
-          console.info("SUB_DMS_connectServiceExtensionAbility_0900:" + data.stdResult)
+          console.info("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700:" + data.stdResult)
         })
       })
 
@@ -527,47 +527,47 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_connectServiceExtensionAbility_0900 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_connectServiceExtensionAbility_0900 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
             done();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0900  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0900  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700  onFailed: ' + code);
           expect().assertFail();
           done();
         }
       });
       await sleep(1000);
       await globalThis.abilityContext.disconnectServiceExtensionAbility(connectId , (err , data) => {
-        console.info('SUB_DMS_connectServiceExtensionAbility_0900  disconnectServiceExtensionAbility is success : ' + data);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700  disconnectServiceExtensionAbility is success : ' + data);
         expect(data).assertEqual(undefined)
         done()
       });
       await sleep(1000);
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0900 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 is end---------------" + connectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_connectServiceExtensionAbility_0110
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600
      * @tc.name     Connect the remote Ability after kill process of distributedsche.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_connectServiceExtensionAbility_0110", 0, async function (done) {
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0110 is start---------------")
-      TAG = "SUB_DMS_connectServiceExtensionAbility_0110";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600";
       abilityDelegator.executeShellCommand("pidof distributedsche", (err, data) => {
-        console.info("SUB_DMS_connectServiceExtensionAbility_0110:" + data.stdResult)
+        console.info("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600:" + data.stdResult)
         abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
-          console.info("SUB_DMS_connectServiceExtensionAbility_0110:" + data.stdResult)
+          console.info("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600:" + data.stdResult)
         })
       })
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
@@ -585,43 +585,43 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_connectServiceExtensionAbility_0110 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_connectServiceExtensionAbility_0110 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
             done();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0110  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0110  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600  onFailed: ' + code);
           expect().assertFail();
           done();
         }
       });
       await sleep(1000);
       globalThis.abilityContext.disconnectServiceExtensionAbility(connectId, (err, data) => {
-        console.info('SUB_DMS_connectServiceExtensionAbility_0110  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
         expect(undefined).assertEqual(data);
         done();
       })
       await sleep(1000);
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0110 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is end---------------" + connectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_connectServiceExtensionAbility_0180
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100
      * @tc.name    Connec the remote Ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_connectServiceExtensionAbility_0180", 0, async function (done) {
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0180 is start---------------")
-      TAG = "SUB_DMS_connectServiceExtensionAbility_0180";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -637,44 +637,44 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_connectServiceExtensionAbility_0180 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_connectServiceExtensionAbility_0180 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
             done()
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0180  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0180  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100  onFailed: ' + code);
           expect().assertFail();
           done();
         }
       });
       await sleep(1000);
       globalThis.abilityContext.disconnectServiceExtensionAbility(connectId, (err, data) => {
-        console.info('SUB_DMS_connectServiceExtensionAbility_0180  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
         expect(undefined).assertEqual(data);
         done();
       })
       await sleep(1000);
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0180 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100 is end---------------" + connectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_connectServiceExtensionAbility_0190
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200
      * @tc.name    Connec the remote Ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_connectServiceExtensionAbility_0190", 0, async function (done) {
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0190 is start---------------")
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 is start---------------")
       let RemoteObj;
-      TAG = "SUB_DMS_connectServiceExtensionAbility_0190";
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200";
       connectId = globalThis.abilityContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -689,19 +689,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_connectServiceExtensionAbility_0190 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_connectServiceExtensionAbility_0190 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0190  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_connectServiceExtensionAbility_0190  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200  onFailed: ' + code);
           expect().assertFail();
           done();
         }
@@ -712,31 +712,31 @@ export default function DmsFwkStageTest() {
       let reply = new rpc.MessageParcel();
       data.writeInt(123);
       RemoteObj.sendRequest(1, data, reply, option).then((result) => {
-        console.log('SUB_DMS_connectServiceExtensionAbility_0190 sendRequest success');
+        console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 sendRequest success');
         let msg = result.reply.readInt();
-        console.info('SUB_DMS_connectServiceExtensionAbility_0190 onConnectRemoteService001 msg: ' + msg);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 onConnectRemoteService001 msg: ' + msg);
         expect(msg == 123).assertTrue();
         done();
       })
       await sleep(1000);
       globalThis.abilityContext.disconnectServiceExtensionAbility(connectId, (err, data) => {
-        console.info('SUB_DMS_connectServiceExtensionAbility_0190  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
         expect(undefined).assertEqual(data);
         done();
       })
       await sleep(1000);
-      console.info("---------------SUB_DMS_connectServiceExtensionAbility_0190 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 is end---------------" + connectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_ConnectAbility_0100
-     * @tc.name    Filed connect remote invisible service without permission.
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400
+     * @tc.name    connect remote same service ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_ConnectAbility_0100", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_ConnectAbility_0100 is start---------------")
-      TAG = "SUB_DMS_StartControl_ConnectAbility_0100";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400";
       try {
         connectId = globalThis.abilityContext.connectServiceExtensionAbility({
           deviceId: dvId,
@@ -753,48 +753,48 @@ export default function DmsFwkStageTest() {
             data.writeInt(1);
             data.writeInt(99);
             proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_StartControl_ConnectAbility_0100 sendRequest success');
+              console.log('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 sendRequest success');
               let msg = result.reply.readInt();
-              console.info('SUB_DMS_StartControl_ConnectAbility_0100 onConnectRemoteService001 msg: ' + msg);
+              console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 onConnectRemoteService001 msg: ' + msg);
               expect(msg == 100).assertTrue();
               done();
             })
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_StartControl_ConnectAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_StartControl_ConnectAbility_0100  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400  onFailed: ' + code);
             expect().assertFail();
             done();
           }
         });
         
       } catch (err) {
-        console.info('SUB_DMS_StartControl_ConnectAbility_0100 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_ConnectAbility_0100 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 catch: ' + err.message);
       }
       await sleep(1000);
       globalThis.abilityContext.disconnectServiceExtensionAbility(connectId, (err, data) => {
-        console.info('SUB_DMS_StartControl_ConnectAbility_0100  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
         expect(undefined).assertEqual(data);
         done();
       })
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartControl_ConnectAbility_0100 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 is end---------------" + connectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_ConnectAbility_0400
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200
      * @tc.name    Filed connect remote invisible service without permission.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_ConnectAbility_0400", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_ConnectAbility_0400 is start---------------")
-      TAG = "SUB_DMS_StartControl_ConnectAbility_0400";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200";
       try {
         connectId = globalThis.abilityContext.connectServiceExtensionAbility({
           deviceId: dvId,
@@ -806,30 +806,30 @@ export default function DmsFwkStageTest() {
             done();
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_StartControl_ConnectAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_StartControl_ConnectAbility_0400  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200  onFailed: ' + code);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_StartControl_ConnectAbility_0400 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_ConnectAbility_0400 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 catch: ' + err.message);
       }
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_ConnectAbility_0300
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300
      * @tc.name    Filed connect remote invisible service without permission.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_ConnectAbility_0300", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_ConnectAbility_0300 is start---------------")
-      TAG = "SUB_DMS_StartControl_ConnectAbility_0300";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300";
       try {
         connectId = globalThis.abilityContext.connectServiceExtensionAbility({
           deviceId: dvId,
@@ -846,161 +846,161 @@ export default function DmsFwkStageTest() {
             data.writeInt(1);
             data.writeInt(99);
             proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_StartControl_ConnectAbility_0300 sendRequest success');
+              console.log('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 sendRequest success');
               let msg = result.reply.readInt();
-              console.info('SUB_DMS_StartControl_ConnectAbility_0300 onConnectRemoteService001 msg: ' + msg);
+              console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 onConnectRemoteService001 msg: ' + msg);
               expect(msg == 100).assertTrue();
               done();
             })
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_StartControl_ConnectAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_StartControl_ConnectAbility_0300  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300  onFailed: ' + code);
             expect().assertFail();
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_StartControl_ConnectAbility_0300 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_ConnectAbility_0300 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 catch: ' + err.message);
       }
       await sleep(1000);
       globalThis.abilityContext.disconnectServiceExtensionAbility(connectId, (err, data) => {
-        console.info('SUB_DMS_StartControl_ConnectAbility_0300  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
         expect(undefined).assertEqual(data);
         done();
       })
       await sleep(1000);
-      console.info("---------------SUB_DMS_StartControl_ConnectAbility_0300 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 is end---------------" + connectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_StartAbility_0100
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0900
      * @tc.name    Success startServiceExtensionAbility with remote.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_StartAbility_0100", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_StartAbility_0100 is start---------------")
-      TAG = "SUB_DMS_StartControl_StartAbility_0100";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0900", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0900 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0900";
       try {
         connectId = globalThis.abilityContext.startServiceExtensionAbility({
           deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
         }, (err, data) => {
-          console.info('SUB_DMS_StartControl_StartAbility_0100 startService result: ' + err.code + " " + err.message);
-          console.info('SUB_DMS_StartControl_StartAbility_0100 startService err.code: ' + err.code);
-          console.info('SUB_DMS_StartControl_StartAbility_0100 startService err.message: ' + err.message);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0900 startService result: ' + err.code + " " + err.message);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0900 startService err.code: ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0900 startService err.message: ' + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartControl_StartAbility_0100 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_StartAbility_0100 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0900 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0900 catch: ' + err.message);
         expect().assertFail();
         done();
       }
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_StartAbility_0200
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200
      * @tc.name    Filed start remote service with error bundle.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_StartAbility_0200", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_StartAbility_0200 is start---------------")
-      TAG = "SUB_DMS_StartControl_StartAbility_0200";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200";
       try {
         connectId = globalThis.abilityContext.startServiceExtensionAbility({
           deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageservererr",
           abilityName: "ServiceAbility"
         }, (err, data) => {
-          console.info('SUB_DMS_StartControl_StartAbility_0200 startService result: ' + err.code + " " + err.message);
-          console.info('SUB_DMS_StartControl_StartAbility_0200 startService err.code: ' + err.code);
-          console.info('SUB_DMS_StartControl_StartAbility_0200 startService err.message: ' + err.message);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 startService result: ' + err.code + " " + err.message);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 startService err.code: ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 startService err.message: ' + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartControl_StartAbility_0200 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_StartAbility_0200 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 catch: ' + err.message);
         expect().assertFail();
         done();
       }
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_StartAbility_0300
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100
      * @tc.name    Filed start remote service with error ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_StartAbility_0300", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_StartAbility_0300 is start---------------")
-      TAG = "SUB_DMS_StartControl_StartAbility_0300";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100";
       try {
         connectId = globalThis.abilityContext.startServiceExtensionAbility({
           deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbilityErr"
         }, (err, data) => {
-          console.info('SUB_DMS_StartControl_StartAbility_0300 startService result: ' + err.code + " " + err.message);
-          console.info('SUB_DMS_StartControl_StartAbility_0300 startService err.code: ' + err.code);
-          console.info('SUB_DMS_StartControl_StartAbility_0300 startService err.message: ' + err.message);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 startService result: ' + err.code + " " + err.message);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 startService err.code: ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 startService err.message: ' + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartControl_StartAbility_0300 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_StartAbility_0300 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 catch: ' + err.message);
         expect().assertFail();
         done();
       }
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_StartAbility_0400
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400
      * @tc.name    Filed start remote service with error device.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_StartAbility_0400", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_StartAbility_0400 is start---------------")
-      TAG = "SUB_DMS_StartControl_StartAbility_0400";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400";
       try {
         connectId = globalThis.abilityContext.startServiceExtensionAbility({
           deviceId: "dvId",
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
         }, (err, data) => {
-          console.info('SUB_DMS_StartControl_StartAbility_0400 startService result: ' + err.code + " " + err.message);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartControl_StartAbility_0400 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_StartAbility_0400 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 catch: ' + err.message);
         expect().assertFail();
         done();
       }
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_StartAbility_0500
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300
      * @tc.name    Filed start remote service with null device.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_StartAbility_0500", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_StartAbility_0500 is start---------------")
-      TAG = "SUB_DMS_StartControl_StartAbility_0500";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300";
       try {
         connectId = globalThis.abilityContext.startServiceExtensionAbility({
           deviceId: "",
@@ -1015,157 +1015,157 @@ export default function DmsFwkStageTest() {
         expect(globalThis.startAbilityReault).assertTrue();
         done();
       } catch (err) {
-        console.info('SUB_DMS_StartControl_StartAbility_0500 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_StartAbility_0500 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300 catch: ' + err.message);
         expect().assertFail();
         done();
       }
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_StartAbility_0700
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200
      * @tc.name    Filed start remote ability with error bundle.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_StartAbility_0700", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_StartAbility_0700 is start---------------")
-      TAG = "SUB_DMS_StartControl_StartAbility_0700";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200";
       try {
         connectId = globalThis.abilityContext.startAbility({
           deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver.err",
           abilityName: "MainAbility"
         }, (err, data) => {
-          console.info('SUB_DMS_StartControl_StartAbility_0700 startService result: ' + err.code + " " + err.message);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(401);
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartControl_StartAbility_0700 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_StartAbility_0700 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 catch: ' + err.message);
         expect().assertFail();
         done();
       }
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_StartAbility_0800
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100
      * @tc.name    Filed start remote ability with error ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_StartAbility_0800", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_StartAbility_0800 is start---------------")
-      TAG = "SUB_DMS_StartControl_StartAbility_0800";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100";
       try {
         connectId = globalThis.abilityContext.startAbility({
           deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "MainAbility.err"
         }, (err, data) => {
-          console.info('SUB_DMS_StartControl_StartAbility_0800 startService result: ' + err.code + " " + err.message);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(401);
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartControl_StartAbility_0800 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_StartAbility_0800 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 catch: ' + err.message);
         expect().assertFail();
         done();
       }
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_StartAbility_0900
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400
      * @tc.name    Filed start remote ability with error device.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_StartAbility_0900", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_StartAbility_0900 is start---------------")
-      TAG = "SUB_DMS_StartControl_StartAbility_0900";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400";
       try {
         connectId = globalThis.abilityContext.startAbility({
           deviceId: "dvId",
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "MainAbility"
         }, (err, data) => {
-          console.info('SUB_DMS_StartControl_StartAbility_0900 startService result: ' + err.code + " " + err.message);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(401);
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartControl_StartAbility_0900 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_StartAbility_0900 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 catch: ' + err.message);
         expect().assertFail();
         done();
       }
     });
 
     /*
-    * @tc.number  SUB_DMS_StartControl_StartAbility_1000
+    * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300
     * @tc.name    Filed start remote ability with null device.
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StartControl_StartAbility_1000", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_StartAbility_1000 is start---------------")
-      TAG = "SUB_DMS_StartControl_StartAbility_1000";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300";
       try {
         connectId = globalThis.abilityContext.startAbility({
           deviceId: "",
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "MainAbility"
         }, (err, data) => {
-          console.info('SUB_DMS_StartControl_StartAbility_1000 startService result: ' + err.code + " " + err.message);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartControl_StartAbility_1000 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_StartAbility_1000 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300 catch: ' + err.message);
         expect().assertFail();
         done();
       }
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_StartAbility_1100
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_1200
      * @tc.name    Filed start remote ability with startServiceExtensionAbility.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_StartAbility_1100", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_StartAbility_1100 is start---------------")
-      TAG = "SUB_DMS_StartControl_StartAbility_1100";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_1200", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_1200 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_1200";
       try {
         connectId = globalThis.abilityContext.startServiceExtensionAbility({
           deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "MainAbility"
         }, (err, data) => {
-          console.info('SUB_DMS_StartControl_StartAbility_1100 startService result: ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_1200 startService result: ' + err.code);
           expect(err.code).assertEqual(16000001);
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartControl_StartAbility_1100 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_StartAbility_1100 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_1200 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_1200 catch: ' + err.message);
         expect().assertFail();
         done();
       }
     });
 
     /*
-     * @tc.number  SUB_DMS_Extension_ConnectAbility_0100
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100
      * @tc.name    ServiceExtension Connect the remote Ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_Extension_ConnectAbility_0100", 0, async function (done) {
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0100 is start---------------")
-      TAG = "SUB_DMS_Extension_ConnectAbility_0100";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -1181,42 +1181,42 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_Extension_ConnectAbility_0100 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_Extension_ConnectAbility_0100 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
             done();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0100  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100  onFailed: ' + code);
           expect().assertFail();
           done();
         }
       });
       await sleep(3000);
       globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId , (err , data) =>{
-        console.info('SUB_DMS_Extension_ConnectAbility_0100  disconnectServiceExtensionAbility is success: ' + data);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100  disconnectServiceExtensionAbility is success: ' + data);
         expect(data).assertEqual(undefined)
       })
       await sleep(1000);
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0100 is end--------------- " + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 is end--------------- " + extensionConnectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_Extension_ConnectAbility_0200
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200
      * @tc.name    ServiceExtension ConnecAbility failed after connect the remote Ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_Extension_ConnectAbility_0200", 0, async function (done) {
-      console.log("------------SUB_DMS_Extension_ConnectAbility_0200 start-------------");
-      TAG = "SUB_DMS_Extension_ConnectAbility_0200";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200", 0, async function (done) {
+      console.log("------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 start-------------");
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -1232,19 +1232,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_Extension_ConnectAbility_0200 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_Extension_ConnectAbility_0200 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0200  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200  onFailed: ' + code);
           expect().assertFail();
           done();
         }
@@ -1265,42 +1265,42 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_Extension_ConnectAbility_0200 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_Extension_ConnectAbility_0200 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 onConnectRemoteService001 msg: ' + msg);
             expect(msg).assertEqual(100)
             done();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0200  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200  onFailed: ' + code);
           expect().assertFail();
           done();
         }
       });
       await sleep(3000);
       globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId2 , (err , data) =>{
-        console.info('SUB_DMS_Extension_ConnectAbility_0200  disconnectServiceExtensionAbility is success: ' + data);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200  disconnectServiceExtensionAbility is success: ' + data);
         expect(data).assertEqual(undefined)
       })
       await sleep(1000);
-      console.log("------------SUB_DMS_Extension_ConnectAbility_0200 end-------------" + extensionConnectId);
+      console.log("------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 end-------------" + extensionConnectId);
     });
 
     /*
-    * @tc.number  SUB_DMS_Extension_ConnectAbility_0300
+    * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300
     * @tc.name    ServiceExtension Disconnect the remote Ability.
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_Extension_ConnectAbility_0300", 0, async function (done) {
-      console.log("------------SUB_DMS_Extension_ConnectAbility_0300 start-------------");
-      TAG = "SUB_DMS_Extension_ConnectAbility_0300";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300", 0, async function (done) {
+      console.log("------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300 start-------------");
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -1316,20 +1316,20 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_Extension_ConnectAbility_0300 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_Extension_ConnectAbility_0300 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
             done();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0300  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300  onFailed: ' + code);
           expect().assertFail();
           done();
         }
@@ -1340,18 +1340,18 @@ export default function DmsFwkStageTest() {
         done()
       })
       await sleep(1000);
-      console.log("------------SUB_DMS_Extension_ConnectAbility_0300 end-------------");
+      console.log("------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300 end-------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_Extension_ConnectAbility_0400
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400
      * @tc.name    ServiceExtension Disconnect the remote Ability failed after connectAbility.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_Extension_ConnectAbility_0400", 0, async function (done) {
-      console.log("------------SUB_DMS_Extension_ConnectAbility_0400 start-------------");
-      TAG = "SUB_DMS_Extension_ConnectAbility_0400";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400", 0, async function (done) {
+      console.log("------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 start-------------");
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -1367,19 +1367,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_Extension_ConnectAbility_0400 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_Extension_ConnectAbility_0400 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0400  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400  onFailed: ' + code);
           expect().assertFail();
           done();
         }
@@ -1400,19 +1400,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_Extension_ConnectAbility_0400 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_Extension_ConnectAbility_0400 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 onConnectRemoteService001 msg: ' + msg);
             expect(msg).assertEqual(100)
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0400  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400  onFailed: ' + code);
           expect().assertFail();
         }
       });
@@ -1423,56 +1423,56 @@ export default function DmsFwkStageTest() {
       })
       await sleep(1000);
       globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId2, (err, data) => {
-        console.info('SUB_DMS_Extension_ConnectAbility_0400  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
         expect(undefined).assertEqual(data);
         done();
       })
-      console.log("------------SUB_DMS_Extension_ConnectAbility_0400 end-------------");
+      console.log("------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 end-------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_Extension_ConnectAbility_0700
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300
      * @tc.name    ServiceExtension Connect the remote Ability with wrong abilityName.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_Extension_ConnectAbility_0700", 0, async function (done) {
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0700 is start---------------")
-      TAG = "SUB_DMS_Extension_ConnectAbility_0700";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "WrongServiceAbility"
       }, {
         onConnect: (elementName, proxy) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0700  onConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300  onConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0700  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0700  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300  onFailed: ' + code);
           expect(code).assertEqual(401);
           done();
         }
       });
       await sleep(1000);
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0700 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300 is end---------------" + extensionConnectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_Extension_ConnectAbility_0800
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400
      * @tc.name    ServiceExtension Connect the remote Ability with error bundle.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_Extension_ConnectAbility_0800", 0, async function (done) {
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0800 is start---------------")
-      TAG = "SUB_DMS_Extension_ConnectAbility_0800";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver.err",
@@ -1483,33 +1483,33 @@ export default function DmsFwkStageTest() {
           done();
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0800  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0800  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400  onFailed: ' + code);
           expect(code).assertEqual(401)
           done();
         }
       });
       await sleep(1000);
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0600 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400 is end---------------" + extensionConnectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_Extension_ConnectAbility_0900
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700
      * @tc.name    ServiceExtension Connect the remote Ability after kill process of softbus_server.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_Extension_ConnectAbility_0900", 0, async function (done) {
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0900 is start---------------")
-      TAG = "SUB_DMS_Extension_ConnectAbility_0900";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700";
       abilityDelegator.executeShellCommand("pidof softbus_server", (err, data) => {
-        console.info("SUB_DMS_Extension_ConnectAbility_0900:" + data.stdResult)
+        console.info("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700:" + data.stdResult)
         abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
-          console.info("SUB_DMS_Extension_ConnectAbility_0900:" + data.stdResult)
+          console.info("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700:" + data.stdResult)
         })
       })
 
@@ -1528,20 +1528,20 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_Extension_ConnectAbility_0900 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_Extension_ConnectAbility_0900 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
             done();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0900  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0900  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700  onFailed: ' + code);
           expect().assertFail();
           done();
         }
@@ -1553,18 +1553,18 @@ export default function DmsFwkStageTest() {
         done();
       })
       await sleep(1000);
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0900 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 is end---------------" + extensionConnectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_Extension_ConnectAbility_0110
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600
      * @tc.name    ServiceExtension Connect the remote Ability after kill process of distributedsche.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_Extension_ConnectAbility_0110", 0, async function (done) {
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0110 is start---------------")
-      TAG = "SUB_DMS_Extension_ConnectAbility_0110";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600";
       abilityDelegator.executeShellCommand("pidof distributedsche", (err, data) => {
         console.info("SUB_DMS_Extension_ConnectAbility_0900:" + data.stdResult)
         abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
@@ -1586,20 +1586,20 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_Extension_ConnectAbility_0110 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_Extension_ConnectAbility_0110 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
             done();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0110  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0110  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600  onFailed: ' + code);
           expect().assertFail();
           done();
         }
@@ -1611,18 +1611,18 @@ export default function DmsFwkStageTest() {
         done();
       })
       await sleep(1000);
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0110 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is end---------------" + extensionConnectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_Extension_ConnectAbility_0180
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000
      * @tc.name    ServiceExtension Connect the remote Ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_Extension_ConnectAbility_0180", 0, async function (done) {
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0180 is start---------------")
-      TAG = "SUB_DMS_Extension_ConnectAbility_0180";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -1638,20 +1638,20 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_Extension_ConnectAbility_0180 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_Extension_ConnectAbility_0180 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
             done()
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0180  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0180  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000  onFailed: ' + code);
           expect().assertFail();
           done();
         }
@@ -1663,19 +1663,19 @@ export default function DmsFwkStageTest() {
         done();
       })
       await sleep(1000);
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0180 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000 is end---------------" + extensionConnectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_Extension_ConnectAbility_0190
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400
      * @tc.name    ServiceExtension Connect the remote Ability.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_Extension_ConnectAbility_0190", 0, async function (done) {
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0190 is start---------------")
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 is start---------------")
       let RemoteObj;
-      TAG = "SUB_DMS_Extension_ConnectAbility_0190";
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400";
       extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -1690,19 +1690,19 @@ export default function DmsFwkStageTest() {
           data.writeInt(1);
           data.writeInt(99);
           proxy.sendRequest(1, data, reply, option).then((result) => {
-            console.log('SUB_DMS_Extension_ConnectAbility_0190 sendRequest success');
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 sendRequest success');
             let msg = result.reply.readInt();
-            console.info('SUB_DMS_Extension_ConnectAbility_0190 onConnectRemoteService001 msg: ' + msg);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
           })
         },
         onDisConnect: (elementName) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0190  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed: (code) => {
-          console.info('SUB_DMS_Extension_ConnectAbility_0190  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400  onFailed: ' + code);
           expect().assertFail();
           done();
         }
@@ -1713,9 +1713,9 @@ export default function DmsFwkStageTest() {
       let reply = new rpc.MessageParcel();
       data.writeInt(123);
       RemoteObj.sendRequest(1, data, reply, option).then((result) => {
-        console.log('SUB_DMS_Extension_ConnectAbility_0190 sendRequest success');
+        console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 sendRequest success');
         let msg = result.reply.readInt();
-        console.info('SUB_DMS_Extension_ConnectAbility_0190 onConnectRemoteService001 msg: ' + msg);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 onConnectRemoteService001 msg: ' + msg);
         expect(msg == 123).assertTrue();
         done();
       })
@@ -1725,18 +1725,18 @@ export default function DmsFwkStageTest() {
         expect(undefined).assertEqual(data);
         done();
       })
-      console.info("---------------SUB_DMS_Extension_ConnectAbility_0190 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 is end---------------" + extensionConnectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_Extension_ConnectAbility_0100
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500
      * @tc.name    ServiceExtension Filed connect remote invisible service without permission.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_Extension_ConnectAbility_0100", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_Extension_ConnectAbility_0100 is start---------------")
-      TAG = "SUB_DMS_StartControl_Extension_ConnectAbility_0100";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500";
       try {
         extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
           deviceId: dvId,
@@ -1753,45 +1753,45 @@ export default function DmsFwkStageTest() {
             data.writeInt(1);
             data.writeInt(99);
             proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_StartControl_Extension_ConnectAbility_0100 sendRequest success');
+              console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 sendRequest success');
               let msg = result.reply.readInt();
-              console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100 onConnectRemoteService001 msg: ' + msg);
+              console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 onConnectRemoteService001 msg: ' + msg);
               expect(msg == 100).assertTrue();
               done();
             })
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500  onFailed: ' + code);
             expect().assertFail();
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 catch: ' + err.message);
       }
       await sleep(1000);
       globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId, (err, data) => {
-        console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
         expect(undefined).assertEqual(data);
         done();
       })
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_Extension_ConnectAbility_0400
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700
      * @tc.name    ServiceExtension Filed connect remote invisible service without permission.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_Extension_ConnectAbility_0400", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_Extension_ConnectAbility_0400 is start---------------")
-      TAG = "SUB_DMS_StartControl_Extension_ConnectAbility_0400";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700";
       try {
         extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
           deviceId: dvId,
@@ -1803,30 +1803,30 @@ export default function DmsFwkStageTest() {
             done();
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0400  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700  onFailed: ' + code);
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0400 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0400 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 catch: ' + err.message);
       }
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_Extension_ConnectAbility_0300
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800
      * @tc.name    ServiceExtension Filed connect remote invisible service without permission.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_Extension_ConnectAbility_0300", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_Extension_ConnectAbility_0300 is start---------------")
-      TAG = "SUB_DMS_StartControl_Extension_ConnectAbility_0300";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800";
       try {
         extensionConnectId = globalThis.extensionContext.connectServiceExtensionAbility({
           deviceId: dvId,
@@ -1843,58 +1843,58 @@ export default function DmsFwkStageTest() {
             data.writeInt(1);
             data.writeInt(99);
             proxy.sendRequest(1, data, reply, option).then((result) => {
-              console.log('SUB_DMS_StartControl_Extension_ConnectAbility_0300 sendRequest success');
+              console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 sendRequest success');
               let msg = result.reply.readInt();
-              console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0300 onConnectRemoteService001 msg: ' + msg);
+              console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 onConnectRemoteService001 msg: ' + msg);
               expect(msg == 100).assertTrue();
               done();
             })
           },
           onDisConnect: (elementName) => {
-            console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
           onFailed: (code) => {
-            console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0300  onFailed: ' + code);
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800  onFailed: ' + code);
             expect().assertFail();
             done();
           }
         });
       } catch (err) {
-        console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0300 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0300 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 catch: ' + err.message);
       }
       await sleep(1000);
       globalThis.extensionContext.disconnectServiceExtensionAbility(extensionConnectId, (err, data) => {
-        console.info('SUB_DMS_StartControl_Extension_ConnectAbility_0100  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800  disconnectServiceExtensionAbility: ' + err.message + " " + err.code);
         expect(undefined).assertEqual(data);
         done();
       })
     });
 
     /*
-     * @tc.number  SUB_DMS_StartControl_Extension_StartAbility_0100
+     * @tc.number  SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0800
      * @tc.name    ServiceExtension success start remote service.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControlExtension__StartAbility_0100", 0, async function (done) {
-      console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0100 is start---------------")
-      TAG = "SUB_DMS_StartControl_Extension_StartAbility_0100";
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0800", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0800 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0800";
       try {
         extensionConnectId = globalThis.extensionContext.startServiceExtensionAbility({
           deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
         }, (err, data) => {
-          console.info('SUB_DMS_StartControl_Extension_StartAbility_0100 startService result: ' + + err.code + " " + err.message);
+          console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0800 startService result: ' + + err.code + " " + err.message);
           expect(err.code).assertEqual(16000001);
           done();
         })
       } catch (err) {
-        console.info('SUB_DMS_StartControl_Extension_StartAbility_0100 catch: ' + err.code);
-        console.info('SUB_DMS_StartControl_Extension_StartAbility_0100 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0800 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0800 catch: ' + err.message);
         expect().assertFail();
         done();
       }
@@ -2145,14 +2145,14 @@ export default function DmsFwkStageTest() {
     });
 
     /*
-     * @tc.number  SUB_DMS_registerMissionListener_0010
+     * @tc.number  SUB_DMS_StandardOs_collaboration_API_MissionManager_0500
      * @tc.name    registerMissionListener successful.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_registerMissionListener_0010", 0, async function (done) {
-      console.info("-----------------SUB_DMS_registerMissionListener_0010 start------------------------");
-      let TAG = "SUB_DMS_registerMissionListener_0010";
+    it("SUB_DMS_StandardOs_collaboration_API_MissionManager_0500", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_0500 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_collaboration_API_MissionManager_0500";
       function NotifyMissionsChanged(deviceId) {
         console.info(TAG + 'NotifyMissionsChanged deviceId ' + JSON.stringify(deviceId));
       }
@@ -2188,18 +2188,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_registerMissionListener_0010 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_0500 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_registerMissionListener_0020
+     * @tc.number  SUB_DMS_StandardOs_collaboration_API_MissionManager_0700
      * @tc.name    registerMissionListener with wrong deviceId.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_registerMissionListener_0020", 0, async function (done) {
-      console.info("-----------------SUB_DMS_registerMissionListener_0020 start------------------------");
-      let TAG = "SUB_DMS_registerMissionListener_0020";
+    it("SUB_DMS_StandardOs_collaboration_API_MissionManager_0700", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_0700 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_collaboration_API_MissionManager_0700";
       function NotifyMissionsChanged(deviceId) {
         console.info(TAG + 'NotifyMissionsChanged deviceId ' + JSON.stringify(deviceId));
       }
@@ -2235,18 +2235,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_registerMissionListener_0020 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_0700 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_registerMissionListener_0030
+     * @tc.number  SUB_DMS_StandardOs_collaboration_API_MissionManager_0600
      * @tc.name    registerMissionListener with null deviceId.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_registerMissionListener_0030", 0, async function (done) {
-      console.info("-----------------SUB_DMS_registerMissionListener_0030 start------------------------");
-      let TAG = "SUB_DMS_registerMissionListener_0030";
+    it("SUB_DMS_StandardOs_collaboration_API_MissionManager_0600", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_0600 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_collaboration_API_MissionManager_0600";
       function NotifyMissionsChanged(deviceId) {
         console.info(TAG + 'NotifyMissionsChanged deviceId ' + JSON.stringify(deviceId));
       }
@@ -2282,7 +2282,7 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_registerMissionListener_0030 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_0600 end------------------------");
     });
 
     /*
@@ -2333,14 +2333,14 @@ export default function DmsFwkStageTest() {
     });
 
     /*
-     * @tc.number  SUB_DMS_startSyncRemoteMissions_0010
+     * @tc.number  SUB_DMS_StandardOs_collaboration_API_MissionManager_1100
      * @tc.name    startSyncRemoteMissions successful.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_startSyncRemoteMissions_0010", 0, async function (done) {
-      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0010 start------------------------");
-      let TAG = "SUB_DMS_startSyncRemoteMissions_0010";
+    it("SUB_DMS_StandardOs_collaboration_API_MissionManager_1100", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1100 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_collaboration_API_MissionManager_1100";
       try {
         await distributedMissionManager.startSyncRemoteMissions({
           deviceId: dvId,
@@ -2363,18 +2363,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0010 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1100 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_startSyncRemoteMissions_0020
+     * @tc.number  SUB_DMS_StandardOs_collaboration_API_MissionManager_1300
      * @tc.name    startSyncRemoteMissions with wrong deviceId.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_startSyncRemoteMissions_0020", 0, async function (done) {
-      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0020 start------------------------");
-      let TAG = "SUB_DMS_registerMissionListener_0010";
+    it("SUB_DMS_StandardOs_collaboration_API_MissionManager_1300", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1300 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_collaboration_API_MissionManager_0500";
       try {
         await distributedMissionManager.startSyncRemoteMissions({
           deviceId: "12345",
@@ -2397,18 +2397,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0020 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1300 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_startSyncRemoteMissions_0030
+     * @tc.number  SUB_DMS_StandardOs_collaboration_API_MissionManager_1200
      * @tc.name    startSyncRemoteMissions with null deviceId.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_startSyncRemoteMissions_0030", 0, async function (done) {
-      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0030 start------------------------");
-      let TAG = "SUB_DMS_startSyncRemoteMissions_0030";
+    it("SUB_DMS_StandardOs_collaboration_API_MissionManager_1200", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1200 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_collaboration_API_MissionManager_1200";
       try {
         await distributedMissionManager.startSyncRemoteMissions({
           deviceId: ' ',
@@ -2431,7 +2431,7 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_startSyncRemoteMissions_0030 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1200 end------------------------");
     });
 
     /*
@@ -2469,14 +2469,14 @@ export default function DmsFwkStageTest() {
     });
 
     /*
-     * @tc.number  SUB_DMS_stopSyncRemoteMissions_0010
+     * @tc.number  SUB_DMS_StandardOs_collaboration_API_MissionManager_1500
      * @tc.name    stopSyncRemoteMissions successful.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_stopSyncRemoteMissions_0010", 0, async function (done) {
-      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0010 start------------------------");
-      let TAG = "SUB_DMS_stopSyncRemoteMissions_0010";
+    it("SUB_DMS_StandardOs_collaboration_API_MissionManager_1500", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1500 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_collaboration_API_MissionManager_1500";
       try {
         await distributedMissionManager.stopSyncRemoteMissions({
           deviceId: dvId
@@ -2497,18 +2497,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0010 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1500 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_stopSyncRemoteMissions_0020
+     * @tc.number  SUB_DMS_StandardOs_collaboration_API_MissionManager_1700
      * @tc.name    stopSyncRemoteMissions with wrong deviceId.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_stopSyncRemoteMissions_0020", 0, async function (done) {
-      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0020 start------------------------");
-      let TAG = "SUB_DMS_stopSyncRemoteMissions_0020";
+    it("SUB_DMS_StandardOs_collaboration_API_MissionManager_1700", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1700 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_collaboration_API_MissionManager_1700";
       try {
         await distributedMissionManager.stopSyncRemoteMissions({
           deviceId: "12345"
@@ -2529,18 +2529,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0020 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1700 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_stopSyncRemoteMissions_0030
+     * @tc.number  SUB_DMS_StandardOs_collaboration_API_MissionManager_1600
      * @tc.name    stopSyncRemoteMissions with null deviceId.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_stopSyncRemoteMissions_0030", 0, async function (done) {
-      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0030 start------------------------");
-      let TAG = "SUB_DMS_stopSyncRemoteMissions_0030";
+    it("SUB_DMS_StandardOs_collaboration_API_MissionManager_1600", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1600 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_collaboration_API_MissionManager_1600";
       try {
         await distributedMissionManager.stopSyncRemoteMissions({
           deviceId: ' '
@@ -2561,7 +2561,7 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_stopSyncRemoteMissions_0030 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1600 end------------------------");
     });
 
     /*
@@ -2629,14 +2629,14 @@ export default function DmsFwkStageTest() {
     });
 
     /*
-     * @tc.number  SUB_DMS_unRegisterMissionListener_0020
+     * @tc.number  SUB_DMS_StandardOs_collaboration_API_MissionManager_1900
      * @tc.name    unRegisterMissionListener successful.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_unRegisterMissionListener_0020", 0, async function (done) {
-      console.info("-----------------SUB_DMS_unRegisterMissionListener_0020 start------------------------");
-      let TAG = "SUB_DMS_unRegisterMissionListener_0020";
+    it("SUB_DMS_StandardOs_collaboration_API_MissionManager_1900", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1900 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_collaboration_API_MissionManager_1900";
       try {
         await distributedMissionManager.unRegisterMissionListener({
           deviceId: dvId
@@ -2657,12 +2657,12 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_unRegisterMissionListener_0020 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_1900 end------------------------");
     });
 
     /*
      * @tc.number  SUB_DMS_unRegisterMissionListener_0030
-     * @tc.name    unRegisterMissionListener with wrong deviceId befoer registerMissionListener.
+     * @tc.name    unRegisterMissionListener with wrong deviceId before registerMissionListener.
      * @tc.desc    Function test
      * @tc.level   0
      */
@@ -2693,14 +2693,14 @@ export default function DmsFwkStageTest() {
     });
 
     /*
-     * @tc.number  SUB_DMS_unRegisterMissionListener_0040
+     * @tc.number  SUB_DMS_StandardOs_collaboration_API_MissionManager_2100
      * @tc.name    unRegisterMissionListener before registerMissionListener.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_unRegisterMissionListener_0040", 0, async function (done) {
-      console.info("-----------------SUB_DMS_unRegisterMissionListener_0040 start------------------------");
-      let TAG = "SUB_DMS_unRegisterMissionListener_0040";
+    it("SUB_DMS_StandardOs_collaboration_API_MissionManager_2100", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_2100 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_collaboration_API_MissionManager_2100";
       try {
         await distributedMissionManager.unRegisterMissionListener({
           deviceId: dvId
@@ -2721,7 +2721,7 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_unRegisterMissionListener_0040 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_API_MissionManager_2100 end------------------------");
     });
 
     /*
@@ -3386,14 +3386,14 @@ export default function DmsFwkStageTest() {
     });
 
     /**
-    * @tc.number   SUB_DMS_on_0010
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0400
     * @tc.name     register on successful.
     * @tc.desc     Test on function
     * @tc.level    0
     */
-    it('SUB_DMS_on_0010', 0, function (done) {
-      console.info("---------------------SUB_DMS_on_0010 start---------------------------");
-      let TAG = "SUB_DMS_on_0010";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0400', 0, function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0400 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0400";
       function onCall(data) {
         console.info(TAG + " onCall : result : " + JSON.stringify(data));
         if (data.info) {
@@ -3408,18 +3408,18 @@ export default function DmsFwkStageTest() {
         expect().assertFail();
         done();
       }
-      console.info("---------------------SUB_DMS_on_0010 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0400 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_off_0010
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0300
     * @tc.name     unRegister off successful.
     * @tc.desc     Test off function
     * @tc.level    0
     */
-    it('SUB_DMS_off_0010', 0, function (done) {
-      console.info("---------------------SUB_DMS_off_0010 start---------------------------");
-      let TAG = "SUB_DMS_off_0010";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0300', 0, function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0300 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0300";
       function offCall(data) {
         console.info(TAG + " offCall: result : " + JSON.stringify(data));
       }
@@ -3430,18 +3430,18 @@ export default function DmsFwkStageTest() {
         expect().assertFail();
         done();
       }
-      console.info("---------------------SUB_DMS_off_0010 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0300 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0010
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1000
     * @tc.name     continueMission with wrong bundleName.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0010', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0010 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0010";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1000', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1000 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1000";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: localDeviceId,
@@ -3465,18 +3465,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0010 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1000 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0020
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0900
     * @tc.name     continueMission with null bundleName.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0020', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0020 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0020";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0900', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0900 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0900";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: localDeviceId,
@@ -3500,18 +3500,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0020 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0900 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0030
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0800
     * @tc.name     continueMission with undefined bundleName.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0030', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0030 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0030";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0800', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0800 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0800";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: localDeviceId,
@@ -3535,18 +3535,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0030 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0800 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0040
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1500
     * @tc.name     continueMission with wrong srcDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0040', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0040 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0040";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1500', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1500 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1500";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: '12345',
@@ -3570,18 +3570,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0040 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1500 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0050
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1400
     * @tc.name     continueMission with undefined srcDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0050', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0050 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0050";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1400', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1400 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1400";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: undefined,
@@ -3605,18 +3605,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0050 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1400 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0060
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1300
     * @tc.name     continueMission with wrong dstDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0060', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0060 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0060";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1300', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1300 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1300";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: localDeviceId,
@@ -3640,18 +3640,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0060 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1300 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0070
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1200
     * @tc.name     continueMission with null dstDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0070', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0070 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0070";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1200', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1200 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1200";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: localDeviceId,
@@ -3675,18 +3675,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0070 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1200 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0080
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1100
     * @tc.name     continueMission with undefined dstDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0080', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0080 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0080";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1100', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1100 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1100";
       try {
         distributedMissionManager.continueMission({
           srcDeviceId: localDeviceId,
@@ -3710,18 +3710,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0080 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1100 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0090
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0600
     * @tc.name     continueMission with wrong srcDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0090', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0090 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0090";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0600', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0600 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0600";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -3755,18 +3755,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0090 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0600 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0100
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0500
     * @tc.name     continueMission with undefined srcDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0100', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0100 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0100";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0500', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0500 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0500";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -3800,18 +3800,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0100 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0500 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0110
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0400
     * @tc.name     continueMission with wrong dstDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0110', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0110 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0110";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0400', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0400 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0400";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -3845,18 +3845,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0110 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0400 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0120
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0300
     * @tc.name     continueMission with null dstDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0120', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0120 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0120";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0300', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0300 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0300";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -3890,18 +3890,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0120 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0300 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0130
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0200
     * @tc.name     continueMission with undefined dstDeviceId.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0130', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0130 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_CallBack_0130";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0200', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0200 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0200";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -3935,20 +3935,20 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0130 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0200 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_CallBack_0140
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0700
     * @tc.name     continue successful.
     * @tc.desc     Test continueMission callback function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_CallBack_0140', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0140 start---------------------------");
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0700', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0700 start---------------------------");
 
       let localMissionId;
-      let TAG = "SUB_DMS_continueMission_CallBack_0140";
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0700";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -3991,18 +3991,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_CallBack_0140 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_0700 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_0010
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2400
     * @tc.name     continueMission with wrong bundleName.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_0010', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_0010 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_0010";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2400', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2400 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2400";
       try {
         let param = {
           srcDeviceId: localDeviceId,
@@ -4025,18 +4025,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_0010 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2400 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_0020
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_02300
     * @tc.name     continueMission with null bundleName.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_0020', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_0020 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_0020";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_02300', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_02300 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_02300";
       try {
         let param = {
           srcDeviceId: localDeviceId,
@@ -4059,18 +4059,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_0020 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_02300 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_0030
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2200
     * @tc.name     continueMission with undefined bundleName.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_0030', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_0030 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_0030";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2200', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2200 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2200";
       try {
         let param = {
           srcDeviceId: localDeviceId,
@@ -4093,18 +4093,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_0030 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2200 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_0040
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2900
     * @tc.name     continueMission with wrong srcDeviceId.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_0040', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_0040 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_0040";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2900', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2900 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2900";
       try {
         let param = {
           srcDeviceId: '12345',
@@ -4127,18 +4127,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_0040 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2900 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_0050
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2800
     * @tc.name     continueMission with undefined srcDeviceId.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_0050', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_0050 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_0050";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2800', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2800 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2800";
       try {
         let param = {
           srcDeviceId: undefined,
@@ -4161,18 +4161,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_0050 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2800 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_0060
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2700
     * @tc.name     continueMission with wrong dstDeviceId.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_0060', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_0060 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_0060";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2700', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2700 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2700";
       try {
         let param = {
           srcDeviceId: localDeviceId,
@@ -4195,18 +4195,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_0060 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2700 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_0070
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2600
     * @tc.name     continueMission with null dstDeviceId.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_0070', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_0070 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_0070";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2600', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2600 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2600";
       try {
         let param = {
           srcDeviceId: localDeviceId,
@@ -4229,18 +4229,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_0070 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2600 end---------------------------");
     });
 
     /**
-    * @tc.number   SUB_DMS_continueMission_0080
+    * @tc.number   SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2500
     * @tc.name     continueMission with undefined dstDeviceId.
     * @tc.desc     Test continueMission promise function
     * @tc.level    0
     */
-    it('SUB_DMS_continueMission_0080', 0, async function (done) {
-      console.info("---------------------SUB_DMS_continueMission_0080 start---------------------------");
-      let TAG = "SUB_DMS_continueMission_0080";
+    it('SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2500', 0, async function (done) {
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2500 start---------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2500";
       try {
         let param = {
           srcDeviceId: localDeviceId,
@@ -4263,18 +4263,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("---------------------SUB_DMS_continueMission_0080 end---------------------------");
+      console.info("---------------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2500 end---------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_continueMission_0090
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2000
      * @tc.name    continueMission with wrong srcDeviceId.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_continueMission_0090", 0, async function (done) {
-      console.info("-----------------SUB_DMS_continueMission_0090 start------------------------");
-      let TAG = "SUB_DMS_continueMission_0090";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2000", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2000 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2000";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -4306,18 +4306,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_continueMission_0090 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2000 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_continueMission_0100
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1900
      * @tc.name    continueMission with undefined srcDeviceId.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_continueMission_0100", 0, async function (done) {
-      console.info("-----------------SUB_DMS_continueMission_0100 start------------------------");
-      let TAG = "SUB_DMS_continueMission_0100";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1900", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1900 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1900";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -4349,18 +4349,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_continueMission_0100 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1900 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_continueMission_0110
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1800
      * @tc.name    continueMission with wrong dstDeviceId.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_continueMission_0110", 0, async function (done) {
-      console.info("-----------------SUB_DMS_continueMission_0110 start------------------------");
-      let TAG = "SUB_DMS_continueMission_0110";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1800", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1800 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1800";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -4392,18 +4392,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_continueMission_0110 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1800 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_continueMission_0120
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1700
      * @tc.name    continueMission with null dstDeviceId.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_continueMission_0120", 0, async function (done) {
-      console.info("-----------------SUB_DMS_continueMission_0120 start------------------------");
-      let TAG = "SUB_DMS_continueMission_0120";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1700", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1700 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1700";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -4435,18 +4435,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_continueMission_0120 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1700 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_continueMission_0130
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1600
      * @tc.name    continueMission with undefined dstDeviceId.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_continueMission_0130", 0, async function (done) {
-      console.info("-----------------SUB_DMS_continueMission_0130 start------------------------");
-      let TAG = "SUB_DMS_continueMission_0130";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1600", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1600 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1600";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -4478,19 +4478,19 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_continueMission_0130 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_1600 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_continueMission_0140
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2100
      * @tc.name    continueMission successful.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_continueMission_0140", 0, async function (done) {
-      console.info("-----------------SUB_DMS_continueMission_0140 start------------------------");
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2100", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2100 start------------------------");
       let localMissionId;
-      let TAG = "SUB_DMS_continueMission_0140";
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2100";
       let allLocalMissions = await missionManager.getMissionInfos("", 20).catch(function (err) {
         console.info(TAG + 'getMissionInfos err,' + err);
       });
@@ -4531,18 +4531,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_continueMission_0140 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_continuationAbility_2100 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_setMissionContinueState_0010
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200
      * @tc.name    setMissionContinueState ContinueState is INACTIVE successful.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_setMissionContinueState_0010", 0, async function (done) {
-      console.info("-----------------SUB_DMS_setMissionContinueState_0010 start------------------------");
-      let TAG = "SUB_DMS_setMissionContinueState_0010";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200";
       let param = AbilityConstant.ContinueState.INACTIVE;
       try {
         continueState = globalThis.abilityContext.setMissionContinueState(param
@@ -4562,18 +4562,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_setMissionContinueState_0010 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_setMissionContinueState_0020
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300
      * @tc.name    setMissionContinueState ContinueState is ACTIVE successful.
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_setMissionContinueState_0020", 0, async function (done) {
-      console.info("-----------------SUB_DMS_setMissionContinueState_0020 start------------------------");
-      let TAG = "SUB_DMS_setMissionContinueState_0020";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300";
       let param = AbilityConstant.ContinueState.ACTIVE;
       try {
         continueState = globalThis.abilityContext.setMissionContinueState(param
@@ -4593,18 +4593,18 @@ export default function DmsFwkStageTest() {
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_setMissionContinueState_0020 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_setMissionContinueState_CallBack_0010
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900
      * @tc.name    setMissionContinueState ContinueState is INACTIVE successful.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_setMissionContinueState_CallBack_0010", 0, async function (done) {
-      console.info("-----------------SUB_DMS_setMissionContinueState_CallBack_0010 start------------------------");
-      let TAG = "SUB_DMS_setMissionContinueState_CallBack_0010";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900";
       let param = AbilityConstant.ContinueState.INACTIVE;
       continueState = globalThis.abilityContext.setMissionContinueState(param, (err, result) => {
         try {
@@ -4624,18 +4624,18 @@ export default function DmsFwkStageTest() {
         done();
       });
       await sleep(1000);
-      console.info("-----------------SUB_DMS_setMissionContinueState_CallBack_0010 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900 end------------------------");
     });
 
     /*
-     * @tc.number  SUB_DMS_setMissionContinueState_CallBack_0020
+     * @tc.number  SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800
      * @tc.name    setMissionContinueState ContinueState is ACTIVE successful.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_setMissionContinueState_CallBack_0020", 0, async function (done) {
-      console.info("-----------------SUB_DMS_setMissionContinueState_CallBack_0020 start------------------------");
-      let TAG = "SUB_DMS_setMissionContinueState_CallBack_0020";
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800 start------------------------");
+      let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800";
       let param = AbilityConstant.ContinueState.ACTIVE;
       continueState = globalThis.abilityContext.setMissionContinueState(param, (err, result) => {
         try {
@@ -4655,17 +4655,17 @@ export default function DmsFwkStageTest() {
         done();
       });
       await sleep(1000);
-      console.info("-----------------SUB_DMS_setMissionContinueState_CallBack_0020 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800 end------------------------");
     });
     
     /*
-     * @tc.number  SUB_DMS_Get_call_0010
+     * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0900
      * @tc.name    Get call is success.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_Get_call_0010' , 0 , async function(done) {
-      console.info("-----------------SUB_DMS_Get_call_0010 start------------------------");
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0900' , 0 , async function(done) {
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0900 start------------------------");
       var wantVules = {
         bundleName : 'com.acts.example.dmsfwkstagetest',
         abilityName : 'com.example.lifecycletest.MainAbility',
@@ -4688,7 +4688,7 @@ export default function DmsFwkStageTest() {
         expect().assertTrue()
         done()
       }
-      console.info("-----------------SUB_DMS_Get_call_0010 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0900 end------------------------");
     });
   })
 }
