@@ -8629,42 +8629,6 @@ export default function RpcJsUnitTest() {
         });
 
         /*
-         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11400
-         * @tc.name    Test messageparcel to pass an object of type iremoteobject across processes
-         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
-         * @tc.level   3
-         */
-        it('SUB_DSoftbus_RPC_Compatibility_MessageParcel_11400', 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_11400---------------------------");
-            function checkResult(num, str) {
-                expect(num).assertEqual(123);
-                expect(str).assertEqual("rpcListenerTest");
-                done();
-            }
-            try {
-                let option = new rpc.MessageOption();
-                var data = rpc.MessageParcel.create();
-                var reply = rpc.MessageParcel.create()
-
-                let listener = new TestListener("rpcListener", checkResult);
-                expect(data.writeRemoteObject(listener)).assertTrue();
-                expect(data.writeInt(123)).assertTrue();
-                expect(data.writeString("rpcListenerTest")).assertTrue();
-                await gIRemoteObject.sendRequest(CODE_WRITE_REMOTEOBJECT, data, reply, option).then((result) => {
-                    expect(result.errCode).assertEqual(0);
-                    result.reply.readException();
-                });
-            } catch (error) {
-                expect(error == null).assertTrue();
-            } finally{
-                data.reclaim();
-                reply.reclaim();
-                done();
-            }
-            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11400---------------------------");
-        })
-
-        /*
          * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11500
          * @tc.name    Test messageparcel to pass an array of iremoteobject objects across processes
          * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
@@ -8706,6 +8670,42 @@ export default function RpcJsUnitTest() {
                 done();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11500---------------------------");
+        })        
+
+        /*
+         * @tc.number  SUB_DSoftbus_RPC_Compatibility_MessageParcel_11400
+         * @tc.name    Test messageparcel to pass an object of type iremoteobject across processes
+         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+         * @tc.level   3
+         */
+        it('SUB_DSoftbus_RPC_Compatibility_MessageParcel_11400', 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_Compatibility_MessageParcel_11400---------------------------");
+            function checkResult(num, str) {
+                expect(num).assertEqual(123);
+                expect(str).assertEqual("rpcListenerTest");
+                done();
+            }
+            try {
+                let option = new rpc.MessageOption();
+                var data = rpc.MessageParcel.create();
+                var reply = rpc.MessageParcel.create()
+
+                let listener = new TestListener("rpcListener", checkResult);
+                expect(data.writeRemoteObject(listener)).assertTrue();
+                expect(data.writeInt(123)).assertTrue();
+                expect(data.writeString("rpcListenerTest")).assertTrue();
+                await gIRemoteObject.sendRequest(CODE_WRITE_REMOTEOBJECT, data, reply, option).then((result) => {
+                    expect(result.errCode).assertEqual(0);
+                    result.reply.readException();
+                });
+            } catch (error) {
+                expect(error == null).assertTrue();
+            } finally{
+                data.reclaim();
+                reply.reclaim();
+                done();
+            }
+            console.info("---------------------end SUB_DSoftbus_RPC_Compatibility_MessageParcel_11400---------------------------");
         })
 
         /*
