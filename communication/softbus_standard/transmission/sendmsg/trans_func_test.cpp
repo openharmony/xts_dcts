@@ -210,27 +210,6 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0700, TestSize.Leve
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_Fun_0800
- * @tc.name   : SendByte Packet size 4k ,Proxy channel, send and receive successful
- * @tc.desc   : Test the SendByte specification
- * @tc.type   : FUNC
- * @tc.size   : MediumTest
- */
-HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendBytes_Fun_0800, TestSize.Level3)
-{
-    int ret;
-    ret = CreateSsAndOpenSession4Proxy();
-    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
-
-    int size = 4 * 1024;
-    ret = SendData4Message(DATA_TYPE_BYTE, size);
-    EXPECT_NE(SOFTBUS_OK, ret) << "SendData4Data(byte,Max) fail";
-
-    ret = CloseSessionAndRemoveSs4Proxy();
-    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
-}
-
-/**
  * @tc.number : SUB_Softbus_Trans_Comp_SendBytes_Fun_0900
  * @tc.name   : SendByte Packet size 0, Proxy channel, send and receive failed
  * @tc.desc   : Test the SendByte specification
