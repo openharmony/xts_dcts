@@ -22,8 +22,8 @@ function startContinuousTask() {
     let wantAgentInfo = {
         wants: [
             {
-                bundleName: "com.ohos.distributekvdisjs",
-                abilityName: "com.ohos.distributekvdisjs.ServiceAbility"
+                bundleName: "com.ohos.distributedobjectjs",
+                abilityName: "com.ohos.distributedobjectjs.ServiceAbility"
             }
         ],
         operationType: wantAgent.OperationType.START_SERVICE,

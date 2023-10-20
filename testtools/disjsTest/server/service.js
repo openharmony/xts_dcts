@@ -17,9 +17,11 @@ import rpc from '@ohos.rpc';
 import ApiMessage from '../common/apiMessage.js';
 import ApiResult from '../common/apiResult.js';
 import ReflectCallApi from './ReflectCallApi.js';
+import deviceinfo from '@ohos.deviceInfo'
 
 let CODE_INVOKE = 1;
 let CODE_INVOKE_TESTCASE = 99;
+let CODE_INVOKE_OSVERSION = 88;
 let logTag = "[RpcServer:  ]";
 
 export default class Stub extends rpc.RemoteObject {
@@ -72,6 +74,19 @@ export default class Stub extends rpc.RemoteObject {
                     testBundle._apiResult=JSON.stringify(resultCall);
                     let result = reply.writeSequenceable(testBundle);
                     console.log(logTag +" writeSequenceable result is " + result);
+                    return true;
+                }
+                case CODE_INVOKE_OSVERSION:
+                {
+                    console.info(logTag +" ===================  case CODE_INVOKE_OSVERSION start ===================  ");
+                    let tmp = data.readString();
+                    console.log(logTag +" readString tmp is " + tmp);
+
+                    let osFullNameInfo = deviceinfo.osFullName;
+                    console.info('the value of the deviceinfo osFullName is :' + osFullNameInfo);
+
+                    reply.writeString(osFullNameInfo);
+                    console.log(logTag +" writeSequenceable result is " + tmp);
                     return true;
                 }
                 default:
