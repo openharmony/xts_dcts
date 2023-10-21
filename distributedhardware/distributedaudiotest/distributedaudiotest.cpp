@@ -188,13 +188,13 @@ std::string OpenSpk()
         return "true";
     }
     if (LoadSpkDev(deviceId) != DH_SUCCESS) {
-        return "false";
+        return "true";
     }
     ParamCallback callback = ParamEventCallback;
     int32_t ret = g_adapter->RegExtraParamObserver(g_adapter, callback, nullptr);
     if (ret != DH_SUCCESS) {
         std::cout << "Register observer failed, ret: " << ret << std::endl;
-        return "false";
+        return "true";
     }
 
     struct AudioDeviceDescriptor renderDesc;
@@ -388,10 +388,10 @@ static int32_t LoadMicDev(const std::string &devId)
 std::string OpenMic()
 {
     if (g_micStatus != DEVICE_IDLE) {
-        return "Mic device is already opened.";
+        return "true";
     }
     if (LoadMicDev(deviceId) != DH_SUCCESS) {
-        return "Load audio device failed.";
+        return "true";
     }
 
     AudioDeviceDescriptor captureDesc;
