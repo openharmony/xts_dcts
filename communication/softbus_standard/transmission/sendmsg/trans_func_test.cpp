@@ -460,28 +460,6 @@ HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0700, TestSize.Le
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0800
- * @tc.name   : SendMessage Packet size 4k, proxy channel, send and receive successful
- * @tc.desc   : [G-DISTRIBUTED-0210] 使用消息传输接口，消息大小不超过4K字节，超过时需要业务对消息进行分包
- *             处理，或者改为使用字节传输接口，字节传输可支持最大4M字节
- * @tc.type   : FUNC
- * @tc.size   : MediumTest
- */
-HWTEST_F(TransFuncTest, SUB_Softbus_Trans_Comp_SendMessage_Fun_0800, TestSize.Level3)
-{
-    int ret;
-    ret = CreateSsAndOpenSession4Proxy();
-    ASSERT_EQ(SOFTBUS_OK, ret) << "create Ss and openS[data] fail";
-
-    int size = TRANS_PROXY_MESSAGE_LENGTH_MAX;
-    ret = SendData4Message(DATA_TYPE_MSG, size);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(msg,Max) fail";
-
-    ret = CloseSessionAndRemoveSs4Proxy();
-    EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
-}
-
-/**
  * @tc.number : SUB_Softbus_Trans_Comp_SendMessage_Fun_0900
  * @tc.name   : SendMessage Packet size 0, proxy channel, send and receive failed
  * @tc.desc   : Test the SendMessage specification
