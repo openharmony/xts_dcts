@@ -32,6 +32,7 @@ let gIRemoteObject = null;
 let remoteHelpers = null;
 let deviceId = null;
 let deviceList = undefined;
+let syncDeviceIds = undefined;
 
 const TEST_BUNDLE_NAME = 'com.ohos.distributeobjectdisjs'; 
 
