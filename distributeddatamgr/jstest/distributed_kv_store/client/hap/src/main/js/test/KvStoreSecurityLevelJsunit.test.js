@@ -14,7 +14,7 @@
  */
 
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
-import deviceManager from '@ohos.distributedHardware.deviceManager';
+import deviceManager from '@ohos.distributedDeviceManager';
 import TestService from '../../../../../../../../../testtools/disjsTest/client/testService.js';
 import RemoteHelper from '../../../../../../../../../testtools/disjsTest/client/remoteHelper.js';
 import factory from '@ohos.data.distributedData';
@@ -106,15 +106,13 @@ export default function kvSyncTest() {
             await remoteHelpers.createKvManager().then(async (data) => {
                 console.info(logTag + "REMOTE create KvManager success,ret: " + data);
             })
-            deviceManager.createDeviceManager(TEST_BUNDLE_NAME, async (error, deviceManager) => {
-                console.info(logTag + "CLIENT Create device manager success");
-                localDeviceId = deviceManager.getLocalDeviceInfoSync().networkId;
-                console.info(logTag + "local device id is: " + localDeviceId);
 
-                deviceList = deviceManager.getTrustedDeviceListSync();
-                deviceId = deviceList[0].networkId;
-                syncDeviceIds = [deviceId];
-            })
+            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+            deviceList = dmInstance.getAvailableDeviceListSync();
+            deviceId = deviceList[0].networkId;
+            console.info(logTag + "deviceId is: " + deviceId);
+            syncDeviceIds = [deviceId];
+
             console.info(logTag + '-----------------beforeAll end-----------------');
             done();
         })
