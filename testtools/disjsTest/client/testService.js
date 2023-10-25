@@ -20,7 +20,7 @@ let logTag = "RpcClient_TestService:  ";
 let CODE_INVOKE = 1;
 import ApiMessage from '../common/apiMessage.js';
 import ApiResult from '../common/apiResult.js';
-import deviceManager from '@ohos.distributedHardware.deviceManager';
+import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
 let results;
@@ -71,7 +71,7 @@ export default class TestService {
     }
 
     getDeviceList(deviceManager) {
-        deviceList = deviceManager.getTrustedDeviceListSync();
+        deviceList = deviceManager.getAvailableDeviceListSync();
         console.info(logTag + "getDeviceList success, deviceList id: " + JSON.stringify(deviceList));
     }
 
@@ -79,33 +79,33 @@ export default class TestService {
         console.info(logTag + " toConnectAbility");
         return new Promise(resolve=>{
             let self = this;
-            deviceManager.createDeviceManager('com.ohos.distributekvdisjs', (error, deviceManager) => {
-                self.getDeviceList(deviceManager);
-                console.info(logTag + "got deviceManager: " + deviceManager);
-                let deviceId = deviceList[0].networkId;
-                console.info(logTag + "deviceid : " + deviceId);
-                console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList));
-                let want = {
-                    "bundleName": bundleName,
-                    "abilityName": abilityName,
-                    "deviceId": deviceId,
-                    "flags": 256
+            let dmInstance = deviceManager.createDeviceManager('com.ohos.distributekvdisjs');
+            self.getDeviceList(dmInstance);
+            console.info("got deviceManager: " + dmInstance)
+            let deviceId = deviceList[0].networkId;
+            console.info(logTag + "deviceid : " + deviceId);
+            console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList));
+            let want = {
+                "bundleName": bundleName,
+                "abilityName": abilityName,
+                "deviceId": deviceId,
+                "flags": 256
+            }
+            let connect = {
+                onConnect: function (elementName, remoteProxy) {
+                    console.log(logTag + 'onConnect called, remoteProxy: ' + remoteProxy);
+                    resolve(remoteProxy);
+                },
+                onDisconnect: function (elementName) {
+                    console.log(logTag + "onDisconnect");
+                },
+                onFailed: function () {
+                    console.log(logTag + "onFailed");
                 }
-                let connect = {
-                    onConnect: function (elementName, remoteProxy) {
-                        console.log(logTag + 'onConnect called, remoteProxy: ' + remoteProxy);
-                        resolve(remoteProxy);
-                    },
-                    onDisconnect: function (elementName) {
-                        console.log(logTag + "onDisconnect");
-                    },
-                    onFailed: function () {
-                        console.log(logTag + "onFailed");
-                    }
-                }
-                let connectId = featureAbility.connectAbility(want, connect);
-                console.info(logTag + "connect ability got id: " + connectId);
-            })
+            }
+            let connectId = featureAbility.connectAbility(want, connect);
+            console.info(logTag + "connect ability got id: " + connectId);
+
         })
     }
 
@@ -113,33 +113,32 @@ export default class TestService {
         console.info(logTag + " toConnectRdbAbility");
         return new Promise(resolve=>{
             let self = this;
-            deviceManager.createDeviceManager('distributerdbdisjs', (error, deviceManager) => {
-                self.getDeviceList(deviceManager);
-                console.info(logTag + "got deviceManager: " + deviceManager);
-                let deviceId = deviceList[0].networkId;
-                console.info(logTag + "deviceid : " + deviceId);
-                console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList));
-                let want = {
-                    "bundleName": "com.ohos.distributerdbdisjs",
-                    "abilityName": "com.ohos.distributerdbdisjs.ServiceAbility",
-                    "deviceId": deviceId,
-                    "flags": 256
+            let dmInstance = deviceManager.createDeviceManager('com.ohos.distributerdbdisjs');
+            self.getDeviceList(dmInstance);
+            console.info(logTag + "got deviceManager: " + dmInstance);
+            let deviceId = deviceList[0].networkId;
+            console.info(logTag + "deviceid : " + deviceId);
+            console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList));
+            let want = {
+                "bundleName": "com.ohos.distributerdbdisjs",
+                "abilityName": "com.ohos.distributerdbdisjs.ServiceAbility",
+                "deviceId": deviceId,
+                "flags": 256
+            }
+            let connect = {
+                onConnect: function (elementName, remoteProxy) {
+                    console.log(logTag + 'onConnect called, remoteProxy: ' + remoteProxy);
+                    resolve(remoteProxy);
+                },
+                onDisconnect: function (elementName) {
+                    console.log(logTag + "onDisconnect");
+                },
+                onFailed: function () {
+                    console.log(logTag + "onFailed");
                 }
-                let connect = {
-                    onConnect: function (elementName, remoteProxy) {
-                        console.log(logTag + 'onConnect called, remoteProxy: ' + remoteProxy);
-                        resolve(remoteProxy);
-                    },
-                    onDisconnect: function (elementName) {
-                        console.log(logTag + "onDisconnect");
-                    },
-                    onFailed: function () {
-                        console.log(logTag + "onFailed");
-                    }
-                }
-                let connectId = featureAbility.connectAbility(want, connect);
-                console.info(logTag + "connect ability got id: " + connectId);
-            })
+            }
+            let connectId = featureAbility.connectAbility(want, connect);
+            console.info(logTag + "connect ability got id: " + connectId);
         })
     }
 
@@ -147,33 +146,32 @@ export default class TestService {
         console.info(logTag + " toConnectObjectAbility");
         return new Promise(resolve=>{
             let self = this;
-            deviceManager.createDeviceManager('distributeobjectdisjs', (error, deviceManager) => {
-                self.getDeviceList(deviceManager);
-                console.info(logTag + "got deviceManager: " + deviceManager);
-                let deviceId = deviceList[0].networkId;
-                console.info(logTag + "deviceid : " + deviceId);
-                console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList));
-                let want = {
-                    "bundleName": bundleNameObject,
-                    "abilityName": abilityNameObject,
-                    "deviceId": deviceId,
-                    "flags": 256
+            let dmInstance = deviceManager.createDeviceManager('com.ohos.distributeobjectdisjs');
+            self.getDeviceList(dmInstance);
+            console.info(logTag + "got deviceManager: " + dmInstance);
+            let deviceId = deviceList[0].networkId;
+            console.info(logTag + "deviceid : " + deviceId);
+            console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList));
+            let want = {
+                "bundleName": bundleNameObject,
+                "abilityName": abilityNameObject,
+                "deviceId": deviceId,
+                "flags": 256
+            }
+            let connect = {
+                onConnect: function (elementName, remoteProxy) {
+                    console.log(logTag + 'onConnect called, remoteProxy: ' + remoteProxy);
+                    resolve(remoteProxy);
+                },
+                onDisconnect: function (elementName) {
+                    console.log(logTag + "onDisconnect");
+                },
+                onFailed: function () {
+                    console.log(logTag + "onFailed");
                 }
-                let connect = {
-                    onConnect: function (elementName, remoteProxy) {
-                        console.log(logTag + 'onConnect called, remoteProxy: ' + remoteProxy);
-                        resolve(remoteProxy);
-                    },
-                    onDisconnect: function (elementName) {
-                        console.log(logTag + "onDisconnect");
-                    },
-                    onFailed: function () {
-                        console.log(logTag + "onFailed");
-                    }
-                }
-                let connectId = featureAbility.connectAbility(want, connect);
-                console.info(logTag + "connect ability got id: " + connectId);
-            })
+            }
+            let connectId = featureAbility.connectAbility(want, connect);
+            console.info(logTag + "connect ability got id: " + connectId);
         })
     }
 }
