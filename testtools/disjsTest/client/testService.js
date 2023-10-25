@@ -115,7 +115,7 @@ export default class TestService {
             let self = this;
             let dmInstance = deviceManager.createDeviceManager('com.ohos.distributerdbdisjs');
             self.getDeviceList(dmInstance);
-            console.info(logTag + "got deviceManager: " + deviceManager);
+            console.info(logTag + "got deviceManager: " + dmInstance);
             let deviceId = deviceList[0].networkId;
             console.info(logTag + "deviceid : " + deviceId);
             console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList));
