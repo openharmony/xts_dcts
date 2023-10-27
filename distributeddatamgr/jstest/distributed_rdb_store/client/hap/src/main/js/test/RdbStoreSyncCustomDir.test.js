@@ -76,8 +76,8 @@ async function driveFn() {
 
 }
 
-export default function rdbSyncFirstLevelTest(){
-    describe('rdbSyncFirstLevelTest', function () {
+export default function rdbSyncCustomDirlTest(){
+    describe('rdbSyncCustomDirlTest', function () {
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
             await getPermission();
