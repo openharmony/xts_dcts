@@ -161,10 +161,11 @@ class Stub extends rpc.RemoteObject {
                     let path = data.readString();
                     console.info("The server's readString result is " + path);
                     let result;
-                    let accessRes = fs.accessSync(path);
-                    if (accessRes == true) {
+                    try {
+                        let file = fs.openSync(path);
                         result = reply.writeString("Server side dir synchronization delete failed!");
-                    } else {
+                        fs.closeSync(file);
+                    } catch (error) {
                         result = reply.writeString("SUCCESS");
                     }
 
