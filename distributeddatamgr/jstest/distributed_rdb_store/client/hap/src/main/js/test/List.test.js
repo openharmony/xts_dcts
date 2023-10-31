@@ -15,7 +15,9 @@
 
 // require('./RdbStoreSyncFirstLevelJsunit.test.js')
 import RdbStoreSyncFirstLevelJsunit from './RdbStoreSyncFirstLevelJsunit.test.js'
+import rdbStorerSyncCustomDirTest from './RdbStoreSyncCustomDir.test.js'
 
 export default function testsuite(){
     RdbStoreSyncFirstLevelJsunit()
+	rdbStorerSyncCustomDirTest()
 }
