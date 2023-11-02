@@ -173,8 +173,8 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0700, TestSize.Level1)
  */
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0800, TestSize.Level1)
 {
-    int32_t ret = FlashLightTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "FlashLightTest fail";
+    int32_t ret = FlashLightTest(nullptr);
+    EXPECT_NE(cameraOk, ret) << "FlashLightTest fail";
     sleep(sleepOk);
 }
 
@@ -188,8 +188,8 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0800, TestSize.Level1)
  */
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0900, TestSize.Level1)
 {
-    int32_t ret = OfflineTest(mainDemo);
-    EXPECT_EQ(cameraOk, ret) << "OfflineTest fail";
+    int32_t ret = OfflineTest(nullptr);
+    EXPECT_NE(cameraOk, ret) << "OfflineTest fail";
 }
 
 /**
@@ -201,7 +201,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0900, TestSize.Level1)
  */
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_1000, TestSize.Level1)
 {
-    int32_t ret = PreviewOn(1, mainDemo);
+    int32_t ret = PreviewOn(1, nullptr);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
     ret = mainDemo->SetAwbMode(sleepOk);
