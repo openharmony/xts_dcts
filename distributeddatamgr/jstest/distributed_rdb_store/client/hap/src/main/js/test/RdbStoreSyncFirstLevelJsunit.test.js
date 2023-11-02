@@ -34,7 +34,7 @@ var rdbStore = undefined;
 var resultSet = undefined;
 let dmInstance = null;
 let localDeviceId = undefined;
-let logTag = 'RpcClient:  ';
+let logTag = 'rdbSyncFirstLevelTest:  ';
 let testservice = null;
 let gIRemoteObject = null;
 let remoteHelpers = null;
@@ -84,8 +84,35 @@ export default function rdbSyncFirstLevelTest(){
             await driveFn();
             sleep(100);
 
+            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+            deviceList = dmInstance.getAvailableDeviceListSync();
+            deviceId = deviceList[0].networkId;
+            console.info(logTag + "deviceId is: " + deviceId);
+            syncDeviceIds = [deviceId];
+
+            try{
+                console.info(logTag + "deviceId: " + deviceId);
+                let params;
+                let wantValue = {
+                    bundleName: "com.ohos.distributerdbdisjs",
+                    abilityName: "com.ohos.distributerdbdisjs.MainAbility",
+                    deviceId: deviceId
+                    // parameters: params
+                };
+                await featureAbility.startAbility({
+                    want: wantValue
+                }).then((data) => {
+                    console.info(logTag + 'beforeAll startAbility data success' + JSON.stringify(data));
+                }).catch((err) => {
+                    console.info(logTag + 'beforeAll startAbility err: ' + err.code);
+                    console.info(logTag + 'beforeAll startAbility err: ' + err.message);
+                });
+            }catch(error){
+                console.info(logTag + "beforeAll startAbility:error = " + error);
+            }
+            await sleep(100);
+
             testservice = new TestService();
-            console.info(logTag + "deviceId: " + deviceId);
             await testservice.toConnectRdbAbility().then(data => {
                 gIRemoteObject = data;
                 console.info(logTag + "toConnectAbility data is" + data);
@@ -104,12 +131,7 @@ export default function rdbSyncFirstLevelTest(){
             })
             await back;
     
-            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-            deviceList = dmInstance.getAvailableDeviceListSync();
-            deviceId = deviceList[0].networkId;
-            console.info(logTag + "deviceId is: " + deviceId);
 
-            syncDeviceIds = [deviceId];
             dmInstance.on("deviceStateChange", (data) => {
                 console.log("deviceStateChange: " + JSON.stringify(data));
             });
