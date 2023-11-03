@@ -12,8 +12,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import kvSyncTest from './KvStoreSecurityLevelJsunit.test.js';
- 
+import kvSyncTest   from './KvStoreSecurityLevelJsunit.test.js';
+import kvSyncTestS1 from './KvStoreSecurityLevelS1Jsunit.test.js';
+import deviceinfo from '@ohos.deviceInfo'
+
 export default function testsuite() {
-    kvSyncTest();
+    let logTag = 'RpcClient:  ';
+    let flag_41 = 1;
+    let localOSVersion = "";
+    let OSVersion41 = "OpenHarmony-4.1";
+    let osReleaseTypeInfo = deviceinfo.osReleaseType;
+    console.info('the value of the deviceinfo osReleaseType is :' + osReleaseTypeInfo);
+    let osFullNameInfo = deviceinfo.osFullName;
+    console.info('the value of the deviceinfo osFullName is :' + osFullNameInfo);
+    localOSVersion = osFullNameInfo.substring(0, 15);
+    console.info(logTag + "localOSVersion is: " + localOSVersion);
+
+    if (localOSVersion == OSVersion41) {
+        flag_41 = 1;
+        console.info(logTag + "flag_41 is: " + flag_41);
+        kvSyncTestS1();
+    } else {
+        flag_41 = 0;
+        console.info(logTag + "flag_41 is: " + flag_41);
+        kvSyncTest();
+    }
 }
