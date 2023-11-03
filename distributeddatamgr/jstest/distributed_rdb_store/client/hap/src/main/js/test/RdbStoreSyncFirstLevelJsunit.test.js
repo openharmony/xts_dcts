@@ -92,12 +92,10 @@ export default function rdbSyncFirstLevelTest(){
 
             try{
                 console.info(logTag + "deviceId: " + deviceId);
-                let params;
                 let wantValue = {
                     bundleName: "com.ohos.distributerdbdisjs",
                     abilityName: "com.ohos.distributerdbdisjs.MainAbility",
                     deviceId: deviceId
-                    // parameters: params
                 };
                 await featureAbility.startAbility({
                     want: wantValue
