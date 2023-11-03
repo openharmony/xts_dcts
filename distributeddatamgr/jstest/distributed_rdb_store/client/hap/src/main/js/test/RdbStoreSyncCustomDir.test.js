@@ -100,12 +100,10 @@ export default function rdbSyncCustomDirlTest(){
 
             console.info(logTag + "deviceId: " + deviceId);
             try{
-                let params;
                 let wantValue = {
                     bundleName: "com.ohos.distributerdbdisjs",
                     abilityName: "com.ohos.distributerdbdisjs.MainAbility",
                     deviceId: deviceId
-                    // parameters: params
                 };
                 await featureAbility.startAbility({
                     want: wantValue
