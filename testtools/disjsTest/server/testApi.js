@@ -19,6 +19,8 @@ import wantAgent from '@ohos.wantAgent';
 import dataRdb from '@ohos.data.rdb';
 import ApiResult from '../common/apiResult';
 import distributedObject from '@ohos.data.distributedDataObject';
+import deviceinfo from '@ohos.deviceInfo'
+
 const TEST_BUNDLE_NAME = 'com.ohos.distributekvdisjs';
 let logTag = "[[RpcServer_TestApi:  ]]";
 let kvManager = undefined;
@@ -94,6 +96,17 @@ export default class TestApi{
         });
     }
     async getKvStore(storeId,SecurityLevel,encrypt){
+        let flag_41 = 1;
+        let localOSVersion = "";
+        let OSVersion41 = "OpenHarmony-4.1";
+        let osReleaseTypeInfo = deviceinfo.osReleaseType;
+        console.info(logTag + 'the value of the deviceinfo osReleaseType is :' + osReleaseTypeInfo);
+        let osFullNameInfo = deviceinfo.osFullName;
+        console.info(logTag + 'the value of the deviceinfo osFullName is :' + osFullNameInfo);
+    
+        localOSVersion = osFullNameInfo.substring(0, 15);
+        console.info(logTag + "localOSVersion is: " + localOSVersion);
+
         var optionsInfo = {
             createIfMissing : true,
             encrypt : false,
@@ -101,25 +114,43 @@ export default class TestApi{
             autoSync : true,
             kvStoreType : disData.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : disData.SecurityLevel.NO_LEVEL,
+            securityLevel : disData.SecurityLevel.S1,
         }
         if(encrypt == "true"){
             optionsInfo.encrypt = true;
         }else{
             optionsInfo.encrypt = false;
         }
-        if(SecurityLevel == "S0"){
-            optionsInfo.securityLevel=disData.SecurityLevel.S0;
-        }else if(SecurityLevel == "S1"){
-            optionsInfo.securityLevel=disData.SecurityLevel.S1;
-        }else if(SecurityLevel == "S2"){
-            optionsInfo.securityLevel=disData.SecurityLevel.S2;
-        }else if(SecurityLevel == "S3"){
-            optionsInfo.securityLevel=disData.SecurityLevel.S3;
-        }else if(SecurityLevel == "S4"){
-            optionsInfo.securityLevel=disData.SecurityLevel.S4;
-        }else{
-            optionsInfo.securityLevel=disData.SecurityLevel.NO_LEVEL;
+
+        if (localOSVersion == OSVersion41) {
+            flag_41 = 1;
+            console.info(logTag + "flag_41 is: " + flag_41);
+            if(SecurityLevel == "S1"){
+                optionsInfo.securityLevel=disData.SecurityLevel.S1;
+            }else if(SecurityLevel == "S2"){
+                optionsInfo.securityLevel=disData.SecurityLevel.S2;
+            }else if(SecurityLevel == "S3"){
+                optionsInfo.securityLevel=disData.SecurityLevel.S3;
+            }else if(SecurityLevel == "S4"){
+                optionsInfo.securityLevel=disData.SecurityLevel.S4;
+            }
+        
+        } else {
+            flag_41 = 0;
+            console.info(logTag + "flag_41 is: " + flag_41);
+            if(SecurityLevel == "NO_LEVEL"){
+                optionsInfo.securityLevel=disData.SecurityLevel.NO_LEVEL;
+            }else if(SecurityLevel == "S0"){
+                optionsInfo.securityLevel=disData.SecurityLevel.S0;
+            }else if(SecurityLevel == "S1"){
+                optionsInfo.securityLevel=disData.SecurityLevel.S1;
+            }else if(SecurityLevel == "S2"){
+                optionsInfo.securityLevel=disData.SecurityLevel.S2;
+            }else if(SecurityLevel == "S3"){
+                optionsInfo.securityLevel=disData.SecurityLevel.S3;
+            }else if(SecurityLevel == "S4"){
+                optionsInfo.securityLevel=disData.SecurityLevel.S4;
+            }
         }
 
         await kvManager.getKVStore(storeId,optionsInfo).then((store) =>{
