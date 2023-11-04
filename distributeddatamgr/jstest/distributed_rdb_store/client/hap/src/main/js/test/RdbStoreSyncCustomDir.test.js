@@ -35,7 +35,7 @@ var rdbStore = undefined;
 var resultSet = undefined;
 let dmInstance = null;
 let localDeviceId = undefined;
-let logTag = 'RpcClient:  ';
+let logTag = 'rdbSyncCustomDirlTest:  ';
 let testservice = null;
 let gIRemoteObject = null;
 let remoteHelpers = null;
@@ -85,8 +85,40 @@ export default function rdbSyncCustomDirlTest(){
             await driveFn();
             sleep(100);
 
-            testservice = new TestService();
+            await deviceManager.createDeviceManager(TEST_BUNDLE_NAME,async (error, deviceManager) =>{
+                console.info(logTag + "CLIENT Create device manager success");
+                localDeviceId = deviceManager.getLocalDeviceInfoSync().deviceId;
+                console.info(logTag + "local device id is: " + localDeviceId);
+                deviceList = deviceManager.getTrustedDeviceListSync();
+                deviceId = deviceList[0].networkId;
+                syncDeviceIds = [deviceId];
+                dmInstance = deviceManager;
+                dmInstance.on("deviceStateChange", (data) => {
+                    console.log("deviceStateChange: " + JSON.stringify(data));
+                });
+            })
+
             console.info(logTag + "deviceId: " + deviceId);
+            try{
+                let wantValue = {
+                    bundleName: "com.ohos.distributerdbdisjs",
+                    abilityName: "com.ohos.distributerdbdisjs.MainAbility",
+                    deviceId: deviceId
+                };
+                await featureAbility.startAbility({
+                    want: wantValue
+                }).then((data) => {
+                    console.info(logTag + 'beforeAll startAbility data' + JSON.stringify(data));
+                }).catch((err) => {
+                    console.info(logTag + 'beforeAll startAbility err: ' + err.code);
+                    console.info(logTag + 'beforeAll startAbility err: ' + err.message);
+                });
+            }catch(error){
+                console.info(logTag + "beforeAll startAbility:error = " + error);
+            };
+            await sleep(100);
+            
+            testservice = new TestService();
             await testservice.toConnectRdbAbility().then(data => {
                 gIRemoteObject = data;
                 console.info(logTag + "toConnectAbility data is" + data);
@@ -105,18 +137,7 @@ export default function rdbSyncCustomDirlTest(){
             })
             await back;
     
-            await deviceManager.createDeviceManager(TEST_BUNDLE_NAME,async (error, deviceManager) =>{
-                console.info(logTag + "CLIENT Create device manager success");
-                localDeviceId = deviceManager.getLocalDeviceInfoSync().deviceId;
-                console.info(logTag + "local device id is: " + localDeviceId);
-                deviceList = deviceManager.getTrustedDeviceListSync();
-                deviceId = deviceList[0].networkId;
-                syncDeviceIds = [deviceId];
-                dmInstance = deviceManager;
-                dmInstance.on("deviceStateChange", (data) => {
-                    console.log("deviceStateChange: " + JSON.stringify(data));
-                });
-            })
+
     
             function storeObserver(devices) {
                 for (let i = 0; i < devices.length; i++) {
