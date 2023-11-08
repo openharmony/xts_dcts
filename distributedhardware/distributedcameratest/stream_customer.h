@@ -23,7 +23,6 @@
 #include <map>
 #include <surface.h>
 #include "constants.h"
-#include "distributed_hardware_log.h"
 #include "iconsumer_surface.h"
 #include "v1_0/ioffline_stream_operator.h"
 
@@ -49,7 +48,6 @@ public:
 
     void OnBufferAvailable()
     {
-        DHLOGI("demo test:enter OnBufferAvailable start");
         OHOS::Rect damage;
         int32_t flushFence = 0;
         int64_t timestamp = 0;
@@ -63,7 +61,6 @@ public:
                 callback_(addr, size);
             }
             consumer_->ReleaseBuffer(buff, -1);
-            DHLOGI("demo test:Exiting OnBufferAvailable end");
         }
     }
 private:
