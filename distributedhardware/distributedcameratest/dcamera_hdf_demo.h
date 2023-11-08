@@ -18,7 +18,6 @@
 #include <vector>
 #include <map>
 #include <iostream>
-#include <hdf_log.h>
 #include <surface.h>
 #include <sys/time.h>
 #include <ctime>
