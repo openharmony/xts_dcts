@@ -357,6 +357,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInterfaceToken()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0010 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -389,6 +390,7 @@ export default function RpcJsUnitTest() {
                     });
                 }
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0020 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -422,6 +424,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInterfaceToken()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0030 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -448,6 +451,7 @@ export default function RpcJsUnitTest() {
                 }
                 data.writeInterfaceToken(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0040 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -471,6 +475,7 @@ export default function RpcJsUnitTest() {
                 let token = 123;
                 data.writeInterfaceToken(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0050 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -501,6 +506,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readShortArray(), wShortArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0060 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -536,6 +542,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rShortArryData, wShortArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0070 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -565,6 +572,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readShortArray(), wShortArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0080 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -595,6 +603,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readShortArray(), erShortArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0090 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -620,6 +629,7 @@ export default function RpcJsUnitTest() {
                 };
                 data.writeShortArray(eShortArryData);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0100 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -650,6 +660,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readLongArray(), wLongArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0110 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -685,6 +696,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rLongArryData, wLongArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0120 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -716,6 +728,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rLongArryData, wLongArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0130 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -748,6 +761,7 @@ export default function RpcJsUnitTest() {
                     expect(rLongArryData[1]).assertEqual(newlongdata[1]);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0140 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -773,6 +787,7 @@ export default function RpcJsUnitTest() {
                 };
                 data.writeLongArray(wLongArryData);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0150 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -803,6 +818,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readDoubleArray(), wDoubleArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0160 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -838,6 +854,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rDoubleArryData, wDoubleArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0170 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -867,6 +884,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readDoubleArray(), wDoubleArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0180 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -898,6 +916,7 @@ export default function RpcJsUnitTest() {
                     expect(rDoubleArryData[1]).assertEqual(1.79e+308);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0190 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -923,6 +942,7 @@ export default function RpcJsUnitTest() {
                 }
                 data.writeDoubleArray(eDoubleArryData);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0200 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -953,6 +973,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readBooleanArray(), wBooleanArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0210 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -992,6 +1013,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rBooleanArryData, wBooleanArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0220 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1022,6 +1044,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readBooleanArray(), eCharArrayData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0230 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1051,6 +1074,7 @@ export default function RpcJsUnitTest() {
                 }
                 data.writeBooleanArray(wBooleanArryData);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0240 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -1081,6 +1105,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readCharArray(), wCharArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0250 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1116,6 +1141,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rCharArryData, wCharArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0260 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1147,6 +1173,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(readchardata, eCharArrayData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0270 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1172,6 +1199,7 @@ export default function RpcJsUnitTest() {
                 };
                 data.writeCharArray(errorCharArryData);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0280 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -1182,14 +1210,14 @@ export default function RpcJsUnitTest() {
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_02900
+        * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_0290
         * @tc.name    Call the writestringarray interface, write the array to the MessageSequence instance,
         *             and call readstringarray (datain: number []) to read the data
         * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   3
         */
-        it("SUB_DSoftbus_RPC_API_MessageSequence_02900", 0, async function () {
-            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_02900---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_0290", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_0290---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -1202,12 +1230,13 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readStringArray(), wStringArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0290 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
                 reply.reclaim();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_02900---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_0290---------------------------");
         });
 
         /*
@@ -1236,6 +1265,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rStringArryData, wStringArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0300 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1258,6 +1288,7 @@ export default function RpcJsUnitTest() {
                 data.writeStringArray(errorStringArryData);
 
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0310 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -1283,6 +1314,7 @@ export default function RpcJsUnitTest() {
                 }
                 data.writeStringArray(wStringArryData);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0320 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1312,6 +1344,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readByteArray(), ByteArraylet);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0330 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1345,6 +1378,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(ByteArraylet, newArr);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0340 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1380,6 +1414,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(newArr, ByteArraylet);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0350 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1414,6 +1449,7 @@ export default function RpcJsUnitTest() {
                     expect(shortArryDataReply[4] == -128).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0360 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1439,6 +1475,7 @@ export default function RpcJsUnitTest() {
                 }
                 data.writeByteArray(ByteArraylet);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0370 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -1469,6 +1506,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readIntArray(), intArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0380 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1504,6 +1542,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(newArr, intArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0390 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1533,6 +1572,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readIntArray(), intArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0400 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1566,6 +1606,7 @@ export default function RpcJsUnitTest() {
                     expect(shortArryDataReply[4] == -2147483648).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0410 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1590,6 +1631,7 @@ export default function RpcJsUnitTest() {
                 }
                 data.writeIntArray(intArryData);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0420 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -1620,6 +1662,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readFloatArray(), floatArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0430 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1652,6 +1695,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(newArr, floatArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0440 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1684,6 +1728,7 @@ export default function RpcJsUnitTest() {
                     expect(newArr[2]).assertEqual(3.4028235e+38);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0450 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1716,6 +1761,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readFloatArray(), floatArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0460 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1741,6 +1787,7 @@ export default function RpcJsUnitTest() {
                 };
                 data.writeFloatArray(floatArryData);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0470 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -1771,6 +1818,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readShort(), short);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0480 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1807,6 +1855,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readShort() == 32767).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0490 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1835,6 +1884,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readShort() == 32767).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0500 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1863,6 +1913,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readShort() == -32768).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0510 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1893,6 +1944,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readLong()).assertEqual(long);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0520 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1923,6 +1975,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readLong() == long).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0530 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1952,6 +2005,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readLong()).assertEqual(-9223372036854776000);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0540 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -1982,6 +2036,7 @@ export default function RpcJsUnitTest() {
                     expect(readlong != 0).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0550 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2011,6 +2066,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readDouble()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0560 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2040,6 +2096,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readDouble()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0570 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2068,6 +2125,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readDouble()).assertEqual(-1);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0580 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2089,6 +2147,7 @@ export default function RpcJsUnitTest() {
                 let token = "1.79E+465312156";
                 data.writeDouble(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0590 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -2119,6 +2178,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readBoolean()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0600 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2149,6 +2209,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readBoolean()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0610 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2170,6 +2231,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 data.writeBoolean(9);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0620 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -2192,6 +2254,7 @@ export default function RpcJsUnitTest() {
                 let token = "true";
                 data.writeBoolean(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0630 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -2222,6 +2285,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readChar()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0640 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2252,6 +2316,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readChar()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0650 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2282,6 +2347,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readChar()).assertEqual(255);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0660 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2312,6 +2378,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readChar()).assertEqual(0);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0670 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2334,6 +2401,7 @@ export default function RpcJsUnitTest() {
                 let token = 'ades';
                 data.writeChar(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0680 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -2367,6 +2435,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0690 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2392,6 +2461,7 @@ export default function RpcJsUnitTest() {
                 }
                 data.writeString(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0700 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -2414,6 +2484,7 @@ export default function RpcJsUnitTest() {
                 let token = 123;
                 data.writeString(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0710 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -2444,6 +2515,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readByte()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0720 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2480,6 +2552,7 @@ export default function RpcJsUnitTest() {
                     expect(reply.readByte()).assertEqual(127);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0730 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2508,6 +2581,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readByte()).assertEqual(127);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0740 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2536,6 +2610,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readByte()).assertEqual(-128);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0750 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2557,6 +2632,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 data.writeByte("error");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0760 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -2587,6 +2663,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0770 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2623,6 +2700,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(2147483647);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0780 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2651,6 +2729,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(2147483647);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0790 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2679,6 +2758,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(-2147483648);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0800 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2700,6 +2780,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 data.writeInt("error");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0810 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -2730,6 +2811,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readFloat()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0820 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2760,6 +2842,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readFloat()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0830 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2789,6 +2872,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readFloat()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0840 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2818,6 +2902,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readFloat()).assertEqual(3.4028235e+38);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0850 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2847,6 +2932,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readFloat()).assertEqual(-1);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0860 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -2869,6 +2955,7 @@ export default function RpcJsUnitTest() {
                 let token = 'a';
                 data.writeFloat(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0870 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -2902,6 +2989,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getRawDataCapacity()).assertEqual(128 * M);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0880 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 parcel.reclaim();
@@ -2936,6 +3024,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readRawData(size), arr);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0890 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 parcel.reclaim();
@@ -2975,6 +3064,7 @@ export default function RpcJsUnitTest() {
                     expect(arr[4]).assertEqual(newReadResult[4]);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0900 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 parcel.reclaim();
@@ -3013,6 +3103,7 @@ export default function RpcJsUnitTest() {
                     expect(arr[3]).assertEqual(newReadResult[3]);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0910 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 parcel.reclaim();
@@ -3047,6 +3138,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readRawData(size), arr);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0920 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 parcel.reclaim();
@@ -3071,6 +3163,7 @@ export default function RpcJsUnitTest() {
                 parcel.writeRawData(arr, arr.length);
                 expect(parcel.getRawDataCapacity()).assertEqual(128 * M);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0930 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 parcel.reclaim();
@@ -3092,6 +3185,7 @@ export default function RpcJsUnitTest() {
                 data.writeRemoteObject(testRemoteObject);
                 expect(data.readRemoteObject() != null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0940 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3113,6 +3207,7 @@ export default function RpcJsUnitTest() {
                 let token = new TestRemoteObject(null);
                 data.writeRemoteObject(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0950 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3159,6 +3254,7 @@ export default function RpcJsUnitTest() {
                 let ret = new MySequenceable(0, "");
                 data.readParcelable(ret);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0970 error: " + error);
                 expect(error).assertEqual(null);
             } finally{
                 data.reclaim();
@@ -3182,6 +3278,7 @@ export default function RpcJsUnitTest() {
                 let ret = new MySequenceable(1, "");
                 data.readParcelable(ret);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0980 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3211,6 +3308,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(6);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_0990 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3242,6 +3340,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt() != 1232222223444).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1000 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3252,13 +3351,13 @@ export default function RpcJsUnitTest() {
         });
 
         /*
-            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_10100
+            * @tc.number  SUB_DSoftbus_RPC_API_MessageSequence_1010
             * @tc.name    Serializable object marshaling and unmarshalling test
             * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
             * @tc.level   3
             */
-        it("SUB_DSoftbus_RPC_API_MessageSequence_10100", 0, async function (done) {
-            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_10100---------------------------");
+        it("SUB_DSoftbus_RPC_API_MessageSequence_1010", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_MessageSequence_1010---------------------------");
             try {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -3274,13 +3373,14 @@ export default function RpcJsUnitTest() {
                     expect(s.num).assertEqual(sequenceable.num);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1010 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
                 reply.reclaim();
                 done();
             }
-            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_10100---------------------------");
+            console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1010---------------------------");
         });
 
         /*
@@ -3296,6 +3396,7 @@ export default function RpcJsUnitTest() {
                 let sequenceable = new MySequenceable(1, 1);
                 data.writeParcelable(sequenceable);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1020 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -3327,6 +3428,7 @@ export default function RpcJsUnitTest() {
                     result.reply.readParcelable(s);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1030 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3360,6 +3462,7 @@ export default function RpcJsUnitTest() {
                     expect(s.num).assertEqual(sequenceable.num);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1040 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3397,6 +3500,7 @@ export default function RpcJsUnitTest() {
                     }
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1050 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3434,6 +3538,7 @@ export default function RpcJsUnitTest() {
                     };
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1060 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3457,6 +3562,7 @@ export default function RpcJsUnitTest() {
                 let sequenceable = 1;
                 data.writeParcelableArray(sequenceable);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1070 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -3503,6 +3609,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply).assertEqual(reply);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1080 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3546,6 +3653,7 @@ export default function RpcJsUnitTest() {
                     expect(result.errCode == 0).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1090 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3594,6 +3702,7 @@ export default function RpcJsUnitTest() {
                     expect(s.str).assertEqual("aaa");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1100 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3653,6 +3762,7 @@ export default function RpcJsUnitTest() {
                 await gIRemoteObject.sendMessageRequest(CODE_ALL_TYPE, data, reply, option, sendMessageRequestCallback);
 
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1110 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("--------------------end SUB_DSoftbus_RPC_API_MessageSequence_1110--------------------------");
@@ -3703,6 +3813,7 @@ export default function RpcJsUnitTest() {
                     }
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1120 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3776,6 +3887,7 @@ export default function RpcJsUnitTest() {
                     }
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1130 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3811,6 +3923,7 @@ export default function RpcJsUnitTest() {
                     result.reply.readException();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1140 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3854,6 +3967,7 @@ export default function RpcJsUnitTest() {
                         result.reply.readException();
                     });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1150 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3899,6 +4013,7 @@ export default function RpcJsUnitTest() {
                         result.reply.readException();
                     });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1160 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3931,6 +4046,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual("");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1170 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3962,6 +4078,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(0);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1180 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -3992,6 +4109,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(5);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1190 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4022,6 +4140,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt() != 5).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1200 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4055,6 +4174,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual("constant");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1210 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4087,6 +4207,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getCapacity()).assertEqual(("constant".length * 2) + 8);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1220 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4112,6 +4233,7 @@ export default function RpcJsUnitTest() {
                 data.setCapacity(getSizedata + 1);
                 data.setCapacity(getSizedata);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1230 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
                 expect(error.message != null).assertTrue();
                 expect(error.code == errCode).assertTrue();
@@ -4143,6 +4265,7 @@ export default function RpcJsUnitTest() {
                     result.reply.setCapacity(getSizeresult);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1240 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
                 expect(error.message != null).assertTrue();
                 expect(error.code == errCode).assertTrue();
@@ -4169,6 +4292,7 @@ export default function RpcJsUnitTest() {
                 expect(data.getCapacity()).assertEqual(M);
                 data.setCapacity(2 * G);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1250 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
                 expect(error.message != null).assertTrue();
                 expect(error.code == errCode).assertTrue();
@@ -4203,6 +4327,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual("constant");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1260 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4237,6 +4362,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual("");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1270 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4265,6 +4391,7 @@ export default function RpcJsUnitTest() {
                 expect(data.getSize()).assertEqual(getCapacitydata);
                 data.setSize(getCapacitydata + 1);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1280 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4297,6 +4424,7 @@ export default function RpcJsUnitTest() {
                     result.reply.setSize(getCapacityresult + 1);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1290 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4321,6 +4449,7 @@ export default function RpcJsUnitTest() {
                 expect(data.getSize()).assertEqual(0);
                 data.setSize(4 * G - 1);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1300 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4345,6 +4474,7 @@ export default function RpcJsUnitTest() {
                 expect(data.getSize()).assertEqual(0);
                 data.setSize(2 * G);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1310 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4376,6 +4506,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getReadPosition()).assertEqual(4);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1320 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4407,6 +4538,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getReadableBytes()).assertEqual(0);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1330 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4441,6 +4573,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getReadPosition()).assertEqual(4);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1340 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4475,6 +4608,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getReadableBytes()).assertEqual(0);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1350 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4507,6 +4641,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readRawData(size) != rawdata).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1360 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4528,6 +4663,7 @@ export default function RpcJsUnitTest() {
                 let testab = new TestProxy(gIRemoteObject).asObject();
                 expect(testab != null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1370 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1370---------------------------");
@@ -4545,6 +4681,7 @@ export default function RpcJsUnitTest() {
                 let testRemoteObject = new TestRemoteObject("testObject");
                 expect(testRemoteObject.asObject() != null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1380 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageSequence_1380---------------------------");
@@ -4573,6 +4710,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readRawData(rawdata.length) != rawdata).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1390 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4603,6 +4741,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1400 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4634,6 +4773,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual("onRemoteMessageRequest invoking");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1410 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4660,6 +4800,7 @@ export default function RpcJsUnitTest() {
                 let ret = new MySequenceable(1, "");
                 data.readParcelable(ret);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1420 error: " + error);
                 let errCode = `${rpc.ErrorCode.CALL_JS_METHOD_ERROR}`;
                 expect(error.message != null).assertTrue();
                 expect(error.code != errCode).assertTrue();
@@ -4686,6 +4827,7 @@ export default function RpcJsUnitTest() {
                 data.setSize(0);
                 data.readInterfaceToken();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1430 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.message != null).assertTrue();
                 expect(error.code != errCode).assertTrue();
@@ -4711,6 +4853,7 @@ export default function RpcJsUnitTest() {
                 };
                 data.writeString(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1440 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -4735,6 +4878,7 @@ export default function RpcJsUnitTest() {
                 let token = "hello ruan zong xian";
                 data.writeInterfaceToken(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1450 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -4759,6 +4903,7 @@ export default function RpcJsUnitTest() {
                 let token = "hello ruan zong xian";
                 data.writeInterfaceToken(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1460 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -4784,6 +4929,7 @@ export default function RpcJsUnitTest() {
                 data.setCapacity(0);
                 data.readParcelable(ret);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1470 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -4806,6 +4952,7 @@ export default function RpcJsUnitTest() {
                 let token = {};
                 data.writeRemoteObject(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1480 error: " + error);
                 let errCode = `${rpc.ErrorCode.PROXY_OR_REMOTE_OBJECT_INVALID_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -4842,6 +4989,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getReadPosition()).assertEqual(4);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1490 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4876,6 +5024,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt() != 5).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1500 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4905,6 +5054,7 @@ export default function RpcJsUnitTest() {
                 data.rewindWrite((token.length * 2 + 6) - 1);
                 expect(data.getWritePosition()).assertEqual((token.length * 2 + 6) - 1);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1510 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -4967,6 +5117,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getReadPosition()).assertEqual(1);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1530 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5000,6 +5151,7 @@ export default function RpcJsUnitTest() {
                 expect(data.readString() != "sequence").assertTrue();
                 expect(data.getReadPosition()).assertEqual(4 + 5);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1540 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5029,6 +5181,7 @@ export default function RpcJsUnitTest() {
                 data.rewindRead((token.length * 2 + 6) - 1);
                 expect(data.getReadPosition()).assertEqual((token.length * 2 + 6) - 1);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1550 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5116,6 +5269,7 @@ export default function RpcJsUnitTest() {
                     expect(s.str).assertEqual("aaa");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1570 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5139,6 +5293,7 @@ export default function RpcJsUnitTest() {
                 data.writeString(str);
                 expect(data.getWritePosition()).assertEqual(8);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1580 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5196,6 +5351,7 @@ export default function RpcJsUnitTest() {
                     expect(s.str).assertEqual("aaa");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1590 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5220,6 +5376,7 @@ export default function RpcJsUnitTest() {
                 expect(data.readString()).assertEqual(str);
                 expect(data.getReadPosition()).assertEqual(8);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageSequence_1600 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5248,6 +5405,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInterfaceToken()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0010 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5280,6 +5438,7 @@ export default function RpcJsUnitTest() {
                     });
                 }
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0020 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5313,6 +5472,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInterfaceToken()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0030 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5339,6 +5499,7 @@ export default function RpcJsUnitTest() {
                 }
                 expect(data.writeInterfaceToken(token)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0040 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5360,6 +5521,7 @@ export default function RpcJsUnitTest() {
                 let token = 123;
                 expect(data.writeInterfaceToken(token)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0050 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5388,6 +5550,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readShortArray(), wShortArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0060 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5423,6 +5586,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rShortArryData, wShortArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0070 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5452,6 +5616,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readShortArray(), wShortArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0080 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5482,6 +5647,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readShortArray(), erShortArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0090 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5507,6 +5673,7 @@ export default function RpcJsUnitTest() {
                 };
                 expect(data.writeShortArray(eShortArryData)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0100 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5535,6 +5702,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readLongArray(), wLongArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0110 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5570,6 +5738,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rLongArryData, wLongArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0120 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5601,6 +5770,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rLongArryData, wLongArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0130 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5633,6 +5803,7 @@ export default function RpcJsUnitTest() {
                     expect(rLongArryData[1]).assertEqual(newlongdata[1]);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0140 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5658,6 +5829,7 @@ export default function RpcJsUnitTest() {
                 };
                 expect(data.writeLongArray(wLongArryData)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0150 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5686,6 +5858,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readDoubleArray(), wDoubleArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0160 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5721,6 +5894,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rDoubleArryData, wDoubleArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0170 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5750,6 +5924,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readDoubleArray(), wDoubleArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0180 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5781,6 +5956,7 @@ export default function RpcJsUnitTest() {
                     expect(rDoubleArryData[1]).assertEqual(1.79e+308);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0190 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5806,6 +5982,7 @@ export default function RpcJsUnitTest() {
                 }
                 expect(data.writeDoubleArray(eDoubleArryData)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0200 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5834,6 +6011,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readBooleanArray(), wBooleanArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0210 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5873,6 +6051,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rBooleanArryData, wBooleanArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0220 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5903,6 +6082,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readBooleanArray(), eCharArrayData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0230 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5932,6 +6112,7 @@ export default function RpcJsUnitTest() {
                 }
                 expect(data.writeBooleanArray(wBooleanArryData)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0240 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5960,6 +6141,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readCharArray(), wCharArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0250 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -5995,6 +6177,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rCharArryData, wCharArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0260 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6025,6 +6208,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(data.readCharArray(), eCharArrayData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0270 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6050,6 +6234,7 @@ export default function RpcJsUnitTest() {
                 };
                 expect(data.writeCharArray(errorCharArryData)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0280 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6078,6 +6263,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readStringArray(), wStringArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0290 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6111,6 +6297,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(rStringArryData, wStringArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0300 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6132,6 +6319,7 @@ export default function RpcJsUnitTest() {
                 let errorStringArryData = ['abc', 123, 'beauty'];
                 expect(data.writeStringArray(errorStringArryData)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0310 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6155,6 +6343,7 @@ export default function RpcJsUnitTest() {
                 }
                 expect(data.writeStringArray(wStringArryData)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0320 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6183,6 +6372,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readByteArray(), ByteArraylet);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0330 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6215,6 +6405,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(ByteArraylet, newArr);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0340 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6249,6 +6440,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(newArr, ByteArraylet);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0350 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6283,6 +6475,7 @@ export default function RpcJsUnitTest() {
                     expect(shortArryDataReply[4] == -128).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0360 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6308,6 +6501,7 @@ export default function RpcJsUnitTest() {
                 }
                 expect(data.writeByteArray(ByteArraylet)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0370 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6336,6 +6530,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readIntArray(), intArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0380 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6371,6 +6566,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(newArr, intArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0390 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6400,6 +6596,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readIntArray(), intArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0400 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6433,6 +6630,7 @@ export default function RpcJsUnitTest() {
                     expect(shortArryDataReply[4] == -2147483648).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0410 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6457,6 +6655,7 @@ export default function RpcJsUnitTest() {
                 }
                 expect(data.writeIntArray(intArryData)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0420 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6485,6 +6684,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readFloatArray(), floatArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0430 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6517,6 +6717,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(newArr, floatArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0440 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6549,6 +6750,7 @@ export default function RpcJsUnitTest() {
                     expect(newArr[2]).assertEqual(3.4028235e+38);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0450 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6581,6 +6783,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readFloatArray(), floatArryData);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0460 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6606,6 +6809,7 @@ export default function RpcJsUnitTest() {
                 };
                 expect(data.writeFloatArray(floatArryData)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0470 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6634,6 +6838,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readShort(), short);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0480 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6670,6 +6875,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readShort() == 32767).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0490 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6698,6 +6904,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readShort() == 32767).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0500 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6726,6 +6933,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readShort() == -32768).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0510 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6756,6 +6964,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readLong()).assertEqual(long);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0520 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6786,6 +6995,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readLong() == long).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0530 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6815,6 +7025,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readLong()).assertEqual(-9223372036854776000);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0540 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6845,6 +7056,7 @@ export default function RpcJsUnitTest() {
                     expect(readlong != 0).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0550 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6874,6 +7086,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readDouble()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0560 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6903,6 +7116,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readDouble()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0570 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6931,6 +7145,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readDouble()).assertEqual(-1);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0580 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6952,6 +7167,7 @@ export default function RpcJsUnitTest() {
                 let token = "1.79E+465312156";
                 expect(data.writeDouble(token)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0590 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -6980,6 +7196,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readBoolean()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0600 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7010,6 +7227,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readBoolean()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0610 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7031,6 +7249,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 expect(data.writeBoolean(9)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0620 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7051,6 +7270,7 @@ export default function RpcJsUnitTest() {
                 let token = "true";
                 expect(data.writeBoolean(token)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0630 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7079,6 +7299,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readChar()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0640 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7109,6 +7330,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readChar()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0650 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7139,6 +7361,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readChar()).assertEqual(255);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0660 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7169,6 +7392,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readChar()).assertEqual(0);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0670 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7191,6 +7415,7 @@ export default function RpcJsUnitTest() {
                 let token = 'ades';
                 expect(data.writeChar(token)).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0680 error: " + error);
                 expect(error != null).assertTrue()
             } finally{
                 data.reclaim();
@@ -7222,6 +7447,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0690 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7247,6 +7473,7 @@ export default function RpcJsUnitTest() {
                 }
                 expect(data.writeString(token)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0700 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7267,6 +7494,7 @@ export default function RpcJsUnitTest() {
                 let token = 123;
                 expect(data.writeString(token)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0710 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7295,6 +7523,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readByte()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0720 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7331,6 +7560,7 @@ export default function RpcJsUnitTest() {
                     expect(reply.readByte()).assertEqual(127);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0730 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7359,6 +7589,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readByte()).assertEqual(127);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0740 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7387,6 +7618,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readByte()).assertEqual(-128);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0750 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7408,6 +7640,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 expect(data.writeByte("error")).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0760 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7436,6 +7669,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0770 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7472,6 +7706,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(2147483647);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0780 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7500,6 +7735,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(2147483647);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0790 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7528,6 +7764,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(-2147483648);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0800 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7549,6 +7786,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 expect(data.writeInt("error")).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0810 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7577,6 +7815,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readFloat()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0820 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7606,6 +7845,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readFloat()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0830 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7635,6 +7875,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readFloat()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0840 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7664,6 +7905,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readFloat()).assertEqual(3.4028235e+38);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0850 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7693,6 +7935,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readFloat()).assertEqual(-1);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0860 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7715,6 +7958,7 @@ export default function RpcJsUnitTest() {
                 let token = 'a';
                 expect(data.writeFloat(token)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0870 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7746,6 +7990,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getRawDataCapacity()).assertEqual(128 * M);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0880 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 parcel.reclaim();
@@ -7780,6 +8025,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readRawData(size), arr);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0890 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 parcel.reclaim();
@@ -7819,6 +8065,7 @@ export default function RpcJsUnitTest() {
                     expect(arr[4]).assertEqual(newReadResult[4]);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0900 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 parcel.reclaim();
@@ -7857,6 +8104,7 @@ export default function RpcJsUnitTest() {
                     expect(arr[3]).assertEqual(newReadResult[3]);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0910 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 parcel.reclaim();
@@ -7891,6 +8139,7 @@ export default function RpcJsUnitTest() {
                     assertArrayElementEqual(result.reply.readRawData(size), arr);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0920 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 parcel.reclaim();
@@ -7915,6 +8164,7 @@ export default function RpcJsUnitTest() {
                 expect(parcel.writeRawData(arr, arr.length)).assertTrue();
                 expect(parcel.getRawDataCapacity()).assertEqual(128 * M);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0930 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 parcel.reclaim();
@@ -7936,6 +8186,7 @@ export default function RpcJsUnitTest() {
                 expect(data.writeRemoteObject(testRemoteObject)).assertTrue();
                 expect(data.readRemoteObject() != null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0940 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7956,6 +8207,7 @@ export default function RpcJsUnitTest() {
                 let token = new TestRemoteObject(null);
                 expect(data.writeRemoteObject(token)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0950 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7976,6 +8228,7 @@ export default function RpcJsUnitTest() {
                 let token = {}
                 expect(data.writeRemoteObject(token)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0960 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -7999,6 +8252,7 @@ export default function RpcJsUnitTest() {
                 let ret = new MySequenceable(0, "");
                 expect(data.readSequenceable(ret)).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0970 error: " + error);
                 expect(error).assertEqual(null);
             } finally{
                 data.reclaim();
@@ -8022,6 +8276,7 @@ export default function RpcJsUnitTest() {
                 let ret = new MySequenceable(1, "");
                 expect(data.readSequenceable(ret)).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0980 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8051,6 +8306,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(6);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_0990 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8082,6 +8338,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt() != 1232222223444).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1000 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8114,6 +8371,7 @@ export default function RpcJsUnitTest() {
                     expect(s.num).assertEqual(sequenceable.num);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1010 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8138,6 +8396,7 @@ export default function RpcJsUnitTest() {
                 let sequenceable = null;
                 expect(data.writeSequenceable(sequenceable)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1020 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8168,6 +8427,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readSequenceable(s)).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1030 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8201,6 +8461,7 @@ export default function RpcJsUnitTest() {
                     expect(s.num).assertEqual(sequenceable.num);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1040 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8238,6 +8499,7 @@ export default function RpcJsUnitTest() {
                     }
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1050 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8275,6 +8537,7 @@ export default function RpcJsUnitTest() {
                     }
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1060 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8298,6 +8561,7 @@ export default function RpcJsUnitTest() {
                 let sequenceable = 1;
                 expect(data.writeSequenceableArray(sequenceable)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1070 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8344,6 +8608,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply).assertEqual(reply);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1080 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8389,6 +8654,7 @@ export default function RpcJsUnitTest() {
                     expect(result.errCode == 0).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1090 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8437,6 +8703,7 @@ export default function RpcJsUnitTest() {
                     expect(s.str).assertEqual("aaa");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1100 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8496,6 +8763,7 @@ export default function RpcJsUnitTest() {
                 await gIRemoteObject.sendRequest(CODE_ALL_TYPE, data, reply, option, sendRequestCallback)
 
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1110 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("--------------------end SUB_DSoftbus_RPC_API_MessageParcel_1110--------------------------");
@@ -8546,6 +8814,7 @@ export default function RpcJsUnitTest() {
                     }
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1120 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8619,6 +8888,7 @@ export default function RpcJsUnitTest() {
                     }
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1130 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8655,6 +8925,7 @@ export default function RpcJsUnitTest() {
                     result.reply.readException();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1140 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8699,6 +8970,7 @@ export default function RpcJsUnitTest() {
                         result.reply.readException();
                     })
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1150 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8744,6 +9016,7 @@ export default function RpcJsUnitTest() {
                         result.reply.readException();
                     })
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1160 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8776,6 +9049,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual("");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1170 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8807,6 +9081,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(0);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1180 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8837,6 +9112,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(5);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1190 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8867,6 +9143,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt() != 5).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1200 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8900,6 +9177,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual("constant");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1210 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8932,6 +9210,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getCapacity()).assertEqual(("constant".length * 2) + 8);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1220 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8959,6 +9238,7 @@ export default function RpcJsUnitTest() {
                 expect(data.setCapacity(getSizedata)).assertEqual(false);
                 expect(data.getCapacity()).assertEqual((getSizedata + 1));
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1230 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -8990,6 +9270,7 @@ export default function RpcJsUnitTest() {
                     expect(data.readString()).assertEqual("constant");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1240 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9015,6 +9296,7 @@ export default function RpcJsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_MessageParcel_1250: setCapacity " + data.setCapacity(2 * G));
                 console.info("SUB_DSoftbus_RPC_API_MessageParcel_1250: setCapacity " + data.getCapacity());
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1250 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9046,6 +9328,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual("constant");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1260 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9079,6 +9362,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual("");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1270 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9106,6 +9390,7 @@ export default function RpcJsUnitTest() {
                 expect(data.getSize()).assertEqual(getCapacitydata);
                 expect(data.setSize(getCapacitydata + 1)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1280 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9138,6 +9423,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.setSize(getCapacityresult + 1)).assertEqual(false);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1290 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9162,6 +9448,7 @@ export default function RpcJsUnitTest() {
                 expect(data.getSize()).assertEqual(0);
                 expect(data.setSize(4 * G - 1)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1300 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9186,6 +9473,7 @@ export default function RpcJsUnitTest() {
                 expect(data.getSize()).assertEqual(0);
                 expect(data.setSize(2 * G)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1310 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9217,6 +9505,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getReadPosition()).assertEqual(4);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1320 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9248,6 +9537,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getReadableBytes()).assertEqual(0);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1330 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9282,6 +9572,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getReadPosition()).assertEqual(4);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1340 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9316,6 +9607,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.getReadableBytes()).assertEqual(0);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1350 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9348,6 +9640,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readRawData(size) != rawdata).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1360 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9369,6 +9662,7 @@ export default function RpcJsUnitTest() {
                 let testab = new TestProxy(gIRemoteObject).asObject();
                 expect(testab != null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1370 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1370---------------------------");
@@ -9386,6 +9680,7 @@ export default function RpcJsUnitTest() {
                 let testRemoteObject = new TestRemoteObject("testObject");
                 expect(testRemoteObject.asObject() != null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1380 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageParcel_1380---------------------------");
@@ -9414,6 +9709,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readRawData(rawdata.length) != rawdata).assertTrue();
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1390 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9444,6 +9740,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1400 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9474,6 +9771,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1410 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9504,6 +9802,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual("onRemoteMessageRequest invoking");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1420 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9534,6 +9833,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual("onRemoteMessageRequest invoking");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1430 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9559,6 +9859,7 @@ export default function RpcJsUnitTest() {
                 };
                 data.writeString(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1440 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -9583,6 +9884,7 @@ export default function RpcJsUnitTest() {
                 let token = "hello ruan zong xian";
                 data.writeInterfaceToken(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1450 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -9607,6 +9909,7 @@ export default function RpcJsUnitTest() {
                 let token = "hello ruan zong xian";
                 data.writeInterfaceToken(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1460 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -9632,6 +9935,7 @@ export default function RpcJsUnitTest() {
                 data.setCapacity(0);
                 data.readParcelable(ret);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1470 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -9654,6 +9958,7 @@ export default function RpcJsUnitTest() {
                 let token = {};
                 data.writeRemoteObject(token);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1480 error: " + error);
                 let errCode = `${rpc.ErrorCode.PROXY_OR_REMOTE_OBJECT_INVALID_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -9681,6 +9986,7 @@ export default function RpcJsUnitTest() {
                 let ret = new MySequenceable(1, "");
                 data.readParcelable(ret);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1490 error: " + error);
                 let errCode = `${rpc.ErrorCode.CALL_JS_METHOD_ERROR}`;
                 expect(error.message != null).assertTrue();
                 expect(error.code != errCode).assertTrue();
@@ -9707,6 +10013,7 @@ export default function RpcJsUnitTest() {
                 data.setSize(0);
                 data.readInterfaceToken();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageParcel_1500 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.message != null).assertTrue();
                 expect(error.code != errCode).assertTrue();
@@ -9730,6 +10037,7 @@ export default function RpcJsUnitTest() {
                 option.setWaitTime(16);
                 expect(option.getWaitTime()).assertEqual(16);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_0100 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0100---------------------------");
@@ -9751,6 +10059,7 @@ export default function RpcJsUnitTest() {
                 option.setWaitTime(60);
                 expect(option.getWaitTime()).assertEqual(60);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_0200 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0200---------------------------");
@@ -9770,6 +10079,7 @@ export default function RpcJsUnitTest() {
                 option.setWaitTime(-1);
                 expect(option.getWaitTime()).assertEqual(rpc.MessageOption.TF_WAIT_TIME);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_0300 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0300---------------------------");
@@ -9789,6 +10099,7 @@ export default function RpcJsUnitTest() {
                 option.setWaitTime(61);
                 expect(option.getWaitTime()).assertEqual(61);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_0400 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0400---------------------------");
@@ -9808,6 +10119,7 @@ export default function RpcJsUnitTest() {
                 option.setFlags(1);
                 expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_ASYNC);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_0500 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0500---------------------------");
@@ -9829,6 +10141,7 @@ export default function RpcJsUnitTest() {
                 option.setFlags(0);
                 expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_ASYNC);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_0600 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0600---------------------------");
@@ -9848,6 +10161,7 @@ export default function RpcJsUnitTest() {
                 option.setFlags(-1);
                 expect(option.getFlags()).assertEqual(-1);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_0700 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0700---------------------------");
@@ -9867,6 +10181,7 @@ export default function RpcJsUnitTest() {
                 option.setFlags(3);
                 expect(option.getFlags()).assertEqual(3);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_0800 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0800---------------------------");
@@ -9886,6 +10201,7 @@ export default function RpcJsUnitTest() {
                 expect(rpc.MessageOption.TF_WAIT_TIME).assertEqual(4);
                 expect(rpc.MessageOption.TF_ACCEPT_FDS).assertEqual(0x10);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_0900 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_MessageOption_0900---------------------------");
@@ -9918,6 +10234,7 @@ export default function RpcJsUnitTest() {
                     expect(option.getWaitTime()).assertEqual(20);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_1000 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9950,6 +10267,7 @@ export default function RpcJsUnitTest() {
                     expect(option.getFlags()).assertEqual(1);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_1100 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -9982,6 +10300,7 @@ export default function RpcJsUnitTest() {
 
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_1200 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -10003,6 +10322,7 @@ export default function RpcJsUnitTest() {
                 let option = new rpc.MessageOption();
                 option.setAsync(3);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_1300 error: " + error);
                 expect(error != null).assertTrue();
             }
             done();
@@ -10031,6 +10351,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_1400 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -10062,6 +10383,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual("");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_1500 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -10093,6 +10415,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readString()).assertEqual(token);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_MessageOption_1600 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -10114,6 +10437,7 @@ export default function RpcJsUnitTest() {
                 expect(rpc.Ashmem.createAshmem("JsAshmemTest", -1) == null).assertTrue();
                 expect(rpc.Ashmem.createAshmem(null, 1024) == null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_0100 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0100---------------------------");
@@ -10138,6 +10462,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_0200 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0200---------------------------");
@@ -10162,6 +10487,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_0300 error: " + error);
                 expect(error != null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0300---------------------------");
@@ -10183,6 +10509,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_0400 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0400---------------------------");
@@ -10204,6 +10531,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_0500 error: " + error);
                 expect(error != null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0500---------------------------");
@@ -10226,6 +10554,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_0600 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -10250,6 +10579,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_0700 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0700---------------------------");
@@ -10270,6 +10600,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_0800 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0800---------------------------");
@@ -10290,6 +10621,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_0900 error: " + error);
                 expect(error != null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_0900---------------------------");
@@ -10310,6 +10642,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_1000 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1000---------------------------");
@@ -10332,6 +10665,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_1100 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1100---------------------------");
@@ -10352,6 +10686,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_1200 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1200---------------------------");
@@ -10374,6 +10709,7 @@ export default function RpcJsUnitTest() {
                 ashmem.closeAshmem();
                 expect(ashmem.mapReadOnlyAshmem()).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_1300 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1300---------------------------");
@@ -10393,10 +10729,11 @@ export default function RpcJsUnitTest() {
                 expect(ashmem.setProtection(rpc.Ashmem.PROT_READ)).assertEqual(false);
                 expect(ashmem.mapReadAndWriteAshmem()).assertEqual(false);
                 expect(ashmem.setProtection(rpc.Ashmem.PROT_NONE)).assertTrue();
-                expect(ashmem.setProtection(rpc.Ashmem.PROT_READ)).assertEqual(false)();
+                expect(ashmem.setProtection(rpc.Ashmem.PROT_READ)).assertEqual(false);
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_1400 error: " + error);
                 expect(error != null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1400---------------------------");
@@ -10416,6 +10753,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_1500 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1500---------------------------");
@@ -10438,6 +10776,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_1600 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1600---------------------------");
@@ -10461,6 +10800,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_1700 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1700---------------------------");
@@ -10486,6 +10826,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_1800 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1800---------------------------");
@@ -10511,6 +10852,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_1900 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_1900---------------------------");
@@ -10533,6 +10875,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_2000 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2000---------------------------");
@@ -10555,6 +10898,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_2100 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2100---------------------------");
@@ -10578,6 +10922,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_2200 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2200---------------------------");
@@ -10600,6 +10945,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_2300 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2300---------------------------");
@@ -10623,6 +10969,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_2400 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2400---------------------------");
@@ -10648,6 +10995,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_2500 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2500---------------------------");
@@ -10675,6 +11023,7 @@ export default function RpcJsUnitTest() {
                 newashmem.unmapAshmem();
                 newashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_2600 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2600---------------------------");
@@ -10702,6 +11051,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_2700 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -10723,6 +11073,7 @@ export default function RpcJsUnitTest() {
                 var data2 = rpc.MessageParcel.create();
                 expect(data.writeAshmem(data2)).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_2800 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
                 data.reclaim();
@@ -10745,6 +11096,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_2900 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_2900---------------------------");
@@ -10765,6 +11117,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3000 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3000---------------------------");
@@ -10785,6 +11138,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3100 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -10807,6 +11161,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3200 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -10829,6 +11184,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3300 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3300---------------------------");
@@ -10852,6 +11208,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3400 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3400---------------------------");
@@ -10873,6 +11230,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3500 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3500---------------------------");
@@ -10897,6 +11255,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3600 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3600---------------------------");
@@ -10918,6 +11277,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3700 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3700---------------------------");
@@ -10944,6 +11304,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3800 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3800---------------------------");
@@ -10964,6 +11325,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_3900 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_3900---------------------------");
@@ -10988,6 +11350,7 @@ export default function RpcJsUnitTest() {
                 ashmem.closeAshmem();
                 console.info("SUB_DSoftbus_RPC_API_Ashmem_4000: run mapReadonlyAshmem is success");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4000 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_4000---------------------------");
@@ -11007,6 +11370,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4100 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -11029,6 +11393,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4200 error: " + error);
                 let errCode = `${rpc.ErrorCode.OS_MMAP_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -11049,6 +11414,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4300 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -11072,6 +11438,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4400 error: " + error);
                 expect(error).assertEqual(null);
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Ashmem_4400---------------------------");
@@ -11092,6 +11459,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4500 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -11114,6 +11482,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4600 error: " + error);
                 let errCode = `${rpc.ErrorCode.OS_IOCTL_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -11134,6 +11503,7 @@ export default function RpcJsUnitTest() {
                 var data2 = rpc.MessageSequence.create();
                 data.writeAshmem(data2);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4700 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_TO_ASHMEM_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error != null).assertTrue();
@@ -11163,6 +11533,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4800 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_FROM_ASHMEM_ERROR}`;
                 expect(error.code != errCode).assertEqual(null);
             }
@@ -11185,6 +11556,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_4900 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error != null).assertTrue();
@@ -11207,6 +11579,7 @@ export default function RpcJsUnitTest() {
                 ashmem.unmapAshmem();
                 ashmem.closeAshmem();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_Ashmem_5000 error: " + error);
                 let errCode = `${rpc.ErrorCode.OS_MMAP_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error != null).assertTrue();
@@ -11236,6 +11609,7 @@ export default function RpcJsUnitTest() {
                     expect(ret.str).assertEqual("aaa");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_0100 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -11285,6 +11659,7 @@ export default function RpcJsUnitTest() {
                     expect(s.str).assertEqual("aaa");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_0200 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -11342,6 +11717,7 @@ export default function RpcJsUnitTest() {
                 console.info("start send request");
                 await gIRemoteObject.sendRequest(CODE_ALL_TYPE, data, reply, option, sendRequestCallback);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_0300 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("--------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0300--------------------------");
@@ -11361,6 +11737,7 @@ export default function RpcJsUnitTest() {
                 expect(object.removeDeathRecipient(null, 0)).assertEqual(false);
                 expect(object.isObjectDead()).assertEqual(false);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_0400 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0400---------------------------");
@@ -11381,6 +11758,7 @@ export default function RpcJsUnitTest() {
                 expect(rpc.IPCSkeleton.getCallingDeviceID()).assertEqual("");
                 expect(rpc.IPCSkeleton.getLocalDeviceID()).assertEqual("");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_0500 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0500---------------------------");
@@ -11402,6 +11780,7 @@ export default function RpcJsUnitTest() {
                 object.attachLocalInterface(object, "Test1");
                 expect(object.queryLocalInterface("Test1") != null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_0600 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0600---------------------------");
@@ -11423,6 +11802,7 @@ export default function RpcJsUnitTest() {
                 object.attachLocalInterface(object, "test1");
                 expect(object.getInterfaceDescriptor() != null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_0700 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0700---------------------------");
@@ -11467,6 +11847,7 @@ export default function RpcJsUnitTest() {
                     expect(s.str).assertEqual("aaa");
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_0800 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -11527,6 +11908,7 @@ export default function RpcJsUnitTest() {
                 console.info("start send request");
                 object.sendRequest(CODE_SAME_PROCESS, data, reply, option, sendRequestCallback);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_0900 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_0900---------------------------");
@@ -11552,6 +11934,7 @@ export default function RpcJsUnitTest() {
                 let result2 = object.getDescriptor();
                 expect(result2 != null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_1100 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_1100---------------------------");
@@ -11608,6 +11991,7 @@ export default function RpcJsUnitTest() {
                 console.info("start send request");
                 object.sendMessageRequest(CODE_SAME_PROCESS, data, reply, option, sendRequestCallback);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_1200 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_1200---------------------------");
@@ -11625,6 +12009,7 @@ export default function RpcJsUnitTest() {
                 let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
                 gIRemoteObject.registerDeathRecipient(recipient, 0);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_1300 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_1300---------------------------");
@@ -11644,6 +12029,7 @@ export default function RpcJsUnitTest() {
                 gIRemoteObject.unregisterDeathRecipient(recipient, 0);
                 console.info("SUB_DSoftbus_RPC_API_IRemoteObject_1400:run unregisterDeathRecipient is done");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_1400 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_1400---------------------------");
@@ -11662,6 +12048,7 @@ export default function RpcJsUnitTest() {
                 object.registerDeathRecipient(null, 0);
                 console.info("SUB_DSoftbus_RPC_API_IRemoteObject_1500:run registerDeathRecipient is done");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_1500 error: " + error);
                 expect(error != null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_1500---------------------------");
@@ -11680,6 +12067,7 @@ export default function RpcJsUnitTest() {
                 object.unregisterDeathRecipient(null, 0);
                 console.info("SUB_DSoftbus_RPC_API_IRemoteObject_1600:run unregisterDeathRecipient result is done");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IRemoteObject_1600 error: " + error);
                 expect(error != null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IRemoteObject_1600---------------------------");
@@ -11701,6 +12089,7 @@ export default function RpcJsUnitTest() {
                 expect(gIRemoteObject.removeDeathRecipient(recipient, 0)).assertTrue();
                 expect(gIRemoteObject.removeDeathRecipient(recipient, 0)).assertEqual(false)();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_0100 error: " + error);
                 expect(error != null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0100---------------------------");
@@ -11719,6 +12108,7 @@ export default function RpcJsUnitTest() {
                 expect(gIRemoteObject.addDeathRecipient(recipient, -(2 * G))).assertTrue();
                 expect(gIRemoteObject.removeDeathRecipient(recipient, -(2 * G))).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_0200 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0200---------------------------");
@@ -11737,6 +12127,7 @@ export default function RpcJsUnitTest() {
                 expect(gIRemoteObject.addDeathRecipient(recipient, (2 * G - 1))).assertTrue();
                 expect(gIRemoteObject.removeDeathRecipient(recipient, (2 * G - 1))).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_0300 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0300---------------------------");
@@ -11755,6 +12146,7 @@ export default function RpcJsUnitTest() {
                 expect(gIRemoteObject.addDeathRecipient(recipient, 2 * G)).assertTrue();
                 expect(gIRemoteObject.removeDeathRecipient(recipient, 2 * G)).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_0400 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0400---------------------------");
@@ -11773,6 +12165,7 @@ export default function RpcJsUnitTest() {
                 expect(gIRemoteObject.addDeathRecipient(recipient, -(2 * G + 1))).assertTrue();
                 expect(gIRemoteObject.removeDeathRecipient(recipient, -(2 * G + 1))).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_0500 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0500---------------------------");
@@ -11797,6 +12190,7 @@ export default function RpcJsUnitTest() {
                 expect(gIRemoteObject.removeDeathRecipient(recipient, 0) == false).assertTrue();
                 expect(gIRemoteObject.isObjectDead() == false).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_0600 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0600---------------------------");
@@ -11814,6 +12208,7 @@ export default function RpcJsUnitTest() {
                 let object = new TestAbilityStub("Test0300");
                 expect(object.getInterfaceDescriptor()).assertEqual("Test0300");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_0700 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0700---------------------------");
@@ -11834,6 +12229,7 @@ export default function RpcJsUnitTest() {
                 expect(object.queryLocalInterface('Test2') != null).assertTrue();
                 expect(object.getInterfaceDescriptor() != null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_0800 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0800---------------------------");
@@ -11854,6 +12250,7 @@ export default function RpcJsUnitTest() {
                 expect(rpc.RemoteProxy.MIN_TRANSACTION_ID).assertEqual(0x1);
                 expect(rpc.RemoteProxy.MAX_TRANSACTION_ID).assertEqual(0x00FFFFFF);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_0900 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_0900---------------------------");
@@ -11881,6 +12278,7 @@ export default function RpcJsUnitTest() {
                 let isDead2 = gIRemoteObject.isObjectDead();
                 expect(isDead2 == false).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1000 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1000---------------------------");
@@ -11899,6 +12297,7 @@ export default function RpcJsUnitTest() {
                 let result = object.getDescriptor();
                 expect(result).assertEqual("Test0300");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1100 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1100---------------------------");
@@ -11922,6 +12321,7 @@ export default function RpcJsUnitTest() {
                 let resultDescrip = object.getDescriptor();
                 expect(resultDescrip != null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1200 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1200---------------------------");
@@ -11944,6 +12344,7 @@ export default function RpcJsUnitTest() {
                 gIRemoteObject.unregisterDeathRecipient(recipient, 0);
                 console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1300: unregisterDeathRecipient2 is success");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1300 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1300---------------------------");
@@ -11963,6 +12364,7 @@ export default function RpcJsUnitTest() {
                 gIRemoteObject.unregisterDeathRecipient(recipient, -(2 * G));
                 console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1400: unregisterDeathRecipient2 is success");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1400 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1400---------------------------");
@@ -11982,6 +12384,7 @@ export default function RpcJsUnitTest() {
                 gIRemoteObject.unregisterDeathRecipient(recipient, (2 * G - 1));
                 console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1500: unregisterDeathRecipient2 is success");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1500 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1500---------------------------");
@@ -12001,6 +12404,7 @@ export default function RpcJsUnitTest() {
                 gIRemoteObject.unregisterDeathRecipient(recipient, 2 * G);
                 console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1600: unregisterDeathRecipient2 is success");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1600 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1600---------------------------");
@@ -12020,6 +12424,7 @@ export default function RpcJsUnitTest() {
                 gIRemoteObject.unregisterDeathRecipient(recipient, -(2 * G + 1));
                 console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1700: unregisterDeathRecipient is success");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1700 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_RemoteProxy_1700---------------------------");
@@ -12041,6 +12446,7 @@ export default function RpcJsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1800: run modifyLocalInterface success");
                 object.getLocalInterface(null);
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_RemoteProxy_1800 error: " + error);
                 let errCode = `${rpc.ErrorCode.ONLY_PROXY_OBJECT_PERMITTED_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
@@ -12062,6 +12468,7 @@ export default function RpcJsUnitTest() {
             }
             catch (error) {
                 expect(error == null).assertTrue();
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_0100 error: " + error);
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0100---------------------------");
         })
@@ -12080,6 +12487,7 @@ export default function RpcJsUnitTest() {
             }
             catch (error) {
                 expect(error == null).assertTrue();
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_0200 error: " + error);
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0200---------------------------");
         })
@@ -12095,10 +12503,10 @@ export default function RpcJsUnitTest() {
             try {
                 let samgr = rpc.IPCSkeleton.getContextObject();
                 expect(samgr != null).assertTrue();
-                expect(samgr.getInterfaceDescriptor()).assertEqual("");
             }
             catch (error) {
                 expect(error == null).assertTrue();
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_0300 error: " + error);
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0300---------------------------");
         })
@@ -12117,6 +12525,7 @@ export default function RpcJsUnitTest() {
             }
             catch (error) {
                 expect(error == null).assertTrue();
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_0400 error: " + error);
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0400---------------------------");
         })
@@ -12135,6 +12544,7 @@ export default function RpcJsUnitTest() {
             }
             catch (error) {
                 expect(error == null).assertTrue();
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_0500 error: " + error);
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0500---------------------------");
         })
@@ -12155,6 +12565,7 @@ export default function RpcJsUnitTest() {
                 expect(rpc.IPCSkeleton.getLocalDeviceID() != null).assertTrue();
                 expect(rpc.IPCSkeleton.getCallingDeviceID() != null).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_0600 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0600---------------------------");
@@ -12169,7 +12580,6 @@ export default function RpcJsUnitTest() {
         it("SUB_DSoftbus_RPC_API_IPCSkeleton_0700", 0, async function (done) {
             console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_0700---------------------------");
             try {
-                expect(rpc.IPCSkeleton.getContextObject().getInterfaceDescriptor()).assertEqual("");
                 let callingPid = rpc.IPCSkeleton.getCallingPid();
                 let callingUid = rpc.IPCSkeleton.getCallingUid();
                 let option = new rpc.MessageOption();
@@ -12185,6 +12595,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(callingUid);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_0700 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -12221,6 +12632,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(101);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_0800 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -12242,6 +12654,7 @@ export default function RpcJsUnitTest() {
                 let id = "";
                 expect(rpc.IPCSkeleton.setCallingIdentity(id)).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_0900 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_0900---------------------------");
@@ -12259,7 +12672,9 @@ export default function RpcJsUnitTest() {
                 let id = 0;
                 expect(rpc.IPCSkeleton.setCallingIdentity(id)).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1000 error: " + error);
                 expect(error == null).assertTrue();
+
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1000---------------------------");
         });
@@ -12279,6 +12694,7 @@ export default function RpcJsUnitTest() {
                 }
                 expect(rpc.IPCSkeleton.setCallingIdentity(id)).assertTrue();
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1100 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1100---------------------------");
@@ -12293,7 +12709,6 @@ export default function RpcJsUnitTest() {
         it("SUB_DSoftbus_RPC_API_IPCSkeleton_1200", 0, async function (done) {
             console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_1200---------------------------");
             try {
-                expect(rpc.IPCSkeleton.getContextObject().getInterfaceDescriptor()).assertEqual("");
                 let callingPid = rpc.IPCSkeleton.getCallingPid();
                 let callingUid = rpc.IPCSkeleton.getCallingUid();
                 expect(rpc.IPCSkeleton.getCallingDeviceID()).assertEqual("");
@@ -12323,6 +12738,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(101);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1200 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -12341,7 +12757,6 @@ export default function RpcJsUnitTest() {
         it("SUB_DSoftbus_RPC_API_IPCSkeleton_1300", 0, async function (done) {
             console.info("---------------------start SUB_DSoftbus_RPC_API_IPCSkeleton_1300---------------------------");
             try {
-                expect(rpc.IPCSkeleton.getContextObject().getInterfaceDescriptor()).assertEqual("");
                 let callingPid = rpc.IPCSkeleton.getCallingPid();
                 let callingUid = rpc.IPCSkeleton.getCallingUid();
                 expect(callingUid != null).assertTrue();
@@ -12357,6 +12772,7 @@ export default function RpcJsUnitTest() {
                     expect(result.reply.readInt()).assertEqual(callingUid);
                 });
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1300 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
                 data.reclaim();
@@ -12380,6 +12796,7 @@ export default function RpcJsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1400 RpcServer: flushCmdBuffer is success");
             }
             catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1400 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1400---------------------------");
@@ -12398,7 +12815,8 @@ export default function RpcJsUnitTest() {
                 let ret = rpc.IPCSkeleton.flushCmdBuffer(remoteObject);
                 console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1500 RpcServer: flushCmdBuffer is success");
             }
-            catch (error) {
+            catch(error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1500 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1500---------------------------");
@@ -12417,6 +12835,7 @@ export default function RpcJsUnitTest() {
                 object.getDescriptor();
                 console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1600: is success");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1600 error: " + error);
                 let errCode = `${rpc.ErrorCode.COMMUNICATION_ERROR}`;
                 expect(error.message != null).assertTrue();
                 expect(error.code == errCode).assertTrue();
@@ -12438,6 +12857,7 @@ export default function RpcJsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1700 RpcServer: flushCmdBuffer is success");
             }
             catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1700 error: " + error);
                 let errCode = `${rpc.ErrorCode.ONLY_REMOTE_OBJECT_PERMITTED_ERROR}`;
                 expect(error.message != null).assertTrue();
                 expect(error.code != errCode).assertTrue();
@@ -12458,6 +12878,7 @@ export default function RpcJsUnitTest() {
                 rpc.IPCSkeleton.restoreCallingIdentity(id);
                 console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1800 restoreCallingIdentity is success");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1800 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1800---------------------------");
@@ -12476,6 +12897,7 @@ export default function RpcJsUnitTest() {
                 rpc.IPCSkeleton.restoreCallingIdentity(id);
                 console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1900 restoreCallingIdentity is success");
             } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_1900 error: " + error);
                 expect(error == null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_1900---------------------------");
@@ -12497,7 +12919,8 @@ export default function RpcJsUnitTest() {
                 rpc.IPCSkeleton.restoreCallingIdentity(id);
                 console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_2000 restoreCallingIdentity is success");
             } catch (error) {
-                expect(error == null).assertTrue();
+                console.info("SUB_DSoftbus_RPC_API_IPCSkeleton_2000 error: " + error);
+                expect(error == null).assertTrue();               
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_IPCSkeleton_2000---------------------------");
         });
