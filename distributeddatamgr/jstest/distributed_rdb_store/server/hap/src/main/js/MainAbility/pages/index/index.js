@@ -15,7 +15,7 @@
 import featureAbility from '@ohos.ability.featureAbility';
 
 import data_rdb from '@ohos.data.relationalStore';
-import deviceManager from '@ohos.distributedHardware.deviceManager';
+import deviceManager from '@ohos.distributedDeviceManager';
 import TestApi from '../../../../../../../../../../../testtools/disjsTest/server/testApi.js';
 
 let context = featureAbility.getContext();

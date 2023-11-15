@@ -14,7 +14,7 @@
  */
 
 import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '@ohos/hypium';
-import deviceManager from '@ohos.distributedHardware.deviceManager';
+import deviceManager from '@ohos.distributedDeviceManager';
 import TestService from '../../../../../../../../../testtools/disjsTest/client/testService.js';
 import RemoteHelper from '../../../../../../../../../testtools/disjsTest/client/remoteHelper.js';
 import factory from '@ohos.data.distributedData';
@@ -35,7 +35,7 @@ var rdbStore = undefined;
 var resultSet = undefined;
 let dmInstance = null;
 let localDeviceId = undefined;
-let logTag = 'rdbSyncCustomDirlTest:  ';
+let logTag = 'CustomClient:  ';
 let testservice = null;
 let gIRemoteObject = null;
 let remoteHelpers = null;
@@ -76,8 +76,8 @@ async function driveFn() {
 
 }
 
-export default function rdbSyncCustomDirlTest(){
-    describe('rdbSyncCustomDirlTest', function () {
+export default function rdbStoreSyncCustomDirTest(){
+    describe('rdbStoreSyncCustomDirTest', function () {
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
             await getPermission();
@@ -85,40 +85,8 @@ export default function rdbSyncCustomDirlTest(){
             await driveFn();
             sleep(100);
 
-            await deviceManager.createDeviceManager(TEST_BUNDLE_NAME,async (error, deviceManager) =>{
-                console.info(logTag + "CLIENT Create device manager success");
-                localDeviceId = deviceManager.getLocalDeviceInfoSync().deviceId;
-                console.info(logTag + "local device id is: " + localDeviceId);
-                deviceList = deviceManager.getTrustedDeviceListSync();
-                deviceId = deviceList[0].networkId;
-                syncDeviceIds = [deviceId];
-                dmInstance = deviceManager;
-                dmInstance.on("deviceStateChange", (data) => {
-                    console.log("deviceStateChange: " + JSON.stringify(data));
-                });
-            })
-
-            console.info(logTag + "deviceId: " + deviceId);
-            try{
-                let wantValue = {
-                    bundleName: "com.ohos.distributerdbdisjs",
-                    abilityName: "com.ohos.distributerdbdisjs.MainAbility",
-                    deviceId: deviceId
-                };
-                await featureAbility.startAbility({
-                    want: wantValue
-                }).then((data) => {
-                    console.info(logTag + 'beforeAll startAbility data' + JSON.stringify(data));
-                }).catch((err) => {
-                    console.info(logTag + 'beforeAll startAbility err: ' + err.code);
-                    console.info(logTag + 'beforeAll startAbility err: ' + err.message);
-                });
-            }catch(error){
-                console.info(logTag + "beforeAll startAbility:error = " + error);
-            };
-            await sleep(100);
-            
             testservice = new TestService();
+            console.info(logTag + "deviceId: " + deviceId);
             await testservice.toConnectRdbAbility().then(data => {
                 gIRemoteObject = data;
                 console.info(logTag + "toConnectAbility data is" + data);
@@ -136,9 +104,23 @@ export default function rdbSyncCustomDirlTest(){
                 console.info("SetDistributedTables failed, err: " + err.code);
             })
             await back;
-    
 
-    
+            await deviceManager.createDeviceManager(TEST_BUNDLE_NAME,async (error, deviceManager) =>{
+                console.info(logTag + "CLIENT Create device manager success");
+                localDeviceId = deviceManager.getLocalDeviceInfoSync().deviceId;
+                console.info(logTag + "local device id is: " + localDeviceId);
+                deviceList = deviceManager.getTrustedDeviceListSync();
+                deviceId = deviceList[0].networkId;
+                syncDeviceIds = [deviceId];
+            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+            deviceList = dmInstance.getAvailableDeviceListSync();
+            deviceId = deviceList[0].networkId;
+            console.info(logTag + "deviceId is: " + deviceId);
+            syncDeviceIds = [deviceId];
+            dmInstance.on("deviceStateChange", (data) => {
+                console.log("deviceStateChange: " + JSON.stringify(data));
+            });
+
             function storeObserver(devices) {
                 for (let i = 0; i < devices.length; i++) {
                     console.log('device=' + devices[i] + ' data changed');
@@ -147,17 +129,17 @@ export default function rdbSyncCustomDirlTest(){
             try {
                 rdbStore.on('dataChange', data_Rdb.SubscribeType.SUBSCRIBE_TYPE_REMOTE, storeObserver);
             } catch (err) {
-                console.log('Register observer failed'); 
+                console.log('Register observer failed');
             }
             console.info(logTag + '-----------------beforeAll end-----------------');
             done();
         })
-    
+
         beforeEach(async function(done){
             console.info(logTag + "-----------------beforeEach 0 -----------------");
             done();
         })
-    
+
         afterEach(async function (done) {
             console.info(logTag + '-----------------afterEach begin-----------------');
             try {
@@ -170,7 +152,7 @@ export default function rdbSyncCustomDirlTest(){
             console.info(logTag + '-----------------afterEach end-----------------');
             done();
         })
-    
+
         afterAll(async function (done){
             console.info(logTag + '-----------------afterAll begin-----------------');
             rdbStore = null;
@@ -229,7 +211,7 @@ export default function rdbSyncCustomDirlTest(){
                     expect(status == 0).assertTrue();
                 }
             }).catch((err) => {
-                console.log('testRdbSyncCustomTest0100 sync failed' + err.code);
+                console.log('testRdbSyncCustomTest0300 sync failed' + err.code);
                 expect().assertFail();
             })
             await promise;
@@ -320,7 +302,7 @@ export default function rdbSyncCustomDirlTest(){
         * @tc.desc Server rdbStore Insert synchronization and then update synchronization
         */
         it("testRdbSyncCustomTest0300", 0, async function (done) {
-            console.info(logTag + "testRdbSyncCustomTest0300 start");
+            console.info(logTag + "testRdbSyncCustomTest0320 start");
     
             //push data to remote device
             var u8 = new Uint8Array([1, 2, 3]);
@@ -396,7 +378,7 @@ export default function rdbSyncCustomDirlTest(){
         * @tc.desc Server rdbStore Insert synchronization, and then delete synchronization
         */
         it("testRdbSyncCustomTest0400", 0, async function (done) {
-            console.info(logTag + "testRdbSyncCustomTest0400 start");
+            console.info(logTag + "testRdbSyncCustomTest0330 start");
     
             //push data to remote device
             var u8 = new Uint8Array([1, 2, 3])
