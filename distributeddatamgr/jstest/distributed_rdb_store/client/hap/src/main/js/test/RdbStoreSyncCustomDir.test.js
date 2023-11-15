@@ -76,8 +76,8 @@ async function driveFn() {
 
 }
 
-export default function rdbStoreSyncCustomDirTest(){
-    describe('rdbStoreSyncCustomDirTest', function () {
+export default function rdbSyncCustomDirlTest(){
+    describe('rdbSyncCustomDirlTest', function () {
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
             await getPermission();
@@ -85,8 +85,33 @@ export default function rdbStoreSyncCustomDirTest(){
             await driveFn();
             sleep(100);
 
+            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+            deviceList = dmInstance.getAvailableDeviceListSync();
+            deviceId = deviceList[0].networkId;
+            console.info(logTag + "deviceId is: " + deviceId);
+            syncDeviceIds = [deviceId];
+
+            try{
+                console.info(logTag + "deviceId: " + deviceId);
+                let wantValue = {
+                    bundleName: "com.ohos.distributerdbdisjs",
+                    abilityName: "com.ohos.distributerdbdisjs.MainAbility",
+                    deviceId: deviceId
+                };
+                await featureAbility.startAbility({
+                    want: wantValue
+                }).then((data) => {
+                    console.info(logTag + 'beforeAll startAbility data success' + JSON.stringify(data));
+                }).catch((err) => {
+                    console.info(logTag + 'beforeAll startAbility err: ' + err.code);
+                    console.info(logTag + 'beforeAll startAbility err: ' + err.message);
+                });
+            }catch(error){
+                console.info(logTag + "beforeAll startAbility:error = " + error);
+            }
+            await sleep(100);
+
             testservice = new TestService();
-            console.info(logTag + "deviceId: " + deviceId);
             await testservice.toConnectRdbAbility().then(data => {
                 gIRemoteObject = data;
                 console.info(logTag + "toConnectAbility data is" + data);
@@ -104,19 +129,8 @@ export default function rdbStoreSyncCustomDirTest(){
                 console.info("SetDistributedTables failed, err: " + err.code);
             })
             await back;
+    
 
-            await deviceManager.createDeviceManager(TEST_BUNDLE_NAME,async (error, deviceManager) =>{
-                console.info(logTag + "CLIENT Create device manager success");
-                localDeviceId = deviceManager.getLocalDeviceInfoSync().deviceId;
-                console.info(logTag + "local device id is: " + localDeviceId);
-                deviceList = deviceManager.getTrustedDeviceListSync();
-                deviceId = deviceList[0].networkId;
-                syncDeviceIds = [deviceId];
-            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-            deviceList = dmInstance.getAvailableDeviceListSync();
-            deviceId = deviceList[0].networkId;
-            console.info(logTag + "deviceId is: " + deviceId);
-            syncDeviceIds = [deviceId];
             dmInstance.on("deviceStateChange", (data) => {
                 console.log("deviceStateChange: " + JSON.stringify(data));
             });
@@ -129,7 +143,7 @@ export default function rdbStoreSyncCustomDirTest(){
             try {
                 rdbStore.on('dataChange', data_Rdb.SubscribeType.SUBSCRIBE_TYPE_REMOTE, storeObserver);
             } catch (err) {
-                console.log('Register observer failed');
+                console.log('Register observer failed'); 
             }
             console.info(logTag + '-----------------beforeAll end-----------------');
             done();
