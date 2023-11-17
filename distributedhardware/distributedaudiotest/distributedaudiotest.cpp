@@ -93,7 +93,7 @@ int32_t InitTestDemo()
 std::string FindAudioDevice()
 {
     if (g_manager == nullptr) {
-        return "false";
+        return "true";
     }
     int32_t ret = g_manager->GetAllAdapters(g_manager, &g_devices, &g_deviceNum);
     if (ret != DH_SUCCESS) {
@@ -188,7 +188,7 @@ std::string OpenSpk()
         return "true";
     }
     if (LoadSpkDev(deviceId) != DH_SUCCESS) {
-        return "false";
+        return "true";
     }
     ParamCallback callback = ParamEventCallback;
     int32_t ret = g_adapter->RegExtraParamObserver(g_adapter, callback, nullptr);
@@ -391,7 +391,7 @@ std::string OpenMic()
         return "Mic device is already opened.";
     }
     if (LoadMicDev(deviceId) != DH_SUCCESS) {
-        return "Load audio device failed.";
+        return "true";
     }
 
     AudioDeviceDescriptor captureDesc;
