@@ -13,6 +13,12 @@
     "installationFree": false,
     "uiSyntax": "ets",
     "pages": "$profile:main_pages",
+    "metadata": [
+      {
+        "name": "ExecuteArkTSLinter",
+        "value": "false"
+      }
+    ],
     "abilities": [
       {
         "continuable":true,
@@ -35,16 +41,6 @@
         ]
       }
     ], 
-    "extensionAbilities": [
-      {
-        "name": "ServiceAbility",
-        "srcEntrance": "./ets/serviceability/ServiceAbility.ts",
-        "label": "$string:entry_label",
-        "description": "$string:phone_entry_main",
-        "type": "service",
-        "visible": true
-      }
-    ],
     "requestPermissions": [
       {
         "name": "ohos.permission.GET_BUNDLE_INFO"
@@ -57,9 +53,6 @@
       },
       {
         "name": "ohos.permission.ACCESS_SERVICE_DM"
-      },
-      {
-        "name": "ohos.permission.MANAGE_MISSIONS"
       }
     ]
   }

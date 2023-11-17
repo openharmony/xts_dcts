@@ -15,7 +15,29 @@
 import Ability from '@ohos.app.ability.UIAbility';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import wantConstant from '@ohos.app.ability.wantConstant';
-
+import rpc from '@ohos.rpc';
+import commonEvent from '@ohos.commonEvent';
+class StubTest extends rpc.RemoteObject {
+    constructor(descriptor) {
+        super(descriptor);
+    }
+    onRemoteRequest(code, data, reply, option) {
+        console.info("onRemoteRequest: " + code)
+        let tmp1 = data.readInt()
+        let tmp2 = data.readInt()
+        let tmp3 = tmp1 + tmp2;
+        let result =  reply.writeInt(tmp3)
+        console.info("The server's writeInt result is " + result);
+        commonEvent.publish("DmsFwkService_RemoteObject", {
+            parameters:{
+                "msg":"receiveMessage = " + data.readInt()
+            }
+        }, (err, data) => {
+            console.info("DmsFwkService_ConnectAbility onCreate");
+        });
+        return true
+    }
+}
 export default class MainAbility extends Ability {
     localStorage: LocalStorage;
 
@@ -26,6 +48,26 @@ export default class MainAbility extends Ability {
             this.localStorage = new LocalStorage();
             this.context.restoreWindowStage(this.localStorage);
         }
+    }
+    onConnect(want) {
+        // Called when the form provider is notified that a temporary form is successfully
+        // converted to a normal form.
+        console.info("DmsFwkStageServer ServiceAbility onConnect")
+        let CommonEventPublishData = {
+            parameters: {
+                "life": "onConnect"
+            }
+        }
+        commonEvent.publish("DmsFwkService_ConnectAbility", CommonEventPublishData, (err) => {
+            console.info("DmsFwkService_ConnectAbility onCreate");
+        });
+        return new StubTest("test");
+    }
+
+    onDisconnect(want) {
+        // Called to notify the form provider to update a specified form.
+        console.info("DmsFwkStageServer ServiceAbility onDisconnect")
+
     }
 
     onNewWant(want, launchParam) {

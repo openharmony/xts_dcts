@@ -14,22 +14,23 @@
  */
 
 import rpc from "@ohos.rpc";
-import deviceManager from '@ohos.distributedHardware.deviceManager';
+// import deviceManager from '@ohos.distributedHardware.deviceManager';
+import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
 var results;
 var bundleName = "com.ohos.dmstest";
 var abilityName = "com.ohos.dmstest.ServiceAbility";
 var deviceList;
-
+let dmInstance ;
 export default class TestService {
 
     constructor() {
 
     }
 
-    getDeviceList(deviceManager) {
-        deviceList = deviceManager.getTrustedDeviceListSync();
+    getDeviceList(dmInstance) {
+        deviceList = dmInstance.getTrustedDeviceListSync();
         console.info("getDeviceList success, deviceList id: " + JSON.stringify(deviceList));
     }
 
@@ -37,33 +38,38 @@ export default class TestService {
         console.info("dmsClient:  toConnectAbility");
         return new Promise(resolve=>{
             let self = this;
-            deviceManager.createDeviceManager('ohos.dmstest.test', (error, deviceManager) => {
-                self.getDeviceList(deviceManager);
-                console.info("dmsClient:  got deviceManager: " + deviceManager);
-                let deviceId = deviceList[0].networkId;
-                console.info("dmsClient: deviceid : " + deviceId);
-                console.info("dmsClient: online deviceList id: " + JSON.stringify(deviceList));
-                let want = {
-                    "bundleName": bundleName,
-                    "abilityName": abilityName,
-                    "deviceId": deviceId,
-                    "flags": 256
+            try {
+                dmInstance = deviceManager.createDeviceManager('ohos.dms.test');
+                console.log('get deviceManager is success')
+            } catch (error) {
+                console.log('get deviceManager is failed' + JSON.stringify(error))
+            }
+
+            self.getDeviceList(dmInstance);
+            console.info("dmsClient:  got deviceManager: " + dmInstance);
+            let deviceId = deviceList[0].networkId;
+            console.info("dmsClient: deviceid : " + deviceId);
+            console.info("dmsClient: online deviceList id: " + JSON.stringify(deviceList));
+            let want = {
+                "bundleName": bundleName,
+                "abilityName": abilityName,
+                "deviceId": deviceId,
+                "flags": 256
+            }
+            let connect = {
+                onConnect: function (elementName, remoteProxy) {
+                    console.log('dmsClient: onConnect called, remoteProxy: ' + remoteProxy);
+                    resolve(remoteProxy);
+                },
+                onDisconnect: function (elementName) {
+                    console.log("dmsClient: onDisconnect");
+                },
+                onFailed: function () {
+                    console.log("dmsClient: onFailed");
                 }
-                let connect = {
-                    onConnect: function (elementName, remoteProxy) {
-                        console.log('dmsClient: onConnect called, remoteProxy: ' + remoteProxy);
-                        resolve(remoteProxy);
-                    },
-                    onDisconnect: function (elementName) {
-                        console.log("dmsClient: onDisconnect");
-                    },
-                    onFailed: function () {
-                        console.log("dmsClient: onFailed");
-                    }
-                }
-                let connectId = featureAbility.connectAbility(want, connect);
-                console.info("connect ability got id: " + connectId);
-            })
+            }
+            let connectId = featureAbility.connectAbility(want, connect);
+            console.info("connect ability got id: " + connectId);
         })
 
     }
