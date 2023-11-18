@@ -1,4 +1,4 @@
-import ServiceExtension from '@ohos.app.ability.ServiceExtensionAbility';
+import UIAbility from '@ohos.app.ability.UIAbility';
 import rpc from '@ohos.rpc';
 import commonEvent from '@ohos.commonEvent';
 class StubTest extends rpc.RemoteObject {
@@ -15,7 +15,7 @@ class StubTest extends rpc.RemoteObject {
         return true
     }
 }
-export default class ServiceAbility extends ServiceExtension {
+export default class ServiceAbility extends UIAbility {
     onCreate(want) {
         // Called to return a FormBindingData object.
         console.info("DmsFwkStageServer ServiceAbility2 onCreate")

@@ -15,7 +15,7 @@
 
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
 import rpc from "@ohos.rpc";
-import deviceManager from '@ohos.distributedHardware.deviceManager';
+import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from "@ohos.ability.featureAbility";
 import { UiDriver, BY } from '@ohos.UiTest';
 import TestService from "./testService";
@@ -27,22 +27,30 @@ let gIRemoteObject = null;
 let testservice = null;
 let localDeviceId = undefined;
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
+let dmInstance 
 
-deviceManager.createDeviceManager('ohos.dms.test', async (error, deviceManager) => {
-    console.info("CLIENT Create device manager success");
-    localDeviceId = deviceManager.getLocalDeviceInfoSync().networkId;
-    console.info("local device id is: " + localDeviceId);
-    let deviceList = deviceManager.getTrustedDeviceListSync();
-    dvList = deviceList;
-    let deviceId = deviceList[0].networkId;
-    dvId = deviceId;
-    console.info("deviceid is: " + deviceId);
-    console.info("deviceList is: " + JSON.stringify(deviceList));
-})
 
 export default function dmsJsUnitTest() {
 
     describe('dmsJsUnitTest', function () {
+
+        async function getDeviceId() {
+            console.log('get deviceManager is begin')
+            try {
+                dmInstance = deviceManager.createDeviceManager('ohos.dms.test');
+                console.log('get deviceManager is success')
+            } catch (error) {
+                console.log('get deviceManager is failed' + JSON.stringify(error))
+            }
+            localDeviceId = dmInstance.getLocalDeviceNetworkId();
+            console.info("local device id is: " + localDeviceId);
+            let deviceList = dmInstance.getAvailableDeviceListSync();
+            dvList = deviceList;
+            let deviceId = deviceList[0].networkId;
+            dvId = deviceId;
+            console.info("deviceid is: " + deviceId);
+            console.info("deviceList is: " + JSON.stringify(deviceList));
+        }
 
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
@@ -67,6 +75,7 @@ export default function dmsJsUnitTest() {
                 console.info(`button is ${JSON.stringify(button)}`);
                 sleep(5000);
                 await button.click();
+                sleep(5000);
             } catch (err) {
                 console.info('err is ' + err);
                 return;
@@ -83,6 +92,7 @@ export default function dmsJsUnitTest() {
                 console.info(`button is ${JSON.stringify(button)}`);
                 sleep(5000);
                 await button.click();
+                
             } catch (err) {
                 console.info('err is ' + err);
                 return;
@@ -95,15 +105,10 @@ export default function dmsJsUnitTest() {
             sleep(5000);
             await driveFn();
             sleep(5000);
-
-            testservice = new TestService();
-            console.info("TestService is:");
-            await testservice.toConnectAbility().then(data => {
-                gIRemoteObject = data;
-                console.info("toConnectAbility data is:" + data);
-            })
-            done();
+            await getDeviceId();
+            sleep(5000);
             console.info("beforeAll done");
+            done();
         })
 
         beforeEach(async function (done) {

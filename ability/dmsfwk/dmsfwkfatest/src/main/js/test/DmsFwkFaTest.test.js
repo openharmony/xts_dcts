@@ -15,7 +15,7 @@
 
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
 import rpc from "@ohos.rpc";
-import deviceManager from '@ohos.distributedHardware.deviceManager';
+import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from "@ohos.ability.featureAbility";
 import { UiDriver, BY } from '@ohos.UiTest';
 import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
@@ -24,10 +24,27 @@ let connectId = null;
 let dvList = [];
 let dvId = null;
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
-
+let dmInstance 
 export default function DmsFwkFaTest() {
 
   describe('DmsFwkFaTest', function () {
+    async function getDeviceId() {
+      console.log('getDeviceId is begin')
+      try {
+          dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstageservert');
+          console.log('get deviceManager is success')
+      } catch (error) {
+          console.log('get deviceManager is failed' + JSON.stringify(error))
+      }
+      let localDeviceId = dmInstance.getLocalDeviceNetworkId();
+      console.info("local device id is: " + localDeviceId);
+      let deviceList = dmInstance.getAvailableDeviceListSync();
+      dvList = deviceList;
+      let deviceId = deviceList[0].networkId;
+      dvId = deviceId;
+      console.info("deviceid is: " + deviceId);
+      console.info("deviceList is: " + JSON.stringify(deviceList));
+    }
 
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
@@ -52,6 +69,7 @@ export default function DmsFwkFaTest() {
         console.info(`button is ${JSON.stringify(button)}`);
         sleep(5000);
         await button.click();
+        sleep(5000);
       } catch (err) {
         console.info('err is ' + err);
         return;
@@ -76,22 +94,14 @@ export default function DmsFwkFaTest() {
 
     beforeAll(async function (done) {
       console.info('beforeAll called dms')
+      getDeviceId()
       await getPermission();
       sleep(5000);
       await driveFn();
-      sleep(100);
-
-      function deviceManagerCallback(error, deviceManagers) {
-        console.info("got deviceManager: " + deviceManagers + ", error: " + error)
-        let deviceList = deviceManagers.getTrustedDeviceListSync()
-        let deviceId = deviceList[0].networkId
-        dvList = deviceList;
-        dvId = deviceId;
-        console.info("online device id: " + deviceId)
-        done()
-      }
-      deviceManager.createDeviceManager('com.acts.example.dmsfwkstageserver', deviceManagerCallback)
-      console.info("beforeAll done")
+      sleep(5000);
+      await getDeviceId()
+      sleep(5000);
+      done()
     })
 
     beforeEach(async function (done) {
@@ -1369,8 +1379,8 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_ConnectAbility_0140", 0, async function (done) {
-      console.info("-----------------SUB_DMS_ConnectAbility_0140 start------------------------");
+    it("SUB_DMS_StandardOs_stability_StabilityTest_0100", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_stability_StabilityTest_0100 start------------------------");
       let connectId;
       try {
         for (let i = 0; i < 10; i++) {
@@ -1388,7 +1398,7 @@ export default function DmsFwkFaTest() {
               proxy.sendRequest(1, data, reply, option).then((result) => {
                 console.log('sendRequest success');
                 let msg = result.reply.readInt();
-                console.info(' SUB_DMS_ConnectAbility_0140 msg: ' + msg)
+                console.info(' SUB_DMS_StandardOs_stability_StabilityTest_0100 msg: ' + msg)
                 expect(msg == 100).assertTrue();
                 done();
               }).catch((e) => {
@@ -1398,32 +1408,32 @@ export default function DmsFwkFaTest() {
               });
             },
             onDisConnect: (elementName) => {
-              console.info('SUB_DMS_ConnectAbility_0140  onDisConnect: ' + JSON.stringify(elementName));
+              console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100  onDisConnect: ' + JSON.stringify(elementName));
               expect().assertFail();
               done();
             },
             onFailed: (code) => {
-              console.info('SUB_DMS_ConnectAbility_0140  onFailed: ' + code);
+              console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100  onFailed: ' + code);
               expect().assertFail();
               done();
             }
           });
           featureAbility.disconnectAbility(connectId, (err, data) => {
-            console.info('SUB_DMS_ConnectAbility_0140 disconnectAbility err: ' + err.code);
-            console.info('SUB_DMS_ConnectAbility_0140 disconnectAbilityerr: ' + err.message);
+            console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 disconnectAbility err: ' + err.code);
+            console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 disconnectAbilityerr: ' + err.message);
             expect(err.code).assertEqual(0);
             done();
           })
-          console.info("SUB_DMS_ConnectAbility_0140 running at : " + i + ",here");
+          console.info("SUB_DMS_StandardOs_stability_StabilityTest_0100 running at : " + i + ",here");
         }
       } catch (err) {
-        console.info('SUB_DMS_ConnectAbility_0140 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbility_0140 catch: ' + err.message);
+        console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 catch: ' + err.code);
+        console.info('SUB_DMS_ConnectAbilitySUB_DMS_StandardOs_stability_StabilityTest_0100_0140 catch: ' + err.message);
         expect().assertFail();
         done();
       }
       await sleep(1000);
-      console.info("-----------------SUB_DMS_ConnectAbility_0140 end------------------------");
+      console.info("-----------------SUB_DMS_StandardOs_stability_StabilityTest_0100 end------------------------");
     });
   })
 }

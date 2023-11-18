@@ -13,27 +13,39 @@
  * limitations under the License.
  */
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from "@ohos/hypium"
-import deviceManager from '@ohos.distributedHardware.deviceManager';
+import deviceManager from '@ohos.distributedDeviceManager';
 import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
-import commonEvent from '@ohos.commonEvent';
-import rpc from '@ohos.rpc';
 import { UiDriver, BY } from '@ohos.UiTest';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl'
 let atManager = abilityAccessCtrl.createAtManager();
 
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
-let dvList;
-let dvId;
-let localDeviceId;
-let connectId;
-let connectId2;
-let subscriber
-let subscribeInfo = {
-  events: ["DmsFwkService_ConnectAbility"]
-}
+let dvList: Array<deviceManager.DeviceBasicInfo>
+let dvId: string;
+let localDeviceId: string;
+let dmInstance : deviceManager.DeviceManager
+let TAG:string;
+
 export default function DmsFwkStageTest() {
 
   describe('DmsFwkStageTest', function () {
+    async function getDeviceId() {
+      console.log('getDeviceId is begin')
+      try {
+          dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstageserver');
+          console.log('get deviceManager is success')
+      } catch (error) {
+          console.log('get deviceManager is failed' + JSON.stringify(error))
+      }
+      localDeviceId = dmInstance.getLocalDeviceNetworkId();
+      console.info("local device id is: " + localDeviceId);
+      let deviceList : Array<deviceManager.DeviceBasicInfo> = dmInstance.getAvailableDeviceListSync();
+      dvList= deviceList;
+      let deviceId : string= deviceList[0].networkId;
+      dvId = deviceId;
+      console.info("deviceid is: " + deviceId);
+      console.info("deviceList is: " + JSON.stringify(deviceList));
+    }
 
     function sleep(ms) {
 		  return new Promise(resolve => setTimeout(resolve, ms));
@@ -56,6 +68,7 @@ export default function DmsFwkStageTest() {
 			  console.info('button is ${JSON.stringify(button)}');
 			  sleep(5000);
 			  await button.click();
+        sleep(5000);
 		  } catch (err) {
 			  console.info('err is ' + err);
 			  return;
@@ -63,21 +76,13 @@ export default function DmsFwkStageTest() {
 	  }
 
     beforeAll(async function (done) {
+      console.log('DMS before began')
       await getPermission();
 	    sleep(5000);
 	    await driveFn();
-	    sleep(1000);
-
-      function deviceManagerCallback(error, deviceManager) {
-        console.info('LifeCycleTest before each called');
-        let deviceList = deviceManager.getTrustedDeviceListSync();
-        let deviceId = deviceList[0].networkId;
-        dvList = deviceList;
-        dvId = deviceId;
-        localDeviceId = deviceManager.getLocalDeviceInfoSync().networkId;
-      }
-      deviceManager.createDeviceManager('com.acts.example.dmsfwkstageserver', deviceManagerCallback)
-      await sleep(1000);
+	    sleep(5000);
+      await getDeviceId();
+      sleep(5000);
       done()
     });
 
@@ -93,9 +98,7 @@ export default function DmsFwkStageTest() {
       done();
     });
 
-    var TAG;
-    var listKeyTemp = [];
-    var listKeyTemp1 = [];
+
 
     /*
      * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100
