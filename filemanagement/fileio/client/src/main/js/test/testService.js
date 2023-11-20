@@ -13,10 +13,9 @@
  * limitations under the License.
  */
 
-import deviceManager from '@ohos.distributedHardware.deviceManager';
+import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
-var results;
 var bundleName = "com.ohos.fileiotest";
 var abilityName = "com.ohos.fileiotest.ServiceAbility";
 var deviceList;
@@ -26,8 +25,8 @@ export default class TestService {
 
     }
 
-    getDeviceList(deviceManager) {
-        deviceList = deviceManager.getTrustedDeviceListSync();
+    getDeviceList(dmInstance) {
+        deviceList = dmInstance.getAvailableDeviceListSync();
         console.info("getDeviceList success, deviceList id: " + JSON.stringify(deviceList))
     }
 
@@ -35,34 +34,32 @@ export default class TestService {
         console.info("fileioClient:  toConnectAbility")
         return new Promise(resolve=>{
             let self = this;
-            deviceManager.createDeviceManager('com.ohos.fileiotest', (error, deviceManager) => {
-                self.getDeviceList(deviceManager);
-                console.info("fileioClient:  got deviceManager: " + deviceManager)
-                let networkId = deviceList[0].networkId
-                console.info("fileioClient: deviceid : " + networkId)
-                console.info("fileioClient: online deviceList id: " + JSON.stringify(deviceList))
-                let want = {
-                    "bundleName": bundleName,
-                    "abilityName": abilityName,
-                    "deviceId": networkId,
-                    "flags": 256
+            let dmInstance = deviceManager.createDeviceManager('com.ohos.fileiotest');
+            self.getDeviceList(dmInstance);
+            console.info("fileioClient:  got deviceManager: " + dmInstance)
+            let networkId = deviceList[0].networkId
+            console.info("fileioClient: deviceid : " + networkId)
+            console.info("fileioClient: online deviceList id: " + JSON.stringify(deviceList))
+            let want = {
+                "bundleName": bundleName,
+                "abilityName": abilityName,
+                "deviceId": networkId,
+                "flags": 256
+            }
+            let connect = {
+                onConnect: function (elementName, remoteProxy) {
+                    console.log('fileioClient: onConnect called, remoteProxy: ' + remoteProxy);
+                    resolve(remoteProxy)
+                },
+                onDisconnect: function (elementName) {
+                    console.log("fileioClient: onDisconnect")
+                },
+                onFailed: function () {
+                    console.log("fileioClient: onFailed")
                 }
-                let connect = {
-                    onConnect: function (elementName, remoteProxy) {
-                        console.log('fileioClient: onConnect called, remoteProxy: ' + remoteProxy);
-                        resolve(remoteProxy)
-                    },
-                    onDisconnect: function (elementName) {
-                        console.log("fileioClient: onDisconnect")
-                    },
-                    onFailed: function () {
-                        console.log("fileioClient: onFailed")
-                    }
-                }
-                let connectId = featureAbility.connectAbility(want, connect)
-                console.info("fileioClient: connect ability got id: " + connectId)
-            })
+            }
+            let connectId = featureAbility.connectAbility(want, connect)
+            console.info("fileioClient: connect ability got id: " + connectId)
         })
-
     }
 }
