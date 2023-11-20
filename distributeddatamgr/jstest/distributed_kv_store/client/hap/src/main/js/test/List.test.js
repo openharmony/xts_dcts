@@ -12,7 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import kvSyncTest   from './KvStoreSecurityLevelJsunit.test.js';
 import kvSyncTestS1 from './KvStoreSecurityLevelS1Jsunit.test.js';
 import deviceinfo from '@ohos.deviceInfo'
 
@@ -31,10 +30,9 @@ export default function testsuite() {
     if (localOSVersion == OSVersion41) {
         flag_41 = 1;
         console.info(logTag + "flag_41 is: " + flag_41);
-        kvSyncTestS1();
     } else {
         flag_41 = 0;
         console.info(logTag + "flag_41 is: " + flag_41);
-        kvSyncTest();
     }
+    kvSyncTestS1();
 }
