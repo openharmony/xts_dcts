@@ -225,7 +225,7 @@ export default function rdbSyncCustomDirlTest(){
                     expect(status == 0).assertTrue();
                 }
             }).catch((err) => {
-                console.log('testRdbSyncCustomTest0300 sync failed' + err.code);
+                console.log('testRdbSyncCustomTest0100 sync failed' + err.code);
                 expect().assertFail();
             })
             await promise;
@@ -236,7 +236,7 @@ export default function rdbSyncCustomDirlTest(){
     
          /**
          * @tc.number SUB_DistributedData_RelationalStore_CrossDevice_SDK_RemoteQueryJsAPITest_2900
-         * @tc.name testRdbSyncTest0200
+         * @tc.name testRdbSyncCustomTest0200
          * @tc.desc Server rdbStore Insert twice and synchronize twice
          */
         it("testRdbSyncCustomTest0200", 0, async function (done) {
@@ -312,11 +312,11 @@ export default function rdbSyncCustomDirlTest(){
     
         /**
         * @tc.number SUB_DistributedData_RelationalStore_CrossDevice_SDK_RemoteQueryJsAPITest_3000
-        * @tc.name testRdbSyncTest0300
+        * @tc.name testRdbSyncCustomTest0300
         * @tc.desc Server rdbStore Insert synchronization and then update synchronization
         */
         it("testRdbSyncCustomTest0300", 0, async function (done) {
-            console.info(logTag + "testRdbSyncCustomTest0320 start");
+            console.info(logTag + "testRdbSyncCustomTest0300 start");
     
             //push data to remote device
             var u8 = new Uint8Array([1, 2, 3]);
@@ -392,7 +392,7 @@ export default function rdbSyncCustomDirlTest(){
         * @tc.desc Server rdbStore Insert synchronization, and then delete synchronization
         */
         it("testRdbSyncCustomTest0400", 0, async function (done) {
-            console.info(logTag + "testRdbSyncCustomTest0330 start");
+            console.info(logTag + "testRdbSyncCustomTest0400 start");
     
             //push data to remote device
             var u8 = new Uint8Array([1, 2, 3])
