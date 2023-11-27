@@ -66,7 +66,7 @@ std::string DPTest::GetDevProfileTest()
 {
     ServiceCharacteristicProfile profile;
     std::string testServiceId = profile.GetServiceId();
-    DistributedDeviceProfileClient::GetInstance().GetDeviceProfile("", serviceId, profile);
+    DistributedDeviceProfileClient::GetInstance().GetDeviceProfile("", testServiceId, profile);
     std::string jsonData = profile.GetCharacteristicProfileJson();
     if(jsonData.empty()){
         DHLOGI("demo test: GetDevProfileTest GetCharacteristicProfileJson error");
@@ -131,7 +131,6 @@ int DPTest::DeleteDevProfileTest()
 
 int DPTest::SyncDveProfileTest(){
     ServiceCharacteristicProfile profile;
-    std::string devices = JSON.stringify(dmDeviceInfo[0]["deviceId"]);
     SyncOptions syncOption;
     syncOption.SetSyncMode((OHOS::DeviceProfile::SyncMode)atoi(mode.c_str()));
     for (const auto& deviceId : deviceIds) {
@@ -158,7 +157,7 @@ int DPTest::SubscribeProfileEventsTest(){
 // 订阅EVENT_PROFILE_CHANGED事件
     ExtraInfo extraInfo;
     extraInfo["deviceId"] = deviceId;
-    extraInfo["serviceIds"] = serviceIds;
+    extraInfo["serviceIds"] = ServiceIds;
     SubscribeInfo changeEventInfo;
     changeEventInfo.profileEvent = ProfileEvent::EVENT_PROFILE_CHANGED;
     changeEventInfo.extraInfo = std::move(extraInfo);

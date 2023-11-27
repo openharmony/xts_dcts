@@ -67,7 +67,8 @@ void ServiceProfileTest::TearDown()
  * @tc.type      : FUNC
  * @tc.size      : Medium test
  */
-HWTEST_F(ServiceProfileTest, SUB_DH_DPTSET_Dcts__001, TestSize.Level1)
+ 
+HWTEST_F(ServiceProfileTest, SUB_DH_DPTSET_Dcts__001, TestSize.Level3)
 {
     std::string ret = mainDemo->PutDevProfileTest();
     std::string res =  mainDemo->GetDevProfileTest();
