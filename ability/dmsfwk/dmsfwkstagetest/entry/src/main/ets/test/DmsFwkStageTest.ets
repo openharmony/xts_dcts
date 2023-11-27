@@ -36,7 +36,7 @@ let extensionConnectId2: number;
 let continueState;
 let caller: Caller;
 let dmInstance : deviceManager.DeviceManager
-var TAG;
+var TAG:string;
 
 export default function DmsFwkStageTest() {
 
@@ -104,6 +104,45 @@ export default function DmsFwkStageTest() {
 
     afterEach(async function (done) {
       console.info('DmsFwkStageTest after each called');
+      try {
+        await globalThis.abilityContext.disconnectServiceExtensionAbility(connectId).then((data) =>{
+          console.info('DmsFwkStageTest disconnectServiceExtensionAbility called success' + data);
+        }).catch ((err) =>{
+          console.info('DmsFwkStageTest disconnectServiceExtensionAbility called err ' + err.code);
+        })
+      } catch (error) {
+        console.info('DmsFwkStageTest disconnectServiceExtensionAbility called error ' + error.code);
+      }
+      await sleep(1000)
+      try {
+        await globalThis.abilityContext.disconnectServiceExtensionAbility(connectId2).then((data) =>{
+          console.info('DmsFwkStageTest disconnectServiceExtensionAbility called success' + data);
+        }).catch ((err) =>{
+          console.info('DmsFwkStageTest disconnectServiceExtensionAbility called err ' + err.code);
+        })
+      } catch (error) {
+        console.info('DmsFwkStageTest disconnectServiceExtensionAbility called error ' + error.code);
+      }
+      await sleep(1000)
+      try {
+        await globalThis.abilityContext.disconnectServiceExtensionAbility(extensionConnectId).then((data) =>{
+          console.info('DmsFwkStageTest disconnectServiceExtensionAbility called success' + data);
+        }).catch ((err) =>{
+          console.info('DmsFwkStageTest disconnectServiceExtensionAbility called err ' + err.code);
+        })
+      } catch (error) {
+        console.info('DmsFwkStageTest disconnectServiceExtensionAbility called error ' + error.code);
+      }
+      await sleep(1000)
+      try {
+        await globalThis.abilityContext.disconnectServiceExtensionAbility(extensionConnectId2).then((data) =>{
+          console.info('DmsFwkStageTest disconnectServiceExtensionAbility called success' + data);
+        }).catch ((err) =>{
+          console.info('DmsFwkStageTest disconnectServiceExtensionAbility called err ' + err.code);
+        })
+      } catch (error) {
+        console.info('DmsFwkStageTest disconnectServiceExtensionAbility called error ' + error.code);
+      }
       done();
     });
 
