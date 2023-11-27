@@ -56,12 +56,12 @@ export default class MainAbility extends Ability {
     onConnect(want) {
 
         console.info("DmsFwkStageServer ServiceAbility onConnect")
-        let CommonEventPublishData = {
+        let commonEventPublishData = {
             parameters: {
                 "life": "onConnect"
             }
         }
-        commonEvent.publish("DmsFwkService_ConnectAbility", CommonEventPublishData, (err) => {
+        commonEvent.publish("DmsFwkService_ConnectAbility", commonEventPublishData, (err) => {
             console.info("DmsFwkService_ConnectAbility onCreate");
         });
         return new StubTest("test");
