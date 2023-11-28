@@ -19,7 +19,6 @@ import deviceManager from '@ohos.distributedDeviceManager';
 import TestApi from '../../../../../../../../../../../testtools/disjsTest/server/testApi.js';
 
 let context = featureAbility.getContext();
-globalThis.abilityContext = context; 
 
 const CREATE_TABLE_TEST = "CREATE TABLE IF NOT EXISTS test (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
 
