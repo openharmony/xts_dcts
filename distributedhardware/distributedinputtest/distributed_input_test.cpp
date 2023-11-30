@@ -468,28 +468,28 @@ HWTEST_F(DistributedInputTest, SUB_DH_DInput_Dcts_3100, testing::ext::TestSize.L
     EXPECT_EQ(true, ret);
 }
 
-HWTEST_F(DistributedInputTest, SUB_DH_DInput_Dcts_3600, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, SUB_DH_DInput_Dcts_3200, testing::ext::TestSize.Level0)
 {
     sptr<TestSimulationEventListenerStub> listener(new TestSimulationEventListenerStub());
     int32_t ret = DistributedInputKit::RegisterSimulationEventListener(listener);
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputTest, SUB_DH_DInput_Dcts_3700, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, SUB_DH_DInput_Dcts_3300, testing::ext::TestSize.Level0)
 {
     sptr<TestSimulationEventListenerStub> listener = nullptr;
     int32_t ret = DistributedInputKit::RegisterSimulationEventListener(listener);
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputTest, SUB_DH_DInput_Dcts_3800, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, SUB_DH_DInput_Dcts_3400, testing::ext::TestSize.Level0)
 {
     sptr<TestSimulationEventListenerStub> listener(new TestSimulationEventListenerStub());
     int32_t ret = DistributedInputKit::UnregisterSimulationEventListener(listener);
     EXPECT_EQ(DH_SUCCESS, ret);
 }
 
-HWTEST_F(DistributedInputTest, SUB_DH_DInput_Dcts_3900, testing::ext::TestSize.Level0)
+HWTEST_F(DistributedInputTest, SUB_DH_DInput_Dcts_3500, testing::ext::TestSize.Level0)
 {
     sptr<TestSimulationEventListenerStub> listener = nullptr;
     int32_t ret = DistributedInputKit::UnregisterSimulationEventListener(listener);
