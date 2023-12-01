@@ -192,7 +192,6 @@ int Wait(int timeout);
 int Wait4Session(int timeout, WaitSessionType type);
 int WaitNodeCount(int timeout, WaitNodeStateType state, int expectCount);
 
-void AddPermission (void);
 void sleepn(int n);
 void TestSetUp(void);
 void TestTearDown(void);
