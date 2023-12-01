@@ -17,6 +17,7 @@
 
 #include "net_trans_common.h"
 #include "wifi_utils.h"
+#include "accesstoken_kit.h"
 
 using namespace std;
 using namespace testing::ext;
@@ -58,9 +59,8 @@ void dsoftbusTest ::TearDown() {}
 void dsoftbusTest ::SetUpTestCase()
 {
     LOG("SetUpTestCase");
-    AddPermission();
-    sleep(1);
-    system("pidof accesstoken_ser | xargs kill -9");
+    uint64_t tokenId = OHOS::Security::AccessToken::AccessTokenKit::GetNativeTokenId("dhardware");
+    SetSelfTokenID(tokenId);
     sleep(1);
     TestSetUp();
     SetupCallback();

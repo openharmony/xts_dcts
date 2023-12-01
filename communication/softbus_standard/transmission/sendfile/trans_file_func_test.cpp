@@ -17,6 +17,7 @@
 
 #include "net_trans_common.h"
 #include "wifi_utils.h"
+#include "accesstoken_kit.h"
 
 static int g_waitFlag = WAIT_DEF_VALUE;
 
@@ -102,9 +103,8 @@ void TransFileFuncTest::TearDown() {}
 void TransFileFuncTest::SetUpTestCase()
 {
     LOG("SetUp begin");
-    AddPermission();
-    sleep(1);
-    system("pidof accesstoken_ser | xargs kill -9");
+    uint64_t tokenId = OHOS::Security::AccessToken::AccessTokenKit::GetNativeTokenId("dhardware");
+    SetSelfTokenID(tokenId);
     sleep(1);
     TestSetUp();
     int ret = RegisterDeviceStateDefCallback();
