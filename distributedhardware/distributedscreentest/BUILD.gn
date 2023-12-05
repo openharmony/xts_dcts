@@ -17,6 +17,11 @@ import("//test/xts/tools/build/suite.gni")
 module_output_path = "dcts/distributedhardware"
 
 ohos_moduletest_suite("SubDctsdisScreenTest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = false
+  }
   module_out_path = module_output_path
   include_dirs = [
     "$base_root/foundation/distributedhardware/distributed_screen/services/common/utils/include",
@@ -67,9 +72,17 @@ ohos_moduletest_suite("SubDctsdisScreenTest") {
 
   external_deps = [
     "access_token:libaccesstoken_sdk",
+    "access_token:libnativetoken",
+    "access_token:libtoken_setproc",
     "c_utils:utils",
+    "dsoftbus:softbus_client",
+    "graphic_2d:librender_service_client",
+    "graphic_2d:surface",
     "hilog:libhilog",
     "player_framework:media_client",
+    "samgr:samgr_proxy",
+    "window_manager:libdm",
+    "window_manager:libwm",
   ]
 
   subsystem_name = "distributedhardware"
