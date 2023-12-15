@@ -15,6 +15,7 @@
 
 #include <gtest/gtest.h>
 #include "dcamera_hdf_demo.h"
+#include "distributed_hardware_log.h"
 
 using namespace testing::ext;
 using namespace OHOS::DistributedHardware;
@@ -36,13 +37,16 @@ void DCameraAutomatTest::SetUpTestCase(void)
 {
     int32_t ret = mainDemo->InitSensors();
     if (ret == camoreError) {
+        DHLOGE("main test: mainDemo->InitSensors() error");
         return;
     }
 
     ret = mainDemo->InitCameraDevice();
     if (ret == camoreError) {
+        DHLOGE("main test: mainDemo->InitCameraDevice() error");
         return;
     }
+    mainDemo->SetEnableResult();
 }
 
 void DCameraAutomatTest::TearDownTestCase(void)
@@ -64,8 +68,8 @@ DCameraAutomatTest::DCameraAutomatTest(void) {}
  */
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0100, TestSize.Level1)
 {
-    int32_t ret = PreviewOn(0, nullptr);
-    EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
+    int32_t ret = PreviewOn(0, mainDemo);
+    EXPECT_EQ(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
 }
 
@@ -79,8 +83,8 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0100, TestSize.Level1)
  */
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0200, TestSize.Level1)
 {
-    int32_t ret = CaptureTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
+    int32_t ret = CaptureTest(mainDemo);
+    EXPECT_EQ(cameraOk, ret) << "CaptureTest fail";
     sleep(sleepOk);
 }
 
@@ -94,8 +98,8 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0200, TestSize.Level1)
  */
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0300, TestSize.Level1)
 {
-    int32_t ret = VideoTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "VideoTest fail";
+    int32_t ret = VideoTest(mainDemo);
+    EXPECT_EQ(cameraOk, ret) << "VideoTest fail";
     sleep(sleepOk);
 }
 
@@ -169,8 +173,8 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0700, TestSize.Level1)
  */
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0800, TestSize.Level1)
 {
-    int32_t ret = FlashLightTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "FlashLightTest fail";
+    int32_t ret = FlashLightTest(mainDemo);
+    EXPECT_EQ(cameraOk, ret) << "FlashLightTest fail";
     sleep(sleepOk);
 }
 
@@ -184,8 +188,8 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0800, TestSize.Level1)
  */
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_0900, TestSize.Level1)
 {
-    int32_t ret = OfflineTest(nullptr);
-    EXPECT_NE(cameraOk, ret) << "OfflineTest fail";
+    int32_t ret = OfflineTest(mainDemo);
+    EXPECT_EQ(cameraOk, ret) << "OfflineTest fail";
 }
 
 /**
@@ -611,7 +615,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3000, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3100, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, mainDemo);
-    //DHLOGI("SUB_DH_Dcamera_DCTS_3100 = ", ret);
+    DHLOGI("SUB_DH_Dcamera_DCTS_3100 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
 }
@@ -626,7 +630,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3100, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3200, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
-    //DHLOGI("SUB_DH_Dcamera_DCTS_3200 = ", ret);
+    DHLOGI("SUB_DH_Dcamera_DCTS_3200 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
 }
@@ -641,7 +645,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3200, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3300, TestSize.Level1)
 {
     int32_t ret = PreviewOn(0, nullptr);
-    //DHLOGI("SUB_DH_Dcamera_DCTS_3300 = ", ret);
+    DHLOGI("SUB_DH_Dcamera_DCTS_3300 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
 }
@@ -656,7 +660,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3300, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3400, TestSize.Level1)
 {
     int32_t ret = PreviewOn(-1, mainDemo);
-    //DHLOGI("SUB_DH_Dcamera_DCTS_3400 = ", ret);
+    DHLOGI("SUB_DH_Dcamera_DCTS_3400 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
 }
@@ -671,7 +675,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3400, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3500, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(5);
-    //DHLOGI("SUB_DH_Dcamera_DCTS_3500 = ", ret);
+    DHLOGI("SUB_DH_Dcamera_DCTS_3500 = ", ret);
     EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
     sleep(sleepOk);
 }
@@ -686,6 +690,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3500, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3600, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
+    DHLOGI("SUB_DH_Dcamera_DCTS_3600 = ", ret);
     EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
     sleep(sleepOk);
 }
@@ -700,9 +705,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3600, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3700, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
+    DHLOGI("SUB_DH_Dcamera_DCTS_3700 = ", ret);
     EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
     sleep(sleepOk);
     ret = mainDemo->SetAeExpo();
+    DHLOGI("SUB_DH_Dcamera_DCTS_3701 = ", ret);
     EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
     sleep(sleepOk);
 }
@@ -717,9 +724,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3700, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3800, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
+    DHLOGI("SUB_DH_Dcamera_DCTS_3800 = ", ret);
     EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
     sleep(sleepOk);
     ret = mainDemo->SetMetadata();
+    DHLOGI("SUB_DH_Dcamera_DCTS_3801 = ", ret);
     EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
     sleep(sleepOk);
 }
@@ -734,6 +743,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3800, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3900, TestSize.Level1)
 {
     int32_t ret = CaptureTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_3900 = ", ret);
     EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
     sleep(sleepOk);
 }
@@ -748,6 +758,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3900, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4000, TestSize.Level1)
 {
     int32_t ret = VideoTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4000 = ", ret);
     EXPECT_NE(cameraOk, ret) << "VideoTest fail";
     sleep(sleepOk);
 }
@@ -762,6 +773,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4000, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4100, TestSize.Level1)
 {
     int32_t ret = FlashLightTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4100 = ", ret);
     EXPECT_NE(cameraOk, ret) << "FlashLightTest fail";
     sleep(sleepOk);
 }
@@ -776,6 +788,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4100, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4200, TestSize.Level1)
 {
     int32_t ret = OfflineTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4200 = ", ret);
     EXPECT_NE(cameraOk, ret) << "OfflineTest fail";
     sleep(sleepOk);
 }
@@ -790,9 +803,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4200, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4300, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4300 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
     ret = mainDemo->SetAwbMode(5);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4301 = ", ret);
     EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
     sleep(sleepOk);
 }
@@ -807,9 +822,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4300, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4400, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4400 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
     ret = mainDemo->SetAwbMode(camoreError);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4401 = ", ret);
     EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
     sleep(sleepOk);
 }
@@ -824,9 +841,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4400, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4500, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4500 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
     ret = CaptureTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4501 = ", ret);
     EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
     sleep(sleepOk);
 }
@@ -841,9 +860,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4500, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4600, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4600 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
     ret = VideoTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4601 = ", ret);
     EXPECT_NE(cameraOk, ret) << "VideoTest fail";
     sleep(sleepOk);
 }
@@ -858,9 +879,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4600, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4700, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4700 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
     ret = PreviewOn(0, nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4701 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
 }
@@ -875,9 +898,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4700, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4800, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4800 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
     ret = FlashLightTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4801 = ", ret);
     EXPECT_NE(cameraOk, ret) << "FlashLightTest fail";
     sleep(sleepOk);
 }
@@ -892,9 +917,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4800, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4900, TestSize.Level1)
 {
     int32_t ret = PreviewOn(1, nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4900 = ", ret);
     EXPECT_NE(cameraOk, ret) << "PreviewOn fail";
     sleep(sleepOk);
     ret = OfflineTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_4901 = ", ret);
     EXPECT_NE(cameraOk, ret) << "OfflineTest fail";
     sleep(sleepOk);
 }
@@ -909,9 +936,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_4900, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5000, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5000 = ", ret);
     EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
     sleep(sleepOk);
     ret = CaptureTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5001 = ", ret);
     EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
     sleep(sleepOk);
 }
@@ -926,9 +955,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5000, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5100, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5100 = ", ret);
     EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
     sleep(sleepOk);
     ret = VideoTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5101 = ", ret);
     EXPECT_NE(cameraOk, ret) << "VideoTest fail";
     sleep(sleepOk);
 }
@@ -943,9 +974,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5100, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5200, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5200 = ", ret);
     EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
     sleep(sleepOk);
     ret = FlashLightTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5201 = ", ret);
     EXPECT_NE(cameraOk, ret) << "FlashLightTest fail";
     sleep(sleepOk);
 }
@@ -960,9 +993,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5200, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5300, TestSize.Level1)
 {
     int32_t ret = mainDemo->SetAwbMode(camoreError);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5300 = ", ret);
     EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
     sleep(sleepOk);
     ret = OfflineTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5301 = ", ret);
     EXPECT_NE(cameraOk, ret) << "OfflineTest fail";
     sleep(sleepOk);
 }
@@ -977,9 +1012,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5300, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5400, TestSize.Level1)
 {
     int32_t ret = CaptureTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5400 = ", ret);
     EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
     sleep(sleepOk);
     ret = VideoTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5401 = ", ret);
     EXPECT_NE(cameraOk, ret) << "VideoTest fail";
     sleep(sleepOk);
 }
@@ -994,9 +1031,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5400, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5500, TestSize.Level1)
 {
     int32_t ret = CaptureTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5500 = ", ret);
     EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
     sleep(sleepOk);
     ret = FlashLightTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5501 = ", ret);
     EXPECT_NE(cameraOk, ret) << "FlashLightTest fail";
     sleep(sleepOk);
 }
@@ -1011,9 +1050,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5500, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5600, TestSize.Level1)
 {
     int32_t ret = CaptureTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5600 = ", ret);
     EXPECT_NE(cameraOk, ret) << "CaptureTest fail";
     sleep(sleepOk);
     ret = OfflineTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5601 = ", ret);
     EXPECT_NE(cameraOk, ret) << "OfflineTest fail";
     sleep(sleepOk);
 }
@@ -1028,9 +1069,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5600, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5700, TestSize.Level1)
 {
     int32_t ret = VideoTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5700 = ", ret);
     EXPECT_NE(cameraOk, ret) << "VideoTest fail";
     sleep(sleepOk);
     ret = FlashLightTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5701 = ", ret);
     EXPECT_NE(cameraOk, ret) << "FlashLightTest fail";
     sleep(sleepOk);
 }
@@ -1045,9 +1088,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5700, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5800, TestSize.Level1)
 {
     int32_t ret = VideoTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5800 = ", ret);
     EXPECT_NE(cameraOk, ret) << "VideoTest fail";
     sleep(sleepOk);
     ret = OfflineTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5801 = ", ret);
     EXPECT_NE(cameraOk, ret) << "OfflineTest fail";
     sleep(sleepOk);
 }
@@ -1062,9 +1107,11 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5800, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5900, TestSize.Level1)
 {
     int32_t ret = FlashLightTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5900 = ", ret);
     EXPECT_NE(cameraOk, ret) << "FlashLightTest fail";
     sleep(sleepOk);
     ret = OfflineTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_5901 = ", ret);
     EXPECT_NE(cameraOk, ret) << "OfflineTest fail";
     sleep(sleepOk);
 }
@@ -1079,9 +1126,236 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_5900, TestSize.Level1)
 HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_6000, TestSize.Level1)
 {
     int32_t ret = FlashLightTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_6000 = ", ret);
     EXPECT_NE(cameraOk, ret) << "FlashLightTest fail";
     sleep(sleepOk);
     ret = FlashLightTest(nullptr);
+    DHLOGI("SUB_DH_Dcamera_DCTS_6001 = ", ret);
     EXPECT_NE(cameraOk, ret) << "FlashLightTest fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_6100
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_6100, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_EXPOSURE_MODE_MANUAL;
+    int32_t ret = mainDemo->SetMetadataAe(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_6200
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_6200, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_EXPOSURE_MODE_LOCKED;
+    int32_t ret = mainDemo->SetMetadataAe(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_6300
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_6300, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_EXPOSURE_MODE_AUTO;
+    int32_t ret = mainDemo->SetMetadataAe(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_6400
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_6400, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_SPOT_METERING;
+    int32_t ret = mainDemo->SetMetadataMeter(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_6500
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_6500, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_REGION_METERING;
+    int32_t ret = mainDemo->SetMetadataMeter(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_6600
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_6600, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_FLASH_MODE_CLOSE;
+    int32_t ret = mainDemo->SetMetadataFlash(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_6700
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_6700, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_FLASH_MODE_OPEN;
+    int32_t ret = mainDemo->SetMetadataFlash(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_6800
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_6800, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_FLASH_MODE_AUTO;
+    int32_t ret = mainDemo->SetMetadataFlash(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_6900
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_6900, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_MIRROR_ON;
+    int32_t ret = mainDemo->SetMetadataMirror(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_7000
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_7000, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_JPEG_ROTATION_0;
+    int32_t ret = mainDemo->SetMetadataJpeg(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_7100
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_7100, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_JPEG_ROTATION_90;
+    int32_t ret = mainDemo->SetMetadataJpeg(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_7200
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_7200, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_FOCUS_MODE_MANUAL;
+    int32_t ret = mainDemo->SetMetadataAf(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_7300
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_7300, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_FOCUS_MODE_CONTINUOUS_AUTO;
+    int32_t ret = mainDemo->SetMetadataAf(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_7400
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_7400, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_FOCUS_MODE_LOCKED;
+    int32_t ret = mainDemo->SetMetadataAf(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
+    sleep(sleepOk);
+}
+
+/**
+ * @tc.number    : SUB_DH_Dcamera_DCTS_7500
+ * @tc.name      ：mainDemo->SetMetadata()
+ * @tc.desc      : Set the parameters required for taking pictures and recording videos
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_7500, TestSize.Level1)
+{
+    uint8_t mode = OHOS_CAMERA_FACE_DETECT_MODE_OFF;
+    int32_t ret = mainDemo->SetMetadataFace(mode);
+    EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
     sleep(sleepOk);
 }
