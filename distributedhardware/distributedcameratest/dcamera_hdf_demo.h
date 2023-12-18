@@ -18,6 +18,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <hdf_log.h>
 #include <surface.h>
 #include <sys/time.h>
 #include <ctime>
@@ -99,6 +100,13 @@ public:
     RetCode SetAwbMode(const int mode) const;
     RetCode SetAeExpo();
     RetCode SetMetadata();
+    RetCode SetMetadataAe(uint8_t mode);
+    RetCode SetMetadataMeter(uint8_t mode);
+    RetCode SetMetadataFlash(uint8_t mode);
+    RetCode SetMetadataMirror(uint8_t mode);
+    RetCode SetMetadataJpeg(uint8_t mode);
+    RetCode SetMetadataAf(uint8_t mode);
+    RetCode SetMetadataFace(uint8_t mode);
     void SetEnableResult();
     void FlashlightOnOff(bool onOff);
 

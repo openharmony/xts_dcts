@@ -14,6 +14,7 @@
  */
 
 #include "stream_customer.h"
+#include "distributed_hardware_log.h"
 
 namespace OHOS {
 namespace DistributedHardware {
@@ -39,6 +40,8 @@ sptr<OHOS::IBufferProducer> StreamCustomer::CreateProducer(CaptureMode mode,
     if (producer == nullptr) {
         return nullptr;
     }
+
+    DHLOGI("demo test, create a buffer queue producer %p", producer.GetRefPtr());
     return producer;
 }
 }
