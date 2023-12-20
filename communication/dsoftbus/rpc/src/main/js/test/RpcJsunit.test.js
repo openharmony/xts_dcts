@@ -539,7 +539,7 @@ export default function RpcJsUnitTest() {
                     expect(result.errCode).assertEqual(0);
                     let rShortArryData = [];
                     result.reply.readShortArray(rShortArryData);
-                    assertArrayElementEqual(rShortArryData, wShortArryData);
+                    expect(rShortArryData).assertDeepEquals(wShortArryData);
                 });
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_MessageSequence_0070 error: " + error);
@@ -1010,7 +1010,7 @@ export default function RpcJsUnitTest() {
                     expect(result.errCode).assertEqual(0);
                     let rBooleanArryData = [];
                     result.reply.readBooleanArray(rBooleanArryData);
-                    assertArrayElementEqual(rBooleanArryData, wBooleanArryData);
+                    expect(rBooleanArryData).assertDeepEquals(wBooleanArryData);
                 });
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_MessageSequence_0220 error: " + error);
@@ -1138,7 +1138,7 @@ export default function RpcJsUnitTest() {
                     expect(result.errCode).assertEqual(0);
                     let rCharArryData = [];
                     result.reply.readCharArray(rCharArryData);
-                    assertArrayElementEqual(rCharArryData, wCharArryData);
+                    expect(rCharArryData).assertDeepEquals(wCharArryData);
                 });
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_MessageSequence_0260 error: " + error);
@@ -1539,7 +1539,7 @@ export default function RpcJsUnitTest() {
                     expect(result.errCode).assertEqual(0);
                     let newArr = new Array(3);
                     result.reply.readIntArray(newArr);
-                    assertArrayElementEqual(newArr, intArryData);
+                    expect(newArr).assertDeepEquals(intArryData);
                 });
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_MessageSequence_0390 error: " + error);
@@ -5583,7 +5583,7 @@ export default function RpcJsUnitTest() {
                     expect(result.errCode).assertEqual(0);
                     let rShortArryData = [];
                     result.reply.readShortArray(rShortArryData);
-                    assertArrayElementEqual(rShortArryData, wShortArryData);
+                    expect(rShortArryData).assertDeepEquals(wShortArryData);
                 });
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_MessageParcel_0070 error: " + error);
@@ -6048,7 +6048,7 @@ export default function RpcJsUnitTest() {
                     expect(result.errCode).assertEqual(0);
                     let rBooleanArryData = [];
                     result.reply.readBooleanArray(rBooleanArryData);
-                    assertArrayElementEqual(rBooleanArryData, wBooleanArryData);
+                    expect(rBooleanArryData).assertDeepEquals(wBooleanArryData);
                 });
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_MessageParcel_0220 error: " + error);
@@ -6174,7 +6174,7 @@ export default function RpcJsUnitTest() {
                     expect(result.errCode).assertEqual(0);
                     let rCharArryData = [];
                     result.reply.readCharArray(rCharArryData);
-                    assertArrayElementEqual(rCharArryData, wCharArryData);
+                    expect(rCharArryData).assertDeepEquals(wCharArryData);
                 });
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_MessageParcel_0260 error: " + error);
@@ -6563,7 +6563,7 @@ export default function RpcJsUnitTest() {
                     expect(result.errCode).assertEqual(0);
                     let newArr = new Array(3);
                     result.reply.readIntArray(newArr);
-                    assertArrayElementEqual(newArr, intArryData);
+                    expect(newArr).assertDeepEquals(intArryData);
                 });
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_MessageParcel_0390 error: " + error);
