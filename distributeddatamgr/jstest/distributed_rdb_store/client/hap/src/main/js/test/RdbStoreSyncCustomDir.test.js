@@ -28,7 +28,7 @@ const CREATE_TABLE_NAME = "CREATE TABLE IF NOT EXISTS test"
 const STORE_CONFIG = {
     name: "RemoteRdb.db",
     securityLevel: data_Rdb.SecurityLevel.S1,
-    customDir:"/data/app/el2/100/database/bundleName/rdb"
+    customDir:"data/app/el2/100/database/bundleName/rdb"
 }
 
 var rdbStore = undefined;
@@ -185,6 +185,9 @@ export default function rdbSyncCustomDirlTest(){
          * @tc.number SUB_DistributedData_RelationalStore_CrossDevice_SDK_RemoteQueryJsAPITest_2800
          * @tc.name testRdbSyncCustomTest0100
          * @tc.desc Server rdbStore Insert first and synchronize
+		 * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 3
          */
          it("testRdbSyncCustomTest0100", 0, async function (done) {
             console.info(logTag + "testRdbSyncCustomTest0100 start");
@@ -238,6 +241,9 @@ export default function rdbSyncCustomDirlTest(){
          * @tc.number SUB_DistributedData_RelationalStore_CrossDevice_SDK_RemoteQueryJsAPITest_2900
          * @tc.name testRdbSyncCustomTest0200
          * @tc.desc Server rdbStore Insert twice and synchronize twice
+		 * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 3
          */
         it("testRdbSyncCustomTest0200", 0, async function (done) {
             console.info(logTag + "testRdbSyncCustomTest0200 start");
@@ -314,6 +320,9 @@ export default function rdbSyncCustomDirlTest(){
         * @tc.number SUB_DistributedData_RelationalStore_CrossDevice_SDK_RemoteQueryJsAPITest_3000
         * @tc.name testRdbSyncCustomTest0300
         * @tc.desc Server rdbStore Insert synchronization and then update synchronization
+		* @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 3
         */
         it("testRdbSyncCustomTest0300", 0, async function (done) {
             console.info(logTag + "testRdbSyncCustomTest0300 start");
@@ -390,6 +399,9 @@ export default function rdbSyncCustomDirlTest(){
         * @tc.number SUB_DistributedData_RelationalStore_CrossDevice_SDK_RemoteQueryJsAPITest_3100
         * @tc.name testRdbSyncCustomTest0400
         * @tc.desc Server rdbStore Insert synchronization, and then delete synchronization
+		* @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 3
         */
         it("testRdbSyncCustomTest0400", 0, async function (done) {
             console.info(logTag + "testRdbSyncCustomTest0400 start");
@@ -453,6 +465,9 @@ export default function rdbSyncCustomDirlTest(){
         * @tc.number SUB_DistributedData_RelationalStore_CrossDevice_SDK_RemoteQueryJsAPITest_3200
         * @tc.name testRdbSyncCustomTest0500
         * @tc.desc Server rdbStore batchInsert sync
+		* @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 3
         */
         it("testRdbSyncCustomTest0500", 0, async function (done) {
             console.info(logTag + "testRdbSyncCustomTest0500 start");
