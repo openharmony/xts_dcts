@@ -95,6 +95,7 @@ export default {
 
     async insertData(){
         const valueBucket = {
+            "id": 1,
             "name": "Lisa",
             "age": 18,
             "salary": 100.5,
