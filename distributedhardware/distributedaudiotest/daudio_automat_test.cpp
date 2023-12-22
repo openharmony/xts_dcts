@@ -204,7 +204,7 @@ HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_1000, TestSize.Level1)
  * @tc.level Level 1
 */
 HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_1100, TestSize.Level1)
-{   
+{
     std::string ret = HandleAudioEvent(6);
     EXPECT_EQ(res, ret) << "CloseMic fail";
     sleep(g_audioDelay);
