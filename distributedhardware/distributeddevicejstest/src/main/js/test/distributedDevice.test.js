@@ -79,12 +79,14 @@ export default function distributedDeviceManager() {
         let dmNetworkId = null;
         let dmDeviceInfo = null;
         let deviceId = null;
-        /*
+       /*
         * @tc.number  SUB_DH_DeviceManager_Dcts_0100
         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
         * use this instance to call other device management methods.
         * @tc.desc    Function test
-        * @tc.level   0
+        * @tc.size    MediumTest
+        * @tc.type:   Function
+        * @tc.level   Level1
         */
         it("SUB_DH_DeviceManager_Dcts_0100", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0100 start------------------------");
@@ -116,8 +118,10 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_0200
          * @tc.name    Start to discover nearby devices.
          * @tc.desc    Function test
-         * @tc.level   0
-        */
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_0200", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0200 start------------------------");
             var discoverParam  = {
@@ -146,8 +150,10 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_0300
          * @tc.name    Get the network id of the local device
          * @tc.desc    Function test
-         * @tc.level   0
-        */
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_0300", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0300 start------------------------");
             try {
@@ -171,8 +177,10 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_0400
          * @tc.name    Get a list of available devices. This interface query all authorized and connectable devices.
          * @tc.desc    Function test
-         * @tc.level   0
-        */
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_0400", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0400 start------------------------");
             try {
@@ -197,8 +205,10 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_0500
          * @tc.name    Get a list of available devices. This interface query all authorized and connectable devices.
          * @tc.desc    Function test
-         * @tc.level   0
-        */
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_0500", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0500 start------------------------");
             try {
@@ -223,8 +233,10 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_0600
          * @tc.name    Get a list of available devices. This interface query all authorized and connectable devices.
          * @tc.desc    Function test
-         * @tc.level   0
-        */
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_0600", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0600 start------------------------");
             dmInstance.getAvailableDeviceList().then((data) => { 
@@ -244,8 +256,10 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_0700
          * @tc.name    Get the device name of the local device.
          * @tc.desc    Function test
-         * @tc.level   0
-        */
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_0700", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0700 start------------------------");
             let bindParam = {
@@ -284,8 +298,10 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_0800
          * @tc.name    Get the device name of the local device.
          * @tc.desc    Function test
-         * @tc.level   0
-        */
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_0800", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0800 start------------------------");
             try {
@@ -309,8 +325,10 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_0900
          * @tc.name    Get the device type of the local device
          * @tc.desc    Function test
-         * @tc.level   0
-        */
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_0900", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0900 start------------------------");
             try {
@@ -334,8 +352,10 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_1000
          * @tc.name    Get the device id of the local device
          * @tc.desc    Function test
-         * @tc.level   0
-        */
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_1000", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1000 start------------------------");
             try {
@@ -356,11 +376,13 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_1100
-        * @tc.name    Get the device name by network id.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_1100
+         * @tc.name    Get the device name by network id.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_1100", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1100 start------------------------");
             try {
@@ -384,8 +406,10 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_1200
          * @tc.name    Get the device type by network id.
          * @tc.desc    Function test
-         * @tc.level   0
-        */
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_1200", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1200 start------------------------");
             try {
@@ -409,8 +433,10 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_1300
          * @tc.name    Unbind the specified target.
          * @tc.desc    Function test
-         * @tc.level   0
-        */
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
        it("SUB_DH_DeviceManager_Dcts_1300", 0, async function (done) {
         console.info("-----------------SUB_DH_DeviceManager_Dcts_1300 start------------------------");
         try {
@@ -437,8 +463,10 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_1400
          * @tc.name    Stop discovering nearby devices.
          * @tc.desc    Function test
-         * @tc.level   0
-        */
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
        it("SUB_DH_DeviceManager_Dcts_1400", 0, async function (done) {
         console.info("-----------------SUB_DH_DeviceManager_Dcts_1400 start------------------------");
         try {
@@ -459,7 +487,9 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_1500
          * @tc.name    Releases the {@code DeviceManager} instance that is no longer used.
          * @tc.desc    Function test
-         * @tc.level   0
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
          */
         it("SUB_DH_DeviceManager_Dcts_1500", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1500 start------------------------");
@@ -495,7 +525,9 @@ export default function distributedDeviceManager() {
          * @tc.number  SUB_DH_DeviceManager_Dcts_1600
          * @tc.name    Releases the {@code DeviceManager} instance that is no longer used.
          * @tc.desc    Function test
-         * @tc.level   0
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
          */
         it("SUB_DH_DeviceManager_Dcts_1600", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1600 start------------------------");
@@ -528,12 +560,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_1700
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_1700
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_1700", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1700 start------------------------");
             let deviceInfoList = null;
@@ -568,12 +602,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_1800
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_1800
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_1800", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1800 start------------------------");
             let deviceInfoList = null;
@@ -610,12 +646,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_1900
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_1900
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_1900", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1900 start------------------------");
             let deviceInfoList = null;
@@ -647,12 +685,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_2000
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_2000
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_2000", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2000 start------------------------");
             let deviceNetworkId = null;
@@ -692,12 +732,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_2100
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_2100
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_2100", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2100 start------------------------");
             let deviceName = null;
@@ -735,12 +777,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_2200
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_2200
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_2200", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2200 start------------------------");
             let deviceType = null;
@@ -778,12 +822,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_2300
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_2300
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_2300", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2300 start------------------------");
             let deviceId = null;
@@ -821,12 +867,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_2400
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_2400
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_2400", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2400 start------------------------");
             let deviceName = null;
@@ -861,12 +909,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_2500
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_2500
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_2500", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2500 start------------------------");
             let deviceType = null;
@@ -901,12 +951,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_2600
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_2600
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_2600", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2600 start------------------------");
             let deviceType = null;
@@ -940,12 +992,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_2700
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_2700
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_2700", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2700 start------------------------");
             let deviceType = null;
@@ -992,12 +1046,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_2800
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_2800
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_2800", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2800 start------------------------");
             let deviceType = null;
@@ -1031,12 +1087,14 @@ export default function distributedDeviceManager() {
         })
 
         /*
-        * @tc.number  SUB_DH_DeviceManager_Dcts_2900
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_DeviceManager_Dcts_2900
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_DeviceManager_Dcts_2900", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2900 start------------------------");
             let deviceType = null;
