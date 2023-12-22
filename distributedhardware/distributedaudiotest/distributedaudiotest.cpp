@@ -31,7 +31,6 @@
 
 // namespace {
 using namespace OHOS::DistributedHardware;
-// const int32_t CMD_QUIT = 0;
 const int32_t CMD_FIND = 9;
 const int32_t CMD_OPEN_SPK = 1;
 const int32_t CMD_CLOSE_SPK = 2;
@@ -87,9 +86,6 @@ static std::thread g_playingThread;
 static std::thread g_capingThread;
 FILE *g_micFile = nullptr;
 
-// static void CloseSpk();
-// static void CloseMic();
-
 static int64_t GetNowTimeUs()
 {
     std::chrono::microseconds nowUs =
@@ -120,18 +116,15 @@ int32_t InitTestDemo()
     return DH_SUCCESS;
 }
 
-//static void FindAudioDevice()
 std::string FindAudioDevice()
 {
     if (g_manager == nullptr) {
         std::cout << "Audio manager is null, Please Check network!" << std::endl;
-        //return;
         return "false";
     }
     int32_t ret = g_manager->GetAllAdapters(g_manager, &g_devices, &g_deviceNum);
     if (ret != DH_SUCCESS) {
         std::cout << "Get audio devices failed!" << std::endl;
-        //return;
         return "false";
     }
     for (int32_t index = 0; index < g_deviceNum; index++) {
@@ -143,7 +136,6 @@ std::string FindAudioDevice()
     }
     return "true";
 }
-
 
 static void HandleDevError(const char *condition, const char *value)
 {
@@ -205,24 +197,20 @@ static int32_t LoadSpkDev(const std::string &devId)
     return DH_SUCCESS;
 }
 
-//static void OpenSpk(const std::string &devId)
 std::string OpenSpk(const std::string devId)
 {
     if (g_spkStatus != DeviceStatus::DEVICE_IDLE) {
         std::cout << "Speaker device is already opened." << std::endl;
-        // return;
         return "true";
     }
     if (LoadSpkDev(devId) != DH_SUCCESS) {
         std::cout << "Load spk failed" << std::endl;
-        // return;
         return "false";
     }
     ParamCallback callback = ParamEventCallback;
     int32_t ret = g_adapter->RegExtraParamObserver(g_adapter, callback, nullptr);
     if (ret != DH_SUCCESS) {
         std::cout << "Register observer failed, ret: " << ret << std::endl;
-        // return;
         return "false";
     }
 
@@ -239,7 +227,6 @@ std::string OpenSpk(const std::string devId)
     ret = g_adapter->CreateRender(g_adapter, &renderDesc, &g_rattrs, &g_render);
     if (ret != DH_SUCCESS || g_render == nullptr) {
         std::cout << "Open SPK device failed, ret: " << ret << std::endl;
-        // return;
         return "false";
     }
     g_spkStatus = DeviceStatus::DEVICE_OPEN;
@@ -288,12 +275,10 @@ static void Play()
     std::cout << "Playing thread stopped." << std::endl;
 }
 
-// static void StartRender()
 std::string StartRender()
 {
     if (g_spkStatus == DeviceStatus::DEVICE_IDLE) {
         std::cout << "Speaker device is not opened, start render failed." << std::endl;
-        // return;
         return "false";
     }
 
@@ -320,12 +305,10 @@ std::string StartRender()
         fclose(wavFile);
         g_frameIndex = 0;
         g_playingThread = std::thread(Play);
-        // return;
         return "true";
     }
     if (g_spkStatus == DeviceStatus::DEVICE_START) {
         std::cout << "Speaker device is started." << std::endl;
-        // return;
         return "true";
     }
     if (g_spkStatus == DeviceStatus::DEVICE_STOP) {
@@ -334,30 +317,25 @@ std::string StartRender()
     return "true";
 }
 
-// static void StopRender()
 std::string StopRender()
 {
     if (g_render == nullptr) {
         std::cout << "SPK device is null." << std::endl;
-        // return;
         return "false";
     }
 
     if (g_spkStatus == DeviceStatus::DEVICE_IDLE) {
         std::cout << "Speaker device is not opened." << std::endl;
-        // return;
         return "false";
     }
 
     if (g_spkStatus == DeviceStatus::DEVICE_OPEN) {
         std::cout << "Speaker device is not started." << std::endl;
-        // return;
         return "false";
     }
 
     if (g_spkStatus == DeviceStatus::DEVICE_STOP) {
         std::cout << "Speaker device is already stoped." << std::endl;
-        // return;
         return "true";
     }
 
@@ -369,12 +347,10 @@ std::string StopRender()
     return "true";
 }
 
-// static void CloseSpk()
 std::string CloseSpk()
 {
     if (g_spkStatus == DeviceStatus::DEVICE_IDLE) {
         std::cout << "Speaker device is not opened." << std::endl;
-        // return;
         return "false";
     }
 
@@ -385,7 +361,6 @@ std::string CloseSpk()
     int32_t ret = g_adapter->DestroyRender(g_adapter, g_render);
     if (ret != DH_SUCCESS) {
         std::cout << "Close speaker failed" << std::endl;
-        // return;
         return "false";
     }
     if (g_micStatus == DeviceStatus::DEVICE_IDLE) {
@@ -433,17 +408,14 @@ static int32_t LoadMicDev(const std::string &devId)
     return DH_SUCCESS;
 }
 
-// static void OpenMic(const std::string &devId)
 std::string OpenMic(const std::string devId)
 {
     if (g_micStatus != DeviceStatus::DEVICE_IDLE) {
         std::cout << "Mic device is already opened." << std::endl;
-        // return;
         return "true";
     }
     if (LoadMicDev(devId) != DH_SUCCESS) {
         std::cout << "Load audio device failed." << std::endl;
-        // return;
         return "false";
     }
 
@@ -460,7 +432,6 @@ std::string OpenMic(const std::string devId)
     int32_t ret = g_adapter->CreateCapture(g_adapter, &captureDesc, &captureAttr, &g_capture);
     if (ret != DH_SUCCESS || g_capture == nullptr) {
         std::cout << "Open MIC device failed." << std::endl;
-        // return;
         return "false";
     }
     g_micStatus = DeviceStatus::DEVICE_OPEN;
@@ -512,12 +483,10 @@ static void Capture()
     std::cout << "Capturing thread stopped." << std::endl;
 }
 
-// static void StartCapture()
 std::string StartCapture()
 {
     if (g_micStatus == DeviceStatus::DEVICE_IDLE) {
         std::cout << "Mic device is not opened, start capture failed." << std::endl;
-        // return;
         return "false";
     }
 
@@ -525,17 +494,14 @@ std::string StartCapture()
         g_micFile = fopen(MIC_FILE_PATH, "ab+");
         if (g_micFile == nullptr) {
             std::cout << "Open pcm file failed." << std::endl;
-            // return;
             return "false";
         }
         g_capingThread = std::thread(Capture);
-        // return;
         return "true";
     }
 
     if (g_micStatus == DeviceStatus::DEVICE_START) {
         std::cout << "Mic device is already started." << std::endl;
-        // return;
         return "true";
     }
 
@@ -545,27 +511,22 @@ std::string StartCapture()
     return "true";
 }
 
-// static void StopCapture()
 std::string StopCapture()
 {
     if (g_capture == nullptr) {
         std::cout << "MIC device is null." << std::endl;
-        // return;
         return "false";
     }
     if (g_micStatus == DeviceStatus::DEVICE_IDLE) {
         std::cout << "Mic device is not opened." << std::endl;
-        // return;
         return "false";
     }
     if (g_micStatus == DeviceStatus::DEVICE_OPEN) {
         std::cout << "Mic device is not started." << std::endl;
-        // return;
         return "false";
     }
     if (g_micStatus == DeviceStatus::DEVICE_STOP) {
         std::cout << "Mic device is already started." << std::endl;
-        // return;
         return "false";
     }
     g_micStatus = DeviceStatus::DEVICE_STOP;
@@ -576,12 +537,10 @@ std::string StopCapture()
     return "true";
 }
 
-// static void CloseMic()
 std::string CloseMic()
 {
     if (g_micStatus == DeviceStatus::DEVICE_IDLE) {
         std::cout << "Mic device is not opened." << std::endl;
-        // return;
         return "false";
     }
 
@@ -592,7 +551,6 @@ std::string CloseMic()
     int32_t ret = g_adapter->DestroyCapture(g_adapter, g_capture);
     if (ret != DH_SUCCESS) {
         std::cout << "Close mic failed." << std::endl;
-        // return;
         return "false";
     }
     if (g_spkStatus == DeviceStatus::DEVICE_IDLE) {
@@ -615,7 +573,6 @@ std::string SetVolume(int vol)
         return "false";
     }
     std::cout << "Please input volum to set [0,15]." << std::endl;
-    // int32_t volInt = GetUserInput();
     if (vol < VOLUME_MIN || vol > VOLUME_MAX) {
         std::cout << "Volume is invalid." << std::endl;
         return "false";
@@ -632,12 +589,10 @@ std::string SetVolume(int vol)
     return "true";
 }
 
-// static void GetVolume()
 std::string GetVolume()
 {
     if (g_spkStatus == DeviceStatus::DEVICE_IDLE) {
         std::cout << "Speaker is not opened, can not get volume." << std::endl;
-        // return;
         return "false";
     }
     AudioExtParamKey key = AudioExtParamKey::AUDIO_EXT_PARAM_KEY_VOLUME;
@@ -646,7 +601,6 @@ std::string GetVolume()
     int32_t ret = g_adapter->GetExtraParams(g_adapter, key, condition.c_str(), vol, VOLUME_BIT);
     if (ret != DH_SUCCESS) {
         std::cout << "Get Volume failed." << std::endl;
-        // return;
         return "false";
     }
     std::cout << "Get volume success. volume: " << vol <<std::endl;
@@ -656,37 +610,37 @@ std::string GetVolume()
 std::string HandleAudioEvent(int32_t cmd)
 {
     std::string res = "";
-    if(cmd == CMD_FIND){
+    if (cmd == CMD_FIND) {
       res = FindAudioDevice();
     }
-    if(cmd == CMD_OPEN_SPK){
+    if (cmd == CMD_OPEN_SPK) {
        res = OpenSpk(g_devId);
     }
-    if(cmd == CMD_START_SPK){
+    if (cmd == CMD_START_SPK) {
         res = StartRender();
     }
-    if(cmd == CMD_STOP_SPK){
+    if (cmd == CMD_STOP_SPK) {
         res = StopRender();
     }
-    if(cmd == CMD_CLOSE_SPK){
+    if (cmd == CMD_CLOSE_SPK) {
         res = CloseSpk();
     }
-    if(cmd == CMD_OPEN_MIC){
+    if (cmd == CMD_OPEN_MIC) {
         res = OpenMic(g_devId);
     }
-    if(cmd == CMD_START_MIC){
+    if (cmd == CMD_START_MIC) {
         res = StartCapture();
     }
-    if(cmd == CMD_STOP_MIC){
+    if (cmd == CMD_STOP_MIC) {
         res = StopCapture();
     }
-    if(cmd == CMD_CLOSE_MIC){
+    if (cmd == CMD_CLOSE_MIC) {
         res = CloseMic();
     }
-    if(cmd == CMD_SET_VOL){
+    if (cmd == CMD_SET_VOL) {
         res = SetVolume(5);
     }
-    if(cmd == CMD_GET_VOL){
+    if (cmd == CMD_GET_VOL) {
         res = GetVolume();
     }
     return res;
