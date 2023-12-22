@@ -611,10 +611,10 @@ std::string HandleAudioEvent(int32_t cmd)
 {
     std::string res = "";
     if (cmd == CMD_FIND) {
-      res = FindAudioDevice();
+        res = FindAudioDevice();
     }
     if (cmd == CMD_OPEN_SPK) {
-       res = OpenSpk(g_devId);
+        res = OpenSpk(g_devId);
     }
     if (cmd == CMD_START_SPK) {
         res = StartRender();
