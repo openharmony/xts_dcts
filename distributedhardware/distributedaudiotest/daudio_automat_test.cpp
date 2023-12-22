@@ -45,7 +45,7 @@ DAudioAutomatTest::DAudioAutomatTest(void) {}
 
 
 /**
- * @tc.name FindAudioDevice() 
+ * @tc.name FindAudioDevice()
  * @tc.number SUB_DH_DAudio_Dcts_0100
  * @tc.desc Find Audio Device Test
  * @tc.size MediumTest
@@ -60,7 +60,7 @@ HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0100, TestSize.Level1)
 }
 
 /**
- * @tc.name OpenSpk() 
+ * @tc.name OpenSpk()
  * @tc.number SUB_DH_DAudio_Dcts_0200
  * @tc.desc Open Spk Test
  * @tc.size MediumTest
@@ -75,7 +75,7 @@ HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0200, TestSize.Level1)
 }
 
 /**
- * @tc.name StartRender() 
+ * @tc.name StartRender()
  * @tc.number SUB_DH_DAudio_Dcts_0300
  * @tc.desc Start Render Test
  * @tc.size MediumTest
@@ -91,7 +91,7 @@ HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0300, TestSize.Level1)
 }
 
 /**
- * @tc.name StopRender() 
+ * @tc.name StopRender()
  * @tc.number SUB_DH_DAudio_Dcts_0400
  * @tc.desc Stop Render Test
  * @tc.size MediumTest
@@ -106,7 +106,7 @@ HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0400, TestSize.Level1)
 }
 
 /**
- * @tc.name SetVolume() 
+ * @tc.name SetVolume()
  * @tc.number SUB_DH_DAudio_Dcts_0500
  * @tc.desc Set Volume Test
  * @tc.size MediumTest
@@ -121,7 +121,7 @@ HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0500, TestSize.Level1)
 }
 
 /**
- * @tc.name GetVolume() 
+ * @tc.name GetVolume()
  * @tc.number SUB_DH_DAudio_Dcts_0600
  * @tc.desc Get Volume Test
  * @tc.size MediumTest
@@ -136,7 +136,7 @@ HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0600, TestSize.Level1)
 }
 
 /**
- * @tc.name CloseSpk() 
+ * @tc.name CloseSpk()
  * @tc.number SUB_DH_DAudio_Dcts_0700
  * @tc.desc Close Spk Test
  * @tc.size MediumTest
@@ -151,7 +151,7 @@ HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0700, TestSize.Level1)
 }
 
 /**
- * @tc.name OpenMic() 
+ * @tc.name OpenMic()
  * @tc.number SUB_DH_DAudio_Dcts_0800
  * @tc.desc Open Mic Test
  * @tc.size MediumTest
@@ -166,7 +166,7 @@ HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0800, TestSize.Level1)
 }
 
 /**
- * @tc.name StartCapture() 
+ * @tc.name StartCapture()
  * @tc.number SUB_DH_DAudio_Dcts_0900
  * @tc.desc Start Capture Test
  * @tc.size MediumTest
@@ -181,7 +181,7 @@ HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_0900, TestSize.Level1)
 }
 
 /**
- * @tc.name StopCapture() 
+ * @tc.name StopCapture()
  * @tc.number SUB_DH_DAudio_Dcts_1000
  * @tc.desc Stop Capture Test
  * @tc.size MediumTest
@@ -196,7 +196,7 @@ HWTEST_F(DAudioAutomatTest, SUB_DH_DAudio_Dcts_1000, TestSize.Level1)
 }
 
 /**
- * @tc.name CloseMic() 
+ * @tc.name CloseMic()
  * @tc.number SUB_DH_DAudio_Dcts_1100
  * @tc.desc Close Mic Test
  * @tc.size MediumTest
