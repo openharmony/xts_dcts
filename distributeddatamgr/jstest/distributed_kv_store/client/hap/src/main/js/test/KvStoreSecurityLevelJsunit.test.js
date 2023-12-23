@@ -160,713 +160,6 @@ describe('kvSyncTest', function () {
     })
 
     /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_0100
-     * @tc.name testServerNoLevelSecurity0100
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is NO_LEVEL
-     */
-    it("testServerNoLevelSecurity0100", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity0100 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {
-            createIfMissing : true,
-            encrypt : false,
-            backup : false,
-            autoSync : false,
-            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-            schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
-        }
-        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-            kvStore = store;
-            console.info(logTag + " get kvStore success");
-        });
-
-        let result = undefined;
-        function call(data) {
-            console.info(logTag + "syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                try{
-                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
-                    }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(TEST_STRING_VALUE);
-                    console.info(logTag + "testServerNoLevelSecurity0100 end");
-                    kvStore.off("syncComplete",call);
-                    done();
-                }catch(err){
-                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                    done();
-                }
-            })
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
-        await sleep(500);
-    })
-
-    /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_0200
-     * @tc.name testServerNoLevelSecurity0200
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is NO_LEVEL
-     */
-     it("testServerNoLevelSecurity0200", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity0200 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-            await sleep(1000);
-            const options = {
-                createIfMissing : true,
-                encrypt : false,
-                backup : false,
-                autoSync : false,
-                kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-                schema : '',
-                securityLevel : factory.SecurityLevel.NO_LEVEL,
-            }
-            await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-                kvStore = store;
-                console.info(logTag + " get kvStore success");
-            });
-    
-            let result = undefined;
-            function call(data) {
-                    console.info(logTag + "syncComplete: " + data);
-                    kvStore.get(TEST_STRING_KEY,(err, data) => {
-                        try{
-                            console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                            if(err != null){
-                                console.info(logTag + " Sync complete get data error,err: " + err);
-                            }else{
-                                console.info(logTag + " Sycn complete get data success,result is: " + data);
-                                result = data;
-                            }
-                            console.info(logTag + " get data finish,result is: " + result);
-                            expect(result).assertEqual(TEST_STRING_VALUE);
-                            console.info(logTag + "testServerNoLevelSecurity0200 end");
-                            kvStore.off("syncComplete",call);
-                            done();
-                        }catch(err){
-                            console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                            done();
-                        }
-
-                    })
-
-            }
-            kvStore.on("syncComplete",call);
-            await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-            await sleep(1000);
-            console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
-
-    })
-
-    /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_0300
-     * @tc.name testServerNoLevelSecurity0300
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is S0
-     */
-     it("testServerNoLevelSecurity0300", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity0300 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {
-            createIfMissing : true,
-            encrypt : false,
-            backup : false,
-            autoSync : false,
-            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-            schema : '',
-            securityLevel : factory.SecurityLevel.S0,
-        }
-        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-            kvStore = store;
-            console.info(logTag + " get kvStore success");
-        })
-
-        let result = undefined;
-        function call(data) {
-            console.info(logTag + "syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                try{
-                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
-                    }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(TEST_STRING_VALUE);
-                    console.info(logTag + "testServerNoLevelSecurity0300 end");
-                    kvStore.off("syncComplete",call);
-                    done();
-                }catch(err){
-                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                    done();
-                }
-            })
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
-        
-    })
-
-    /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_0400
-     * @tc.name testServerNoLevelSecurity0400
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is S0
-     */
-     it("testServerNoLevelSecurity0400", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity0400 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {
-            createIfMissing : true,
-            encrypt : false,
-            backup : false,
-            autoSync : false,
-            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-            schema : '',
-            securityLevel : factory.SecurityLevel.S0,
-        }
-        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-            kvStore = store;
-            console.info(logTag + " get kvStore success");
-        })
-
-        let result = undefined;
-        function call(data) {
-            console.info(logTag + "syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                try{
-                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
-                    }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(TEST_STRING_VALUE);
-                    console.info(logTag + "testServerNoLevelSecurity0400 end");
-                    kvStore.off("syncComplete",call);
-                    done();
-                }catch(err){
-                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                    done();
-                }
-            })
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
-    })
-
-    /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_0500
-     * @tc.name testServerNoLevelSecurity0500
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is S1
-     */
-    it("testServerNoLevelSecurity0500", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity0500 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {
-            createIfMissing : true,
-            encrypt : false,
-            backup : false,
-            autoSync : false,
-            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-            schema : '',
-            securityLevel : factory.SecurityLevel.S1,
-        }
-        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-            kvStore = store;
-            console.info(logTag + " get kvStore success");
-        })
-
-        let result = undefined;
-        function call(data) {
-            console.info(logTag + "syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                try{
-                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
-                    }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(TEST_STRING_VALUE);
-                    console.info(logTag + "testServerNoLevelSecurity0500 end");
-                    kvStore.off("syncComplete",call);
-                    done();
-
-                }catch(err){
-                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                    done();
-                }
-            })
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
-    })
-
-    /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_0600
-     * @tc.name testServerNoLevelSecurity0600
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is S1
-     */
-        it("testServerNoLevelSecurity0600", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity0600 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {
-            createIfMissing : true,
-            encrypt : false,
-            backup : false,
-            autoSync : false,
-            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-            schema : '',
-            securityLevel : factory.SecurityLevel.S1,
-        }
-        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-            kvStore = store;
-            console.info(logTag + " get kvStore success");
-        })
-
-        let result = undefined;
-        function call(data) {
-            console.info(logTag + "syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                try{
-                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
-                    }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(TEST_STRING_VALUE);
-                    console.info(logTag + "testServerNoLevelSecurity0600 end");
-                    kvStore.off("syncComplete",call);
-                    done();
-
-                }catch(err){
-                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                    done();
-                }
-            })
-
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
-    })
-
-    /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_0700
-     * @tc.name testServerNoLevelSecurity0700
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is S2
-     */
-        it("testServerNoLevelSecurity0700", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity0700 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {
-            createIfMissing : true,
-            encrypt : false,
-            backup : false,
-            autoSync : false,
-            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-            schema : '',
-            securityLevel : factory.SecurityLevel.S2,
-        }
-        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-            kvStore = store;
-            console.info(logTag + " get kvStore success");
-        })
-
-        let result = undefined;
-        function call(data) {
-            console.info(logTag + "syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                try{
-                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
-                    }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(TEST_STRING_VALUE);
-                    console.info(logTag + "testServerNoLevelSecurity0700 end");
-                    kvStore.off("syncComplete",call);
-                    done();
-
-                }catch(err){
-                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                    done();
-                }
-            })
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
-        await sleep(500);
-    })
-
-    /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_0800
-     * @tc.name testServerNoLevelSecurity0800
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is S2
-     */
-        it("testServerNoLevelSecurity0800", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity0800 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {
-            createIfMissing : true,
-            encrypt : false,
-            backup : false,
-            autoSync : false,
-            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-            schema : '',
-            securityLevel : factory.SecurityLevel.S2,
-        }
-        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-            kvStore = store;
-            console.info(logTag + " get kvStore success");
-        })
-
-        let result = undefined;
-        
-        function call(data) {
-            console.info(logTag + "syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                try{
-                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
-                    }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(TEST_STRING_VALUE);
-                    console.info(logTag + "testServerNoLevelSecurity0800 end");
-                    kvStore.off("syncComplete",call);
-                    done();
-
-                }catch(err){
-                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                    done();
-                }
-            })
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
-    })
-
-    /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_0900
-     * @tc.name testServerNoLevelSecurity0900
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is S3
-     */
-    it("testServerNoLevelSecurity0900", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity0900 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {
-            createIfMissing : true,
-            encrypt : false,
-            backup : false,
-            autoSync : false,
-            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-            schema : '',
-            securityLevel : factory.SecurityLevel.S3,
-        }
-        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-            kvStore = store;
-            console.info(logTag + " get kvStore success");
-        })
-
-        let result = undefined;
-        
-        function call(data) {
-            console.info(logTag + "syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                try{
-                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
-                    }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(TEST_STRING_VALUE);
-                    console.info(logTag + "testServerNoLevelSecurity0900 end");
-                    kvStore.off("syncComplete",call);
-                    done();
-
-                }catch(err){
-                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                    done();
-                }
-            })
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
-    })
-
-     /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_1000
-     * @tc.name testServerNoLevelSecurity1000
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is S3
-     */
-    it("testServerNoLevelSecurity1000", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity1000 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {
-            createIfMissing : true,
-            encrypt : false,
-            backup : false,
-            autoSync : false,
-            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-            schema : '',
-            securityLevel : factory.SecurityLevel.S3,
-        }
-        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-            kvStore = store;
-            console.info(logTag + " get kvStore success");
-        })
-
-        let result = undefined;
-        
-        function call(data) {
-            console.info(logTag + "syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                try{
-                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
-                    }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(TEST_STRING_VALUE);
-                    console.info(logTag + "testServerNoLevelSecurity1000 end");
-                    kvStore.off("syncComplete",call);
-                    done();
-
-                }catch(err){
-                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                    done();
-                }
-            })
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
-    })
-
-    /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_1100
-     * @tc.name testServerNoLevelSecurity1100
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is S4
-     */
-    it("testServerNoLevelSecurity1100", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity1100 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {
-            createIfMissing : true,
-            encrypt : false,
-            backup : false,
-            autoSync : false,
-            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-            schema : '',
-            securityLevel : factory.SecurityLevel.S4,
-        }
-        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-            kvStore = store;
-            console.info(logTag + " get kvStore success");
-        })
-
-        let result = undefined;
-        
-        function call(data) {
-            console.info(logTag + "syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                try{
-                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
-                    }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(TEST_STRING_VALUE);
-                    console.info(logTag + "testServerNoLevelSecurity1100 end");
-                    kvStore.off("syncComplete",call);
-                    done();
-
-                }catch(err){
-                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                    done();
-                }
-            })
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
-    })
-
-    /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_1200
-     * @tc.name testServerNoLevelSecurity1200
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is S4
-     */
-    it("testServerNoLevelSecurity1200", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity1200 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {
-            createIfMissing : true,
-            encrypt : false,
-            backup : false,
-            autoSync : false,
-            kvStoreType : factory.KVStoreType.SINGLE_VERSION,
-            schema : '',
-            securityLevel : factory.SecurityLevel.S4,
-        }
-        await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-            kvStore = store;
-            console.info(logTag + " get kvStore success");
-        })
-
-        let result = undefined;
-        
-        function call(data) {
-            console.info(logTag + "syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                try{
-                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
-                    }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(TEST_STRING_VALUE);
-                    console.info(logTag + "testServerNoLevelSecurity1200 end");
-                    kvStore.off("syncComplete",call);
-                    done();
-                }catch(err){
-                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                    done();
-                }
-            })
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
-    })
-
-
-    /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_NO_LEVEL_1300
-     * @tc.name testServerNoLevelSecurity1300
-     * @tc.desc Server kvStore security is NO_LEVEL,client kvStore security is null
-     */
-     it("testServerNoLevelSecurity1300", 0, async function(done){
-        console.info(logTag + "testServerNoLevelSecurity1300 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
-        await sleep(1000);
-        const options = {};
-        try{
-            await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
-                kvStore = store;
-                console.info(logTag + " testServerNoLevelSecurity1300 get kvStore success");
-            })
-        }catch(err){
-            console.info(logTag + " testServerNoLevelSecurity1300 get kvStore err"+err.code);
-        }
-
-        let result = undefined;
-
-        function call(data) {
-            console.info("syncComplete: " + data);
-            kvStore.get(TEST_STRING_KEY,(err, data) => {
-                try{
-                    console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
-                    if(err != null){
-                        console.info(logTag + " Sync complete get data error,err: " + err);
-                    }else{
-                        console.info(logTag + " Sycn complete get data success,result is: " + data);
-                        result = data;
-                    }
-                    console.info(logTag + " get data finish,result is: " + result);
-                    expect(result).assertEqual(undefined);
-                    console.info(logTag + "testServerNoLevelSecurity1300 end");
-                    kvStore.off("syncComplete",call);
-                    done();
-
-                }catch(err){
-                    console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
-                    done();
-                }
-
-            })
-        }
-        kvStore.on("syncComplete",call);
-        await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
-        await sleep(1000);
-        console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
-    })
-
     /**
      * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S0_0100
      * @tc.name testServerS0Security0100
@@ -976,7 +269,7 @@ describe('kvSyncTest', function () {
         await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
         await sleep(1000);
         console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
+        kvStore.sync(syncDeviceIds, PUSH_PULL);
     })
 
     /**
@@ -1088,7 +381,7 @@ describe('kvSyncTest', function () {
         await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
         await sleep(1000);
         console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
+        kvStore.sync(syncDeviceIds, PUSH_PULL);
     })
 
     /**
@@ -1645,7 +938,7 @@ describe('kvSyncTest', function () {
         await sleep(1000);
         console.info(logTag + "Client sync start");
 
-        kvStore.sync(syncDeviceIds, PULL);
+        kvStore.sync(syncDeviceIds, PUSH_PULL);
     })
 
     /**
@@ -1866,7 +1159,7 @@ describe('kvSyncTest', function () {
         await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
         await sleep(1000);
         console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
+        kvStore.sync(syncDeviceIds, PUSH_PULL);
     })
 
     /**
@@ -4187,7 +3480,7 @@ describe('kvSyncTest', function () {
      */
      it("testServerKvStoreId0100", 0, async function(done){
         console.info(logTag + "testServerKvStoreId0100 start");
-        await remoteHelpers.getKvStore("x".repeat(129),"NO_LEVEL",false);
+        await remoteHelpers.getKvStore("x".repeat(129),"S1",false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4196,7 +3489,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel : factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -4241,7 +3534,7 @@ describe('kvSyncTest', function () {
      */
      it("testServerKvStoreId0200", 0, async function(done){
         console.info(logTag + "testServerKvStoreId0200 start");
-        await remoteHelpers.getKvStore("x".repeat(129),"NO_LEVEL",false);
+        await remoteHelpers.getKvStore("x".repeat(129),"S1",false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4250,7 +3543,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel : factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -4295,7 +3588,7 @@ describe('kvSyncTest', function () {
      */
      it("testServerKvStoreId0300", 0, async function(done){
         console.info(logTag + "testServerKvStoreId0300 start");
-        await remoteHelpers.getKvStore("x".repeat(128),"NO_LEVEL",false);
+        await remoteHelpers.getKvStore("x".repeat(128),"S1",false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4304,7 +3597,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel : factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore("x".repeat(128),options).then((store) => {
             kvStore = store;
@@ -4356,7 +3649,7 @@ describe('kvSyncTest', function () {
      */
      it("testServerKvStoreId0400", 0, async function(done){
         console.info(logTag + "testServerKvStoreId0400 start");
-        await remoteHelpers.getKvStore("x".repeat(128),"NO_LEVEL",false);
+        await remoteHelpers.getKvStore("x".repeat(128), "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4365,7 +3658,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore("x".repeat(128),options).then((store) => {
             kvStore = store;
@@ -4406,7 +3699,7 @@ describe('kvSyncTest', function () {
         await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
         await sleep(1000);
         console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
+        kvStore.sync(syncDeviceIds, PUSH_PULL);
     })
 
     /**
@@ -4416,7 +3709,7 @@ describe('kvSyncTest', function () {
      */
      it("testServerKvStoreId0500", 0, async function(done){
         console.info(logTag + "testServerKvStoreId0500 start");
-        await remoteHelpers.getKvStore("SERVER_KVSTORE","NO_LEVEL",false);
+        await remoteHelpers.getKvStore("SERVER_KVSTORE", "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4425,7 +3718,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -4471,7 +3764,7 @@ describe('kvSyncTest', function () {
      */
      it("testServerKvStoreId0600", 0, async function(done){
         console.info(logTag + "testServerKvStoreId0600 start");
-        await remoteHelpers.getKvStore("SERVER_KVSTORE","NO_LEVEL",false);
+        await remoteHelpers.getKvStore("SERVER_KVSTORE", "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4480,7 +3773,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -4526,7 +3819,7 @@ describe('kvSyncTest', function () {
      */
      it("testServerEncryptKVStore0100", 0, async function(done){
         console.info(logTag + "testServerEncryptKVStore0100 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",true);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", true);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4535,7 +3828,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -4580,7 +3873,7 @@ describe('kvSyncTest', function () {
      */
      it("testServerEncryptKVStore0200", 0, async function(done){
         console.info(logTag + "testServerEncryptKVStore0200 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",true);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", true);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4589,7 +3882,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -4624,7 +3917,7 @@ describe('kvSyncTest', function () {
         await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
         await sleep(1000);
         console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
+        kvStore.sync(syncDeviceIds, PUSH_PULL);
     })
 
     /**
@@ -4634,7 +3927,7 @@ describe('kvSyncTest', function () {
      */
      it("testServerEncryptKVStore0300", 0, async function(done){
         console.info(logTag + "testServerEncryptKVStore0300 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",true);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", true);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4643,7 +3936,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -4688,7 +3981,7 @@ describe('kvSyncTest', function () {
      */
      it("testServerEncryptKVStore0400", 0, async function(done){
         console.info(logTag + "testServerEncryptKVStore0400 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",true);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", true);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4697,7 +3990,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -4732,7 +4025,7 @@ describe('kvSyncTest', function () {
         await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
         await sleep(1000);
         console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
+        kvStore.sync(syncDeviceIds, PUSH_PULL);
     })
 
     /**
@@ -4742,7 +4035,7 @@ describe('kvSyncTest', function () {
      */
      it("testServerEncryptKVStore0500", 0, async function(done){
         console.info(logTag + "testServerEncryptKVStore0500 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4751,7 +4044,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -4796,7 +4089,7 @@ describe('kvSyncTest', function () {
      */
      it("testServerEncryptKVStore0600", 0, async function(done){
         console.info(logTag + "testServerEncryptKVStore0600 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4805,7 +4098,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -4840,7 +4133,7 @@ describe('kvSyncTest', function () {
         await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
         await sleep(1000);
         console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
+        kvStore.sync(syncDeviceIds, PUSH_PULL);
     })
 
     /**
@@ -4850,7 +4143,7 @@ describe('kvSyncTest', function () {
      */
     it("testServerMaxKeyLength0100", 0, async function(done){
         console.info(logTag + "testServerMaxKeyLength0100 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4859,7 +4152,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -4904,7 +4197,7 @@ describe('kvSyncTest', function () {
      */
     it("testServerMaxKeyLength0200", 0, async function(done){
         console.info(logTag + "testServerMaxKeyLength0200 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4913,7 +4206,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -4959,7 +4252,7 @@ describe('kvSyncTest', function () {
      it("testServerMaxKeyLength0300", 0, async function(done){
         console.info(logTag + "testServerMaxKeyLength0300 start");
         const KEY = "x".repeat(1024)
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -4968,7 +4261,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+                securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5014,7 +4307,7 @@ describe('kvSyncTest', function () {
     it("testServerMaxKeyLength0400", 0, async function(done){
         console.info(logTag + "testServerMaxKeyLength0400 start");
         const KEY = "x".repeat(1024)
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5023,7 +4316,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5068,7 +4361,7 @@ describe('kvSyncTest', function () {
      */
      it("testSyncStringType0100", 0, async function(done){
         console.info(logTag + "testSyncStringType0100 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5077,7 +4370,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5122,7 +4415,7 @@ describe('kvSyncTest', function () {
      */
       it("testSyncStringType0200", 0, async function(done){
         console.info(logTag + "testSyncStringType0200 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5131,7 +4424,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5166,7 +4459,7 @@ describe('kvSyncTest', function () {
         await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
         await sleep(1000);
         console.info(logTag + "Client sync start");
-        kvStore.sync(syncDeviceIds, PULL);
+        kvStore.sync(syncDeviceIds, PUSH_PULL);
     })
 
     /**
@@ -5176,7 +4469,7 @@ describe('kvSyncTest', function () {
      */
     it("testSyncIntType0100", 0, async function(done){
         console.info(logTag + "testSyncIntType0100 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5185,7 +4478,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5230,7 +4523,7 @@ describe('kvSyncTest', function () {
      */
     it("testSyncIntType0200", 0, async function(done){
         console.info(logTag + "testSyncIntType0200 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5239,7 +4532,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5285,7 +4578,7 @@ describe('kvSyncTest', function () {
      */
      it("testSyncIntType0300", 0, async function(done){
         console.info(logTag + "testSyncIntType0300 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5294,7 +4587,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5341,7 +4634,7 @@ describe('kvSyncTest', function () {
      */
          it("testSyncIntType0400", 0, async function(done){
             console.info(logTag + "testSyncIntType0400 start");
-            await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+            await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
             const options = {
                 createIfMissing : true,
@@ -5350,7 +4643,7 @@ describe('kvSyncTest', function () {
                 autoSync : false,
                 kvStoreType : factory.KVStoreType.SINGLE_VERSION,
                 schema : '',
-                securityLevel : factory.SecurityLevel.NO_LEVEL,
+                securityLevel: factory.SecurityLevel.S1,
             }
             await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
                 kvStore = store;
@@ -5398,7 +4691,7 @@ describe('kvSyncTest', function () {
      */
      it("testSyncIntType0500", 0, async function(done){
         console.info(logTag + "testSyncIntType0500 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5407,7 +4700,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5455,7 +4748,7 @@ describe('kvSyncTest', function () {
      */
          it("testSyncIntType0600", 0, async function(done){
             console.info(logTag + "testSyncIntType0600 start");
-            await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+            await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
             const options = {
                 createIfMissing : true,
@@ -5464,7 +4757,7 @@ describe('kvSyncTest', function () {
                 autoSync : false,
                 kvStoreType : factory.KVStoreType.SINGLE_VERSION,
                 schema : '',
-                securityLevel : factory.SecurityLevel.NO_LEVEL,
+                securityLevel: factory.SecurityLevel.S1,
             }
             await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
                 kvStore = store;
@@ -5512,7 +4805,7 @@ describe('kvSyncTest', function () {
      */
      it("testSyncIntType0700", 0, async function(done){
         console.info(logTag + "testSyncIntType0700 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5521,7 +4814,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5568,7 +4861,7 @@ describe('kvSyncTest', function () {
      */
          it("testSyncIntType0800", 0, async function(done){
             console.info(logTag + "testSyncIntType0800 start");
-            await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+            await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
             const options = {
                 createIfMissing : true,
@@ -5577,7 +4870,7 @@ describe('kvSyncTest', function () {
                 autoSync : false,
                 kvStoreType : factory.KVStoreType.SINGLE_VERSION,
                 schema : '',
-                securityLevel : factory.SecurityLevel.NO_LEVEL,
+                securityLevel: factory.SecurityLevel.S1,
             }
             await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
                 kvStore = store;
@@ -5626,7 +4919,7 @@ describe('kvSyncTest', function () {
      */
      it("testSyncIntType0900", 0, async function(done){
         console.info(logTag + "testSyncIntType0900 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5635,7 +4928,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5682,7 +4975,7 @@ describe('kvSyncTest', function () {
      */
          it("testSyncIntType1000", 0, async function(done){
             console.info(logTag + "testSyncIntType1000 start");
-            await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+            await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
             const options = {
                 createIfMissing : true,
@@ -5691,7 +4984,7 @@ describe('kvSyncTest', function () {
                 autoSync : false,
                 kvStoreType : factory.KVStoreType.SINGLE_VERSION,
                 schema : '',
-                securityLevel : factory.SecurityLevel.NO_LEVEL,
+                securityLevel: factory.SecurityLevel.S1,
             }
             await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
                 kvStore = store;
@@ -5739,7 +5032,7 @@ describe('kvSyncTest', function () {
      */
      it("testSyncIntType1100", 0, async function(done){
         console.info(logTag + "testSyncIntType1100 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5748,7 +5041,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel: factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5795,7 +5088,7 @@ describe('kvSyncTest', function () {
      */
          it("testSyncIntType1200", 0, async function(done){
             console.info(logTag + "testSyncIntType1200 start");
-            await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+            await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
             const options = {
                 createIfMissing : true,
@@ -5804,7 +5097,7 @@ describe('kvSyncTest', function () {
                 autoSync : false,
                 kvStoreType : factory.KVStoreType.SINGLE_VERSION,
                 schema : '',
-                securityLevel : factory.SecurityLevel.NO_LEVEL,
+                securityLevel: factory.SecurityLevel.S1,
             }
             await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
                 kvStore = store;
@@ -5852,7 +5145,7 @@ describe('kvSyncTest', function () {
      */
     it("testSyncFloatType0100", 0, async function(done){
         console.info(logTag + "testSyncFloatType0100 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID,"S1",false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5861,7 +5154,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel : factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5905,7 +5198,7 @@ describe('kvSyncTest', function () {
      */
     it("testSyncFloatType0200", 0, async function(done){
         console.info(logTag + "testSyncFloatType0200 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID,"S1",false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5914,7 +5207,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel : factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -5961,7 +5254,7 @@ describe('kvSyncTest', function () {
         console.info(logTag + "testSyncMultipleData0100 start");
         let value1 = undefined;
         let value2 = undefined;
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID,"S1",false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -5970,7 +5263,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel : factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -6027,7 +5320,7 @@ describe('kvSyncTest', function () {
      */
     it("testSyncMultipleData0200", 0, async function(done){
         console.info(logTag + "testSyncMultipleData0200 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID,"S1",false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -6036,7 +5329,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel : factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -6094,7 +5387,7 @@ describe('kvSyncTest', function () {
      */
      it("testSyncDeleteSync0100", 0, async function(done){
         console.info(logTag + "testSyncDeleteSync0100 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID,"S1",false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -6103,7 +5396,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel : factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -6157,7 +5450,7 @@ describe('kvSyncTest', function () {
      */
      it("testSyncDeleteSync0200", 0, async function(done){
         console.info(logTag + "testSyncDeleteSync0200 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID,"S1",false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -6166,7 +5459,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel : factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -6219,7 +5512,7 @@ describe('kvSyncTest', function () {
      */
      it("testSyncModifySync0100", 0, async function(done){
         console.info(logTag + "testSyncModifySync0100 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID,"S1",false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -6228,7 +5521,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel : factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
@@ -6280,7 +5573,7 @@ describe('kvSyncTest', function () {
      */
      it("testSyncModifySync0200", 0, async function(done){
         console.info(logTag + "testSyncModifySync0200 start");
-        await remoteHelpers.getKvStore(TEST_STORE_ID,"NO_LEVEL",false);
+        await remoteHelpers.getKvStore(TEST_STORE_ID,"S1",false);
         await sleep(1000);
         const options = {
             createIfMissing : true,
@@ -6289,7 +5582,7 @@ describe('kvSyncTest', function () {
             autoSync : false,
             kvStoreType : factory.KVStoreType.SINGLE_VERSION,
             schema : '',
-            securityLevel : factory.SecurityLevel.NO_LEVEL,
+            securityLevel : factory.SecurityLevel.S1,
         }
         await kvManager.getKVStore(TEST_STORE_ID,options).then((store) => {
             kvStore = store;
