@@ -122,35 +122,20 @@ export default class TestApi{
             optionsInfo.encrypt = false;
         }
 
-        if (localOSVersion == OSVersion41) {
-            flag_41 = 1;
-            console.info(logTag + "flag_41 is: " + flag_41);
-            if(SecurityLevel == "S1"){
-                optionsInfo.securityLevel=disData.SecurityLevel.S1;
-            }else if(SecurityLevel == "S2"){
-                optionsInfo.securityLevel=disData.SecurityLevel.S2;
-            }else if(SecurityLevel == "S3"){
-                optionsInfo.securityLevel=disData.SecurityLevel.S3;
-            }else if(SecurityLevel == "S4"){
-                optionsInfo.securityLevel=disData.SecurityLevel.S4;
-            }
-        
-        } else {
-            flag_41 = 0;
-            console.info(logTag + "flag_41 is: " + flag_41);
-            if(SecurityLevel == "NO_LEVEL"){
-                optionsInfo.securityLevel=disData.SecurityLevel.NO_LEVEL;
-            }else if(SecurityLevel == "S0"){
-                optionsInfo.securityLevel=disData.SecurityLevel.S0;
-            }else if(SecurityLevel == "S1"){
-                optionsInfo.securityLevel=disData.SecurityLevel.S1;
-            }else if(SecurityLevel == "S2"){
-                optionsInfo.securityLevel=disData.SecurityLevel.S2;
-            }else if(SecurityLevel == "S3"){
-                optionsInfo.securityLevel=disData.SecurityLevel.S3;
-            }else if(SecurityLevel == "S4"){
-                optionsInfo.securityLevel=disData.SecurityLevel.S4;
-            }
+        if(SecurityLevel == "NO_LEVEL"){
+            optionsInfo.securityLevel=disData.SecurityLevel.NO_LEVEL;
+        }else if(SecurityLevel == "S0"){
+            optionsInfo.securityLevel=disData.SecurityLevel.S0;
+        }else if(SecurityLevel == "S1"){
+            optionsInfo.securityLevel=disData.SecurityLevel.S1;
+        }else if(SecurityLevel == "S2"){
+            optionsInfo.securityLevel=disData.SecurityLevel.S2;
+        }else if(SecurityLevel == "S3"){
+            optionsInfo.securityLevel=disData.SecurityLevel.S3;
+        }else if(SecurityLevel == "S4"){
+            optionsInfo.securityLevel=disData.SecurityLevel.S4;
+        }else {
+            optionsInfo.securityLevel=disData.SecurityLevel.S1;
         }
 
         await kvManager.getKVStore(storeId,optionsInfo).then((store) =>{
