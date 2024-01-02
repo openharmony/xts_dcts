@@ -409,7 +409,7 @@ int32_t AudioProcessTestCallback::RenderFromFile(const BufferDesc &bufDesc)
         AUDIO_INFO_LOG("%{public}s render finish.", __func__);
         return SUCCESS;
     }
-    size_t bytesReadCall = fread(bufDesc.buffer, 1, bufDesc.bufLength, g_spkWavFile);
+    fread(bufDesc.buffer, 1, bufDesc.bufLength, g_spkWavFile);
     if (g_isLatencyTesting) {
         if (playIndex_ == 0) {
             cout << "First play time: " << GetNowTimeUs() << endl;
