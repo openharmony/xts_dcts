@@ -933,12 +933,10 @@ void CountLatencyTime()
         return;
     }
     cout << "record " << playSize << "times frame high." << endl;
-    int32_t sum = 0;
     for (int32_t i = 0; i < playSize; i++) {
         cout << "Send: " << g_playBeepTime_[i] << " Received: " <<
             g_captureBeepTime_[i] << endl;
         cout << "Time is: " << ((g_captureBeepTime_[i] - g_playBeepTime_[i]) / g_usPerMs) << endl;
-        sum += g_captureBeepTime_[i] - g_playBeepTime_[i];
     }
 
     g_playBeepTime_.clear();
