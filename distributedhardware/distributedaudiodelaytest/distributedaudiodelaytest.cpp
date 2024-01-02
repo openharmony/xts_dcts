@@ -409,7 +409,7 @@ int32_t AudioProcessTestCallback::RenderFromFile(const BufferDesc &bufDesc)
         AUDIO_INFO_LOG("%{public}s render finish.", __func__);
         return SUCCESS;
     }
-    fread(bufDesc.buffer, 1, bufDesc.bufLength, g_spkWavFile);
+    size_t bytesReadCall = fread(bufDesc.buffer, 1, bufDesc.bufLength, g_spkWavFile);
     if (g_isLatencyTesting) {
         if (playIndex_ == 0) {
             cout << "First play time: " << GetNowTimeUs() << endl;
@@ -554,8 +554,8 @@ int32_t AudioProcessTest::InitSpk(int32_t loopCount, bool isRemote)
     config.streamType = STREAM_MUSIC;
 
     if (g_testMode == TestMode::RENDER_FILE) {
-        wav_hdr wavHeader;
-        size_t headerSize = sizeof(wav_hdr);
+        WavHdr wavHeader;
+        size_t headerSize = sizeof(WavHdr);
         size_t bytesRead = fread(&wavHeader, 1, headerSize, g_spkWavFile);
         if (bytesRead != headerSize) {
             AUDIO_ERR_LOG("RenderCallbackTest: File header reading error");
@@ -802,15 +802,14 @@ string AutoRunSpk()
 {
     std::string res = "true";
     cout << "Auto run spk process test enter, please input loopCount and path:" << endl;
-    std::string palyFilePath = "/data/test.wav";//自己加的
-    g_spkfilePath = palyFilePath;//自己加的
+    std::string palyFilePath = "/data/test.wav";
+    g_spkfilePath = palyFilePath;
     int32_t loopCount = 2;
 
     if (!OpenSpkFile()) {
         cout << "open spk file path failed!" << g_spkfilePath << endl;
         res = "false";
         return res;
-
     }
     if (g_audioProcessTest->InitSpk(loopCount, false) != SUCCESS) {
         cout << "Spk init failed!" << endl;
@@ -941,7 +940,6 @@ void CountLatencyTime()
         cout << "Time is: " << ((g_captureBeepTime_[i] - g_playBeepTime_[i]) / g_usPerMs) << endl;
         sum += g_captureBeepTime_[i] - g_playBeepTime_[i];
     }
-    cout << "Remote audio latency in average is: " << sum / playSize << " (us)." << endl;
 
     g_playBeepTime_.clear();
     g_captureBeepTime_.clear();
@@ -1181,7 +1179,7 @@ bool SetSysPara(const std::string key, int32_t &value)
 
 void MakeShare()
 {
-   g_audioProcessTest = make_shared<AudioProcessTest>(); 
+    g_audioProcessTest = make_shared<AudioProcessTest>();
 }
 
 std::string LocalSpkInitProcessTestk()
@@ -1273,7 +1271,7 @@ std::string ResumeSpkProcessTest()
     if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
         InitCachebuffer();
     }
-   if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
+    if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = CallResumeSpk();
     }
     return item;

@@ -52,7 +52,7 @@ struct WAV_HEADER {
     uint8_t Subchunk2ID[4] = {'d', 'a', 't', 'a'}; // "data"  string
     uint32_t Subchunk2Size = 0; // Sampled data length
 };
-using wav_hdr = struct WAV_HEADER;
+using WavHdr = struct WAV_HEADER;
 void MakeShare();
 std::string LocalSpkInitProcessTestk();
 std::string RemoteSpkInitProcessTest();
