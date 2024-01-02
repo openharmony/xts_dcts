@@ -564,9 +564,9 @@ int32_t AudioProcessTest::InitSpk(int32_t loopCount, bool isRemote)
             AUDIO_ERR_LOG("RenderCallbackTest: File header reading error");
         }
 
-        config.streamInfo.samplingRate = static_cast<AudioSamplingRate>(wavHeader.SamplesPerSec);
+        config.streamInfo.samplingRate = static_cast<AudioSamplingRate>(wavHeader.samplesPerSec);
         config.streamInfo.format = GetSampleFormat(wavHeader.bitsPerSample);
-        config.streamInfo.channels = static_cast<AudioChannel>(wavHeader.NumOfChan);
+        config.streamInfo.channels = static_cast<AudioChannel>(wavHeader.numOfChan);
 
         cout << endl << "samplingRate:" << config.streamInfo.samplingRate << endl;
         cout << "format:" << config.streamInfo.format << endl;
