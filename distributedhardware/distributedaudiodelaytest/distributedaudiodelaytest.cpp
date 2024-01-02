@@ -409,7 +409,10 @@ int32_t AudioProcessTestCallback::RenderFromFile(const BufferDesc &bufDesc)
         AUDIO_INFO_LOG("%{public}s render finish.", __func__);
         return SUCCESS;
     }
-    fread(bufDesc.buffer, 1, bufDesc.bufLength, g_spkWavFile);
+    size_t bytesReadCall = fread(bufDesc.buffer, 1, bufDesc.bufLength, g_spkWavFile);
+    if (bytesReadCall > 0) {
+        AUDIO_INFO_LOG("bytesReadCall===");
+    }
     if (g_isLatencyTesting) {
         if (playIndex_ == 0) {
             cout << "First play time: " << GetNowTimeUs() << endl;
@@ -463,7 +466,7 @@ void AudioProcessTestCallback::OnHandleData(size_t length)
     callBack.End();
 }
 
-inline AudioSampleFormat GetSampleFormat(int32_t wavSampleFormat)
+AudioSampleFormat GetSampleFormat(int32_t wavSampleFormat)
 {
     switch (wavSampleFormat) {
         case SAMPLE_FORMAT_U8:
