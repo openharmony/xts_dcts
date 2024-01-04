@@ -197,7 +197,7 @@ static int32_t LoadSpkDev(const std::string &devId)
     return DH_SUCCESS;
 }
 
-std::string OpenSpk(const std::string devId)
+std::string OpenSpk(std::string devId)
 {
     if (g_spkStatus != DeviceStatus::DEVICE_IDLE) {
         std::cout << "Speaker device is already opened." << std::endl;
@@ -408,7 +408,7 @@ static int32_t LoadMicDev(const std::string &devId)
     return DH_SUCCESS;
 }
 
-std::string OpenMic(const std::string devId)
+std::string OpenMic(std::string devId)
 {
     if (g_micStatus != DeviceStatus::DEVICE_IDLE) {
         std::cout << "Mic device is already opened." << std::endl;
