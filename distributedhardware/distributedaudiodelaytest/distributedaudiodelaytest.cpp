@@ -1190,12 +1190,11 @@ std::string LocalSpkInitProcessTestk()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = ConfigSpkTest(false);
     }
@@ -1209,12 +1208,11 @@ std::string RemoteSpkInitProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = ConfigSpkTest(true);
     }
@@ -1228,12 +1226,11 @@ std::string StartSpkProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = CallStartSpk();
     }
@@ -1247,12 +1244,11 @@ std::string PauseSpkProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = CallPauseSpk();
     }
@@ -1266,12 +1262,11 @@ std::string ResumeSpkProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = CallResumeSpk();
     }
@@ -1285,13 +1280,11 @@ std::string StopSpkProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+ 
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
 
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = CallStopSpk();
     }
@@ -1306,12 +1299,11 @@ std::string ReleaseSpkProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = CallReleaseSpk();
     }
@@ -1325,12 +1317,11 @@ std::string LocalMicInitProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = ConfigMicTest(false);
     }
@@ -1344,12 +1335,11 @@ std::string RemoteMicInitProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = ConfigMicTest(true);
     }
@@ -1363,12 +1353,11 @@ std::string StartMicProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = CallStartMic();
     }
@@ -1382,12 +1371,11 @@ std::string PauseMicProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = CallPauseMic();
     }
@@ -1401,12 +1389,11 @@ std::string ResumeMicProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = CallResumeMic();
     }
@@ -1420,12 +1407,11 @@ std::string StopMicProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = CallStopMic();
     }
@@ -1439,12 +1425,11 @@ std::string ReleaseMicProcessTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = CallReleaseMic();
     }
@@ -1458,12 +1443,11 @@ std::string LocalLoopTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = LocalLoopLatencyTest();
     }
@@ -1477,12 +1461,11 @@ std::string RemoteLoopTest()
     std::string item = "";
     AudioProcessTestType procTestType = INVALID_PROC_TEST;
     g_testMode = TestMode::RENDER_FILE;
+
     if (g_audioProcessTestType.count(g_inputNum)) {
         procTestType = static_cast<AudioProcessTestType>(g_inputNum);
     }
-    if (g_testMode == TestMode::RENDER_MIC_LOOP_DATA) {
-        InitCachebuffer();
-    }
+
     if (procTestType == INTERACTIVE_RUN_SPK_TEST) {
         item = RemoteLoopLatencyTest();
     }
