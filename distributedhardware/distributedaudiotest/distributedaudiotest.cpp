@@ -298,6 +298,13 @@ std::string StartRender()
             g_isInitRenderData = true;
         }
         FILE *wavFile = fopen(SPK_FILE_PATH, "rb");
+
+        if (wavFile == nullptr) {
+            DHLOGE("open spk file path failed!");
+            std::cout << "open spk file path failed!" << std::endl;
+            return "false";
+        }
+
         fread(&wavHeader, 1, headerSize, wavFile);
         for (int32_t i = 0; i < g_frameNum; i++) {
             fread(renderData[i], 1, RENDER_FRAME_SIZE, wavFile);
