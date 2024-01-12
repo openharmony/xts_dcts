@@ -16,7 +16,7 @@
 import rpc from "@ohos.rpc";
 import avSession from "@ohos.multimedia.avsession";
 import featureAbility from '@ohos.ability.featureAbility';
-import deviceManager from '@ohos.distributedHardware.deviceManager';
+import deviceManager from '@ohos.distributedDeviceManager';
 import process from "@ohos.process";
 import audio from "@ohos.multimedia.audio";
 import TestService from "./testService";
@@ -50,18 +50,7 @@ export default function AVSessionManagerJsUnit() {
         let localDeviceId = undefined;
         let dvList = [];
         let dvId = null;
-
-        deviceManager.createDeviceManager('com.example.myapplication', async (error, deviceManager) => {
-            console.info("Client ceate device manager success");
-            localDeviceId = deviceManager.getLocalDeviceInfoSync().deviceId;
-            console.info("local device id is: " + localDeviceId);
-            let deviceList = deviceManager.getTrustedDeviceListSync();
-            dvList = deviceList;
-            let deviceId = deviceList[0].deviceId;
-            dvId = deviceId;
-            console.info("deviceid is: " + deviceId)
-            console.info("deviceList is: " + JSON.stringify(deviceList))
-        })
+        let dmInstance;
 
         function sleep(time) {
             return new Promise(resolve => setTimeout(resolve, time));
@@ -97,7 +86,25 @@ export default function AVSessionManagerJsUnit() {
             await getPermission();
             sleep(5000);
             await driveFn();
-            sleep(100);
+            await sleep(500);
+
+            try {
+                dmInstance = deviceManager.createDeviceManager('com.example.myapplication');
+                if (dmInstance) {
+                    console.info("Client ceate device manager success");
+                    localDeviceId = dmInstance.getLocalDeviceId();
+                    console.info("local device id is: " + localDeviceId);
+                    let deviceList = dmInstance.getAvailableDeviceListSync();
+                    dvList = deviceList;
+                    let deviceId = deviceList[0].deviceId;
+                    dvId = deviceId;
+                    console.info("deviceid is: " + deviceId)
+                    console.info("deviceList is: " + JSON.stringify(deviceList))
+                }
+            } catch(err) {
+                console.info('err is ' + err);
+                return;
+            }
 
             audioManager = audio.getAudioManager().getRoutingManager();
 
