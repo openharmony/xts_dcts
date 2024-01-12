@@ -52,14 +52,14 @@ constexpr int32_t AUDIO_SAMPLE_RATE = 48000;
 constexpr int32_t VOLUME_MIN = 0;
 constexpr int32_t VOLUME_MAX = 15;
 constexpr int32_t VOLUME_BIT = 3;
-constexpr int32_t RENDER_FRAME_SIZE = 4096;
+constexpr int32_t RENDER_FRAME_SIZE = 3840;
 constexpr int32_t RENDER_INTER_LEAVED = 1;
 constexpr int32_t RENDER_STREAM_ID = 0;
 constexpr int32_t RENDER_CHANNEL_MASK = 2;
 constexpr int32_t CAPTURE_INTER_LEAVED = 1;
 constexpr int32_t CAPTURE_STREAM_ID = 2;
 constexpr int32_t CAPTURE_CHANNEL_MASK = 2;
-constexpr int64_t AUDIO_FRAME_TIME_INTERFAL_DEFAULT = 21333;
+constexpr int64_t AUDIO_FRAME_TIME_INTERFAL_DEFAULT = 20000;
 
 static AudioManager *g_manager = nullptr;
 static AudioAdapter *g_adapter = nullptr;
