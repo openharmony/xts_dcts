@@ -738,3 +738,132 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4300, TestSize.Level1)
     ret = StopExpand(2);
     EXPECT_NE(g_dSreenOk, ret) << "StopExpand fail";
 }
+
+/**
+ * @tc.number    : SUB_DH_Dscreen_Dcts_4400
+ * @tc.name      StartMirror and StopMirror method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4400, TestSize.Level1)
+{
+    int ret = -1;
+    for (int num = 0; num < 5; num++) {
+        ret = StartMirror(0);
+        std::cout << "SUB_DH_Dscreen_Dcts_4400 num:" << num << "ret:" << ret << std::endl;
+        EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    }
+    ret = StopMirror(0);
+    EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+}
+
+/**
+ * @tc.number    : SUB_DH_Dscreen_Dcts_4500
+ * @tc.name      StartMirror and StopMirror method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4500, TestSize.Level1)
+{
+    int ret = StartMirror(0);
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    for (int num = 0; num < 5; num++) {
+        ret = StopMirror(0);
+        std::cout << "SUB_DH_Dscreen_Dcts_4500 num:" << num << "ret:" << ret << std::endl;
+        EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
+    }
+}
+
+/**
+ * @tc.number    : SUB_DH_Dscreen_Dcts_4600
+ * @tc.name      ：StartExpand and StopExpand method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4600, TestSize.Level1)
+{
+    int ret = -1;
+    for (int num = 0; num < 5; num++) {
+        ret = StartExpand(0);
+        std::cout << "SUB_DH_Dscreen_Dcts_4600 num:" << num << "ret:" << ret << std::endl;
+        EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    }
+    ret = StopExpand(0);
+    EXPECT_EQ(g_dSreenOk, ret) << "StopExpand fail";
+}
+
+/**
+ * @tc.number    : SUB_DH_Dscreen_Dcts_4700
+ * @tc.name      ：StartExpand and StopExpand method Enter error parameters to see the return value
+ * @tc.desc      : Composite test function
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4700, TestSize.Level1)
+{
+    int ret = -1;
+    ret = StartExpand(0);
+    EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
+    for (int num = 0; num < 5; num++) {
+        ret = StopExpand(0);
+        std::cout << "SUB_DH_Dscreen_Dcts_4700 num:" << num << "ret:" << ret << std::endl;
+        EXPECT_EQ(g_dSreenOk, ret) << "StopExpand fail";
+    }
+}
+
+/**
+ * @tc.number    : SUB_DH_Dscreen_Dcts_4800
+ * @tc.name      ：CreateWindow()
+ * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ * @tc.desc      : Distributed screen Creates a small window on the remote device
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4800, TestSize.Level1)
+{
+    int ret = -1;
+    for (int num = 0; num < 5; num++) {
+        ret = CreateWindow(0);
+        std::cout << "SUB_DH_Dscreen_Dcts_4800 num:" << num << "ret:" << ret << std::endl;
+        EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
+    }
+}
+
+/**
+ * @tc.number    : SUB_DH_Dscreen_Dcts_4900
+ * @tc.name      ：QueryRemoteDeviceInfo()
+ * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ * @tc.desc      : Distributed screen Displays information about remote devices
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4900, TestSize.Level1)
+{
+    int ret = -1;
+    for (int num = 0; num < 5; num++) {
+        ret = QueryRemoteDeviceInfo(0);
+        std::cout << "SUB_DH_Dscreen_Dcts_4900 num:" << num << "ret:" << ret << std::endl;
+        EXPECT_EQ(g_dSreenOk, ret) << "QueryRemoteDeviceInfo fail";
+    }
+}
+
+/**
+ * @tc.number    : SUB_DH_Dscreen_Dcts_5000
+ * @tc.name      ：QueryRemoteScreenInfo()
+ * @tc.desc      : [STD-DISTRIBUTED-0113]禁止修改OpenHarmony分布式屏幕交互协议
+ * @tc.desc      : Distributed screen Displays information about remote screens
+ * @tc.type      : FUNC
+ * @tc.size      : Medium test
+ */
+HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_5000, TestSize.Level1)
+{
+    int ret = -1;
+    for (int num = 0; num < 5; num++) {
+        ret = QueryRemoteScreenInfo(0);
+        std::cout << "SUB_DH_Dscreen_Dcts_5000 num:" << num << "ret:" << ret << std::endl;
+        EXPECT_EQ(g_dSreenOk, ret) << "QueryRemoteScreenInfo fail";
+    }
+}
