@@ -14,13 +14,14 @@
  */
 
 import rpc from "@ohos.rpc";
-import deviceManager from '@ohos.distributedHardware.deviceManager';
+import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
 var results;
 var bundleName = "com.example.myapplication";
 var abilityName = "com.example.myapplication.ServiceAbility";
 var deviceList;
+var dmInstance;
 
 export default class TestService {
 
@@ -28,8 +29,8 @@ export default class TestService {
 
     }
 
-    getDeviceList(deviceManager) {
-        deviceList = deviceManager.getTrustedDeviceListSync();
+    getDeviceList(dmInstance) {
+        deviceList = dmInstance.getAvailableDeviceListSync();
         console.info("getDeviceList success, deviceList id: " + JSON.stringify(deviceList));
     }
 
@@ -37,9 +38,10 @@ export default class TestService {
         console.info("avsessionClient: toConnectAbility")
         return new Promise(resolve=>{
             let self = this;
-            deviceManager.createDeviceManager('com.example.myapplication', (error, deviceManager) => {
-                self.getDeviceList(deviceManager);
-                console.info("avsessionClient:  got deviceManager: " + deviceManager)
+            dmInstance = deviceManager.createDeviceManager('com.example.myapplication');
+            if (dmInstance) {
+                self.getDeviceList(dmInstance);
+                console.info("avsessionClient:  got dmInstance: " + dmInstance)
                 let networkId = deviceList[0].networkId
                 console.info("avsessionClient: networkId : " + networkId)
                 console.info("avsessionClient: online deviceList id: " + JSON.stringify(deviceList))
@@ -63,7 +65,7 @@ export default class TestService {
                 }
                 let connectId = featureAbility.connectAbility(want, connect)
                 console.info("connect ability got id: " + connectId)
-            })
+            }
         })
     }
 }
