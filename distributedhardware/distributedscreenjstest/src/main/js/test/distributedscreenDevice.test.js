@@ -373,5 +373,67 @@ export default function distributedDeviceManager() {
             await sleep(1000);
             console.info("-----------------SUB_DH_releaseDeviceManager_0013 end------------------------");
         })
+		
+		 /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_1400
+         * @tc.name    Stop discovering nearby devices.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+       it("SUB_DH_DeviceManager_Dcts_1400", 0, async function (done) {
+        console.info("-----------------SUB_DH_DeviceManager_Dcts_1400 start------------------------");
+        try {
+            dmInstance.stopDiscovering();
+            console.log("stopDiscovering success");
+            expect(true).assertTrue();
+            done();
+        } catch (err) {
+            console.info("stopDiscovering errCode:" + err.code + ",errMessage:" + err.message);
+            expect(false).assertFail();
+            done();
+        }
+        await sleep(1000);
+        console.info("-----------------SUB_DH_DeviceManager_Dcts_1400 end------------------------");
+        })
+		
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_1500
+         * @tc.name    Releases the {@code DeviceManager} instance that is no longer used.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_1500", 0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_1500 start------------------------");
+            var mFilterOption = {
+                targetPkgName: "com.ohos.distributedscreenjstest",
+                sortType: 0,
+                filter: JSON.stringify({
+                    key: 'test',
+                    value: 0
+                })
+            }
+            try {
+                dmInstance.off('replyResult');
+                dmInstance.off('discoverSuccess');
+                dmInstance.off('discoverFail');
+                dmInstance.off('serviceDie');
+                dmInstance.off('deviceStateChange');
+				dmInstance.off('deviceNameChange');
+                deviceManager.releaseDeviceManager(dmInstance);
+                console.log("releaseDeviceManager success");
+                expect(true).assertTrue();
+                done();
+            } catch (err) {
+                console.info("releaseDeviceManager errCode:" + err.code + ",errMessage:" + err.message);
+                expect(false).assertFail();
+                done();
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_1500 end------------------------");
+        })
     })
 }
