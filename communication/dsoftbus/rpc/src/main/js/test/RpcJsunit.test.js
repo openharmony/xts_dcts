@@ -10836,7 +10836,7 @@ export default function RpcJsUnitTest() {
             try {
                 expect(rpc.MessageOption.TF_SYNC).assertEqual(0);
                 expect(rpc.MessageOption.TF_ASYNC).assertEqual(1);
-                expect(rpc.MessageOption.TF_WAIT_TIME).assertEqual(4);
+                expect(rpc.MessageOption.TF_WAIT_TIME).assertEqual(8);
                 expect(rpc.MessageOption.TF_ACCEPT_FDS).assertEqual(0x10);
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_MessageOption_0900 error: " + error);
