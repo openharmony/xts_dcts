@@ -16,8 +16,31 @@ import Ability from '@ohos.app.ability.UIAbility';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import wantConstant from '@ohos.app.ability.wantConstant';
 import rpc from '@ohos.rpc';
-import commonEvent from '@ohos.commonEvent';
-class StubTest extends rpc.RemoteObject {
+import CommonEventManager from '@ohos.commonEventManager';
+import common from '@ohos.app.ability.common';
+
+export class MyMessageAble {
+  num: number = 0;
+  str: string = '';
+  constructor(num:number, string:string) {
+    this.num = num;
+    this.str = string;
+  }
+  marshalling(messageParcel) {
+    console.log('MyMessageAble messageParcel marshalling' + this.num , + this.str)
+    messageParcel.writeInt(this.num);
+    messageParcel.writeString(this.str);
+    return true;
+  }
+  unmarshalling(messageParcel) {
+    console.log('MyMessageAble messageParcel unmarshalling' + this.num , + this.str)
+    this.num = messageParcel.readInt();
+    this.str = messageParcel.readString();
+    return true;
+  }
+}
+
+export class StubTest extends rpc.RemoteObject {
     constructor(descriptor) {
 
         super(descriptor)
@@ -29,11 +52,11 @@ class StubTest extends rpc.RemoteObject {
         let tmp1 = data.readInt();
         let tmp2 = data.readInt();
         let tmp3 = tmp1 + tmp2;
-        let result =  reply.writeInt(tmp3);
+        let result = reply.writeInt(tmp3);
         console.info("The server's writeInt result is " + result);
-        commonEvent.publish("DmsFwkService_RemoteObject", {
-            parameters:{
-                "msg":"receiveMessage = " + data.readInt()
+        CommonEventManager.publish("DmsFwkService_RemoteObject", {
+            parameters: {
+                "msg": "receiveMessage = " + data.readInt()
             }
         }, (err, data) => {
             console.info("DmsFwkService_ConnectAbility onCreate");
@@ -45,8 +68,8 @@ export default class MainAbility extends Ability {
     localStorage: LocalStorage;
 
     onCreate(want, launchParam) {
-
         console.log("[Demo] MainAbility onCreate");
+        AppStorage.setOrCreate<common.UIAbilityContext>('context', this.context);
         globalThis.abilityWant = want;
         if (launchParam.launchReason == AbilityConstant.LaunchReason.CONTINUATION) {
             this.localStorage = new LocalStorage();
@@ -61,7 +84,7 @@ export default class MainAbility extends Ability {
                 "life": "onConnect"
             }
         }
-        commonEvent.publish("DmsFwkService_ConnectAbility", commonEventPublishData, (err) => {
+        CommonEventManager.publish("DmsFwkService_ConnectAbility", commonEventPublishData, (err) => {
             console.info("DmsFwkService_ConnectAbility onCreate");
         });
         return new StubTest("test");
@@ -73,7 +96,6 @@ export default class MainAbility extends Ability {
     }
 
     onNewWant(want, launchParam) {
-        
         console.log("[Demo] MainAbility onNewWant")
         globalThis.abilityWant = want;
         if (launchParam.launchReason == AbilityConstant.LaunchReason.CONTINUATION) {
