@@ -181,7 +181,7 @@ export default function rdbSyncFirstLevelTest(){
         })
     
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_0100
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1000
          * @tc.name testRdbSyncTest0010
          * @tc.desc Server rdbStore Insert first and synchronize
          */
@@ -234,7 +234,7 @@ export default function rdbSyncFirstLevelTest(){
         })
     
          /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_0200
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1800
          * @tc.name testRdbSyncTest0020
          * @tc.desc Server rdbStore Insert twice and synchronize twice
          */
@@ -310,7 +310,7 @@ export default function rdbSyncFirstLevelTest(){
         })
     
         /**
-        * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_0300
+        * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2300
         * @tc.name testRdbSyncTest0030
         * @tc.desc Server rdbStore Insert synchronization and then update synchronization
         */
@@ -386,7 +386,7 @@ export default function rdbSyncFirstLevelTest(){
     
     
         /**
-        * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_0400
+        * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2100
         * @tc.name testRdbSyncTest0040
         * @tc.desc Server rdbStore Insert synchronization, and then delete synchronization
         */
@@ -449,7 +449,7 @@ export default function rdbSyncFirstLevelTest(){
     
     
         /**
-        * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_0500
+        * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1100
         * @tc.name testRdbSyncTest0050
         * @tc.desc Server rdbStore batchInsert sync
         */
@@ -516,7 +516,7 @@ export default function rdbSyncFirstLevelTest(){
     
     
         /**
-        * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_0600
+        * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1600
         * @tc.name testRdbSyncTest0060
         * @tc.desc Server rdbStore BatchInsert synchronization and then update synchronization
         */
@@ -611,7 +611,7 @@ export default function rdbSyncFirstLevelTest(){
     
     
         /**
-        * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_0700
+        * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1300
         * @tc.name testRdbSyncTest0070
         * @tc.desc Server rdbStore BatchInsert synchronization, and then delete synchronization
         */
@@ -689,7 +689,7 @@ export default function rdbSyncFirstLevelTest(){
         })
     
         /**
-        * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_0800
+        * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1500
         * @tc.name testRdbSyncTest0080
         * @tc.desc Server rdbStore BatchInsert synchronization, and then delete synchronization,and then update synchronization
         */
@@ -801,7 +801,7 @@ export default function rdbSyncFirstLevelTest(){
     
     
         /**
-        * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_0900
+        * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1400
         * @tc.name testRdbSyncTest0090
         * @tc.desc Server rdbStore BatchInsert synchronization, and then delete synchronization, and then insert synchronization
         */
@@ -914,7 +914,7 @@ export default function rdbSyncFirstLevelTest(){
     
     
         /**
-        * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1000
+        * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1200
         * @tc.name testRdbSyncTest0100
         * @tc.desc Server rdbStore BatchInsert synchronization callback, 
         */
@@ -985,7 +985,7 @@ export default function rdbSyncFirstLevelTest(){
     
     
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1100
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0800
          * @tc.name testRdbSyncTest0110
          * @tc.desc Server rdbStore Insert first and synchronize salary Number.MIN_VALUE-1
          */
@@ -1038,7 +1038,7 @@ export default function rdbSyncFirstLevelTest(){
     
     
         /**
-        * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1200
+        * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1700
         * @tc.name testRdbSyncTest0120
         * @tc.desc Server rdbStore BatchInsert synchronization, and then update synchronization，and then update synchronization
         */
@@ -1168,7 +1168,7 @@ export default function rdbSyncFirstLevelTest(){
     
     
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1300
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0700
          * @tc.name testRdbSyncTest0130
          * @tc.desc Server rdbStore Insert first and synchronize salary Number.MAX_VALUE+1
         */
@@ -1221,7 +1221,7 @@ export default function rdbSyncFirstLevelTest(){
     
     
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1400
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2200
          * @tc.name testRdbSyncTest0140
          * @tc.desc Server rdbStore Insert first and synchronize,delete all
         */
@@ -1291,7 +1291,7 @@ export default function rdbSyncFirstLevelTest(){
         })
     
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1600
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1900
          * @tc.name testRdbSyncTest0160
          * @tc.desc Server rdbStore Insert first and synchronize, Sync the null character of the pre-device id
         */
@@ -1347,7 +1347,7 @@ export default function rdbSyncFirstLevelTest(){
     
         
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1700
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2000
          * @tc.name testRdbSyncTest0170
          * @tc.desc Server rdbStore Insert first and synchronize, Error in synchronization of pre-tableName
          */
@@ -1405,7 +1405,7 @@ export default function rdbSyncFirstLevelTest(){
         })
         
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1800
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0900
          * @tc.name testRdbSyncTest0180
          * @tc.desc Server rdbStore Insert first and synchronize, Pass null in synchronous mode
         */
@@ -1463,7 +1463,7 @@ export default function rdbSyncFirstLevelTest(){
         })
 
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_1900
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2500
          * @tc.name testRdbSyncTest0190
          * @tc.desc Server get rdbStoreS2 level, Name different
         */
@@ -1542,7 +1542,7 @@ export default function rdbSyncFirstLevelTest(){
 
 
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2000
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2400
          * @tc.name testRdbSyncTest0200
          * @tc.desc Server get rdbStoreS2 level, Name different
         */
@@ -1619,7 +1619,7 @@ export default function rdbSyncFirstLevelTest(){
         })
 
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2100
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2600
          * @tc.name testRdbSyncTest0210
          * @tc.desc Server rdbStore get rdbStoreS2 level, Name equal
         */
@@ -1658,7 +1658,7 @@ export default function rdbSyncFirstLevelTest(){
 
 
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2200
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0100
          * @tc.name testRdbSyncTest0220
          * @tc.desc Server get rdbStoreS2 level, Name different
         */
@@ -1694,7 +1694,7 @@ export default function rdbSyncFirstLevelTest(){
 
 
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2300
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2700
          * @tc.name testRdbSyncTest0230
          * @tc.desc Server get rdbStoreS2 level, Name different
         */
@@ -1728,7 +1728,7 @@ export default function rdbSyncFirstLevelTest(){
         })
 
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2400
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0500
          * @tc.name testRdbSyncTest0240
          * @tc.desc Server rdbStore Insert first and synchronize, intValue = Max
          */
@@ -1782,7 +1782,7 @@ export default function rdbSyncFirstLevelTest(){
 
 
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2500
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0600
          * @tc.name testRdbSyncTest0250
          * @tc.desc Server rdbStore Insert first and synchronize, intValue = Min
          */
@@ -1835,7 +1835,7 @@ export default function rdbSyncFirstLevelTest(){
 
 
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2600
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0200
          * @tc.name testRdbSyncTest0260
          * @tc.desc Server rdbStore Insert first and synchronize, intValue = NaN
          */
@@ -1888,7 +1888,7 @@ export default function rdbSyncFirstLevelTest(){
 
 
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2700
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0400
          * @tc.name testRdbSyncTest0270
          * @tc.desc Server rdbStore Insert first and synchronize, intValue = POSITIVE_INFINITY
          */
@@ -1941,7 +1941,7 @@ export default function rdbSyncFirstLevelTest(){
 
 
         /**
-         * @tc.number SUB_DISTRIBUTEDDATAMGR_SyncRDBTest_2800
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0300
          * @tc.name testRdbSyncTest0280
          * @tc.desc Server rdbStore Insert first and synchronize, intValue = NEGATIVE_INFINITY
          */
