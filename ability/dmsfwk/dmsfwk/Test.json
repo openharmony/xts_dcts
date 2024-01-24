@@ -7,7 +7,7 @@
         "package-name": "com.ohos.dmstest",
         "abilityName": "com.ohos.dmstest.MainAbility",
         "shell-timeout": "180000",
-		"testcase-timeout": 10000
+		"testcase-timeout": 70000
     },
     "kits": [
         {

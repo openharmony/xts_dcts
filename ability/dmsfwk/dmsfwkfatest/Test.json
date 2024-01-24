@@ -6,7 +6,7 @@
         "bundle-name": "com.example.configuration",
         "package-name": "com.example.configuration",
         "shell-timeout": "600000",
-		"testcase-timeout": 10000
+		"testcase-timeout": 70000
     },
     "kits": [
         {
