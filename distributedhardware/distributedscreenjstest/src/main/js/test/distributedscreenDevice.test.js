@@ -79,13 +79,15 @@ export default function distributedDeviceManager() {
         let dmNetworkId = null;
         let dmDeviceInfo = null;
         let deviceId = null;
+
         /*
-        * @tc.number  SUB_DH_createDeviceManager_0001
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_createDeviceManager_0001
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   0
+         */
         it("SUB_DH_createDeviceManager_0001", 0, async function (done) {
             console.info("-----------------SUB_DH_createDeviceManager_0001 start------------------------");
             try {
@@ -145,12 +147,15 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0200 end------------------------");
         })
         
+
         /*
          * @tc.number  SUB_DH_getLocalDeviceNetworkId_0003
          * @tc.name    Get the network id of the local device
          * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
          * @tc.level   0
-        */
+         */
         it("SUB_DH_getLocalDeviceNetworkId_0003", 0, async function (done) {
             console.info("-----------------SUB_DH_getLocalDeviceNetworkId_0003 start------------------------");
             try {
@@ -170,12 +175,15 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_getLocalDeviceNetworkId_0003 end------------------------");
         })
 
+
         /*
          * @tc.number  SUB_DH_getAvailableDeviceListSync_0004
          * @tc.name    Get a list of available devices. This interface query all authorized and connectable devices.
          * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
          * @tc.level   0
-        */
+         */
         it("SUB_DH_getAvailableDeviceListSync_0004", 0, async function (done) {
             console.info("-----------------SUB_DH_getAvailableDeviceListSync_0004 start------------------------");
             try {
@@ -198,12 +206,15 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_getAvailableDeviceListSync_0004 end------------------------");
         })
 
-        /*
+
+         /*
          * @tc.number  SUB_DH_getAvailableDeviceList_0005
          * @tc.name    Get a list of available devices. This interface query all authorized and connectable devices.
          * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
          * @tc.level   0
-        */
+         */
         it("SUB_DH_getAvailableDeviceList_0005", 0, async function (done) {
             console.info("-----------------SUB_DH_getAvailableDeviceList_0005 start------------------------");
             try {
@@ -224,12 +235,15 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_getAvailableDeviceList_0005 end------------------------");
         })
 
+
         /*
          * @tc.number  SUB_DH_getAvailableDeviceList_0006
          * @tc.name    Get a list of available devices. This interface query all authorized and connectable devices.
          * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
          * @tc.level   0
-        */
+         */
         it("SUB_DH_getAvailableDeviceList_0006", 0, async function (done) {
             console.info("-----------------SUB_DH_getAvailableDeviceList_0006 start------------------------");
             dmInstance.getAvailableDeviceList().then((data) => { 
@@ -287,12 +301,15 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0700 end------------------------");
         })
 
-        /*
+
+         /*
          * @tc.number  SUB_DH_getLocalDeviceName_0008
          * @tc.name    Get the device name of the local device.
          * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
          * @tc.level   0
-        */
+         */
         it("SUB_DH_getLocalDeviceName_0008", 0, async function (done) {
             console.info("-----------------SUB_DH_getLocalDeviceName_0008 start------------------------");
             try {
@@ -312,12 +329,15 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_getLocalDeviceName_0008 end------------------------");
         })
 
+
         /*
          * @tc.number  SUB_DH_getLocalDeviceType_0009
          * @tc.name    Get the device type of the local device
          * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
          * @tc.level   0
-        */
+         */
         it("SUB_DH_getLocalDeviceType_0009", 0, async function (done) {
             console.info("-----------------SUB_DH_getLocalDeviceType_0009 start------------------------");
             try {
@@ -337,12 +357,15 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_getLocalDeviceType_0009 end------------------------");
         })
 
-        /*
+
+         /*
          * @tc.number  SUB_DH_getLocalDeviceId_0010
          * @tc.name    Get the device id of the local device
          * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
          * @tc.level   0
-        */
+         */
         it("SUB_DH_getLocalDeviceId_0010", 0, async function (done) {
             console.info("-----------------SUB_DH_getLocalDeviceId_0010 start------------------------");
             try {
@@ -362,12 +385,15 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_getLocalDeviceId_0010 end------------------------");
         })
 
+
         /*
-        * @tc.number  SUB_DH_getDeviceName_0011
-        * @tc.name    Get the device name by network id.
-        * @tc.desc    Function test
-        * @tc.level   0
-        */
+         * @tc.number  SUB_DH_getDeviceName_0011
+         * @tc.name    Get the device name by network id.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   0
+         */
         it("SUB_DH_getDeviceName_0011", 0, async function (done) {
             console.info("-----------------SUB_DH_getDeviceName_0011 start------------------------");
             try {
@@ -387,12 +413,15 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_getDeviceName_0011 end------------------------");
         })
 
+
         /*
          * @tc.number  SUB_DH_getDeviceType_0012
          * @tc.name    Get the device type by network id.
          * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
          * @tc.level   0
-        */
+         */
         it("SUB_DH_getDeviceType_0012", 0, async function (done) {
             console.info("-----------------SUB_DH_getDeviceType_0012 start------------------------");
             try {
@@ -412,10 +441,13 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_getDeviceType_0012 end------------------------");
         })
 		
+
         /*
          * @tc.number  SUB_DH_releaseDeviceManager_0013
          * @tc.name    Releases the {@code DeviceManager} instance that is no longer used.
          * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
          * @tc.level   0
          */
         it("SUB_DH_releaseDeviceManager_0013", 0, async function (done) {
