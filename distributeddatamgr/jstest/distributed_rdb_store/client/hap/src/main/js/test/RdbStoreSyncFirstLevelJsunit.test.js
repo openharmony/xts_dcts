@@ -184,6 +184,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1000
          * @tc.name testRdbSyncTest0010
          * @tc.desc Server rdbStore Insert first and synchronize
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
          */
          it("testRdbSyncTest0010", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0010 start");
@@ -237,6 +240,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1800
          * @tc.name testRdbSyncTest0020
          * @tc.desc Server rdbStore Insert twice and synchronize twice
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
          */
         it("testRdbSyncTest0020", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0020 start");
@@ -313,6 +319,9 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2300
         * @tc.name testRdbSyncTest0030
         * @tc.desc Server rdbStore Insert synchronization and then update synchronization
+        * @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 2
         */
         it("testRdbSyncTest0030", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0030 start");
@@ -389,6 +398,9 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2100
         * @tc.name testRdbSyncTest0040
         * @tc.desc Server rdbStore Insert synchronization, and then delete synchronization
+        * @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 2
         */
         it("testRdbSyncTest0040", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0040 start");
@@ -452,6 +464,9 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1100
         * @tc.name testRdbSyncTest0050
         * @tc.desc Server rdbStore batchInsert sync
+        * @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 2
         */
         it("testRdbSyncTest0050", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0050 start");
@@ -519,6 +534,9 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1600
         * @tc.name testRdbSyncTest0060
         * @tc.desc Server rdbStore BatchInsert synchronization and then update synchronization
+        * @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 2
         */
         it("testRdbSyncTest0060", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0060 start");
@@ -614,6 +632,9 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1300
         * @tc.name testRdbSyncTest0070
         * @tc.desc Server rdbStore BatchInsert synchronization, and then delete synchronization
+        * @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 2
         */
          it("testRdbSyncTest0070", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0070 start");
@@ -692,6 +713,9 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1500
         * @tc.name testRdbSyncTest0080
         * @tc.desc Server rdbStore BatchInsert synchronization, and then delete synchronization,and then update synchronization
+        * @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 2
         */
         it("testRdbSyncTest0080", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0080 start");
@@ -804,6 +828,9 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1400
         * @tc.name testRdbSyncTest0090
         * @tc.desc Server rdbStore BatchInsert synchronization, and then delete synchronization, and then insert synchronization
+        * @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 2
         */
          it("testRdbSyncTest0090", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0090 start");
@@ -916,7 +943,10 @@ export default function rdbSyncFirstLevelTest(){
         /**
         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1200
         * @tc.name testRdbSyncTest0100
-        * @tc.desc Server rdbStore BatchInsert synchronization callback, 
+        * @tc.desc Server rdbStore BatchInsert synchronization callback
+        * @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 2
         */
         it("testRdbSyncTest0100", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0100 start");
@@ -988,6 +1018,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0800
          * @tc.name testRdbSyncTest0110
          * @tc.desc Server rdbStore Insert first and synchronize salary Number.MIN_VALUE-1
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
          */
          it("testRdbSyncTest0110", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0110 start");
@@ -1041,6 +1074,9 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1700
         * @tc.name testRdbSyncTest0120
         * @tc.desc Server rdbStore BatchInsert synchronization, and then update synchronization，and then update synchronization
+        * @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 2
         */
          it("testRdbSyncTest0120", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0120 start");
@@ -1171,6 +1207,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0700
          * @tc.name testRdbSyncTest0130
          * @tc.desc Server rdbStore Insert first and synchronize salary Number.MAX_VALUE+1
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
         */
         it("testRdbSyncTest0130", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0130 start");
@@ -1224,6 +1263,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2200
          * @tc.name testRdbSyncTest0140
          * @tc.desc Server rdbStore Insert first and synchronize,delete all
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
         */
          it("testRdbSyncTest0140", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0140 start");
@@ -1294,6 +1336,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_1900
          * @tc.name testRdbSyncTest0160
          * @tc.desc Server rdbStore Insert first and synchronize, Sync the null character of the pre-device id
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
         */
         it("testRdbSyncTest0160", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0160 start");
@@ -1350,6 +1395,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2000
          * @tc.name testRdbSyncTest0170
          * @tc.desc Server rdbStore Insert first and synchronize, Error in synchronization of pre-tableName
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
          */
          it("testRdbSyncTest0170", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0170 start");
@@ -1408,6 +1456,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0900
          * @tc.name testRdbSyncTest0180
          * @tc.desc Server rdbStore Insert first and synchronize, Pass null in synchronous mode
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
         */
         it("testRdbSyncTest0180", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0180 start");
@@ -1466,6 +1517,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2500
          * @tc.name testRdbSyncTest0190
          * @tc.desc Server get rdbStoreS2 level, Name different
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
         */
          it("testRdbSyncTest0190", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0190 start");
@@ -1545,6 +1599,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2400
          * @tc.name testRdbSyncTest0200
          * @tc.desc Server get rdbStoreS2 level, Name different
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
         */
          it("testRdbSyncTest0200", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0200 start");
@@ -1622,6 +1679,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2600
          * @tc.name testRdbSyncTest0210
          * @tc.desc Server rdbStore get rdbStoreS2 level, Name equal
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
         */
         it("testRdbSyncTest0210", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0210 start");
@@ -1661,6 +1721,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0100
          * @tc.name testRdbSyncTest0220
          * @tc.desc Server get rdbStoreS2 level, Name different
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
         */
         it("testRdbSyncTest0220", 0, async function (done) {
         console.info(logTag + "testRdbSyncTest0220 start");
@@ -1697,6 +1760,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_2700
          * @tc.name testRdbSyncTest0230
          * @tc.desc Server get rdbStoreS2 level, Name different
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
         */
          it("testRdbSyncTest0230", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0230 start");
@@ -1731,6 +1797,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0500
          * @tc.name testRdbSyncTest0240
          * @tc.desc Server rdbStore Insert first and synchronize, intValue = Max
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
          */
         it("testRdbSyncTest0240", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0240 start");
@@ -1785,6 +1854,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0600
          * @tc.name testRdbSyncTest0250
          * @tc.desc Server rdbStore Insert first and synchronize, intValue = Min
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
          */
          it("testRdbSyncTest0250", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0250 start");
@@ -1838,6 +1910,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0200
          * @tc.name testRdbSyncTest0260
          * @tc.desc Server rdbStore Insert first and synchronize, intValue = NaN
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
          */
          it("testRdbSyncTest0260", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0260 start");
@@ -1891,6 +1966,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0400
          * @tc.name testRdbSyncTest0270
          * @tc.desc Server rdbStore Insert first and synchronize, intValue = POSITIVE_INFINITY
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
          */
          it("testRdbSyncTest0270", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0270 start");
@@ -1944,6 +2022,9 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_RemoteQueryJsAPITest_0300
          * @tc.name testRdbSyncTest0280
          * @tc.desc Server rdbStore Insert first and synchronize, intValue = NEGATIVE_INFINITY
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
          */
          it("testRdbSyncTest0280", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0280 start");
