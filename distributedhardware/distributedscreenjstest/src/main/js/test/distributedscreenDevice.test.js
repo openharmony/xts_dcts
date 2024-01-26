@@ -288,7 +288,6 @@ export default function distributedDeviceManager() {
                     })
                 } else {
                     console.log("bindTarget deviceId is null");
-                    expect(true).assertTrue();
                     done();
                 }
                 
