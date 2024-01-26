@@ -82,13 +82,13 @@ export default function distributedDeviceManager() {
 
         /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_0100
-         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * @tc.name    createDeviceManager()
          * @tc.desc    Function test
          * @tc.size    MediumTest
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_DeviceManager_Dcts_0100", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_0100", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0100 start------------------------");
             try {
                 dmInstance = deviceManager.createDeviceManager("com.ohos.distributedscreenjstest");
@@ -123,7 +123,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_0200", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_0200", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0200 start------------------------");
             var discoverParam  = {
                 "discoverTargetType":1
@@ -156,7 +156,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_DeviceManager_Dcts_0300", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_0300", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0300 start------------------------");
             try {
                 dmNetworkId = dmInstance.getLocalDeviceNetworkId();
@@ -178,13 +178,13 @@ export default function distributedDeviceManager() {
 
         /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_0400
-         * @tc.name    Get a list of available devices. This interface query all authorized and connectable devices.
+         * @tc.name    getAvailableDeviceListSync().
          * @tc.desc    Function test
          * @tc.size    MediumTest
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_DeviceManager_Dcts_0400", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_0400", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0400 start------------------------");
             try {
                 dmDeviceInfo = dmInstance.getAvailableDeviceListSync();
@@ -209,13 +209,13 @@ export default function distributedDeviceManager() {
 
          /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_0500
-         * @tc.name    Get a list of available devices. This interface query all authorized and connectable devices.
+         * @tc.name   getAvailableDeviceList().
          * @tc.desc    Function test
          * @tc.size    MediumTest
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_DeviceManager_Dcts_0500", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_0500", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0500 start------------------------");
             try {
                 dmInstance.getAvailableDeviceList((err, data) => {
@@ -238,13 +238,13 @@ export default function distributedDeviceManager() {
 
         /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_0600
-         * @tc.name    Get a list of available devices. This interface query all authorized and connectable devices.
+         * @tc.name    getAvailableDeviceList()
          * @tc.desc    Function test
          * @tc.size    MediumTest
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_DeviceManager_Dcts_0600", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_0600", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0600 start------------------------");
             dmInstance.getAvailableDeviceList().then((data) => { 
                 console.log('getAvailableDeviceList info: ' + JSON.stringify(data));
@@ -267,7 +267,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-         it("SUB_DH_DeviceManager_Dcts_0700", 0, async function (done) {
+         it("SUB_DH_Device_Manager_Dcts_0700", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0700 start------------------------");
             let bindParam = {
                 "bindType" : 1,
@@ -309,7 +309,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_DeviceManager_Dcts_0800", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_0800", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0800 start------------------------");
             try {
                 let lDeviceName = dmInstance.getLocalDeviceName();
@@ -337,7 +337,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_DeviceManager_Dcts_0900", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_0900", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0900 start------------------------");
             try {
                 let lDeviceType = dmInstance.getLocalDeviceType();
@@ -365,7 +365,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_DeviceManager_Dcts_1000", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_1000", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1000 start------------------------");
             try {
                 let lDeviceId = dmInstance.getLocalDeviceId();
@@ -393,7 +393,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_DeviceManager_Dcts_1100", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_1100", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1100 start------------------------");
             try {
                 let deviceName = dmInstance.getDeviceName(dmNetworkId);
@@ -421,7 +421,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_DeviceManager_Dcts_1200", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_1200", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1200 start------------------------");
             try {
                 let deviceType = dmInstance.getDeviceType(dmNetworkId);
@@ -449,7 +449,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_DeviceManager_Dcts_1300", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_1300", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1300 start------------------------");
             var mFilterOption = {
                 targetPkgName: "com.ohos.distributedscreenjstest",
@@ -487,7 +487,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-       it("SUB_DH_DeviceManager_Dcts_1400", 0, async function (done) {
+       it("SUB_DH_Device_Manager_Dcts_1400", 0, async function (done) {
         console.info("-----------------SUB_DH_DeviceManager_Dcts_1400 start------------------------");
         try {
             dmInstance.stopDiscovering();
@@ -511,7 +511,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_1500", 0, async function (done) {
+        it("SUB_DH_Device_Manager_Dcts_1500", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1500 start------------------------");
             var mFilterOption = {
                 targetPkgName: "com.ohos.distributedscreenjstest",
