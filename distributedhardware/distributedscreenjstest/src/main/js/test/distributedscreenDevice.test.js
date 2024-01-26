@@ -136,7 +136,7 @@ export default function distributedDeviceManager() {
 
                 dmInstance.startDiscovering(discoverParam);
                 console.log("startDiscovering success");
-                expect(true).assertTrue();
+                expect(data !== null).assertTrue();
                 done();
             } catch(err) {
                 console.error("startDiscovering errCode:" + err.code + ",errMessage:" + err.message);
