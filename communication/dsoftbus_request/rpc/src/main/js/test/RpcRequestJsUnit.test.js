@@ -141,7 +141,7 @@ export default function RpcRequestJsUnitTest() {
             testservice = new TestService
             await testservice.toConnectAbility().then(data => {
                 gIRemoteObject = data;
-                console.info("RpcClient: toConnectAbility data is： " + data);
+                console.info("RpcClient: toConnectAbility data is:" + data);
             })
             done();
             console.info("beforeAll done");
@@ -157,12 +157,12 @@ export default function RpcRequestJsUnitTest() {
         })
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_0100
-        * @tc.name    Verifying the processing of the MessageSequence synchronous callback information of the async_onRemoteMessageRequest interface
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0100
+        * @tc.name    : testVerifying the processing of the MessageSequence synchronous callback information of the async_onRemoteMessageRequest interface
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */       
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_0100", 0, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0100--------------------");
@@ -188,12 +188,12 @@ export default function RpcRequestJsUnitTest() {
         });       
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_0200
-        * @tc.name    Verifying the processing of the MessageSequence Asynchronous callback information of the async_onRemoteMessageRequest interface
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0200
+        * @tc.name    : testVerifying the processing of the MessageSequence Asynchronous callback information of the async_onRemoteMessageRequest interface
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_0200", 0, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0200--------------------");
@@ -219,13 +219,13 @@ export default function RpcRequestJsUnitTest() {
         });      
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_0300
-        * @tc.name    Verifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information synchronously
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0300
+        * @tc.name    : testVerifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information synchronously
         *               invoked by the MessageSequence interface of the onRemoteMessageRequest interface
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_0300", 0, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0300--------------------");
@@ -251,13 +251,13 @@ export default function RpcRequestJsUnitTest() {
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_0400
-        * @tc.name    Verifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information Asynchronously
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0400
+        * @tc.name    : testVerifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information Asynchronously
         *               invoked by the MessageSequence interface of the onRemoteMessageRequest interface
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_0400", 0, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0400--------------------");
@@ -283,12 +283,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_0500
-        * @tc.name    Verifying the processing of the MessageParcel synchronous callback information of the async_onRemoteMessageRequest interface
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0500
+        * @tc.name    : testVerifying the processing of the MessageParcel synchronous callback information of the async_onRemoteMessageRequest interface
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_0500", 0, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0500--------------------");
@@ -316,12 +316,12 @@ export default function RpcRequestJsUnitTest() {
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_0600
-        * @tc.name    Verifying the processing of the MessageParcel Asynchronous callback information of the async_onRemoteMessageRequest interface
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0600
+        * @tc.name    : testVerifying the processing of the MessageParcel Asynchronous callback information of the async_onRemoteMessageRequest interface
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_0600", 0, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0600--------------------");
@@ -348,13 +348,13 @@ export default function RpcRequestJsUnitTest() {
         });  
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_0700
-        * @tc.name    Verifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information in synchronous
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0700
+        * @tc.name    : testVerifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information in synchronous
         *               invoking of the aa interface MessageParcel
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_0700", 0, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0700--------------------");
@@ -382,13 +382,13 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_0800
-        * @tc.name    Verifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information in Asynchronous
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0800
+        * @tc.name    : testVerifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information in Asynchronous
         *                invoking of the aa interface MessageParcel
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_0800", 0, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0800--------------------");
@@ -415,12 +415,12 @@ export default function RpcRequestJsUnitTest() {
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_0900
-        * @tc.name    Invoke async_onRemoteMessageRequest to process information in synchronization mode and call back in AsyncCallback mode
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0900
+        * @tc.name    : testInvoke async_onRemoteMessageRequest to process information in synchronization mode and call back in AsyncCallback mode
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_0900", 0, function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0900--------------------");
@@ -451,12 +451,12 @@ export default function RpcRequestJsUnitTest() {
         });
 
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_1000
-        * @tc.name    Invoke async_onRemoteMessageRequest to process information in asynchronous mode and call back in AsyncCallback mode
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1000
+        * @tc.name    : testInvoke async_onRemoteMessageRequest to process information in asynchronous mode and call back in AsyncCallback mode
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_1000", 0, function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1000--------------------");
@@ -487,12 +487,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_1100
-        * @tc.name    Writes the specified anonymous shared object to this MessageSequence
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1100
+        * @tc.name    : testWrites the specified anonymous shared object to this MessageSequence
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_1100", 0, function(){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1100--------------------");
@@ -511,12 +511,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_1200
-        * @tc.name    Test the function of serializing the readAshmem interface in MessageSequence mode
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1200
+        * @tc.name    : testTest the function of serializing the readAshmem interface in MessageSequence mode
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_1200", 0, function(){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1200--------------------");
@@ -537,12 +537,12 @@ export default function RpcRequestJsUnitTest() {
         });  
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_1300
-        * @tc.name    Test the function of serializing the writeAshmem interface in MessageParcel mode
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1300
+        * @tc.name    : testTest the function of serializing the writeAshmem interface in MessageParcel mode
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_1300", 0, function(){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1300--------------------");
@@ -562,12 +562,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_1400
-        * @tc.name    Test the function of serializing the readAshmem interface in MessageParcel mode
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1400
+        * @tc.name    : testTest the function of serializing the readAshmem interface in MessageParcel mode
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_1400", 0, function(){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1400--------------------");
@@ -589,12 +589,12 @@ export default function RpcRequestJsUnitTest() {
         });  
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_1500
-        * @tc.name    To test the function of handling the exception of the writeAshmem interface in MessageSequence mode
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1500
+        * @tc.name    : testTo test the function of handling the exception of the writeAshmem interface in MessageSequence mode
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_1500", 0, function(){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1500--------------------");
@@ -615,12 +615,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_onRemoteRequest_1600
-        * @tc.name    To test the function of handling the exception of the writeAshmem interface in MessageParcel mode
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1600
+        * @tc.name    : testTo test the function of handling the exception of the writeAshmem interface in MessageParcel mode
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */   
         it("SUB_DSoftbus_RPC_API_onRemoteRequest_1600", 0, function(){
             console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1600--------------------");
@@ -638,12 +638,12 @@ export default function RpcRequestJsUnitTest() {
         });         
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_0100
-        * @tc.name    writeRemoteObject is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_0100
+        * @tc.name    : testwriteRemoteObject is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_0100", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0100---------------------------");
@@ -661,12 +661,12 @@ export default function RpcRequestJsUnitTest() {
         });        
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_0200
-        * @tc.name    readRemoteObject is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_0200
+        * @tc.name    : testreadRemoteObject is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_0200", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0200---------------------------");
@@ -685,12 +685,12 @@ export default function RpcRequestJsUnitTest() {
         });         
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_0300
-        * @tc.name    readRemoteObject is proxy or remote object is invalid Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_0300
+        * @tc.name    : testreadRemoteObject is proxy or remote object is invalid Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_0300", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0300---------------------------");
@@ -708,12 +708,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_0400
-        * @tc.name    writeInterfaceToken is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_0400
+        * @tc.name    : testwriteInterfaceToken is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_0400", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0400---------------------------");
@@ -730,12 +730,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_0500
-        * @tc.name    readInterfaceToken is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_0500
+        * @tc.name    : testreadInterfaceToken is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_0500", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0500---------------------------");
@@ -753,12 +753,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_0600
-        * @tc.name    setSize is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_0600
+        * @tc.name    : testsetSize is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_0600", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0600---------------------------");
@@ -775,12 +775,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_0700
-        * @tc.name    setCapacity is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_0700
+        * @tc.name    : testsetCapacity is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_0700", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0700---------------------------");
@@ -797,12 +797,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_0800
-        * @tc.name    rewindRead is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_0800
+        * @tc.name    : testrewindRead is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_0800", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0800---------------------------");
@@ -819,12 +819,12 @@ export default function RpcRequestJsUnitTest() {
         });  
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_0900
-        * @tc.name    rewindWrite is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_0900
+        * @tc.name    : testrewindWrite is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_0900", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0900---------------------------");
@@ -841,12 +841,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_1000
-        * @tc.name    writeByte is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_1000
+        * @tc.name    : testwriteByte is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_1000", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1000---------------------------");
@@ -863,12 +863,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_1100
-        * @tc.name    readByte is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_1100
+        * @tc.name    : testreadByte is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_1100", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1100---------------------------");
@@ -885,12 +885,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_1200
-        * @tc.name    writeShort is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_1200
+        * @tc.name    : testwriteShort is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_1200", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1200---------------------------");
@@ -907,12 +907,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_1300
-        * @tc.name    readShort is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_1300
+        * @tc.name    : testreadShort is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_1300", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1300---------------------------");
@@ -930,12 +930,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_1400
-        * @tc.name    writeInt is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_1400
+        * @tc.name    : testwriteInt is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_1400", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1400---------------------------");
@@ -952,12 +952,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_1500
-        * @tc.name    readInt is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_1500
+        * @tc.name    : testreadInt is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_1500", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1500---------------------------");
@@ -975,12 +975,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_1600
-        * @tc.name    writeLong is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_1600
+        * @tc.name    : testwriteLong is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_1600", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1600---------------------------");
@@ -997,12 +997,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_1700
-        * @tc.name    readLong is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_1700
+        * @tc.name    : testreadLong is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_1700", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1700---------------------------");
@@ -1020,12 +1020,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_1800
-        * @tc.name    writeFloat is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_1800
+        * @tc.name    : testwriteFloat is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_1800", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1800---------------------------");
@@ -1042,12 +1042,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_1900
-        * @tc.name    readFloat is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_1900
+        * @tc.name    : testreadFloat is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_1900", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1900---------------------------");
@@ -1065,12 +1065,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_2000
-        * @tc.name    writeDouble is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_2000
+        * @tc.name    : testwriteDouble is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_2000", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2000---------------------------");
@@ -1087,12 +1087,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_2100
-        * @tc.name    readDouble is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_2100
+        * @tc.name    : testreadDouble is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_2100", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2100---------------------------");
@@ -1110,12 +1110,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_2200
-        * @tc.name    writeBoolean is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_2200
+        * @tc.name    : testwriteBoolean is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_2200", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2200---------------------------");
@@ -1132,12 +1132,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_2300
-        * @tc.name    readBoolean is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_2300
+        * @tc.name    : testreadBoolean is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_2300", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2300---------------------------");
@@ -1155,12 +1155,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_2400
-        * @tc.name    writeChar is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_2400
+        * @tc.name    : testwriteChar is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_2400", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2400---------------------------");
@@ -1177,12 +1177,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_2500
-        * @tc.name    readChar is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_2500
+        * @tc.name    : testreadChar is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_2500", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2500---------------------------");
@@ -1200,12 +1200,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_2600
-        * @tc.name    writeString is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_2600
+        * @tc.name    : testwriteString is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_2600", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2600---------------------------");
@@ -1222,12 +1222,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_2700
-        * @tc.name    readString is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_2700
+        * @tc.name    : testreadString is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_2700", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2700---------------------------");
@@ -1245,12 +1245,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_2800
-        * @tc.name    writeParcelable is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_2800
+        * @tc.name    : testwriteParcelable is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_2800", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2800---------------------------");
@@ -1268,12 +1268,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_2900
-        * @tc.name    readParcelable is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_2900
+        * @tc.name    : testreadParcelable is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_2900", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2900---------------------------");
@@ -1293,12 +1293,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_3000
-        * @tc.name    writeByteArray is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_3000
+        * @tc.name    : testwriteByteArray is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_3000", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3000---------------------------");
@@ -1316,12 +1316,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_3100
-        * @tc.name    readByteArray is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_3100
+        * @tc.name    : testreadByteArray is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_3100", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3100---------------------------");
@@ -1340,12 +1340,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_3200
-        * @tc.name    writeShortArray is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_3200
+        * @tc.name    : testwriteShortArray is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_3200", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3200---------------------------");
@@ -1363,12 +1363,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_3300
-        * @tc.name    readShortArray is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_3300
+        * @tc.name    : testreadShortArray is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_3300", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3300---------------------------");
@@ -1387,12 +1387,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_3400
-        * @tc.name    writeIntArray is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_3400
+        * @tc.name    : testwriteIntArray is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_3400", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3400---------------------------");
@@ -1410,12 +1410,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_3500
-        * @tc.name    readIntArray is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_3500
+        * @tc.name    : testreadIntArray is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_3500", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3500---------------------------");
@@ -1434,12 +1434,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_3600
-        * @tc.name    writeLongArray is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_3600
+        * @tc.name    : testwriteLongArray is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_3600", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3600---------------------------");
@@ -1457,12 +1457,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_3700
-        * @tc.name    readLongArray is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_3700
+        * @tc.name    : testreadLongArray is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_3700", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3700---------------------------");
@@ -1481,12 +1481,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_3800
-        * @tc.name    writeFloatArray is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_3800
+        * @tc.name    : testwriteFloatArray is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_3800", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3800---------------------------");
@@ -1504,12 +1504,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_3900
-        * @tc.name    readFloatArray is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_3900
+        * @tc.name    : testreadFloatArray is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_3900", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3900---------------------------");
@@ -1528,12 +1528,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_4000
-        * @tc.name    writeDoubleArray is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_4000
+        * @tc.name    : testwriteDoubleArray is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_4000", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4000---------------------------");
@@ -1551,12 +1551,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_4100
-        * @tc.name    readDoubleArray is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_4100
+        * @tc.name    : testreadDoubleArray is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_4100", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4100---------------------------");
@@ -1575,12 +1575,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_4200
-        * @tc.name    writeBooleanArray is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_4200
+        * @tc.name    : testwriteBooleanArray is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_4200", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4200---------------------------");
@@ -1598,12 +1598,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_4300
-        * @tc.name    readBooleanArray is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_4300
+        * @tc.name    : testreadBooleanArray is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_4300", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4300---------------------------");
@@ -1622,12 +1622,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_4400
-        * @tc.name    writeCharArray is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_4400
+        * @tc.name    : testwriteCharArray is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_4400", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4400---------------------------");
@@ -1645,12 +1645,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_4500
-        * @tc.name    readCharArray is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_4500
+        * @tc.name    : testreadCharArray is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_4500", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4500---------------------------");
@@ -1669,12 +1669,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_4600
-        * @tc.name    writeStringArray is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_4600
+        * @tc.name    : testwriteStringArray is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_4600", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4600---------------------------");
@@ -1692,12 +1692,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_4700
-        * @tc.name    readStringArray is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_4700
+        * @tc.name    : testreadStringArray is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_4700", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4700---------------------------");
@@ -1716,12 +1716,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_4800
-        * @tc.name    writeNoException is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_4800
+        * @tc.name    : testwriteNoException is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_4800", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4800---------------------------");
@@ -1738,12 +1738,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_4900
-        * @tc.name    readException is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_4900
+        * @tc.name    : testreadException is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_4900", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4900---------------------------");
@@ -1760,12 +1760,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_5000
-        * @tc.name    writeParcelableArray is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_5000
+        * @tc.name    : testwriteParcelableArray is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_5000", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5000---------------------------");
@@ -1784,12 +1784,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_5100
-        * @tc.name    readParcelableArray is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_5100
+        * @tc.name    : testreadParcelableArray is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_5100", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5100---------------------------");
@@ -1810,12 +1810,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_5200
-        * @tc.name    writeRemoteObjectArray is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_5200
+        * @tc.name    : testwriteRemoteObjectArray is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_5200", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5200---------------------------");
@@ -1845,12 +1845,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_5300
-        * @tc.name    readRemoteObjectArray is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_5300
+        * @tc.name    : testreadRemoteObjectArray is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_5300", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5300---------------------------");
@@ -1881,12 +1881,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_5400
-        * @tc.name    dupFileDescriptor is call os dup function failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_5400
+        * @tc.name    : testdupFileDescriptor is call os dup function failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_5400", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5400---------------------------");
@@ -1901,12 +1901,12 @@ export default function RpcRequestJsUnitTest() {
         });         
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_5500
-        * @tc.name    writeFileDescriptor is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_5500
+        * @tc.name    : testwriteFileDescriptor is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_5500", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5500---------------------------");
@@ -1930,12 +1930,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_5600
-        * @tc.name    readFileDescriptor is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_5600
+        * @tc.name    : testreadFileDescriptor is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_5600", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5600---------------------------");
@@ -1960,12 +1960,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_5700
-        * @tc.name    writeAshmem is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_5700
+        * @tc.name    : testwriteAshmem is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_5700", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5700---------------------------");
@@ -1985,12 +1985,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_5800
-        * @tc.name     readAshmem is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_5800
+        * @tc.name    : test readAshmem is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_5800", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5800---------------------------");
@@ -2011,12 +2011,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_5900
-        * @tc.name    writeRawData is write data to message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_5900
+        * @tc.name    : testwriteRawData is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_5900", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5900---------------------------");
@@ -2034,12 +2034,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_6000
-        * @tc.name    readRawData is read data from message sequence failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_6000
+        * @tc.name    : testreadRawData is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_6000", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6000---------------------------");
@@ -2058,12 +2058,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_6100
-        * @tc.name    registerDeathRecipient is only proxy object permitted Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_6100
+        * @tc.name    : testregisterDeathRecipient is only proxy object permitted Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_6100", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6100---------------------------");
@@ -2081,12 +2081,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_6200
-        * @tc.name    unregisterDeathRecipient is only proxy object permitted Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_6200
+        * @tc.name    : testunregisterDeathRecipient is only proxy object permitted Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_6200", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6200---------------------------");
@@ -2104,12 +2104,12 @@ export default function RpcRequestJsUnitTest() {
         });        
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_6300
-        * @tc.name    writeAshmem is write to ashmem failed Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3  
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_6300
+        * @tc.name    : testwriteAshmem is write to ashmem failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_6300", 0,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6300---------------------------");
@@ -2129,12 +2129,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_6400
-        * @tc.name    getLocalInterface is only remote object permitted Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_6400
+        * @tc.name    : testgetLocalInterface is only remote object permitted Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_6400", 0, async function () {
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6400---------------------------");
@@ -2149,12 +2149,12 @@ export default function RpcRequestJsUnitTest() {
         }); 
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_6500
-        * @tc.name    registerDeathRecipient is only remote object permitted Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_6500
+        * @tc.name    : testregisterDeathRecipient is only remote object permitted Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_6500", 0, async function () {
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6500---------------------------");
@@ -2170,12 +2170,12 @@ export default function RpcRequestJsUnitTest() {
         });
         
         /*
-        * @tc.number  SUB_DSoftbus_RPC_API_Errorcode_6600
-        * @tc.name    unregisterDeathRecipient is proxy or remote object is invalid Error verification
-        * @tc.desc    [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
-        * @tc.level   3
-        * @tc.type    Compatibility
-        * @tc.size    MediumTest
+        * @tc.number  : SUB_DSoftbus_RPC_API_Errorcode_6600
+        * @tc.name    : testunregisterDeathRecipient is proxy or remote object is invalid Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
         */
         it("SUB_DSoftbus_RPC_API_Errorcode_6600", 0, async function () {
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6600---------------------------");
