@@ -17,7 +17,6 @@ group("distributedhardware") {
   testonly = true
   if (is_standard_system) {
     deps = [
-      "distributedaudiodelaytest:SubDctsdisAudioDelayTest",
       "distributedaudiotest:SubDctsdisAudioTest",
       "distributedcameratest:SubDctsdisCameraTest",
       "distributeddevicejstest:SubDctsdisDeviceJsTest",
