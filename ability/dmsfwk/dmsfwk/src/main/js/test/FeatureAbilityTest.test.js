@@ -70,12 +70,12 @@ export default function dmsJsUnitTest() {
                 let driver = await UiDriver.create();
                 console.info(`come in driveFn`);
                 console.info(`driver is ${JSON.stringify(driver)}`);
-                sleep(2000);
+                await sleep(1000);
                 let button = await driver.findComponent(BY.text('允许'));
                 console.info(`button is ${JSON.stringify(button)}`);
-                sleep(5000);
+                await sleep(1000);
                 await button.click();
-                sleep(5000);
+                await sleep(1000);
             } catch (err) {
                 console.info('err is ' + err);
                 return;
@@ -87,10 +87,10 @@ export default function dmsJsUnitTest() {
                 let driver = await UiDriver.create();
                 console.info(`come in driveFn`);
                 console.info(`driver is ${JSON.stringify(driver)}`);
-                sleep(2000);
+                await sleep(1000);
                 let button = await driver.findComponent(BY.text('知道了'));
                 console.info(`button is ${JSON.stringify(button)}`);
-                sleep(5000);
+                await sleep(1000);
                 await button.click();
                 
             } catch (err) {
@@ -102,11 +102,11 @@ export default function dmsJsUnitTest() {
         beforeAll(async function (done) {
             console.info('beforeAll called dms');
             await getPermission();
-            sleep(5000);
+            await sleep(1000);
             await driveFn();
-            sleep(5000);
+            await sleep(1000);
             await getDeviceId();
-            sleep(5000);
+            await sleep(1000);
             console.info("beforeAll done");
             done();
         })
@@ -119,11 +119,12 @@ export default function dmsJsUnitTest() {
         afterEach(async function (done) {
             console.info('afterEach called');
             setTimeout(done, 4000);
+            await sleep(1000)
         })
 
         afterAll(async function (done) {
             await driveClick();
-            sleep(5000);
+            await sleep(1000);
 
             console.info('afterAll called');
             done();
@@ -152,7 +153,7 @@ export default function dmsJsUnitTest() {
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800 data' + JSON.stringify(data));
@@ -197,7 +198,7 @@ export default function dmsJsUnitTest() {
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600 data' + JSON.stringify(data));
@@ -242,7 +243,7 @@ export default function dmsJsUnitTest() {
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700 data' + JSON.stringify(data));
@@ -286,7 +287,7 @@ export default function dmsJsUnitTest() {
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900 data' + JSON.stringify(data));
@@ -331,7 +332,7 @@ export default function dmsJsUnitTest() {
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500 data' + JSON.stringify(data));
@@ -376,7 +377,7 @@ export default function dmsJsUnitTest() {
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300 data' + JSON.stringify(data));
@@ -421,7 +422,7 @@ export default function dmsJsUnitTest() {
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400 data' + JSON.stringify(data));
@@ -465,7 +466,7 @@ export default function dmsJsUnitTest() {
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800 data' + JSON.stringify(data));
@@ -510,7 +511,7 @@ export default function dmsJsUnitTest() {
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900 data' + JSON.stringify(data));
@@ -554,7 +555,7 @@ export default function dmsJsUnitTest() {
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000 data' + JSON.stringify(data));
@@ -599,7 +600,7 @@ export default function dmsJsUnitTest() {
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100 data' + JSON.stringify(data));
@@ -639,12 +640,12 @@ export default function dmsJsUnitTest() {
                 let params;
                 let wantValue = {
                     bundleName: "com.ohos.dmstest",
-                    abilityName: "com.ohos.dmstest.ServiceAbility",
+                    abilityName: "com.ohos.dmstest.MainAbility",
                     deviceId: dvId,
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000 data' + JSON.stringify(data));
@@ -683,7 +684,7 @@ export default function dmsJsUnitTest() {
                 let params;
                 let wantValue = undefined;
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200 data' + JSON.stringify(data));
@@ -723,7 +724,7 @@ export default function dmsJsUnitTest() {
                 let params;
                 let wantValue = {};
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100 data' + JSON.stringify(data));
@@ -763,7 +764,7 @@ export default function dmsJsUnitTest() {
                 let params;
                 let wantValue = "";
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300 data' + JSON.stringify(data));
@@ -803,13 +804,13 @@ export default function dmsJsUnitTest() {
                 let params;
                 let wantValue = {
                     bundleName: "com.ohos.dmstest",
-                    abilityName: "com.ohos.dmstest.ServiceAbility",
+                    abilityName: "com.ohos.dmstest.MainAbility",
                     deviceId: dvId,
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 want=' + JSON.stringify(wantValue));
                 for (let i = 0; i < 10; i++) {
-                    await featureAbility.startAbility({
+                    featureAbility.startAbility({
                         want: wantValue
                     }).then((data) => {
                         console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 data' + JSON.stringify(data));
@@ -822,6 +823,7 @@ export default function dmsJsUnitTest() {
                         done();
                     });
                     console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 running at : " + i + ",here");
+                    await sleep(2000)
                 }
             } catch (error) {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600:error = " + error);
@@ -857,7 +859,7 @@ export default function dmsJsUnitTest() {
                     }
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200 data' + JSON.stringify(data));
@@ -902,12 +904,12 @@ export default function dmsJsUnitTest() {
                 let params;
                 let wantValue = {
                     bundleName: "com.ohos.dmstest",
-                    abilityName: "com.ohos.dmstest.ServiceAbility",
+                    abilityName: "com.ohos.dmstest.MainAbility",
                     deviceId: dvId,
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 data' + JSON.stringify(data));
@@ -952,12 +954,12 @@ export default function dmsJsUnitTest() {
                 let params;
                 let wantValue = {
                     bundleName: "com.ohos.dmstest",
-                    abilityName: "com.ohos.dmstest.ServiceAbility",
+                    abilityName: "com.ohos.dmstest.MainAbility",
                     deviceId: dvId,
                     parameters: params
                 };
                 console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400 want=' + JSON.stringify(wantValue));
-                await featureAbility.startAbility({
+                featureAbility.startAbility({
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400 data' + JSON.stringify(data));
@@ -1422,7 +1424,7 @@ export default function dmsJsUnitTest() {
             let params;
             let wantValue = {
                 bundleName: "com.ohos.dmstest",
-                abilityName: "com.ohos.dmstest.ServiceAbility",
+                abilityName: "com.ohos.dmstest.MainAbility",
                 deviceId: dvId,
                 parameters: params
             };
@@ -1565,7 +1567,7 @@ export default function dmsJsUnitTest() {
             let params;
             let wantValue = {
                 bundleName: "com.ohos.dmstest",
-                abilityName: "com.ohos.dmstest.ServiceAbility",
+                abilityName: "com.ohos.dmstest.MainAbility",
                 deviceId: dvId,
                 parameters: params
             };
@@ -1589,6 +1591,8 @@ export default function dmsJsUnitTest() {
                     console.info(TAG + " running at : " + i + ",here");
                     done();
                 });
+                await sleep(2000)
+                console.log('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700 i is' + i);
             }
             await sleep(1000);
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700 end------------------------");
