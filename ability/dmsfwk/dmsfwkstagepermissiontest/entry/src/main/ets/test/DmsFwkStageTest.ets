@@ -63,12 +63,12 @@ export default function DmsFwkStageTest() {
 			  let driver = await UiDriver.create()
 			  console.info('come in driveFn')
 			  console.info('driver is ${JSON.stringify(driver)}')
-			  sleep(2000);
+			  await sleep(1000);
 			  let button = await driver.findComponent(BY.text('允许'));
 			  console.info('button is ${JSON.stringify(button)}');
-			  sleep(5000);
+			  await sleep(1000);
 			  await button.click();
-        sleep(5000);
+        await sleep(1000);
 		  } catch (err) {
 			  console.info('err is ' + err);
 			  return;
@@ -78,11 +78,11 @@ export default function DmsFwkStageTest() {
     beforeAll(async function (done) {
       console.log('DMS before began')
       await getPermission();
-	    sleep(5000);
+	    await sleep(1000);
 	    await driveFn();
-	    sleep(5000);
+	    await sleep(1000);
       await getDeviceId();
-      sleep(5000);
+      await sleep(1000);
       done()
     });
 
