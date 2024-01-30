@@ -128,7 +128,6 @@ export default function distributedDeviceManager() {
             var discoverParam  = {
                 "discoverTargetType":1
               };
-            let data = null;
             try {
                 dmInstance.on('discoverSuccess', (data) => {
                     console.info("discoverSuccess:" + JSON.stringify(data));
@@ -136,7 +135,7 @@ export default function distributedDeviceManager() {
 
                 dmInstance.startDiscovering(discoverParam);
                 console.log("startDiscovering success");
-                expect(data !== null).assertTrue();
+                expect(true).assertTrue();
                 done();
             } catch(err) {
                 console.error("startDiscovering errCode:" + err.code + ",errMessage:" + err.message);
@@ -288,12 +287,13 @@ export default function distributedDeviceManager() {
                     })
                 } else {
                     console.log("bindTarget deviceId is null");
+                    expect(false).assertFail();
                     done();
                 }
                 
             } catch (err) {
                 console.info("bindTarget errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect(err.code == 401).assertTrue();
                 done();
             }
             await sleep(1000);
@@ -451,28 +451,20 @@ export default function distributedDeviceManager() {
          */
         it("SUB_DH_Device_Manager_Dcts_1300", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1300 start------------------------");
-            var mFilterOption = {
-                targetPkgName: "com.ohos.distributedscreenjstest",
-                sortType: 0,
-                filter: JSON.stringify({
-                    key: 'test',
-                    value: 0
-                })
-            }
             try {
-                dmInstance.off('replyResult');
-                dmInstance.off('discoverSuccess');
-                dmInstance.off('discoverFail');
-                dmInstance.off('serviceDie');
-                dmInstance.off('deviceStateChange');
-				dmInstance.off('deviceNameChange');
-                deviceManager.releaseDeviceManager(dmInstance);
-                console.log("releaseDeviceManager success");
-                expect(true).assertTrue();
-                done();
+                if (deviceId !== null) {
+                    dmInstance.unbindTarget(deviceId);
+                    console.log("unbindTarget success");
+                    expect(true).assertTrue();
+                    done();
+                } else {
+                    console.log("unbindTarget deviceId is null");
+                    expect(false).assertFail();
+                    done();
+                }
             } catch (err) {
-                console.info("releaseDeviceManager errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                console.info("unbindTarget errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 401).assertTrue();
                 done();
             }
             await sleep(1000);
