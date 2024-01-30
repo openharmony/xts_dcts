@@ -88,7 +88,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_Device_Manager_Dcts_0100", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0100", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0100 start------------------------");
             try {
                 dmInstance = deviceManager.createDeviceManager("com.ohos.distributedscreenjstest");
@@ -123,19 +123,20 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_Device_Manager_Dcts_0200", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0200", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0200 start------------------------");
             var discoverParam  = {
                 "discoverTargetType":1
               };
             try {
-                dmInstance.on('discoverSuccess', (data) => {
-                    console.info("discoverSuccess:" + JSON.stringify(data));
-                });
-
                 dmInstance.startDiscovering(discoverParam);
                 console.log("startDiscovering success");
-                expect(true).assertTrue();
+                dmNetworkId = dmInstance.getLocalDeviceNetworkId();
+                if (dmNetworkId === null) {
+                    console.error("getLocalDeviceNetworkId fail");
+                }
+                console.log("getLocalDeviceNetworkId dmNetworkId:" + dmNetworkId);
+                expect(dmNetworkId != null).assertTrue();
                 done();
             } catch(err) {
                 console.error("startDiscovering errCode:" + err.code + ",errMessage:" + err.message);
@@ -146,7 +147,6 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0200 end------------------------");
         })
         
-
         /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_0300
          * @tc.name    Get the network id of the local device
@@ -155,7 +155,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_Device_Manager_Dcts_0300", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0300", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0300 start------------------------");
             try {
                 dmNetworkId = dmInstance.getLocalDeviceNetworkId();
@@ -174,7 +174,6 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0300 end------------------------");
         })
 
-
         /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_0400
          * @tc.name    getAvailableDeviceListSync().
@@ -183,7 +182,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_Device_Manager_Dcts_0400", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0400", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0400 start------------------------");
             try {
                 dmDeviceInfo = dmInstance.getAvailableDeviceListSync();
@@ -205,8 +204,7 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0400 end------------------------");
         })
 
-
-         /*
+        /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_0500
          * @tc.name   getAvailableDeviceList().
          * @tc.desc    Function test
@@ -214,7 +212,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_Device_Manager_Dcts_0500", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0500", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0500 start------------------------");
             try {
                 dmInstance.getAvailableDeviceList((err, data) => {
@@ -234,7 +232,6 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0500 end------------------------");
         })
 
-
         /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_0600
          * @tc.name    getAvailableDeviceList()
@@ -243,7 +240,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_Device_Manager_Dcts_0600", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0600", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0600 start------------------------");
             dmInstance.getAvailableDeviceList().then((data) => { 
                 console.log('getAvailableDeviceList info: ' + JSON.stringify(data));
@@ -266,7 +263,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-         it("SUB_DH_Device_Manager_Dcts_0700", 0, async function (done) {
+         it("SUB_DH_DeviceManager_Dcts_0700", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0700 start------------------------");
             let bindParam = {
                 "bindType" : 1,
@@ -276,21 +273,21 @@ export default function distributedDeviceManager() {
                 "customDescription": "device manager"
             };
             try {
-                if (deviceId !== null) {
-                    dmInstance.bindTarget(deviceId, bindParam, (err, data) => {
-                    if (err) {
-                        console.info("bindTarget fail errCode:" + err.code + ",errMessage:" + err.message);
-                    }
-                    console.log("bindTarget:" + JSON.stringify(data));
-                    expect(data != null).assertTrue();
-                    done();
-                    })
-                } else {
-                    console.log("bindTarget deviceId is null");
-                    expect(false).assertFail();
-                    done();
+                dmDeviceInfo = dmInstance.getAvailableDeviceListSync();
+                if (dmDeviceInfo === null) {
+                    console.log('getAvailableDeviceListSync info fail');
                 }
-                
+                console.log('getAvailableDeviceListSync info:' + JSON.stringify(dmDeviceInfo[0]["deviceId"]));
+                deviceId = JSON.stringify(dmDeviceInfo[0]["deviceId"]);
+                console.log('getAvailableDeviceListSync info:' + deviceId);
+                dmInstance.bindTarget(deviceId, bindParam, (err, data) => {
+                if (err) {
+                    console.info("bindTarget fail errCode:" + err.code + ",errMessage:" + err.message);
+                }
+                console.log("bindTarget:" + JSON.stringify(data));
+                expect(dmDeviceInfo != null).assertTrue();
+                done();
+                })
             } catch (err) {
                 console.info("bindTarget errCode:" + err.code + ",errMessage:" + err.message);
                 expect(err.code == 401).assertTrue();
@@ -300,8 +297,7 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0700 end------------------------");
         })
 
-
-         /*
+        /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_0800
          * @tc.name    Get the device name of the local device.
          * @tc.desc    Function test
@@ -309,7 +305,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_Device_Manager_Dcts_0800", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0800", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0800 start------------------------");
             try {
                 let lDeviceName = dmInstance.getLocalDeviceName();
@@ -328,7 +324,6 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0800 end------------------------");
         })
 
-
         /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_0900
          * @tc.name    Get the device type of the local device
@@ -337,7 +332,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_Device_Manager_Dcts_0900", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0900", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0900 start------------------------");
             try {
                 let lDeviceType = dmInstance.getLocalDeviceType();
@@ -356,8 +351,7 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0900 end------------------------");
         })
 
-
-         /*
+        /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_1000
          * @tc.name    Get the device id of the local device
          * @tc.desc    Function test
@@ -365,7 +359,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_Device_Manager_Dcts_1000", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1000", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1000 start------------------------");
             try {
                 let lDeviceId = dmInstance.getLocalDeviceId();
@@ -384,7 +378,6 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1000 end------------------------");
         })
 
-
         /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_1100
          * @tc.name    Get the device name by network id.
@@ -393,7 +386,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_Device_Manager_Dcts_1100", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1100", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1100 start------------------------");
             try {
                 let deviceName = dmInstance.getDeviceName(dmNetworkId);
@@ -412,7 +405,6 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1100 end------------------------");
         })
 
-
         /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_1200
          * @tc.name    Get the device type by network id.
@@ -421,7 +413,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_Device_Manager_Dcts_1200", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1200", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1200 start------------------------");
             try {
                 let deviceType = dmInstance.getDeviceType(dmNetworkId);
@@ -440,7 +432,6 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1200 end------------------------");
         })
 		
-
         /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_1300
          * @tc.name    Releases the {@code DeviceManager} instance that is no longer used.
@@ -449,19 +440,21 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   0
          */
-        it("SUB_DH_Device_Manager_Dcts_1300", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1300", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1300 start------------------------");
             try {
-                if (deviceId !== null) {
-                    dmInstance.unbindTarget(deviceId);
-                    console.log("unbindTarget success");
-                    expect(true).assertTrue();
-                    done();
-                } else {
-                    console.log("unbindTarget deviceId is null");
-                    expect(false).assertFail();
-                    done();
+                dmDeviceInfo = dmInstance.getAvailableDeviceListSync();
+                if (dmDeviceInfo === null) {
+                    console.log('getAvailableDeviceListSync info fail');
                 }
+                
+                console.log('getAvailableDeviceListSync info:' + JSON.stringify(dmDeviceInfo[0]["deviceId"]));
+                deviceId = JSON.stringify(dmDeviceInfo[0]["deviceId"]);
+                console.log('getAvailableDeviceListSync info:' + deviceId);
+                dmInstance.unbindTarget(deviceId);
+                console.log("unbindTarget success");
+                expect(dmDeviceInfo != null).assertTrue();
+                done();
             } catch (err) {
                 console.info("unbindTarget errCode:" + err.code + ",errMessage:" + err.message);
                 expect(err.code == 401).assertTrue();
@@ -471,7 +464,7 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1300 end------------------------");
         })
 		
-		 /*
+		/*
          * @tc.number  SUB_DH_DeviceManager_Dcts_1400
          * @tc.name    Stop discovering nearby devices.
          * @tc.desc    Function test
@@ -479,7 +472,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-       it("SUB_DH_Device_Manager_Dcts_1400", 0, async function (done) {
+       it("SUB_DH_DeviceManager_Dcts_1400", 0, async function (done) {
         console.info("-----------------SUB_DH_DeviceManager_Dcts_1400 start------------------------");
         try {
             dmInstance.stopDiscovering();
@@ -503,7 +496,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_Device_Manager_Dcts_1500", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1500", 0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1500 start------------------------");
             var mFilterOption = {
                 targetPkgName: "com.ohos.distributedscreenjstest",
