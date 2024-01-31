@@ -66,7 +66,6 @@ void DSreenAutomatTest::SetUpTestCase(void)
     tokenIdEx = AccessTokenKit::AllocHapToken(info, g_PolicyPramsl);
     SetSelfTokenID(tokenIdEx.tokenIDEx);
     sleep(g_dSleepOk);
-    system("pidof accesstoken_ser | xargs kill -9");
 }
 
 void DSreenAutomatTest::TearDownTestCase(void) {}
