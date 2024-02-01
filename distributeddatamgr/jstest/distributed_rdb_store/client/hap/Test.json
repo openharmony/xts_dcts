@@ -4,8 +4,8 @@
         "type": "OHJSUnitTest",
         "test-timeout": "60000",
         "testcase-timeout": 60000,
-        "bundle-name": "com.ohos.distributerdbdisjs",
-        "package-name": "com.ohos.distributerdbdisjs",
+        "bundle-name": "com.acts.distributerdbdisjs",
+        "package-name": "com.acts.distributerdbdisjs",
         "shell-timeout": "60000"
     },
     "kits": [

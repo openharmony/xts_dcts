@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.ohos.distributerdbdisjs",
+    "bundleName": "com.acts.distributerdbdisjs",
     "vendor": "ohos",
     "version": {
       "code": 1000000,
@@ -14,7 +14,7 @@
   },
   "deviceConfig": {},
   "module": {
-    "package": "com.ohos.distributerdbdisjs",
+    "package": "com.acts.distributerdbdisjs",
     "name": ".entry",
     "mainAbility":".MainAbility",
     "srcPath":"",

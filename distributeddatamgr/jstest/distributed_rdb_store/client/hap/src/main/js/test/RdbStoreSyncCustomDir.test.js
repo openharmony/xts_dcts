@@ -42,7 +42,7 @@ let remoteHelpers = null;
 let deviceId = null;
 let syncDeviceIds = undefined;
 let deviceList = undefined;
-const TEST_BUNDLE_NAME = 'com.ohos.distributerdbdisjs';
+const TEST_BUNDLE_NAME = 'com.acts.distributerdbdisjs';
 
 
 function sleep(ms) {
@@ -87,29 +87,9 @@ export default function rdbSyncCustomDirlTest(){
 
             let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
             deviceList = dmInstance.getAvailableDeviceListSync();
-            deviceId = deviceList[0].networkId;
+            deviceId = deviceList[0].networkId;                                                                                                                                                                  
             console.info(logTag + "deviceId is: " + deviceId);
             syncDeviceIds = [deviceId];
-
-            try{
-                console.info(logTag + "deviceId: " + deviceId);
-                let wantValue = {
-                    bundleName: "com.ohos.distributerdbdisjs",
-                    abilityName: "com.ohos.distributerdbdisjs.MainAbility",
-                    deviceId: deviceId
-                };
-                await featureAbility.startAbility({
-                    want: wantValue
-                }).then((data) => {
-                    console.info(logTag + 'beforeAll startAbility data success' + JSON.stringify(data));
-                }).catch((err) => {
-                    console.info(logTag + 'beforeAll startAbility err: ' + err.code);
-                    console.info(logTag + 'beforeAll startAbility err: ' + err.message);
-                });
-            }catch(error){
-                console.info(logTag + "beforeAll startAbility:error = " + error);
-            }
-            await sleep(100);
 
             testservice = new TestService();
             await testservice.toConnectRdbAbility().then(data => {

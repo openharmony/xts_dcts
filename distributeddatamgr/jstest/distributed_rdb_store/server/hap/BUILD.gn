@@ -1,4 +1,4 @@
-# Copyright (C) 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2021 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,22 +11,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("../../../../../../tools/build/suite.gni")
+import("//test/xts/tools/build/suite.gni")
 
 ohos_hap_assist_suite("distributerdbdisjs_server") {
-  hap_profile = "./src/main/config.json"
+  hap_profile = "entry/src/main/module.json"
+  hap_name = "DctsDistributeRdbDisJsServer"
+
+  testonly = true
   deps = [
     ":distributerdbdisjs_assets",
     ":distributerdbdisjs_resources",
   ]
-  certificate_profile = "./signature/openharmony_sx.p7b"
-  hap_name = "DctsDistributeRdbDisJsServer"
+  ets2abc = true
+  certificate_profile = "signature/openharmony_sx.p7b"
+  subsystem_name = "ability"
+  part_name = "ability_runtime"
 }
+
+ohos_app_scope("distributerdbdisjs_app_profile") {
+  app_profile = "AppScope/app.json"
+  sources = [ "AppScope/resources" ]
+}
+
 ohos_js_assets("distributerdbdisjs_assets") {
-  source_dir = "./src/main/js"
-  hap_profile = "./src/main/config.json"
+  source_dir = "entry/src/main/ets"
 }
+
 ohos_resources("distributerdbdisjs_resources") {
-  sources = [ "./src/main/resources" ]
-  hap_profile = "./src/main/config.json"
+  sources = [ "entry/src/main/resources" ]
+  deps = [ ":distributerdbdisjs_app_profile" ]
+  hap_profile = "entry/src/main/module.json"
 }
