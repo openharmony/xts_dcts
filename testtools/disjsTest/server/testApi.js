@@ -12,24 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import disData from '@ohos.data.distributedData';
+import disData from '@ohos.data.distributedKVStore';
 import backgroundTaskManager from '@ohos.backgroundTaskManager';
-import featureAbility from '@ohos.ability.featureAbility';
-import wantAgent from '@ohos.wantAgent';
 import dataRdb from '@ohos.data.rdb';
 import ApiResult from '../common/apiResult';
 import distributedObject from '@ohos.data.distributedDataObject';
 import deviceinfo from '@ohos.deviceInfo'
+import UIAbility from '@ohos.app.ability.UIAbility';
 
-const TEST_BUNDLE_NAME = 'com.ohos.distributekvdisjs';
+import common from "@ohos.app.ability.common"
+
+const TEST_BUNDLE_NAME = 'com.acts.distributekvdisjs';
 let logTag = "[[RpcServer_TestApi:  ]]";
-let kvManager = undefined;
-let kvStore = undefined;
+let kvManager = null;
+let kvStore = null;
 let rdbStore = undefined;
 
 let g_object = undefined;
-let context = undefined;
 
+let context;
 
 export default class TestApi{
     constructor(){}
@@ -42,60 +43,44 @@ export default class TestApi{
          return Number(a)-Number(b);
     }
 
-    async startBackgroundRunning(){
-        console.info(logTag + " Server start background running started");
-        let wantAgentInfo = {
-            wants: [
-                {
-                    bundleName: TEST_BUNDLE_NAME,
-                    abilityName: "com.ohos.distributekvdisjs.ServiceAbility"
-                }
-            ],
-            operationType: wantAgent.OperationType.START_ABILITY,
-            requestCode: 0,
-            wantAgentFlags: [wantAgent.WantAgentFlags.UPDATE_PRESENT_FLAG]
-        };
-
-        await wantAgent.getWantAgent(wantAgentInfo).then(async (wantAgentObj) => {
-            console.info(logTag + " Server startBackgroundRunning get want agent success");
-            await backgroundTaskManager.startBackgroundRunning(featureAbility.getContext(),
-                backgroundTaskManager.BackgroundMode.DATA_TRANSFER, wantAgentObj).then(() => {
-                console.info("Operation startBackgroundRunning succeeded");
-            }).catch((err) => {
-                console.error("Operation startBackgroundRunning failed Cause: " + err);
-            });
-        }).catch((err) => {
-            console.info(logTag + " Server startBackgroundRunning get want agent err: " + err);
-        });
-    }
-
-    async stopBackgroundRunning(){
-        backgroundTaskManager.stopBackgroundRunning(featureAbility.getContext()).then(() => {
-            console.info("Operation stopBackgroundRunning succeeded");
-        }).catch((err) => {
-            console.error("Operation stopBackgroundRunning failed Cause: " + err);
-        });
-    }
-
     async createKvManager(){
-        const config = {
-            bundleName: TEST_BUNDLE_NAME,
-            userInfo: {
-                userId: '0',
-                userType: disData.UserType.SAME_USER_ID
-            }
-        }
         console.info(logTag + "_methodName is createKvManager");
-        await disData.createKVManager(config).then((manager) =>{
-            console.log(logTag + "Created KVManager success");
-            kvManager = manager;
-            return String(true);
-        }).catch((err) => {
-            console.log(logTag + "Failed to create KVManager: " + err );
-                return String(err);
-        });
+        try {
+             let context = globalThis.extensionContext;
+             console.info(logTag + "context=" + context);
+             const config = {
+                 context: context,
+                 bundleName: TEST_BUNDLE_NAME,
+             }
+             kvManager = disData.createKVManager(config);
+             console.log(logTag + "createKvManager22 success, kvManager=" + kvManager);
+          } catch (error) {
+            console.error(logTag + "createKvManager22 error.code=" + error.code + "error.message=" + error.message);
+          }
+         console.info(logTag + "createKvManager22 end");
     }
+
     async getKvStore(storeId,SecurityLevel,encrypt){
+        console.info(logTag + "_methodName is getKvStore, storeId=" + storeId + " SecurityLevel=" + SecurityLevel + " encrypt="+ encrypt);
+        console.info(logTag + "kvManager=" + kvManager);
+        if(!kvManager) {
+            console.info(logTag + "createKvManager22 begin");
+           console.info(logTag + "_methodName is createKvManager22");
+           try {
+                let context = globalThis.extensionContext;
+                console.info(logTag + "context=" + context);
+                const config = {
+                    context: context,
+                    bundleName: TEST_BUNDLE_NAME,
+                }
+                kvManager = disData.createKVManager(config);
+                console.log(logTag + "createKvManager22 success, kvManager=" + kvManager);
+             } catch (error) {
+               console.error(logTag + "createKvManager22 error.code=" + error.code + "error.message=" + error.message);
+             }
+            console.info(logTag + "createKvManager22 end");
+        } 
+
         let flag_41 = 1;
         let localOSVersion = "";
         let OSVersion41 = "OpenHarmony-4.1";
@@ -140,19 +125,21 @@ export default class TestApi{
 
         await kvManager.getKVStore(storeId,optionsInfo).then((store) =>{
             kvStore = store;
-            console.info(logTag + " get kvStore success, security level is: " + optionsInfo.securityLevel);
+            console.info(logTag + " getKVStore success, securityLevel is: " + optionsInfo.securityLevel);
             return String(true);
-        }).catch((err) => {
+        }).catch((error) => {
+            console.error(logTag + "getKVStore fail, error.code=" + error.code + "error.message=" + error.message);
             return String(err);
         });
     }
     async closeKvStore(storeId){
         await kvManager.closeKVStore(TEST_BUNDLE_NAME,storeId,kvStore).then(async () => {
             await kvManager.deleteKVStore(TEST_BUNDLE_NAME,storeId).then(() => {
-                console.info(logTag + " Server delete KVStore success");
+                console.info(logTag + " Server delete KVStore success, storeId=" + storeId);
                 return String(true);
             })
-        }).catch((err) => {
+        }).catch((error) => {
+            console.error(logTag + "closeKvStore fail, error.code=" + error.code + "error.message=" + error.message);
             return String(err);
         });
     }
@@ -179,8 +166,8 @@ export default class TestApi{
         await kvStore.put(key,putValue).then(() =>  {
             console.info(logTag + " Server  put data success ,key is : " + key + " value is: " + putValue);
             return String(true);
-        }).catch((err) => {
-            console.info(logTag + "Server put data fail,err: " + err);
+        }).catch((error) => {
+            console.error(logTag + " Server  put fail, error.code=" + error.code + "error.message=" + error.message);
             return String(err);
         });
     }
