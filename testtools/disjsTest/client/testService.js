@@ -113,15 +113,15 @@ export default class TestService {
         console.info(logTag + " toConnectRdbAbility");
         return new Promise(resolve=>{
             let self = this;
-            let dmInstance = deviceManager.createDeviceManager('com.ohos.distributerdbdisjs');
+            let dmInstance = deviceManager.createDeviceManager('com.acts.distributerdbdisjs');
             self.getDeviceList(dmInstance);
             console.info(logTag + "got deviceManager: " + dmInstance);
             let deviceId = deviceList[0].networkId;
             console.info(logTag + "deviceid : " + deviceId);
             console.info(logTag + "online deviceList id: " + JSON.stringify(deviceList));
             let want = {
-                "bundleName": "com.ohos.distributerdbdisjs",
-                "abilityName": "com.ohos.distributerdbdisjs.ServiceAbility",
+                "bundleName": "com.acts.distributerdbdisjs",
+                "abilityName": "com.acts.distributerdbdisjs.ServiceAbility",
                 "deviceId": deviceId,
                 "flags": 256
             }
