@@ -37,6 +37,9 @@
 #include "softbus_bus_center.h"
 #include "softbus_common.h"
 
+#include "if_system_ability_manager.h"
+#include "iservice_registry.h"
+
 using namespace std;
 using namespace OHOS;
 using namespace OHOS::DistributedHardware;
@@ -347,5 +350,20 @@ int CreateWindow(int mode)
     DHLOGE("create window success, window id: %d, width: %d, height: %d", windowId, windowWidth, windowHeight);
     ScreenClient::GetInstance().RemoveWindow(windowId);
     sleep(SLEEP_FIVE_SECOND);
+    return 0;
+}
+
+int SaTest()
+{
+    auto samgr = OHOS::SystemAbilityManagerClient::GetInstance().GetSystemAbilityManager();
+    if (samgr == nullptr) {
+        DHLOGE("testSa1===");
+        return 1;
+    }
+    auto object = samgr->CheckSystemAbility(4807);
+    if (object == nullptr) {
+        DHLOGE("testSa2===");
+        return 1;
+    }
     return 0;
 }

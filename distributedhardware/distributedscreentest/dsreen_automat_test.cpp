@@ -20,6 +20,9 @@
 #include "softbus_common.h"
 #include "accesstoken_kit.h"
 
+#include "if_system_ability_manager.h"
+#include "iservice_registry.h"
+
 using namespace testing::ext;
 using namespace OHOS::DistributedHardware;
 using namespace OHOS::Security::AccessToken;
@@ -84,6 +87,10 @@ DSreenAutomatTest::DSreenAutomatTest(void) {}
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0100, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
 }
@@ -98,6 +105,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0100, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0200, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StopMirror(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StopMirror fail";
 }
@@ -112,6 +123,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0200, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0300, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartExpand(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartExpand fail";
 }
@@ -126,6 +141,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0300, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0400, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StopExpand(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StopExpand fail";
 }
@@ -140,6 +159,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0400, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0500, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = CreateWindow(0);
     EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
 }
@@ -154,6 +177,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0500, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0600, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = QueryRemoteDeviceInfo(0);
     EXPECT_EQ(g_dSreenOk, ret) << "QueryRemoteDeviceInfo fail";
 }
@@ -168,6 +195,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0600, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0700, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = QueryRemoteScreenInfo(0);
     EXPECT_EQ(g_dSreenOk, ret) << "QueryRemoteScreenInfo fail";
 }
@@ -181,6 +212,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0700, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0800, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = StopMirror(0);
@@ -196,6 +231,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0800, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0900, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartExpand(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = StopExpand(0);
@@ -211,6 +250,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_0900, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1000, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = StopMirror(0);
@@ -228,6 +271,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1000, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1100, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartExpand(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = StopExpand(0);
@@ -245,6 +292,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1100, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1200, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = CreateWindow(0);
@@ -262,6 +313,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1200, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1300, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartExpand(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = CreateWindow(0);
@@ -279,6 +334,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1300, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1400, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = QueryRemoteDeviceInfo(0);
@@ -296,6 +355,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1400, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1500, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = QueryRemoteScreenInfo(0);
@@ -313,6 +376,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1500, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1600, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartExpand(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = QueryRemoteDeviceInfo(0);
@@ -330,6 +397,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1600, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1700, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartExpand(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = QueryRemoteScreenInfo(0);
@@ -347,6 +418,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1700, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1800, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = CreateWindow(0);
     EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
     ret = StopMirror(0);
@@ -364,6 +439,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1800, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1900, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartExpand(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = StopExpand(0);
@@ -383,6 +462,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_1900, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2000, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = StartExpand(0);
@@ -402,6 +485,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2000, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2100, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartExpand(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     ret = StartMirror(0);
@@ -421,6 +508,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2100, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2200, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = CreateWindow(0);
     EXPECT_EQ(g_dSreenOk, ret) << "CreateWindow fail";
     ret = StopExpand(0);
@@ -446,6 +537,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2200, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2300, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartMirror fail";
 }
@@ -459,6 +554,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2300, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2400, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StopMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StopMirror fail";
 }
@@ -472,6 +571,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2400, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2500, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartExpand(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartExpand fail";
 }
@@ -485,6 +588,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2500, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2600, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StopExpand(2);
     EXPECT_NE(g_dSreenOk, ret) << "StopExpand fail";
 }
@@ -498,6 +605,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2600, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2700, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = CreateWindow(2);
     EXPECT_NE(g_dSreenOk, ret) << "CreateWindow fail";
 }
@@ -511,6 +622,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2700, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2800, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = QueryRemoteDeviceInfo(2);
     EXPECT_NE(g_dSreenOk, ret) << "QueryRemoteDeviceInfo fail";
 }
@@ -524,6 +639,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2800, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2900, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = QueryRemoteScreenInfo(2);
     EXPECT_NE(g_dSreenOk, ret) << "QueryRemoteScreenInfo fail";
 }
@@ -537,6 +656,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_2900, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3000, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartMirror fail";
     ret = StopMirror(2);
@@ -552,6 +675,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3000, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3100, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartMirror fail";
     ret = StartExpand(2);
@@ -567,6 +694,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3100, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3200, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartMirror fail";
     ret = CreateWindow(2);
@@ -582,6 +713,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3200, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3300, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartMirror fail";
     ret = QueryRemoteDeviceInfo(2);
@@ -597,6 +732,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3300, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3400, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartMirror fail";
     ret = QueryRemoteScreenInfo(2);
@@ -612,6 +751,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3400, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3500, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartMirror fail";
     ret = StopExpand(2);
@@ -627,6 +770,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3500, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3600, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StopMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StopMirror fail";
     ret = StartExpand(2);
@@ -642,6 +789,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3600, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3700, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StopMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StopMirror fail";
     ret = CreateWindow(2);
@@ -657,6 +808,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3700, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3800, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StopMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StopMirror fail";
     ret = QueryRemoteDeviceInfo(2);
@@ -672,6 +827,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3800, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3900, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StopMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StopMirror fail";
     ret = QueryRemoteScreenInfo(2);
@@ -687,6 +846,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_3900, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4000, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StopMirror(2);
     EXPECT_NE(g_dSreenOk, ret) << "StopMirror fail";
     ret = StopExpand(2);
@@ -702,6 +865,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4000, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4100, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartExpand(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartExpand fail";
     ret = CreateWindow(2);
@@ -717,6 +884,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4100, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4200, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartExpand(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartExpand fail";
     ret = QueryRemoteDeviceInfo(2);
@@ -732,6 +903,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4200, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4300, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartExpand(2);
     EXPECT_NE(g_dSreenOk, ret) << "StartExpand fail";
     ret = StopExpand(2);
@@ -747,6 +922,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4300, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4400, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = -1;
     for (int num = 0; num < 5; num++) {
         ret = StartMirror(0);
@@ -766,6 +945,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4400, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4500, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = StartMirror(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
     for (int num = 0; num < 5; num++) {
@@ -784,6 +967,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4500, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4600, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = -1;
     for (int num = 0; num < 5; num++) {
         ret = StartExpand(0);
@@ -803,6 +990,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4600, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4700, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = -1;
     ret = StartExpand(0);
     EXPECT_EQ(g_dSreenOk, ret) << "StartMirror fail";
@@ -823,6 +1014,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4700, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4800, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = -1;
     for (int num = 0; num < 5; num++) {
         ret = CreateWindow(0);
@@ -841,6 +1036,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4800, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4900, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = -1;
     for (int num = 0; num < 5; num++) {
         ret = QueryRemoteDeviceInfo(0);
@@ -859,6 +1058,10 @@ HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_4900, TestSize.Level1)
  */
 HWTEST_F(DSreenAutomatTest, SUB_DH_Dscreen_Dcts_5000, TestSize.Level1)
 {
+    int res = SaTest();
+    if (res == 1) {
+        return;
+    }
     int ret = -1;
     for (int num = 0; num < 5; num++) {
         ret = QueryRemoteScreenInfo(0);
