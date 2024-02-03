@@ -18,8 +18,8 @@ import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
 var results;
-var bundleName = "com.example.myapplication";
-var abilityName = "com.example.myapplication.ServiceAbility";
+var bundleName = "com.acts.avsessionserver";
+var abilityName = "com.acts.avsessionserver.ServiceAbility";
 var deviceList;
 var dmInstance;
 
