@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.ohos.distributekvdisjs",
+    "bundleName": "com.acts.distributekvdisjs",
     "vendor": "ohos",
     "version": {
       "code": 1000000,
@@ -13,7 +13,7 @@
   },
   "deviceConfig": {},
   "module": {
-    "package": "com.ohos.distributekvdisjs",
+    "package": "com.acts.distributekvdisjs",
     "name": ".entry",
     "mainAbility":".MainAbility",
     "srcPath":"",

@@ -25,8 +25,8 @@ import featureAbility from '@ohos.ability.featureAbility';
 
 let results;
 let isConnected = false;
-let bundleName = "com.ohos.distributekvdisjs";
-let abilityName = "com.ohos.distributekvdisjs.ServiceAbility";
+let bundleName = "com.acts.distributekvdisjs";
+let abilityName = "com.acts.distributekvdisjs.ServiceAbility";
 let bundleNameObject = "com.ohos.distributeobjectdisjs";
 let abilityNameObject = "com.ohos.distributeobjectdisjs.ServiceAbility";
 
@@ -79,7 +79,7 @@ export default class TestService {
         console.info(logTag + " toConnectAbility");
         return new Promise(resolve=>{
             let self = this;
-            let dmInstance = deviceManager.createDeviceManager('com.ohos.distributekvdisjs');
+            let dmInstance = deviceManager.createDeviceManager('com.acts.distributekvdisjs');
             self.getDeviceList(dmInstance);
             console.info("got deviceManager: " + dmInstance)
             let deviceId = deviceList[0].networkId;

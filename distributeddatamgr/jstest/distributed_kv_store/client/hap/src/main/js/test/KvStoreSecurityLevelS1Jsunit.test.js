@@ -17,7 +17,7 @@ import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from
 import deviceManager from '@ohos.distributedDeviceManager';
 import TestService from '../../../../../../../../../testtools/disjsTest/client/testService.js';
 import RemoteHelper from '../../../../../../../../../testtools/disjsTest/client/remoteHelper.js';
-import factory from '@ohos.data.distributedData';
+import factory from '@ohos.data.distributedKVStore';
 import { UiDriver, BY } from '@ohos.UiTest'
 import featureAbility from '@ohos.ability.featureAbility';
 import deviceinfo from '@ohos.deviceInfo'
@@ -43,14 +43,14 @@ const TEST_FLOAT_KEY = "TEST_FLOAT_KEY";
 const TEST_FLOAT_VALUE = 1.1;
 const TEST_STORE_ID = 'clientStoreId';
 const SERVET_STORE_ID = 'clientStoreId';
-const TEST_BUNDLE_NAME = 'com.ohos.distributekvdisjs';
+const TEST_BUNDLE_NAME = 'com.acts.distributekvdisjs';
+
+let g_context = featureAbility.getContext();
 const config = {
-    bundleName: TEST_BUNDLE_NAME,
-    userInfo: {
-        userId: '0',
-        userType: factory.UserType.SAME_USER_ID
-    }
+  context: g_context,
+  bundleName: TEST_BUNDLE_NAME,
 }
+
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -113,10 +113,10 @@ export default function kvSyncTestS1() {
             testservice = new TestService();
 
             console.info(logTag + "deviceId: " + deviceId);
-            factory.createKVManager(config, function (err, manager) {
-                kvManager = manager;
-                console.info(logTag + "CLIENT create kvManager success");
-            })
+
+            kvManager = factory.createKVManager(config);
+            console.info(logTag + "CLIENT create kvManager success, kvManager=" + kvManager);
+
             await testservice.toConnectAbility().then(data => {
                 gIRemoteObject = data;
                 console.info(logTag + "toConnectAbility data is" + data);
@@ -180,6 +180,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S1_0500
          * @tc.name testServerS1Security0500
          * @tc.desc Server kvStore security is S1,client kvStore security is S1
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerS1Security0500", 0, async function (done) {
             console.info(logTag + "testServerS1Security0500 start");
@@ -236,6 +239,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S1_0600
          * @tc.name testServerS1Security0600
          * @tc.desc Server kvStore security is S1,client kvStore security is S1
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerS1Security0600", 0, async function (done) {
             console.info(logTag + "testServerS1Security0600 start");
@@ -291,6 +297,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S1_0700
          * @tc.name testServerS1Security0700
          * @tc.desc Server kvStore security is S1,client kvStore security is S2
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerS1Security0700", 0, async function (done) {
             console.info(logTag + "testServerS1Security0700 start");
@@ -346,6 +355,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S1_0800
          * @tc.name testServerS1Security0800
          * @tc.desc Server kvStore security is S1,client kvStore security is S2
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerS1Security0800", 0, async function (done) {
             console.info(logTag + "testServerS1Security0800 start");
@@ -401,6 +413,9 @@ export default function kvSyncTestS1() {
         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S1_0900
         * @tc.name testServerS1Security0900
         * @tc.desc Server kvStore security is S1,client kvStore security is S3
+        * @tc.level: Level 2
+        * @tc.type: Functiontion
+        * @tc.size: MediumTest
         */
         it("testServerS1Security0900", 0, async function (done) {
             console.info(logTag + "testServerS1Security0900 start");
@@ -455,6 +470,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S1_1000
          * @tc.name testServerS1Security1000
          * @tc.desc Server kvStore security is S1,client kvStore security is S3
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerS1Security1000", 0, async function (done) {
             console.info(logTag + "testServerS1Security1000 start");
@@ -510,6 +528,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S1_1100
          * @tc.name testServerS1Security1100
          * @tc.desc Server kvStore security is S1,client kvStore security is S4
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerS1Security1100", 0, async function (done) {
             console.info(logTag + "testServerS1Security1100 start");
@@ -565,6 +586,9 @@ export default function kvSyncTestS1() {
         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S1_1200
         * @tc.name testServerS1Security1200
         * @tc.desc Server kvStore security is S1,client kvStore security is S4
+        * @tc.level: Level 2
+        * @tc.type: Functiontion
+        * @tc.size: MediumTest
         */
         it("testServerS1Security1200", 0, async function (done) {
             console.info(logTag + "testServerS1Security1200 start");
@@ -620,6 +644,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S2_0500
          * @tc.name testServerS2Security0500
          * @tc.desc Server kvStore security is S2,client kvStore security is S1
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerS2Security0500", 0, async function (done) {
             console.info(logTag + "testServerS2Security0500 start");
@@ -675,6 +702,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S2_0600
          * @tc.name testServerS2Security0600
          * @tc.desc Server kvStore security is S2,client kvStore security is S1
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerS2Security0600", 0, async function (done) {
             console.info(logTag + "testServerS2Security0600 start");
@@ -730,6 +760,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S2_0700
          * @tc.name testServerS2Security0700
          * @tc.desc Server kvStore security is S4,client kvStore security is S2
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerS2Security0700", 0, async function (done) {
             console.info(logTag + "testServerS2Security0700 start");
@@ -785,6 +818,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S2_0800
          * @tc.name testServerS2Security0800
          * @tc.desc Server kvStore security is S4,client kvStore security is S2
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerS2Security0800", 0, async function (done) {
             console.info(logTag + "testServerS2Security0800 start");
@@ -840,7 +876,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S2_0900
          * @tc.name testServerS2Security0900
          * @tc.desc Server kvStore security is S2,client kvStore security is S3
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS2Security0900", 0, async function (done) {
             console.info(logTag + "testServerS2Security0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
@@ -895,7 +934,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S2_1000
          * @tc.name testServerS2Security1000
          * @tc.desc Server kvStore security is S2,client kvStore security is S3
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS2Security1000", 0, async function (done) {
             console.info(logTag + "testServerS2Security1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
@@ -950,7 +992,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S2_1100
          * @tc.name testServerS2Security1100
          * @tc.desc Server kvStore security is S2,client kvStore security is S4
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS2Security1100", 0, async function (done) {
             console.info(logTag + "testServerS2Security1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
@@ -1005,7 +1050,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S2_1200
          * @tc.name testServerS2Security1200
          * @tc.desc Server kvStore security is S2,client kvStore security is S4
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS2Security1200", 0, async function (done) {
             console.info(logTag + "testServerS2Security1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
@@ -1060,7 +1108,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S3_0500
          * @tc.name testServerS3Security0500
          * @tc.desc Server kvStore security is S3,client kvStore security is S1
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS3Security0500", 0, async function (done) {
             console.info(logTag + "testServerS3Security0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
@@ -1115,7 +1166,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S3_0600
          * @tc.name testServerS3Security0600
          * @tc.desc Server kvStore security is S3,client kvStore security is S1
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS3Security0600", 0, async function (done) {
             console.info(logTag + "testServerS3Security0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
@@ -1170,7 +1224,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S3_0700
          * @tc.name testServerS3Security0700
          * @tc.desc Server kvStore security is S3,client kvStore security is S2
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS3Security0700", 0, async function (done) {
             console.info(logTag + "testServerS3Security0700 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
@@ -1225,7 +1282,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S3_0800
          * @tc.name testServerS3Security0800
          * @tc.desc Server kvStore security is S3,client kvStore security is S2
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS3Security0800", 0, async function (done) {
             console.info(logTag + "testServerS3Security0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
@@ -1280,7 +1340,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S3_0900
          * @tc.name testServerS3Security0900
          * @tc.desc Server kvStore security is S4,client kvStore security is S3
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS3Security0900", 0, async function (done) {
             console.info(logTag + "testServerS3Security0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
@@ -1335,7 +1398,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S3_1000
          * @tc.name testServerS3Security1000
          * @tc.desc Server kvStore security is S4,client kvStore security is S3
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS3Security1000", 0, async function (done) {
             console.info(logTag + "testServerS3Security1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
@@ -1390,7 +1456,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S3_1100
          * @tc.name testServerS3Security1100
          * @tc.desc Server kvStore security is S3,client kvStore security is S4
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS3Security1100", 0, async function (done) {
             console.info(logTag + "testServerS3Security1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
@@ -1445,7 +1514,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S3_1200
          * @tc.name testServerS3Security1200
          * @tc.desc Server kvStore security is S3,client kvStore security is S4
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS3Security1200", 0, async function (done) {
             console.info(logTag + "testServerS3Security1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
@@ -1496,14 +1568,14 @@ export default function kvSyncTestS1() {
             kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
-
-
-
         /**
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S4_0500
          * @tc.name testServerS4Security0500
          * @tc.desc Server kvStore security is S4,client kvStore security is S1
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS4Security0500", 0, async function (done) {
             console.info(logTag + "testServerS4Security0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
@@ -1558,7 +1630,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S4_0600
          * @tc.name testServerS4Security0600
          * @tc.desc Server kvStore security is S4,client kvStore security is S1
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS4Security0600", 0, async function (done) {
             console.info(logTag + "testServerS4Security0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
@@ -1613,7 +1688,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S4_0700
          * @tc.name testServerS4Security0700
          * @tc.desc Server kvStore security is S4,client kvStore security is S2
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS4Security0700", 0, async function (done) {
             console.info(logTag + "testServerS4Security0700 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
@@ -1668,7 +1746,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S4_0800
          * @tc.name testServerS4Security0800
          * @tc.desc Server kvStore security is S4,client kvStore security is S2
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS4Security0800", 0, async function (done) {
             console.info(logTag + "testServerS4Security0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
@@ -1723,7 +1804,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S4_0900
          * @tc.name testServerS4Security0900
          * @tc.desc Server kvStore security is S4,client kvStore security is S3
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS4Security0900", 0, async function (done) {
             console.info(logTag + "testServerS4Security0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
@@ -1778,7 +1862,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S4_1000
          * @tc.name testServerS4Security1000
          * @tc.desc Server kvStore security is S4,client kvStore security is S3
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS4Security1000", 0, async function (done) {
             console.info(logTag + "testServerS4Security1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
@@ -1833,7 +1920,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S4_1100
          * @tc.name testServerS4Security1100
          * @tc.desc Server kvStore security is S4,client kvStore security is S4
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS4Security1100", 0, async function (done) {
             console.info(logTag + "testServerS4Security1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
@@ -1888,7 +1978,10 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_S4_1200
          * @tc.name testServerS4Security1200
          * @tc.desc Server kvStore security is S4,client kvStore security is S4
-        */
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testServerS4Security1200", 0, async function (done) {
             console.info(logTag + "testServerS4Security1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
@@ -1943,6 +2036,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERSTOREID_0100
          * @tc.name testServerKvStoreId0100
          * @tc.desc Get server kvstore with length of storeId is 129 bit.
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerKvStoreId0100", 0, async function (done) {
             console.info(logTag + "testServerKvStoreId0100 start");
@@ -1997,6 +2093,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERSTOREID_0200
          * @tc.name testServerKvStoreId0200
          * @tc.desc Get server kvstore with length of storeId is 129 bit.
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerKvStoreId0200", 0, async function (done) {
             console.info(logTag + "testServerKvStoreId0200 start");
@@ -2051,6 +2150,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERSTOREID_0300
          * @tc.name testServerKvStoreId0300
          * @tc.desc Get server kvstore with length of storeId is 128 bit.
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerKvStoreId0300", 0, async function (done) {
             console.info(logTag + "testServerKvStoreId0300 start");
@@ -2112,6 +2214,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERSTOREID_0400
          * @tc.name testServerKvStoreId0400
          * @tc.desc Get server kvstore with length of storeId is 128 bit.
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerKvStoreId0400", 0, async function (done) {
             console.info(logTag + "testServerKvStoreId0400 start");
@@ -2172,6 +2277,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERSTOREID_0500
          * @tc.name testServerKvStoreId0500
          * @tc.desc The storeId of the two devices' kvstores are inconsistent
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerKvStoreId0500", 0, async function (done) {
             console.info(logTag + "testServerKvStoreId0500 start");
@@ -2227,6 +2335,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERSTOREID_0600
          * @tc.name testServerKvStoreId0600
          * @tc.desc The storeId of the two devices' kvstores are inconsistent
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerKvStoreId0600", 0, async function (done) {
             console.info(logTag + "testServerKvStoreId0600 start");
@@ -2282,6 +2393,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERENCRYPTSTORE_0100
          * @tc.name testServerEncryptKVStore0100
          * @tc.desc Unencrypt kvStore PULL from encrypt kvStore
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerEncryptKVStore0100", 0, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0100 start");
@@ -2336,6 +2450,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERENCRYPTSTORE_0200
          * @tc.name testServerEncryptKVStore0200
          * @tc.desc Unencrypt kvStore PUSH_PULL to encrypt kvStore
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerEncryptKVStore0200", 0, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0200 start");
@@ -2390,6 +2507,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERENCRYPTSTORE_0300
          * @tc.name testServerEncryptKVStore0300
          * @tc.desc Encrypt kvStore PULL from encrypt kvStore
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerEncryptKVStore0300", 0, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0300 start");
@@ -2444,6 +2564,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERENCRYPTSTORE_0400
          * @tc.name testServerEncryptKVStore0400
          * @tc.desc Encrypt kvStore PUSH_PULL to encrypt kvStore
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerEncryptKVStore0400", 0, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0400 start");
@@ -2498,6 +2621,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERENCRYPTSTORE_0500
          * @tc.name testServerEncryptKVStore0500
          * @tc.desc Encrypt kvStore PULL from unencrypt kvStore
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerEncryptKVStore0500", 0, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0500 start");
@@ -2552,6 +2678,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERENCRYPTSTORE_0600
          * @tc.name testServerEncryptKVStore0600
          * @tc.desc Encrypt kvStore PUSH_PULL unencrypt kvStore
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerEncryptKVStore0600", 0, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0600 start");
@@ -2606,6 +2735,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERMAXKEYLENGTH_0100
          * @tc.name testServerMaxKeyLength0100
          * @tc.desc Length of key greater than 1024
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerMaxKeyLength0100", 0, async function (done) {
             console.info(logTag + "testServerMaxKeyLength0100 start");
@@ -2660,6 +2792,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERMAXKEYLENGTH_0200
          * @tc.name testServerMaxKeyLength0200
          * @tc.desc Length of key greater than 1024
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerMaxKeyLength0200", 0, async function (done) {
             console.info(logTag + "testServerMaxKeyLength0200 start");
@@ -2714,6 +2849,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERMAXKEYLENGTH_0300
          * @tc.name testServerMaxKeyLength0300
          * @tc.desc Length of key is 1024
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerMaxKeyLength0300", 0, async function (done) {
             console.info(logTag + "testServerMaxKeyLength0300 start");
@@ -2769,6 +2907,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SERVERMAXKEYLENGTH_0400
          * @tc.name testServerMaxKeyLength0400
          * @tc.desc Length of key is 1024
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testServerMaxKeyLength0400", 0, async function (done) {
             console.info(logTag + "testServerMaxKeyLength0400 start");
@@ -2824,6 +2965,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCSTRINGTYPE_0100
          * @tc.name testSyncStringType0100
          * @tc.desc Sync string type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncStringType0100", 0, async function (done) {
             console.info(logTag + "testSyncStringType0100 start");
@@ -2875,10 +3019,13 @@ export default function kvSyncTestS1() {
         })
 
         /**
-        * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCSTRINGTYPE_0200
-        * @tc.name testSyncStringType0200
-        * @tc.desc Sync string type data
-        */
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCSTRINGTYPE_0200
+         * @tc.name testSyncStringType0200
+         * @tc.desc Sync string type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testSyncStringType0200", 0, async function (done) {
             console.info(logTag + "testSyncStringType0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
@@ -2932,6 +3079,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0100
          * @tc.name testSyncIntType0100
          * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncIntType0100", 0, async function (done) {
             console.info(logTag + "testSyncIntType0100 start");
@@ -2986,6 +3136,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0200
          * @tc.name testSyncIntType0200
          * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncIntType0200", 0, async function (done) {
             console.info(logTag + "testSyncIntType0200 start");
@@ -3041,6 +3194,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0300
          * @tc.name testSyncIntType0300
          * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncIntType0300", 0, async function (done) {
             console.info(logTag + "testSyncIntType0300 start");
@@ -3094,10 +3250,13 @@ export default function kvSyncTestS1() {
         })
 
         /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0400
-     * @tc.name testSyncIntType0400
-     * @tc.desc Sync int type data
-     */
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0400
+         * @tc.name testSyncIntType0400
+         * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testSyncIntType0400", 0, async function (done) {
             console.info(logTag + "testSyncIntType0400 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
@@ -3154,6 +3313,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0500
          * @tc.name testSyncIntType0500
          * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncIntType0500", 0, async function (done) {
             console.info(logTag + "testSyncIntType0500 start");
@@ -3208,10 +3370,13 @@ export default function kvSyncTestS1() {
         })
 
         /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0600
-     * @tc.name testSyncIntType0600
-     * @tc.desc Sync int type data
-     */
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0600
+         * @tc.name testSyncIntType0600
+         * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testSyncIntType0600", 0, async function (done) {
             console.info(logTag + "testSyncIntType0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
@@ -3268,6 +3433,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0700
          * @tc.name testSyncIntType0700
          * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncIntType0700", 0, async function (done) {
             console.info(logTag + "testSyncIntType0700 start");
@@ -3321,10 +3489,13 @@ export default function kvSyncTestS1() {
         })
 
         /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0800
-     * @tc.name testSyncIntType0800
-     * @tc.desc Sync int type data
-     */
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0800
+         * @tc.name testSyncIntType0800
+         * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testSyncIntType0800", 0, async function (done) {
             console.info(logTag + "testSyncIntType0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
@@ -3376,12 +3547,13 @@ export default function kvSyncTestS1() {
             kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
-
-
         /**
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_0900
          * @tc.name testSyncIntType0900
          * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncIntType0900", 0, async function (done) {
             console.info(logTag + "testSyncIntType0900 start");
@@ -3435,10 +3607,13 @@ export default function kvSyncTestS1() {
         })
 
         /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_1000
-     * @tc.name testSyncIntType1000
-     * @tc.desc Sync int type data
-     */
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_1000
+         * @tc.name testSyncIntType1000
+         * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testSyncIntType1000", 0, async function (done) {
             console.info(logTag + "testSyncIntType1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
@@ -3495,6 +3670,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_1100
          * @tc.name testSyncIntType1100
          * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncIntType1100", 0, async function (done) {
             console.info(logTag + "testSyncIntType1100 start");
@@ -3548,10 +3726,13 @@ export default function kvSyncTestS1() {
         })
 
         /**
-     * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_1200
-     * @tc.name testSyncIntType1200
-     * @tc.desc Sync int type data
-     */
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_1200
+         * @tc.name testSyncIntType1200
+         * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
         it("testSyncIntType1200", 0, async function (done) {
             console.info(logTag + "testSyncIntType1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
@@ -3607,6 +3788,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_1300
          * @tc.name testSyncIntType1300
          * @tc.desc Sync int type data MaxValue+1
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
          it("testSyncIntType1300", 0, async function (done) {
             console.info(logTag + "testSyncIntType1300 start");
@@ -3663,6 +3847,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCINTTYPE_1400
          * @tc.name testSyncIntType1400
          * @tc.desc Sync int type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
          it("testSyncIntType1400", 0, async function (done) {
             console.info(logTag + "testSyncIntType1400 start");
@@ -3719,6 +3906,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCFLOATTYPE_0100
          * @tc.name testSyncFloatType0100
          * @tc.desc Sync float type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncFloatType0100", 0, async function (done) {
             console.info(logTag + "testSyncFloatType0100 start");
@@ -3772,6 +3962,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCFLOATTYPE_0200
          * @tc.name testSyncFloatType0200
          * @tc.desc Sync float type data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncFloatType0200", 0, async function (done) {
             console.info(logTag + "testSyncFloatType0200 start");
@@ -3826,6 +4019,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCMULTIPLEDATA_0100
          * @tc.name testSyncMultipleData0100
          * @tc.desc Synchronize multiple pieces of data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncMultipleData0100", 0, async function (done) {
             console.info(logTag + "testSyncMultipleData0100 start");
@@ -3894,6 +4090,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCMULTIPLEDATA_0200
          * @tc.name testSyncMultipleData0200
          * @tc.desc Synchronize multiple pieces of data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncMultipleData0200", 0, async function (done) {
             console.info(logTag + "testSyncMultipleData0200 start");
@@ -3961,6 +4160,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCDELETEYSYNC_0100
          * @tc.name testSyncDeleteSync0100
          * @tc.desc Synchronize multiple pieces of data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncDeleteSync0100", 0, async function (done) {
             console.info(logTag + "testSyncDeleteSync0100 start");
@@ -4024,6 +4226,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCDELETEYSYNC_0200
          * @tc.name testSyncDeleteSync0200
          * @tc.desc Synchronize multiple pieces of data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncDeleteSync0200", 0, async function (done) {
             console.info(logTag + "testSyncDeleteSync0200 start");
@@ -4086,6 +4291,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCMODIFYSYNC_0100
          * @tc.name testSyncModifySync0100
          * @tc.desc Synchronize multiple pieces of data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncModifySync0100", 0, async function (done) {
             console.info(logTag + "testSyncModifySync0100 start");
@@ -4147,6 +4355,9 @@ export default function kvSyncTestS1() {
          * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCMODIFYSYNC_0200
          * @tc.name testSyncModifySync0200
          * @tc.desc Synchronize multiple pieces of data
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
          */
         it("testSyncModifySync0200", 0, async function (done) {
             console.info(logTag + "testSyncModifySync0200 start");

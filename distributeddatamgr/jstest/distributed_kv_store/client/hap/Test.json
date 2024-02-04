@@ -2,8 +2,8 @@
     "description": "Configuration for hjunit demo Tests",
     "driver": {
         "type": "OHJSUnitTest",
-        "bundle-name": "com.ohos.distributekvdisjs",
-        "package-name": "com.ohos.distributekvdisjs",
+        "bundle-name": "com.acts.distributekvdisjs",
+        "package-name": "com.acts.distributekvdisjs",
         "test-timeout": "1200000",
         "testcase-timeout": "60000",
         "shell-timeout": "1200000"
