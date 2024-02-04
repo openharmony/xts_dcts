@@ -101,4 +101,6 @@ int StopExpand(int mode);
 int CreateWindow(int mode);
 int QueryRemoteDeviceInfo(int mode);
 int QueryRemoteScreenInfo(int mode);
+
+int SaTest();
 #endif // AVCODEC_VDEC_DEMO_H
