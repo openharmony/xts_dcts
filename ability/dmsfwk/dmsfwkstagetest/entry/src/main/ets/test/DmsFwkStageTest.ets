@@ -761,12 +761,12 @@ export default function DmsFwkStageTest() {
           let option1: rpc.MessageOption = new rpc.MessageOption();
           let data1: rpc.MessageSequence = new rpc.MessageSequence();
           let reply1: rpc.MessageSequence = new rpc.MessageSequence();
-          data.writeInt(0);
+          data1.writeInt(0);
           remote1.sendMessageRequest(1, data1, reply1, option1).then((result: rpc.RequestResult) => {
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 sendRequest success');
-            let msg = result.reply.readInt();
-            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 onConnectRemoteService002 msg: ' + msg);
-            expect(msg == 0).assertTrue();
+            let msg1 = result.reply.readInt();
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 onConnectRemoteService002 msg1: ' + msg1);
+            expect(msg1 == 0).assertTrue();
           })
         },
         onDisconnect(elementName: bundleManager.ElementName) {
@@ -1630,12 +1630,12 @@ export default function DmsFwkStageTest() {
           let option1: rpc.MessageOption = new rpc.MessageOption();
           let data1: rpc.MessageSequence = new rpc.MessageSequence();
           let reply1: rpc.MessageSequence = new rpc.MessageSequence();
-          data.writeInt(0);
+          data1.writeInt(0);
           remote1.sendMessageRequest(1, data1, reply1, option1).then((result: rpc.RequestResult) => {
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 sendRequest success');
-            let msg = result.reply.readInt();
-            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 onConnectRemoteService002 msg: ' + msg);
-            expect(msg == 0).assertTrue();
+            let msg1 = result.reply.readInt();
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 onConnectRemoteService002 msg1: ' + msg1);
+            expect(msg1 == 0).assertTrue();
           })
         },
         onDisconnect(elementName: bundleManager.ElementName) {
