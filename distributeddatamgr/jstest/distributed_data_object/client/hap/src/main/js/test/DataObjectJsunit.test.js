@@ -34,7 +34,7 @@ let deviceId = null;
 let deviceList = undefined;
 let syncDeviceIds = undefined;
 
-const TEST_BUNDLE_NAME = 'com.ohos.distributeobjectdisjs'; 
+const TEST_BUNDLE_NAME = 'com.acts.distributeobjectdisjs'; 
 
 let localName = "Amylocal";
 let localAge = 18;
@@ -208,11 +208,10 @@ describe('dataObjectTest', function () {
             console.info(logTag + "remote: setSessionId start");
             await remoteHelpers.setSessionId(sessionId1);
             await sleep(2000);
-
             expect(g_object.name == reName).assertEqual(true);
             expect(g_object.age == reAge).assertEqual(true);
             expect(g_object.isVis == reIsVis).assertEqual(true);
-
+            
             console.info(logTag + " off change");
             g_object.off("change");
             g_object.setSessionId().then (()=>{
@@ -338,7 +337,7 @@ describe('dataObjectTest', function () {
             console.info(logTag + "remote: setSessionId start");
             await remoteHelpers.setSessionId(sessionId1);
             await sleep(2000);
-        
+            
             expect(g_object.name == reName).assertEqual(true);
             expect(g_object.age == reAge).assertEqual(true);
             expect(g_object.isVis == reIsVis).assertEqual(true);

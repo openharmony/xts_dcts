@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.ohos.distributeobjectdisjs",
+    "bundleName": "com.acts.distributeobjectdisjs",
     "vendor": "ohos",
     "version": {
       "code": 1000000,
@@ -13,7 +13,7 @@
   },
   "deviceConfig": {},
   "module": {
-    "package": "com.ohos.distributeobjectdisjs",
+    "package": "com.acts.distributeobjectdisjs",
     "name": ".entry",
     "mainAbility":".MainAbility",
     "srcPath":"",
