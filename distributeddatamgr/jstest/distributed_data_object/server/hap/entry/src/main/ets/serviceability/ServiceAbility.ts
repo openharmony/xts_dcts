@@ -18,27 +18,7 @@ import commonEvent from '@ohos.commonEventManager';
 
 import Stub from '../../../../../../../../../../testtools/disjsTest/server/service.js'
 
-// class StubTest extends rpc.RemoteObject {
-//     constructor(descriptor) {
-//         super(descriptor);
-//     }
-//     onRemoteRequest(code, data, reply, option) {
-//         console.info("onRemoteRequest: " + code)
-//         let tmp1 = data.readInt()
-//         let tmp2 = data.readInt()
-//         let tmp3 = tmp1 + tmp2;
-//         let result =  reply.writeInt(tmp3)
-//         console.info("The server's writeInt result is " + result);
-//         commonEvent.publish("DmsFwkService_RemoteObject", {
-//             parameters:{
-//                 "msg":"receiveMessage = " + tmp1
-//             }
-//         }, (err, data) => {
-//             console.info("DmsFwkService_ConnectAbility onCreate");
-//         });
-//         return true
-//     }
-// }
+
 export default class ServiceAbility extends UIAbility {
     onCreate(want) {
         // Called to return a FormBindingData object.
