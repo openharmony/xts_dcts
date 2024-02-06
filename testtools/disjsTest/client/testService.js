@@ -27,8 +27,8 @@ let results;
 let isConnected = false;
 let bundleName = "com.acts.distributekvdisjs";
 let abilityName = "com.acts.distributekvdisjs.ServiceAbility";
-let bundleNameObject = "com.ohos.distributeobjectdisjs";
-let abilityNameObject = "com.ohos.distributeobjectdisjs.ServiceAbility";
+let bundleNameObject = "com.acts.distributeobjectdisjs";
+let abilityNameObject = "com.acts.distributeobjectdisjs.ServiceAbility";
 
 let deviceList;
 
@@ -146,7 +146,7 @@ export default class TestService {
         console.info(logTag + " toConnectObjectAbility");
         return new Promise(resolve=>{
             let self = this;
-            let dmInstance = deviceManager.createDeviceManager('com.ohos.distributeobjectdisjs');
+            let dmInstance = deviceManager.createDeviceManager('com.acts.distributeobjectdisjs');
             self.getDeviceList(dmInstance);
             console.info(logTag + "got deviceManager: " + dmInstance);
             let deviceId = deviceList[0].networkId;

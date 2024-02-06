@@ -26,6 +26,7 @@ const TEST_BUNDLE_NAME = 'com.acts.distributekvdisjs';
 let logTag = "[[RpcServer_TestApi:  ]]";
 let kvManager = null;
 let kvStore = null;
+
 let rdbStore = undefined;
 
 let g_object = undefined;
@@ -226,12 +227,11 @@ export default class TestApi{
     async createObject(objectname, age, isVis){
         try{
             console.info(logTag + "************* createObject begin ************* ");
-            
-            console.info(logTag + "context 1= " + context);
-            context = featureAbility.getContext();
-            console.info(logTag + "context 2= " + context);
-            if (context == undefined || context == null) {
-                console.info(logTag + "error: context = undefined");
+
+            let g_context = globalThis.extensionContext;
+            console.info(logTag + "context 2= " + g_context);
+            if (g_context == undefined || g_context == null) {
+                console.info(logTag + "error: g_context = undefined");
                 return false;
             }
 
@@ -243,7 +243,7 @@ export default class TestApi{
             console.info(logTag + "objectname=" + objectname + "  age=" + age + "  isVis=" + isVis);
             console.info(logTag + "rename=" + rename + "  reage=" + reage + "  reisVis=" + reisVis);
 
-            g_object = distributedObject.create(context, {name: rename, age: reage, isVis: reisVis});
+            g_object = distributedObject.create(g_context, {name: rename, age: reage, isVis: reisVis});
             if (g_object == undefined || g_object == null) {
                 console.info(logTag + "error:  g_object = undefined");
                 return false;
