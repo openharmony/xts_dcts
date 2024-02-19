@@ -141,7 +141,7 @@ export default function RpcRequestJsUnitTest() {
             testservice = new TestService
             await testservice.toConnectAbility().then(data => {
                 gIRemoteObject = data;
-                console.info("RpcClient: toConnectAbility data is:" + data);
+                console.info("RpcClient: toConnectAbility data is： " + data);
             })
             done();
             console.info("beforeAll done");

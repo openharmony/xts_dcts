@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+# Copyright (C) 2021-2023 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,34 +11,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//test/xts/tools/build/suite.gni")
+import("../../../../tools/build/suite.gni")
 
 ohos_hap_assist_suite("DctsRpcJsServer") {
-  hap_profile = "entry/src/main/module.json"
-  hap_name = "DctsRpcHapServer"
-
-  testonly = true
+  hap_profile = "./src/main/config.json"
   deps = [
-    ":rpcstageserver_js_assets",
-    ":rpcstageserver_resources",
+    ":rpc_js_assets",
+    ":rpc_js_resources",
   ]
-  ets2abc = true
-  certificate_profile = "signature/openharmony_sx.p7b"
-  subsystem_name = "ability"
-  part_name = "ability_runtime"
-}
 
-ohos_app_scope("rpcstageserver_app_profile") {
-  app_profile = "AppScope/app.json"
-  sources = [ "AppScope/resources" ]
+  certificate_profile = "./signature/openharmony_sx.p7b"
+  hap_name = "DctsRpcHapServer"
+  subsystem_name = "communication"
+  part_name = "ipc"
 }
-
-ohos_js_assets("rpcstageserver_js_assets") {
-  source_dir = "entry/src/main/ets"
+ohos_js_assets("rpc_js_assets") {
+  source_dir = "./src/main/js"
+  hap_profile = "./src/main/config.json"
 }
-
-ohos_resources("rpcstageserver_resources") {
-  sources = [ "entry/src/main/resources" ]
-  deps = [ ":rpcstageserver_app_profile" ]
-  hap_profile = "entry/src/main/module.json"
+ohos_resources("rpc_js_resources") {
+  sources = [ "./src/main/resources" ]
+  hap_profile = "./src/main/config.json"
 }
