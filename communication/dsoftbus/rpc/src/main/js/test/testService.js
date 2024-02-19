@@ -16,8 +16,8 @@
 import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
-var bundleName = "com.acts.rpc.test.server";
-var abilityName = "com.acts.rpc.test.server.ServiceAbility";
+var bundleName = "com.ohos.rpctest";
+var abilityName = "com.ohos.rpctest.ServiceAbility";
 var deviceList;
 
 export default class TestService {
