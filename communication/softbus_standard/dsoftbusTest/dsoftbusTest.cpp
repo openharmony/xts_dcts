@@ -59,8 +59,9 @@ void dsoftbusTest ::TearDown() {}
 void dsoftbusTest ::SetUpTestCase()
 {
     LOG("SetUpTestCase");
-    uint64_t tokenId = OHOS::Security::AccessToken::AccessTokenKit::GetNativeTokenId("dhardware");
-    SetSelfTokenID(tokenId);
+    AddPermission();
+    sleep(1);
+    system("pidof accesstoken_ser | xargs kill -9");
     sleep(1);
     TestSetUp();
     SetupCallback();

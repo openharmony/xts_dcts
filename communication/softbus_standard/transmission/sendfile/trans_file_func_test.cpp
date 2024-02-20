@@ -103,8 +103,9 @@ void TransFileFuncTest::TearDown() {}
 void TransFileFuncTest::SetUpTestCase()
 {
     LOG("SetUp begin");
-    uint64_t tokenId = OHOS::Security::AccessToken::AccessTokenKit::GetNativeTokenId("dhardware");
-    SetSelfTokenID(tokenId);
+    AddPermission();
+    sleep(1);
+    system("pidof accesstoken_ser | xargs kill -9");
     sleep(1);
     TestSetUp();
     int ret = RegisterDeviceStateDefCallback();
@@ -155,13 +156,13 @@ static int WaitFile(int timeout)
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_Fun_0100
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_0100
  * @tc.name   : test SendFile 8M
  * @tc.desc   : [G-DISTRIBUTED-0208] 必须支持蓝牙 WiFi或以太网等软总线依赖的通信能力中的一种或者多种
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0100, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0100, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -195,13 +196,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0100, TestSize.L
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_Fun_0200
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_0200
  * @tc.name   : test SendFile 0M
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0200, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0200, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -235,13 +236,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0200, TestSize.L
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_Fun_0300
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_0300
  * @tc.name   : SendFile the sender address is empty ,send failed
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0300, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0300, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -269,13 +270,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0300, TestSize.L
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_Fun_0400
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_0400
  * @tc.name   : SendFile the sender address is invalid ,send failed
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0400, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0400, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -307,13 +308,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0400, TestSize.L
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_Fun_0500
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_0500
  * @tc.name   : SendFile the receiving address is null ,send successful
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0500, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0500, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -343,13 +344,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0500, TestSize.L
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_Fun_0600
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_0600
  * @tc.name   : SendFile the receiving address is invalid ,send successful
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0600, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0600, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -383,13 +384,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0600, TestSize.L
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_Fun_0700
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_0700
  * @tc.name   : SendFile close  session ,send failed
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0700, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0700, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -424,26 +425,26 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0700, TestSize.L
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_Fun_0800
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_0800
  * @tc.name   : SendFile set recev listening address to be null or invalid
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0800, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0800, TestSize.Level2)
 {
     int ret = SetFileReceiveListener(DEF_PKG_NAME, SESSION_NAME_FILE, GetRecvFileListener(), NULL);
     EXPECT_NE(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_Fun_0900
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_0900
  * @tc.name   : Send 4 files once
  * @tc.desc   : [G-DISTRIBUTED-0206]禁止修改传输的默认协议，新增或者变更默认传输协议必须通过协商机制来实现
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0900, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0900, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -476,13 +477,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_Fun_0900, TestSize.L
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0100
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0100
  * @tc.name   : test SendFile 8M By P2P
  * @tc.desc   : [G-DISTRIBUTED-0206]禁止修改传输的默认协议，新增或者变更默认传输协议必须通过协商机制来实现
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0100, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0100, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -516,13 +517,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0100, TestSi
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0200
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0200
  * @tc.name   : test SendFile 0M By P2P
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0200, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0200, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -556,13 +557,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0200, TestSi
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0300
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0300
  * @tc.name   : SendFile By P2P the sender address is empty ,send failed
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0300, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0300, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -590,13 +591,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0300, TestSi
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0400
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0400
  * @tc.name   : SendFile By P2P the sender address is invalid ,send failed
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0400, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0400, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -628,13 +629,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0400, TestSi
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0500
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0500
  * @tc.name   : SendFile By P2P the receiving address is null ,send successful
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0500, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0500, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -664,13 +665,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0500, TestSi
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0600
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0600
  * @tc.name   : SendFile By P2P the receiving address is invalid ,send successful
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0600, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0600, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -704,13 +705,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0600, TestSi
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0700
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0700
  * @tc.name   : SendFile By P2P close  session ,send failed
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0700, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0700, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
@@ -745,13 +746,13 @@ HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0700, TestSi
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0800
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0800
  * @tc.name   : Send 4 files once By P2P
  * @tc.desc   : Test send file function
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransFileFuncTest, SUB_Softbus_Trans_Comp_SendFile_P2P_Fun_0800, TestSize.Level2)
+HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0800, TestSize.Level2)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
