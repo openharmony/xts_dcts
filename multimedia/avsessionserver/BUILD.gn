@@ -13,32 +13,22 @@
 import("//test/xts/tools/build/suite.gni")
 
 ohos_hap_assist_suite("DctsAVSessionServerTest") {
-  hap_profile = "entry/src/main/module.json"
-  hap_name = "DctsAVSessionServerTest"
-
-  testonly = true
+  hap_profile = "./src/main/config.json"
   deps = [
     ":avsession_js_assets",
     ":avsession_js_resources",
   ]
 
-  ets2abc = true
-  certificate_profile = "signature/openharmony_sx.p7b"
+  certificate_profile = "./signature/openharmony_sx.p7b"
+  hap_name = "DctsAVSessionServerTest"
   subsystem_name = "multimedia"
   part_name = "av_session"
 }
-
-ohos_app_scope("avsessionserver_app_profile") {
-  app_profile = "AppScope/app.json"
-  sources = [ "AppScope/resources" ]
-}
-
 ohos_js_assets("avsession_js_assets") {
-  source_dir = "entry/src/main/ets"
+  source_dir = "./src/main/js"
+  hap_profile = "./src/main/config.json"
 }
-
 ohos_resources("avsession_js_resources") {
-  sources = [ "entry/src/main/resources" ]
-  deps = [ ":avsessionserver_app_profile" ]
-  hap_profile = "entry/src/main/module.json"
+  sources = [ "./src/main/resources" ]
+  hap_profile = "./src/main/config.json"
 }
