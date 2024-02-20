@@ -20,7 +20,6 @@
 #include <securec.h>
 #include <sys/time.h>
 #include <unistd.h>
-
 #include "common_list.h"
 #include "discovery_service.h"
 #include "session.h"
@@ -29,7 +28,6 @@
 #include "softbus_def.h"
 #include "softbus_errcode.h"
 #include "softbus_utils.h"
-
 #include "nativetoken_kit.h"
 #include "token_setproc.h"
 
@@ -188,6 +186,9 @@ typedef enum {
         fprintf(stdout, "[Test-softbus] %s " format "\n", strTime, ##__VA_ARGS__); \
     } while (0)
 
+char* GetSoftbusPid(void);
+char* GetNetworkId(void);
+uint64_t GetCurrentTimeOfMs(void);
 int Wait(int timeout);
 int Wait4Session(int timeout, WaitSessionType type);
 int WaitNodeCount(int timeout, WaitNodeStateType state, int expectCount);
@@ -199,8 +200,6 @@ void TestTearDown(void);
 int RegisterDeviceStateDefCallback(void);
 int UnRegisterDeviceStateDefCallback(void);
 int CheckRemoteDeviceIsNull(int isSetNetId);
-
-uint64_t GetCurrentTimeOfMs(void);
 
 void ResetWaitFlag(void);
 void ResetWaitFlag4Data(void);
@@ -221,15 +220,21 @@ int OpenSession4DataByP2p(void);
 int OpenSession4ProxyByP2p(void);
 int CloseSessionBatch4Data(int* sessionId, int count);
 int CloseSessionBatch4Ctl(int* sessionId, int count);
-
-char* GetSoftbusPid(void);
-char* GetNetworkId(void);
 int GetCurrentSessionId4Data(void);
 int GetCurrentSessionId4Ctl(void);
 int GetCurrentSessionId4Proxy(void);
 void SetCurrentSessionId4Data(int sessionId);
 void SetCurrentSessionId4Ctl(int sessionId);
 void SetCurrentSessionId4Proxy(int sessionId);
+void ResetClosedSessionCount4Data(void);
+void ResetClosedSessionCount4Ctrl(void);
+int GetClosedSessionCount4Data(void);
+int GetClosedSessionCount4Ctrl(void);
+int CloseSessionAndRemoveSs4Data(void);
+int CloseSessionAndRemoveSs4Ctl(void);
+int CloseSessionAndRemoveSs4Proxy(void);
+void AddPermission(void);
+
 ISessionListener* GetSessionListenser4Data(void);
 ISessionListener* GetSessionListenser4Ctl(void);
 ISessionListener* GetSessionListenser4Proxy(void);
@@ -242,15 +247,6 @@ SessionAttribute* GetSessionAttr4DataP2p(void);
 SessionAttribute* GetSessionAttr4ProxyP2p(void);
 IFileReceiveListener* GetRecvFileListener(void);
 IFileSendListener* GetSendFileListener(void);
-
-void ResetClosedSessionCount4Data(void);
-void ResetClosedSessionCount4Ctrl(void);
-int GetClosedSessionCount4Data(void);
-int GetClosedSessionCount4Ctrl(void);
-
-int CloseSessionAndRemoveSs4Data(void);
-int CloseSessionAndRemoveSs4Ctl(void);
-int CloseSessionAndRemoveSs4Proxy(void);
 
 #ifdef __cplusplus
 }

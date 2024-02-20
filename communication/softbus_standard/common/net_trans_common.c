@@ -16,11 +16,9 @@
 #include "net_trans_common.h"
 
 static int ONE_SECOND = 1;
-
 static int32_t g_currentSessionId4Data = -1;
 static int32_t g_currentSessionId4Ctl = -1;
 static int32_t g_currentSessionId4Proxy = -1;
-
 static int32_t g_waitFlag = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Data = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Ctl = WAIT_DEF_VALUE;
@@ -29,7 +27,6 @@ static int32_t g_waitFlag4Stream = WAIT_DEF_VALUE;
 static int32_t g_passiveOpenRetFlag = SOFTBUS_OK;
 static int32_t g_nodeOnlineCount = 0;
 static int32_t g_nodeOfflineCount = 0;
-
 static int32_t g_msgCount4Data = 0;
 static int32_t g_byteCount4Data = 0;
 static int32_t g_sessionCloseCount4Data = 0;
@@ -67,16 +64,12 @@ static char g_fillContentChar = 'd';
 static unsigned int g_expectDataSize = 0;
 static char* g_expectDataContent = NULL;
 static char* g_expectMessageContent = NULL;
-
-static pthread_barrier_t* g_barrier = NULL;
-
 static int32_t g_recvMsgStat4Control[MAX_SESSION_NUM] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 static int32_t g_recvByteStat4Control[MAX_SESSION_NUM] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
 static uint64_t g_discoverTimeEnd;
 static uint64_t g_openSessionTimeEnd;
 static uint64_t g_transTimeEnd;
-
+static pthread_barrier_t* g_barrier = NULL;
 /* discovery */
 static IDiscoveryCallback g_defDiscCallback;
 
@@ -924,7 +917,6 @@ int OpenSession4DataByP2p(void)
         LOG("Wait4Session[data] fail");
         return SOFTBUS_ERR;
     }
-    
     return ret;
 }
 
@@ -1210,7 +1202,6 @@ void TestSetUp(void)
     g_defNodeStateCallback.onNodeOffline = OnDefNodeOffline;
     g_defNodeStateCallback.onNodeBasicInfoChanged = OnDefNodeBasicInfoChanged;
     g_defNodeStateCallback.onNodeStatusChanged = onDefNodeStatusChanged;
-
     g_defDiscCallback.OnDeviceFound = OnDefDeviceFound;
     g_defDiscCallback.OnDiscoverFailed = OnDefDiscoverFail;
     g_defDiscCallback.OnDiscoverySuccess = OnDefDiscoverSuccess;
@@ -1222,7 +1213,6 @@ void TestSetUp(void)
         g_sessionlistener4Data->OnMessageReceived = DataMessageReceived;
         g_sessionlistener4Data->OnBytesReceived = DataBytesReceived;
     }
-
     if (g_sessionlistener4Ctl == NULL) {
         g_sessionlistener4Ctl = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlistener4Ctl->OnSessionOpened = ControlSessionOpened;
@@ -1230,7 +1220,6 @@ void TestSetUp(void)
         g_sessionlistener4Ctl->OnMessageReceived = ControlMessageReceived;
         g_sessionlistener4Ctl->OnBytesReceived = ControlBytesReceived;
     }
-
     if (g_sessionlistener4Pass == NULL) {
         g_sessionlistener4Pass = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlistener4Pass->OnSessionOpened = PassiveSessionOpened;
@@ -1238,7 +1227,6 @@ void TestSetUp(void)
         g_sessionlistener4Pass->OnMessageReceived = PassiveMessageReceived;
         g_sessionlistener4Pass->OnBytesReceived = PassiveBytesReceived;
     }
-
     if (g_sessionlistener4Perf == NULL) {
         g_sessionlistener4Perf = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlistener4Perf->OnSessionOpened = PerfSessionOpened;
@@ -1246,7 +1234,6 @@ void TestSetUp(void)
         g_sessionlistener4Perf->OnMessageReceived = PerfMessageReceived;
         g_sessionlistener4Perf->OnBytesReceived = PerfBytesReceived;
     }
-
     if (g_sessionlistener4Proxy == NULL) {
         g_sessionlistener4Proxy = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlistener4Proxy->OnSessionOpened = ProxySessionOpened;
@@ -1254,14 +1241,12 @@ void TestSetUp(void)
         g_sessionlistener4Proxy->OnMessageReceived = ProxyMessageReceived;
         g_sessionlistener4Proxy->OnBytesReceived = ProxyBytesReceived;
     }
-
     if (g_sessionlistener4Stream == NULL) {
         g_sessionlistener4Stream = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlistener4Stream->OnSessionOpened = StreamSessionOpened;
         g_sessionlistener4Stream->OnSessionClosed = StreamSessionClosed;
         g_sessionlistener4Stream->OnStreamReceived = StreamReceived;
     }
-
     if (g_fileSendListener == NULL) {
         g_fileSendListener = (IFileSendListener*)calloc(1, sizeof(IFileSendListener));
         g_fileSendListener->OnSendFileProcess = OnSendFileProcess;
@@ -1275,7 +1260,6 @@ void TestSetUp(void)
         g_fileRecvListener->OnReceiveFileFinished = OnReceiveFileFinished;
         g_fileRecvListener->OnFileTransError = OnRecvFileTransError;
     }
-
     if (g_sessionAttr4Data == NULL) {
         g_sessionAttr4Data = (SessionAttribute*)calloc(1, sizeof(SessionAttribute));
         g_sessionAttr4Data->dataType = TYPE_BYTES;
@@ -1308,11 +1292,9 @@ void TestSetUp(void)
         g_p2pattributeProxy->linkTypeNum = 1;
         g_p2pattributeProxy->linkType[0] = LINK_TYPE_WIFI_P2P;
     }
-
     if (g_barrier == NULL) {
         g_barrier = (pthread_barrier_t*)calloc(1, sizeof(pthread_barrier_t));
     }
-
     if (g_sId4Task2 == NULL) {
         g_sId4Task2 = (int*)malloc(sizeof(int) * DEF_SEND_DATA_SID_COUNT);
     }
@@ -1347,7 +1329,6 @@ void TestTearDown(void)
         free(g_sessionlistener4Stream);
         g_sessionlistener4Stream = NULL;
     }
-
     if (g_fileRecvListener != NULL) {
         free(g_fileRecvListener);
         g_fileRecvListener = NULL;
@@ -1356,7 +1337,6 @@ void TestTearDown(void)
         free(g_fileSendListener);
         g_fileSendListener = NULL;
     }
-
     if (g_sessionAttr4Data != NULL) {
         free(g_sessionAttr4Data);
         g_sessionAttr4Data = NULL;
@@ -1397,4 +1377,24 @@ void TestTearDown(void)
         free(g_sId4Task3);
         g_sId4Task3 = NULL;
     }
+}
+
+void AddPermission(void)
+{
+    uint64_t tokenId;
+    const char *perms[2];
+    perms[0] = OHOS_PERMISSION_DISTRIBUTED_SOFTBUS_CENTER;
+    perms[1] = OHOS_PERMISSION_DISTRIBUTED_DATASYNC;
+    NativeTokenInfoParams infoTnstance = {
+        .dcapsNum = 0,
+        .permsNum = 2,
+        .aclsNum = 0,
+        .dcaps = NULL,
+        .perms = perms,
+        .acls = NULL,
+        .processName = "dsoftbus_test_service",
+        .aplStr = "system_core",
+    };
+    tokenId = GetAccessTokenId(&infoTnstance);
+    SetSelfTokenID(tokenId);
 }

@@ -38,13 +38,13 @@ void TransStreamTest::TearDown() {}
 void TransStreamTest::SetUpTestCase()
 {
     LOG("SetUp begin");
-    uint64_t tokenId = OHOS::Security::AccessToken::AccessTokenKit::GetNativeTokenId("dhardware");
-    SetSelfTokenID(tokenId);
+    AddPermission();
+    sleep(1);
+    system("pidof accesstoken_ser | xargs kill -9");
     sleep(1);
     TestSetUp();
     int ret = RegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call reg node state callback fail";
-
     ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
     ASSERT_EQ(SOFTBUS_OK, ret) << "get node fail,please check network";
 }
@@ -58,13 +58,13 @@ void TransStreamTest::TearDownTestCase()
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendStream_0100
+ * @tc.number   : SUB_DSoftbus_Spec_DCTS_SendStream_0100
  * @tc.name     : test Stream
  * @tc.desc     : Test send stream function
  * @tc.type     : FUNC
  * @tc.size     : MediumTest
  */
-HWTEST_F(TransStreamTest, SUB_Softbus_Trans_Comp_SendStream_0100, TestSize.Level2) {
+HWTEST_F(TransStreamTest, SUB_DSoftbus_Spec_DCTS_SendStream_0100, TestSize.Level2) {
     int ret;
 
     string data = "send stream transmission test!!!!";
@@ -103,13 +103,13 @@ HWTEST_F(TransStreamTest, SUB_Softbus_Trans_Comp_SendStream_0100, TestSize.Level
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_SendStream_P2P_0100
+ * @tc.number   : SUB_DSoftbus_Spec_DCTS_SendStream_P2P_0100
  * @tc.name     : test Stream By P2P
  * @tc.desc     : Test send stream function
  * @tc.type     : FUNC
  * @tc.size     : MediumTest
  */
-HWTEST_F(TransStreamTest, SUB_Softbus_Trans_Comp_SendStream_P2P_0100, TestSize.Level2) {
+HWTEST_F(TransStreamTest, SUB_DSoftbus_Spec_DCTS_SendStream_P2P_0100, TestSize.Level2) {
     int ret;
 
     string data = "send stream transmission test!!!!";

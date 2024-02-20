@@ -89,19 +89,16 @@ void TransSessionFuncTest::TearDown() {}
 void TransSessionFuncTest::SetUpTestCase()
 {
     LOG("SetUp begin");
-    uint64_t tokenId = OHOS::Security::AccessToken::AccessTokenKit::GetNativeTokenId("dhardware");
-    SetSelfTokenID(tokenId);
+    AddPermission();
+    sleep(1);
+    system("pidof accesstoken_ser | xargs kill -9");
     sleep(1);
     TestSetUp();
-
     int ret = RegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call reg node state callback fail";
-
     ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
     ASSERT_EQ(SOFTBUS_OK, ret) << "get node fail,please check network";
-
     system(" truncate -s 8M /data/8M.tar");
-
     LOG("SetUp end");
 }
 
@@ -109,18 +106,17 @@ void TransSessionFuncTest::TearDownTestCase()
 {
     int ret = UnRegisterDeviceStateDefCallback();
     EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
-
     TestTearDown();
 }
 
 /**
- * @tc.number  : SUB_Softbus_Trans_Comp_OpenSession_Func_0100
+ * @tc.number  : SUB_DSoftbus_Spec_DCTS_OpenSession_0100
  * @tc.name    : one Client creates SessionServer + 1, Max succeeds, 1 fails
  * @tc.desc    : Test session management
  * @tc.type    : FUNC
  * @tc.size    : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0100, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_0100, TestSize.Level3)
 {
     int ret;
     char sessionNames[][SESSION_NAME_SIZE_MAX] = { "com.communication.demo1.1", "com.communication.demo1.2",
@@ -145,13 +141,13 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0100, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0200
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_OpenSession_0200
  * @tc.name   : OpenSession + 1, Max succeeds, 1 fails
  * @tc.desc   : Test session management
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0200, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_0200, TestSize.Level3)
 {
     int ret;
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, GetSessionListenser4Data());
@@ -187,13 +183,13 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0200, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0300
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_OpenSession_0300
  * @tc.name   : Obtain DevicedName based on Sessionid
  * @tc.desc   : Test session management
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0300, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_0300, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Data();
@@ -215,13 +211,13 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0300, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0400
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_OpenSession_0400
  * @tc.name   : Obtain DevicedId based on Sessionid
  * @tc.desc   : Test session management
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0400, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_0400, TestSize.Level3)
 {
     int ret;
     ret = CreateSsAndOpenSession4Ctl();
@@ -237,13 +233,13 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0400, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0500
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_OpenSession_0500
  * @tc.name   : OpenSession Type is TYPE_BYTES sendfile fail
  * @tc.desc   : 【G-DISTRIBUTED-0205】禁止修改Openharmony分布式软总线设备间传输通道管理协议。
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0500, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_0500, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -286,13 +282,13 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0500, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0600
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_OpenSession_0600
  * @tc.name   : OpenSession Type is TYPE_MESSAGE sendfile fail
  * @tc.desc   : Test session management
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0600, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_0600, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -335,13 +331,13 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0600, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0700
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_OpenSession_0700
  * @tc.name   : OpenSession Type is TYPE_STREAM sendfile fail
  * @tc.desc   : Test session management
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0700, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_0700, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -387,13 +383,13 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0700, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0800
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_OpenSession_0800
  * @tc.name   : OpenSession Type is TYPE_BYTES sendstream fail
  * @tc.desc   : Test session management
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0800, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_0800, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -435,13 +431,13 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0800, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_0900
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_OpenSession_0900
  * @tc.name   : OpenSession Type is TYPE_MESSAGE sendstream fail
  * @tc.desc   : Test session management
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0900, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_0900, TestSize.Level3)
 {
     int ret;
     int sessionId;
@@ -483,13 +479,13 @@ HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_0900, Tes
 }
 
 /**
- * @tc.number : SUB_Softbus_Trans_Comp_OpenSession_Func_1000
+ * @tc.number : SUB_DSoftbus_Spec_DCTS_OpenSession_1000
  * @tc.name   : OpenSession Type is TYPE_FILE sendstream fail
  * @tc.desc   : Test session management
  * @tc.type   : FUNC
  * @tc.size   : MediumTest
  */
-HWTEST_F(TransSessionFuncTest, SUB_Softbus_Trans_Comp_OpenSession_Func_1000, TestSize.Level3)
+HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_1000, TestSize.Level3)
 {
     int ret;
     int sessionId;
