@@ -1,4 +1,4 @@
-# Copyright (C) 2021-2023 Huawei Device Co., Ltd.
+# Copyright (C) 2021-2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -18,6 +18,12 @@ dsoftbus_root_path = "../../../../../../../foundation/communication/dsoftbus"
 wifi_root_path = "../../../../../../../foundation/communication/wifi/wifi"
 
 ohos_moduletest_suite("DctsSoftBusTransStreamFunTest") {
+  sanitize = {
+    cfi = true
+    cfi_cross_dso = true
+    debug = true
+  }
+
   module_out_path = module_output_path
   sources = [
     "../../common/net_trans_common.c",
@@ -27,17 +33,14 @@ ohos_moduletest_suite("DctsSoftBusTransStreamFunTest") {
 
   include_dirs = [
     "../../common",
-
     "$dsoftbus_root_path/core/common/include",
     "$dsoftbus_root_path/adapter/common/include",
     "$dsoftbus_root_path/interfaces/kits/common",
     "$dsoftbus_root_path/interfaces/kits/bus_center",
     "$dsoftbus_root_path/interfaces/kits/discovery",
     "$dsoftbus_root_path/interfaces/kits/transport",
-
     "$wifi_root_path/frameworks/native/include",
     "$wifi_root_path/frameworks/native/interfaces",
-
     "$wifi_root_path/services/wifi_standard/wifi_framework/wifi_toolkit/net_helper",
     "$wifi_root_path/services/wifi_standard/wifi_framework/wifi_toolkit/log",
   ]
