@@ -785,6 +785,7 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 catch error is' + error.code);
         expect(true).assertTrue()
       }
+      await sleep(2000);
       context.disconnectServiceExtensionAbility(connectId, () => {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200  disconnectServiceExtensionAbility');
         expect(true).assertTrue()
@@ -1654,6 +1655,7 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 catch error is' + error.code);
         expect(true).assertTrue()
       }
+      await sleep(2000);
       context.disconnectServiceExtensionAbility(connectId, () => {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400  disconnectServiceExtensionAbility');
         expect(true).assertTrue()
