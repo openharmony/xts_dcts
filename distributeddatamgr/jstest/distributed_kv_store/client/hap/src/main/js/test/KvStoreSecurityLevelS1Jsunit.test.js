@@ -4414,5 +4414,204 @@ export default function kvSyncTestS1() {
             kvStore.sync(syncDeviceIds, PUSH_PULL);
             await sleep(600);
         })
+
+        
+        /**
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCSCHEMA_0100
+         * @tc.name testSyncSchema0100
+         * @tc.desc Server kvStore security is S1,client kvStore security is S1, prefixKey("test_"), PULL
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
+        it("testSyncSchema0100", 0, async function (done) {
+            console.info(logTag + "testSyncSchema0100 start");
+            
+            let options = {
+                createIfMissing: true,
+                encrypt: false,
+                backup: false,
+                autoSync: false,
+                kvStoreType: factory.KVStoreType.SINGLE_VERSION,
+                schema: {},
+                securityLevel: factory.SecurityLevel.S1,
+            }
+
+            let name = new factory.FieldNode('name');
+            name.type = factory.ValueType.INTEGER;
+            name.nullable = false;
+            name.default = 0;
+
+            let schema = new factory.Schema();
+            schema.root.appendChild(name);
+            schema.indexes = ['$.name'];
+            schema.mode = 1; 
+
+            let TEST_SCHEMA_STORE_ID = "SchemaStoreId_0100";
+            let TEST_SCHEMA_STORE_ID_PREF = "SchemaStoreId_";
+            let schemaIdPref = TEST_SCHEMA_STORE_ID.substring(0, 14);
+            console.info(logTag + "testSyncSchema0100 schemaIdPref=" + schemaIdPref);
+            if (schemaIdPref == TEST_SCHEMA_STORE_ID_PREF) {
+                options.schema = schema;
+            } 
+            console.info(logTag + "testSyncSchema0100 options.schema=" + options.schema);
+            
+            await remoteHelpers.getKvStore(TEST_SCHEMA_STORE_ID, "S1", false);
+            await sleep(1000);
+
+            await kvManager.getKVStore(TEST_SCHEMA_STORE_ID, options).then((store) => {
+                kvStore = store;
+                console.info(logTag + "testSyncSchema0100 getKVStore success. kvStore=" + kvStore);
+                expect(store != null).assertTrue();
+            }).catch((err) => {
+                console.info(logTag + 'testSyncSchema0100 getKVStore fail. error= ' + error.code + error.message);
+                expect(null).assertFail();
+            });
+
+            let schemaKey = "test_key_1";
+            let schemaValue = '{"name":1}';
+
+            let result = undefined;
+            await remoteHelpers.kvPut(schemaKey, schemaValue, "String");
+            await sleep(1000);
+            console.info(logTag + "testSyncSchema0100 Client sync start");
+
+            const query = new factory.Query();
+            query.prefixKey("test_");          
+            kvStore.sync(syncDeviceIds, query, PULL, 1000);
+            await sleep(1000);
+
+            await kvStore.get(schemaKey, (err, data) => {
+                try {
+                    console.info(logTag + "testSyncSchema0100  get data,key is " + schemaKey);
+                    if (err != null) {
+                        console.info(logTag + "testSyncSchema0100 get data error,err: " + err);
+                    } else {
+                        console.info(logTag + "testSyncSchema0100  get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + "testSyncSchema0100 get data finish,result is: " + result);
+                    expect(result).assertEqual(schemaValue);
+                    console.info(logTag + "testSyncSchema0100 end");
+                } catch (err) {
+                    console.error('testSyncSchema0100 catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                }
+
+            })
+            await sleep(1000);
+
+            await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_SCHEMA_STORE_ID, kvStore, async function () {
+                console.info(logTag + 'testSyncSchema0100 CLIENT  closeKVStore success');
+                await kvManager.deleteKVStore(TEST_BUNDLE_NAME, TEST_SCHEMA_STORE_ID, function () {
+                    console.info(logTag + 'testSyncSchema0100 CLIENT  deleteKVStore success');
+                });
+            });
+            await remoteHelpers.closeKvStore(TEST_SCHEMA_STORE_ID).then(async (ret) => {
+                console.info(logTag + "testSyncSchema0100 REMOTE  close server kvStore success: " + ret);
+            })
+            await sleep(2000);
+            kvStore = null;
+            console.info(logTag + '-----------------testSyncSchema0100 end-----------------');
+            done();
+        }) 
+
+        /**
+         * @tc.number SUB_DISTRIBUTEDDATAMGR_SINGLEKVSTORE_SYNCSCHEMA_0200
+         * @tc.name testSyncSchema0200
+         * @tc.desc Server kvStore security is S1,client kvStore security is S1, prefixKey("test_"), PUSH_PULL
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
+        it("testSyncSchema0200", 0, async function (done) {
+            console.info(logTag + "testSyncSchema0200 start");
+            
+            let options = {
+                createIfMissing: true,
+                encrypt: false,
+                backup: false,
+                autoSync: false,
+                kvStoreType: factory.KVStoreType.SINGLE_VERSION,
+                schema: {},
+                securityLevel: factory.SecurityLevel.S1,
+            }
+
+            let name = new factory.FieldNode('name');
+            name.type = factory.ValueType.INTEGER;
+            name.nullable = false;
+            name.default = 0;
+
+            let schema = new factory.Schema();
+            schema.root.appendChild(name);
+            schema.indexes = ['$.name'];
+            schema.mode = 1; 
+
+            let TEST_SCHEMA_STORE_ID = "SchemaStoreId_0200";
+            let TEST_SCHEMA_STORE_ID_PREF = "SchemaStoreId_";
+            let schemaIdPref = TEST_SCHEMA_STORE_ID.substring(0, 14);
+            console.info(logTag + "testSyncSchema0200 schemaIdPref=" + schemaIdPref);
+            if (schemaIdPref == TEST_SCHEMA_STORE_ID_PREF) {
+                options.schema = schema;
+            } 
+            console.info(logTag + "testSyncSchema0200 options.schema=" + options.schema);
+            
+            await remoteHelpers.getKvStore(TEST_SCHEMA_STORE_ID, "S1", false);
+            await sleep(1000);
+
+            await kvManager.getKVStore(TEST_SCHEMA_STORE_ID, options).then((store) => {
+                kvStore = store;
+                console.info(logTag + "testSyncSchema0200 getKVStore success. kvStore=" + kvStore);
+                expect(store != null).assertTrue();
+            }).catch((err) => {
+                console.info(logTag + 'testSyncSchema0200 getKVStore fail. error= ' + error.code + error.message);
+                expect(null).assertFail();
+            });
+
+            let schemaKey = "test_key_1";
+            let schemaValue = '{"name":1}';
+
+            let result = undefined;
+            await remoteHelpers.kvPut(schemaKey, schemaValue, "String");
+            await sleep(1000);
+            console.info(logTag + "testSyncSchema0200 Client sync start");
+
+            const query = new factory.Query();
+            query.prefixKey("test_");          
+            kvStore.sync(syncDeviceIds, query, PUSH_PULL, 1000);
+            await sleep(1000);
+
+            await kvStore.get(schemaKey, (err, data) => {
+                try {
+                    console.info(logTag + "testSyncSchema0200  get data,key is " + schemaKey);
+                    if (err != null) {
+                        console.info(logTag + "testSyncSchema0200 get data error,err: " + err);
+                    } else {
+                        console.info(logTag + "testSyncSchema0200  get data success,result is: " + data);
+                        result = data;
+                    }
+                    console.info(logTag + "testSyncSchema0200 get data finish,result is: " + result);
+                    expect(result).assertEqual(schemaValue);
+                    console.info(logTag + "testSyncSchema0200 end");
+                } catch (err) {
+                    console.error('testSyncSchema0200 catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                }
+            })
+            await sleep(1000);
+
+            await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_SCHEMA_STORE_ID, kvStore, async function () {
+                console.info(logTag + 'testSyncSchema0200 CLIENT  closeKVStore success');
+                await kvManager.deleteKVStore(TEST_BUNDLE_NAME, TEST_SCHEMA_STORE_ID, function () {
+                    console.info(logTag + 'testSyncSchema0200 CLIENT  deleteKVStore success');
+                });
+            });
+            await remoteHelpers.closeKvStore(TEST_SCHEMA_STORE_ID).then(async (ret) => {
+                console.info(logTag + "testSyncSchema0200 REMOTE  close server kvStore success: " + ret);
+            })
+            await sleep(2000);
+            kvStore = null;
+            console.info(logTag + '-----------------testSyncSchema0200 end-----------------');
+            done();
+        }) 
+
     })
 }

@@ -124,6 +124,25 @@ export default class TestApi{
             optionsInfo.securityLevel=disData.SecurityLevel.S1;
         }
 
+        let name = new disData.FieldNode('name');
+        name.type = disData.ValueType.INTEGER;
+        name.nullable = false;
+        name.default = 0;
+
+        let schema = new disData.Schema();
+        schema.root.appendChild(name);
+        schema.indexes = ['$.name'];
+        schema.mode = 1; 
+        
+
+        let TEST_SCHEMA_STORE_ID_PREF = "SchemaStoreId_";
+        let schemaIdPref = storeId.substring(0, 14);
+        console.info(logTag + "schemaIdPref=" + schemaIdPref);
+        if (schemaIdPref == TEST_SCHEMA_STORE_ID_PREF) {
+            optionsInfo.schema = schema;
+        } 
+        console.info(logTag + "optionsInfo.schema=" + optionsInfo.schema);
+
         await kvManager.getKVStore(storeId,optionsInfo).then((store) =>{
             kvStore = store;
             console.info(logTag + " getKVStore success, securityLevel is: " + optionsInfo.securityLevel);
