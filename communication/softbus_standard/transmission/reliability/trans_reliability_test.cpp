@@ -1178,7 +1178,7 @@ HWTEST_F(TransReliabilityTest, SUB_DSoftbus_Spec_DCTS_SessionServer_5000, TestSi
     EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS-ctrl fail";
     string pkgName = "com.communication.demo.max.len.#@$%!";
     ret = CreateSessionServer(pkgName.c_str(), SESSION_NAME_DATA, GetSessionListenser4Data());
-    EXPECT_EQ(SOFTBUS_FUNC_NOT_SUPPORT, ret) << "CreateSS-ctrl success";
+    EXPECT_EQ(SOFTBUS_INVALID_PKGNAME, ret) << "CreateSS-ctrl success";
     ret = RemoveSessionServer(pkgName.c_str(), SESSION_NAME_DATA);
     EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS-ctrl success";
 }
