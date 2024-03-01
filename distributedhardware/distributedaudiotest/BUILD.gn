@@ -35,7 +35,10 @@ ohos_moduletest_suite("SubDctsdisAudioTest") {
     "$base_root/foundation/distributedhardware/distributed_audio/services/hdfaudioclient:daudio_client",
   ]
 
-  external_deps = [ "hilog:libhilog" ]
+  external_deps = [
+    "distributed_hardware_fwk:distributedhardwareutils",
+    "hilog:libhilog",
+  ]
 
   defines = [
     "HI_LOG_ENABLE",
