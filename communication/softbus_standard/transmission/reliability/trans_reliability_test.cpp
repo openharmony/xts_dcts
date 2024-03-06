@@ -1207,7 +1207,7 @@ HWTEST_F(TransReliabilityTest, SUB_DSoftbus_Spec_DCTS_SessionServer_5100, TestSi
  * @tc.size   : MediumTest
  */
 
-HWTEST_F(TransReliabilityTest, SUB_Softbus_Trans_Comp_GetNodeKey_Reli_5200, TestSize.Level3)
+HWTEST_F(TransReliabilityTest, SUB_DSoftbus_Spec_DCTS_SessionServer_5200, TestSize.Level3)
 {
         int ret;
         NodeBasicInfo info;
