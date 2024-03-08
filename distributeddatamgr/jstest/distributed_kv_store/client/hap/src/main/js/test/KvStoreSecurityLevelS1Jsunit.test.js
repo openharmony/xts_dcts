@@ -22,6 +22,9 @@ import { UiDriver, BY } from '@ohos.UiTest'
 import featureAbility from '@ohos.ability.featureAbility';
 import deviceinfo from '@ohos.deviceInfo'
 
+const bundleNameKv  = "com.acts.distributekvdisjs";
+const abilityNameKv = "com.acts.distributekvdisjs.MainAbility";
+
 let localDeviceId = undefined;
 let logTag = 'RpcClient:  ';
 let testservice = null;
@@ -44,6 +47,7 @@ const TEST_FLOAT_VALUE = 1.1;
 const TEST_STORE_ID = 'clientStoreId';
 const SERVET_STORE_ID = 'clientStoreId';
 const TEST_BUNDLE_NAME = 'com.acts.distributekvdisjs';
+
 
 let g_context = featureAbility.getContext();
 const config = {
@@ -110,10 +114,33 @@ export default function kvSyncTestS1() {
             await driveFn();
             sleep(2000);
 
+            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+            deviceList = dmInstance.getAvailableDeviceListSync();
+            deviceId = deviceList[0].networkId;
+            console.info(logTag + "deviceId is: " + deviceId);
+            syncDeviceIds = [deviceId];
+
+            try{
+                console.info(logTag + "deviceId: " + deviceId);
+                let wantValue = {
+                    bundleName: bundleNameKv,
+                    abilityName: abilityNameKv,
+                    deviceId: deviceId
+                };
+                await featureAbility.startAbility({
+                    want: wantValue
+                }).then((data) => {
+                    console.info(logTag + ' startAbility  success. data=' + JSON.stringify(data));
+                }).catch((err) => {
+                    console.info(logTag + ' startAbility err: ' + err.code + err.message);
+                });
+            }catch(error){
+                console.info(logTag + "beforeAll startAbility:error = " + error);
+            }
+            await sleep(1000);
+
+
             testservice = new TestService();
-
-            console.info(logTag + "deviceId: " + deviceId);
-
             kvManager = factory.createKVManager(config);
             console.info(logTag + "CLIENT create kvManager success, kvManager=" + kvManager);
 
@@ -126,11 +153,7 @@ export default function kvSyncTestS1() {
                 console.info(logTag + "REMOTE create KvManager success,ret: " + data);
             })
 
-            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-            deviceList = dmInstance.getAvailableDeviceListSync();
-            deviceId = deviceList[0].networkId;
-            console.info(logTag + "deviceId is: " + deviceId);
-            syncDeviceIds = [deviceId];
+
 
             console.info(logTag + '-----------------beforeAll end-----------------');
             done();
