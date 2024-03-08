@@ -52,18 +52,14 @@ using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioPortType;
 using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioPortRole;
 using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioCallbackType;
 int32_t g_volume = 5;
-
 static int32_t ParamEventCallback(AudioExtParamKey key, const char *condition, const char *value, void *reserved,
     void *cookie);
-
-class AudioParamCallbackImpl final : public IAudioCallback {
-    
+class AudioParamCallbackImpl final : public IAudioCallback { 
 const int32_t SUCCESS = 0;
 
 public:
     AudioParamCallbackImpl() {}
     ~AudioParamCallbackImpl() override {}
-
     int32_t RenderCallback(AudioCallbackType type, int8_t &reserved, int8_t &cookie) override;
     int32_t ParamCallback(AudioExtParamKey key, const std::string &condition, const std::string &value,
         int8_t &reserved, int8_t cookie) override;
@@ -163,7 +159,7 @@ int32_t InitTestDemo()
         return ERR_DH_AUDIO_FAILED;
     }
     std::cout << "Load audio manager success." << std::endl;
-    FindDevice();
+    FindAudioDevice();
     if (g_devId.empty()) {
         std::cout << "Cannot find distributed device. Please input 9 to query distribtued device." << std::endl;
     } else {
@@ -172,7 +168,7 @@ int32_t InitTestDemo()
     return DH_SUCCESS;
 }
 
-std::string FindDevice()
+std::string FindAudioDevice()
 {
     if (g_manager == nullptr) {
         std::cout << "Audio manager is null, Please Check network!" << std::endl;
@@ -237,7 +233,7 @@ static int32_t LoadSpkDev(const std::string &devId)
     }
     if (dev.adapterName.data() == nullptr) {
         std::cout << "Input device id is wrong." << std::endl;
-        FindDevice();
+        FindAudioDevice();
         return ERR_DH_AUDIO_FAILED;
     }
     if (g_manager == nullptr) {
@@ -463,7 +459,7 @@ static int32_t LoadMicDev(const std::string &devId)
     }
     if (dev.adapterName.data() == nullptr) {
         std::cout << "Input device id is wrong." << std::endl;
-        FindDevice();
+        FindAudioDevice();
         return ERR_DH_AUDIO_FAILED;
     }
     if (g_manager == nullptr) {
@@ -565,15 +561,15 @@ std::string StartCapture()
         g_micFile = fopen(MIC_FILE_PATH, "ab+");
         if (g_micFile == nullptr) {
             std::cout << "Open pcm file failed." << std::endl;
-            return "false";;
+            return "false";
         }
         g_capingThread = std::thread(Capture);
-        return "true";;
+        return "true";
     }
 
     if (g_micStatus == DeviceStatus::DEVICE_START) {
         std::cout << "Mic device is already started." << std::endl;
-        return "true";;
+        return "true";
     }
 
     if (g_micStatus == DeviceStatus::DEVICE_STOP) {
@@ -586,19 +582,19 @@ std::string StopCapture()
 {
     if (g_capture == nullptr) {
         std::cout << "MIC device is null." << std::endl;
-        return "false";;
+        return "false";
     }
     if (g_micStatus == DeviceStatus::DEVICE_IDLE) {
         std::cout << "Mic device is not opened." << std::endl;
-        return "false";;
+        return "false";
     }
     if (g_micStatus == DeviceStatus::DEVICE_OPEN) {
         std::cout << "Mic device is not started." << std::endl;
-        return "false";;
+        return "false";
     }
     if (g_micStatus == DeviceStatus::DEVICE_STOP) {
         std::cout << "Mic device is already started." << std::endl;
-        return "false";;
+        return "false";
     }
     g_micStatus = DeviceStatus::DEVICE_STOP;
     if (g_capingThread.joinable()) {
@@ -612,7 +608,7 @@ std::string CloseMic()
 {
     if (g_micStatus == DeviceStatus::DEVICE_IDLE) {
         std::cout << "Mic device is not opened." << std::endl;
-        return "false";;
+        return "false";
     }
 
     if (g_micStatus == DeviceStatus::DEVICE_START) {
@@ -682,7 +678,7 @@ std::string HandleAudioEvent(int32_t cmd)
 {
     std::string res = "";
     if (cmd == CMD_FIND) {
-        res = FindDevice();
+        res = FindAudioDevice();
     }
     if (cmd == CMD_OPEN_SPK) {
         res = OpenSpk(g_devId);
