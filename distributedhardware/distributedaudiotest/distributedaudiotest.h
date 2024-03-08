@@ -111,7 +111,7 @@ enum DAudioErrorCode {
 
 using WavHdr = struct WAV_HEADER;
 int32_t InitTestDemo();
-std::string FindDevice();
+std::string FindAudioDevice();
 std::string OpenSpk(std::string devId);
 std::string StartRender();
 std::string StopRender();
