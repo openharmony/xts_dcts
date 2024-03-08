@@ -23,6 +23,7 @@ ohos_moduletest_suite("SubDctsdisAudioTest") {
     "$base_root/foundation/distributedhardware/distributed_hardware_fwk/common/log/include",
     "$base_root/drivers/peripheral/distributed_audio/hdi_service/common/include",
     "$base_root/foundation/distributedhardware/distributed_hardware_fwk/utils/include/log",
+    "$base_root/foundation/distributedhardware/distributed_audio/common/include",
   ]
 
   sources = [
@@ -30,13 +31,13 @@ ohos_moduletest_suite("SubDctsdisAudioTest") {
     "distributedaudiotest.cpp",
   ]
 
-  deps = [
-    "$base_root/drivers/hdf_core/adapter/uhdf2/utils:libhdf_utils",
-    "$base_root/foundation/distributedhardware/distributed_audio/services/hdfaudioclient:daudio_client",
-  ]
+  deps = [ "$base_root/drivers/hdf_core/adapter/uhdf2/utils:libhdf_utils" ]
 
   external_deps = [
+    "c_utils:utils",
     "distributed_hardware_fwk:distributedhardwareutils",
+    "drivers_interface_distributed_audio:libdaudio_proxy_1.0",
+    "hdf_core:libhdf_utils",
     "hilog:libhilog",
   ]
 

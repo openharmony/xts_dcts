@@ -29,8 +29,64 @@
 #include "unistd.h"
 #include "distributedaudiotest.h"
 
-// namespace {
 using namespace OHOS::DistributedHardware;
+
+using OHOS::HDI::DistributedAudio::Audio::V1_0::IAudioAdapter;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioAdapterDescriptor;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioFormat;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioPort;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioPortDirection;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::IAudioManager;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::IAudioRender;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::IAudioCapture;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioSampleAttributes;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioDeviceDescriptor;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioCategory;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioRouteNode;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioExtParamKey;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioRoute;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioSceneDescriptor;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::IAudioCallback;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioPortPin;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioPortType;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioPortRole;
+using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioCallbackType;
+int32_t g_volume = 5;
+
+static int32_t ParamEventCallback(AudioExtParamKey key, const char *condition, const char *value, void *reserved,
+    void *cookie);
+
+class AudioParamCallbackImpl final : public IAudioCallback {
+    
+const int32_t SUCCESS = 0;
+
+public:
+    AudioParamCallbackImpl() {}
+    ~AudioParamCallbackImpl() override {}
+
+    int32_t RenderCallback(AudioCallbackType type, int8_t &reserved, int8_t &cookie) override;
+    int32_t ParamCallback(AudioExtParamKey key, const std::string &condition, const std::string &value,
+        int8_t &reserved, int8_t cookie) override;
+};
+
+int32_t AudioParamCallbackImpl::RenderCallback(AudioCallbackType type, int8_t &reserved, int8_t &cookie)
+{
+    (void) type;
+    (void) reserved;
+    (void) cookie;
+    return SUCCESS;
+}
+
+int32_t AudioParamCallbackImpl::ParamCallback(AudioExtParamKey key, const std::string &condition,
+    const std::string &value, int8_t &reserved, int8_t cookie)
+{
+    (void) cookie;
+    void *cookies = nullptr;
+    ParamEventCallback(static_cast<::AudioExtParamKey>(key), condition.c_str(),
+        value.c_str(), static_cast<void *>(&reserved), cookies);
+    return SUCCESS;
+}
+
 const int32_t CMD_FIND = 9;
 const int32_t CMD_OPEN_SPK = 1;
 const int32_t CMD_CLOSE_SPK = 2;
@@ -51,7 +107,6 @@ constexpr int32_t TYPE_OFFSET = 12;
 constexpr int32_t AUDIO_SAMPLE_RATE = 48000;
 constexpr int32_t VOLUME_MIN = 0;
 constexpr int32_t VOLUME_MAX = 15;
-constexpr int32_t VOLUME_BIT = 3;
 constexpr int32_t RENDER_FRAME_SIZE = 3840;
 constexpr int32_t RENDER_INTER_LEAVED = 1;
 constexpr int32_t RENDER_STREAM_ID = 0;
@@ -59,20 +114,21 @@ constexpr int32_t RENDER_CHANNEL_MASK = 2;
 constexpr int32_t CAPTURE_INTER_LEAVED = 1;
 constexpr int32_t CAPTURE_STREAM_ID = 2;
 constexpr int32_t CAPTURE_CHANNEL_MASK = 2;
-constexpr int64_t AUDIO_FRAME_TIME_INTERFAL_DEFAULT = 20000;
+constexpr int64_t AUDIO_FRAME_TIME_INTERFAL_DEFAULT = 21333;
 
-static AudioManager *g_manager = nullptr;
-static AudioAdapter *g_adapter = nullptr;
-static AudioRender *g_render = nullptr;
-static AudioCapture *g_capture = nullptr;
-static AudioAdapterDescriptor *g_devices = nullptr;
-
+static OHOS::sptr<IAudioManager> g_manager = nullptr;
+static OHOS::sptr<IAudioAdapter> g_adapter = nullptr;
+static OHOS::sptr<IAudioRender> g_render = nullptr;
+static OHOS::sptr<IAudioCapture> g_capture = nullptr;
+static std::vector<AudioAdapterDescriptor> g_devices;
+static OHOS::sptr<IAudioCallback> g_callbackStub = nullptr;
 static std::string g_devId = "";
 
 static constexpr const char* PLAY_THREAD = "playThread";
 static constexpr const char* CAPTURE_THREAD = "captureThread";
 
-int32_t g_deviceNum = 0;
+uint32_t g_renderId = 0;
+uint32_t g_captureId = 0;
 int32_t g_frameNum = 0;
 int32_t g_frameIndex = 0;
 int32_t g_micFrameNum = 0;
@@ -101,13 +157,13 @@ int32_t InitTestDemo()
     std::cout << "**********************************************************************************" << std::endl;
     std::cout << std::endl;
     std::cout << "Init distributed audio hdf service." << std::endl;
-    g_manager = GetAudioManagerFuncs();
+    g_manager = IAudioManager::Get("daudio_primary_service", false);
     if (g_manager == nullptr) {
         std::cout << "Distributed audio manager is null, Please Check network!" << std::endl;
-        return ERR_DH_AUDIO_HDF_FAIL;
+        return ERR_DH_AUDIO_FAILED;
     }
     std::cout << "Load audio manager success." << std::endl;
-    FindAudioDevice();
+    FindDevice();
     if (g_devId.empty()) {
         std::cout << "Cannot find distributed device. Please input 9 to query distribtued device." << std::endl;
     } else {
@@ -116,19 +172,19 @@ int32_t InitTestDemo()
     return DH_SUCCESS;
 }
 
-std::string FindAudioDevice()
+std::string FindDevice()
 {
     if (g_manager == nullptr) {
         std::cout << "Audio manager is null, Please Check network!" << std::endl;
         return "false";
     }
-    int32_t ret = g_manager->GetAllAdapters(g_manager, &g_devices, &g_deviceNum);
+    int32_t ret = g_manager->GetAllAdapters(g_devices);
     if (ret != DH_SUCCESS) {
         std::cout << "Get audio devices failed!" << std::endl;
         return "false";
     }
-    for (int32_t index = 0; index < g_deviceNum; index++) {
-        const AudioAdapterDescriptor &desc = g_devices[index];
+    for (uint32_t index = 0; index < g_devices.size(); index++) {
+        const AudioAdapterDescriptor desc = g_devices[index];
         if (index == 0) {
             g_devId = desc.adapterName;
             break;
@@ -171,27 +227,27 @@ static int32_t ParamEventCallback(AudioExtParamKey key, const char *condition, c
 
 static int32_t LoadSpkDev(const std::string &devId)
 {
-    struct AudioAdapterDescriptor *dev = nullptr;
-    for (int32_t index = 0; index < g_deviceNum; index++) {
-        struct AudioAdapterDescriptor &desc = g_devices[index];
+    struct AudioAdapterDescriptor dev;
+    for (uint32_t index = 0; index < g_devices.size(); index++) {
+        struct AudioAdapterDescriptor desc = g_devices[index];
         if (desc.adapterName == devId) {
-            dev = &desc;
+            dev = desc;
             break;
         }
     }
-    if (dev == nullptr) {
+    if (dev.adapterName.data() == nullptr) {
         std::cout << "Input device id is wrong." << std::endl;
-        FindAudioDevice();
-        return ERR_DH_AUDIO_HDF_FAIL;
+        FindDevice();
+        return ERR_DH_AUDIO_FAILED;
     }
     if (g_manager == nullptr) {
-        return ERR_DH_AUDIO_HDF_FAIL;
+        return ERR_DH_AUDIO_FAILED;
     }
     if (g_adapter == nullptr) {
-        int32_t ret = g_manager->LoadAdapter(g_manager, dev, &g_adapter);
+        int32_t ret = g_manager->LoadAdapter(dev, g_adapter);
         if (ret != DH_SUCCESS || g_adapter == nullptr) {
             std::cout << "Load audio device failed, ret: " << ret << std::endl;
-            return ERR_DH_AUDIO_HDF_FAIL;
+            return ERR_DH_AUDIO_FAILED;
         }
     }
     return DH_SUCCESS;
@@ -207,8 +263,9 @@ std::string OpenSpk(std::string devId)
         std::cout << "Load spk failed" << std::endl;
         return "false";
     }
-    ParamCallback callback = ParamEventCallback;
-    int32_t ret = g_adapter->RegExtraParamObserver(g_adapter, callback, nullptr);
+
+    g_callbackStub = new AudioParamCallbackImpl();
+    int32_t ret = g_adapter->RegExtraParamObserver(g_callbackStub, 0);
     if (ret != DH_SUCCESS) {
         std::cout << "Register observer failed, ret: " << ret << std::endl;
         return "false";
@@ -216,15 +273,15 @@ std::string OpenSpk(std::string devId)
 
     struct AudioDeviceDescriptor renderDesc;
     renderDesc.pins = AudioPortPin::PIN_OUT_SPEAKER;
-    renderDesc.desc = nullptr;
+    renderDesc.desc = "";
     AudioSampleAttributes g_rattrs = {};
-    g_rattrs.type = AUDIO_IN_MEDIA;
+    g_rattrs.type = AudioCategory::AUDIO_IN_MEDIA;
     g_rattrs.interleaved = RENDER_INTER_LEAVED;
     g_rattrs.streamId = RENDER_STREAM_ID;
     g_rattrs.channelCount = RENDER_CHANNEL_MASK;
     g_rattrs.sampleRate = AUDIO_SAMPLE_RATE;
     g_rattrs.format = AudioFormat::AUDIO_FORMAT_TYPE_PCM_16_BIT;
-    ret = g_adapter->CreateRender(g_adapter, &renderDesc, &g_rattrs, &g_render);
+    ret = g_adapter->CreateRender(renderDesc, g_rattrs, g_render, g_renderId);
     if (ret != DH_SUCCESS || g_render == nullptr) {
         std::cout << "Open SPK device failed, ret: " << ret << std::endl;
         return "false";
@@ -256,13 +313,20 @@ static void Play()
         std::cout << "Play thread setname failed." << std::endl;
     }
     std::cout << "Playing thread started." << std::endl;
-    g_render->control.Start((AudioHandle)g_render);
+    g_render->Start();
     g_spkStatus = DeviceStatus::DEVICE_START;
 
     uint64_t size = 0;
     while (g_spkStatus == DeviceStatus::DEVICE_START) {
         int64_t startTime = GetNowTimeUs();
-        int32_t ret = g_render->RenderFrame(g_render, renderData[g_frameIndex], RENDER_FRAME_SIZE, &size);
+
+        std::vector<int8_t> frameHal(RENDER_FRAME_SIZE);
+        int32_t ret = memcpy_s(frameHal.data(), RENDER_FRAME_SIZE, renderData[g_frameIndex], RENDER_FRAME_SIZE);
+        if (ret != EOK) {
+            DHLOGE("Copy render frame failed, error code %{public}d.", ret);
+            return;
+        }
+        ret = g_render->RenderFrame(frameHal, size);
         if (ret != DH_SUCCESS) {
             std::cout<<"RenderFrame failed, index: "<< g_frameIndex << ", ret:  " << ret << std::endl;
         }
@@ -350,7 +414,7 @@ std::string StopRender()
     if (g_playingThread.joinable()) {
         g_playingThread.join();
     }
-    g_render->control.Stop((AudioHandle)g_render);
+    g_render->Stop();
     return "true";
 }
 
@@ -365,13 +429,13 @@ std::string CloseSpk()
         StopRender();
     }
 
-    int32_t ret = g_adapter->DestroyRender(g_adapter, g_render);
+    int32_t ret = g_adapter->DestroyRender(g_renderId);
     if (ret != DH_SUCCESS) {
         std::cout << "Close speaker failed" << std::endl;
         return "false";
     }
     if (g_micStatus == DeviceStatus::DEVICE_IDLE) {
-        g_manager->UnloadAdapter(g_manager, g_adapter);
+        g_manager->UnloadAdapter(g_devId);
         g_adapter = nullptr;
     }
     g_spkStatus = DeviceStatus::DEVICE_IDLE;
@@ -389,27 +453,27 @@ std::string CloseSpk()
 
 static int32_t LoadMicDev(const std::string &devId)
 {
-    struct AudioAdapterDescriptor *dev = nullptr;
-    for (int32_t index = 0; index < g_deviceNum; index++) {
-        struct AudioAdapterDescriptor &desc = g_devices[index];
+    struct AudioAdapterDescriptor dev;
+    for (uint32_t index = 0; index < g_devices.size(); index++) {
+        struct AudioAdapterDescriptor desc = g_devices[index];
         if (desc.adapterName == devId) {
-            dev = &desc;
+            dev = desc;
             break;
         }
     }
-    if (dev == nullptr) {
+    if (dev.adapterName.data() == nullptr) {
         std::cout << "Input device id is wrong." << std::endl;
-        FindAudioDevice();
-        return ERR_DH_AUDIO_HDF_FAIL;
+        FindDevice();
+        return ERR_DH_AUDIO_FAILED;
     }
     if (g_manager == nullptr) {
-        return ERR_DH_AUDIO_HDF_FAIL;
+        return ERR_DH_AUDIO_FAILED;
     }
     if (g_adapter == nullptr) {
-        int32_t ret = g_manager->LoadAdapter(g_manager, dev, &g_adapter);
+        int32_t ret = g_manager->LoadAdapter(dev, g_adapter);
         if (ret != DH_SUCCESS || g_adapter == nullptr) {
             std::cout << "Load audio device failed, ret: " << ret << std::endl;
-            return ERR_DH_AUDIO_HDF_FAIL;
+            return ERR_DH_AUDIO_FAILED;
         }
     }
     return DH_SUCCESS;
@@ -428,15 +492,15 @@ std::string OpenMic(std::string devId)
 
     AudioDeviceDescriptor captureDesc;
     captureDesc.pins = AudioPortPin::PIN_IN_MIC;
-    captureDesc.desc = nullptr;
+    captureDesc.desc = "";
     AudioSampleAttributes captureAttr;
-    captureAttr.type = AUDIO_IN_MEDIA;
+    captureAttr.type = AudioCategory::AUDIO_IN_MEDIA;
     captureAttr.interleaved = CAPTURE_INTER_LEAVED;
     captureAttr.streamId = CAPTURE_STREAM_ID;
     captureAttr.channelCount = CAPTURE_CHANNEL_MASK;
     captureAttr.sampleRate = AUDIO_SAMPLE_RATE;
     captureAttr.format = AudioFormat::AUDIO_FORMAT_TYPE_PCM_16_BIT;
-    int32_t ret = g_adapter->CreateCapture(g_adapter, &captureDesc, &captureAttr, &g_capture);
+    int32_t ret = g_adapter->CreateCapture(captureDesc, captureAttr, g_capture, g_captureId);
     if (ret != DH_SUCCESS || g_capture == nullptr) {
         std::cout << "Open MIC device failed." << std::endl;
         return "false";
@@ -468,19 +532,19 @@ static void Capture()
         std::cout << "Capture thread setname failed." << std::endl;
     }
     std::cout << "Capturing thread started." << std::endl;
-    g_capture->control.Start((AudioHandle)g_capture);
+    g_capture->Start();
     g_micStatus = DeviceStatus::DEVICE_START;
 
     uint64_t size = 0;
     while (g_micStatus == DeviceStatus::DEVICE_START) {
-        uint8_t *data[RENDER_FRAME_SIZE];
+        std::vector<int8_t> data(RENDER_FRAME_SIZE);
         int64_t startTime = GetNowTimeUs();
-        int32_t ret = g_capture->CaptureFrame(g_capture, data, RENDER_FRAME_SIZE, &size);
+        int32_t ret = g_capture->CaptureFrame(data, size);
         if (ret != DH_SUCCESS) {
             std::cout << "CaptureFrame failed, ret: " << ret << std::endl;
             return;
         }
-        size_t writeCnt = fwrite(data, 1, RENDER_FRAME_SIZE, g_micFile);
+        size_t writeCnt = fwrite(data.data(), 1, RENDER_FRAME_SIZE, g_micFile);
         if (static_cast<int32_t>(writeCnt) != RENDER_FRAME_SIZE) {
             std::cout << "fwrite data failed." << std::endl;
         }
@@ -501,15 +565,15 @@ std::string StartCapture()
         g_micFile = fopen(MIC_FILE_PATH, "ab+");
         if (g_micFile == nullptr) {
             std::cout << "Open pcm file failed." << std::endl;
-            return "false";
+            return "false";;
         }
         g_capingThread = std::thread(Capture);
-        return "true";
+        return "true";;
     }
 
     if (g_micStatus == DeviceStatus::DEVICE_START) {
         std::cout << "Mic device is already started." << std::endl;
-        return "true";
+        return "true";;
     }
 
     if (g_micStatus == DeviceStatus::DEVICE_STOP) {
@@ -522,25 +586,25 @@ std::string StopCapture()
 {
     if (g_capture == nullptr) {
         std::cout << "MIC device is null." << std::endl;
-        return "false";
+        return "false";;
     }
     if (g_micStatus == DeviceStatus::DEVICE_IDLE) {
         std::cout << "Mic device is not opened." << std::endl;
-        return "false";
+        return "false";;
     }
     if (g_micStatus == DeviceStatus::DEVICE_OPEN) {
         std::cout << "Mic device is not started." << std::endl;
-        return "false";
+        return "false";;
     }
     if (g_micStatus == DeviceStatus::DEVICE_STOP) {
         std::cout << "Mic device is already started." << std::endl;
-        return "false";
+        return "false";;
     }
     g_micStatus = DeviceStatus::DEVICE_STOP;
     if (g_capingThread.joinable()) {
         g_capingThread.join();
     }
-    g_capture->control.Stop((AudioHandle)g_capture);
+    g_capture->Stop();
     return "true";
 }
 
@@ -548,20 +612,20 @@ std::string CloseMic()
 {
     if (g_micStatus == DeviceStatus::DEVICE_IDLE) {
         std::cout << "Mic device is not opened." << std::endl;
-        return "false";
+        return "false";;
     }
 
     if (g_micStatus == DeviceStatus::DEVICE_START) {
         StopCapture();
     }
 
-    int32_t ret = g_adapter->DestroyCapture(g_adapter, g_capture);
+    int32_t ret = g_adapter->DestroyCapture(g_captureId);
     if (ret != DH_SUCCESS) {
         std::cout << "Close mic failed." << std::endl;
         return "false";
     }
     if (g_spkStatus == DeviceStatus::DEVICE_IDLE) {
-        g_manager->UnloadAdapter(g_manager, g_adapter);
+        g_manager->UnloadAdapter(g_devId);
         g_adapter = nullptr;
     }
     if (g_micFile != nullptr) {
@@ -588,7 +652,7 @@ std::string SetVolume(int vol)
     AudioExtParamKey key = AudioExtParamKey::AUDIO_EXT_PARAM_KEY_VOLUME;
     std::string condition = "EVENT_TYPE=1;VOLUME_GROUP_ID=1;AUDIO_VOLUME_TYPE=1;";
     std::string volStr = std::to_string(vol);
-    int32_t ret = g_adapter->SetExtraParams(g_adapter, key, condition.c_str(), volStr.c_str());
+    int32_t ret = g_adapter->SetExtraParams(key, condition, volStr);
     if (ret != DH_SUCCESS) {
         std::cout << "Set volume failed" << std::endl;
         return "false";
@@ -604,8 +668,8 @@ std::string GetVolume()
     }
     AudioExtParamKey key = AudioExtParamKey::AUDIO_EXT_PARAM_KEY_VOLUME;
     std::string condition = "EVENT_TYPE=1;VOLUME_GROUP_ID=1;AUDIO_VOLUME_TYPE=1;";
-    char vol[VOLUME_BIT];
-    int32_t ret = g_adapter->GetExtraParams(g_adapter, key, condition.c_str(), vol, VOLUME_BIT);
+    std::string vol;
+    int32_t ret = g_adapter->GetExtraParams(key, condition.c_str(), vol);
     if (ret != DH_SUCCESS) {
         std::cout << "Get Volume failed." << std::endl;
         return "false";
@@ -618,7 +682,7 @@ std::string HandleAudioEvent(int32_t cmd)
 {
     std::string res = "";
     if (cmd == CMD_FIND) {
-        res = FindAudioDevice();
+        res = FindDevice();
     }
     if (cmd == CMD_OPEN_SPK) {
         res = OpenSpk(g_devId);
@@ -645,11 +709,10 @@ std::string HandleAudioEvent(int32_t cmd)
         res = CloseMic();
     }
     if (cmd == CMD_SET_VOL) {
-        res = SetVolume(5);
+        res = SetVolume(g_volume);
     }
     if (cmd == CMD_GET_VOL) {
         res = GetVolume();
     }
     return res;
 }
-

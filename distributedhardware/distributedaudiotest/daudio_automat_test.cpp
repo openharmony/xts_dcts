@@ -14,7 +14,7 @@
  */
 
 #include <gtest/gtest.h>
-#include "./distributedaudiotest.h"
+#include "distributedaudiotest.h"
 
 using namespace testing::ext;
 using namespace OHOS::DistributedHardware;
