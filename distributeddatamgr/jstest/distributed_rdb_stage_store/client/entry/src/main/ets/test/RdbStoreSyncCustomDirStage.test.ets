@@ -111,12 +111,6 @@ export default function rdbSyncCustomDirlTest(){
             console.info(logTag + "deviceId is: " + deviceId);
             syncDeviceIds = [deviceId];
 
-            // testservice = new TestService();
-            // await testservice.toConnectRdbAbility().then(data => {
-            //     gIRemoteObject = data;
-            //     console.info(logTag + "toConnectAbility data is" + data);
-            //     remoteHelpers = new RemoteHelper(testservice,gIRemoteObject);
-            // })
             let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             let want = {
                 deviceId: deviceId,

@@ -35,7 +35,6 @@ const STORE_CONFIG: data_Rdb.StoreConfig = {
 let rdbStore: data_Rdb.RdbStore | undefined = undefined;
 let rdbSecondStore: data_Rdb.RdbStore | undefined = undefined;
 
-// var rdbStore = undefined;
 var resultSet = undefined;
 let dmInstance = null;
 let localDeviceId = undefined;
@@ -49,8 +48,6 @@ let deviceList = undefined;
 let connection: number;
 const TEST_BUNDLE_NAME = 'com.acts.distributerdbdisets';
 let atManager = abilityAccessCtrl.createAtManager();
-
-
 
 export default function rdbSyncFirstLevelTest(){
     describe('rdbSyncFirstLevelTest', function () {
@@ -103,8 +100,6 @@ export default function rdbSyncFirstLevelTest(){
             }
         }
 
-
-        
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
             await getPermission();
@@ -117,13 +112,6 @@ export default function rdbSyncFirstLevelTest(){
             deviceId = deviceList[0].networkId;
             console.info(logTag + "deviceId is: " + deviceId);
             syncDeviceIds = [deviceId];
-
-            // testService = new TestService();
-            // await testService.toConnectRdbAbility().then(data => {
-            //     gIRemoteObject = data;
-            //     console.info(logTag + "toConnectAbility data is" + data);
-            //     remoteHelpers = new RemoteHelper(testService,gIRemoteObject);
-            // }
 
             let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             let want = {
@@ -158,9 +146,6 @@ export default function rdbSyncFirstLevelTest(){
             }).catch((err: BusinessError) => {
                 console.error(`Get RdbStore failed, code is ${err.code},message is ${err.message}`);
             })
-
-            // rdbStore = await data_Rdb.getRdbStore(context, STORE_CONFIG);
-            // console.info(logTag + "create RemoteRdbStage.db success");
             await rdbStore.executeSql(CREATE_TABLE_TEST, null);
             console.info(logTag + "create  remote RemoteRdbStage.db success");
             //setDistributedTables
