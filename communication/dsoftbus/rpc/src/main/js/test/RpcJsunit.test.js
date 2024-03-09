@@ -14,10 +14,10 @@
  */
 
 import rpc from "@ohos.rpc";
-import TestService from "./testService"
+import TestService from "./testService";
 import featureAbility from '@ohos.ability.featureAbility';
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
-import { UiDriver, BY } from '@ohos.UiTest'
+import { UiDriver, BY } from '@ohos.UiTest';
 
 export default function RpcJsUnitTest() {
 
@@ -132,7 +132,7 @@ export default function RpcJsUnitTest() {
                     _checkResult(_num, _str);
                 }, 2 * 1000);
                 console.info("result:" + result);
-                return result
+                return result;
             }
         }
 
@@ -145,7 +145,7 @@ export default function RpcJsUnitTest() {
                 let descriptor = data.readInterfaceToken();
                 if (descriptor !== "TestAbilityStub") {
                     console.error("received unknown descriptor: " + descriptor);
-                    return false
+                    return false;
                 }
                 switch (code) {
                     case 1:
@@ -172,12 +172,12 @@ export default function RpcJsUnitTest() {
                             reply.writeChar(tmp8);
                             reply.writeString(tmp9);
                             reply.writeSequenceable(s);
-                            return true
+                            return true;
                         }
                     default:
                         {
                             console.error("default case, code: " + code);
-                            return false
+                            return false;
                         }
                 }
             }
@@ -192,7 +192,7 @@ export default function RpcJsUnitTest() {
                 let descriptor = data.readInterfaceToken();
                 if (descriptor !== "TestAbilityMessageStub") {
                     console.error("received unknown descriptor: " + descriptor);
-                    return false
+                    return false;
                 }
                 switch (code) {
                     case 1:
@@ -219,12 +219,12 @@ export default function RpcJsUnitTest() {
                             reply.writeChar(tmp8);
                             reply.writeString(tmp9);
                             reply.writeParcelable(s);
-                            return true
+                            return true;
                         }
                     default:
                         {
                             console.error("default case, code: " + code);
-                            return false
+                            return false;
                         }
                 }
             }
@@ -269,7 +269,7 @@ export default function RpcJsUnitTest() {
             }
             asObject() {
                 console.info("server remote");
-                return this.remote
+                return this.remote;
             }
         }
 
@@ -287,12 +287,13 @@ export default function RpcJsUnitTest() {
         async function getPermission() {
             console.info(`getPermission is start`);
             let permissions = ['ohos.permission.DISTRIBUTED_DATASYNC'];
-            let context = featureAbility.getContext()
+            let context = featureAbility.getContext();
             context.requestPermissionsFromUser(permissions, 666, (data) => {
                 console.info("request success" + JSON.stringify(data));
 
             })
         }
+
         async function driveFn() {
             try {
                 let driver = await UiDriver.create();
@@ -312,17 +313,16 @@ export default function RpcJsUnitTest() {
 
         beforeAll(async function (done) {
             console.info('beforeAll called rpc');
-
+            testservice = new TestService;
             await getPermission();
-            
             sleep(5000);
             await driveFn();
             sleep(2000);
-
-            testservice = new TestService
+            testservice.toStartAbility();
+            sleep(2000);
             await testservice.toConnectAbility().then(data => {
                 gIRemoteObject = data;
-                console.info("RpcClient: toConnectAbility data is： " + data);
+                console.info("RpcClient: toConnectAbility data is: " + data);
             })
             done();
             console.info("beforeAll done");

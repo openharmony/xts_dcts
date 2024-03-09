@@ -16,8 +16,9 @@
 import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
-var bundleName = "com.acts.rpc.test.server";
+var serverBundleName = "com.acts.rpc.test.server";
 var abilityName = "com.acts.rpc.test.server.ServiceAbility";
+var mainAbilityName = "com.acts.rpc.test.server.MainAbility";
 var deviceList;
 
 export default class TestService {
@@ -25,25 +26,24 @@ export default class TestService {
     }
 
     getDeviceList(deviceManager) {
-
         deviceList = deviceManager.getAvailableDeviceListSync();
-        console.info("getDeviceList success, deviceList id: " + JSON.stringify(deviceList))
+        console.info("getDeviceList success, deviceList id: " + JSON.stringify(deviceList));
     }
 
     toConnectAbility() {
-        console.info("RpcClient:  toConnectAbility")
+        console.info("RpcClient:  toConnectAbility");
         return new Promise(resolve=>{
             let self = this;
 
             let dmInstance = deviceManager.createDeviceManager('ohos.rpc.test');
 
             self.getDeviceList(dmInstance);
-                console.info("RpcClient:  got deviceManager: " + dmInstance)
-                let networkId = deviceList[0].networkId
-                console.info("RpcClient: deviceid : " + networkId)
-                console.info("RpcClient: online deviceList id: " + JSON.stringify(deviceList))
+                console.info("RpcClient:  got deviceManager: " + dmInstance);
+                let networkId = deviceList[0].networkId;
+                console.info("RpcClient: deviceid : " + networkId);
+                console.info("RpcClient: online deviceList id: " + JSON.stringify(deviceList));
                 let want = {
-                    "bundleName": bundleName,
+                    "bundleName": serverBundleName,
                     "abilityName": abilityName,
                     "deviceId": networkId,
                     "flags": 256
@@ -51,18 +51,44 @@ export default class TestService {
                 let connect = {
                     onConnect: function (elementName, remoteProxy) {
                         console.log('RpcClient: onConnect called, remoteProxy: ' + remoteProxy);
-                        resolve(remoteProxy)
+                        resolve(remoteProxy);
                     },
                     onDisconnect: function (elementName) {
-                        console.log("RpcClient: onDisconnect")
+                        console.log("RpcClient: onDisconnect");
                     },
                     onFailed: function () {
-                        console.log("RpcClient: onFailed")
+                        console.log("RpcClient: onFailed");
                     }
                 }
-                let connectId = featureAbility.connectAbility(want, connect)
-                console.info("RpcClient: connect ability got id: " + connectId)
+                let connectId = featureAbility.connectAbility(want, connect);
+                console.info("RpcClient: connect ability got id: " + connectId);
         })
+    }
 
+    toStartAbility() {
+        console.info("RpcClient:  toStartAbility");
+        let self = this;
+        let dmInstance = deviceManager.createDeviceManager('ohos.rpc.test');
+        self.getDeviceList(dmInstance);
+        console.info("RpcClient:  got deviceManager: " + dmInstance);
+        let networkId = deviceList[0].networkId;
+        console.info("RpcClient: deviceid : " + networkId);
+        console.info("RpcClient: online deviceList id: " + JSON.stringify(deviceList));
+        try{
+            let wantValue = {
+                "bundleName": serverBundleName,
+                "abilityName": mainAbilityName,
+                "deviceId": networkId
+            };
+            featureAbility.startAbility({
+                want: wantValue
+            }).then((data) => {
+                console.info("RpcClient startAbility  success. data=" + JSON.stringify(data));
+            }).catch((err) => {
+                console.info("RpcClient startAbility err: " + err.code + err.message);
+            });
+        }catch(error){
+            console.info("RpcClient startAbility:error = " + error);
+        }  
     }
 }
