@@ -15,48 +15,6 @@
 
 import ServiceExtension from '@ohos.app.ability.ServiceExtensionAbility';
 import rpc from '@ohos.rpc';
-import fileio from '@ohos.fileio';
-import wantAgent from '@ohos.wantAgent';
-import backgroundTaskManager from '@ohos.backgroundTaskManager';
-
-function startContinuousTask() {
-    let wantAgentInfo = {
-        wants: [
-            {
-                bundleName: "com.ohos.rpcquesttest",
-                abilityName: "com.ohos.rpcquesttest.ServiceAbility"
-            }
-        ],
-        operationType: wantAgent.OperationType.START_SERVICE,
-        requestCode: 0,
-        wantAgentFlags: [wantAgent.WantAgentFlags.UPDATE_PRESENT_FLAG]
-    };
-
-    wantAgent.getWantAgent(wantAgentInfo).then((wantAgentObj) => {
-        try{
-            backgroundTaskManager.startBackgroundRunning(this.context,
-            backgroundTaskManager.BackgroundMode.MULTI_DEVICE_CONNECTION, wantAgentObj).then(() => {
-            console.info("Operation startBackgroundRunning succeeded");
-        }).catch((err) => {
-            console.error("Operation startBackgroundRunning failed Cause: " + err);
-        });
-        }catch(error){
-            console.error(`Operation startBackgroundRunning failed. code is ${error.code} message is ${error.message}`);
-        }
-    });
-}
-
-function stopContinuousTask() {
-    try{
-        backgroundTaskManager.stopBackgroundRunning(this.context).then(() => {
-            console.info("Operation stopBackgroundRunning succeeded");
-        }).catch((err) => {
-            console.error("Operation stopBackgroundRunning failed Cause: " + err);
-        });
-    }catch(error){
-        console.error(`Operation stopBackgroundRunning failed. code is ${error.code} message is ${error.message}`);
-    }
-}
 
 class MySequenceable {
     num = null;
@@ -93,14 +51,14 @@ class Stub extends rpc.RemoteObject {
                 console.info("onRemoteRequest readstring is " + tmp1);
                 let result =  reply.writeString("onRemoteRequest invoking");
                 console.info("onRemoteRequest writestring is " + result);
-                return true
+                return true;
             } else if (code === 38){
                 console.info("case 38 start");
                 let tmp1 = data.readString();
                 console.info("onRemoteRequest readstring is " + tmp1);
                 let result =  reply.writeString(tmp1);
                 console.info("onRemoteRequest writestring is " + result);
-                return true
+                return true;
             }else {
                 console.error("default case " + code);
                 return super.onRemoteRequest(code, data, reply, option);
@@ -108,7 +66,7 @@ class Stub extends rpc.RemoteObject {
         } catch (error) {
             console.info("onRemoteRequest: " + error);
         }
-        return false
+        return false;
     }
     onRemoteMessageRequest(code, data, reply, option) {
         try{
@@ -122,7 +80,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readByteArray result is " + tmp1.length);
                         let result =  reply.writeByteArray(tmp1);
                         console.info("The server's writeByteArray result is " + result);
-                        return true
+                        return true;
                     }
                 case 2:
                     {
@@ -131,7 +89,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readIntArray " + tmp1.length);
                         let result =  reply.writeIntArray(tmp1);
                         console.info("The server's writeIntArray result is " + result);
-                        return true
+                        return true;
                     }
                 case 3:
                     {
@@ -140,7 +98,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readFloatArray result is " + tmp1.length);
                         let result =  reply.writeFloatArray(tmp1);
                         console.info("The server's writeFloatArray result is " + result);
-                        return true
+                        return true;
                     }
                 case 4:
                     {
@@ -149,7 +107,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readShortArray result is " + tmp1.length);
                         let result =  reply.writeShortArray(tmp1);
                         console.info("The server's writeShortArray result is " + result);
-                        return true
+                        return true;
                     }
                 case 5:
                     {
@@ -158,7 +116,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readLongArray result is " + tmp1.length);
                         let result =  reply.writeLongArray(tmp1);
                         console.info("The server's writeLongArray result is " + result);
-                        return true
+                        return true;
                     }
                 case 6:
                     {
@@ -167,7 +125,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readDoubleArray result is " + tmp1.length);
                         let result =  reply.writeDoubleArray(tmp1);
                         console.info("The server's writeDoubleArray result is " + result);
-                        return true
+                        return true;
                     }
                 case 7:
                     {
@@ -176,7 +134,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readBooleanArray result is " + tmp1.length);
                         let result =  reply.writeBooleanArray(tmp1);
                         console.info("The server's writeBooleanArray result is " + result);
-                        return true
+                        return true;
                     }
                 case 8:
                     {
@@ -185,7 +143,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readCharArray result is " + tmp1.length);
                         let result =  reply.writeCharArray(tmp1);
                         console.info("The server's writeCharArray result is " + result);
-                        return true
+                        return true;
                     }
                 case 9:
                     {
@@ -194,7 +152,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readStringArray result is " + tmp1.length);
                         let result =  reply.writeStringArray(tmp1);
                         console.info("The server's writeStringArray result is " + result);
-                        return true
+                        return true;
                     }
                 case 10:
                     {
@@ -203,7 +161,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readShort result is " + tmp1);
                         let result =  reply.writeShort(tmp1);
                         console.info("The server's writeShort result is " + result);
-                        return true
+                        return true;
                     }
                 case 11:
                     {
@@ -212,7 +170,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readLong result is " + tmp1);
                         let result =  reply.writeLong(tmp1);
                         console.info("The server's writeLong result is " + result);
-                        return true
+                        return true;
                     }
                 case 12:
                     {
@@ -221,7 +179,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readDouble result is " + tmp1);
                         let result =  reply.writeDouble(tmp1);
                         console.info("The server's writeDouble result is " + result);
-                        return true
+                        return true;
                     }
                 case 13:
                     {
@@ -230,7 +188,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readBoolean result is " + tmp1);
                         let result =  reply.writeBoolean(tmp1);
                         console.info("The server's writeBoolean result is " + result);
-                        return true
+                        return true;
                     }
                 case 14:
                     {
@@ -239,7 +197,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readChar result is " + tmp1);
                         let result =  reply.writeChar(tmp1);
                         console.info("The server's writeChar result is " + result);
-                        return true
+                        return true;
                     }
                 case 15:
                     {
@@ -248,7 +206,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readString result is " + tmp1.length);
                         let result =  reply.writeString(tmp1);
                         console.info("The server's writeString result is " + result);
-                        return true
+                        return true;
                     }
                 case 16:
                     {
@@ -257,7 +215,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readByte result is " + tmp1);
                         let result =  reply.writeByte(tmp1);
                         console.info("The server's writeByte result is " + result);
-                        return true
+                        return true;
                     }
                 case 17:
                     {
@@ -266,7 +224,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readInt result is " + tmp1);
                         let result =  reply.writeInt(tmp1);
                         console.info("The server's writeInt result is " + result);
-                        return true
+                        return true;
                     }
                 case 18:
                     {
@@ -275,7 +233,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readFloat result is " + tmp1);
                         let result =  reply.writeFloat(tmp1);
                         console.info("The server's writeFloat result is " + result);
-                        return true
+                        return true;
                     }
                 case 19:
                     {
@@ -288,7 +246,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's writeInt result is " + size1);
                         let result = reply.writeRawData(tmp1, tmp1.length);
                         console.info("The server's writeRawData result is " + result);
-                        return true
+                        return true;
                     }
                 case 20:
                     {
@@ -318,7 +276,7 @@ class Stub extends rpc.RemoteObject {
                             })
                         reply.writeNoException();
                         console.info("case 20 end");
-                        return true
+                        return true;
                     }
                 case 21:
                     {
@@ -328,7 +286,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("server's readParcelable result is " + tmp1);
                         let result =  reply.writeParcelable(s);
                         console.info("server's writeParcelable result is " + result);
-                        return true
+                        return true;
                     }
                 case 22:
                     {
@@ -340,7 +298,7 @@ class Stub extends rpc.RemoteObject {
                         reply.writeNoException();
                         console.info("writeNoException result is ");
                         var result = reply.writeInt(tmp);
-                        return true
+                        return true;
                     }
                 case 23:
                     {
@@ -351,7 +309,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("readParcelableArray result success");
                         let result =  reply.writeParcelableArray(s);
                         console.info("writeParcelableArray result is " + result);
-                        return true
+                        return true;
                     }
                 case 24:
                     {
@@ -376,7 +334,7 @@ class Stub extends rpc.RemoteObject {
                                 })
                         }
                         console.info("The server's writeRemoteObjectArray result is " + result);
-                        return true
+                        return true;
                     }
                 case 25:
                     {
@@ -402,7 +360,7 @@ class Stub extends rpc.RemoteObject {
                         let result8 =  reply.writeChar(tmp8);
                         let result9 =  reply.writeString(tmp9);
                         let result10 =  reply.writeParcelable(s);
-                        return true
+                        return true;
                     }
                 case 26:
                     {
@@ -429,10 +387,9 @@ class Stub extends rpc.RemoteObject {
                         let result8 =  reply.writeCharArray(tmp8);
                         let result9 =  reply.writeStringArray(tmp9);
                         let result10 =  reply.writeParcelableArray(s);
-                        return true
+                        return true;
                     }
                 case 27:
-
                     {
                         console.info("case 27 start");
                         var ashmem = data.readAshmem();
@@ -453,7 +410,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("unmapAshmem success " );
                         ashmem.closeAshmem();
                         console.info("closeAshmem success ");
-                        return true
+                        return true;
                     }
                 case 28:
                     {
@@ -463,7 +420,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readParcelable result is " + s);
                         var result =  reply.writeParcelable(s);
                         console.info("The server's writeParcelable result is " + s);
-                        return true
+                        return true;
                     }
                 case 29:
                     {
@@ -480,7 +437,7 @@ class Stub extends rpc.RemoteObject {
                         var result4 =  reply.writeShort(tmp4);
                         var result5 =  reply.writeShort(tmp5);
                         console.info("The server's writeShort result is " + result1);
-                        return true
+                        return true;
                     }
                 case 30:
                     {
@@ -497,7 +454,7 @@ class Stub extends rpc.RemoteObject {
                         var result4 =  reply.writeByte(tmp4);
                         var result5 =  reply.writeByte(tmp5);
                         console.info("The server's writeByte result is " + result1);
-                        return true
+                        return true;
                     }
                 case 31:
                     {
@@ -514,7 +471,7 @@ class Stub extends rpc.RemoteObject {
                         var result4 =  reply.writeInt(tmp4);
                         var result5 =  reply.writeInt(tmp5);
                         console.info("The server's writeInt result is " + result1);
-                        return true
+                        return true;
                     }
                 case 32:
                     {
@@ -539,7 +496,7 @@ class Stub extends rpc.RemoteObject {
                         reply.writeInt(rpc.IPCSkeleton.getCallingUid());
                         reply.writeInt(rpc.IPCSkeleton.flushCommands(this));
                         console.info("IPCSkeleton the server result success");
-                        return true
+                        return true;
                     }
                 case 33:
                     {
@@ -558,7 +515,7 @@ class Stub extends rpc.RemoteObject {
                         reply.writeInt(rpc.IPCSkeleton.getCallingUid());
                         reply.writeInt(rpc.IPCSkeleton.flushCommands(this));
                         console.info("IPCSkeleton the server result success");
-                        return true
+                        return true;
                     }
                 case 34:
                     {
@@ -591,7 +548,7 @@ class Stub extends rpc.RemoteObject {
                                 })
                         }
                         reply.writeNoException();
-                        return true
+                        return true;
                     }
                 case 35:
                     {
@@ -621,7 +578,7 @@ class Stub extends rpc.RemoteObject {
                                 })
                         }
                         reply.writeNoException();
-                        return true
+                        return true;
                     }
                 case 36:
                     {
@@ -630,7 +587,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's getSize and readInterfaceToken result is " + tmp.length);
                         let result =  reply.writeInterfaceToken(tmp);
                         console.info("The server's setSize and writeInterfaceToken result is " + result);
-                        return true
+                        return true;
                     }
                 case 37:
                     {
@@ -639,7 +596,7 @@ class Stub extends rpc.RemoteObject {
                         console.info("onRemoteRequest readstring is " + tmp1);
                         let result =  reply.writeString("onRemoteMessageRequest invoking");
                         console.info("onRemoteRequest writestring is " + result);
-                        return true
+                        return true;
                     }
                 default:
                     this.onRemoteRequest(code, data, reply, option);
@@ -651,32 +608,29 @@ class Stub extends rpc.RemoteObject {
     }
 }
 
-
 export default class ServiceAbility extends ServiceExtension {
     onCreate(want) {
         // Called to return a FormBindingData object.
-        console.info("IpcStageServer ServiceAbility onCreate")
+        console.info("IpcStageServer ServiceAbility onCreate");
     }
 
     onConnect(want) {
         // Called when the form provider is notified that a temporary form is successfully
-        console.info("IpcStageServer ServiceAbility onConnect")
+        console.info("IpcStageServer ServiceAbility onConnect");
         return new Stub("rpcTestAbility");
     }
 
     onDisconnect(want) {
         // Called to notify the form provider to update a specified form.
-        console.info("IpcStageServer ServiceAbility onDisconnect")
+        console.info("IpcStageServer ServiceAbility onDisconnect");
     }
 
     onRequest(want, startId){
-        console.info("IpcStageServer ServiceAbility onRequest")
-
+        console.info("IpcStageServer ServiceAbility onRequest");
     }
 
     onDestroy() {
         // Called to notify the form provider that a specified form has been destroyed.
-        console.info("IpcStageServer ServiceAbility onCronDestroyeate")
-
+        console.info("IpcStageServer ServiceAbility onCronDestroyeate");
     }
 };
