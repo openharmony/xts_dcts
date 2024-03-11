@@ -124,17 +124,15 @@ export default function DmsFwkStageTest() {
 
     afterEach(async (done: Function) => {
       console.info('DmsFwkStageTest after each called');
-      await DisconnectServiceExtensionAbility(connectId)
+      let connectIdList: number[] = [connectId,connectId2,extensionConnectId,extensionConnectId2]
       await sleep(1000)
-      await DisconnectServiceExtensionAbility(connectId2)
-      await sleep(1000)
-      await DisconnectServiceExtensionAbility(extensionConnectId)
-      await sleep(1000)
-      await DisconnectServiceExtensionAbility(extensionConnectId2)
-      await sleep(1000)
+      for (let i in connectIdList) {
+        await sleep(1000)
+        await DisconnectServiceExtensionAbility(connectIdList[i])
+        console.log('connectIdList i is' + i + connectIdList[i])
+      }
       done();
     });
-
 
     /*
      * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900
@@ -180,13 +178,7 @@ export default function DmsFwkStageTest() {
           done();
         }
       });
-      await sleep(2000);
-      await context.disconnectServiceExtensionAbility(connectId , () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900  disconnectServiceExtensionAbility is success');
-        expect(true).assertTrue()
-        done()
-      });
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900 is end--------------- " + connectId)
     });
 
@@ -269,21 +261,9 @@ export default function DmsFwkStageTest() {
           expect().assertFail();
           done();
         }
-      }
+      };
       connectId2 = context.connectServiceExtensionAbility(want1,options1);
-      await sleep(2000);
-      await context.disconnectServiceExtensionAbility(connectId , () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800  disconnectServiceExtensionAbility is success : ');
-        expect(true).assertTrue()
-        done()
-      });
-      await sleep(2000);
-      await context.disconnectServiceExtensionAbility(connectId2 , () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800  disconnectServiceExtensionAbility is success : ');
-        expect(true).assertTrue()
-        done()
-      });
-      await sleep(2000);
+      await sleep(1000);
       console.log("------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 end-------------" + connectId);
     });
 
@@ -331,15 +311,9 @@ export default function DmsFwkStageTest() {
           expect().assertFail();
           done();
         }
-      }
+      };
       connectId = context.connectServiceExtensionAbility(want,options);
-      await sleep(2000);
-      await context.disconnectServiceExtensionAbility(connectId , () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200  disconnectServiceExtensionAbility is success : ');
-        expect(true).assertTrue()
-        done()
-      });
-      await sleep(2000);
+      await sleep(1000);
       console.log("------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200 end-------------");
     });
 
@@ -421,20 +395,9 @@ export default function DmsFwkStageTest() {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100  onFailed: ' + code);
           expect().assertFail();
         }
-      }
+      };
       connectId2 = context.connectServiceExtensionAbility(want1,options1);
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(connectId, () => {
-        expect(true).assertTrue()
-        done()
-      })
-      await sleep(2000);
-      await context.disconnectServiceExtensionAbility(connectId2 , () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100  disconnectServiceExtensionAbility is success');
-        expect(true).assertTrue()
-        done()
-      });
-      await sleep(2000);
+      await sleep(1000);
       console.log("------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 end-------------");
     });
 
@@ -599,13 +562,7 @@ export default function DmsFwkStageTest() {
         }
       }
       connectId = context.connectServiceExtensionAbility(want,options);
-      await sleep(2000);
-      await context.disconnectServiceExtensionAbility(connectId , () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700  disconnectServiceExtensionAbility is success');
-        expect(true).assertTrue()
-        done()
-      });
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 is end---------------" + connectId)
     });
 
@@ -660,13 +617,7 @@ export default function DmsFwkStageTest() {
         }
       }
       connectId = context.connectServiceExtensionAbility(want,options);
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(connectId, () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600  disconnectServiceExtensionAbility');
-        expect(true).assertTrue()
-        done();
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is end---------------" + connectId)
     });
 
@@ -715,13 +666,7 @@ export default function DmsFwkStageTest() {
         }
       }
       connectId = context.connectServiceExtensionAbility(want,options);
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(connectId, () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100  disconnectServiceExtensionAbility');
-        expect(true).assertTrue()
-        done();
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100 is end---------------" + connectId)
     });
 
@@ -785,13 +730,8 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 catch error is' + error.code);
         expect(true).assertTrue()
       }
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(connectId, () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200  disconnectServiceExtensionAbility');
-        expect(true).assertTrue()
-      })
-      done();
-      await sleep(2000);
+      done()
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 is end---------------" + connectId)
     });
 
@@ -845,13 +785,7 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 catch: ' + err.code);
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 catch: ' + err.message);
       }
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(connectId, () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400  disconnectServiceExtensionAbility: ');
-        expect(true).assertTrue()
-        done();
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 is end---------------" + connectId)
     });
 
@@ -943,13 +877,7 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 catch: ' + err.code);
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 catch: ' + err.message);
       }
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(connectId, () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300  disconnectServiceExtensionAbility success');
-        expect(true).assertTrue()
-        done();
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 is end---------------" + connectId)
     });
 
@@ -1117,13 +1045,7 @@ export default function DmsFwkStageTest() {
           done();
         }
       });
-      await sleep(2000);
-      
-      context.disconnectServiceExtensionAbility(extensionConnectId , () =>{
-        console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0100  disconnectServiceExtensionAbility is success');
-        expect(true).assertTrue()
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0100 is end--------------- " + extensionConnectId)
     });
 
@@ -1203,12 +1125,7 @@ export default function DmsFwkStageTest() {
           done();
         }
       });
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(extensionConnectId2 , () =>{
-        console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0200  disconnectServiceExtensionAbility is success');
-        expect(true).assertTrue()
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.log("------------SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0200 end-------------" + extensionConnectId);
     });
 
@@ -1255,12 +1172,7 @@ export default function DmsFwkStageTest() {
           done();
         }
       });
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(extensionConnectId, () => {
-        expect(true).assertTrue()
-        done()
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.log("------------SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0300 end-------------");
     });
 
@@ -1340,18 +1252,7 @@ export default function DmsFwkStageTest() {
           expect().assertFail();
         }
       });
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(extensionConnectId, () => {
-        expect(true).assertTrue()
-        done()
-      })
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(extensionConnectId2, () => {
-        console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0400  disconnectServiceExtensionAbility');
-        expect(true).assertTrue();
-        done();
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.log("------------SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0400 end-------------");
     });
 
@@ -1473,13 +1374,7 @@ export default function DmsFwkStageTest() {
           done();
         }
       });
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(extensionConnectId, () => {
-        console.info('SUB_DMS_Extension_ConnectAbility_0400  disconnectServiceExtensionAbility');
-        expect(true).assertTrue();
-        done();
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 is end---------------" + extensionConnectId)
     });
 
@@ -1532,13 +1427,7 @@ export default function DmsFwkStageTest() {
           done();
         }
       });
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(extensionConnectId, () => {
-        console.info('SUB_DMS_Extension_ConnectAbility_0400  disconnectServiceExtensionAbility');
-        expect(true).assertTrue();
-        done();
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is end---------------" + extensionConnectId)
     });
 
@@ -1585,13 +1474,7 @@ export default function DmsFwkStageTest() {
           done();
         }
       });
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(extensionConnectId, () => {
-        console.info('SUB_DMS_Extension_ConnectAbility_0400  disconnectServiceExtensionAbility');
-        expect(true).assertTrue();
-        done();
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000 is end---------------" + extensionConnectId)
     });
 
@@ -1655,13 +1538,8 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 catch error is' + error.code);
         expect(true).assertTrue()
       }
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(connectId, () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400  disconnectServiceExtensionAbility');
-        expect(true).assertTrue()
-      })
       done();
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 is end---------------" + connectId)
     });
 
@@ -1713,13 +1591,7 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 catch: ' + err.code);
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 catch: ' + err.message);
       }
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(extensionConnectId, () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500  disconnectServiceExtensionAbility');
-        expect(true).assertTrue();
-        done();
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 is end---------------" + extensionConnectId)
     });
 
@@ -1809,16 +1681,125 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 catch: ' + err.code);
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 catch: ' + err.message);
       }
-      await sleep(2000);
-      context.disconnectServiceExtensionAbility(extensionConnectId, () => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800  disconnectServiceExtensionAbility');
-        expect(true).assertTrue();
-        done();
-      })
-      await sleep(2000);
+      await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 is end---------------" + extensionConnectId)
     });
 
+    /*
+     * @tc.number  SUB_DMS_StartControl_Extension_StartAbility_0300
+     * @tc.name    startAbility remote ServiceAbility
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_StartControl_Extension_StartAbility_0300", 0, async (done: Function) => {
+      console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0300 is start---------------")
+      TAG = "SUB_DMS_StartControl_Extension_StartAbility_0300";
+      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+      try {
+        context.startAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstagetest",
+          abilityName: "com.example.lifecycletest.MainAbility"
+        }, (err: BusinessError) => {
+          console.info('SUB_DMS_StartControl_Extension_StartAbility_0300 startService result: ' + err.code);
+          expect(err.code).assertEqual(0);
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartControl_Extension_StartAbility_0300 catch: ' + err.code);
+        console.info('SUB_DMS_StartControl_Extension_StartAbility_0300 catch: ' + err.message);
+        expect().assertFail();
+      }
+      done()
+      await sleep(2000);
+      console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0300 is end---------------")
+    });
+
+    /*
+     * @tc.number  SUB_DMS_StartControl_Extension_StartAbility_0400
+     * @tc.name    startAbility remote ServiceAbility
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_StartControl_Extension_StartAbility_0400", 0, async (done: Function) => {
+      console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0400 is start---------------")
+      TAG = "SUB_DMS_StartControl_Extension_StartAbility_0400";
+      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+      try {
+        context.startAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstagetest",
+          abilityName: "ServiceAbility"
+        }, (err: BusinessError) => {
+          console.info('SUB_DMS_StartControl_Extension_StartAbility_0400 startService result: ' + err.code);
+          expect(err.code).assertEqual(0);
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartControl_Extension_StartAbility_0400 catch: ' + err.code);
+        console.info('SUB_DMS_StartControl_Extension_StartAbility_0400 catch: ' + err.message);
+        expect().assertFail();
+      }
+      done()
+      await sleep(2000);
+      console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0400 is end---------------")
+    });
+
+    /*
+     * @tc.number  SUB_DMS_StartControl_Extension_StartAbility_0500
+     * @tc.name    startAbility remote MainAbility2
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_StartControl_Extension_StartAbility_0500", 0, async (done: Function) => {
+      console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0500 is start---------------")
+      TAG = "SUB_DMS_StartControl_Extension_StartAbility_0500";
+      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+      try {
+        context.startAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "MainAbility2"
+        }, (err: BusinessError) => {
+          console.info('SUB_DMS_StartControl_Extension_StartAbility_0500 startService result: ' + err.code);
+          expect(err.code).assertEqual(0);
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartControl_Extension_StartAbility_0500 catch: ' + err.code);
+        console.info('SUB_DMS_StartControl_Extension_StartAbility_0500 catch: ' + err.message);
+        expect().assertFail();
+      }
+      done()
+      await sleep(2000);
+      console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0500 is end---------------")
+    });
+
+    /*
+     * @tc.number  SUB_DMS_StartControl_Extension_StartAbility_0600
+     * @tc.name    startAbility remote ability
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_StartControl_Extension_StartAbility_0600", 0, async (done: Function) => {
+      console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0600 is start---------------")
+      TAG = "SUB_DMS_StartControl_Extension_StartAbility_0600";
+      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+      try {
+        context.startAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "MainAbility"
+        }, (err: BusinessError) => {
+          console.info('SUB_DMS_StartControl_Extension_StartAbility_0600 startService result: ' + err.code);
+          expect(err.code).assertEqual(0);
+        })
+      } catch (err) {
+        console.info('SUB_DMS_StartControl_Extension_StartAbility_0600 catch: ' + err.code);
+        console.info('SUB_DMS_StartControl_Extension_StartAbility_0600 catch: ' + err.message);
+        expect().assertFail();
+      }
+      done();
+      await sleep(2000);
+      console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0600 is end---------------")
+    });
 
     /*
      * @tc.number  SUB_DMS_StartControl_Extension_StartAbility_0700
@@ -2524,5 +2505,104 @@ export default function DmsFwkStageTest() {
       await sleep(2000);
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200 end------------------------");
     });
+    
+    /*
+     * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300
+     * @tc.name    call is call
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300', 0, async (done: Function) => {
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300 start------------------------");
+      if (typeof call === 'object' && call != null) {
+        console.log('call call.callWithResult() begin');
+        let msg1 = new MyMessageAble(2, 'world');
+        call.callWithResult('test', msg1)
+          .then((data) => {
+            let msg2 = new MyMessageAble(0, '');
+            data.readParcelable(msg2);
+            sleep(2000);
+            console.log('call call.callWithResult() end' + msg2.num + '' + msg2.str);
+            expect(msg2.str).assertEqual("Callee test")
+            done()
+          }).catch((err: BusinessError) => {
+            console.log('call call.callWithResult() catch' + err)
+          })
+      } else {
+        console.log('get call.callWithResult() failed' + typeof call)
+      }
+      done()
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300 end------------------------");
+    })
+
+    /*
+     * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1400
+     * @tc.name    get call with 10 times.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1400', 0, async (done: Function) => {
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1400 start------------------------");
+      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+      for (let i = 0; i < 10; i++) {
+        context.startAbilityByCall({
+          bundleName: 'com.acts.example.dmsfwkstagetest',
+          abilityName: 'com.example.lifecycletest.MainAbility',
+          deviceId: dvId
+        })
+          .then((data: Caller) => {
+            let caller = data;
+            console.log('get caller is success caller is ' + caller)
+            expect(typeof (caller)).assertEqual('object')
+            caller.onRelease(() => {
+              console.log('call is onRelease success')
+            })
+          }).catch((err: BusinessError) => {
+            console.log('get caller is failed err is ' + JSON.stringify(err))
+            expect(err == undefined).assertTrue()
+          })
+        await sleep(1000);
+        console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1400 i is" + '' + i);
+      }
+      done()
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1400 end------------------------");
+    })
+
+    /*
+     * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1500
+     * @tc.name    caller.release with 10 times.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1500', 0, async (done: Function) => {
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1500 start------------------------");
+      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+      for (let i = 0; i < 10; i++) {
+        context.startAbilityByCall({
+          bundleName: 'com.acts.example.dmsfwkstagetest',
+          abilityName: 'com.example.lifecycletest.MainAbility',
+          deviceId: dvId
+        })
+          .then((data: Caller) => {
+            let caller = data;
+            console.log('get caller is success caller is ' + caller)
+            expect(typeof (caller)).assertEqual('object')
+            caller.onRelease(() => {
+              console.log('call is onRelease success')
+            })
+            caller.release();
+            console.log('caller release success')
+          }).catch((err: BusinessError) => {
+            console.log('get caller is failed err is ' + JSON.stringify(err))
+            expect(err == undefined).assertTrue()
+          })
+        await sleep(1000);
+        console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1500 i is" + '' + i);
+      }
+      done()
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1500 end------------------------");
+    })
   })
 }
