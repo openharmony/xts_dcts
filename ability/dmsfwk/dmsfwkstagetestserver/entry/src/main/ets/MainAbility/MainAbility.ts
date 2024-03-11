@@ -16,8 +16,37 @@ import Ability from '@ohos.app.ability.UIAbility';
 import AcCtrl from '@ohos.abilityAccessCtrl';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import wantConstant from '@ohos.app.ability.wantConstant';
+let AcManager = AcCtrl.createAtManager();
 
-let AcManager = AcCtrl.createAtManager()
+class MyMessageAble {
+    num: number = 0;
+    str: string = '';
+    constructor(num: number, string: string) {
+        this.num = num;
+        this.str = string;
+    }
+    marshalling(messageParcel) {
+        console.log('MyMessageAble messageParcel marshalling' + this.num, + this.str)
+        messageParcel.writeInt(this.num);
+        messageParcel.writeString(this.str);
+        return true;
+    }
+    unmarshalling(messageParcel) {
+        console.log('MyMessageAble messageParcel unmarshalling' + this.num, + this.str)
+        this.num = messageParcel.readInt();
+        this.str = messageParcel.readString();
+        return true;
+    }
+}
+
+function funcCallBack(pdata) {
+    console.log('MainAbility funcCallBack is called' + pdata);
+    let msg = new MyMessageAble(0, '');
+    console.log('CALLTEST pdata.readSequenceable BEGIN');
+    pdata.readParcelable(msg);
+    return new MyMessageAble(10, 'Callee test')
+}
+
 export default class MainAbility extends Ability {
     localStorage: LocalStorage;
 
@@ -31,9 +60,10 @@ export default class MainAbility extends Ability {
         AcManager.requestPermissionsFromUser(this.context, ['ohos.permission.DISTRIBUTED_DATASYNC'], function (result) {
             console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser')
         })
+        this.callee.on('test', funcCallBack);
         setTimeout(()=>{
             this.context.terminateSelf()
-        },2000)
+        },3000)
         
     }
 
