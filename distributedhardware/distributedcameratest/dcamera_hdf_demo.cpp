@@ -1666,7 +1666,8 @@ int32_t DemoCameraHostCallback::OnCameraEvent(const std::string& cameraId, Camer
 
 int32_t DemoStreamOperatorCallback::OnCaptureStarted(int32_t captureId, const std::vector<int32_t>& streamIds)
 {
-    DHLOGI("%{public}s, enter. captureId = %{public}d, streamIds size = %{public}d", __func__, captureId, streamIds.size());
+    DHLOGI("%{public}s, enter. captureId = %{public}d, streamIds size = %{public}d", __func__, 
+	    captureId, streamIds.size());
     return RC_OK;
 }
 
@@ -1685,8 +1686,8 @@ int32_t DemoStreamOperatorCallback::OnCaptureError(int32_t captureId, const std:
 int32_t DemoStreamOperatorCallback::OnFrameShutter(int32_t captureId,
     const std::vector<int32_t>& streamIds, uint64_t timestamp)
 {
-    DHLOGI("%{public}s, enter. captureId = %{public}d, streamIds size = %{public}d, timestamp = %%{public}llu", __func__,
-        captureId, streamIds.size(), timestamp);
+    DHLOGI("%{public}s, enter. captureId = %{public}d, streamIds size = %{public}d, timestamp = %{public}llu", 
+	    __func__, captureId, streamIds.size(), timestamp);
     return RC_OK;
 }
 
