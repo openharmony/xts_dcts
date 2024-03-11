@@ -88,7 +88,7 @@ void DcameraHdfDemo::GetStreamOpt()
         const sptr<IStreamOperatorCallback> streamOperatorCallback(new DemoStreamOperatorCallback());
         rc = demoCameraDevice_->GetStreamOperator(streamOperatorCallback, streamOperator_);
         if (rc != HDI::Camera::V1_0::NO_ERROR) {
-            DHLOGE("demo test: GetStreamOpt GetStreamOperator fail");
+            DHLOGI("demo test: GetStreamOpt GetStreamOperator fail");
             streamOperator_ = nullptr;
         }
     }
@@ -121,7 +121,7 @@ void DcameraHdfDemo::CaptureSet(std::vector<uint8_t> &setNum)
 
 RetCode DcameraHdfDemo::CaptureON(const int streamId, const int captureId, CaptureMode mode)
 {
-    DHLOGI("demo test: CaptureON enter streamId == %d and captureId == %d and mode == %d",
+    DHLOGI("demo test: CaptureON enter streamId == %{public}d and captureId == %{public}d and mode == %{public}d",
         streamId, captureId, mode);
     std::lock_guard<std::mutex> l(metaDatalock_);
     std::vector<uint8_t> setting;
@@ -144,7 +144,7 @@ RetCode DcameraHdfDemo::CaptureON(const int streamId, const int captureId, Captu
     captureInfo_.enableShutterCallback_ = false;
     int rc = streamOperator_->Capture(captureId, captureInfo_, iscapture);
     if (rc != HDI::Camera::V1_0::NO_ERROR) {
-        DHLOGE("demo test: CaptureStart Capture error");
+        DHLOGI("demo test: CaptureStart Capture error");
         streamOperator_->ReleaseStreams(captureInfo_.streamIds_);
         return RC_ERROR;
     }
@@ -156,10 +156,10 @@ RetCode DcameraHdfDemo::CaptureON(const int streamId, const int captureId, Captu
 RetCode DcameraHdfDemo::CaptureOff(const int captureId, const CaptureMode mode)
 {
     int rc = 0;
-    DHLOGI("demo test: CaptureOff enter mode == %d", mode);
+    DHLOGI("demo test: CaptureOff enter mode == %{public}d", mode);
 
     if (streamOperator_ == nullptr) {
-        DHLOGE("demo test: CaptureOff streamOperator_ is nullptr");
+        DHLOGI("demo test: CaptureOff streamOperator_ is nullptr");
         return RC_ERROR;
     }
 
@@ -174,7 +174,7 @@ RetCode DcameraHdfDemo::CaptureOff(const int captureId, const CaptureMode mode)
     }
 
     if (rc != HDI::Camera::V1_0::NO_ERROR) {
-        DHLOGE("demo test: CaptureOff CancelCapture error mode %d rc == %d", mode, rc);
+        DHLOGI("demo test: CaptureOff CancelCapture error mode %{public}d rc == %{public}d", mode, rc);
         return RC_ERROR;
     }
     DHLOGI("demo test: CaptureOff exit");
@@ -187,14 +187,14 @@ RetCode DcameraHdfDemo::CreateStreamInfo(const int streamId, std::shared_ptr<Str
     DHLOGI("demo test: CreateStream enter");
     GetStreamOpt();
     if (streamOperator_ == nullptr) {
-        DHLOGE("demo test: CreateStream GetStreamOpt() is nullptr");
+        DHLOGI("demo test: CreateStream GetStreamOpt() is nullptr");
         return RC_ERROR;
     }
 
     StreamInfo streamInfo = {0};
     SetStreamInfo(streamInfo, streamCustomer, streamId, intent);
     if (streamInfo.bufferQueue_->producer_ == nullptr) {
-        DHLOGE("demo test: CreateStream CreateProducer(); is nullptr");
+        DHLOGI("demo test: CreateStream CreateProducer(); is nullptr");
         return RC_ERROR;
     }
     streamInfos_.push_back(streamInfo);
@@ -208,13 +208,13 @@ RetCode DcameraHdfDemo::CreateStream()
     DHLOGI("demo test: CreateStreams start");
     rc = streamOperator_->CreateStreams(streamInfos_);
     if (rc != HDI::Camera::V1_0::NO_ERROR) {
-        DHLOGE("demo test: CreateStream CreateStreams error");
+        DHLOGI("demo test: CreateStream CreateStreams error");
         return RC_ERROR;
     }
     DHLOGI("demo test: CommitStreams start");
     rc = streamOperator_->CommitStreams(NORMAL, cameraAbility_);
     if (rc != HDI::Camera::V1_0::NO_ERROR) {
-        DHLOGE("demo test: CreateStream CommitStreams error");
+        DHLOGI("demo test: CreateStream CommitStreams error");
         streamOperator_->ReleaseStreams(streamIds_);
         return RC_ERROR;
     }
@@ -229,7 +229,7 @@ RetCode DcameraHdfDemo::InitCameraDevice()
     DHLOGI("demo test: InitCameraDevice enter");
 
     if (demoCameraHost_ == nullptr) {
-        DHLOGE("demo test: InitCameraDevice demoCameraHost_ == nullptr");
+        DHLOGI("demo test: InitCameraDevice demoCameraHost_ == nullptr");
         return RC_ERROR;
     }
 
@@ -261,7 +261,7 @@ RetCode DcameraHdfDemo::InitCameraDevice()
     sptr<DemoCameraDeviceCallback> callback(new DemoCameraDeviceCallback());
     rc = demoCameraHost_->OpenCamera(cameraIds_.front(), callback, demoCameraDevice_);
     if (rc != HDI::Camera::V1_0::NO_ERROR || demoCameraDevice_ == nullptr) {
-        DHLOGE("demo test: InitCameraDevice OpenCamera failed");
+        DHLOGI("demo test: InitCameraDevice OpenCamera failed");
         return RC_ERROR;
     }
 
@@ -290,14 +290,14 @@ RetCode DcameraHdfDemo::InitSensors()
     constexpr const char *demoServiceName = "distributed_camera_service";
     demoCameraHost_ = ICameraHost::Get(demoServiceName, false);
     if (demoCameraHost_ == nullptr) {
-        DHLOGE("demo test: ICameraHost::Get error");
+        DHLOGI("demo test: ICameraHost::Get error");
         return RC_ERROR;
     }
 
     hostCallback_ = new DemoCameraHostCallback();
     rc = demoCameraHost_->SetCallback(hostCallback_);
     if (rc != HDI::Camera::V1_0::NO_ERROR) {
-        DHLOGE("demo test: demoCameraHost_->SetCallback(hostCallback_) error");
+        DHLOGI("demo test: demoCameraHost_->SetCallback(hostCallback_) error");
         return RC_ERROR;
     }
 
@@ -307,7 +307,7 @@ RetCode DcameraHdfDemo::InitSensors()
 
 void DcameraHdfDemo::StoreImage(const char *bufStart, const uint32_t size) const
 {
-    DHLOGI("demo test:StoreImage size == %d", size);
+    DHLOGI("demo test:StoreImage size == %{public}d", size);
     constexpr uint32_t pathLen = 64;
     char path[pathLen] = {0};
     char prefix[] = "/data/";
@@ -317,19 +317,19 @@ void DcameraHdfDemo::StoreImage(const char *bufStart, const uint32_t size) const
     struct timeval start = {};
     gettimeofday(&start, nullptr);
     if (sprintf_s(path, sizeof(path), "%spicture_%ld.jpeg", prefix, start.tv_usec) < 0) {
-        DHLOGE("sprintf_s error .....");
+        DHLOGI("sprintf_s error .....");
         return;
     }
 
     imgFD = open(path, O_RDWR | O_CREAT, 00766); // 00766:file operate permission
     if (imgFD == -1) {
-        DHLOGE("demo test:open image file error %s.....", strerror(errno));
+        DHLOGI("demo test:open image file error %{public}s.....", strerror(errno));
         return;
     }
 
     ret = write(imgFD, bufStart, size);
     if (ret == -1) {
-        DHLOGE("demo test:write image file error %s.....", strerror(errno));
+        DHLOGI("demo test:write image file error %{public}s.....", strerror(errno));
     }
 
     close(imgFD);
@@ -342,9 +342,9 @@ void DcameraHdfDemo::StoreVideo(const char *bufStart, const uint32_t size) const
 
     ret = write(videoFd_, bufStart, size);
     if (ret == -1) {
-        DHLOGE("demo test:write video file error %s.....", strerror(errno));
+        DHLOGI("demo test:write video file error %{public}s.....", strerror(errno));
     }
-    DHLOGI("demo test:StoreVideo size == %d", size);
+    DHLOGI("demo test:StoreVideo size == %{public}d", size);
 }
 
 void DcameraHdfDemo::OpenVideoFile()
@@ -354,12 +354,12 @@ void DcameraHdfDemo::OpenVideoFile()
     char prefix[] = "/data/";
     auto seconds = time(nullptr);
     if (sprintf_s(path, sizeof(path), "%svideo%ld.h264", prefix, seconds) < 0) {
-        DHLOGE("%s: sprintf  failed", __func__);
+        DHLOGI("%{public}s: sprintf  failed", __func__);
         return;
     }
     videoFd_ = open(path, O_RDWR | O_CREAT, 00766); // 00766:file operate permission
     if (videoFd_ < 0) {
-        DHLOGE("demo test: StartVideo open %s %s failed", path, strerror(errno));
+        DHLOGI("demo test: StartVideo open %{public}s %{public}s failed", path, strerror(errno));
     }
 }
 
@@ -369,17 +369,17 @@ RetCode DcameraHdfDemo::CreateStreams(const int streamIdSecond, StreamIntent int
     std::vector<StreamInfo> streamInfos;
     std::vector<StreamInfo>().swap(streamInfos);
 
-    DHLOGI("demo test: CreateStreams streamIdSecond = %d", streamIdSecond);
+    DHLOGI("demo test: CreateStreams streamIdSecond = %{public}d", streamIdSecond);
     GetStreamOpt();
     if (streamOperator_ == nullptr) {
-        DHLOGE("demo test: CreateStreams GetStreamOpt() is nullptr");
+        DHLOGI("demo test: CreateStreams GetStreamOpt() is nullptr");
         return RC_ERROR;
     }
 
     StreamInfo previewStreamInfo = {0};
     SetStreamInfo(previewStreamInfo, streamCustomerPreview_, STREAM_ID_PREVIEW, OHOS::HDI::Camera::V1_0::PREVIEW);
     if (previewStreamInfo.bufferQueue_->producer_ == nullptr) {
-        DHLOGE("demo test: CreateStream CreateProducer(); is nullptr");
+        DHLOGI("demo test: CreateStream CreateProducer(); is nullptr");
         return RC_ERROR;
     }
     streamInfos.push_back(previewStreamInfo);
@@ -392,20 +392,20 @@ RetCode DcameraHdfDemo::CreateStreams(const int streamIdSecond, StreamIntent int
     }
 
     if (secondStreamInfo.bufferQueue_->producer_ == nullptr) {
-        DHLOGE("demo test: CreateStreams CreateProducer() secondStreamInfo is nullptr");
+        DHLOGI("demo test: CreateStreams CreateProducer() secondStreamInfo is nullptr");
         return RC_ERROR;
     }
     streamInfos.push_back(secondStreamInfo);
 
     rc = streamOperator_->CreateStreams(streamInfos);
     if (rc != HDI::Camera::V1_0::NO_ERROR) {
-        DHLOGE("demo test: CreateStream CreateStreams error");
+        DHLOGI("demo test: CreateStream CreateStreams error");
         return RC_ERROR;
     }
 
     rc = streamOperator_->CommitStreams(NORMAL, cameraAbility_);
     if (rc != HDI::Camera::V1_0::NO_ERROR) {
-        DHLOGE("demo test: CreateStream CommitStreams error");
+        DHLOGI("demo test: CreateStream CommitStreams error");
         std::vector<int> streamIds = {STREAM_ID_PREVIEW, streamIdSecond};
         streamOperator_->ReleaseStreams(streamIds);
         return RC_ERROR;
@@ -425,7 +425,7 @@ RetCode DcameraHdfDemo::CaptureOnDualStreams(const int streamIdSecond)
 
     rc = streamOperator_->Capture(CAPTURE_ID_PREVIEW, previewCaptureInfo, true);
     if (rc != HDI::Camera::V1_0::NO_ERROR) {
-        DHLOGE("demo test: CaptureOnDualStreams preview Capture error");
+        DHLOGI("demo test: CaptureOnDualStreams preview Capture error");
         streamOperator_->ReleaseStreams(previewCaptureInfo.streamIds_);
         return RC_ERROR;
     }
@@ -438,14 +438,14 @@ RetCode DcameraHdfDemo::CaptureOnDualStreams(const int streamIdSecond)
     if (streamIdSecond == STREAM_ID_CAPTURE) {
         rc = streamOperator_->Capture(CAPTURE_ID_CAPTURE, secondCaptureInfo, true);
         if (rc != HDI::Camera::V1_0::NO_ERROR) {
-            DHLOGE("demo test: CaptureOnDualStreams CAPTURE_ID_CAPTURE error");
+            DHLOGI("demo test: CaptureOnDualStreams CAPTURE_ID_CAPTURE error");
             streamOperator_->ReleaseStreams(secondCaptureInfo.streamIds_);
             return RC_ERROR;
         }
     } else {
         rc = streamOperator_->Capture(CAPTURE_ID_VIDEO, secondCaptureInfo, true);
         if (rc != HDI::Camera::V1_0::NO_ERROR) {
-            DHLOGE("demo test: CaptureOnDualStreams CAPTURE_ID_VIDEO error");
+            DHLOGI("demo test: CaptureOnDualStreams CAPTURE_ID_VIDEO error");
             streamOperator_->ReleaseStreams(secondCaptureInfo.streamIds_);
             return RC_ERROR;
         }
@@ -476,7 +476,7 @@ RetCode DcameraHdfDemo::StartDualStreams(const int streamIdSecond)
             isCaptureOn_ = 1;
             rc = CreateStreams(streamIdSecond, OHOS::HDI::Camera::V1_0::STILL_CAPTURE);
             if (rc != RC_OK) {
-                DHLOGE("demo test:StartPreviewStream CreateStreams error");
+                DHLOGI("demo test:StartPreviewStream CreateStreams error");
                 return RC_ERROR;
             }
         }
@@ -489,7 +489,7 @@ RetCode DcameraHdfDemo::StartDualStreams(const int streamIdSecond)
             isVideoOn_ = 1;
             rc = CreateStreams(streamIdSecond, OHOS::HDI::Camera::V1_0::VIDEO);
             if (rc != RC_OK) {
-                DHLOGE("demo test:StartPreviewStream CreateStreams error");
+                DHLOGI("demo test:StartPreviewStream CreateStreams error");
                 return RC_ERROR;
             }
         }
@@ -513,7 +513,7 @@ RetCode DcameraHdfDemo::StartCaptureStream()
 
         rc = CreateStreamInfo(STREAM_ID_CAPTURE, streamCustomerCapture_, OHOS::HDI::Camera::V1_0::STILL_CAPTURE);
         if (rc != RC_OK) {
-            DHLOGE("demo test:StartCaptureStream CreateStream error");
+            DHLOGI("demo test:StartCaptureStream CreateStream error");
             return RC_ERROR;
         }
     }
@@ -535,7 +535,7 @@ RetCode DcameraHdfDemo::StartVideoStream()
 
         rc = CreateStreamInfo(STREAM_ID_VIDEO, streamCustomerVideo_, OHOS::HDI::Camera::V1_0::VIDEO);
         if (rc != RC_OK) {
-            DHLOGE("demo test:StartVideoStream CreateStream error");
+            DHLOGI("demo test:StartVideoStream CreateStream error");
             return RC_ERROR;
         }
     }
@@ -558,7 +558,7 @@ RetCode DcameraHdfDemo::StartPreviewStream()
 
         rc = CreateStreamInfo(STREAM_ID_PREVIEW, streamCustomerPreview_, OHOS::HDI::Camera::V1_0::PREVIEW);
         if (rc != RC_OK) {
-            DHLOGE("demo test:StartPreviewStream CreateStream error");
+            DHLOGI("demo test:StartPreviewStream CreateStream error");
             return RC_ERROR;
         }
     }
@@ -573,7 +573,7 @@ RetCode DcameraHdfDemo::ReleaseAllStream()
     DHLOGI("demo test: ReleaseAllStream enter");
 
     if (isPreviewOn_ != 1) {
-        DHLOGE("demo test: ReleaseAllStream preview is not running");
+        DHLOGI("demo test: ReleaseAllStream preview is not running");
         return RC_ERROR;
     }
 
@@ -1257,7 +1257,7 @@ void DcameraHdfDemo::FlashlightOnOff(bool onOff)
     DHLOGI("demo test: FlashlightOnOff enter");
 
     if (demoCameraHost_ == nullptr) {
-        DHLOGE("demo test: FlashlightOnOff demoCameraHost_ == nullptr");
+        DHLOGI("demo test: FlashlightOnOff demoCameraHost_ == nullptr");
         return;
     }
 
@@ -1277,7 +1277,7 @@ RetCode DcameraHdfDemo::StreamOffline(const int streamId)
     streamIds.push_back(streamId);
     rc = streamOperator_->ChangeToOfflineStream(streamIds, streamOperatorCallback, offlineStreamOperator);
     if (rc != CamRetCode::METHOD_NOT_SUPPORTED) {
-        DHLOGE("demo test: StreamOffline ChangeToOfflineStream error");
+        DHLOGI("demo test: StreamOffline ChangeToOfflineStream error");
         return RC_ERROR;
     }
 
@@ -1292,13 +1292,13 @@ RetCode DcameraHdfDemo::StreamOffline(const int streamId)
     if (offlineStreamOperator != nullptr) {
         rc = offlineStreamOperator->CancelCapture(CAPTURE_ID_CAPTURE);
         if (rc != CamRetCode::METHOD_NOT_SUPPORTED) {
-            DHLOGE("demo test: StreamOffline offlineStreamOperator->CancelCapture error");
+            DHLOGI("demo test: StreamOffline offlineStreamOperator->CancelCapture error");
             return RC_ERROR;
         }
 
         rc = offlineStreamOperator->Release();
         if (rc != CamRetCode::METHOD_NOT_SUPPORTED) {
-            DHLOGE("demo test: StreamOffline offlineStreamOperator->Release() error");
+            DHLOGI("demo test: StreamOffline offlineStreamOperator->Release() error");
             return RC_ERROR;
         }
     }
@@ -1314,11 +1314,11 @@ RetCode DcameraHdfDemo::GetFaceDetectMode(std::shared_ptr<CameraAbility> &abilit
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_STATISTICS_FACE_DETECT_MODE, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_STATISTICS_FACE_DETECT_MODE error");
+        DHLOGI("demo test: get OHOS_STATISTICS_FACE_DETECT_MODE error");
         return RC_ERROR;
     }
     faceDetectMode = *(entry.data.u8);
-    DHLOGI("demo test: faceDetectMode %d",  faceDetectMode);
+    DHLOGI("demo test: faceDetectMode %{public}d",  faceDetectMode);
     return RC_OK;
 }
 
@@ -1329,7 +1329,7 @@ RetCode DcameraHdfDemo::GetFocalLength(std::shared_ptr<CameraAbility> &ability)
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_ABILITY_FOCAL_LENGTH, &entry);
     if (ret != 0) {
-        DHLOGE("demo test:  get OHOS_ABILITY_FOCAL_LENGTH error");
+        DHLOGI("demo test:  get OHOS_ABILITY_FOCAL_LENGTH error");
         return RC_ERROR;
     }
     focalLength = *(entry.data.f);
@@ -1344,18 +1344,18 @@ RetCode DcameraHdfDemo::GetAvailableFocusModes(std::shared_ptr<CameraAbility> &a
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_ABILITY_FOCUS_MODES, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_ABILITY_FOCUS_MODES  error");
+        DHLOGI("demo test: get OHOS_ABILITY_FOCUS_MODES  error");
         return RC_ERROR;
     }
     uint32_t count = entry.count;
-    DHLOGI("demo test: count  %d",  count);
+    DHLOGI("demo test: count  %{public}d",  count);
 
     for (uint32_t i = 0 ; i < count; i++) {
         focusMode.push_back(*(entry.data.u8 + i));
     }
 
     for (auto it = focusMode.begin(); it != focusMode.end(); it++) {
-        DHLOGI("demo test: focusMode : %d ", *it);
+        DHLOGI("demo test: focusMode : %{public}d ", *it);
     }
     return RC_OK;
 }
@@ -1367,18 +1367,18 @@ RetCode DcameraHdfDemo::GetAvailableExposureModes(std::shared_ptr<CameraAbility>
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_ABILITY_EXPOSURE_MODES, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_ABILITY_EXPOSURE_MODES  error");
+        DHLOGI("demo test: get OHOS_ABILITY_EXPOSURE_MODES  error");
         return RC_ERROR;
     }
     uint32_t count = entry.count;
-    DHLOGI("demo test: count  %d",  count);
+    DHLOGI("demo test: count  %{public}d",  count);
 
     for (uint32_t i = 0 ; i < count; i++) {
         exposureMode.push_back(*(entry.data.u8 + i));
     }
 
     for (auto it = exposureMode.begin(); it != exposureMode.end(); it++) {
-        DHLOGI("demo test: exposureMode : %d ", *it);
+        DHLOGI("demo test: exposureMode : %{public}d ", *it);
     }
     return RC_OK;
 }
@@ -1390,18 +1390,18 @@ RetCode DcameraHdfDemo::GetExposureCompensationRange(std::shared_ptr<CameraAbili
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_CONTROL_AE_COMPENSATION_RANGE, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_CONTROL_AE_COMPENSATION_RANGE error");
+        DHLOGI("demo test: get OHOS_CONTROL_AE_COMPENSATION_RANGE error");
         return RC_ERROR;
     }
 
     uint32_t count = entry.count;
-    DHLOGI("demo test:  exposureCompensationRange count  %d",  count);
+    DHLOGI("demo test:  exposureCompensationRange count  %{public}d",  count);
     for (uint32_t i = 0 ; i < count; i++) {
         exposureCompensationRange.push_back(*(entry.data.i32 + i));
     }
 
     for (auto it = exposureCompensationRange.begin(); it != exposureCompensationRange.end(); it++) {
-        DHLOGI("demo test: exposureCompensationRange %d ", *it);
+        DHLOGI("demo test: exposureCompensationRange %{public}d ", *it);
     }
 
     return RC_OK;
@@ -1414,12 +1414,12 @@ RetCode DcameraHdfDemo::GetExposureCompensationSteps(std::shared_ptr<CameraAbili
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_CONTROL_AE_COMPENSATION_STEP, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_CONTROL_AE_COMPENSATION_STEP error");
+        DHLOGI("demo test: get OHOS_CONTROL_AE_COMPENSATION_STEP error");
         return RC_ERROR;
     }
     exposureCompensationSteps.numerator = entry.data.r->numerator;
     exposureCompensationSteps.denominator = entry.data.r->denominator;
-    DHLOGI("demo test: steps.numerator %d  and steps.denominator %d ",
+    DHLOGI("demo test: steps.numerator %{public}d  and steps.denominator %{public}d ",
         exposureCompensationSteps.numerator, exposureCompensationSteps.denominator);
     return RC_OK;
 }
@@ -1431,18 +1431,18 @@ RetCode DcameraHdfDemo::GetAvailableMeterModes(std::shared_ptr<CameraAbility> &a
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_ABILITY_METER_MODES, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_ABILITY_METER_MODES  error");
+        DHLOGI("demo test: get OHOS_ABILITY_METER_MODES  error");
         return RC_ERROR;
     }
     uint32_t count = entry.count;
-    DHLOGI("demo test: count  %d",  count);
+    DHLOGI("demo test: count  %{public}d",  count);
 
     for (uint32_t i = 0 ; i < count; i++) {
         meterModes.push_back(*(entry.data.u8 + i));
     }
 
     for (auto it = meterModes.begin(); it != meterModes.end(); it++) {
-        DHLOGI("demo test: meterModes : %d ", *it);
+        DHLOGI("demo test: meterModes : %{public}d ", *it);
     }
     return RC_OK;
 }
@@ -1454,18 +1454,18 @@ RetCode DcameraHdfDemo::GetAvailableFlashModes(std::shared_ptr<CameraAbility> &a
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_ABILITY_FLASH_MODES, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_ABILITY_FLASH_MODES  error");
+        DHLOGI("demo test: get OHOS_ABILITY_FLASH_MODES  error");
         return RC_ERROR;
     }
     uint32_t count = entry.count;
-    DHLOGI("demo test: count  %d",  count);
+    DHLOGI("demo test: count  %{public}d",  count);
 
     for (uint32_t i = 0 ; i < count; i++) {
         flashModes.push_back(*(entry.data.u8 + i));
     }
 
     for (auto it = flashModes.begin(); it != flashModes.end(); it++) {
-        DHLOGI("demo test: flashModes : %d ", *it);
+        DHLOGI("demo test: flashModes : %{public}d ", *it);
     }
     return RC_OK;
 }
@@ -1477,11 +1477,11 @@ RetCode DcameraHdfDemo::GetMirrorSupported(std::shared_ptr<CameraAbility> &abili
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_CONTROL_CAPTURE_MIRROR_SUPPORTED, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_CONTROL_CAPTURE_MIRROR_SUPPORTED error");
+        DHLOGI("demo test: get OHOS_CONTROL_CAPTURE_MIRROR_SUPPORTED error");
         return RC_ERROR;
     }
     mirrorSupported = *(entry.data.u8);
-    DHLOGI("demo test: mirrorSupported  %d",  mirrorSupported);
+    DHLOGI("demo test: mirrorSupported  %{public}d",  mirrorSupported);
     return RC_OK;
 }
 
@@ -1492,18 +1492,18 @@ RetCode DcameraHdfDemo::GetStreamBasicConfigurations(std::shared_ptr<CameraAbili
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_ABILITY_STREAM_AVAILABLE_BASIC_CONFIGURATIONS, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_ABILITY_STREAM_AVAILABLE_BASIC_CONFIGURATIONS error");
+        DHLOGI("demo test: get OHOS_ABILITY_STREAM_AVAILABLE_BASIC_CONFIGURATIONS error");
         return RC_ERROR;
     }
 
     uint32_t count = entry.count;
-    DHLOGI("demo test: streamBasicConfigurations count  %d",  count);
+    DHLOGI("demo test: streamBasicConfigurations count  %{public}d",  count);
     for (uint32_t i = 0 ; i < count; i++) {
         streamBasicConfigurations.push_back(*(entry.data.i32 + i));
     }
 
     for (auto it = streamBasicConfigurations.begin(); it != streamBasicConfigurations.end(); it++) {
-        DHLOGI("demo test: streamBasicConfigurations %d ", *it);
+        DHLOGI("demo test: streamBasicConfigurations %{public}d ", *it);
     }
 
     return RC_OK;
@@ -1516,18 +1516,18 @@ RetCode DcameraHdfDemo::GetFpsRange(std::shared_ptr<CameraAbility> &ability)
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_ABILITY_FPS_RANGES, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_ABILITY_FPS_RANGES error");
+        DHLOGI("demo test: get OHOS_ABILITY_FPS_RANGES error");
         return RC_ERROR;
     }
 
     uint32_t count = entry.count;
-    DHLOGI("demo test: fpsRange count  %d",  count);
+    DHLOGI("demo test: fpsRange count  %{public}d",  count);
     for (uint32_t i = 0 ; i < count; i++) {
         fpsRange.push_back(*(entry.data.i32 + i));
     }
 
     for (auto it = fpsRange.begin(); it != fpsRange.end(); it++) {
-        DHLOGI("demo test: fpsRange %d ", *it);
+        DHLOGI("demo test: fpsRange %{public}d ", *it);
     }
 
     return RC_OK;
@@ -1540,12 +1540,12 @@ RetCode DcameraHdfDemo::GetCameraPosition(std::shared_ptr<CameraAbility> &abilit
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_POSITION, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_ABILITY_CAMERA_POSITION error");
+        DHLOGI("demo test: get OHOS_ABILITY_CAMERA_POSITION error");
         return RC_ERROR;
     }
 
     cameraPosition= *(entry.data.u8);
-    DHLOGI("demo test: cameraPosition  %d", cameraPosition);
+    DHLOGI("demo test: cameraPosition  %{public}d", cameraPosition);
     return RC_OK;
 }
 
@@ -1556,12 +1556,12 @@ RetCode DcameraHdfDemo::GetCameraType(std::shared_ptr<CameraAbility> &ability)
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_TYPE, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_ABILITY_CAMERA_TYPE error");
+        DHLOGI("demo test: get OHOS_ABILITY_CAMERA_TYPE error");
         return RC_ERROR;
     }
 
     cameraType= *(entry.data.u8);
-    DHLOGI("demo test: cameraType  %d", cameraType);
+    DHLOGI("demo test: cameraType  %{public}d", cameraType);
     return RC_OK;
 }
 
@@ -1572,12 +1572,12 @@ RetCode DcameraHdfDemo::GetCameraConnectionType(std::shared_ptr<CameraAbility> &
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_ABILITY_CAMERA_CONNECTION_TYPE, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_ABILITY_CAMERA_CONNECTION_TYPE error");
+        DHLOGI("demo test: get OHOS_ABILITY_CAMERA_CONNECTION_TYPE error");
         return RC_ERROR;
     }
 
     cameraConnectionType= *(entry.data.u8);
-    DHLOGI("demo test: cameraConnectionType  %d", cameraConnectionType);
+    DHLOGI("demo test: cameraConnectionType  %{public}d", cameraConnectionType);
     return RC_OK;
 }
 
@@ -1588,17 +1588,17 @@ RetCode DcameraHdfDemo::GetFaceDetectMaxNum(std::shared_ptr<CameraAbility> &abil
     camera_metadata_item_t entry;
     int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_STATISTICS_FACE_DETECT_MAX_NUM, &entry);
     if (ret != 0) {
-        DHLOGE("demo test: get OHOS_STATISTICS_FACE_DETECT_MAX_NUM error");
+        DHLOGI("demo test: get OHOS_STATISTICS_FACE_DETECT_MAX_NUM error");
         return RC_ERROR;
     }
     faceDetectMaxNum = *(entry.data.u8);
-    DHLOGI("demo test: faceDetectMaxNum %d ", faceDetectMaxNum);
+    DHLOGI("demo test: faceDetectMaxNum %{public}d ", faceDetectMaxNum);
     return RC_OK;
 }
 
 int32_t DemoCameraDeviceCallback::OnError(ErrorType type, int32_t errorCode)
 {
-    DHLOGI("demo test: OnError type : %d, errorCode : %d", type, errorCode);
+    DHLOGI("demo test: OnError type : %{public}d, errorCode : %{public}d", type, errorCode);
     return RC_OK;
 }
 
@@ -1616,11 +1616,11 @@ int32_t DemoCameraDeviceCallback::OnResult(uint64_t timestamp, const std::vector
                 camera_metadata_item_t entry;
                 int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_CONTROL_FOCUS_MODE, &entry);
                 if (ret != 0) {
-                    DHLOGE("demo test: get OHOS_CONTROL_FOCUS_MODE error");
+                    DHLOGI("demo test: get OHOS_CONTROL_FOCUS_MODE error");
                     return RC_ERROR;
                 }
                 focusMode = *(entry.data.u8);
-                DHLOGI("demo test: focusMode %d", focusMode);
+                DHLOGI("demo test: focusMode %{public}d", focusMode);
                 break;
             }
             case OHOS_CONTROL_EXPOSURE_MODE: {
@@ -1632,7 +1632,7 @@ int32_t DemoCameraDeviceCallback::OnResult(uint64_t timestamp, const std::vector
                     return RC_ERROR;
                 }
                 exposureMode = *(entry.data.u8);
-                DHLOGI("demo test: exposureMode %d", exposureMode);
+                DHLOGI("demo test: exposureMode %{public}d", exposureMode);
                 break;
             }
             default:
@@ -1645,47 +1645,47 @@ int32_t DemoCameraDeviceCallback::OnResult(uint64_t timestamp, const std::vector
 
 int32_t DemoCameraHostCallback::OnCameraStatus(const std::string& cameraId, CameraStatus status)
 {
-    DHLOGI("%s, enter. cameraId = %s, status = %d",
+    DHLOGI("%{public}s, enter. cameraId = %{public}s, status = %{public}d",
         __func__, cameraId.c_str(), static_cast<int>(status));
     return RC_OK;
 }
 
 int32_t DemoCameraHostCallback::OnFlashlightStatus(const std::string& cameraId, FlashlightStatus status)
 {
-    DHLOGI("%s, enter. cameraId = %s, status = %d",
+    DHLOGI("%{public}s, enter. cameraId = %{public}s, status = %{public}d",
         __func__, cameraId.c_str(), static_cast<int>(status));
     return RC_OK;
 }
 
 int32_t DemoCameraHostCallback::OnCameraEvent(const std::string& cameraId, CameraEvent event)
 {
-    DHLOGI("%s, enter. cameraId = %s, event = %d",
+    DHLOGI("%{public}s, enter. cameraId = %{public}s, event = %{public}d",
         __func__, cameraId.c_str(), static_cast<int>(event));
     return RC_OK;
 }
 
 int32_t DemoStreamOperatorCallback::OnCaptureStarted(int32_t captureId, const std::vector<int32_t>& streamIds)
 {
-    DHLOGI("%s, enter. captureId = %d, streamIds size = %d", __func__, captureId, streamIds.size());
+    DHLOGI("%{public}s, enter. captureId = %{public}d, streamIds size = %{public}d", __func__, captureId, streamIds.size());
     return RC_OK;
 }
 
 int32_t DemoStreamOperatorCallback::OnCaptureEnded(int32_t captureId, const std::vector<CaptureEndedInfo>& infos)
 {
-    DHLOGI("%s, enter. captureId = %d, infos size = %d", __func__, captureId, infos.size());
+    DHLOGI("%{public}s, enter. captureId = %{public}d, infos size = %{public}d", __func__, captureId, infos.size());
     return RC_OK;
 }
 
 int32_t DemoStreamOperatorCallback::OnCaptureError(int32_t captureId, const std::vector<CaptureErrorInfo>& infos)
 {
-    DHLOGI("%s, enter. captureId = %d, infos size = %d", __func__, captureId, infos.size());
+    DHLOGI("%{public}s, enter. captureId = %{public}d, infos size = %{public}d", __func__, captureId, infos.size());
     return RC_OK;
 }
 
 int32_t DemoStreamOperatorCallback::OnFrameShutter(int32_t captureId,
     const std::vector<int32_t>& streamIds, uint64_t timestamp)
 {
-    DHLOGI("%s, enter. captureId = %d, streamIds size = %d, timestamp = %llu", __func__,
+    DHLOGI("%{public}s, enter. captureId = %{public}d, streamIds size = %{public}d, timestamp = %%{public}llu", __func__,
         captureId, streamIds.size(), timestamp);
     return RC_OK;
 }
@@ -1696,27 +1696,27 @@ RetCode PreviewOn(int mode, const std::shared_ptr<DcameraHdfDemo>& mainDemo)
     DHLOGI("main test: PreviewOn enter");
 
     if (mode != 0 || mainDemo == nullptr) {
-        DHLOGE("main test: mainDemo is nullptr or mode is 0");
+        DHLOGI("main test: mainDemo is nullptr or mode is 0");
         return RC_ERROR;
     }
 
     rc = mainDemo->StartPreviewStream();
     if (rc != RC_OK) {
-        DHLOGE("main test: PreviewOn StartPreviewStream error");
+        DHLOGI("main test: PreviewOn StartPreviewStream error");
         return RC_ERROR;
     }
     DHLOGI("main test: StartPreviewStream enter");
     if (mode == 0) {
         rc = mainDemo->StartCaptureStream();
         if (rc != RC_OK) {
-            DHLOGE("main test: PreviewOn StartCaptureStream error");
+            DHLOGI("main test: PreviewOn StartCaptureStream error");
             return RC_ERROR;
         }
         DHLOGI("main test: StartCaptureStream enter");
     } else {
         rc = mainDemo->StartVideoStream();
         if (rc != RC_OK) {
-            DHLOGE("main test: PreviewOn StartVideoStream error");
+            DHLOGI("main test: PreviewOn StartVideoStream error");
             return RC_ERROR;
         }
         DHLOGI("main test: StartVideoStream enter");
@@ -1724,7 +1724,7 @@ RetCode PreviewOn(int mode, const std::shared_ptr<DcameraHdfDemo>& mainDemo)
     rc = mainDemo->CreateStream();
     rc = mainDemo->CaptureON(STREAM_ID_PREVIEW, CAPTURE_ID_PREVIEW, CAPTURE_PREVIEW);
     if (rc != RC_OK) {
-        DHLOGE("main test: PreviewOn mainDemo->CaptureON() preview error");
+        DHLOGI("main test: PreviewOn mainDemo->CaptureON() preview error");
         return RC_ERROR;
     }
 
@@ -1747,7 +1747,7 @@ RetCode FlashLightTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
     constexpr size_t delayTime = 5;
     
     if (mainDemo == nullptr) {
-        DHLOGE("main test: FlashLightTest  mainDemo is nullptr");
+        DHLOGI("main test: FlashLightTest  mainDemo is nullptr");
         return RC_ERROR;
     }
 
@@ -1768,7 +1768,7 @@ RetCode OfflineTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
     int32_t dalayTime = 5;
 
     if (mainDemo == nullptr) {
-        DHLOGE("main test: OfflineTest  mainDemo is nullptr");
+        DHLOGI("main test: OfflineTest  mainDemo is nullptr");
         return RC_ERROR;
     }
 
@@ -1780,7 +1780,7 @@ RetCode OfflineTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
 
     rc = mainDemo->StreamOffline(STREAM_ID_CAPTURE);
     if (rc != RC_OK) {
-        DHLOGE("main test: mainDemo->StreamOffline error");
+        DHLOGI("main test: mainDemo->StreamOffline error");
         return RC_ERROR;
     }
 
@@ -1788,7 +1788,7 @@ RetCode OfflineTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
     mainDemo->InitCameraDevice();
     rc = PreviewOn(0, mainDemo);
     if (rc != RC_OK) {
-        DHLOGE("main test: PreviewOn() error");
+        DHLOGI("main test: PreviewOn() error");
         return RC_ERROR;
     }
     return RC_OK;
@@ -1800,20 +1800,20 @@ RetCode CaptureTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
     constexpr size_t delayTime = 5;
     
     if (mainDemo == nullptr) {
-        DHLOGE("main test: CaptureTest  mainDemo is nullptr");
+        DHLOGI("main test: CaptureTest  mainDemo is nullptr");
         return RC_ERROR;
     }
 
     rc = mainDemo->CaptureON(STREAM_ID_CAPTURE, CAPTURE_ID_CAPTURE, CAPTURE_SNAPSHOT);
     if (rc != RC_OK) {
-        DHLOGE("main test: mainDemo->CaptureON() capture error");
+        DHLOGI("main test: mainDemo->CaptureON() capture error");
         return RC_ERROR;
     }
 
     sleep(delayTime);
     rc = mainDemo->CaptureOff(CAPTURE_ID_CAPTURE, CAPTURE_SNAPSHOT);
     if (rc != RC_OK) {
-        DHLOGE("main test: mainDemo->CaptureOff() capture error");
+        DHLOGI("main test: mainDemo->CaptureOff() capture error");
         return RC_ERROR;
     }
     DHLOGI("main test: CaptureON success");
@@ -1826,7 +1826,7 @@ RetCode VideoTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
     constexpr size_t delayTime = 5;
     
     if (mainDemo == nullptr) {
-        DHLOGE("main test: VideoTest  mainDemo is nullptr");
+        DHLOGI("main test: VideoTest  mainDemo is nullptr");
         return RC_ERROR;
     }
 
@@ -1841,7 +1841,7 @@ RetCode VideoTest(const std::shared_ptr<DcameraHdfDemo>& mainDemo)
 
     rc = PreviewOn(0, mainDemo);
     if (rc != RC_OK) {
-        DHLOGE("main test: video PreviewOn() error please -q exit demo");
+        DHLOGI("main test: video PreviewOn() error please -q exit demo");
         return RC_ERROR;
     }
     return RC_OK;
