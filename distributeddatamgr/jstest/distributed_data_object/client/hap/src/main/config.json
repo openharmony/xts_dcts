@@ -18,11 +18,12 @@
     "mainAbility":".MainAbility",
     "srcPath":"",
     "deviceType": [
-      "phone",
-      "tablet",
-      "tv",
-      "wearable",
-      "default"
+        "phone",
+        "tablet",
+        "tv",
+        "wearable",
+        "default",
+        "2in1"
     ],
     "distro": {
       "deliveryWithInstall": true,
