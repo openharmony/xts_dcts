@@ -307,7 +307,7 @@ RetCode DcameraHdfDemo::InitSensors()
 
 void DcameraHdfDemo::StoreImage(const char *bufStart, const uint32_t size) const
 {
-    DHLOGI("demo test:StoreImage size == %{public}d", size);
+    DHLOGI("demo test:StoreImage size == %{public}" PRIu32, size);
     constexpr uint32_t pathLen = 64;
     char path[pathLen] = {0};
     char prefix[] = "/data/";
@@ -344,7 +344,7 @@ void DcameraHdfDemo::StoreVideo(const char *bufStart, const uint32_t size) const
     if (ret == -1) {
         DHLOGI("demo test:write video file error %{public}s.....", strerror(errno));
     }
-    DHLOGI("demo test:StoreVideo size == %{public}d", size);
+    DHLOGI("demo test:StoreVideo size == %{public}" PRIu32, size);
 }
 
 void DcameraHdfDemo::OpenVideoFile()
@@ -1318,7 +1318,7 @@ RetCode DcameraHdfDemo::GetFaceDetectMode(std::shared_ptr<CameraAbility> &abilit
         return RC_ERROR;
     }
     faceDetectMode = *(entry.data.u8);
-    DHLOGI("demo test: faceDetectMode %{public}d",  faceDetectMode);
+    DHLOGI("demo test: faceDetectMode %{public}" PRIu8, faceDetectMode);
     return RC_OK;
 }
 
@@ -1348,14 +1348,14 @@ RetCode DcameraHdfDemo::GetAvailableFocusModes(std::shared_ptr<CameraAbility> &a
         return RC_ERROR;
     }
     uint32_t count = entry.count;
-    DHLOGI("demo test: count  %{public}d",  count);
+    DHLOGI("demo test: count  %{public}" PRIu32,  count);
 
     for (uint32_t i = 0 ; i < count; i++) {
         focusMode.push_back(*(entry.data.u8 + i));
     }
 
     for (auto it = focusMode.begin(); it != focusMode.end(); it++) {
-        DHLOGI("demo test: focusMode : %{public}d ", *it);
+        DHLOGI("demo test: focusMode : %{public}" PRIu8" ", *it);
     }
     return RC_OK;
 }
@@ -1371,14 +1371,14 @@ RetCode DcameraHdfDemo::GetAvailableExposureModes(std::shared_ptr<CameraAbility>
         return RC_ERROR;
     }
     uint32_t count = entry.count;
-    DHLOGI("demo test: count  %{public}d",  count);
+    DHLOGI("demo test: count  %{public}" PRIu32,  count);
 
     for (uint32_t i = 0 ; i < count; i++) {
         exposureMode.push_back(*(entry.data.u8 + i));
     }
 
     for (auto it = exposureMode.begin(); it != exposureMode.end(); it++) {
-        DHLOGI("demo test: exposureMode : %{public}d ", *it);
+        DHLOGI("demo test: exposureMode : %{public}" PRIu8" ", *it);
     }
     return RC_OK;
 }
@@ -1395,7 +1395,7 @@ RetCode DcameraHdfDemo::GetExposureCompensationRange(std::shared_ptr<CameraAbili
     }
 
     uint32_t count = entry.count;
-    DHLOGI("demo test:  exposureCompensationRange count  %{public}d",  count);
+    DHLOGI("demo test:  exposureCompensationRange count  %{public}" PRIu32,  count);
     for (uint32_t i = 0 ; i < count; i++) {
         exposureCompensationRange.push_back(*(entry.data.i32 + i));
     }
@@ -1435,14 +1435,14 @@ RetCode DcameraHdfDemo::GetAvailableMeterModes(std::shared_ptr<CameraAbility> &a
         return RC_ERROR;
     }
     uint32_t count = entry.count;
-    DHLOGI("demo test: count  %{public}d",  count);
+    DHLOGI("demo test: count  %{public}" PRIu32,  count);
 
     for (uint32_t i = 0 ; i < count; i++) {
         meterModes.push_back(*(entry.data.u8 + i));
     }
 
     for (auto it = meterModes.begin(); it != meterModes.end(); it++) {
-        DHLOGI("demo test: meterModes : %{public}d ", *it);
+        DHLOGI("demo test: meterModes : %{public}" PRIu8" ", *it);
     }
     return RC_OK;
 }
@@ -1458,14 +1458,14 @@ RetCode DcameraHdfDemo::GetAvailableFlashModes(std::shared_ptr<CameraAbility> &a
         return RC_ERROR;
     }
     uint32_t count = entry.count;
-    DHLOGI("demo test: count  %{public}d",  count);
+    DHLOGI("demo test: count  %{public}" PRIu32,  count);
 
     for (uint32_t i = 0 ; i < count; i++) {
         flashModes.push_back(*(entry.data.u8 + i));
     }
 
     for (auto it = flashModes.begin(); it != flashModes.end(); it++) {
-        DHLOGI("demo test: flashModes : %{public}d ", *it);
+        DHLOGI("demo test: flashModes : %{public}" PRIu8" ", *it);
     }
     return RC_OK;
 }
@@ -1481,7 +1481,7 @@ RetCode DcameraHdfDemo::GetMirrorSupported(std::shared_ptr<CameraAbility> &abili
         return RC_ERROR;
     }
     mirrorSupported = *(entry.data.u8);
-    DHLOGI("demo test: mirrorSupported  %{public}d",  mirrorSupported);
+    DHLOGI("demo test: mirrorSupported  %{public}" PRIu8,  mirrorSupported);
     return RC_OK;
 }
 
@@ -1497,7 +1497,7 @@ RetCode DcameraHdfDemo::GetStreamBasicConfigurations(std::shared_ptr<CameraAbili
     }
 
     uint32_t count = entry.count;
-    DHLOGI("demo test: streamBasicConfigurations count  %{public}d",  count);
+    DHLOGI("demo test: streamBasicConfigurations count  %{public}" PRIu32,  count);
     for (uint32_t i = 0 ; i < count; i++) {
         streamBasicConfigurations.push_back(*(entry.data.i32 + i));
     }
@@ -1521,7 +1521,7 @@ RetCode DcameraHdfDemo::GetFpsRange(std::shared_ptr<CameraAbility> &ability)
     }
 
     uint32_t count = entry.count;
-    DHLOGI("demo test: fpsRange count  %{public}d",  count);
+    DHLOGI("demo test: fpsRange count  %{public}" PRIu32,  count);
     for (uint32_t i = 0 ; i < count; i++) {
         fpsRange.push_back(*(entry.data.i32 + i));
     }
@@ -1545,7 +1545,7 @@ RetCode DcameraHdfDemo::GetCameraPosition(std::shared_ptr<CameraAbility> &abilit
     }
 
     cameraPosition= *(entry.data.u8);
-    DHLOGI("demo test: cameraPosition  %{public}d", cameraPosition);
+    DHLOGI("demo test: cameraPosition  %{public}" PRIu8, cameraPosition);
     return RC_OK;
 }
 
@@ -1561,7 +1561,7 @@ RetCode DcameraHdfDemo::GetCameraType(std::shared_ptr<CameraAbility> &ability)
     }
 
     cameraType= *(entry.data.u8);
-    DHLOGI("demo test: cameraType  %{public}d", cameraType);
+    DHLOGI("demo test: cameraType  %{public}" PRIu8, cameraType);
     return RC_OK;
 }
 
@@ -1577,7 +1577,7 @@ RetCode DcameraHdfDemo::GetCameraConnectionType(std::shared_ptr<CameraAbility> &
     }
 
     cameraConnectionType= *(entry.data.u8);
-    DHLOGI("demo test: cameraConnectionType  %{public}d", cameraConnectionType);
+    DHLOGI("demo test: cameraConnectionType  %{public}" PRIu8, cameraConnectionType);
     return RC_OK;
 }
 
@@ -1592,7 +1592,7 @@ RetCode DcameraHdfDemo::GetFaceDetectMaxNum(std::shared_ptr<CameraAbility> &abil
         return RC_ERROR;
     }
     faceDetectMaxNum = *(entry.data.u8);
-    DHLOGI("demo test: faceDetectMaxNum %{public}d ", faceDetectMaxNum);
+    DHLOGI("demo test: faceDetectMaxNum %{public}" PRIu8, faceDetectMaxNum);
     return RC_OK;
 }
 
@@ -1604,7 +1604,7 @@ int32_t DemoCameraDeviceCallback::OnError(ErrorType type, int32_t errorCode)
 
 int32_t DemoCameraDeviceCallback::OnResult(uint64_t timestamp, const std::vector<uint8_t>& result)
 {
-    DHLOGI("demo test: OnResult timestamp : %{public}ld,", timestamp);
+    DHLOGI("demo test: OnResult timestamp : %{public}" PRIu64, timestamp);
     std::shared_ptr<OHOS::Camera::CameraMetadata> updateSettings;
 
     OHOS::Camera::MetadataUtils::ConvertVecToMetadata(result, updateSettings);
@@ -1620,7 +1620,7 @@ int32_t DemoCameraDeviceCallback::OnResult(uint64_t timestamp, const std::vector
                     return RC_ERROR;
                 }
                 focusMode = *(entry.data.u8);
-                DHLOGI("demo test: focusMode %{public}d", focusMode);
+                DHLOGI("demo test: focusMode %{public}" PRIu8, focusMode);
                 break;
             }
             case OHOS_CONTROL_EXPOSURE_MODE: {
@@ -1632,7 +1632,7 @@ int32_t DemoCameraDeviceCallback::OnResult(uint64_t timestamp, const std::vector
                     return RC_ERROR;
                 }
                 exposureMode = *(entry.data.u8);
-                DHLOGI("demo test: exposureMode %{public}d", exposureMode);
+                DHLOGI("demo test: exposureMode %{public}" PRIu8, exposureMode);
                 break;
             }
             default:
@@ -1666,28 +1666,28 @@ int32_t DemoCameraHostCallback::OnCameraEvent(const std::string& cameraId, Camer
 
 int32_t DemoStreamOperatorCallback::OnCaptureStarted(int32_t captureId, const std::vector<int32_t>& streamIds)
 {
-    DHLOGI("%{public}s, enter. captureId = %{public}d, streamIds size = %{public}d", __func__, 
-	    captureId, streamIds.size());
+    DHLOGI("%{public}s, enter. captureId = %{public}d, streamIds size = %{public}zu", __func__,
+        captureId, streamIds.size());
     return RC_OK;
 }
 
 int32_t DemoStreamOperatorCallback::OnCaptureEnded(int32_t captureId, const std::vector<CaptureEndedInfo>& infos)
 {
-    DHLOGI("%{public}s, enter. captureId = %{public}d, infos size = %{public}d", __func__, captureId, infos.size());
+    DHLOGI("%{public}s, enter. captureId = %{public}d, infos size = %{public}zu", __func__, captureId, infos.size());
     return RC_OK;
 }
 
 int32_t DemoStreamOperatorCallback::OnCaptureError(int32_t captureId, const std::vector<CaptureErrorInfo>& infos)
 {
-    DHLOGI("%{public}s, enter. captureId = %{public}d, infos size = %{public}d", __func__, captureId, infos.size());
+    DHLOGI("%{public}s, enter. captureId = %{public}d, infos size = %{public}zu", __func__, captureId, infos.size());
     return RC_OK;
 }
 
 int32_t DemoStreamOperatorCallback::OnFrameShutter(int32_t captureId,
     const std::vector<int32_t>& streamIds, uint64_t timestamp)
 {
-    DHLOGI("%{public}s, enter. captureId = %{public}d, streamIds size = %{public}d, timestamp = %{public}llu", 
-	    __func__, captureId, streamIds.size(), timestamp);
+    DHLOGI("%{public}s, enter. captureId = %{public}d, streamIds size = %{public}zu, timestamp = %{public}" PRIu64,
+        __func__, captureId, streamIds.size(), timestamp);
     return RC_OK;
 }
 

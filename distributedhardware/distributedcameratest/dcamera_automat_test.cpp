@@ -709,7 +709,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3700, TestSize.Level1)
     EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
     sleep(sleepOk);
     ret = mainDemo->SetAeExpo();
-    DHLOGI("SUB_DH_Dcamera_DCTS_3701 = ", ret);
+    DHLOGI("SUB_DH_Dcamera_DCTS_3701 = %{public}d", ret);
     EXPECT_EQ(cameraOk, ret) << "SetAeExpo fail";
     sleep(sleepOk);
 }
@@ -728,7 +728,7 @@ HWTEST_F(DCameraAutomatTest, SUB_DH_Dcamera_DCTS_3800, TestSize.Level1)
     EXPECT_NE(cameraOk, ret) << "SetAwbMode incandescent fail";
     sleep(sleepOk);
     ret = mainDemo->SetMetadata();
-    DHLOGI("SUB_DH_Dcamera_DCTS_3801 = ", ret);
+    DHLOGI("SUB_DH_Dcamera_DCTS_3801 = %{public}d", ret);
     EXPECT_EQ(cameraOk, ret) << "SetMetadata fail";
     sleep(sleepOk);
 }
