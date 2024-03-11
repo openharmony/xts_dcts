@@ -23,6 +23,9 @@ import distributedObject from '@ohos.data.distributedDataObject';
 import deviceinfo from '@ohos.deviceInfo'
 import rpc from '@ohos.rpc';
 
+const bundleNameObject  = "com.acts.distributeobjectdisjs";
+const abilityNameObject = "com.acts.distributeobjectdisjs.MainAbility";
+
 let context = featureAbility.getContext();
 
 let localDeviceId = undefined;
@@ -104,6 +107,31 @@ describe('dataObjectTest', function () {
         await driveFn();
         sleep(2000);
 
+        let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+        deviceList = dmInstance.getAvailableDeviceListSync();
+        deviceId = deviceList[0].networkId;
+        console.info(logTag + "deviceId is: " + deviceId);
+        syncDeviceIds = [deviceId];
+
+        try{
+            console.info(logTag + "deviceId: " + deviceId);
+            let wantValue = {
+                bundleName: bundleNameObject,
+                abilityName: abilityNameObject,
+                deviceId: deviceId
+            };
+            await featureAbility.startAbility({
+                want: wantValue
+            }).then((data) => {
+                console.info(logTag + ' startAbility  success. data=' + JSON.stringify(data));
+            }).catch((err) => {
+                console.info(logTag + ' startAbility err: ' + err.code + err.message);
+            });
+        }catch(error){
+            console.info(logTag + "beforeAll startAbility:error = " + error);
+        }
+        await sleep(1000);       
+
         testservice = new TestService();
         console.info(logTag + "deviceId: " + deviceId);
      
@@ -113,12 +141,6 @@ describe('dataObjectTest', function () {
             remoteHelpers = new RemoteHelper(testservice,gIRemoteObject);
         })
       
-        let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-        deviceList = dmInstance.getAvailableDeviceListSync();
-        deviceId = deviceList[0].networkId;
-        console.info(logTag + "deviceId is: " + deviceId);
-        syncDeviceIds = [deviceId];
-
         //get remote device os version
         console.info(logTag + "get remote device os version");
         let data = rpc.MessageSequence.create();

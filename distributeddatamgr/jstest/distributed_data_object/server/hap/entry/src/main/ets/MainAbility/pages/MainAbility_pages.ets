@@ -16,7 +16,7 @@ import router from '@ohos.router';
 @Entry
 @Component
 struct Index {
-  @State message: string = 'MainAbility'
+  @State message: string = 'Stage objectserver'
 
   build() {
     Row() {
