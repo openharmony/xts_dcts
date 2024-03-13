@@ -1399,7 +1399,7 @@ void TestTearDown(void)
     }
 }
 
-void AddPermission (void)
+void AddPermission(void)
 {
     uint64_t tokenId;
     const char *perms[2];
