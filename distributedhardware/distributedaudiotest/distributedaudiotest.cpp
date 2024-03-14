@@ -106,7 +106,7 @@ std::string FindAudioDevice()
         const AudioAdapterDescriptor &desc = g_devices[index];
         std::cout << "Device[" << index << "] ID: " << desc.adapterName << std::endl;
         deviceId = deviceId +  desc.adapterName;
-        DHLOGI("demo test: Device [%s] ID",desc.adapterName);
+        DHLOGI("demo test: Device [%s] ID", desc.adapterName);
         if (index != g_deviceNum - 1) {
         }
         std::cout << "pin list: ";
@@ -446,7 +446,11 @@ static void Capture()
             std::cout << "CaptureFrame failed, ret: " << ret << std::endl;
             return;
         }
-        fwrite(data, 1, RENDER_FRAME_SIZE, g_micFile);
+        size_t res = fwrite(data, 1, RENDER_FRAME_SIZE, g_micFile);
+        if (res < DH_SUCCESS) {
+            std::cout << "fwrite failed, res: " << res << std::endl;
+            return;
+        }
         g_micFrameNum++;
         ReadStreamWait(startTime);
     }

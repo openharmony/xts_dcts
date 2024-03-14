@@ -231,14 +231,14 @@ void VDecDemo::InputFunc()
 
     while (true) {
         if (!isRunning_.load()) {
-            break;
+            return;
         }
 
         unique_lock<mutex> lock(signal_->inMutex_);
         signal_->inCond_.wait(lock, [this]() { return signal_->inQueue_.size() > 0; });
 
         if (!isRunning_.load()) {
-            break;
+            return;
         }
 
         uint32_t index = signal_->inQueue_.front();
@@ -246,14 +246,14 @@ void VDecDemo::InputFunc()
 
         char *fileBuffer = static_cast<char *>(malloc(sizeof(char) * (*frameLen) + 1));
         if (fileBuffer == nullptr) {
-            break;
+            return;
         }
 
         (void)testFile_->read(fileBuffer, *frameLen);
         if (memcpy_s(buffer->GetBase(), buffer->GetSize(), fileBuffer, *frameLen) != EOK) {
             free(fileBuffer);
             DHLOGI("Fatal: memcpy fail");
-            break;
+            return;
         }
 
         AVCodecBufferInfo info;
@@ -277,12 +277,12 @@ void VDecDemo::InputFunc()
         frameCount_++;
         if (frameCount_ == defaultFrameCount_) {
             DHLOGI("Finish decode, exit");
-            break;
+            return;
         }
 
         if (ret != 0) {
             DHLOGI("Fatal error, exit");
-            break;
+            return;
         }
     }
 }
@@ -291,20 +291,20 @@ void VDecDemo::OutputFunc()
 {
     while (true) {
         if (!isRunning_.load()) {
-            break;
+            return;
         }
 
         unique_lock<mutex> lock(signal_->outMutex_);
         signal_->outCond_.wait(lock, [this]() { return signal_->outQueue_.size() > 0; });
 
         if (!isRunning_.load()) {
-            break;
+            return;
         }
 
         uint32_t index = signal_->outQueue_.front();
         if (vdec_->ReleaseOutputBuffer(index, true) != 0) {
             DHLOGI("Fatal: ReleaseOutputBuffer fail");
-            break;
+            return;
         }
 
         signal_->outQueue_.pop();
