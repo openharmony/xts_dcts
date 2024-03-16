@@ -2562,7 +2562,7 @@ export default function DmsFwkStageTest() {
             console.log('get caller is failed err is ' + JSON.stringify(err))
             expect(err == undefined).assertTrue()
           })
-        await sleep(1000);
+        await sleep(2000);
         console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1400 i is" + '' + i);
       }
       done()
@@ -2598,7 +2598,7 @@ export default function DmsFwkStageTest() {
             console.log('get caller is failed err is ' + JSON.stringify(err))
             expect(err == undefined).assertTrue()
           })
-        await sleep(1000);
+        await sleep(3000);
         console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1500 i is" + '' + i);
       }
       done()
