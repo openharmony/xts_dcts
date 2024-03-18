@@ -100,12 +100,7 @@ extern "C" {
 #define SIZE_1K 1024
 
 #define CMD_DOWN_ETH "ifconfig eth0 down"
-#define CMD_CONFIG_ETH_WRONG_IP "ifconfig eth0 193.168.7.88 up"
-#define CMD_CONFIG_ETH_RIGHT_IP "ifconfig eth0 192.168.3.88 up"
 #define CMD_PIDOF_SOFTBUS "pidof softbus_server"
-
-#define CMD_CONFIG_WLAN_WRONG_IP "ifconfig wlan0 193.168.3.88 up"
-
 #define MAX_SESSION_SERVER_NUM_CLIENT 8
 #define MAX_SESSION_SERVER_NUM_SERVER 32
 #define TRANS_BYTES_LENGTH_MAX (4 * 1024 * 1024)
@@ -192,7 +187,7 @@ int Wait(int timeout);
 int Wait4Session(int timeout, WaitSessionType type);
 int WaitNodeCount(int timeout, WaitNodeStateType state, int expectCount);
 
-void AddPermission (void);
+void AddPermission(void);
 void sleepn(int n);
 void TestSetUp(void);
 void TestTearDown(void);
