@@ -3,8 +3,8 @@
     "driver": {
         "type": "OHJSUnitTest",
         "test-timeout": "600000",
-        "bundle-name": "com.ohos.fileiotest",
-        "package-name": "com.ohos.fileiotest",
+        "bundle-name": "com.acts.fileio.test.server",
+        "package-name": "com.acts.fileio.test.server",
         "testcase-timeout": "60000",
         "shell-timeout": "600000"
     },
@@ -19,7 +19,7 @@
         {
             "type": "ShellKit",
             "teardown-command": [
-                "rm -rf /mnt/hmdfs/100/account/merge_view/data/com.ohos.fileiotest/*"
+                "rm -rf /mnt/hmdfs/100/account/merge_view/data/com.acts.fileio.test.server/*"
             ]
         }
     ]

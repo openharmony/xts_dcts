@@ -3,7 +3,7 @@
     "driver": {
         "type": "JSUnitServer",
         "test-timeout": "900000",
-        "package": "com.ohos.fileiotest",
+        "package": "com.acts.fileio.test.server",
 
         "abilityName": ".MainAbility",
         "shell-timeout": "900000"
