@@ -692,6 +692,10 @@ export default function DmsFwkFaTest() {
           console.error(TAG + ' fail, error: ' + error.code);
           expect(error.code).assertEqual(1);
           done();
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+          done();
         }
       });
       await sleep(1000);
@@ -721,7 +725,11 @@ export default function DmsFwkFaTest() {
           console.error(TAG + ' fail, error: ' + error.code);
           expect(error.code).assertEqual(1);
           done();
-        } 
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+          done();
+        }
       });
       await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0200 is end---------------");
@@ -750,13 +758,16 @@ export default function DmsFwkFaTest() {
           console.error(TAG + ' fail, error: ' + error.code);
           expect(error.code).assertEqual(1);
           done();
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+          done();
         }
       });
       done();
       await sleep(1000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0300 is end---------------");
     });
-
 
 
     /*
