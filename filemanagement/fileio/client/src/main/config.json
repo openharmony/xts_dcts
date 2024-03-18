@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.ohos.fileiotest",
+    "bundleName": "com.acts.fileio.test.server",
     "vendor": "example",
     "version": {
       "code": 1000000,
@@ -30,7 +30,7 @@
         "name": "ohos.permission.ACCESS_SERVICE_DM"
       }
     ],
-    "package": "com.ohos.fileiotest",
+    "package": "com.acts.fileio.test.server",
     "name": ".entry",
     "mainAbility":".MainAbility",
     "srcPath":"",

@@ -16,8 +16,8 @@
 import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from '@ohos.ability.featureAbility';
 
-var bundleName = "com.ohos.fileiotest";
-var abilityName = "com.ohos.fileiotest.ServiceAbility";
+var bundleName = "com.acts.fileio.test.server";
+var abilityName = "com.acts.fileio.test.server.ServiceAbility";
 var deviceList;
 
 export default class TestService {
@@ -34,7 +34,7 @@ export default class TestService {
         console.info("fileioClient:  toConnectAbility")
         return new Promise(resolve=>{
             let self = this;
-            let dmInstance = deviceManager.createDeviceManager('com.ohos.fileiotest');
+            let dmInstance = deviceManager.createDeviceManager('com.acts.fileio.test.server');
             self.getDeviceList(dmInstance);
             console.info("fileioClient:  got deviceManager: " + dmInstance)
             let networkId = deviceList[0].networkId

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,19 +13,19 @@
  * limitations under the License.
  */
 
+import ServiceExtension from '@ohos.app.ability.ServiceExtensionAbility';
 import rpc from "@ohos.rpc";
 import fileio from '@ohos.fileio';
 import fs from '@ohos.file.fs';
-import backgroundTaskManager from '@ohos.backgroundTaskManager';
 import wantAgent from '@ohos.wantAgent';
-import featureAbility from '@ohos.ability.featureAbility';
+import backgroundTaskManager from '@ohos.backgroundTaskManager';
 
 function startContinuousTask() {
     let wantAgentInfo = {
         wants: [
             {
-                bundleName: "com.ohos.fileiotest",
-                abilityName: "com.ohos.fileiotest.ServiceAbility"
+                bundleName: "com.acts.fileio.test.server",
+                abilityName: "com.acts.fileio.test.server.ServiceAbility"
             }
         ],
         operationType: wantAgent.OperationType.START_SERVICE,
@@ -35,11 +35,10 @@ function startContinuousTask() {
 
     wantAgent.getWantAgent(wantAgentInfo).then((wantAgentObj) => {
         try{
-            backgroundTaskManager.startBackgroundRunning(featureAbility.getContext(),
-                backgroundTaskManager.BackgroundMode.MULTI_DEVICE_CONNECTION, wantAgentObj).then(() => {
-                console.info("Operation startBackgroundRunning succeeded");
+            backgroundTaskManager.startBackgroundRunning(this.context, backgroundTaskManager.BackgroundMode.MULTI_DEVICE_CONNECTION, wantAgentObj).then(() => {
+              console.info("Operation startBackgroundRunning succeeded");
             }).catch((err) => {
-                console.error("Operation startBackgroundRunning failed Cause: " + err);
+              console.error("Operation startBackgroundRunning failed Cause: " + err);
             });
         }catch(error){
             console.error(`Operation startBackgroundRunning failed. code is ${error.code} message is ${error.message}`);
@@ -49,48 +48,51 @@ function startContinuousTask() {
 
 function stopContinuousTask() {
     try{
-        backgroundTaskManager.stopBackgroundRunning(featureAbility.getContext()).then(() => {
-            console.info("Operation stopBackgroundRunning succeeded");
-        }).catch((err) => {
-            console.error("Operation stopBackgroundRunning failed Cause: " + err);
-        });
+      backgroundTaskManager.stopBackgroundRunning(this.context).then(() => {
+        console.info("Operation stopBackgroundRunning succeeded");
+      }).catch((err) => {
+        console.error("Operation stopBackgroundRunning failed Cause: " + err);
+      });
     }catch(error){
-        console.error(`Operation stopBackgroundRunning failed. code is ${error.code} message is ${error.message}`);
+      console.error(`Operation stopBackgroundRunning failed. code is ${error.code} message is ${error.message}`);
     }
 }
 
-export default {
-    onStart() {
-        console.info('FileioServer: onStart')
-        startContinuousTask();
-        console.info('FileioServer: startContinuousTask');
-    },
-    onStop() {
-        console.info('FileioServer: onStop')
-        stopContinuousTask();
-        console.info('FileioServer: stopContinuousTask');
-    },
-    onCommand(want, startId) {
-        console.info('FileioServer: onCommand, want: ' + JSON.stringify(want) + ', startId: ' + startId)
-    },
+export default class ServiceAbility extends ServiceExtension {
+    onCreate(want) {
+        // Called to return a FormBindingData object.
+        console.info("FileioServer ServiceAbility onCreate")
+    }
+
     onConnect(want) {
-        console.info('FileioServer: service onConnect called.')
-        return new Stub("rpcTestAbility")
-    },
+        // Called when the form provider is notified that a temporary form is successfully
+        console.info("FileioServer ServiceAbility onConnect")
+        return new Stub("rpcTestAbility");
+    }
+
     onDisconnect(want) {
-        console.info('FileioServer: service onDisConnect called.')
-    },
-    onReconnect(want) {
-        console.info('FileioServer: service onReConnect called.')
+        // Called to notify the form provider to update a specified form.
+        console.info("FileioServer ServiceAbility onDisconnect")
+    }
+
+    onRequest(want, startId){
+        console.info("FileioServer ServiceAbility onRequest")
+
+    }
+
+    onDestroy() {
+        // Called to notify the form provider that a specified form has been destroyed.
+        console.info("IpcStageServer ServiceAbility onCronDestroyeate")
+
     }
 }
 
 function checkDirExists(destDirPath) {
     console.info("start check dir :" + destDirPath);
     try {
-        fs.accessSync(destDirPath);
+        let res = fs.accessSync(destDirPath);
         console.info('------------------- dest dir exists.');
-        return true;
+        return res;
     } catch (e) {
         console.info('------------------- dest dir is not exists.');
         return false;
@@ -100,9 +102,9 @@ function checkDirExists(destDirPath) {
 function checkFileExists(destFilePath,) {
     console.info("start check file :" + destFilePath);
     try {
-        fs.accessSync(destFilePath);
+        let res = fs.accessSync(destFilePath);
         console.info('------------------- ' + destFilePath + ' exists.');
-        return true;
+        return res;
     } catch (e) {
         console.info('------------------- ' + destFilePath + ' not exists.');
         return false;
@@ -135,9 +137,9 @@ class Stub extends rpc.RemoteObject {
         super(descriptor);
     }
 
-    onRemoteRequest(code, data, reply, option) {
-        try {
-            console.info("onRemoteRequest: " + code)
+    async onRemoteMessageRequest(code, data, reply, option) {
+        try{
+            console.info("async onRemoteMessageRequest: " + code);
             switch (code) {
                 case CODE_MK_DIR:
                 {
@@ -260,7 +262,7 @@ class Stub extends rpc.RemoteObject {
                     return super.onRemoteMessageRequest(code, data, reply, option);
             }
         } catch (error) {
-            console.info("onRemoteMessageRequest: " + error);
+            console.info("async onRemoteMessageRequest: " + error);
         }
         return false
     }
