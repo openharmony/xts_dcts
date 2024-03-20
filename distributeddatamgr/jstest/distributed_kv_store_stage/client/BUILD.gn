@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+# Copyright (c) 2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,34 +11,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("../../../../../tools/build/suite.gni")
+import("//test/xts/tools/build/suite.gni")
 
-ohos_hap_assist_suite("distributekvdisjs_server") {
+ohos_js_hap_suite("distributekvdisets_test") {
   hap_profile = "entry/src/main/module.json"
-  hap_name = "DctsDistributeKvStoreDisJsServer"
-
-  testonly = true
+  js_build_mode = "debug"
   deps = [
-    ":distributekvdisjs_js_assets",
-    ":distributekvdisjs_resources",
+    ":distributekvdisets_js_assets",
+    ":distributekvdisets_resources",
   ]
   ets2abc = true
   certificate_profile = "signature/openharmony_sx.p7b"
+  hap_name = "DctsDistributeKvStoreDisEtsTest"
+
   subsystem_name = "distributeddatamgr"
   part_name = "kv_store"
 }
 
-ohos_app_scope("distributekvdisjs_app_profile") {
+ohos_app_scope("distributekvdisets_app_profile") {
   app_profile = "AppScope/app.json"
   sources = [ "AppScope/resources" ]
 }
 
-ohos_js_assets("distributekvdisjs_js_assets") {
+ohos_js_assets("distributekvdisets_js_assets") {
   source_dir = "entry/src/main/ets"
 }
 
-ohos_resources("distributekvdisjs_resources") {
+ohos_resources("distributekvdisets_resources") {
   sources = [ "entry/src/main/resources" ]
-  deps = [ ":distributekvdisjs_app_profile" ]
+  deps = [ ":distributekvdisets_app_profile" ]
   hap_profile = "entry/src/main/module.json"
 }

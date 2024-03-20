@@ -13,14 +13,14 @@
 
 import("../../../../../tools/build/suite.gni")
 
-ohos_hap_assist_suite("distributekvdisjs_server") {
+ohos_hap_assist_suite("distributekvdisets_server") {
   hap_profile = "entry/src/main/module.json"
-  hap_name = "DctsDistributeKvStoreDisJsServer"
+  hap_name = "DctsDistributeKvStoreDisEtsServer"
 
   testonly = true
   deps = [
-    ":distributekvdisjs_js_assets",
-    ":distributekvdisjs_resources",
+    ":distributekvdisets_js_assets",
+    ":distributekvdisets_resources",
   ]
   ets2abc = true
   certificate_profile = "signature/openharmony_sx.p7b"
@@ -28,17 +28,17 @@ ohos_hap_assist_suite("distributekvdisjs_server") {
   part_name = "kv_store"
 }
 
-ohos_app_scope("distributekvdisjs_app_profile") {
+ohos_app_scope("distributekvdisets_app_profile") {
   app_profile = "AppScope/app.json"
   sources = [ "AppScope/resources" ]
 }
 
-ohos_js_assets("distributekvdisjs_js_assets") {
+ohos_js_assets("distributekvdisets_js_assets") {
   source_dir = "entry/src/main/ets"
 }
 
-ohos_resources("distributekvdisjs_resources") {
+ohos_resources("distributekvdisets_resources") {
   sources = [ "entry/src/main/resources" ]
-  deps = [ ":distributekvdisjs_app_profile" ]
+  deps = [ ":distributekvdisets_app_profile" ]
   hap_profile = "entry/src/main/module.json"
 }
