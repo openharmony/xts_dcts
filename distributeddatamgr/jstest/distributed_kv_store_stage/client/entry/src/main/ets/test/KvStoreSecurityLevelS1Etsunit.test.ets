@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Huawei Device Co., Ltd.
+ * Copyright (C) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,26 +15,33 @@
 
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
 import deviceManager from '@ohos.distributedDeviceManager';
-import TestService from '../../../../../../../../../testtools/disjsTest/client/testService.js';
-import RemoteHelper from '../../../../../../../../../testtools/disjsTest/client/remoteHelper.js';
+import TestService from '../../../../../../../../../testtools/disetsTest/client/testService.ets';
+import RemoteHelper from '../../../../../../../../../testtools/disetsTest/client/remoteHelper.ets';
 import factory from '@ohos.data.distributedKVStore';
-import { UiDriver, BY } from '@ohos.UiTest'
-import featureAbility from '@ohos.ability.featureAbility';
+import { Driver, ON } from '@ohos.UiTest';
 import deviceinfo from '@ohos.deviceInfo'
+import common from '@ohos.app.ability.common';
+import abilityAccessCtrl, { Context, PermissionRequestResult } from '@ohos.abilityAccessCtrl';
+import { BusinessError } from '@ohos.base';
+import StartOptions from '@ohos.app.ability.StartOptions';
+import UIAbility from '@ohos.app.ability.UIAbility';
+import Want from '@ohos.app.ability.Want';
 
-const bundleNameKv  = "com.acts.distributekvdisjs";
-const abilityNameKv = "com.acts.distributekvdisjs.MainAbility";
+const bundleNameKv  = "com.acts.distributekvdisets";
+const abilityNameKv = "com.acts.distributekvdisets.MainAbility";
 
-let localDeviceId = undefined;
-let logTag = 'RpcClient:  ';
-let testservice = null;
-let gIRemoteObject = null;
-let remoteHelpers = null;
-let deviceId = null;
-let kvManager = null;
-let kvStore = null;
-let syncDeviceIds = undefined;
-let deviceList = undefined;
+let dmInstance : deviceManager.DeviceManager;
+let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
+let deviceList: Array<deviceManager.DeviceBasicInfo>;
+let localDeviceId : string;
+let deviceId : string;
+let syncDeviceIds: string[] = [];
+let logTag = '[RpcClient:  ]  ';
+//let gIRemoteObject = null;
+let remoteHelpers;
+let kvManager: factory.KVManager;
+let kvStore: factory.SingleKVStore | null;
+
 const PULL = factory.SyncMode.PULL_ONLY;
 const PUSH = factory.SyncMode.PUSH_ONLY;
 const PUSH_PULL = factory.SyncMode.PUSH_PULL;
@@ -46,114 +53,112 @@ const TEST_FLOAT_KEY = "TEST_FLOAT_KEY";
 const TEST_FLOAT_VALUE = 1.1;
 const TEST_STORE_ID = 'clientStoreId';
 const SERVET_STORE_ID = 'clientStoreId';
-const TEST_BUNDLE_NAME = 'com.acts.distributekvdisjs';
+const TEST_BUNDLE_NAME = 'com.acts.distributekvdisets';
 
 
-let g_context = featureAbility.getContext();
+let g_context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
+console.info(logTag + "g_context=" + g_context);
 const config = {
   context: g_context,
   bundleName: TEST_BUNDLE_NAME,
 }
 
+let getDeviceId = async () =>{
+    console.info(logTag + 'let getDeviceId is begin...')
+    try {
+        dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+        console.info(logTag + 'get deviceManager is success')
+    } catch (error) {
+        console.info(logTag + 'get deviceManager is failed' + JSON.stringify(error))
+    }
+    localDeviceId = dmInstance.getLocalDeviceNetworkId();
+    console.info(logTag + "local device id is: " + localDeviceId);
+    deviceList = dmInstance.getAvailableDeviceListSync();
+    deviceId = deviceList[0].networkId;
+    syncDeviceIds = [deviceId];
+    console.info(logTag + "deviceid is: " + deviceId);
+    console.info(logTag + "syncDeviceIds is: " + JSON.stringify(syncDeviceIds));
+}
 
-function sleep(ms) {
+
+let sleep = (ms:number) =>{
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-async function getPermission() {
-    console.info(`getPermission is start`);
-    let permissions = ['ohos.permission.DISTRIBUTED_DATASYNC'];
-    let context = featureAbility.getContext();
-    context.requestPermissionsFromUser(permissions, 666, (data) => {
-        console.info("request success" + JSON.stringify(data));
 
+let getPermission = async () =>{
+    console.info(logTag + 'let getPermission is begin...');
+    let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+    atManager.requestPermissionsFromUser(context, ['ohos.permission.DISTRIBUTED_DATASYNC'], (err: BusinessError, data: PermissionRequestResult) => {
+        console.info(logTag + "request success" + JSON.stringify(data));
+        console.info(logTag + "request success" + JSON.stringify(err));
     })
 }
-async function driveFn() {
+
+let driveFn = async () =>{
     try {
-        let driver = await UiDriver.create();
-        console.info(` come in driveFn`);
-        console.info(`driver is ${JSON.stringify(driver)}`);
-        sleep(2000);
-        let button = await driver.findComponent(BY.text('允许'));
-        console.info(`button is ${JSON.stringify(button)}`);
-        sleep(5000);
+        console.info(logTag + 'let driveFn begin...')
+        let driver: Driver = await Driver.create()
+        console.info(logTag + 'come in driveFn')
+        console.info(logTag + 'driver is ${JSON.stringify(driver)}')
+        await sleep(2000);
+        let button = await driver.findComponent(ON.text('允许'));
+        console.info(logTag + 'button is ${JSON.stringify(button)}');
+        await sleep(2000);
         await button.click();
-    } catch (err) {
-        console.info('err is ' + err);
+        await sleep(1000);
+        } catch (err) {
+        console.info(logTag + 'err is ' + err);
         return;
     }
-
 }
 
-export default function kvSyncTestS1() {
-    describe('kvSyncTestS1', function () {
+let startAbility = async () =>{
+    try{
+        console.info(logTag + "let startAbility begin...");
+        let wantValue: Want = {
+            bundleName: bundleNameKv,
+            abilityName: abilityNameKv,
+            deviceId: deviceId
+        };
+
+        let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+        context.startAbility(wantValue).then(() => {
+            console.info(logTag + ' startAbility success.' );
+        }).catch((err) => {
+            console.info(logTag + ' startAbility err: ' + err.code + err.message);
+        });
+    }catch(error){
+        console.info(logTag + "beforeAll startAbility:error = " + error);
+    }
+}
+
+export default function kvSyncTestS1Ets() {
+    describe('kvSyncTestS1Ets', function () {
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
 
-            let flag_41 = 1;
-            let localOSVersion = "";
-            let OSVersion41 = "OpenHarmony-4.1";
-
-            let osReleaseTypeInfo = deviceinfo.osReleaseType;
-            console.info(logTag + 'the value of the deviceinfo osReleaseType is :' + osReleaseTypeInfo);
-            let osFullNameInfo = deviceinfo.osFullName;
-            console.info(logTag + 'the value of the deviceinfo osFullName is :' + osFullNameInfo);
-
-            localOSVersion = osFullNameInfo.substring(0, 15);
-            console.info(logTag + "localOSVersion is: " + localOSVersion);
-
-            if (localOSVersion == OSVersion41) {
-                flag_41 = 1;
-                console.info(logTag + "flag_41 is: " + flag_41);
-            } else {
-                flag_41 = 0;
-                console.info(logTag + "flag_41 is: " + flag_41);
-            }
             await getPermission();
-            sleep(5000);
+            await sleep(2000);
             await driveFn();
-            sleep(2000);
-
-            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-            deviceList = dmInstance.getAvailableDeviceListSync();
-            deviceId = deviceList[0].networkId;
-            console.info(logTag + "deviceId is: " + deviceId);
-            syncDeviceIds = [deviceId];
-
-            try{
-                console.info(logTag + "deviceId: " + deviceId);
-                let wantValue = {
-                    bundleName: bundleNameKv,
-                    abilityName: abilityNameKv,
-                    deviceId: deviceId
-                };
-                await featureAbility.startAbility({
-                    want: wantValue
-                }).then((data) => {
-                    console.info(logTag + ' startAbility  success. data=' + JSON.stringify(data));
-                }).catch((err) => {
-                    console.info(logTag + ' startAbility err: ' + err.code + err.message);
-                });
-            }catch(error){
-                console.info(logTag + "beforeAll startAbility:error = " + error);
-            }
             await sleep(1000);
+            await getDeviceId();
+            await sleep(1000);
+            await startAbility();
+            await sleep(2000);
 
+            let testservice = new TestService();
 
-            testservice = new TestService();
             kvManager = factory.createKVManager(config);
             console.info(logTag + "CLIENT create kvManager success, kvManager=" + kvManager);
 
             await testservice.toConnectAbility().then(data => {
-                gIRemoteObject = data;
+                let gIRemoteObject = data;
                 console.info(logTag + "toConnectAbility data is" + data);
                 remoteHelpers = new RemoteHelper(testservice, gIRemoteObject);
             })
             await remoteHelpers.createKvManager().then(async (data) => {
                 console.info(logTag + "REMOTE create KvManager success,ret: " + data);
             })
-
-
 
             console.info(logTag + '-----------------beforeAll end-----------------');
             done();
@@ -167,7 +172,7 @@ export default function kvSyncTestS1() {
 
         afterEach(async function (done) {
             console.info(logTag + '-----------------afterEach begin-----------------');
-            await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID, kvStore, async function () {
+            await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID, async function () {
                 console.info(logTag + 'CLIENT afterEach closeKVStore success');
                 await kvManager.deleteKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID, function () {
                     console.info(logTag + 'CLIENT afterEach deleteKVStore success');
@@ -184,7 +189,7 @@ export default function kvSyncTestS1() {
 
         afterAll(async function (done) {
             console.info(logTag + '-----------------afterAll begin-----------------');
-            await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID, kvStore, async function () {
+            await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID, async function () {
                 console.info(logTag + 'CLIENT afterEach closeKVStore success');
                 await kvManager.deleteKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID, function () {
                     console.info(logTag + 'CLIENT afterEach deleteKVStore success');
@@ -200,31 +205,38 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0660
-         * @tc.name testServerS1Security0500
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S1_0500
+         * @tc.name testEtsServerS1Security0500
          * @tc.desc Server kvStore security is S1,client kvStore security is S1
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS1Security0500", 0, async function (done) {
+        it("testEtsServerS1Security0500", 0, async function (done) {
             console.info(logTag + "testServerS1Security0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
-            const options = {
+  
+            const options: factory.Options = {
                 createIfMissing: true,
                 encrypt: false,
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
-                console.info(logTag + " get kvStore success");
-            })
+                console.info(logTag + " get kvStore success. kvStore=" + kvStore);
+            }).catch((err: BusinessError) => {
+                console.error(logTag + `Failed to get KVStore.code is ${err.code},message is ${err.message}`);
+              });
 
+            if (kvStore == null) {
+                console.info(logTag + " get kvStore success. kvStore=" + kvStore);
+                return;
+            }
             let result = undefined;
             function call(data) {
                 console.info(logTag + "syncComplete: " + data);
@@ -259,14 +271,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0670
-         * @tc.name testServerS1Security0600
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S1_0600
+         * @tc.name testEtsServerS1Security0600
          * @tc.desc Server kvStore security is S1,client kvStore security is S1
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS1Security0600", 0, async function (done) {
+        it("testEtsServerS1Security0600", 0, async function (done) {
             console.info(logTag + "testServerS1Security0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -276,10 +288,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -317,14 +329,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0680
-         * @tc.name testServerS1Security0700
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S1_0700
+         * @tc.name testEtsServerS1Security0700
          * @tc.desc Server kvStore security is S1,client kvStore security is S2
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS1Security0700", 0, async function (done) {
+        it("testEtsServerS1Security0700", 0, async function (done) {
             console.info(logTag + "testServerS1Security0700 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -334,10 +346,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S2,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -375,14 +387,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0690
-         * @tc.name testServerS1Security0800
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S1_0800
+         * @tc.name testEtsServerS1Security0800
          * @tc.desc Server kvStore security is S1,client kvStore security is S2
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS1Security0800", 0, async function (done) {
+        it("testEtsServerS1Security0800", 0, async function (done) {
             console.info(logTag + "testServerS1Security0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -392,10 +404,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S2,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -433,14 +445,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-        * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0700
-        * @tc.name testServerS1Security0900
+        * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S1_0900
+        * @tc.name testEtsServerS1Security0900
         * @tc.desc Server kvStore security is S1,client kvStore security is S3
         * @tc.level: Level 2
         * @tc.type: Functiontion
         * @tc.size: MediumTest
         */
-        it("testServerS1Security0900", 0, async function (done) {
+        it("testEtsServerS1Security0900", 0, async function (done) {
             console.info(logTag + "testServerS1Security0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -450,10 +462,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S3,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -490,14 +502,14 @@ export default function kvSyncTestS1() {
             kvStore.sync(syncDeviceIds, PULL);
         })
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0710
-         * @tc.name testServerS1Security1000
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S1_1000
+         * @tc.name testEtsServerS1Security1000
          * @tc.desc Server kvStore security is S1,client kvStore security is S3
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS1Security1000", 0, async function (done) {
+        it("testEtsServerS1Security1000", 0, async function (done) {
             console.info(logTag + "testServerS1Security1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -507,10 +519,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S3,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -548,14 +560,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0720
-         * @tc.name testServerS1Security1100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S1_1100
+         * @tc.name testEtsServerS1Security1100
          * @tc.desc Server kvStore security is S1,client kvStore security is S4
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS1Security1100", 0, async function (done) {
+        it("testEtsServerS1Security1100", 0, async function (done) {
             console.info(logTag + "testServerS1Security1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -565,10 +577,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S4,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -606,14 +618,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-        * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0730
-        * @tc.name testServerS1Security1200
+        * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S1_1200
+        * @tc.name testEtsServerS1Security1200
         * @tc.desc Server kvStore security is S1,client kvStore security is S4
         * @tc.level: Level 2
         * @tc.type: Functiontion
         * @tc.size: MediumTest
         */
-        it("testServerS1Security1200", 0, async function (done) {
+        it("testEtsServerS1Security1200", 0, async function (done) {
             console.info(logTag + "testServerS1Security1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -623,10 +635,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S4,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -664,14 +676,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0760
-         * @tc.name testServerS2Security0500
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S2_0500
+         * @tc.name testEtsServerS2Security0500
          * @tc.desc Server kvStore security is S2,client kvStore security is S1
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security0500", 0, async function (done) {
+        it("testEtsServerS2Security0500", 0, async function (done) {
             console.info(logTag + "testServerS2Security0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
             await sleep(1000);
@@ -681,10 +693,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -722,14 +734,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0820
-         * @tc.name testServerS2Security0600
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S2_0600
+         * @tc.name testEtsServerS2Security0600
          * @tc.desc Server kvStore security is S2,client kvStore security is S1
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security0600", 0, async function (done) {
+        it("testEtsServerS2Security0600", 0, async function (done) {
             console.info(logTag + "testServerS2Security0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
             await sleep(1000);
@@ -739,10 +751,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -780,14 +792,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0770
-         * @tc.name testServerS2Security0700
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S2_0700
+         * @tc.name testEtsServerS2Security0700
          * @tc.desc Server kvStore security is S4,client kvStore security is S2
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security0700", 0, async function (done) {
+        it("testEtsServerS2Security0700", 0, async function (done) {
             console.info(logTag + "testServerS2Security0700 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -797,10 +809,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S2,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -838,14 +850,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0830
-         * @tc.name testServerS2Security0800
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S2_0800
+         * @tc.name testEtsServerS2Security0800
          * @tc.desc Server kvStore security is S4,client kvStore security is S2
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security0800", 0, async function (done) {
+        it("testEtsServerS2Security0800", 0, async function (done) {
             console.info(logTag + "testServerS2Security0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -855,10 +867,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S2,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -896,14 +908,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0780
-         * @tc.name testServerS2Security0900
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S2_0900
+         * @tc.name testEtsServerS2Security0900
          * @tc.desc Server kvStore security is S2,client kvStore security is S3
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security0900", 0, async function (done) {
+        it("testEtsServerS2Security0900", 0, async function (done) {
             console.info(logTag + "testServerS2Security0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
             await sleep(1000);
@@ -913,10 +925,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S3,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -954,14 +966,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0840
-         * @tc.name testServerS2Security1000
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S2_1000
+         * @tc.name testEtsServerS2Security1000
          * @tc.desc Server kvStore security is S2,client kvStore security is S3
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security1000", 0, async function (done) {
+        it("testEtsServerS2Security1000", 0, async function (done) {
             console.info(logTag + "testServerS2Security1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
             await sleep(1000);
@@ -971,10 +983,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S3,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1012,14 +1024,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0790
-         * @tc.name testServerS2Security1100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S2_1100
+         * @tc.name testEtsServerS2Security1100
          * @tc.desc Server kvStore security is S2,client kvStore security is S4
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security1100", 0, async function (done) {
+        it("testEtsServerS2Security1100", 0, async function (done) {
             console.info(logTag + "testServerS2Security1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
             await sleep(1000);
@@ -1029,10 +1041,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S4,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1070,14 +1082,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0850
-         * @tc.name testServerS2Security1200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S2_1200
+         * @tc.name testEtsServerS2Security1200
          * @tc.desc Server kvStore security is S2,client kvStore security is S4
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security1200", 0, async function (done) {
+        it("testEtsServerS2Security1200", 0, async function (done) {
             console.info(logTag + "testServerS2Security1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
             await sleep(1000);
@@ -1087,10 +1099,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S4,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1128,14 +1140,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0880
-         * @tc.name testServerS3Security0500
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S3_0500
+         * @tc.name testEtsServerS3Security0500
          * @tc.desc Server kvStore security is S3,client kvStore security is S1
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security0500", 0, async function (done) {
+        it("testEtsServerS3Security0500", 0, async function (done) {
             console.info(logTag + "testServerS3Security0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
             await sleep(1000);
@@ -1145,10 +1157,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1186,14 +1198,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0940
-         * @tc.name testServerS3Security0600
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S3_0600
+         * @tc.name testEtsServerS3Security0600
          * @tc.desc Server kvStore security is S3,client kvStore security is S1
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security0600", 0, async function (done) {
+        it("testEtsServerS3Security0600", 0, async function (done) {
             console.info(logTag + "testServerS3Security0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
             await sleep(1000);
@@ -1203,10 +1215,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1244,14 +1256,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0890
-         * @tc.name testServerS3Security0700
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S3_0700
+         * @tc.name testEtsServerS3Security0700
          * @tc.desc Server kvStore security is S3,client kvStore security is S2
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security0700", 0, async function (done) {
+        it("testEtsServerS3Security0700", 0, async function (done) {
             console.info(logTag + "testServerS3Security0700 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
             await sleep(1000);
@@ -1261,10 +1273,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S2,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1302,14 +1314,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0950
-         * @tc.name testServerS3Security0800
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S3_0800
+         * @tc.name testEtsServerS3Security0800
          * @tc.desc Server kvStore security is S3,client kvStore security is S2
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security0800", 0, async function (done) {
+        it("testEtsServerS3Security0800", 0, async function (done) {
             console.info(logTag + "testServerS3Security0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
             await sleep(1000);
@@ -1319,10 +1331,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S2,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1360,14 +1372,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0900
-         * @tc.name testServerS3Security0900
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S3_0900
+         * @tc.name testEtsServerS3Security0900
          * @tc.desc Server kvStore security is S4,client kvStore security is S3
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security0900", 0, async function (done) {
+        it("testEtsServerS3Security0900", 0, async function (done) {
             console.info(logTag + "testServerS3Security0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1377,10 +1389,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S3,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1418,14 +1430,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0960
-         * @tc.name testServerS3Security1000
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S3_1000
+         * @tc.name testEtsServerS3Security1000
          * @tc.desc Server kvStore security is S4,client kvStore security is S3
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security1000", 0, async function (done) {
+        it("testEtsServerS3Security1000", 0, async function (done) {
             console.info(logTag + "testServerS3Security1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1435,10 +1447,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S3,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1476,14 +1488,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0910
-         * @tc.name testServerS3Security1100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S3_1100
+         * @tc.name testEtsServerS3Security1100
          * @tc.desc Server kvStore security is S3,client kvStore security is S4
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security1100", 0, async function (done) {
+        it("testEtsServerS3Security1100", 0, async function (done) {
             console.info(logTag + "testServerS3Security1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
             await sleep(1000);
@@ -1493,10 +1505,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S4,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1534,14 +1546,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0970
-         * @tc.name testServerS3Security1200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S3_1200
+         * @tc.name testEtsServerS3Security1200
          * @tc.desc Server kvStore security is S3,client kvStore security is S4
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security1200", 0, async function (done) {
+        it("testEtsServerS3Security1200", 0, async function (done) {
             console.info(logTag + "testServerS3Security1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
             await sleep(1000);
@@ -1551,10 +1563,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S4,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1592,14 +1604,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_1000
-         * @tc.name testServerS4Security0500
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S4_0500
+         * @tc.name testEtsServerS4Security0500
          * @tc.desc Server kvStore security is S4,client kvStore security is S1
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security0500", 0, async function (done) {
+        it("testEtsServerS4Security0500", 0, async function (done) {
             console.info(logTag + "testServerS4Security0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1609,10 +1621,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1650,14 +1662,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_1060
-         * @tc.name testServerS4Security0600
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S4_0600
+         * @tc.name testEtsServerS4Security0600
          * @tc.desc Server kvStore security is S4,client kvStore security is S1
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security0600", 0, async function (done) {
+        it("testEtsServerS4Security0600", 0, async function (done) {
             console.info(logTag + "testServerS4Security0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1667,10 +1679,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1708,14 +1720,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_1010
-         * @tc.name testServerS4Security0700
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S4_0700
+         * @tc.name testEtsServerS4Security0700
          * @tc.desc Server kvStore security is S4,client kvStore security is S2
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security0700", 0, async function (done) {
+        it("testEtsServerS4Security0700", 0, async function (done) {
             console.info(logTag + "testServerS4Security0700 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1725,10 +1737,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1766,14 +1778,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_1070
-         * @tc.name testServerS4Security0800
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S4_0800
+         * @tc.name testEtsServerS4Security0800
          * @tc.desc Server kvStore security is S4,client kvStore security is S2
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security0800", 0, async function (done) {
+        it("testEtsServerS4Security0800", 0, async function (done) {
             console.info(logTag + "testServerS4Security0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1783,10 +1795,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1824,14 +1836,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_1020
-         * @tc.name testServerS4Security0900
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S4_0900
+         * @tc.name testEtsServerS4Security0900
          * @tc.desc Server kvStore security is S4,client kvStore security is S3
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security0900", 0, async function (done) {
+        it("testEtsServerS4Security0900", 0, async function (done) {
             console.info(logTag + "testServerS4Security0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1841,10 +1853,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1882,14 +1894,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_1080
-         * @tc.name testServerS4Security1000
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S4_1000
+         * @tc.name testEtsServerS4Security1000
          * @tc.desc Server kvStore security is S4,client kvStore security is S3
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security1000", 0, async function (done) {
+        it("testEtsServerS4Security1000", 0, async function (done) {
             console.info(logTag + "testServerS4Security1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1899,10 +1911,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1940,14 +1952,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_1030
-         * @tc.name testServerS4Security1100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S4_1100
+         * @tc.name testEtsServerS4Security1100
          * @tc.desc Server kvStore security is S4,client kvStore security is S4
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security1100", 0, async function (done) {
+        it("testEtsServerS4Security1100", 0, async function (done) {
             console.info(logTag + "testServerS4Security1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1957,10 +1969,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -1998,14 +2010,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_1090
-         * @tc.name testServerS4Security1200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S4_1200
+         * @tc.name testEtsServerS4Security1200
          * @tc.desc Server kvStore security is S4,client kvStore security is S4
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security1200", 0, async function (done) {
+        it("testEtsServerS4Security1200", 0, async function (done) {
             console.info(logTag + "testServerS4Security1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -2015,10 +2027,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2056,14 +2068,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0040
-         * @tc.name testServerKvStoreId0100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERSTOREID_0100
+         * @tc.name testEtsServerKvStoreId0100
          * @tc.desc Get server kvstore with length of storeId is 129 bit.
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerKvStoreId0100", 0, async function (done) {
+        it("testEtsServerKvStoreId0100", 0, async function (done) {
             console.info(logTag + "testServerKvStoreId0100 start");
             await remoteHelpers.getKvStore("x".repeat(129), "S1", false);
             await sleep(1000);
@@ -2073,10 +2085,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2113,14 +2125,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0200
-         * @tc.name testServerKvStoreId0200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERSTOREID_0200
+         * @tc.name testEtsServerKvStoreId0200
          * @tc.desc Get server kvstore with length of storeId is 129 bit.
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerKvStoreId0200", 0, async function (done) {
+        it("testEtsServerKvStoreId0200", 0, async function (done) {
             console.info(logTag + "testServerKvStoreId0200 start");
             await remoteHelpers.getKvStore("x".repeat(129), "S1", false);
             await sleep(1000);
@@ -2130,10 +2142,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2170,14 +2182,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0030
-         * @tc.name testServerKvStoreId0300
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERSTOREID_0300
+         * @tc.name testEtsServerKvStoreId0300
          * @tc.desc Get server kvstore with length of storeId is 128 bit.
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerKvStoreId0300", 0, async function (done) {
+        it("testEtsServerKvStoreId0300", 0, async function (done) {
             console.info(logTag + "testServerKvStoreId0300 start");
             await remoteHelpers.getKvStore("x".repeat(128), "S1", false);
             await sleep(1000);
@@ -2187,10 +2199,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore("x".repeat(128), options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>("x".repeat(128), options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2234,14 +2246,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0190
-         * @tc.name testServerKvStoreId0400
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERSTOREID_0400
+         * @tc.name testEtsServerKvStoreId0400
          * @tc.desc Get server kvstore with length of storeId is 128 bit.
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerKvStoreId0400", 0, async function (done) {
+        it("testEtsServerKvStoreId0400", 0, async function (done) {
             console.info(logTag + "testServerKvStoreId0400 start");
             await remoteHelpers.getKvStore("x".repeat(128), "S1", false);
             await sleep(1000);
@@ -2251,10 +2263,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore("x".repeat(128), options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>("x".repeat(128), options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2297,14 +2309,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0020
-         * @tc.name testServerKvStoreId0500
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERSTOREID_0500
+         * @tc.name testEtsServerKvStoreId0500
          * @tc.desc The storeId of the two devices' kvstores are inconsistent
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerKvStoreId0500", 0, async function (done) {
+        it("testEtsServerKvStoreId0500", 0, async function (done) {
             console.info(logTag + "testServerKvStoreId0500 start");
             await remoteHelpers.getKvStore("SERVER_KVSTORE", "S1", false);
             await sleep(1000);
@@ -2314,10 +2326,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2355,14 +2367,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0180
-         * @tc.name testServerKvStoreId0600
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERSTOREID_0600
+         * @tc.name testEtsServerKvStoreId0600
          * @tc.desc The storeId of the two devices' kvstores are inconsistent
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerKvStoreId0600", 0, async function (done) {
+        it("testEtsServerKvStoreId0600", 0, async function (done) {
             console.info(logTag + "testServerKvStoreId0600 start");
             await remoteHelpers.getKvStore("SERVER_KVSTORE", "S1", false);
             await sleep(1000);
@@ -2372,10 +2384,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2413,14 +2425,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0330
-         * @tc.name testServerEncryptKVStore0100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERENCRYPTSTORE_0100
+         * @tc.name testEtsServerEncryptKVStore0100
          * @tc.desc Unencrypt kvStore PULL from encrypt kvStore
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerEncryptKVStore0100", 0, async function (done) {
+        it("testEtsServerEncryptKVStore0100", 0, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", true);
             await sleep(1000);
@@ -2430,10 +2442,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2470,14 +2482,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0350
-         * @tc.name testServerEncryptKVStore0200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERENCRYPTSTORE_0200
+         * @tc.name testEtsServerEncryptKVStore0200
          * @tc.desc Unencrypt kvStore PUSH_PULL to encrypt kvStore
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerEncryptKVStore0200", 0, async function (done) {
+        it("testEtsServerEncryptKVStore0200", 0, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", true);
             await sleep(1000);
@@ -2487,10 +2499,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2527,14 +2539,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0340
-         * @tc.name testServerEncryptKVStore0300
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERENCRYPTSTORE_0300
+         * @tc.name testEtsServerEncryptKVStore0300
          * @tc.desc Encrypt kvStore PULL from encrypt kvStore
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerEncryptKVStore0300", 0, async function (done) {
+        it("testEtsServerEncryptKVStore0300", 0, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0300 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", true);
             await sleep(1000);
@@ -2544,10 +2556,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2584,14 +2596,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0360
-         * @tc.name testServerEncryptKVStore0400
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERENCRYPTSTORE_0400
+         * @tc.name testEtsServerEncryptKVStore0400
          * @tc.desc Encrypt kvStore PUSH_PULL to encrypt kvStore
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerEncryptKVStore0400", 0, async function (done) {
+        it("testEtsServerEncryptKVStore0400", 0, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0400 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", true);
             await sleep(1000);
@@ -2601,10 +2613,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2641,14 +2653,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0310
-         * @tc.name testServerEncryptKVStore0500
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERENCRYPTSTORE_0500
+         * @tc.name testEtsServerEncryptKVStore0500
          * @tc.desc Encrypt kvStore PULL from unencrypt kvStore
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerEncryptKVStore0500", 0, async function (done) {
+        it("testEtsServerEncryptKVStore0500", 0, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -2658,10 +2670,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2698,14 +2710,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0320
-         * @tc.name testServerEncryptKVStore0600
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERENCRYPTSTORE_0600
+         * @tc.name testEtsServerEncryptKVStore0600
          * @tc.desc Encrypt kvStore PUSH_PULL unencrypt kvStore
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerEncryptKVStore0600", 0, async function (done) {
+        it("testEtsServerEncryptKVStore0600", 0, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -2715,10 +2727,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2755,14 +2767,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_1100
-         * @tc.name testServerMaxKeyLength0100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERMAXKEYLENGTH_0100
+         * @tc.name testEtsServerMaxKeyLength0100
          * @tc.desc Length of key greater than 1024
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerMaxKeyLength0100", 0, async function (done) {
+        it("testEtsServerMaxKeyLength0100", 0, async function (done) {
             console.info(logTag + "testServerMaxKeyLength0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -2772,10 +2784,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2812,14 +2824,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_1110
-         * @tc.name testServerMaxKeyLength0200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERMAXKEYLENGTH_0200
+         * @tc.name testEtsServerMaxKeyLength0200
          * @tc.desc Length of key greater than 1024
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerMaxKeyLength0200", 0, async function (done) {
+        it("testEtsServerMaxKeyLength0200", 0, async function (done) {
             console.info(logTag + "testServerMaxKeyLength0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -2829,10 +2841,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2869,14 +2881,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_1120
-         * @tc.name testServerMaxKeyLength0300
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERMAXKEYLENGTH_0300
+         * @tc.name testEtsServerMaxKeyLength0300
          * @tc.desc Length of key is 1024
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerMaxKeyLength0300", 0, async function (done) {
+        it("testEtsServerMaxKeyLength0300", 0, async function (done) {
             console.info(logTag + "testServerMaxKeyLength0300 start");
             const KEY = "x".repeat(1024)
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
@@ -2887,10 +2899,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2927,14 +2939,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_1130
-         * @tc.name testServerMaxKeyLength0400
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERMAXKEYLENGTH_0400
+         * @tc.name testEtsServerMaxKeyLength0400
          * @tc.desc Length of key is 1024
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerMaxKeyLength0400", 0, async function (done) {
+        it("testEtsServerMaxKeyLength0400", 0, async function (done) {
             console.info(logTag + "testServerMaxKeyLength0400 start");
             const KEY = "x".repeat(1024)
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
@@ -2945,10 +2957,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -2985,14 +2997,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0140
-         * @tc.name testSyncStringType0100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCSTRINGTYPE_0100
+         * @tc.name testEtsSyncStringType0100
          * @tc.desc Sync string type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncStringType0100", 0, async function (done) {
+        it("testEtsSyncStringType0100", 0, async function (done) {
             console.info(logTag + "testSyncStringType0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3002,10 +3014,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3042,14 +3054,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0280
-         * @tc.name testSyncStringType0200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCSTRINGTYPE_0200
+         * @tc.name testEtsSyncStringType0200
          * @tc.desc Sync string type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncStringType0200", 0, async function (done) {
+        it("testEtsSyncStringType0200", 0, async function (done) {
             console.info(logTag + "testSyncStringType0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3059,10 +3071,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3099,14 +3111,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0060
-         * @tc.name testSyncIntType0100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_0100
+         * @tc.name testEtsSyncIntType0100
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0100", 0, async function (done) {
+        it("testEtsSyncIntType0100", 0, async function (done) {
             console.info(logTag + "testSyncIntType0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3116,10 +3128,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3138,7 +3150,7 @@ export default function kvSyncTestS1() {
                         console.info(logTag + " get data finish,result is: " + result);
                         expect(result).assertEqual(TEST_INT_VALUE);
                         kvStore.off("syncComplete", call);
-                        console.info(logTag + "testSyncIntType0100 end");
+                        console.info(logTag + "testSyncIntType0100 end"); 
                         done();
 
                     } catch (err) {
@@ -3156,14 +3168,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0220
-         * @tc.name testSyncIntType0200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_0200
+         * @tc.name testEtsSyncIntType0200
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0200", 0, async function (done) {
+        it("testEtsSyncIntType0200", 0, async function (done) {
             console.info(logTag + "testSyncIntType0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3173,10 +3185,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3214,14 +3226,14 @@ export default function kvSyncTestS1() {
 
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0070
-         * @tc.name testSyncIntType0300
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_0300
+         * @tc.name testEtsSyncIntType0300
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0300", 0, async function (done) {
+        it("testEtsSyncIntType0300", 0, async function (done) {
             console.info(logTag + "testSyncIntType0300 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3231,10 +3243,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3273,14 +3285,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0230
-         * @tc.name testSyncIntType0400
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_0400
+         * @tc.name testEtsSyncIntType0400
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0400", 0, async function (done) {
+        it("testEtsSyncIntType0400", 0, async function (done) {
             console.info(logTag + "testSyncIntType0400 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3290,10 +3302,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3333,14 +3345,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0090
-         * @tc.name testSyncIntType0500
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_0500
+         * @tc.name testEtsSyncIntType0500
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0500", 0, async function (done) {
+        it("testEtsSyncIntType0500", 0, async function (done) {
             console.info(logTag + "testSyncIntType0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3350,10 +3362,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3393,14 +3405,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0240
-         * @tc.name testSyncIntType0600
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_0600
+         * @tc.name testEtsSyncIntType0600
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0600", 0, async function (done) {
+        it("testEtsSyncIntType0600", 0, async function (done) {
             console.info(logTag + "testSyncIntType0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3410,10 +3422,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3453,14 +3465,14 @@ export default function kvSyncTestS1() {
 
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0110
-         * @tc.name testSyncIntType0700
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_0700
+         * @tc.name testEtsSyncIntType0700
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0700", 0, async function (done) {
+        it("testEtsSyncIntType0700", 0, async function (done) {
             console.info(logTag + "testSyncIntType0700 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3470,10 +3482,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3512,14 +3524,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0250
-         * @tc.name testSyncIntType0800
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_0800
+         * @tc.name testEtsSyncIntType0800
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0800", 0, async function (done) {
+        it("testEtsSyncIntType0800", 0, async function (done) {
             console.info(logTag + "testSyncIntType0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3529,10 +3541,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3571,14 +3583,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0120
-         * @tc.name testSyncIntType0900
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_0900
+         * @tc.name testEtsSyncIntType0900
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0900", 0, async function (done) {
+        it("testEtsSyncIntType0900", 0, async function (done) {
             console.info(logTag + "testSyncIntType0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3588,10 +3600,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3630,14 +3642,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0260
-         * @tc.name testSyncIntType1000
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_1000
+         * @tc.name testEtsSyncIntType1000
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType1000", 0, async function (done) {
+        it("testEtsSyncIntType1000", 0, async function (done) {
             console.info(logTag + "testSyncIntType1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3647,10 +3659,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3690,14 +3702,14 @@ export default function kvSyncTestS1() {
 
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0130
-         * @tc.name testSyncIntType1100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_1100
+         * @tc.name testEtsSyncIntType1100
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType1100", 0, async function (done) {
+        it("testEtsSyncIntType1100", 0, async function (done) {
             console.info(logTag + "testSyncIntType1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3707,10 +3719,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3749,14 +3761,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0270
-         * @tc.name testSyncIntType1200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_1200
+         * @tc.name testEtsSyncIntType1200
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType1200", 0, async function (done) {
+        it("testEtsSyncIntType1200", 0, async function (done) {
             console.info(logTag + "testSyncIntType1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3766,10 +3778,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3808,14 +3820,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0050
-         * @tc.name testSyncIntType1300
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_1300
+         * @tc.name testEtsSyncIntType1300
          * @tc.desc Sync int type data MaxValue+1
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-         it("testSyncIntType1300", 0, async function (done) {
+         it("testEtsSyncIntType1300", 0, async function (done) {
             console.info(logTag + "testSyncIntType1300 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3825,10 +3837,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3867,14 +3879,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0210
-         * @tc.name testSyncIntType1400
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCINTTYPE_1400
+         * @tc.name testEtsSyncIntType1400
          * @tc.desc Sync int type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-         it("testSyncIntType1400", 0, async function (done) {
+         it("testEtsSyncIntType1400", 0, async function (done) {
             console.info(logTag + "testSyncIntType1400 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3884,10 +3896,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3926,14 +3938,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0010
-         * @tc.name testSyncFloatType0100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCFLOATTYPE_0100
+         * @tc.name testEtsSyncFloatType0100
          * @tc.desc Sync float type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncFloatType0100", 0, async function (done) {
+        it("testEtsSyncFloatType0100", 0, async function (done) {
             console.info(logTag + "testSyncFloatType0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3943,10 +3955,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -3982,14 +3994,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0160
-         * @tc.name testSyncFloatType0200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCFLOATTYPE_0200
+         * @tc.name testEtsSyncFloatType0200
          * @tc.desc Sync float type data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncFloatType0200", 0, async function (done) {
+        it("testEtsSyncFloatType0200", 0, async function (done) {
             console.info(logTag + "testSyncFloatType0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3999,10 +4011,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -4039,14 +4051,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0290
-         * @tc.name testSyncMultipleData0100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCMULTIPLEDATA_0100
+         * @tc.name testEtsSyncMultipleData0100
          * @tc.desc Synchronize multiple pieces of data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncMultipleData0100", 0, async function (done) {
+        it("testEtsSyncMultipleData0100", 0, async function (done) {
             console.info(logTag + "testSyncMultipleData0100 start");
             let value1 = undefined;
             let value2 = undefined;
@@ -4058,10 +4070,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -4110,14 +4122,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0150
-         * @tc.name testSyncMultipleData0200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCMULTIPLEDATA_0200
+         * @tc.name testEtsSyncMultipleData0200
          * @tc.desc Synchronize multiple pieces of data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncMultipleData0200", 0, async function (done) {
+        it("testEtsSyncMultipleData0200", 0, async function (done) {
             console.info(logTag + "testSyncMultipleData0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -4127,10 +4139,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -4180,14 +4192,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0300
-         * @tc.name testSyncDeleteSync0100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCDELETEYSYNC_0100
+         * @tc.name testEtsSyncDeleteSync0100
          * @tc.desc Synchronize multiple pieces of data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncDeleteSync0100", 0, async function (done) {
+        it("testEtsSyncDeleteSync0100", 0, async function (done) {
             console.info(logTag + "testSyncDeleteSync0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -4197,10 +4209,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -4235,8 +4247,8 @@ export default function kvSyncTestS1() {
 
             kvStore.on("syncComplete", call);
             await remoteHelpers.kvDelete("key1");
-            kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, function (data, err) {
-                console.info(logTag + "local device data has changed,key is:  " + data.deleteEntries.key);
+            kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, (data) => {
+                console.info(logTag + "local device data has changed,key is:  " + data);
             })
             await sleep(2000);
             console.info(logTag + "Client sync start");
@@ -4246,14 +4258,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0170
-         * @tc.name testSyncDeleteSync0200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCDELETEYSYNC_0200
+         * @tc.name testEtsSyncDeleteSync0200
          * @tc.desc Synchronize multiple pieces of data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncDeleteSync0200", 0, async function (done) {
+        it("testEtsSyncDeleteSync0200", 0, async function (done) {
             console.info(logTag + "testSyncDeleteSync0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -4263,10 +4275,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -4300,8 +4312,8 @@ export default function kvSyncTestS1() {
             await sleep(2000);
             kvStore.on("syncComplete", call);
             await remoteHelpers.kvDelete("key1");
-            kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, function (data, err) {
-                console.info(logTag + "local device data has changed,key is:  " + data.deleteEntries.key);
+            kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, (data) => {
+                console.info(logTag + "local device data has changed,key is:  " + data);
             })
             await sleep(2000);
             console.info(logTag + "Client sync start");
@@ -4311,14 +4323,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0230
-         * @tc.name testSyncModifySync0100
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCMODIFYSYNC_0100
+         * @tc.name testEtsSyncModifySync0100
          * @tc.desc Synchronize multiple pieces of data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncModifySync0100", 0, async function (done) {
+        it("testEtsSyncModifySync0100", 0, async function (done) {
             console.info(logTag + "testSyncModifySync0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -4328,10 +4340,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -4365,8 +4377,8 @@ export default function kvSyncTestS1() {
             await sleep(2000);
             kvStore.on("syncComplete", call);
             await remoteHelpers.kvPut("key1", "value2", "String");
-            kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, function (data, err) {
-                console.info(logTag + "local device data has changed,key is:  " + data.updateEntries.key);
+            kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, (data) => {
+                console.info(logTag + "local device data has changed,key is:  " + data);
             })
             await sleep(2000);
             console.info(logTag + "Client sync start");
@@ -4375,14 +4387,14 @@ export default function kvSyncTestS1() {
         })
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_0090
-         * @tc.name testSyncModifySync0200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCMODIFYSYNC_0200
+         * @tc.name testEtsSyncModifySync0200
          * @tc.desc Synchronize multiple pieces of data
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncModifySync0200", 0, async function (done) {
+        it("testEtsSyncModifySync0200", 0, async function (done) {
             console.info(logTag + "testSyncModifySync0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -4392,10 +4404,10 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: '',
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
-            await kvManager.getKVStore(TEST_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + " get kvStore success");
             })
@@ -4428,9 +4440,8 @@ export default function kvSyncTestS1() {
             await sleep(2000);
             kvStore.on("syncComplete", call);
             await remoteHelpers.kvPut("key1", "value2", "String");
-            kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, function (data, err) {
-                console.info(logTag + "local device data has changed,key is:  " + data.updateEntries.key);
-                expect(data.updateEntries.key).assertEqual("key1");
+            kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, (data) => {
+                console.info(logTag + "local device data has changed,key is:  " + data);
             })
             await sleep(2000);
             console.info(logTag + "Client sync start");
@@ -4439,31 +4450,31 @@ export default function kvSyncTestS1() {
         })
 
         
-        /** 
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_SYNCSCHEMA_0100
-         * @tc.name testSyncSchema0100
+        /**
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCSCHEMA_0100
+         * @tc.name testEtsSyncSchema0100
          * @tc.desc Server kvStore security is S1,client kvStore security is S1, prefixKey("test_"), PULL
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncSchema0100", 0, async function (done) {
+        it("testEtsSyncSchema0100", 0, async function (done) {
             console.info(logTag + "testSyncSchema0100 start");
             
-            let options = {
+            let options: factory.Options = {
                 createIfMissing: true,
                 encrypt: false,
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: {},
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
 
-            let name = new factory.FieldNode('name');
+            let name: factory.FieldNode = new factory.FieldNode('name');
             name.type = factory.ValueType.INTEGER;
             name.nullable = false;
-            name.default = 0;
+            name.default = "str";
 
             let schema = new factory.Schema();
             schema.root.appendChild(name);
@@ -4482,11 +4493,11 @@ export default function kvSyncTestS1() {
             await remoteHelpers.getKvStore(TEST_SCHEMA_STORE_ID, "S1", false);
             await sleep(1000);
 
-            await kvManager.getKVStore(TEST_SCHEMA_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_SCHEMA_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + "testSyncSchema0100 getKVStore success. kvStore=" + kvStore);
                 expect(store != null).assertTrue();
-            }).catch((err) => {
+            }).catch((error) => {
                 console.info(logTag + 'testSyncSchema0100 getKVStore fail. error= ' + error.code + error.message);
                 expect(null).assertFail();
             });
@@ -4523,7 +4534,7 @@ export default function kvSyncTestS1() {
             })
             await sleep(1000);
 
-            await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_SCHEMA_STORE_ID, kvStore, async function () {
+            await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_SCHEMA_STORE_ID, async function () {
                 console.info(logTag + 'testSyncSchema0100 CLIENT  closeKVStore success');
                 await kvManager.deleteKVStore(TEST_BUNDLE_NAME, TEST_SCHEMA_STORE_ID, function () {
                     console.info(logTag + 'testSyncSchema0100 CLIENT  deleteKVStore success');
@@ -4539,14 +4550,14 @@ export default function kvSyncTestS1() {
         }) 
 
         /**
-         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentGradeSyncTest_SYNCSCHEMA_0200
-         * @tc.name testSyncSchema0200
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SYNCSCHEMA_0200
+         * @tc.name testEtsSyncSchema0200
          * @tc.desc Server kvStore security is S1,client kvStore security is S1, prefixKey("test_"), PUSH_PULL
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncSchema0200", 0, async function (done) {
+        it("testEtsSyncSchema0200", 0, async function (done) {
             console.info(logTag + "testSyncSchema0200 start");
             
             let options = {
@@ -4555,14 +4566,14 @@ export default function kvSyncTestS1() {
                 backup: false,
                 autoSync: false,
                 kvStoreType: factory.KVStoreType.SINGLE_VERSION,
-                schema: {},
+                schema: undefined,
                 securityLevel: factory.SecurityLevel.S1,
             }
 
             let name = new factory.FieldNode('name');
             name.type = factory.ValueType.INTEGER;
             name.nullable = false;
-            name.default = 0;
+            name.default = "str";
 
             let schema = new factory.Schema();
             schema.root.appendChild(name);
@@ -4581,11 +4592,11 @@ export default function kvSyncTestS1() {
             await remoteHelpers.getKvStore(TEST_SCHEMA_STORE_ID, "S1", false);
             await sleep(1000);
 
-            await kvManager.getKVStore(TEST_SCHEMA_STORE_ID, options).then((store) => {
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_SCHEMA_STORE_ID, options).then((store : factory.SingleKVStore) => {
                 kvStore = store;
                 console.info(logTag + "testSyncSchema0200 getKVStore success. kvStore=" + kvStore);
                 expect(store != null).assertTrue();
-            }).catch((err) => {
+            }).catch((error) => {
                 console.info(logTag + 'testSyncSchema0200 getKVStore fail. error= ' + error.code + error.message);
                 expect(null).assertFail();
             });
@@ -4615,13 +4626,13 @@ export default function kvSyncTestS1() {
                     console.info(logTag + "testSyncSchema0200 get data finish,result is: " + result);
                     expect(result).assertEqual(schemaValue);
                     console.info(logTag + "testSyncSchema0200 end");
-                } catch (err) {
+                } catch (error) {
                     console.error('testSyncSchema0200 catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
                 }
             })
             await sleep(1000);
 
-            await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_SCHEMA_STORE_ID, kvStore, async function () {
+            await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_SCHEMA_STORE_ID, async function () {
                 console.info(logTag + 'testSyncSchema0200 CLIENT  closeKVStore success');
                 await kvManager.deleteKVStore(TEST_BUNDLE_NAME, TEST_SCHEMA_STORE_ID, function () {
                     console.info(logTag + 'testSyncSchema0200 CLIENT  deleteKVStore success');
