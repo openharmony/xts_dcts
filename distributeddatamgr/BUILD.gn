@@ -17,6 +17,8 @@ group("distributeddatatest") {
     deps = [
       "jstest/distributed_data_object/client/hap:distributedobjectdisjs_test",
       "jstest/distributed_data_object/server/hap:distributedobjectdisjs_server",
+      "jstest/distributed_data_object_stage/client:distributedobjectdisets_test",
+      "jstest/distributed_data_object_stage/server:distributedobjectdists_server",
       "jstest/distributed_kv_store/client/hap:distributekvdisjs_test",
       "jstest/distributed_kv_store/server:distributekvdisjs_server",
       "jstest/distributed_kv_store_stage/client:distributekvdisets_test",
