@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -73,16 +73,16 @@ int QueryRemoteScreenInfo(int mode)
         }
     }
     DHLOGE("-------------remote screen info---------------");
-    DHLOGE("remote screen Num: %d", remoteScreens.size());
+    DHLOGE("remote screen Num: %{public}zu", remoteScreens.size());
     for (const auto &screen : remoteScreens) {
         if (screen == nullptr) {
             continue;
         }
         g_screenId = screen->GetId();
-        DHLOGE("--------screen id: %d ---------", screen->GetId());
-        DHLOGE("screen name: : %s", GetAnonyString(screen->GetName()).c_str());
-        DHLOGE("width: : %d", screen->GetWidth());
-        DHLOGE("height : %d", screen->GetHeight());
+        DHLOGE("--------screen id: %{public}" PRIu64 " ---------", screen->GetId());
+        DHLOGE("screen name: : %{public}s", GetAnonyString(screen->GetName()).c_str());
+        DHLOGE("width: : %{public}d", screen->GetWidth());
+        DHLOGE("height : %{public}d", screen->GetHeight());
         DHLOGE("-------------------------------------------");
     }
 
@@ -121,7 +121,7 @@ int StartMirror(int mode)
 
     sptr<Display> defaultDisplay = DisplayManager::GetInstance().GetDefaultDisplay();
     DHLOGE("------------start mirror----------");
-    DHLOGE("mirror screen Id is: %d", g_screenId);
+    DHLOGE("mirror screen Id is: %{public}" PRIu64 "", g_screenId);
     vector<uint64_t> mirrorIds;
     mirrorIds.push_back(g_screenId);
     ScreenId screenGroupId;
@@ -158,7 +158,7 @@ int StopMirror(int mode)
     }
 
     DHLOGE("-------------- stop mirror ------------");
-    DHLOGE("stop mirror screen id is: %d", g_screenId);
+    DHLOGE("stop mirror screen id is: %{public}" PRIu64 "", g_screenId);
     vector<uint64_t> stopMirrorIds;
     stopMirrorIds.push_back(g_screenId);
     ScreenManager::GetInstance().RemoveVirtualScreenFromGroup(stopMirrorIds);
@@ -196,7 +196,7 @@ int StartExpand(int mode)
 
     sptr<Display> defaultDisplay = DisplayManager::GetInstance().GetDefaultDisplay();
     DHLOGE("------------start expand----------");
-    DHLOGE("expand screen Id is: %d", g_screenId);
+    DHLOGE("expand screen Id is: %{public}" PRIu64 "", g_screenId);
     vector<ExpandOption> options = {{defaultDisplay->GetScreenId(), 0, 0}, {g_screenId, defaultDisplay->GetWidth(), 0}};
     ScreenId screenGroupId;
     ScreenManager::GetInstance().MakeExpand(options, screenGroupId);
@@ -232,7 +232,7 @@ int StopExpand(int mode)
     }
 
     DHLOGE("-------------- stop expand ------------");
-    DHLOGE("stop expand screen id is : %d", g_screenId);
+    DHLOGE("stop expand screen id is : %{public}" PRIu64 "", g_screenId);
     vector<uint64_t> stopExpandIds;
     stopExpandIds.push_back(g_screenId);
     ScreenManager::GetInstance().RemoveVirtualScreenFromGroup(stopExpandIds);
@@ -247,8 +247,8 @@ static void PrintNodeProperty(NodeBasicInfo *nodeInfo)
         return;
     }
 
-    DHLOGE("DeviceName = %s", nodeInfo->deviceName);
-    DHLOGE("NetworkId = %s", GetAnonyString(nodeInfo->networkId).c_str());
+    DHLOGE("DeviceName = %{public}s", nodeInfo->deviceName);
+    DHLOGE("NetworkId = %{public}s", GetAnonyString(nodeInfo->networkId).c_str());
     NodeDeviceInfoKey key = NODE_KEY_UDID;
     unsigned char udid[UDID_BUF_LEN] = {0};
     if (GetNodeKeyInfo(g_pkgName, nodeInfo->networkId, key, udid, UDID_BUF_LEN) != 0) {
@@ -259,7 +259,7 @@ static void PrintNodeProperty(NodeBasicInfo *nodeInfo)
     if (GetNodeKeyInfo(g_pkgName, nodeInfo->networkId, key, uuid, UUID_BUF_LEN) != 0) {
         DHLOGE("GetNodeKeyInfo Fail!");
     } else {
-        DHLOGE("Uuid = %s\n", GetAnonyString(reinterpret_cast<char *>(udid)).c_str());
+        DHLOGE("Uuid = %{public}s\n", GetAnonyString(reinterpret_cast<char *>(udid)).c_str());
     }
 }
 
@@ -306,9 +306,9 @@ int QueryRemoteDeviceInfo(int mode)
         return -1;
     }
 
-    DHLOGE("Device Num = %d", infoNum);
+    DHLOGE("Device Num = %{public}d", infoNum);
     for (int i = 0; i < infoNum; ++i) {
-        DHLOGE("[No.%d]", i + 1);
+        DHLOGE("[No.%{public}d]", i + 1);
         PrintNodeProperty(remoteNodeInfo + i);
     }
 
@@ -347,7 +347,8 @@ int CreateWindow(int mode)
     vdec->SetOutputSurface(surface);
     DHLOGE("start run decoder");
     vdec->RunCase();
-    DHLOGE("create window success, window id: %d, width: %d, height: %d", windowId, windowWidth, windowHeight);
+    DHLOGE("create window success, window id: %{public}d, width: %{public}d, height: %{public}d",
+        windowId, windowWidth, windowHeight);
     ScreenClient::GetInstance().RemoveWindow(windowId);
     sleep(SLEEP_FIVE_SECOND);
     return 0;

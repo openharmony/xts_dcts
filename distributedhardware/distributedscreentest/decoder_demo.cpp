@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -310,7 +310,7 @@ void VDecDemo::OutputFunc()
 
 void VDecDemoCallback::OnError(AVCodecErrorType errorType, int32_t errorCode)
 {
-    DHLOGI("Error received, errorType: %s, errorCode: %d", errorType, errorCode);
+    DHLOGI("Error received, errorType: %{public}d, errorCode: %{public}d", errorType, errorCode);
 }
 
 void VDecDemoCallback::OnOutputFormatChanged(const Format &format)
@@ -320,7 +320,7 @@ void VDecDemoCallback::OnOutputFormatChanged(const Format &format)
 
 void VDecDemoCallback::OnInputBufferAvailable(uint32_t index)
 {
-    DHLOGI("OnInputBufferAvailable received, index: %d", index);
+    DHLOGI("OnInputBufferAvailable received, index: %{public}d", index);
     unique_lock<mutex> lock(signal_->inMutex_);
     signal_->inQueue_.push(index);
     signal_->inCond_.notify_all();
@@ -328,7 +328,7 @@ void VDecDemoCallback::OnInputBufferAvailable(uint32_t index)
 
 void VDecDemoCallback::OnOutputBufferAvailable(uint32_t index, AVCodecBufferInfo info, AVCodecBufferFlag flag)
 {
-    DHLOGI("OnOutputBufferAvailable received, index: %d", index);
+    DHLOGI("OnOutputBufferAvailable received, index: %{public}d", index);
     unique_lock<mutex> lock(signal_->outMutex_);
     signal_->outQueue_.push(index);
     signal_->outCond_.notify_all();
