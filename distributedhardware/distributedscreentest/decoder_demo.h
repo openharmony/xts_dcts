@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,7 +27,7 @@
 #include "distributed_hardware_log.h"
 
 namespace OHOS {
-namespace Media {
+namespace MediaAVCodec {
 class VDecSignal {
 public:
     std::mutex inMutex_;
@@ -36,6 +36,7 @@ public:
     std::condition_variable outCond_;
     std::queue<uint32_t> inQueue_;
     std::queue<uint32_t> outQueue_;
+    std::queue<std::shared_ptr<Media::AVSharedMemory>> availableInputBufferQueue_;
 };
 
 class VDecDemoCallback : public AVCodecCallback, public NoCopyable {
@@ -44,9 +45,10 @@ public:
     virtual ~VDecDemoCallback() = default;
 
     void OnError(AVCodecErrorType errorType, int32_t errorCode) override;
-    void OnOutputFormatChanged(const Format &format) override;
-    void OnInputBufferAvailable(uint32_t index) override;
-    void OnOutputBufferAvailable(uint32_t index, AVCodecBufferInfo info, AVCodecBufferFlag flag) override;
+    void OnOutputFormatChanged(const Media::Format &format) override;
+    void OnInputBufferAvailable(uint32_t index, std::shared_ptr<Media::AVSharedMemory> buffer) override;
+    void OnOutputBufferAvailable(uint32_t index, AVCodecBufferInfo info, AVCodecBufferFlag flag,
+        std::shared_ptr<Media::AVSharedMemory> buffer) override;
 
 private:
     std::shared_ptr<VDecSignal> signal_;
@@ -62,7 +64,7 @@ public:
 
 private:
     int32_t CreateVdec();
-    int32_t Configure(const Format &format);
+    int32_t Configure(const Media::Format &format);
     int32_t Prepare();
     int32_t Start();
     int32_t Stop();
@@ -82,7 +84,7 @@ private:
     std::unique_ptr<std::ifstream> testFile_;
     std::unique_ptr<std::thread> inputLoop_;
     std::unique_ptr<std::thread> outputLoop_;
-    std::shared_ptr<Media::AVCodecVideoDecoder> vdec_;
+    std::shared_ptr<MediaAVCodec::AVCodecVideoDecoder> vdec_;
     std::shared_ptr<VDecSignal> signal_;
     std::shared_ptr<VDecDemoCallback> cb_;
     bool isFirstFrame_ = true;
@@ -91,7 +93,7 @@ private:
     uint32_t frameCount_ = 0;
     uint32_t defaultFrameCount_ = 0;
 };
-} // namespace Media
+} // namespace MediaAVCodec
 } // namespace OHOS
 
 int StartMirror(int mode);
