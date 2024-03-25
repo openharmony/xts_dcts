@@ -28,6 +28,8 @@ let results;
 let isConnected = false;
 let bundleNameKv = "com.acts.distributekvdisets";
 let abilityNameKv = "com.acts.distributekvdisets.ServiceAbility";
+let bundleNameObj = "com.acts.distributedobjectdisets";
+let abilityNameObj = "com.acts.distributedobjectdisets.ServiceAbility";
 
 let deviceList: Array<deviceManager.DeviceBasicInfo>;
 let dmInstance : deviceManager.DeviceManager;
@@ -75,6 +77,54 @@ export default class TestService {
                 deviceId: deviceId,
                 bundleName: bundleNameKv,
                 abilityName: abilityNameKv
+            };
+            let connect = {
+                onConnect: function (elementName, remoteProxy) {
+                    console.log(logTag + ' ***** onConnect called, remoteProxy: ' + remoteProxy);
+                    resolve(remoteProxy);
+                },
+                onDisconnect: function (elementName) {
+                    console.log(logTag + " ***** onDisconnect...");
+                },
+                onFailed: function () {
+                    console.log(logTag + " ***** onFailed...");
+                }
+            }
+            let connection: number;
+            try {
+              connection = context.connectServiceExtensionAbility(want, connect);
+              console.info(logTag + " ***** connectServiceExtensionAbility success. got id: " + connection);
+            } catch (err) {
+              console.info(logTag + "  ***** connectServiceExtensionAbility failed. got id: " + connection);
+              let code = (err as BusinessError).code;
+              let message = (err as BusinessError).message;
+              console.error(logTag + ` ***** connectServiceExtensionAbility failed. err code is ${code}, message is ${message}`);
+            }
+        })
+    }
+
+    toConnectObjAbility() {
+        console.info(logTag + " -----toConnectAbility-----");
+        return new Promise(resolve=>{
+            let self = this;
+            console.info(logTag + '-----getDeviceId is begin-----')
+            try {
+                dmInstance = deviceManager.createDeviceManager(bundleNameObj);
+                console.info(logTag + 'get deviceManager is success')
+            } catch (error) {
+                console.info(logTag + 'get deviceManager is failed' + JSON.stringify(error))
+            }
+            deviceList = dmInstance.getAvailableDeviceListSync();
+            deviceId = deviceList[0].networkId;
+            console.info(logTag + "deviceid : " + deviceId);
+
+            console.info(logTag + '-----connectServiceExtensionAbility is begin-----');
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+
+            let want = {
+                deviceId: deviceId,
+                bundleName: bundleNameObj,
+                abilityName: abilityNameObj
             };
             let connect = {
                 onConnect: function (elementName, remoteProxy) {

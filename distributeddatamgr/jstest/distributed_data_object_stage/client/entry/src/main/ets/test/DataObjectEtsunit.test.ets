@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Huawei Device Co., Ltd.
+ * Copyright (C) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,29 +15,30 @@
 
 import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '@ohos/hypium';
 import deviceManager from '@ohos.distributedDeviceManager';
-import TestService from '../../../../../../../../../testtools/disjsTest/client/testService.js';
-import RemoteHelper from '../../../../../../../../../testtools/disjsTest/client/remoteHelper.js';
+import TestService from '../../../../../../../../../testtools/disetsTest/client/testService.ets';
+import RemoteHelper from '../../../../../../../../../testtools/disetsTest/client/remoteHelper.ets';
 import { UiDriver, BY } from '@ohos.UiTest'
-import featureAbility from '@ohos.ability.featureAbility';
 import distributedObject from '@ohos.data.distributedDataObject';
 import deviceinfo from '@ohos.deviceInfo'
-import rpc from '@ohos.rpc';
+import { BusinessError } from "@ohos.base";
+import common from '@ohos.app.ability.common';
+import abilityAccessCtrl, { Context, PermissionRequestResult } from '@ohos.abilityAccessCtrl';
+import Want from '@ohos.app.ability.Want';
 
-const bundleNameObject  = "com.acts.distributeobjectdisjs";
-const abilityNameObject = "com.acts.distributeobjectdisjs.MainAbility";
-
-let context = featureAbility.getContext();
 
 let localDeviceId = undefined;
-let logTag = '[RpcClient:  ]';
+let logTag = '[ObjectEts:  ]';  
 let testservice = null;
-let gIRemoteObject = null;
 let remoteHelpers = null;
 let deviceId = null;
 let deviceList = undefined;
 let syncDeviceIds = undefined;
+let dmInstance : deviceManager.DeviceManager;
 
-const TEST_BUNDLE_NAME = 'com.acts.distributeobjectdisjs'; 
+let bundleNameObj = "com.acts.distributedobjectdisets";
+let abilityNameObj = "com.acts.distributedobjectdisets.MainAbility";
+
+const TEST_BUNDLE_NAME = 'com.acts.distributedobjectdisets'; 
 
 let localName = "Amylocal";
 let localAge = 18;
@@ -64,107 +65,105 @@ let flag_32Rlease = 1;
 let remoteOSVersion = "";
 let OSVersion32 = "OpenHarmony-3.2";
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-async function getPermission() {
-    console.info(`getPermission is start`);
-    let permissions = ['ohos.permission.DISTRIBUTED_DATASYNC'];
-    context.requestPermissionsFromUser(permissions, 666, (data) => {
-        console.info("request success" + JSON.stringify(data));
 
-    })
-}
-async function driveFn() {
-    try {
-        let driver = await UiDriver.create();
-        console.info(` come in driveFn`);
-        console.info(`driver is ${JSON.stringify(driver)}`);
-        sleep(2000);
-        let button = await driver.findComponent(BY.text('允许'));
-        console.info(`button is ${JSON.stringify(button)}`);
-        sleep(5000);
-        await button.click();
-    } catch (err) {
-        console.info('err is ' + err);
-        return;
+let atManager = abilityAccessCtrl.createAtManager();
+// let g_context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
+
+export default function dataObjectEtsTest() {
+describe('dataObjectEtsTest', function () {
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-}
+    let getPermission = async () =>{
+        console.info('getPermission is start');
+        let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
+        atManager.requestPermissionsFromUser(context, ['ohos.permission.DISTRIBUTED_DATASYNC'], (err: BusinessError, data: PermissionRequestResult) => {
+          console.info("request success" + JSON.stringify(data));
+          console.info("request success" + JSON.stringify(err));
+        })
+      }
 
-export default function dataObjectTest() {
-describe('dataObjectTest', function () {
-    beforeAll(async function (done) {
-        console.info(logTag + '-----------------beforeAll begin-----------------');
+    async function driveFn() {
+        try {
+            let driver = await UiDriver.create()
+            console.info('come in driveFn')
+            console.info('driver is ${JSON.stringify(driver)}')
+            await sleep(1000);
+            let button = await driver.findComponent(BY.text('允许'));
+            console.info('button is ${JSON.stringify(button)}');
+            await sleep(1000);
+            await button.click();
+        await sleep(1000);  
+        } catch (err) {
+            console.info('err is ' + err);
+            return;
+        }
+    }
 
-       let osReleaseTypeInfo = deviceinfo.osReleaseType;
-       console.info('the value of the deviceinfo osReleaseType is :' + osReleaseTypeInfo);
-       let osFullNameInfo = deviceinfo.osFullName;
-       console.info('the value of the deviceinfo osFullName is :' + osFullNameInfo);
-
-        await getPermission();
-        sleep(5000);
-        await driveFn();
-        sleep(2000);
-
-        let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-        deviceList = dmInstance.getAvailableDeviceListSync();
-        deviceId = deviceList[0].networkId;
-        console.info(logTag + "deviceId is: " + deviceId);
-        syncDeviceIds = [deviceId];
-
+    let startAbility = async () =>{
         try{
-            console.info(logTag + "deviceId: " + deviceId);
-            let wantValue = {
-                bundleName: bundleNameObject,
-                abilityName: abilityNameObject,
+            console.info(logTag + "let startAbility begin...");
+            let wantValue: Want = {
+                bundleName: bundleNameObj,
+                abilityName: abilityNameObj,
                 deviceId: deviceId
             };
-            await featureAbility.startAbility({
-                want: wantValue
-            }).then((data) => {
-                console.info(logTag + ' startAbility  success. data=' + JSON.stringify(data));
+    
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+            context.startAbility(wantValue).then(() => {
+                console.info(logTag + ' startAbility success.' );
             }).catch((err) => {
                 console.info(logTag + ' startAbility err: ' + err.code + err.message);
             });
         }catch(error){
             console.info(logTag + "beforeAll startAbility:error = " + error);
         }
-        await sleep(1000);       
+    }
+
+    let getDeviceId = async () =>{
+        console.info(logTag + 'let getDeviceId is begin...')
+        try {
+            dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+            console.info(logTag + 'get deviceManager is success')
+        } catch (error) {
+            console.info(logTag + 'get deviceManager is failed' + JSON.stringify(error))
+        }
+        localDeviceId = dmInstance.getLocalDeviceNetworkId();
+        console.info(logTag + "local device id is: " + localDeviceId);
+        deviceList = dmInstance.getAvailableDeviceListSync();
+        deviceId = deviceList[0].networkId;
+        syncDeviceIds = [deviceId];
+        console.info(logTag + "deviceid is: " + deviceId);
+        console.info(logTag + "syncDeviceIds is: " + JSON.stringify(syncDeviceIds));
+    }
+
+    beforeAll(async function (done) {
+        console.info(logTag + '-----------------beforeAll begin-----------------');
+        await getPermission();
+        sleep(5000);
+        await driveFn();
+        sleep(100);
+        await getDeviceId();
+        await sleep(1000);
+        await startAbility();
+        await sleep(2000);
 
         testservice = new TestService();
-        console.info(logTag + "deviceId: " + deviceId);
-     
-        await testservice.toConnectObjectAbility().then(data => {
-            gIRemoteObject = data;
-            console.info(logTag + "toConnectObjectAbility data is" + data);
-            remoteHelpers = new RemoteHelper(testservice,gIRemoteObject);
+
+       let osReleaseTypeInfo = deviceinfo.osReleaseType;
+       console.info('the value of the deviceinfo osReleaseType is :' + osReleaseTypeInfo);
+       let osFullNameInfo = deviceinfo.osFullName;
+       console.info('the value of the deviceinfo osFullName is :' + osFullNameInfo);
+
+
+        await testservice.toConnectObjAbility().then(data => {
+            let gIRemoteObject = data;
+            console.info(logTag + "toConnectAbility data is" + data);
+            remoteHelpers = new RemoteHelper(testservice, gIRemoteObject);
         })
-      
-        //get remote device os version
-        console.info(logTag + "get remote device os version");
-        let data = rpc.MessageSequence.create();
-        let reply = rpc.MessageSequence.create();
-        let option = new rpc.MessageOption();
-        let token = "OpenHarmony-4.0";
 
-        data.writeString(token);
-        expect(gIRemoteObject != undefined).assertTrue();
-        await gIRemoteObject.sendMessageRequest(CODE_INVOKE_OSVERSION, data, reply, option).then((result) => {
-            expect(result.errCode).assertEqual(0);
-            let re =  result.reply.readString();
-            remoteOSVersion = re.substring(0, 15);
-            console.info(logTag + "re is: " + re);
-            console.info(logTag + "remoteOSVersion is: " + remoteOSVersion);
-
-            if (remoteOSVersion == OSVersion32) {
-                flag_32Rlease = 0;
-                console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
-            } else {
-                flag_32Rlease = 1;
-                console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
-            }
-        });
         console.info(logTag + '-----------------beforeAll end-----------------');
         done();
     })
@@ -186,21 +185,20 @@ describe('dataObjectTest', function () {
     })
 
     /**
-     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdJsAPITest_0900
-     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0100
+     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0100
+     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0100
      * @tc.desc: sessionId1 genSessionId, remote join sessionId1, sync success
      */
-    it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0100", 0, async function(done){
-        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0100 start *************");
+    it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0100", 0, async function(done){
+        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0100 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
             done();
         } else {
 
-            await remoteHelpers.setTestCaseName("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0100");
-
             console.info(logTag + "local: create object start");
             let g_object;
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             g_object = distributedObject.create(context, {name: localName, age: localAge, isVis: localIsVis});
             expect(g_object != undefined).assertEqual(true);
 
@@ -244,27 +242,26 @@ describe('dataObjectTest', function () {
             await remoteHelpers.setSessionId();
             await sleep(1000);
 
-            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0100 end *************");
+            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0100 end *************");
             done();
         }
     })
 
     /**
-     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdJsAPITest_0200
-     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0200
+     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0200
+     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0200
      * @tc.desc: sessionId1 "abcde", remote join sessionId1, sync success
      */
-    it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0200", 0, async function(done){
-        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0200 start *************");
+    it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0200", 0, async function(done){
+        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0200 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
             done();
         } else {
 
-            await remoteHelpers.setTestCaseName("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0200");
-
             console.info(logTag + "local: create object start");
             let g_object;
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             g_object = distributedObject.create(context, {name: localName, age: localAge, isVis: localIsVis});
             expect(g_object != undefined).assertEqual(true);
 
@@ -309,26 +306,26 @@ describe('dataObjectTest', function () {
             await remoteHelpers.setSessionId();
             await sleep(1000);
 
-            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0200 end *************");
+            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0200 end *************");
             done();
             }
     })
 
     /**
-     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdJsAPITest_0100
-     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0400
+     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0300
+     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0300
      * @tc.desc: sessionId1 "123456", remote join sessionId1, sync success
      */
-    it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0400", 0, async function(done){
-        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0400 start *************");
+    it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0300", 0, async function(done){
+        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0300 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
             done();
         } else {
 
-            await remoteHelpers.setTestCaseName("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0400");
             console.info(logTag + "local: create object start");
             let g_object;
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             g_object = distributedObject.create(context, {name: localName, age: localAge, isVis: localIsVis});
             expect(g_object != undefined).assertEqual(true);
         
@@ -374,26 +371,26 @@ describe('dataObjectTest', function () {
             await remoteHelpers.setSessionId();
             await sleep(1000);
 
-            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0400 end *************");
+            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0300 end *************");
             done();
         }
     })
 
     /**
-     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdJsAPITest_1000
-     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0900
+     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0400
+     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0400
      * @tc.desc: local join sessionId1 , remote join sessionId2, sync fail
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0900", 0, async function(done){
-        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0900 start *************");
+     it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0400", 0, async function(done){
+        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0400 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
             done();
         } else {
 
-            await remoteHelpers.setTestCaseName("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0900");
             console.info(logTag + "local: create object start");
             let g_object;
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             g_object = distributedObject.create(context, {name: localName, age: localAge, isVis: localIsVis});
             expect(g_object != undefined).assertEqual(true);
         
@@ -442,26 +439,26 @@ describe('dataObjectTest', function () {
             await remoteHelpers.setSessionId();
             await sleep(1000);
 
-            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_0900 end *************");
+            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0400 end *************");
             done();
         }
     })   
 
     /**
-     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdJsAPITest_0500
-     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0100
+     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0500
+     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0100
      * @tc.desc: local  modify name2 , sync success
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0100", 0, async function(done){
-        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0100 start *************");
+     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0100", 0, async function(done){
+        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0100 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
             done();
         } else {
-            await remoteHelpers.setTestCaseName("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0100");
 
             console.info(logTag + "local: create object start");
             let g_object;
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             g_object = distributedObject.create(context, {name: localName, age: localAge, isVis: localIsVis});
             expect(g_object != undefined).assertEqual(true);
 
@@ -521,27 +518,26 @@ describe('dataObjectTest', function () {
             await remoteHelpers.setSessionId();
             await sleep(1000);
 
-            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0100 end *************");
+            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0100 end *************");
             done();
         }
     })    
 
 
     /**
-     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdJsAPITest_0400
-     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0200
+     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0600
+     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0200
      * @tc.desc: local  modify name null, sync success
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0200", 0, async function(done){
-        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0200 start *************");
+     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0200", 0, async function(done){
+        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0200 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
             done();
         } else {
-            await remoteHelpers.setTestCaseName("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0200");
-
             console.info(logTag + "local: create object start");
             let g_object;
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             g_object = distributedObject.create(context, {name: localName, age: localAge, isVis: localIsVis});
             expect(g_object != undefined).assertEqual(true);
 
@@ -603,26 +599,26 @@ describe('dataObjectTest', function () {
             await remoteHelpers.setSessionId();
             await sleep(1000);
 
-            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0200 end *************");
+            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0200 end *************");
             done();
         }
     }) 
 
     /**
-     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdJsAPITest_0300
-     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0300
+     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0700
+     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0300
      * @tc.desc: local  modify name null, sync success
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0300", 0, async function(done){
-        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0300 start *************");
+     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0300", 0, async function(done){
+        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0300 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
             done();
         } else {
-            await remoteHelpers.setTestCaseName("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0300");
 
             console.info(logTag + "local: create object start");
             let g_object;
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             g_object = distributedObject.create(context, {name: localName, age: localAge, isVis: localIsVis});
             expect(g_object != undefined).assertEqual(true);
 
@@ -683,25 +679,24 @@ describe('dataObjectTest', function () {
             await remoteHelpers.setSessionId();
             await sleep(1000);
 
-            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_0300 end *************");
+            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0300 end *************");
             done();
         }
     }) 
     /**
-     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdJsAPITest_0800
-     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0100
+     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0800
+     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0100
      * @tc.desc: remote  modify name , sync success
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0100", 0, async function(done){
+     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0100", 0, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0100 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
             done();
         } else {
-            await remoteHelpers.setTestCaseName("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0100");
-
             console.info(logTag + "local: create object start");
             let g_object;
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             g_object = distributedObject.create(context, {name: localName, age: localAge, isVis: localIsVis});
             expect(g_object != undefined).assertEqual(true);
 
@@ -753,26 +748,25 @@ describe('dataObjectTest', function () {
             await remoteHelpers.setSessionId();
             await sleep(1000);
 
-            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0100 end *************");
+            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0100 end *************");
             done();
         }
     })    
 
     /**
-     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdJsAPITest_0600
-     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0200
+     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0900
+     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0200
      * @tc.desc: remote  modify number , sync success
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0200", 0, async function(done){
-        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0200 start *************");
+     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0200", 0, async function(done){
+        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0200 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
             done();
         } else {
-            await remoteHelpers.setTestCaseName("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0200");
-
             console.info(logTag + "local: create object start");
             let g_object;
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             g_object = distributedObject.create(context, {name: localName, age: localAge, isVis: localIsVis});
             expect(g_object != undefined).assertEqual(true);
 
@@ -824,26 +818,26 @@ describe('dataObjectTest', function () {
             await remoteHelpers.setSessionId();
             await sleep(1000);
 
-            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0200 end *************");
+            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0200 end *************");
             done();
         }
     })    
 
     /**
-     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdJsAPITest_0700
-     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0300
+     * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_1000
+     * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0300
      * @tc.desc: remote  modify bool , sync success
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0300", 0, async function(done){
-        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0300 start *************");
+     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0300", 0, async function(done){
+        console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0300 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
             done();
         } else {
-            await remoteHelpers.setTestCaseName("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0300");
 
             console.info(logTag + "local: create object start");
             let g_object;
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             g_object = distributedObject.create(context, {name: localName, age: localAge, isVis: localIsVis});
             expect(g_object != undefined).assertEqual(true);
 
@@ -895,7 +889,7 @@ describe('dataObjectTest', function () {
             await remoteHelpers.setSessionId();
             await sleep(1000);
 
-            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0300 end *************");
+            console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0300 end *************");
             done();
         }
     })   
