@@ -1523,8 +1523,12 @@ export default function rdbSyncFirstLevelTest(){
             const CREATE_TABLE_TEST_S2 = "CREATE TABLE IF NOT EXISTS test (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
 
             let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
-            rdbSecondStore = await data_Rdb.getRdbStore(context, STORE_CONFIGS2);
-            console.info("testRdbSyncStageEtsTest0190 create RemoteS2Rdb.db success");
+            await data_Rdb.getRdbStore(context, STORE_CONFIGS2).then(async (store: data_Rdb.RdbStore) => {
+                rdbSecondStore = store;
+                console.info("testRdbSyncStageEtsTest0190 create RemoteS2Rdb.db success");
+            }).catch((err: BusinessError) => {
+                console.error(`testRdbSyncStageEtsTest0190 create RemoteS2Rdb.db failed, code is ${err.code},message is ${err.message}`);
+            })
             rdbSecondStore.executeSql(CREATE_TABLE_TEST_S2, null);
             console.info(logTag + "create RemoteS2Rdb.db table success");
             //setDistributedTables
