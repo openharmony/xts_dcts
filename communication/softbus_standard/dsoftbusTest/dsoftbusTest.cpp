@@ -61,7 +61,7 @@ void dsoftbusTest ::SetUpTestCase()
     LOG("SetUpTestCase");
     AddPermission();
     sleep(1);
-    system("pidof accesstoken_ser | xargs kill -9");
+    system("pidof accesstoken_service | xargs kill -9");
     sleep(1);
     TestSetUp();
     SetupCallback();
