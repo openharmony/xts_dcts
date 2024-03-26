@@ -91,7 +91,7 @@ void TransSessionFuncTest::SetUpTestCase()
     LOG("SetUp begin");
     AddPermission();
     sleep(1);
-    system("pidof accesstoken_ser | xargs kill -9");
+    system("pidof accesstoken_service | xargs kill -9");
     sleep(1);
     TestSetUp();
     int ret = RegisterDeviceStateDefCallback();

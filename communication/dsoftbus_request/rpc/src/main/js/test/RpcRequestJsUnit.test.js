@@ -124,7 +124,7 @@ export default function RpcRequestJsUnitTest() {
                 sleep(2000);
                 let button = await driver.findComponent(BY.text('允许'));
                 console.info(`button is ${JSON.stringify(button)}`);
-                sleep(5000);
+                sleep(2000);
                 await button.click();
             } catch (err) {
                 console.info('err is ' + err);
@@ -135,7 +135,7 @@ export default function RpcRequestJsUnitTest() {
         beforeAll(async function (done) {
             console.info('beforeAll called rpc');
             await getPermission();           
-            sleep(5000);
+            sleep(2000);
             await driveFn();
             sleep(2000);
             testservice = new TestService

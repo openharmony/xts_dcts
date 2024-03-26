@@ -52,6 +52,7 @@ ohos_moduletest_suite("DctsSoftBusTransFileFunTest") {
     "access_token:libtoken_setproc",
     "c_utils:utils",
     "dsoftbus:softbus_client",
+    "hilog:libhilog",
     "ipc:ipc_core",
     "wifi:wifi_sdk",
   ]
