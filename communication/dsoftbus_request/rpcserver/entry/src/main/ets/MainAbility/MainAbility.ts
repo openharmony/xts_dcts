@@ -13,47 +13,57 @@
  * limitations under the License.
  */
 
-import Ability from '@ohos.app.ability.UIAbility';
+import UIAbility from '@ohos.app.ability.UIAbility';
+import hilog from '@ohos.hilog';
+import window from '@ohos.window';
 import AcCtrl from '@ohos.abilityAccessCtrl';
 import {Core} from 'deccjsunit/index';
 
-let AcManager = AcCtrl.createAtManager()
-export default class MainAbility extends Ability {
+let AcManager = AcCtrl.createAtManager();
+export default class MainAbility extends UIAbility {
     onCreate(want, launchParam) {
         console.info('AceApplication onCreate');
-        const core = Core.getInstance()
-        core.init()
-        const configService = core.getDefaultService('config')
-        configService.setConfig(this)
+        const core = Core.getInstance();
+        core.init();
+        const configService = core.getDefaultService('config');
+        configService.setConfig(this);
 
-        console.info('Calc[IndexPage] grantPermission')
+        console.info('Calc[IndexPage] grantPermission');
         AcManager.requestPermissionsFromUser(this.context, ['ohos.permission.DISTRIBUTED_DATASYNC'], function (result) {
-            console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser')
-        })
+            console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser');
+        });
     }
 
     onDestroy() {
-        console.info("onDestroy")
+        console.info("onDestroy");
     }
 
-    onWindowStageCreate(windowStage) {
+    onWindowStageCreate(windowStage: window.WindowStage) {
         // Main window is created, set main page for this ability
-        console.info("onWindowStageCreate")
-    }
+        hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
+    
+        windowStage.loadContent('pages/Index', (err, data) => {
+          if (err.code) {
+            hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
+            return;
+          }
+            hilog.info(0x0000, 'testTag', 'Succeeded in loading the content. Data: %{public}s', JSON.stringify(data) ?? '');
+        });
+      }
 
     onWindowStageDestroy() {
         // Main window is destroyed, release UI related resources
-        console.info("onWindowStageDestroy")
+        console.info("onWindowStageDestroy");
     }
 
     onForeground() {
         // Ability has brought to foreground
-        console.info("onForeground")
+        console.info("onForeground");
     }
 
     onBackground() {
         // Ability has back to background
-        console.info("onBackground")
+        console.info("onBackground");
     }
 
 };
