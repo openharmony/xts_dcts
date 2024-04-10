@@ -5,7 +5,7 @@
     "srcEntrance": "./ets/Application/AbilityStage.ts",
     "description": "$string:phone_entry_dsc",
     "mainElement": "MainAbility",
-    "deviceType": [
+    "deviceTypes": [
       "phone",
       "tablet",
       "tv",
