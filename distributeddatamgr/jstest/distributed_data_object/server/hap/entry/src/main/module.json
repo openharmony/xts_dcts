@@ -5,9 +5,13 @@
     "srcEntrance": "./ets/Application/AbilityStage.ts",
     "description": "$string:entry_desc",
     "mainElement": "MainAbility",
-    "deviceTypes": [
+    "deviceType": [
+      "phone",
+      "tablet",
+      "tv",
+      "wearable",
       "default",
-      "tablet"
+      "2in1"
     ],
     "deliveryWithInstall": true,
     "installationFree": false,
