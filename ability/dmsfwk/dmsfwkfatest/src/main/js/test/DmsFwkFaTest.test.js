@@ -769,6 +769,131 @@ export default function DmsFwkFaTest() {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0300 is end---------------");
     });
 
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0400
+    * @tc.name    StartRemoteAbilityForResult remote MainAbility want is null
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0400", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0400 is start---------------");
+      let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0400';
+      let wantValue = {
+      }
+      featureAbility.startAbilityForResult({
+        want: wantValue
+      }, (error) => {
+        if (error && error.code !== 0) {
+          console.error(TAG + ' fail, error: ' + error.code);
+          expect(error.code).assertEqual(1);
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+        }
+      });
+      done();
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0400 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0500
+    * @tc.name    StartRemoteAbilityForResult remote MainAbility abilityName is undefined
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0500", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0500 is start---------------");
+      let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0500';
+      let wantValue = {
+        deviceId: dvId,
+        bundleName: "com.acts.example.dmsfwkstageserver",
+        abilityName: undefined,
+        parameters: {
+          startReason: "terminateSelfWithResult"
+        }
+      }
+      featureAbility.startAbilityForResult({
+        want: wantValue
+      }, (error) => {
+        if (error && error.code !== 0) {
+          console.error(TAG + ' fail, error: ' + error.code);
+          expect(error.code).assertEqual(1);
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+        }
+      });
+      done();
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0500 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0600
+    * @tc.name    StartRemoteAbilityForResult remote MainAbility abilityName is null
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0600", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0600 is start---------------");
+      let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0600';
+      let wantValue = {
+        deviceId: dvId,
+        bundleName: "com.acts.example.dmsfwkstageserver",
+        abilityName: null,
+        parameters: {
+          startReason: "terminateSelfWithResult"
+        }
+      }
+      featureAbility.startAbilityForResult({
+        want: wantValue
+      }, (error) => {
+        if (error && error.code !== 0) {
+          console.error(TAG + ' fail, error: ' + error.code);
+          expect(error.code).assertEqual(1);
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+        }
+      });
+      done();
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0600 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0700
+    * @tc.name    StartRemoteAbilityForResult remote MainAbility abilityName is err
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0700", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0700 is start---------------");
+      let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0700';
+      let wantValue = {
+        deviceId: dvId,
+        bundleName: "com.acts.example.dmsfwkstageserver",
+        abilityName: 's1234wersds',
+        parameters: {
+          startReason: "terminateSelfWithResult"
+        }
+      }
+      featureAbility.startAbilityForResult({
+        want: wantValue
+      }, (error) => {
+        if (error && error.code !== 0) {
+          console.error(TAG + ' fail, error: ' + error.code);
+          expect(error.code).assertEqual(9);
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+        }
+      });
+      done();
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0700 is end---------------");
+    });
 
     /*
      * @tc.number  SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300
