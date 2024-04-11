@@ -407,7 +407,7 @@ HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_0800, TestSize
     };
     StreamFrameInfo  frame = {0};
 
-    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM, &g_fileSessionListener);
+    ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM,  GetSessionListenser4Data());
     EXPECT_EQ(SOFTBUS_OK, ret) << "call CreateSS[file] fail";
 
     sessionId = OpenSession(SESSION_NAME_STREAM, SESSION_NAME_STREAM, GetNetworkId(), DEF_GROUP_ID, GetSessionAttr4Data());
@@ -426,7 +426,7 @@ HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_0800, TestSize
 
     CloseSession(sessionId);
     
-    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM);
     EXPECT_EQ(SOFTBUS_OK, ret) << "remove Ss fail";
 }
 
@@ -522,6 +522,6 @@ HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_1000, TestSize
 
     CloseSession(sessionId);
     
-    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_STREAM);
+    ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
     EXPECT_EQ(SOFTBUS_OK, ret) << "remove Ss fail";
 }
