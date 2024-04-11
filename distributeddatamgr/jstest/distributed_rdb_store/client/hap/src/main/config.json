@@ -24,7 +24,7 @@
       "tv",
       "wearable",
       "default",
-	  "2in1"
+	    "2in1"
     ],
     "distro": {
       "deliveryWithInstall": true,
