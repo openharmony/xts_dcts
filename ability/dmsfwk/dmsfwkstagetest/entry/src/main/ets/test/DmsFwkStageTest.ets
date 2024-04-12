@@ -125,12 +125,12 @@ export default function DmsFwkStageTest() {
     afterEach(async (done: Function) => {
       console.info('DmsFwkStageTest after each called');
       let connectIdList: number[] = [connectId,connectId2,extensionConnectId,extensionConnectId2]
-      await sleep(1000)
       for (let i in connectIdList) {
         await sleep(1000)
         await DisconnectServiceExtensionAbility(connectIdList[i])
         console.log('connectIdList i is' + i + connectIdList[i])
       }
+      await sleep(2000)
       done();
     });
 
@@ -1538,8 +1538,8 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 catch error is' + error.code);
         expect(true).assertTrue()
       }
-      done();
       await sleep(1000);
+      done();
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 is end---------------" + connectId)
     });
 
@@ -2604,5 +2604,32 @@ export default function DmsFwkStageTest() {
       done()
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1500 end------------------------");
     })
+
+    /*
+     * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600
+     * @tc.name    Get call various applications
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600', 0, async (done: Function) => {
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600 start------------------------");
+      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+      context.startAbilityByCall({
+        bundleName: 'com.acts.example.dmsfwkstageserver',
+        abilityName: 'MainAbility',
+        deviceId: dvId
+      })
+        .then((data: Caller) => {
+          call = data;
+          console.log('get caller is success caller is ' + call)
+          expect().assertFail()
+        }).catch((err: BusinessError) => {
+          console.log('get caller is failed err is ' + JSON.stringify(err))
+          expect(err.code == 16000050).assertTrue()
+        })
+      done()
+      await sleep(2000)
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600 end------------------------");
+    });
   })
 }

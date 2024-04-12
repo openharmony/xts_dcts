@@ -913,7 +913,7 @@ export default function dmsJsUnitTest() {
                     want: wantValue
                 }).then((data) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 data' + JSON.stringify(data));
-                    expect(data == 0).assertTrue();
+                    expect(JSON.stringify(data) == 0).assertTrue();
                     done();
                 }).catch((err) => {
                     console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 err: ' + err.code);
