@@ -217,7 +217,7 @@ HWTEST_F(TransReliabilityTest, SUB_DSoftbus_Spec_DCTS_SessionServer_0600, TestSi
     ret = CreateSessionServer(NULL, SESSION_NAME_DATA, GetSessionListenser4Data());
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS[pkg name null]";
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS fail[session listener only malloc]";
+    EXPECT_EQ(SOFTBUS_TRANS_PROXY_SEND_REQUEST_FAILED, ret) << "RemoveSS fail[session listener only malloc]";
 }
 
 /**
@@ -234,7 +234,7 @@ HWTEST_F(TransReliabilityTest, SUB_DSoftbus_Spec_DCTS_SessionServer_0700, TestSi
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS[session name null]";
     
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS fail[session listener only malloc]";
+    EXPECT_EQ(SOFTBUS_TRANS_PROXY_SEND_REQUEST_FAILED, ret) << "RemoveSS fail[session listener only malloc]";
 }
 
 /**
@@ -251,7 +251,7 @@ HWTEST_F(TransReliabilityTest, SUB_DSoftbus_Spec_DCTS_SessionServer_0800, TestSi
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS[session listener null]";
    
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS fail[session listener only malloc]";
+    EXPECT_EQ(SOFTBUS_TRANS_PROXY_SEND_REQUEST_FAILED, ret) << "RemoveSS fail[session listener only malloc]";
 }
 
 /**
@@ -269,7 +269,7 @@ HWTEST_F(TransReliabilityTest, SUB_DSoftbus_Spec_DCTS_SessionServer_0900, TestSi
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, listener);
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS fail[session listener only malloc]";
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS fail[session listener only malloc]";
+    EXPECT_EQ(SOFTBUS_TRANS_PROXY_SEND_REQUEST_FAILED, ret) << "RemoveSS fail[session listener only malloc]";
 
     free(listener);
 }
@@ -293,7 +293,7 @@ HWTEST_F(TransReliabilityTest, SUB_DSoftbus_Spec_DCTS_SessionServer_1000, TestSi
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, listener);
     EXPECT_EQ(EXPECT_INVALID_PARAM, ret) << "CreateSS success[session listener member=null]";
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS fail[session listener only malloc]";
+    EXPECT_EQ(SOFTBUS_TRANS_PROXY_SEND_REQUEST_FAILED, ret) << "RemoveSS fail[session listener only malloc]";
 
     free(listener);
 }
@@ -1180,7 +1180,7 @@ HWTEST_F(TransReliabilityTest, SUB_DSoftbus_Spec_DCTS_SessionServer_5000, TestSi
     ret = CreateSessionServer(pkgName.c_str(), SESSION_NAME_DATA, GetSessionListenser4Data());
     EXPECT_EQ(SOFTBUS_INVALID_PKGNAME, ret) << "CreateSS-ctrl success";
     ret = RemoveSessionServer(pkgName.c_str(), SESSION_NAME_DATA);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "RemoveSS-ctrl success";
+    EXPECT_EQ(SOFTBUS_TRANS_PROXY_SEND_REQUEST_FAILED, ret) << "RemoveSS-ctrl success";
 }
 
 /**

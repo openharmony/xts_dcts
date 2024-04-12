@@ -22,8 +22,10 @@ static int32_t g_currentSessionId4Proxy = -1;
 static int32_t g_waitFlag = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Data = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Ctl = WAIT_DEF_VALUE;
+static int32_t g_waitFlag4CtlClose = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Proxy = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Stream = WAIT_DEF_VALUE;
+static int32_t g_waitFlag4DataClose = WAIT_DEF_VALUE;
 static int32_t g_passiveOpenRetFlag = SOFTBUS_OK;
 static int32_t g_nodeOnlineCount = 0;
 static int32_t g_nodeOfflineCount = 0;
@@ -347,10 +349,10 @@ static void DataSessionClosed(int sessionId)
     if (sessionId == g_currentSessionId4Data) {
         LOG("[cb][data]closed session,check sid[%d] success", sessionId);
         g_currentSessionId4Data = -1;
-        g_waitFlag4Data = WAIT_SUCCESS_VALUE;
+        g_waitFlag4DataClose = WAIT_SUCCESS_VALUE;
     } else {
         LOG("[cb][data]closed session, callback sid[%d] not match open sid[%d]", sessionId, g_currentSessionId4Data);
-        g_waitFlag4Data = WAIT_FAIL_VALUE;
+        g_waitFlag4DataClose = WAIT_FAIL_VALUE;
     }
 }
 
@@ -420,10 +422,10 @@ static void ControlSessionClosed(int sessionId)
     if (sessionId == g_currentSessionId4Ctl) {
         LOG("[cb][ctrl]closed session check sid[%d] success", sessionId);
         g_currentSessionId4Ctl = -1;
-        g_waitFlag4Ctl = WAIT_SUCCESS_VALUE;
+        g_waitFlag4CtlClose = WAIT_SUCCESS_VALUE;
     } else {
         LOG("[cb][ctrl]closed session callback sid[%d] not match open sid[%d]", sessionId, g_currentSessionId4Ctl);
-        g_waitFlag4Ctl = WAIT_FAIL_VALUE;
+        g_waitFlag4CtlClose = WAIT_FAIL_VALUE;
     }
 }
 
@@ -617,11 +619,13 @@ void ResetWaitFlag(void)
 void ResetWaitFlag4Data(void)
 {
     g_waitFlag4Data = WAIT_DEF_VALUE;
+    g_waitFlag4DataClose  = WAIT_DEF_VALUE;
 }
 
 void ResetWaitFlag4Ctl(void)
 {
     g_waitFlag4Ctl = WAIT_DEF_VALUE;
+    g_waitFlag4CtlClose = WAIT_DEF_VALUE;
 }
 
 void ResetWaitFlag4Proxy(void)
