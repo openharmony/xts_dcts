@@ -1,0 +1,21 @@
+{
+    "description": "Config for DctsSoftBusSoketTransFuncTest test cases",
+    "driver": {
+        "module-name": "DctsSoftBusSoketTransFuncTest",
+        "native-test-timeout": "900000",
+        "native-test-device-path": "/data/local/tmp",
+        "runtime-hint": "1s",
+        "type": "CppTest"
+    },
+    "kits": [
+     {
+        "post-push" : [
+        "chmod -R 777 /data/local/tmp/*"
+     ],
+        "push": [
+          "DctsSoftBusSoketTransFuncTest->/data/local/tmp/DctsSoftBusSoketTransFuncTest"
+	],
+      "type": "PushKit"
+       }
+    ]
+}
