@@ -64,10 +64,10 @@ async function driveFn() {
         let driver = await UiDriver.create()
         console.info(` come in driveFn`)
         console.info(`driver is ${JSON.stringify(driver)}`)
-        sleep(2000);
+        await sleep(2000);
         let button = await driver.findComponent(BY.text('允许'));
         console.info(`button is ${JSON.stringify(button)}`);
-        sleep(5000);
+        await sleep(5000);
         await button.click();
     } catch (err) {
         console.info('err is ' + err);
@@ -81,9 +81,9 @@ export default function rdbSyncCustomDirlTest(){
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
             await getPermission();
-            sleep(5000);
+            await sleep(5000);
             await driveFn();
-            sleep(100);
+            await sleep(100);
 
             let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
             deviceList = dmInstance.getAvailableDeviceListSync();

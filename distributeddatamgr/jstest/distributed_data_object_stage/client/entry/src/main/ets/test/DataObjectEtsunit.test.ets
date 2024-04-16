@@ -95,7 +95,7 @@ describe('dataObjectEtsTest', function () {
             console.info('button is ${JSON.stringify(button)}');
             await sleep(1000);
             await button.click();
-        await sleep(1000);  
+            await sleep(1000);  
         } catch (err) {
             console.info('err is ' + err);
             return;
@@ -142,9 +142,9 @@ describe('dataObjectEtsTest', function () {
     beforeAll(async function (done) {
         console.info(logTag + '-----------------beforeAll begin-----------------');
         await getPermission();
-        sleep(5000);
+        await sleep(5000);
         await driveFn();
-        sleep(100);
+        await sleep(100);
         await getDeviceId();
         await sleep(1000);
         await startAbility();
