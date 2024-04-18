@@ -101,9 +101,9 @@ export default function rdbSyncCustomDirlTest(){
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
             await getPermission();
-            sleep(5000);
+            await sleep(5000);
             await driveFn();
-            sleep(100);
+            await sleep(100);
 
             let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
             deviceList = dmInstance.getAvailableDeviceListSync();
@@ -137,7 +137,7 @@ export default function rdbSyncCustomDirlTest(){
               let message = (err as BusinessError).message;
               console.error(logTag + `connectServiceExtensionAbility failed, code is ${code}, message is ${message}`);
             };
-            sleep(100);
+            await sleep(100);
             rdbStore = await data_Rdb.getRdbStore(context, STORE_CONFIG);
             console.info(logTag + "create RemoteRdbStage.db success");
             await rdbStore.executeSql(CREATE_TABLE_TEST, null);
