@@ -72,7 +72,7 @@ HWTEST_F(TransReliabilityTest, SUB_DSoftbus_Spec_DCTS_SessionServer_0100, TestSi
     int sessionId = 0;
     string data = "invalid session id";
     ret = SendBytes(sessionId, data.c_str(), data.length());
-    EXPECT_EQ(SOFTBUS_TRANS_INVALID_SESSION_ID, ret);
+    EXPECT_EQ(SOFTBUS_TRANS_SESSION_INFO_NOT_FOUND, ret);
 }
 
 /**
@@ -94,7 +94,7 @@ HWTEST_F(TransReliabilityTest, SUB_DSoftbus_Spec_DCTS_SessionServer_0200, TestSi
 
     string data = "session closed";
     ret = SendBytes(sessionId, data.c_str(), data.length());
-    EXPECT_EQ(SOFTBUS_TRANS_INVALID_SESSION_ID, ret);
+    EXPECT_EQ(SOFTBUS_TRANS_SESSION_INFO_NOT_FOUND, ret);
 }
 
 /**
@@ -170,7 +170,7 @@ HWTEST_F(TransReliabilityTest, SUB_DSoftbus_Spec_DCTS_SessionServer_0400, TestSi
     int sessionId = 0;
     string data = "invalid session id";
     ret = SendMessage(sessionId, data.c_str(), data.length());
-    EXPECT_EQ(SOFTBUS_TRANS_INVALID_SESSION_ID, ret);
+    EXPECT_EQ(SOFTBUS_TRANS_SESSION_INFO_NOT_FOUND, ret);
 }
 
 /**
