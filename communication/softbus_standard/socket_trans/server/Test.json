@@ -1,0 +1,21 @@
+{
+    "description": "Config for dsoftbusTest test cases",
+    "driver": {
+        "module-name": "dsoftbusTest",
+        "native-test-timeout": "120000",
+        "native-test-device-path": "/data/local/tmp",
+        "runtime-hint": "1s",
+        "type": "CppTest"
+    },
+    "kits": [
+     {
+        "post-push" : [
+        "chmod -R 777 /data/local/tmp/*"
+     ],
+        "push": [
+          "dsoftbusTest->/data/local/tmp/dsoftbusTest"
+	],
+      "type": "PushKit"
+       }
+    ]
+}
