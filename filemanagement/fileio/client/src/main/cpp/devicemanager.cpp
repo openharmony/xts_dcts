@@ -21,8 +21,7 @@
 #include "device_manager.h"
 #include "distributed_file_daemon_manager.h"
 
-class FileIoClient : public OHOS::DistributedHardware::DmInitCallback
-{
+class FileIoClient : public OHOS::DistributedHardware::DmInitCallback{
     void OnRemoteDied()
     {
     }
