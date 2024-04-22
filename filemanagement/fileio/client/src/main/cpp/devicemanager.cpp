@@ -30,13 +30,12 @@ class FileIoClient : public OHOS::DistributedHardware::DmInitCallback{
 static napi_value DeviceOpenP2PConnection(napi_env env, napi_callback_info info)
 {
     std::shared_ptr<OHOS::DistributedHardware::DmInitCallback> initCallback = std::make_shared<FileIoClient>();
-    OHOS::DistributedHardware::DeviceManager::GetInstance().InitDeviceManager("com.acts.fileio\
-.test.server",initCallback);
+    auto &deviceManager = OHOS::DistributedHardware::DeviceManager::GetInstance();
+    deviceManager.InitDeviceManager("com.acts.fileio.test.server", initCallback);
     std::vector<OHOS::DistributedHardware::DmDeviceInfo> deviceList;
-    OHOS::DistributedHardware::DeviceManager::GetInstance().GetTrustedDeviceList("com.acts.fileio\
-.test.server","",deviceList);
-    int32_t ret = OHOS::Storage::DistributedFile::DistributedFileDaemonManager::GetInstance().Open\
-P2PConnection(deviceList[0]);
+    deviceManager.GetTrustedDeviceList("com.acts.fileio.test.server", "", deviceList);
+    auto &dfsmanager = OHOS::Storage::DistributedFile::DistributedFileDaemonManager::GetInstance();
+    int32_t ret = dfsmanager.OpenP2PConnection(deviceList[0]);
     napi_value result = nullptr;
     napi_create_int32(env, ret, &result);
     return result;
