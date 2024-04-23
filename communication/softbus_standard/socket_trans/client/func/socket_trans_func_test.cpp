@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -119,13 +119,13 @@ SocketInfo socketStreamInfo = {
 };
 
 QosTV info_wifi[] = {
-    {.qos = QOS_TYPE_MIN_BW, .value = 10 * 1024 * 4024, },
+    {.qos = QOS_TYPE_MIN_BW, .value = 10 * 1024 * 1024, },
     {.qos = QOS_TYPE_MIN_LATENCY, .value = 800, },
     {.qos = QOS_TYPE_MAX_LATENCY, .value = 800, },
 };
 
 QosTV info_p2p[] = {
-    {.qos = QOS_TYPE_MIN_BW, .value = 160 * 1024 * 4024, },
+    {.qos = QOS_TYPE_MIN_BW, .value = 160 * 1024 * 1024, },
     {.qos = QOS_TYPE_MIN_LATENCY, .value = 1600, },
     {.qos = QOS_TYPE_MAX_LATENCY, .value = 1600, },
 };
