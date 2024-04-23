@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,6 +21,7 @@ import securityLabel from '@ohos.file.securityLabel';
 import TestService from "./testService"
 import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '@ohos/hypium';
 import {UiDriver, BY} from '@ohos.UiTest';
+import devicemanager from 'libdevicemanager.so';
 
 let gIRemoteObject = null;
 var testservice = null;
@@ -195,6 +196,7 @@ export default function FileioDistributedTest(){
             sleep(5000);
             await driveFn();
             sleep(3000);
+            devicemanager.DeviceOpenP2PConnection();
             
             testservice = new TestService;
             await testservice.toConnectAbility().then(data => {
