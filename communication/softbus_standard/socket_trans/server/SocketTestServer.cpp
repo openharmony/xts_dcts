@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -44,9 +44,10 @@ void SocketTestServer ::TearDown() {}
 void SocketTestServer ::SetUpTestCase()
 {
     LOG("SetUpTestCase");
-    uint64_t tokenId = OHOS::Security::AccessToken::AccessTokenKit::GetNativeTokenId("dhardware");
-    SetSelfTokenID(tokenId);
-    sleep(1);
+    AddPermission();
+    sleep(ONE_SECOND);
+    system("pidof accesstoken_service | xargs kill -9");
+    sleep(ONE_SECOND);
     TestSetUp();
     SetupCallback();
     int ret = RegNodeDeviceStateCb(DEF_PKG_NAME, g_nodeStateCallback);
