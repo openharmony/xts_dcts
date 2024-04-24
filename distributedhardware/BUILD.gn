@@ -20,6 +20,7 @@ group("distributedhardware") {
       "distributedaudiotest:SubDctsdisAudioTest",
       "distributedcameratest:SubDctsdisCameraTest",
       "distributeddevicejstest:SubDctsdisDeviceJsTest",
+      "distributeddptest:SubDctsDistributedDpTest",
       "distributedinputtest:SubDistributedInputTest",
       "distributedscreentest:SubDctsdisScreenTest",
     ]
