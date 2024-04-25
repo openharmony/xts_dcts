@@ -24,19 +24,20 @@ let connectId = null;
 let dvList = [];
 let dvId = null;
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
-let dmInstance 
+let dmInstance
+let localDeviceId
 export default function DmsFwkFaTest() {
 
   describe('DmsFwkFaTest', function () {
     async function getDeviceId() {
       console.log('getDeviceId is begin')
       try {
-          dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstageservert');
-          console.log('get deviceManager is success')
+        dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstageservert');
+        console.log('get deviceManager is success')
       } catch (error) {
-          console.log('get deviceManager is failed' + JSON.stringify(error))
+        console.log('get deviceManager is failed' + JSON.stringify(error))
       }
-      let localDeviceId = dmInstance.getLocalDeviceNetworkId();
+      localDeviceId = dmInstance.getLocalDeviceNetworkId();
       console.info("local device id is: " + localDeviceId);
       let deviceList = dmInstance.getAvailableDeviceListSync();
       dvList = deviceList;
@@ -896,6 +897,204 @@ export default function DmsFwkFaTest() {
     });
 
     /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0800
+    * @tc.name    StartRemoteAbilityForResult remote MainAbility bundleName is undefined
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0800", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0800 is start---------------");
+      let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0800';
+      let wantValue = {
+        deviceId: dvId,
+        bundleName: undefined,
+        abilityName: "MainAbility2",
+        parameters: {
+          startReason: "terminateSelfWithResult"
+        }
+      }
+      featureAbility.startAbilityForResult({
+        want: wantValue
+      }, (error) => {
+        if (error && error.code !== 0) {
+          console.error(TAG + ' fail, error: ' + error.code);
+          expect(error.code).assertEqual(1);
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+        }
+      });
+      done();
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0800 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0900
+    * @tc.name    StartRemoteAbilityForResult remote MainAbility bundleName is null
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0900", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0900 is start---------------");
+      let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0900';
+      let wantValue = {
+        deviceId: dvId,
+        bundleName: undefined,
+        abilityName: "MainAbility2",
+        parameters: {
+          startReason: "terminateSelfWithResult"
+        }
+      }
+      featureAbility.startAbilityForResult({
+        want: wantValue
+      }, (error) => {
+        if (error && error.code !== 0) {
+          console.error(TAG + ' fail, error: ' + error.code);
+          expect(error.code).assertEqual(1);
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+        }
+      });
+      done();
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0900 is end---------------");
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1000
+    * @tc.name    StartRemoteAbilityForResult remote MainAbility bundleName is err
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1000", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1000 is start---------------");
+      let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1000';
+      let wantValue = {
+        deviceId: dvId,
+        bundleName: "123456789x.",
+        abilityName: "MainAbility2",
+        parameters: {
+          startReason: "terminateSelfWithResult"
+        }
+      }
+      featureAbility.startAbilityForResult({
+        want: wantValue
+      }, (error) => {
+        if (error && error.code !== 0) {
+          console.error(TAG + ' fail, error: ' + error.code);
+          expect(error.code).assertEqual(9);
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+        }
+      });
+      done();
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1000 is end---------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1100
+     * @tc.name    StartRemoteAbilityForResult remote MainAbility deviceId is undefined
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1100", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1100 is start---------------");
+      let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1100';
+      let wantValue = {
+        deviceId: undefined,
+        bundleName: "com.acts.example.dmsfwkstageserver",
+        abilityName: "MainAbility2",
+        parameters: {
+          startReason: "terminateSelfWithResult"
+        }
+      }
+      featureAbility.startAbilityForResult({
+        want: wantValue
+      }, (error) => {
+        if (error && error.code !== 0) {
+          console.error(TAG + ' fail, error: ' + error.code);
+          expect(error.code).assertEqual(1);
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+        }
+      });
+      done();
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1100 is end---------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1200
+     * @tc.name    StartRemoteAbilityForResult remote MainAbility deviceId is null
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1200", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1200 is start---------------");
+      let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1200';
+      let wantValue = {
+        deviceId: "",
+        bundleName: "com.acts.example.dmsfwkstageserver",
+        abilityName: "MainAbility2",
+        parameters: {
+          startReason: "terminateSelfWithResult"
+        }
+      }
+      featureAbility.startAbilityForResult({
+        want: wantValue
+      }, (error) => {
+        if (error && error.code !== 0) {
+          console.error(TAG + ' fail, error: ' + error.code);
+          expect(error.code).assertEqual(1);
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+        }
+      });
+      done();
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1200 is end---------------");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1300
+     * @tc.name    StartRemoteAbilityForResult remote MainAbility deviceId is err
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1300", 0, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1300 is start---------------");
+      let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1300';
+      let wantValue = {
+        deviceId: "123456789c.",
+        bundleName: "com.acts.example.dmsfwkstageserver",
+        abilityName: "MainAbility2",
+        parameters: {
+          startReason: "terminateSelfWithResult"
+        }
+      }
+      featureAbility.startAbilityForResult({
+        want: wantValue
+      }, (error) => {
+        if (error && error.code !== 0) {
+          console.error(TAG + ' fail, error: ' + error.code);
+          expect(error.code).assertEqual(9);
+        } else {
+          console.log(TAG + ' StartAbilityForResult_callback success');
+          expect().assertFail()
+        }
+      });
+      done();
+      await sleep(1000);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1300 is end---------------");
+    });
+
+    /*
      * @tc.number  SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300
      * @tc.name    Connect the remote ServiceAbility.
      * @tc.desc    Function test
@@ -950,7 +1149,7 @@ export default function DmsFwkFaTest() {
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_02000356
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200
      * @tc.name    Connect the remote Service with null bundlename.
      * @tc.desc    Function test
      * @tc.level   0
@@ -1598,7 +1797,62 @@ export default function DmsFwkFaTest() {
       await sleep(1000);
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300 end------------------------");
     });
-
+  
+    /*
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400
+     * @tc.name    Connect the remote ServiceAbility deviceId is localDeviceId.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400", 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400 start------------------------");
+      let connectId;
+      try {
+        connectId = featureAbility.connectAbility({
+          deviceId: localDeviceId,
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "ServiceAbility"
+        }, {
+          onConnect: (elementName, proxy) => {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then((result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400 msg: ' + msg)
+              expect(msg == 100).assertFail();
+              done();
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
+              expect().assertFail();
+              done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400 onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400 onFailed: ' + code);
+            expect(code == 0).assertTrue();
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400 catch: ' + err.message);
+        expect().assertFail();
+        done();
+      }
+      done()
+      await sleep(1000);
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400 end------------------------");
+    });
+  
     /*
     * @tc.number  SUB_DMS_StandardOs_stability_StabilityTest_0100
     * @tc.name    Connect the remote ServiceAbility fot ten times.
