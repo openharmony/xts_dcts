@@ -133,9 +133,9 @@ export default class RemoteHelper{
         // To avoid unknown errors, it is recommended to pass in only values of string type
         // If insert data successful,it will return true, otherwise it will return errInfo
         console.info(logTag + "_methodName is kvPut");
+        console.info(logTag + "_methodName is String(value)" + String(value));
         let message = new ApiMessage("openHarmony","testApi","kvPut"," ",
-		    ["string",valueType,"string"],[String(key),value.toString(),String(valueType)]," ");
-        console.info(logTag + " test key is: " + key + " value is " + value.toString())
+		    ["string",valueType,"string"],[String(key),String(value),String(valueType)]," ");
         let resGetReq = await this.getReq(message);
         return resGetReq;
     }

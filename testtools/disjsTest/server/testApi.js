@@ -127,7 +127,7 @@ export default class TestApi{
         let name = new disData.FieldNode('name');
         name.type = disData.ValueType.INTEGER;
         name.nullable = false;
-        name.default = 0;
+        name.default = '0';
 
         let schema = new disData.Schema();
         schema.root.appendChild(name);
