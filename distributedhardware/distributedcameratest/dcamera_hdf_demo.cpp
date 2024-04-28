@@ -16,6 +16,7 @@
 #include "dcamera_hdf_demo.h"
 #include "distributed_hardware_log.h"
 #include "metadata_utils.h"
+#include <gtest/gtest.h>
 
 namespace OHOS {
 namespace DistributedHardware {
@@ -278,31 +279,43 @@ void DcameraHdfDemo::ReleaseCameraDevice()
     }
 }
 
-RetCode DcameraHdfDemo::InitSensors()
+void DcameraHdfDemo::InitSensors()
 {
-    int rc = 0;
+    int rc = -1;
     DHLOGI("demo test: InitSensors enter");
-
-    if (demoCameraHost_ != nullptr) {
-        return RC_OK;
-    }
-
     constexpr const char *demoServiceName = "distributed_camera_service";
-    demoCameraHost_ = ICameraHost::Get(demoServiceName, false);
     if (demoCameraHost_ == nullptr) {
-        DHLOGI("demo test: ICameraHost::Get error");
-        return RC_ERROR;
+        demoCameraHost_ = ICameraHost::Get(demoServiceName, false);
+        if (demoCameraHost_ == nullptr) {
+            DHLOGI("demo test: ICameraHost::Get error");
+        } else {
+            DHLOGI("demo test: ICameraHost::Get success");
+        }
     }
 
     hostCallback_ = new DemoCameraHostCallback();
     rc = demoCameraHost_->SetCallback(hostCallback_);
     if (rc != HDI::Camera::V1_0::NO_ERROR) {
         DHLOGI("demo test: demoCameraHost_->SetCallback(hostCallback_) error");
-        return RC_ERROR;
+        return;
     }
 
-    DHLOGI("demo test: InitSensors exit");
-    return RC_OK;
+    demoCameraHost_->GetCameraIds(cameraIds_);
+    if (cameraIds_.size() == 0) {
+        DHLOGI("camera device list empty");
+        GTEST_SKIP() << "No Camera Available" << std::endl;
+        return;
+    }
+}
+
+void DcameraHdfDemo::InitDemo()
+{
+    demoCameraHost_->GetCameraIds(cameraIds_);
+    if (cameraIds_.size() == 0) {
+        DHLOGI("camera device list empty");
+        GTEST_SKIP() << "No Camera Available" << std::endl;
+        return;
+    }
 }
 
 void DcameraHdfDemo::StoreImage(const char *bufStart, const uint32_t size) const
@@ -608,9 +621,15 @@ void DcameraHdfDemo::SetEnableResult()
 {
     DHLOGI("demo test: SetEnableResult enter");
 
+    if (cameraIds_.empty()) {
+        DHLOGI("demo test: camera device list empty");
+        return;
+    }
     results_list_.push_back(OHOS_CONTROL_EXPOSURE_MODE);
     results_list_.push_back(OHOS_CONTROL_FOCUS_MODE);
-    demoCameraDevice_->EnableResult(results_list_);
+    if (demoCameraDevice_ != nullptr) {
+        demoCameraDevice_->EnableResult(results_list_);
+    }
 
     DHLOGI("demo test: SetEnableResult exit");
 }

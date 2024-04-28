@@ -56,7 +56,6 @@ ohos_moduletest_suite("SubDctsdisScreenTest") {
   deps = [
     "$base_root/base/security/access_token/interfaces/innerkits/nativetoken:libnativetoken",
     "$base_root/base/security/access_token/interfaces/innerkits/token_setproc:libtoken_setproc",
-    "$base_root/foundation/communication/dsoftbus/adapter:softbus_adapter",
     "$base_root/foundation/communication/dsoftbus/sdk:softbus_client",
     "$base_root/foundation/distributedhardware/distributed_screen/common:distributed_screen_utils",
     "$base_root/foundation/distributedhardware/distributed_screen/interfaces/innerkits/native_cpp/screen_sink:distributed_screen_sink_sdk",
