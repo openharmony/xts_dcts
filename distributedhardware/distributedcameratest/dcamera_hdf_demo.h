@@ -83,7 +83,8 @@ public:
 
     RetCode InitCameraDevice();
     void ReleaseCameraDevice();
-    RetCode InitSensors();
+    void InitSensors();
+    void InitDemo();
 
     RetCode StartPreviewStream();
     RetCode StartCaptureStream();

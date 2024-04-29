@@ -35,13 +35,9 @@ public:
 };
 void DCameraAutomatTest::SetUpTestCase(void)
 {
-    int32_t ret = mainDemo->InitSensors();
-    if (ret == camoreError) {
-        DHLOGI("main test: mainDemo->InitSensors() error");
-        return;
-    }
+    mainDemo->InitSensors();
 
-    ret = mainDemo->InitCameraDevice();
+    int32_t ret = mainDemo->InitCameraDevice();
     if (ret == camoreError) {
         DHLOGI("main test: mainDemo->InitCameraDevice() error");
         return;
@@ -54,7 +50,10 @@ void DCameraAutomatTest::TearDownTestCase(void)
     PreviewOff(mainDemo);
     mainDemo->QuitDemo();
 }
-void DCameraAutomatTest::SetUp(void) {}
+void DCameraAutomatTest::SetUp(void)
+{
+    mainDemo->InitDemo();
+}
 void DCameraAutomatTest::TearDown(void) {}
 DCameraAutomatTest::DCameraAutomatTest(void) {}
 
