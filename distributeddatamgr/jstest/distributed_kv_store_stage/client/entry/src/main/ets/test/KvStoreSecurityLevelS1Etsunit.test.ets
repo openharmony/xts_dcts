@@ -4474,7 +4474,7 @@ export default function kvSyncTestS1Ets() {
             let name: factory.FieldNode = new factory.FieldNode('name');
             name.type = factory.ValueType.INTEGER;
             name.nullable = false;
-            name.default = "str";
+            name.default = '0';
 
             let schema = new factory.Schema();
             schema.root.appendChild(name);
@@ -4573,7 +4573,7 @@ export default function kvSyncTestS1Ets() {
             let name = new factory.FieldNode('name');
             name.type = factory.ValueType.INTEGER;
             name.nullable = false;
-            name.default = "str";
+            name.default = '0';
 
             let schema = new factory.Schema();
             schema.root.appendChild(name);
