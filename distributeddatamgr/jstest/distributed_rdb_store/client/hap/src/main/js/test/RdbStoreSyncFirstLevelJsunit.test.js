@@ -1762,7 +1762,7 @@ export default function rdbSyncFirstLevelTest(){
                   done();
                 }).catch((err) => {
                   console.error(`testRdbSyncTest0230 Get RdbStore failed, code is ${err.code},message is ${err.message}`);
-                  expect(err.code).assertEqual(14800000);
+                  expect(err.code).assertEqual(14800017);
                   done();
                 })
             }catch(error){
