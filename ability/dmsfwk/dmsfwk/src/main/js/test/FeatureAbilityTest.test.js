@@ -27,7 +27,7 @@ let gIRemoteObject = null;
 let testservice = null;
 let localDeviceId = undefined;
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
-let dmInstance 
+let dmInstance
 
 
 export default function dmsJsUnitTest() {
@@ -92,7 +92,7 @@ export default function dmsJsUnitTest() {
                 console.info(`button is ${JSON.stringify(button)}`);
                 await sleep(1000);
                 await button.click();
-                
+
             } catch (err) {
                 console.info('err is ' + err);
                 return;
@@ -815,12 +815,10 @@ export default function dmsJsUnitTest() {
                     }).then((data) => {
                         console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 data' + JSON.stringify(data));
                         expect(data == 0).assertTrue();
-                        done();
                     }).catch((err) => {
                         console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 err: ' + err.code);
                         console.info('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 err: ' + err.message);
                         expect().assertFail();
-                        done();
                     });
                     console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 running at : " + i + ",here");
                     await sleep(2000)
@@ -828,9 +826,9 @@ export default function dmsJsUnitTest() {
             } catch (error) {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600:error = " + error);
                 expect().assertFail();
-                done();
             }
             await sleep(1000);
+            done();
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 end------------------------");
         });
 
@@ -1589,12 +1587,12 @@ export default function dmsJsUnitTest() {
                         expect().assertFail();
                     }
                     console.info(TAG + " running at : " + i + ",here");
-                    done();
                 });
                 await sleep(2000)
                 console.log('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700 i is' + i);
             }
             await sleep(1000);
+            done();
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700 end------------------------");
         });
 

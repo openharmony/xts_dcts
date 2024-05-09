@@ -21,6 +21,7 @@ import { UiDriver, BY } from '@ohos.UiTest';
 import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
 
 let connectId = null;
+let connectId1 = null;
 let dvList = [];
 let dvId = null;
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
@@ -1120,31 +1121,32 @@ export default function DmsFwkFaTest() {
               let msg = result.reply.readInt();
               console.info(' SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 msg: ' + msg)
               expect(msg == 100).assertTrue();
-              done();
+              
             }).catch((e) => {
               console.log('sendRequest error:' + e);
               expect().assertFail();
-              done();
+            
             });
           },
           onDisConnect: (elementName) => {
             console.info('SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
-            done();
+         
           },
           onFailed: (code) => {
             console.info('SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300  onFailed: ' + code);
             expect().assertFail();
-            done();
+       
           }
         });
       } catch (err) {
         console.info('SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 catch: ' + err.code);
         console.info('SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 catch: ' + err.message);
         expect().assertFail();
-        done();
+      
       }
       await sleep(1000);
+      done();
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 end------------------------");
     });
 
@@ -1797,7 +1799,7 @@ export default function DmsFwkFaTest() {
       await sleep(1000);
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300 end------------------------");
     });
-  
+
     /*
      * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400
      * @tc.name    Connect the remote ServiceAbility deviceId is localDeviceId.
@@ -1852,7 +1854,133 @@ export default function DmsFwkFaTest() {
       await sleep(1000);
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400 end------------------------");
     });
-  
+
+    /*
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500
+     * @tc.name    Connect the remote ServiceAbility Twices.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500', 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 start------------------------");
+      let request = {
+        deviceId: dvId,
+        bundleName: "com.acts.example.dmsfwkstageserver",
+        abilityName: "ServiceAbility"
+      };
+      let options = {
+        onConnect: (elementName, proxy) => {
+          let option = new rpc.MessageOption();
+          let data = new rpc.MessageParcel();
+          let reply = new rpc.MessageParcel();
+          data.writeInt(1);
+          data.writeInt(99);
+          proxy.sendRequest(1, data, reply, option).then((result) => {
+            console.log('sendRequest success');
+            let msg = result.reply.readInt();
+            console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 msg: ' + msg)
+            expect(msg == 100).assertTrue();
+            done();
+          }).catch((e) => {
+            console.log('sendRequest error:' + e);
+            expect().assertFail();
+            done();
+          });
+        },
+        onDisConnect: (elementName) => {
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500  onDisConnect: ' + JSON.stringify(elementName));
+          expect().assertFail();
+          done();
+        },
+        onFailed: (code) => {
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500  onFailed: ' + code);
+          expect().assertFail();
+          done();
+        }
+      };
+      connectId = featureAbility.connectAbility(request, options);
+      await sleep(1000)
+      let request1 = {
+        deviceId: dvId,
+        bundleName: "com.acts.example.dmsfwkstageserver",
+        abilityName: "ServiceAbility"
+      };
+      let options1 = {
+        onConnect: (elementName, proxy) => {
+          let option = new rpc.MessageOption();
+          let data = new rpc.MessageParcel();
+          let reply = new rpc.MessageParcel();
+          data.writeInt(1);
+          data.writeInt(99);
+          proxy.sendRequest(1, data, reply, option).then((result) => {
+            console.log('sendRequest success');
+            let msg = result.reply.readInt();
+            console.info(' SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 msg1: ' + msg)
+            expect(msg == 100).assertTrue();
+            done();
+          }).catch((e) => {
+            console.log('sendRequest error:' + e);
+            expect().assertFail();
+            done();
+          });
+        },
+        onDisConnect: (elementName) => {
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500  onDisConnect: ' + JSON.stringify(elementName));
+          expect().assertFail();
+          done();
+        },
+        onFailed: (code) => {
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500  onFailed: ' + code);
+          expect().assertFail();
+          done();
+        }
+      };
+      connectId1 = featureAbility.connectAbility(request1, options1);
+      await sleep(1000)
+      featureAbility.disconnectAbility(connectId, (err, data) => {
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 disconnectAbility err: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 disconnectAbilityerr: ' + err.message);
+        expect(err.code).assertEqual(0);
+        done();
+      });
+      await sleep(1000)
+      featureAbility.disconnectAbility(connectId1, (err, data) => {
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 disconnectAbility err: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 disconnectAbilityerr: ' + err.message);
+        expect(err.code).assertEqual(0);
+        done();
+      });
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 end------------------------");
+    })
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600
+    * @tc.name    Connect the remote ServiceAbility Twices.
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600', 0, async function (done) {
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 start------------------------");
+      if (connectId && connectId1 == null) {
+        console.log('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 disconnectAbility is failed')
+      } else {
+        featureAbility.disconnectAbility(connectId, (err) => {
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 disconnectAbility err: ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 disconnectAbilityerr: ' + err.message);
+          expect(err.code).assertEqual(0);
+          done();
+        });
+        await sleep(1000)
+        featureAbility.disconnectAbility(connectId1, (err) => {
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 disconnectAbility err: ' + err.code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 disconnectAbilityerr: ' + err.message);
+          expect(err.code).assertEqual(0);
+          done();
+        });
+      }
+      console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 end------------------------");
+    })
+
     /*
     * @tc.number  SUB_DMS_StandardOs_stability_StabilityTest_0100
     * @tc.name    Connect the remote ServiceAbility fot ten times.
