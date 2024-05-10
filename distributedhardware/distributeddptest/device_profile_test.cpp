@@ -34,6 +34,9 @@
 #include "device_profile_manager.h"
 #include "kv_adapter.h"
 #include "profile_cache.h"
+#include "accesstoken_kit.h"
+#include "nativetoken_kit.h"
+#include "token_setproc.h"
 #undef PRIVATE
 #undef PROTECTED
 
@@ -41,6 +44,28 @@ namespace OHOS {
 namespace DistributedDeviceProfile {
 using namespace testing::ext;
 using namespace std;
+
+void AddPermission(void)
+{
+    const int32_t PERMS_NUM = 2;
+    const char *perms[PERMS_NUM] = {
+        "ohos.permission.DISTRIBUTED_DATASYNC",
+        "ohos.permission.DISTRIBUTED_SOFTBUS_CENTER"
+    };
+    uint64_t tokenId;
+    NativeTokenInfoParams infoInstance = {
+        .dcapsNum = 0,
+        .permsNum = PERMS_NUM,
+        .aclsNum = 0,
+        .dcaps = nullptr,
+        .perms = perms,
+        .acls = nullptr,
+        .processName = "deviceprofile",
+        .aplStr = "system_core",
+    };
+    tokenId = GetAccessTokenId(&infoInstance);
+    SetSelfTokenID(tokenId);
+}
 
 class DeviceProfileManagerTest : public testing::Test {
 public:
@@ -50,7 +75,13 @@ public:
     void TearDown();
 };
 
-void DeviceProfileManagerTest::SetUpTestCase(void) {
+void DeviceProfileManagerTest::SetUpTestCase(void)
+{
+    AddPermission();
+    sleep(1);
+    system("pidof accesstoken_service | xargs kill -9");
+    sleep(1);
+
 }
 
 void DeviceProfileManagerTest::TearDownTestCase(void) {
