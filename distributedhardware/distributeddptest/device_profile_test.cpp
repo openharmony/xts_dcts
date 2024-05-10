@@ -81,7 +81,6 @@ void DeviceProfileManagerTest::SetUpTestCase(void)
     sleep(1);
     system("pidof accesstoken_service | xargs kill -9");
     sleep(1);
-
 }
 
 void DeviceProfileManagerTest::TearDownTestCase(void) {
