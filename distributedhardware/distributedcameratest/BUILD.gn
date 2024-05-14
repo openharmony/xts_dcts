@@ -47,7 +47,7 @@ ohos_moduletest_suite("SubDctsdisCameraTest") {
   deps = [
     "$base_root/drivers/hdf_core/adapter/uhdf2/hdi:libhdi",
     "$base_root/drivers/hdf_core/adapter/uhdf2/ipc:libhdf_ipc_adapter",
-    "$base_root/drivers/peripheral/distributed_camera/hdi_service:libdistributed_camera_hdf_service_1.0",
+    "$base_root/drivers/peripheral/distributed_camera/hdi_service:libdistributed_camera_hdf_service_1.1",
     "$base_root/third_party/jsoncpp:jsoncpp",
   ]
 
