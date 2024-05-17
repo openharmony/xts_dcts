@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -1407,9 +1407,9 @@ RetCode DcameraHdfDemo::GetExposureCompensationRange(std::shared_ptr<CameraAbili
     common_metadata_header_t* data = ability->get();
     std::vector<int32_t>  exposureCompensationRange;
     camera_metadata_item_t entry;
-    int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_CONTROL_AE_COMPENSATION_RANGE, &entry);
+    int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_ABILITY_AE_COMPENSATION_RANGE, &entry);
     if (ret != 0) {
-        DHLOGI("demo test: get OHOS_CONTROL_AE_COMPENSATION_RANGE error");
+        DHLOGI("demo test: get OHOS_ABILITY_AE_COMPENSATION_RANGE error");
         return RC_ERROR;
     }
 
@@ -1431,9 +1431,9 @@ RetCode DcameraHdfDemo::GetExposureCompensationSteps(std::shared_ptr<CameraAbili
     common_metadata_header_t* data = ability->get();
     camera_rational_t exposureCompensationSteps;
     camera_metadata_item_t entry;
-    int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_CONTROL_AE_COMPENSATION_STEP, &entry);
+    int ret = OHOS::Camera::FindCameraMetadataItem(data, OHOS_ABILITY_AE_COMPENSATION_STEP, &entry);
     if (ret != 0) {
-        DHLOGI("demo test: get OHOS_CONTROL_AE_COMPENSATION_STEP error");
+        DHLOGI("demo test: get OHOS_ABILITY_AE_COMPENSATION_STEP error");
         return RC_ERROR;
     }
     exposureCompensationSteps.numerator = entry.data.r->numerator;
