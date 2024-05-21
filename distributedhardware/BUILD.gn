@@ -19,11 +19,11 @@ group("distributedhardware") {
     deps = [
       "distributedaudionewtest:SubDctsdisAudioNewTest",
       "distributedaudiotest:SubDctsdisAudioTest",
-      "distributedcameratest:SubDctsdisCameraTest",
-      "distributeddevicejstest:SubDctsdisDeviceJsTest",
-      "distributeddptest:SubDctsDistributedDpTest",
-      "distributedinputtest:SubDistributedInputTest",
-      "distributedscreentest:SubDctsdisScreenTest",
+      "distributedcameratest:DctsSubdisCameraTest",
+      "distributeddevicejstest:DctsSubdisDeviceJsTest",
+      "distributeddptest:DctsSubDistributedDpTest",
+      "distributedinputtest:DctsSubDistributedInputTest",
+      "distributedscreentest:DctsSubdisScreenTest",
     ]
   }
 }

@@ -13,14 +13,14 @@
 
 import("../../../tools/build/suite.gni")
 
-ohos_js_hap_suite("SubDctsdisDeviceJsTest") {
+ohos_js_hap_suite("DctsSubdisDeviceJsTest") {
   hap_profile = "./src/main/config.json"
   deps = [
     ":distributedjs_assets",
     ":distributedjs_resources",
   ]
   certificate_profile = "./signature/openharmony_sx.p7b"
-  hap_name = "SubDctsdisDeviceJsTest"
+  hap_name = "DctsSubdisDeviceJsTest"
   subsystem_name = "distributedhardware"
   part_name = "device_manager"
 }

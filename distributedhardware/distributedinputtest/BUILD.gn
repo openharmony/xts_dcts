@@ -16,7 +16,7 @@ import("//test/xts/tools/build/suite.gni")
 
 module_out_path = "dcts/distributedhardware"
 
-ohos_moduletest_suite("SubDistributedInputTest") {
+ohos_moduletest_suite("DctsSubDistributedInputTest") {
   module_out_path = module_out_path
   include_dirs = [
     "$base_root/foundation/distributedhardware/distributed_hardware_fwk/av_transport/common/include",
@@ -82,7 +82,7 @@ ohos_moduletest_suite("SubDistributedInputTest") {
 
   defines = [
     "HI_LOG_ENABLE",
-    "DH_LOG_TAG=\"SubDistributedInputTest\"",
+    "DH_LOG_TAG=\"DctsSubDistributedInputTest\"",
     "LOG_DOMAIN=0xD004100",
   ]
 

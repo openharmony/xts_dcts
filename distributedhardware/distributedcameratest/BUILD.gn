@@ -19,7 +19,7 @@ config("dcamera_hdf_demo_config") {
   visibility = [ ":*" ]
 }
 
-ohos_moduletest_suite("SubDctsdisCameraTest") {
+ohos_moduletest_suite("DctsSubdisCameraTest") {
   module_out_path = module_output_path
   install_enable = true
   sources = [
@@ -73,7 +73,7 @@ ohos_moduletest_suite("SubDctsdisCameraTest") {
 
   defines = [
     "HI_LOG_ENABLE",
-    "DH_LOG_TAG=\"SubDctsdisCameraTest\"",
+    "DH_LOG_TAG=\"DctsSubdisCameraTest\"",
     "LOG_DOMAIN=0xD004100",
   ]
 

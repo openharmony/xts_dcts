@@ -15,7 +15,7 @@ base_root = "../../../../../"
 import("//test/xts/tools/build/suite.gni")
 module_out_path = "dcts/distributedhardware"
 
-ohos_moduletest_suite("SubDctsDistributedDpTest") {
+ohos_moduletest_suite("DctsSubDistributedDpTest") {
   sanitize = {
     cfi = true
     cfi_cross_dso = true
@@ -54,7 +54,7 @@ ohos_moduletest_suite("SubDctsDistributedDpTest") {
 
   defines = [
     "HI_LOG_ENABLE",
-    "DH_LOG_TAG=\"SubDctsDistributedDpTest\"",
+    "DH_LOG_TAG=\"DctsSubDistributedDpTest\"",
     "LOG_DOMAIN=0xD004100",
   ]
 
