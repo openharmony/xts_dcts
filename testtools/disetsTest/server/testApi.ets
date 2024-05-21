@@ -164,6 +164,12 @@ export default class TestApi{
         console.info(logTag + " putValue : " + putValue + "  value is: " + value + "  valueType is: " + valueType);
         if(valueType == "String"){
             putValue = value;
+        }else if(valueType == "String_MAX_VALUE_LENGTH"){
+            let maxValueLength:number = disData.Constants.MAX_VALUE_LENGTH;
+            console.info(logTag + 'maxValueLength = ' + maxValueLength);
+            let maxValueLengthString:number = "v".repeat(maxValueLength);
+            console.info(logTag + 'maxValueLengthString.length = ' + maxValueLengthString.length);
+            putValue = maxValueLengthString;
         }else if(valueType == "Number"){
             putValue = Number(value);
         }else if(valueType == "Number_Min"){
@@ -177,7 +183,7 @@ export default class TestApi{
                 putValue = Boolean(value);
             }
         }
-        console.info(logTag + " putValue : " + putValue + "  value is: " + value);
+        console.info(logTag + " putValue : " + putValue + "  value is: " + value + "  valueType is: " + valueType);
         await kvStore.put(key,putValue).then(() =>  {
             console.info(logTag + " Server  put data success ,key is : " + key + " value is: " + putValue);
             return String(true);

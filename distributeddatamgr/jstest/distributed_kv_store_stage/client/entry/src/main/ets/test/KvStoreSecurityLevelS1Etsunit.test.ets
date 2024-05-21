@@ -205,6 +205,428 @@ export default function kvSyncTestS1Ets() {
         })
 
         /**
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_LocalKeyMax_0100
+         * @tc.name testEtsLocalKeyMax0100
+         * @tc.desc Server kvStore security is S1,client kvStore security is S1, key len=1024
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
+        it("testEtsLocalKeyMax0100", 0, async function (done) {
+            console.info(logTag + "testEtsSyncLocalKeyMax0100 start");
+
+            const options: factory.Options = {
+                createIfMissing: true,
+                encrypt: false,
+                backup: false,
+                autoSync: false,
+                kvStoreType: factory.KVStoreType.SINGLE_VERSION,
+                schema: undefined,
+                securityLevel: factory.SecurityLevel.S1,
+            }
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
+                kvStore = store;
+                console.info(logTag + " get kvStore success. kvStore=" + kvStore);
+                expect(kvStore != null).assertTrue();  
+            }).catch((err: BusinessError) => {
+                console.error(logTag + `Failed to get KVStore.code is ${err.code},message is ${err.message}`);
+                expect(null).assertFail();
+              }); 
+
+            let maxKeyLength:number= factory.Constants.MAX_KEY_LENGTH;
+            console.info(logTag + 'maxKeyLength = ' + maxKeyLength);
+            expect(maxKeyLength == 1024).assertTrue();
+
+            let maxValueLength:number = factory.Constants.MAX_VALUE_LENGTH;
+            console.info(logTag + 'maxValueLength = ' + maxValueLength);
+            expect(maxValueLength == 4194303).assertTrue();
+
+            let maxKeyLengthString:number = "k".repeat(1024);
+            let maxValueLengthString:number = "v".repeat(10);
+            console.info(logTag + 'maxKeyLengthString.length = ' + maxKeyLengthString.length);
+            console.info(logTag + 'maxValueLengthString.length = ' + maxValueLengthString.length);
+
+            try {
+                await kvStore.put(maxKeyLengthString, maxValueLengthString).then(async (data) => {
+                  console.info(logTag + ' put success');
+                  expect(data == undefined).assertTrue();
+                  await kvStore.get(maxKeyLengthString).then((data) => {
+                    console.info(logTag + ' get success, data.length= ' + data.length);
+                    expect(maxValueLengthString.length == data.length).assertTrue(); 
+                    done();
+                  }).catch((err) => {
+                    console.error(logTag + ' get fail ' + `, error code is ${err.code}, message is ${err.message}`);
+                    expect(null).assertFail();
+                    done();
+                  });
+                }).catch((err) => {
+                  console.error(logTag + ' put fail ' + `, error code is ${err.code}, message is ${err.message}`);
+                  expect(null).assertFail();
+                  done();
+                });
+              } catch (e) {
+                console.error(logTag + ' put e ' + `, error code is ${e.code}, message is ${e.message}`);
+                expect(null).assertFail();
+                done();
+              }
+
+            console.info(logTag + "testEtsSyncLocalKeyMax0100 end");
+            done();
+
+        })
+
+        /**
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_LocalKeyMax_0200
+         * @tc.name testEtsLocalKeyMax0200
+         * @tc.desc Server kvStore security is S1,client kvStore security is S1, key len=1025, fail
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
+        it("testEtsLocalKeyMax0200", 0, async function (done) {
+            console.info(logTag + "testEtsSyncLocalKeyMax0200 start");
+
+            const options: factory.Options = {
+                createIfMissing: true,
+                encrypt: false,
+                backup: false,
+                autoSync: false,
+                kvStoreType: factory.KVStoreType.SINGLE_VERSION,
+                schema: undefined,
+                securityLevel: factory.SecurityLevel.S1,
+            }
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
+                kvStore = store;
+                console.info(logTag + " get kvStore success. kvStore=" + kvStore);
+                expect(kvStore != null).assertTrue();  
+            }).catch((err: BusinessError) => {
+                console.error(logTag + `Failed to get KVStore.code is ${err.code},message is ${err.message}`);
+                expect(null).assertFail();
+              });
+
+            let maxKeyLength:number= factory.Constants.MAX_KEY_LENGTH;
+            console.info(logTag + 'maxKeyLength = ' + maxKeyLength);
+            expect(maxKeyLength == 1024).assertTrue();
+
+            let maxValueLength:number = factory.Constants.MAX_VALUE_LENGTH;
+            console.info(logTag + 'maxValueLength = ' + maxValueLength);
+            expect(maxValueLength == 4194303).assertTrue();
+
+            let maxKeyLengthString:number = "k".repeat(1025);
+            let maxValueLengthString:number = "v".repeat(10);
+            console.info(logTag + 'maxKeyLengthString.length = ' + maxKeyLengthString.length);
+            console.info(logTag + 'maxValueLengthString.length = ' + maxValueLengthString.length);
+
+            try {
+                await kvStore.put(maxKeyLengthString, maxValueLengthString).then(async (data) => {
+                  console.info(logTag + ' put success');
+                  expect(null).assertFail();
+                }).catch((err) => {
+                  console.error(logTag + ' put fail ' + `, error code is ${err.code}, message is ${err.message}`);
+                  expect(err.code == 401).assertTrue();
+                  done();
+                });
+              } catch (e) {
+                console.error(logTag + ' put e ' + `, error code is ${e.code}, message is ${e.message}`);
+                expect(null).assertFail();
+                done();
+              }
+
+            console.info(logTag + "testEtsSyncLocalKeyMax0200 end");
+            done();
+
+        })
+
+        /**
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_LocalValueMax_0100
+         * @tc.name testEtsLocalValueMax0100
+         * @tc.desc Server kvStore security is S1,client kvStore security is S1, value len=4194303
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
+        it("testEtsLocalValueMax0100", 0, async function (done) {
+            console.info(logTag + "testEtsLocalValueMax0100 start");
+
+            const options: factory.Options = {
+                createIfMissing: true,
+                encrypt: false,
+                backup: false,
+                autoSync: false,
+                kvStoreType: factory.KVStoreType.SINGLE_VERSION,
+                schema: undefined,
+                securityLevel: factory.SecurityLevel.S1,
+            }
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
+                kvStore = store;
+                console.info(logTag + " get kvStore success. kvStore=" + kvStore);
+                expect(kvStore != null).assertTrue();  
+            }).catch((err: BusinessError) => {
+                console.error(logTag + `Failed to get KVStore.code is ${err.code},message is ${err.message}`);
+                expect(null).assertFail();
+              });
+
+            let maxKeyLength:number= factory.Constants.MAX_KEY_LENGTH;
+            console.info(logTag + 'maxKeyLength = ' + maxKeyLength);
+            expect(maxKeyLength == 1024).assertTrue();
+
+            let maxValueLength:number = factory.Constants.MAX_VALUE_LENGTH;
+            console.info(logTag + 'maxValueLength = ' + maxValueLength);
+            expect(maxValueLength == 4194303).assertTrue();
+
+            let maxKeyLengthString:number = "k".repeat(1024);
+            let maxValueLengthString:number = "v".repeat(4194303);
+            console.info(logTag + 'maxKeyLengthString.length = ' + maxKeyLengthString.length);
+            console.info(logTag + 'maxValueLengthString.length = ' + maxValueLengthString.length);
+
+            try {
+                await kvStore.put(maxKeyLengthString, maxValueLengthString).then(async (data) => {
+                  console.info(logTag + ' put success');
+                  expect(data == undefined).assertTrue();
+                  await kvStore.get(maxKeyLengthString).then((data) => {
+                    console.info(logTag + ' get success, data.length= ' + data.length);
+                    expect(maxValueLengthString.length == data.length).assertTrue(); 
+                    done();
+                  }).catch((err) => {
+                    console.error(logTag + ' get fail ' + `, error code is ${err.code}, message is ${err.message}`);
+                    expect(null).assertFail();
+                    done();
+                  });
+                }).catch((err) => {
+                  console.error(logTag + ' put fail ' + `, error code is ${err.code}, message is ${err.message}`);
+                  expect(null).assertFail();
+                  done();
+                });
+              } catch (e) {
+                console.error(logTag + ' put e ' + `, error code is ${e.code}, message is ${e.message}`);
+                expect(null).assertFail();
+                done();
+              }
+
+            console.info(logTag + "testEtsLocalValueMax0100 end");
+            done();
+
+        })
+
+        /**
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_LocalValueMax_0200
+         * @tc.name testEtsLocalValueMax0200
+         * @tc.desc Server kvStore security is S1,client kvStore security is S1, value len=4194304, fail
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
+        it("testEtsLocalValueMax0200", 0, async function (done) {
+            console.info(logTag + "testEtsLocalValueMax0200 start");
+
+            const options: factory.Options = {
+                createIfMissing: true,
+                encrypt: false,
+                backup: false,
+                autoSync: false,
+                kvStoreType: factory.KVStoreType.SINGLE_VERSION,
+                schema: undefined,
+                securityLevel: factory.SecurityLevel.S1,
+            }
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
+                kvStore = store;
+                console.info(logTag + " get kvStore success. kvStore=" + kvStore);
+                expect(kvStore != null).assertTrue();  
+            }).catch((err: BusinessError) => {
+                console.error(logTag + `Failed to get KVStore.code is ${err.code},message is ${err.message}`);
+                expect(null).assertFail();
+              }); 
+
+            let maxKeyLength:number= factory.Constants.MAX_KEY_LENGTH;
+            console.info(logTag + 'maxKeyLength = ' + maxKeyLength);
+            expect(maxKeyLength == 1024).assertTrue();
+
+            let maxValueLength:number = factory.Constants.MAX_VALUE_LENGTH;
+            console.info(logTag + 'maxValueLength = ' + maxValueLength);
+            expect(maxValueLength == 4194303).assertTrue();
+
+            let maxKeyLengthString:number = "k".repeat(1024);
+            let maxValueLengthString:number = "v".repeat(4194304);
+            console.info(logTag + 'maxKeyLengthString.length = ' + maxKeyLengthString.length);
+            console.info(logTag + 'maxValueLengthString.length = ' + maxValueLengthString.length);
+
+            try {
+                await kvStore.put(maxKeyLengthString, maxValueLengthString).then(async (data) => {
+                  console.info(logTag + ' put success');
+                  expect(null).assertFail();
+                }).catch((err) => {
+                  console.error(logTag + ' put fail ' + `, error code is ${err.code}, message is ${err.message}`);
+                  expect(err.code == 401).assertTrue();
+                  done();
+                });
+              } catch (e) {
+                console.error(logTag + ' put e ' + `, error code is ${e.code}, message is ${e.message}`);
+                expect(null).assertFail();
+                done();
+              }
+
+            console.info(logTag + "testEtsLocalValueMax0200 end");
+            done();
+
+        })
+
+        /**
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_KeyMax_0100
+         * @tc.name testEtsSyncKeyMax0100
+         * @tc.desc Server kvStore security is S1,client kvStore security is S1,key len=1024
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
+        it("testEtsSyncKeyMax0100", 0, async function (done) {
+            console.info(logTag + "testEtsSyncKeyMax0100 start");
+            await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
+            await sleep(1000);
+  
+            const options: factory.Options = {
+                createIfMissing: true,
+                encrypt: false,
+                backup: false,
+                autoSync: false,
+                kvStoreType: factory.KVStoreType.SINGLE_VERSION,
+                schema: undefined,
+                securityLevel: factory.SecurityLevel.S1,
+            }
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
+                kvStore = store;
+                console.info(logTag + " get kvStore success. kvStore=" + kvStore);
+                expect(kvStore != null).assertTrue();  
+            }).catch((err: BusinessError) => {
+                console.error(logTag + `Failed to get KVStore.code is ${err.code},message is ${err.message}`);
+                expect(null).assertFail();
+              });
+
+            let maxKeyLength:number= factory.Constants.MAX_KEY_LENGTH;
+            console.info(logTag + 'maxKeyLength = ' + maxKeyLength);
+            expect(maxKeyLength == 1024).assertTrue();
+
+            let maxValueLength:number = factory.Constants.MAX_VALUE_LENGTH;
+            console.info(logTag + 'maxValueLength = ' + maxValueLength);
+            expect(maxValueLength == 4194303).assertTrue();
+
+            let maxKeyLengthString:number = "k".repeat(1024);
+            let maxValueLengthString:number = "v".repeat(10);
+            console.info(logTag + 'maxKeyLengthString.length = ' + maxKeyLengthString.length);
+            console.info(logTag + 'maxValueLengthString.length = ' + maxValueLengthString.length);
+
+            let result = undefined;
+            function call(data) {
+                console.info(logTag + "syncComplete: " + data);
+                kvStore.get(maxKeyLengthString, (err, data) => {
+                    try {
+                        console.info(logTag + " Sync complete get data,key.len=" + maxKeyLengthString.length);
+                        if (err != null) {
+                            console.info(logTag + " Sync complete get data error,err: " + err.code + err.message);
+                        } else {
+                            console.info(logTag + " Sycn complete get data success,result is: " + data.length);
+                            result = data;
+                        }
+                        console.info(logTag + " get data finish,result is: " + result);
+                        expect(result.length).assertEqual(maxValueLengthString.length);
+                        console.info(logTag + "testEtsSyncKeyMax0500 end");
+                        kvStore.off("syncComplete", call);
+                        done();
+
+                    } catch (err) {
+                        console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                        expect(null).assertFail();
+                        done();
+                    }
+
+                })
+            }
+            kvStore.on("syncComplete", call);
+            await remoteHelpers.kvPut(maxKeyLengthString, maxValueLengthString, "String");
+            await sleep(1000);
+            console.info(logTag + "Client sync start");
+
+            kvStore.sync(syncDeviceIds, PULL);
+        })
+
+        /**
+         * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_KeyMax_0200
+         * @tc.name testEtsSyncKeyMax0200
+         * @tc.desc Server kvStore security is S1,client kvStore security is S1,value len=4194303
+         * @tc.level: Level 2
+         * @tc.type: Functiontion
+         * @tc.size: MediumTest
+         */
+        it("testEtsSyncKeyMax0200", 0, async function (done) {
+            console.info(logTag + "testEtsSyncKeyMax0200 start");
+            await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
+            await sleep(1000);
+  
+            const options: factory.Options = {
+                createIfMissing: true,
+                encrypt: false,
+                backup: false,
+                autoSync: false,
+                kvStoreType: factory.KVStoreType.SINGLE_VERSION,
+                schema: undefined,
+                securityLevel: factory.SecurityLevel.S1,
+            }
+            await kvManager.getKVStore<factory.SingleKVStore>(TEST_STORE_ID, options).then((store : factory.SingleKVStore) => {
+                kvStore = store;
+                console.info(logTag + " get kvStore success. kvStore=" + kvStore);
+                expect(kvStore != null).assertTrue();  
+            }).catch((err: BusinessError) => {
+                console.error(logTag + `Failed to get KVStore.code is ${err.code},message is ${err.message}`);
+                expect(null).assertFail();
+              });
+
+            let maxKeyLength:number= factory.Constants.MAX_KEY_LENGTH;
+            console.info(logTag + 'maxKeyLength = ' + maxKeyLength);
+            expect(maxKeyLength == 1024).assertTrue();
+
+            let maxValueLength:number = factory.Constants.MAX_VALUE_LENGTH;
+            console.info(logTag + 'maxValueLength = ' + maxValueLength);
+            expect(maxValueLength == 4194303).assertTrue();
+
+            let maxKeyLengthString:number = "k".repeat(1024);
+            let maxValueLengthString:number = "v".repeat(4194303);
+            console.info(logTag + 'maxKeyLengthString.length = ' + maxKeyLengthString.length);
+            console.info(logTag + 'maxValueLengthString.length = ' + maxValueLengthString.length);
+            
+            let result = undefined;
+            function call(data) {
+                console.info(logTag + "syncComplete: " + data);
+                kvStore.get(maxKeyLengthString, (err, data) => {
+                    try {
+                        console.info(logTag + " Sync complete get data,key.len=" + maxKeyLengthString.length);
+                        if (err != null) {
+                            console.info(logTag + " Sync complete get data error,err: " + err.code + err.message);
+                        } else {
+                            result = data;
+                        }
+                        console.info(logTag + " Sycn complete get data success, result.length is: " + result.length);
+                        expect(result.length).assertEqual(maxValueLengthString.length);
+                        console.info(logTag + "testEtsSyncKeyMax0200 end");
+                        kvStore.off("syncComplete", call);
+                        done();
+
+                    } catch (err) {
+                        console.error('catch get err:' + `, error code is ${err.code}, message is ${err.message}`);
+                        expect(null).assertFail();
+                        done();
+                    }
+
+                })
+            }
+            kvStore.on("syncComplete", call);
+            await remoteHelpers.kvPut(maxKeyLengthString, "VALUE", "String_MAX_VALUE_LENGTH");
+            await sleep(3000);
+            console.info(logTag + "Client sync start");
+
+            kvStore.sync(syncDeviceIds, PULL);
+            
+        })
+
+        /**
          * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_S1_0500
          * @tc.name testEtsServerS1Security0500
          * @tc.desc Server kvStore security is S1,client kvStore security is S1
