@@ -1,7 +1,7 @@
 {
     "description": "Config for disSreen test cases",
     "driver": {
-        "module-name": "SubDctsdisScreenTest",
+        "module-name": "DctsSubdisScreenTest",
         "native-test-timeout": "120000",
         "native-test-device-path": "/data/local/tmp",
         "runtime-hint": "1s",
@@ -13,7 +13,7 @@
         "chmod -R 777 /data/local/tmp/*"
      ],
         "push": [
-          "SubDctsdisScreenTest->/data/local/tmp/SubDctsdisScreenTest"
+          "DctsSubdisScreenTest->/data/local/tmp/DctsSubdisScreenTest"
 	],
       "type": "PushKit"
        }
