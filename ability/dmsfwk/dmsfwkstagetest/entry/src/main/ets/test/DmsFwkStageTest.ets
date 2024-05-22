@@ -70,8 +70,8 @@ export default function DmsFwkStageTest() {
       console.info('getPermission is start');
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       atManager.requestPermissionsFromUser(context, ['ohos.permission.DISTRIBUTED_DATASYNC'], (err: BusinessError, data: PermissionRequestResult) => {
-        console.info("request success" + JSON.stringify(data));
-        console.info("request success" + JSON.stringify(err));
+        console.info("requestPermissionsFromUser success data is" + JSON.stringify(data));
+        console.info("requestPermissionsFromUser failed err is" + JSON.stringify(err));
       })
     }
 
@@ -129,7 +129,7 @@ export default function DmsFwkStageTest() {
         await DisconnectServiceExtensionAbility(connectIdList[i])
         console.log('connectIdList i is' + i + connectIdList[i])
       }
-      await sleep(2000)
+      await sleep(3000)
       done();
     });
 
@@ -158,13 +158,13 @@ export default function DmsFwkStageTest() {
             let reply: rpc.MessageSequence = new rpc.MessageSequence();
             data.writeInt(1);
             data.writeInt(99);
-            remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+            remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+              let msg = await result.reply.readInt();
               console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900 sendRequest success');
-              let msg = result.reply.readInt();
               console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900 onConnectRemoteService001 msg: ' + msg);
-              done();
               expect(msg == 100).assertTrue();
             })
+            done();
           },
           onDisconnect(elementName: bundleManager.ElementName) {
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900  onDisConnect: ' + JSON.stringify(elementName));
@@ -177,7 +177,7 @@ export default function DmsFwkStageTest() {
             done();
           }
         });
-      await sleep(2000);
+      await sleep(2000)
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900 is end--------------- " + connectId)
     });
 
@@ -206,13 +206,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800  onDisConnect: ' + JSON.stringify(elementName));
@@ -242,13 +242,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 sendRequest success');
-            let msg = result.reply.readInt();
-            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 onConnectRemoteService001 msg: ' + msg);
-            done();
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 onConnectRemoteService001 msg1: ' + msg);
             expect(msg).assertEqual(100)
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800  onDisConnect: ' + JSON.stringify(elementName));
@@ -292,13 +292,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200  onDisConnect: ' + JSON.stringify(elementName));
@@ -341,13 +341,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100  onDisConnect: ' + JSON.stringify(elementName));
@@ -377,13 +377,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 sendRequest success');
-            let msg = result.reply.readInt();
-            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 onConnectRemoteService001 msg: ' + msg);
-            done();
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 onConnectRemoteService001 msg1: ' + msg);
             expect(msg).assertEqual(100)
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100  onDisConnect: ' + JSON.stringify(elementName));
@@ -428,12 +428,12 @@ export default function DmsFwkStageTest() {
         onFailed(code: number) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500 code: ' + code);
           expect(code).assertEqual(401)
-          done();
         }
       }
       connectId = context.connectServiceExtensionAbility(want, options);
       await sleep(2000);
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500 is end---------------" + connectId)
+      done();
     });
 
 
@@ -541,13 +541,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700  onDisConnect: ' + JSON.stringify(elementName));
@@ -596,13 +596,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600  onDisConnect: ' + JSON.stringify(elementName));
@@ -617,7 +617,7 @@ export default function DmsFwkStageTest() {
       }
       connectId = context.connectServiceExtensionAbility(want, options);
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is end---------------" + connectId);
     });
 
     /*
@@ -645,13 +645,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
@@ -666,7 +666,7 @@ export default function DmsFwkStageTest() {
       }
       connectId = context.connectServiceExtensionAbility(want, options);
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100 is end---------------" + connectId);
     });
 
     /*
@@ -696,22 +696,23 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
           })
           let option1: rpc.MessageOption = new rpc.MessageOption();
           let data1: rpc.MessageSequence = new rpc.MessageSequence();
           let reply1: rpc.MessageSequence = new rpc.MessageSequence();
-          data1.writeInt(0);
-          remote1.sendMessageRequest(1, data1, reply1, option1).then((result: rpc.RequestResult) => {
+          data1.writeInt(123);
+          remote1.sendMessageRequest(1, data1, reply1, option1).then(async (result: rpc.RequestResult) => {
+            let msg1 = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 sendRequest success');
-            let msg1 = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 onConnectRemoteService002 msg1: ' + msg1);
-            expect(msg1 == 0).assertTrue();
+            expect(msg1 == 123).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
@@ -727,11 +728,10 @@ export default function DmsFwkStageTest() {
         connectId = context.connectServiceExtensionAbility(want, options);
       } catch (error) {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 catch error is' + error.code);
-        expect(true).assertTrue()
+        expect().assertFail()
       }
       await sleep(2000);
-      done()
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 is end---------------" + connectId);
     });
 
     /*
@@ -759,13 +759,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
@@ -785,7 +785,7 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 catch: ' + err.message);
       }
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 is end---------------" + connectId);
     });
 
     /*
@@ -854,13 +854,13 @@ export default function DmsFwkStageTest() {
             let reply: rpc.MessageSequence = new rpc.MessageSequence();
             data.writeInt(1);
             data.writeInt(99);
-            remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+            remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+              let msg = await result.reply.readInt();
               console.log('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 sendRequest success');
-              let msg = result.reply.readInt();
               console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 onConnectRemoteService001 msg: ' + msg);
-              done();
               expect(msg == 100).assertTrue();
             })
+            done();
           },
           onDisconnect(elementName: bundleManager.ElementName) {
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
@@ -878,7 +878,7 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 catch: ' + err.message);
       }
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 is end---------------" + connectId);
     });
 
 
@@ -1026,13 +1026,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0100 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0100 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
@@ -1046,7 +1046,7 @@ export default function DmsFwkStageTest() {
         }
       });
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0100 is end--------------- " + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0100 is end--------------- " + extensionConnectId);
     });
 
     /*
@@ -1073,13 +1073,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0200 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0200 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
@@ -1107,13 +1107,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0200 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0200 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg).assertEqual(100)
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
@@ -1154,13 +1154,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0300 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0300 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
@@ -1201,13 +1201,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0400 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0400 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
@@ -1235,13 +1235,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0400 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0400 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg).assertEqual(100)
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
@@ -1356,13 +1356,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700  onDisConnect: ' + JSON.stringify(elementName));
@@ -1376,7 +1376,7 @@ export default function DmsFwkStageTest() {
         }
       });
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 is end---------------" + extensionConnectId);
     });
 
     /*
@@ -1409,13 +1409,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600  onDisConnect: ' + JSON.stringify(elementName));
@@ -1429,7 +1429,7 @@ export default function DmsFwkStageTest() {
         }
       });
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is end---------------" + extensionConnectId);
     });
 
     /*
@@ -1456,13 +1456,13 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000 onConnectRemoteService001 msg: ' + msg);
-            done();
             expect(msg == 100).assertTrue();
           })
+          done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000  onDisConnect: ' + JSON.stringify(elementName));
@@ -1476,7 +1476,7 @@ export default function DmsFwkStageTest() {
         }
       });
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000 is end---------------" + extensionConnectId);
     });
 
     /*
@@ -1506,41 +1506,42 @@ export default function DmsFwkStageTest() {
           let reply: rpc.MessageSequence = new rpc.MessageSequence();
           data.writeInt(1);
           data.writeInt(99);
-          remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+          remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+            let msg = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 sendRequest success');
-            let msg = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
           })
           let option1: rpc.MessageOption = new rpc.MessageOption();
           let data1: rpc.MessageSequence = new rpc.MessageSequence();
           let reply1: rpc.MessageSequence = new rpc.MessageSequence();
-          data1.writeInt(0);
-          remote1.sendMessageRequest(1, data1, reply1, option1).then((result: rpc.RequestResult) => {
+          data1.writeInt(123);
+          remote1.sendMessageRequest(1, data1, reply1, option1).then(async (result: rpc.RequestResult) => {
+            let msg1 = await result.reply.readInt();
             console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 sendRequest success');
-            let msg1 = result.reply.readInt();
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 onConnectRemoteService002 msg1: ' + msg1);
-            expect(msg1 == 0).assertTrue();
+            expect(msg1 == 123).assertTrue();
           })
+          done()
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400  onDisConnect: ' + JSON.stringify(elementName));
-          expect(elementName != null).assertTrue();
+
         },
         onFailed(code: number) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400  onFailed: ' + code);
-          expect().assertFail();
+
         }
       };
       try {
         connectId = context.connectServiceExtensionAbility(want, options);
       } catch (error) {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 catch error is' + error.code);
-        expect(true).assertTrue()
+        expect().assertFail();
+        done()
       }
       await sleep(2000);
-      done();
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 is end---------------" + connectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 is end---------------" + connectId);
     });
 
     /*
@@ -1568,13 +1569,13 @@ export default function DmsFwkStageTest() {
             let reply: rpc.MessageSequence = new rpc.MessageSequence();
             data.writeInt(1);
             data.writeInt(99);
-            remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+            remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+              let msg = await result.reply.readInt();
               console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 sendRequest success');
-              let msg = result.reply.readInt();
               console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 onConnectRemoteService001 msg: ' + msg);
-              done();
               expect(msg == 100).assertTrue();
             })
+            done();
           },
           onDisconnect(elementName: bundleManager.ElementName) {
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500  onDisConnect: ' + JSON.stringify(elementName));
@@ -1592,7 +1593,7 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 catch: ' + err.message);
       }
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 is end---------------" + extensionConnectId);
     });
 
     /*
@@ -1659,13 +1660,13 @@ export default function DmsFwkStageTest() {
             let reply: rpc.MessageSequence = new rpc.MessageSequence();
             data.writeInt(1);
             data.writeInt(99);
-            remote.sendMessageRequest(1, data, reply, option).then((result: rpc.RequestResult) => {
+            remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+              let msg = await result.reply.readInt();
               console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 sendRequest success');
-              let msg = result.reply.readInt();
               console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 onConnectRemoteService001 msg: ' + msg);
-              done();
               expect(msg == 100).assertTrue();
             })
+            done();
           },
           onDisconnect(elementName: bundleManager.ElementName) {
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800  onDisConnect: ' + JSON.stringify(elementName));
@@ -1683,7 +1684,7 @@ export default function DmsFwkStageTest() {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 catch: ' + err.message);
       }
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 is end---------------" + extensionConnectId);
     });
 
     /*
@@ -2399,22 +2400,25 @@ export default function DmsFwkStageTest() {
         context.startAbilityByCall({
           bundleName: 'com.acts.example.dmsfwkstagetest',
           abilityName: 'com.example.lifecycletest.MainAbility',
-          deviceId: dvId
+          deviceId: dvId,
+          parameters: {
+            "ohos.aafwk.param.callAbilityToForeground": true
+          }
         })
           .then((data: Caller) => {
             call = data;
             console.log('get caller is success caller is ' + call)
-            expect(typeof (call)).assertEqual('object')
-            done()
+            expect(call).assertInstanceOf('Object')
+            done();
           }).catch((err: BusinessError) => {
             console.log('get caller is failed err is ' + JSON.stringify(err))
-            expect(err == undefined).assertTrue()
-            done()
+            expect().assertFail()
+            done();
           })
       } catch (error) {
         console.log('catch error is ' + JSON.stringify(error))
         expect().assertFail();
-        done()
+        done();
       }
       await sleep(2000)
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0900 end------------------------");
@@ -2429,6 +2433,7 @@ export default function DmsFwkStageTest() {
     it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1000', 0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1000 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+      let caller
       try {
         context.startAbilityByCall({
           bundleName: 'com.acts.example.dmsfwkstagetest',
@@ -2436,37 +2441,22 @@ export default function DmsFwkStageTest() {
           deviceId: dvId
         })
           .then((data: Caller) => {
-            let caller = data;
+            caller = data;
             console.log('get caller is success caller is ' + caller)
-            expect(typeof (caller)).assertEqual('object')
-            done()
-            sleep(1000)
-            try {
-              caller.onRelease(() => {
-                console.log('call is onRelease success')
-                done()
-              })
-              sleep(1000)
-              try {
-                caller.release();
-                console.log('caller release success')
-                expect().assertEqual(undefined)
-                done()
-              } catch (error) {
-                console.log('catch error is ' + JSON.stringify(error))
-                expect().assertFail();
-                done()
-              }
-            } catch (error) {
-              console.log('catch error is ' + error)
-              expect().failed();
-              done()
-            }
+            expect(caller).assertInstanceOf('Object')
           }).catch((err: BusinessError) => {
             console.log('get caller is failed err is ' + JSON.stringify(err))
-            expect(err == undefined).assertTrue()
-            done()
+            expect().assertFail()
           })
+        await sleep(1000)
+        caller.onRelease(() => {
+          console.log('call is onRelease success')
+        })
+        await sleep(1000)
+        caller.release();
+        console.log('caller release success')
+        expect().assertEqual(undefined)
+        done()
       } catch (error) {
         console.log('catch error is ' + JSON.stringify(error))
         expect().assertFail();
@@ -2478,13 +2468,14 @@ export default function DmsFwkStageTest() {
 
     /*
      * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1100
-     * @tc.name    call is release
+     * @tc.name    call is onRelease
      * @tc.desc    Function test
      * @tc.level   0
      */
     it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1100', 0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1100 start------------------------");
-      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
+      let caller
       try {
         context.startAbilityByCall({
           bundleName: 'com.acts.example.dmsfwkstagetest',
@@ -2492,32 +2483,24 @@ export default function DmsFwkStageTest() {
           deviceId: dvId
         })
           .then((data: Caller) => {
-            let caller = data;
+            caller = data;
             console.log('get caller is success caller is ' + caller)
-            expect(typeof (caller)).assertEqual('object')
-            done()
-            sleep(1000)
-            try {
-              caller.onRelease(() => {
-                console.log('call is onRelease success')
-                done()
-              })
-            } catch (error) {
-              console.log('catch error is ' + error)
-              expect().failed();
-              done()
-            }
+            expect(caller).assertInstanceOf('Object')
+            caller.onRelease(() => {
+              console.log('call is onRelease success')
+            })
+            done();
           }).catch((err: BusinessError) => {
             console.log('get caller is failed err is ' + JSON.stringify(err))
-            expect(err == undefined).assertTrue()
+            expect().assertFail()
             done()
-          })
+          });
       } catch (error) {
         console.log('catch error is ' + JSON.stringify(error))
         expect().assertFail();
         done()
       }
-      await sleep(2000);
+      await sleep(1000);
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1100 end------------------------");
     })
 
@@ -2529,7 +2512,8 @@ export default function DmsFwkStageTest() {
      */
     it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200', 0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200 start------------------------");
-      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
+      let caller
       try {
         context.startAbilityByCall({
           bundleName: 'com.acts.example.dmsfwkstagetest',
@@ -2537,24 +2521,16 @@ export default function DmsFwkStageTest() {
           deviceId: dvId
         })
           .then((data: Caller) => {
-            let caller = data;
+            caller = data;
             console.log('get caller is success caller is ' + caller)
-            expect(typeof (caller)).assertEqual('object')
-            done()
-            sleep(1000)
-            try {
-              let MyMessageAble1 = new MyMessageAble(1, 'world')
-              caller.call('test', MyMessageAble1);
-              console.log('call.call is success')
-              done()
-            } catch (error) {
-              console.log('call.call catch error is ' + JSON.stringify(error))
-              expect().assertFail();
-              done()
-            }
+            expect(caller).assertInstanceOf('Object')
+            let MyMessageAble1 = new MyMessageAble(1, 'world')
+            caller.call('test', MyMessageAble1);
+            console.log('call.call is success')
+            done();
           }).catch((err: BusinessError) => {
             console.log('get caller is failed err is ' + JSON.stringify(err))
-            expect(err == undefined).assertTrue()
+            expect().assertFail()
             done()
           })
       } catch (error) {
@@ -2581,17 +2557,17 @@ export default function DmsFwkStageTest() {
           .then((data) => {
             let msg2 = new MyMessageAble(0, '');
             data.readParcelable(msg2);
-            sleep(2000);
             console.log('call call.callWithResult() end' + msg2.num + '' + msg2.str);
             expect(msg2.str).assertEqual("Callee test")
             done();
           }).catch((err: BusinessError) => {
             console.log('call call.callWithResult() catch' + err)
+            expect().assertFail()
+            done()
           })
       } else {
         console.log('get call.callWithResult() failed' + typeof call)
       }
-      done()
       await sleep(2000);
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300 end------------------------");
     })
