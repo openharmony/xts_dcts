@@ -26,13 +26,13 @@ class MyMessageAble {
         this.str = string;
     }
     marshalling(messageParcel) {
-        console.log('MyMessageAble messageParcel marshalling' + this.num, + this.str)
+        console.log('MyMessageAble messageParcel marshalling' + this.num + this.str)
         messageParcel.writeInt(this.num);
         messageParcel.writeString(this.str);
         return true;
     }
     unmarshalling(messageParcel) {
-        console.log('MyMessageAble messageParcel unmarshalling' + this.num, + this.str)
+        console.log('MyMessageAble messageParcel unmarshalling' + this.num + this.str)
         this.num = messageParcel.readInt();
         this.str = messageParcel.readString();
         return true;
@@ -61,10 +61,10 @@ export default class MainAbility extends Ability {
             console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser')
         })
         this.callee.on('test', funcCallBack);
-        setTimeout(()=>{
+        setTimeout(() => {
             this.context.terminateSelf()
-        },3000)
-        
+        }, 30000)
+
     }
 
     onNewWant(want, launchParam) {
