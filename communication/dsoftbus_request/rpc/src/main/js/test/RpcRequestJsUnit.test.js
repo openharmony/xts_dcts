@@ -23,7 +23,7 @@ import { UiDriver, BY } from '@ohos.UiTest'
 export default function RpcRequestJsUnitTest() {
 
     describe('RpcRequestJsUnitTest', function () {
-        console.info("-----------------------SUB_DSoftbus_RPC_API_onRemoteRequest_Test is starting-----------------------");
+        console.info("-----------------------SUB_DSoftbus_RPC_API_OnRemoteRequest_Test is starting-----------------------");
 
         const CODE_ASYNC_ONREMOTEMESSAGE = 1;
         const CODE_ONREMOTE_ASYNC_ONREMOTEMESSAGE = 2;
@@ -157,15 +157,15 @@ export default function RpcRequestJsUnitTest() {
         })
 
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0100
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_0100
         * @tc.name    : testVerifying the processing of the MessageSequence synchronous callback information of the async_onRemoteMessageRequest interface
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */       
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_0100", 0, async function(done){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0100--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0100", 0, async function(done){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0100--------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -184,19 +184,19 @@ export default function RpcRequestJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_0100--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_0100--------------------");
         });       
 
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0200
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_0200
         * @tc.name    : testVerifying the processing of the MessageSequence Asynchronous callback information of the async_onRemoteMessageRequest interface
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_0200", 0, async function(done){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0200--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0200", 0, async function(done){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0200--------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -215,11 +215,11 @@ export default function RpcRequestJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_0200--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_0200--------------------");
         });      
 
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0300
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_0300
         * @tc.name    : testVerifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information synchronously
         *               invoked by the MessageSequence interface of the onRemoteMessageRequest interface
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
@@ -227,8 +227,8 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_0300", 0, async function(done){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0300--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0300", 0, async function(done){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0300--------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -247,11 +247,11 @@ export default function RpcRequestJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_0300--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_0300--------------------");
         });
 
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0400
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_0400
         * @tc.name    : testVerifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information Asynchronously
         *               invoked by the MessageSequence interface of the onRemoteMessageRequest interface
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
@@ -259,8 +259,8 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_0400", 0, async function(done){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0400--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0400", 0, async function(done){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0400--------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -279,19 +279,19 @@ export default function RpcRequestJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_0400--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_0400--------------------");
         });
         
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0500
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_0500
         * @tc.name    : testVerifying the processing of the MessageParcel synchronous callback information of the async_onRemoteMessageRequest interface
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_0500", 0, async function(done){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0500--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0500", 0, async function(done){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0500--------------------");
             try{
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -312,19 +312,19 @@ export default function RpcRequestJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_0500--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_0500--------------------");
         });
 
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0600
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_0600
         * @tc.name    : testVerifying the processing of the MessageParcel Asynchronous callback information of the async_onRemoteMessageRequest interface
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_0600", 0, async function(done){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0600--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0600", 0, async function(done){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0600--------------------");
             try{
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -344,11 +344,11 @@ export default function RpcRequestJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_0600--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_0600--------------------");
         });  
         
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0700
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_0700
         * @tc.name    : testVerifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information in synchronous
         *               invoking of the aa interface MessageParcel
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
@@ -356,8 +356,8 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_0700", 0, async function(done){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0700--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0700", 0, async function(done){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0700--------------------");
             try{
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -378,11 +378,11 @@ export default function RpcRequestJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_0700--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_0700--------------------");
         });
         
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0800
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_0800
         * @tc.name    : testVerifying the processing priority of the onRemoteRequest and async_onRemoteMessageRequest callback information in Asynchronous
         *                invoking of the aa interface MessageParcel
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
@@ -390,8 +390,8 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_0800", 0, async function(done){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0800--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0800", 0, async function(done){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0800--------------------");
             try{
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
@@ -411,19 +411,19 @@ export default function RpcRequestJsUnitTest() {
                 reply.reclaim();
                 done();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_0800--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_0800--------------------");
         });
 
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_0900
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_0900
         * @tc.name    : testInvoke async_onRemoteMessageRequest to process information in synchronization mode and call back in AsyncCallback mode
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_0900", 0, function(done){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_0900--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0900", 0, function(done){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0900--------------------");
             try{
                 function sendMessageRequestCallback(result) {
                     try{
@@ -447,19 +447,19 @@ export default function RpcRequestJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_0900--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_0900--------------------");
         });
 
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1000
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_1000
         * @tc.name    : testInvoke async_onRemoteMessageRequest to process information in asynchronous mode and call back in AsyncCallback mode
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_1000", 0, function(done){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1000--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1000", 0, function(done){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1000--------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
@@ -483,19 +483,19 @@ export default function RpcRequestJsUnitTest() {
             } catch (error) {
                 expect(error == null).assertTrue();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_1000--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_1000--------------------");
         });
         
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1100
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_1100
         * @tc.name    : testWrites the specified anonymous shared object to this MessageSequence
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_1100", 0, function(){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1100--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1100", 0, function(){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1100--------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ashmem = rpc.Ashmem.create("ashmem", 1024);
@@ -507,19 +507,19 @@ export default function RpcRequestJsUnitTest() {
             }finally{
                 data.reclaim();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_1100--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_1100--------------------");
         }); 
         
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1200
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_1200
         * @tc.name    : testTest the function of serializing the readAshmem interface in MessageSequence mode
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_1200", 0, function(){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1200--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1200", 0, function(){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1200--------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ashmem = rpc.Ashmem.create("ashmem", 1024);
@@ -533,19 +533,19 @@ export default function RpcRequestJsUnitTest() {
             }finally{
                 data.reclaim();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_1200--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_1200--------------------");
         });  
         
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1300
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_1300
         * @tc.name    : testTest the function of serializing the writeAshmem interface in MessageParcel mode
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_1300", 0, function(){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1300--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1300", 0, function(){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1300--------------------");
             try{
                 var data = rpc.MessageParcel.create();
                 let ashmem = rpc.Ashmem.create("ashmem", 1024);
@@ -558,19 +558,19 @@ export default function RpcRequestJsUnitTest() {
             }finally{
                 data.reclaim();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_1300--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_1300--------------------");
         }); 
         
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1400
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_1400
         * @tc.name    : testTest the function of serializing the readAshmem interface in MessageParcel mode
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_1400", 0, function(){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1400--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1400", 0, function(){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1400--------------------");
             try{
                 var data = rpc.MessageParcel.create();
                 let ashmem = rpc.Ashmem.create("ashmem", 1024);
@@ -585,19 +585,19 @@ export default function RpcRequestJsUnitTest() {
             }finally{
                 data.reclaim();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_1400--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_1400--------------------");
         });  
         
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1500
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_1500
         * @tc.name    : testTo test the function of handling the exception of the writeAshmem interface in MessageSequence mode
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_1500", 0, function(){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1500--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1500", 0, function(){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1500--------------------");
             try{
                 var data = rpc.MessageSequence.create();
                 let ashmem = "";
@@ -611,19 +611,19 @@ export default function RpcRequestJsUnitTest() {
             }finally{
                 data.reclaim();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_1500--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_1500--------------------");
         }); 
         
         /*
-        * @tc.number  : SUB_DSoftbus_RPC_API_onRemoteRequest_1600
+        * @tc.number  : SUB_DSoftbus_RPC_API_OnRemoteRequest_1600
         * @tc.name    : testTo test the function of handling the exception of the writeAshmem interface in MessageParcel mode
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_onRemoteRequest_1600", 0, function(){
-            console.info("--------------------start SUB_DSoftbus_RPC_API_onRemoteRequest_1600--------------------");
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1600", 0, function(){
+            console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1600--------------------");
             try{
                 var data = rpc.MessageParcel.create();
                 let weitedata = data.writeAshmem();
@@ -634,7 +634,7 @@ export default function RpcRequestJsUnitTest() {
             }finally{
                 data.reclaim();
             }
-            console.info("--------------------end SUB_DSoftbus_RPC_API_onRemoteRequest_1600--------------------");
+            console.info("--------------------end SUB_DSoftbus_RPC_API_OnRemoteRequest_1600--------------------");
         });         
         
         /*
@@ -2190,6 +2190,6 @@ export default function RpcRequestJsUnitTest() {
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_Errorcode_6600---------------------------");
         });        
-        console.info("-----------------------SUB_DSoftbus_RPC_API_onRemoteRequest_Test is end-----------------------");
+        console.info("-----------------------SUB_DSoftbus_RPC_API_OnRemoteRequest_Test is end-----------------------");
     });
 }
