@@ -2409,6 +2409,9 @@ export default function DmsFwkStageTest() {
             call = data;
             console.log('get caller is success caller is ' + call)
             expect(call).assertInstanceOf('Object')
+            call.onRelease(() => {
+              console.log('call is onRelease success')
+            })
             done();
           }).catch((err: BusinessError) => {
             console.log('get caller is failed err is ' + JSON.stringify(err))
