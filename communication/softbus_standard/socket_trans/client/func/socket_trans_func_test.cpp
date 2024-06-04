@@ -127,7 +127,7 @@ QosTV info_wifi[] = {
 QosTV info_p2p[] = {
     {.qos = QOS_TYPE_MIN_BW, .value = 160 * 1024 * 1024, },
     {.qos = QOS_TYPE_MIN_LATENCY, .value = 1600, },
-    {.qos = QOS_TYPE_MAX_LATENCY, .value = 1600, },
+    {.qos = QOS_TYPE_MAX_LATENCY, .value = 3000, },
 };
 
 /**
