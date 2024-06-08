@@ -22,6 +22,7 @@
 #include "securec.h"
 #include "wm_common.h"
 #include "window.h"
+#include "window_scene.h"
 #include "window_option.h"
 
 using namespace OHOS::DistributedHardware;

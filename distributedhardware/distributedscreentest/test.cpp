@@ -29,6 +29,7 @@
 #include "screen_manager.h"
 #include "wm_common.h"
 #include "window.h"
+#include "window_scene.h"
 #include "window_option.h"
 #include "nativetoken_kit.h"
 #include "token_setproc.h"
@@ -48,7 +49,7 @@ using namespace OHOS::MediaAVCodec;
 using namespace OHOS::Security::AccessToken;
 
 namespace {
-    static char const *g_pkgName = "ohos.dsoftbus.tool";
+    static char const *DSOFTBUS_TOOL_PKG_NAME = "ohos.dsoftbus.tool";
 }
 
 constexpr int32_t SLEEP_FIVE_SECOND = 10;
@@ -251,12 +252,12 @@ static void PrintNodeProperty(NodeBasicInfo *nodeInfo)
     DHLOGE("NetworkId = %{public}s", GetAnonyString(nodeInfo->networkId).c_str());
     NodeDeviceInfoKey key = NODE_KEY_UDID;
     unsigned char udid[UDID_BUF_LEN] = {0};
-    if (GetNodeKeyInfo(g_pkgName, nodeInfo->networkId, key, udid, UDID_BUF_LEN) != 0) {
+    if (GetNodeKeyInfo(DSOFTBUS_TOOL_PKG_NAME, nodeInfo->networkId, key, udid, UDID_BUF_LEN) != 0) {
         DHLOGE("GetNodeKeyInfo Fail!");
     }
     key = NODE_KEY_UUID;
     unsigned char uuid[UUID_BUF_LEN] = {0};
-    if (GetNodeKeyInfo(g_pkgName, nodeInfo->networkId, key, uuid, UUID_BUF_LEN) != 0) {
+    if (GetNodeKeyInfo(DSOFTBUS_TOOL_PKG_NAME, nodeInfo->networkId, key, uuid, UUID_BUF_LEN) != 0) {
         DHLOGE("GetNodeKeyInfo Fail!");
     } else {
         DHLOGE("Uuid = %{public}s\n", GetAnonyString(reinterpret_cast<char *>(udid)).c_str());
@@ -293,7 +294,7 @@ int QueryRemoteDeviceInfo(int mode)
 
     DHLOGE("-----------Local Device Info------");
 
-    if (GetLocalNodeDeviceInfo(g_pkgName, &localNodeinfo) != 0) {
+    if (GetLocalNodeDeviceInfo(DSOFTBUS_TOOL_PKG_NAME, &localNodeinfo) != 0) {
         printf("LnnGetLocalNodeInfo Fail!\n");
         DHLOGE("LnnGetLocalNodeInfo Fail!");
         return -1;
@@ -301,7 +302,7 @@ int QueryRemoteDeviceInfo(int mode)
 
     PrintNodeProperty(&localNodeinfo);
     DHLOGE("-------Remote Device info---------");
-    if (GetAllNodeDeviceInfo(g_pkgName, &remoteNodeInfo, &infoNum) != 0) {
+    if (GetAllNodeDeviceInfo(DSOFTBUS_TOOL_PKG_NAME, &remoteNodeInfo, &infoNum) != 0) {
         DHLOGE("GetAllNodeDeviceInfo Fail!");
         return -1;
     }
