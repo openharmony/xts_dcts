@@ -1911,8 +1911,8 @@ export default function DmsFwkStageTest() {
         }, (err: BusinessError) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_1000 startService result: ' + err.code + " " + err.message);
           expect(err.code).assertEqual(16000001);
-          done();
         })
+        done();
       } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_1000 catch: ' + err.code);
         console.info('SUB_DMS_StartControl_Extension_StartAbility_1000 catch: ' + err.message);
@@ -1966,8 +1966,8 @@ export default function DmsFwkStageTest() {
       try {
         context.startAbilityForResult({
           deviceId: dvId,
-          bundleName: "com.acts.example.dmsfwkstagetest",
-          abilityName: "com.example.lifecycletest.MainAbility",
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "MainAbility"
         }, (err: BusinessError) => {
           console.info('SUB_DMS_StartControl_Extension_startAbilityForResult_1200 err.code is: ' + err.code);
           expect(err.code).assertEqual(0);
@@ -2388,6 +2388,44 @@ export default function DmsFwkStageTest() {
     });
 
     /*
+     * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200
+     * @tc.name    call is call
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200', 0, async (done: Function) => {
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200 start------------------------");
+      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
+      let caller
+      try {
+        context.startAbilityByCall({
+          bundleName: 'com.acts.example.dmsfwkstagetest',
+          abilityName: 'com.example.lifecycletest.MainAbility',
+          deviceId: dvId
+        })
+          .then((data: Caller) => {
+            caller = data;
+            console.log('get caller is success caller is ' + caller)
+            expect(caller).assertInstanceOf('Object')
+            let MyMessageAble1 = new MyMessageAble(1, 'world')
+            caller.call('test', MyMessageAble1);
+            console.log('call.call is success')
+            done();
+          }).catch((err: BusinessError) => {
+            console.log('get caller is failed err is ' + JSON.stringify(err))
+            expect().assertFail()
+            done()
+          })
+      } catch (error) {
+        console.log('catch error is ' + JSON.stringify(error))
+        expect().assertFail();
+        done()
+      }
+      await sleep(2000);
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200 end------------------------");
+    });
+
+    /*
      * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0900
      * @tc.name    Get call is success.
      * @tc.desc    Function test
@@ -2426,6 +2464,36 @@ export default function DmsFwkStageTest() {
       await sleep(2000)
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0900 end------------------------");
     });
+
+    /*
+     * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300
+     * @tc.name    call is call
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300', 0, async (done: Function) => {
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300 start------------------------");
+      if (typeof call === 'object' && call != null) {
+        console.log('call call.callWithResult() begin');
+        let msg1 = new MyMessageAble(2, 'world');
+        call.callWithResult('test', msg1)
+          .then((data) => {
+            let msg2 = new MyMessageAble(0, '');
+            data.readParcelable(msg2);
+            console.log('call call.callWithResult() end' + msg2.num + '' + msg2.str);
+            expect(msg2.str).assertEqual("Callee test")
+            done();
+          }).catch((err: BusinessError) => {
+            console.log('call call.callWithResult() catch' + err)
+            expect().assertFail()
+            done()
+          })
+      } else {
+        console.log('get call.callWithResult() failed' + typeof call)
+      }
+      await sleep(2000);
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300 end------------------------");
+    })
 
     /*
      * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1000
@@ -2505,74 +2573,6 @@ export default function DmsFwkStageTest() {
       }
       await sleep(1000);
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1100 end------------------------");
-    })
-
-    /*
-     * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200
-     * @tc.name    call is call
-     * @tc.desc    Function test
-     * @tc.level   0
-     */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200', 0, async (done: Function) => {
-      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200 start------------------------");
-      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
-      let caller
-      try {
-        context.startAbilityByCall({
-          bundleName: 'com.acts.example.dmsfwkstagetest',
-          abilityName: 'com.example.lifecycletest.MainAbility',
-          deviceId: dvId
-        })
-          .then((data: Caller) => {
-            caller = data;
-            console.log('get caller is success caller is ' + caller)
-            expect(caller).assertInstanceOf('Object')
-            let MyMessageAble1 = new MyMessageAble(1, 'world')
-            caller.call('test', MyMessageAble1);
-            console.log('call.call is success')
-            done();
-          }).catch((err: BusinessError) => {
-            console.log('get caller is failed err is ' + JSON.stringify(err))
-            expect().assertFail()
-            done()
-          })
-      } catch (error) {
-        console.log('catch error is ' + JSON.stringify(error))
-        expect().assertFail();
-        done()
-      }
-      await sleep(2000);
-      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200 end------------------------");
-    });
-
-    /*
-     * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300
-     * @tc.name    call is call
-     * @tc.desc    Function test
-     * @tc.level   0
-     */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300', 0, async (done: Function) => {
-      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300 start------------------------");
-      if (typeof call === 'object' && call != null) {
-        console.log('call call.callWithResult() begin');
-        let msg1 = new MyMessageAble(2, 'world');
-        call.callWithResult('test', msg1)
-          .then((data) => {
-            let msg2 = new MyMessageAble(0, '');
-            data.readParcelable(msg2);
-            console.log('call call.callWithResult() end' + msg2.num + '' + msg2.str);
-            expect(msg2.str).assertEqual("Callee test")
-            done();
-          }).catch((err: BusinessError) => {
-            console.log('call call.callWithResult() catch' + err)
-            expect().assertFail()
-            done()
-          })
-      } else {
-        console.log('get call.callWithResult() failed' + typeof call)
-      }
-      await sleep(2000);
-      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300 end------------------------");
     })
 
     /*
