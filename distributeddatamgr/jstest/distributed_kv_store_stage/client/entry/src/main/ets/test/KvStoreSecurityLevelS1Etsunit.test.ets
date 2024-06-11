@@ -4935,7 +4935,7 @@ export default function kvSyncTestS1Ets() {
             const query = new factory.Query();
             query.prefixKey("test_");          
             kvStore.sync(syncDeviceIds, query, PULL, 1000);
-            await sleep(1000);
+            await sleep(4000);
 
             await kvStore.get(schemaKey, (err, data) => {
                 try {
@@ -5034,7 +5034,7 @@ export default function kvSyncTestS1Ets() {
             const query = new factory.Query();
             query.prefixKey("test_");          
             kvStore.sync(syncDeviceIds, query, PUSH_PULL, 1000);
-            await sleep(1000);
+            await sleep(4000);
 
             await kvStore.get(schemaKey, (err, data) => {
                 try {
