@@ -3,9 +3,10 @@
     "driver": {
         "type": "OHJSUnitTest",
         "test-timeout": "180000",
-        "shell-timeout": "180000",
         "bundle-name": "com.acts.example.dmsfwkstagepermissiontest",
-        "module-name": "entry_test"
+        "module-name": "phone",
+        "shell-timeout": "600000",
+        "testcase-timeout": 70000
     },
     "kits": [
         {
@@ -14,12 +15,6 @@
             ],
             "type": "AppInstallKit",
             "cleanup-apps": true
-        },{
-            "type": "ShellKit",
-            "run-command": [
-                "power-shell wakeup",
-                "power-shell setmode 602"
-            ]
         }
-    ]
+    ] 
 }
