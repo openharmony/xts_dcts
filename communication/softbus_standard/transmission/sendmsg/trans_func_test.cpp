@@ -34,7 +34,7 @@ public:
 
 void TransFuncTest::SetUp() {}
 
-void TransFuncTest::TearDown() 
+void TransFuncTest::TearDown()
 {
     sleepn(1);
 }
