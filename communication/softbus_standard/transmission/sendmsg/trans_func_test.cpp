@@ -34,7 +34,10 @@ public:
 
 void TransFuncTest::SetUp() {}
 
-void TransFuncTest::TearDown() {}
+void TransFuncTest::TearDown()
+{
+    sleepn(1);
+}
 
 void TransFuncTest::SetUpTestCase()
 {
@@ -518,7 +521,6 @@ HWTEST_F(TransFuncTest, SUB_DSoftbus_Spec_DCTS_SendMessage_P2P_0100, TestSize.Le
 
     ret = CloseSessionAndRemoveSs4Data();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
-    sleepn(3);
 }
 
 /**
@@ -543,7 +545,6 @@ HWTEST_F(TransFuncTest, SUB_DSoftbus_Spec_DCTS_SendMessage_P2P_0200, TestSize.Le
 
     ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
-    sleepn(3);
 }
 
 /**
@@ -568,7 +569,6 @@ HWTEST_F(TransFuncTest, SUB_DSoftbus_Spec_DCTS_SendMessage_P2P_0300, TestSize.Le
 
     ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
-    sleepn(3);
 }
 
 /**
@@ -595,7 +595,6 @@ HWTEST_F(TransFuncTest, SUB_DSoftbus_Spec_DCTS_SendMessage_P2P_0400, TestSize.Le
 
     ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
-    sleepn(3);
 }
 
 /**
@@ -626,7 +625,6 @@ HWTEST_F(TransFuncTest, SUB_DSoftbus_Spec_DCTS_SendMessage_P2P_0500, TestSize.Le
 
     ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
-    sleepn(3);
 }
 
 /**
@@ -657,5 +655,4 @@ HWTEST_F(TransFuncTest, SUB_DSoftbus_Spec_DCTS_SendMessage_P2P_0600, TestSize.Le
 
     ret = CloseSessionAndRemoveSs4Proxy();
     EXPECT_EQ(SOFTBUS_OK, ret) << "close session and remove Ss fail";
-    sleepn(3);
 }
