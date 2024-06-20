@@ -45,7 +45,7 @@ export default class Stub extends rpc.RemoteObject {
                     const reflectCallApi = new ReflectCallApi();
                     resCallApi = reflectCallApi.call(testBundle);
                     console.log(logTag+"_methodName  call success,result is "+resCallApi);
-                    if (resCallApi == 1)  {
+                    if (resCallApi === 1)  {
                         resultCall._resultCode = 1;
                         resultCall._result = 1;
                     } else {
@@ -89,7 +89,7 @@ export default class Stub extends rpc.RemoteObject {
                 }
             }
         } catch (error) {
-            console.log(logTag +"ERROR: onRemoteMessageRequest: " + error.code + error.message);
+            console.log(logTag +'ERROR: onRemoteMessageRequest: ' + error.code + error.message);
         }
         return false;
     }

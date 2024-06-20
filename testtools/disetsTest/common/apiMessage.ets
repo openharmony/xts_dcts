@@ -33,29 +33,29 @@ export default class ApiMessage {
         this._apiResult = apiResult;
 
     }
-    marshalling(MessageSequence) {
+    marshalling(messageSequence: rpc.MessageSequence) {
         console.log(logTag + "into marshalling.");
-        MessageSequence.writeString(this._deviceName);
-        MessageSequence.writeString(this._className);
-        MessageSequence.writeString(this._methodName);
-        MessageSequence.writeString(this._apiSession);
+        messageSequence.writeString(this._deviceName);
+        messageSequence.writeString(this._className);
+        messageSequence.writeString(this._methodName);
+        messageSequence.writeString(this._apiSession);
         console.log(logTag + "writeString successfully.");
-        MessageSequence.writeStringArray(this._parameterTypes);
-        MessageSequence.writeStringArray(this._parameters);
-        MessageSequence.writeString(this._apiResult);
+        messageSequence.writeStringArray(this._parameterTypes);
+        messageSequence.writeStringArray(this._parameters);
+        messageSequence.writeString(this._apiResult);
         console.log(logTag + "marshalling successfully.");
         return true;
     }
 
-    unmarshalling(MessageSequence) {
+    unmarshalling(messageSequence: rpc.MessageSequence) {
         console.log(logTag + "into unmarshalling.");
-        this._deviceName = MessageSequence.readString();
-        this._className = MessageSequence.readString();
-        this._methodName = MessageSequence.readString();
-        this._apiSession = MessageSequence.readString();
-        this._parameterTypes = MessageSequence.readStringArray();
-        this._parameters = MessageSequence.readStringArray();
-        this._apiResult = MessageSequence.readString();
+        this._deviceName = messageSequence.readString();
+        this._className = messageSequence.readString();
+        this._methodName = messageSequence.readString();
+        this._apiSession = messageSequence.readString();
+        this._parameterTypes = messageSequence.readStringArray();
+        this._parameters = messageSequence.readStringArray();
+        this._apiResult = messageSequence.readString();
         console.log(logTag + "unmarshalling successfully.");
         return true;
     }

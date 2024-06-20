@@ -34,60 +34,60 @@ export default class Stub extends rpc.RemoteObject {
         try {
             console.log(logTag +" ===================  onRemoteMessageRequest: code is " + code + "  ===================");
             switch (code) {
-                case CODE_INVOKE:
-                {
-                    console.info(logTag +" case CODE_INVOKE start");
-                    let testBundle = new ApiMessage(null, null, null, null, null, null, null);
-                    data.readParcelable(testBundle);
+              case CODE_INVOKE:
+              {
+                console.info(logTag +" case CODE_INVOKE start");
+                let testBundle = new ApiMessage(null, null, null, null, null, null, null);
+                data.readParcelable(testBundle);
 
-                    let resultCall = new ApiResult(0,null);
-                    var resCallApi = -1;
-                    const reflectCallApi = new ReflectCallApi();
-                    resCallApi = reflectCallApi.call(testBundle);
-                    console.log(logTag+"_methodName  call success,result is "+resCallApi);
-                    if (resCallApi == 1)  {
-                        resultCall._resultCode = 1;
-                        resultCall._result = 1;
-                    } else {
-                        resultCall._resultCode = -1;
-                        resultCall._result = -1;
-                    } 
-                    console.log(logTag + "The server's writeSequenceable result is " + JSON.stringify(resultCall));
-
-                    testBundle._apiResult=JSON.stringify(resultCall);
-		            console.log(logTag +" The testBundle is " + JSON.stringify(testBundle));
-                    reply.writeParcelable(testBundle);
-
-                    return true;
-                }
-                case CODE_INVOKE_TESTCASE:
-                {
-                    console.info(logTag +" ===================  case CODE_INVOKE_TESTCASE start ===================  ");
-                    let testBundle = new ApiMessage(null, null, null, null, null, null, null);
-                    data.readSequenceable(testBundle);
-
-                    let resultCall = new ApiResult(0,null);
+                let resultCall = new ApiResult(0,null);
+                var resCallApi = -1;
+                const reflectCallApi = new ReflectCallApi();
+                resCallApi = reflectCallApi.call(testBundle);
+                console.log(logTag+"_methodName  call success,result is "+resCallApi);
+                if (resCallApi === 1)  {
                     resultCall._resultCode = 1;
                     resultCall._result = 1;
-                    testBundle._apiResult=JSON.stringify(resultCall);
-                    reply.writeParcelable(testBundle);
-                    return true;
-                }
-                case CODE_INVOKE_OSVERSION:
-                {
-                    console.info(logTag +" ===================  case CODE_INVOKE_OSVERSION start ===================  ");
-                    data.readString();
-                    let osFullNameInfo = deviceinfo.osFullName;
-                    console.info('the value of the deviceinfo osFullName is :' + osFullNameInfo);
-                    reply.writeString(osFullNameInfo);
-                    return true;
-                }
-                default:
-                    console.error(logTag +" default case " + code);
-                    return super.onRemoteMessageRequest(code, data, reply, option);
+                } else {
+                    resultCall._resultCode = -1;
+                    resultCall._result = -1;
+                } 
+                console.log(logTag + "The server's writeSequenceable result is " + JSON.stringify(resultCall));
+
+                testBundle._apiResult=JSON.stringify(resultCall);
+                console.log(logTag +" The testBundle is " + JSON.stringify(testBundle));
+                reply.writeParcelable(testBundle);
+
+                return true;
+              }
+              case CODE_INVOKE_TESTCASE:
+              {
+                console.info(logTag +" ===================  case CODE_INVOKE_TESTCASE start ===================  ");
+                let testBundle = new ApiMessage(null, null, null, null, null, null, null);
+                data.readSequenceable(testBundle);
+
+                let resultCall = new ApiResult(0,null);
+                resultCall._resultCode = 1;
+                resultCall._result = 1;
+                testBundle._apiResult=JSON.stringify(resultCall);
+                reply.writeParcelable(testBundle);
+                return true;
+              }
+              case CODE_INVOKE_OSVERSION:
+              {
+                console.info(logTag +" ===================  case CODE_INVOKE_OSVERSION start ===================  ");
+                data.readString();
+                let osFullNameInfo = deviceinfo.osFullName;
+                console.info('the value of the deviceinfo osFullName is :' + osFullNameInfo);
+                reply.writeString(osFullNameInfo);
+                return true;
+              }
+              default:
+                console.error(logTag +' default case ' + code);
+                return super.onRemoteMessageRequest(code, data, reply, option);
             }
         } catch (error) {
-            console.log(logTag +"ERROR: onRemoteMessageRequest: " + error.code + error.message);
+            console.log(logTag +'ERROR: onRemoteMessageRequest: ' + error.code + error.message);
         }
         return false;
     }
