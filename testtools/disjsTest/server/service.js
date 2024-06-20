@@ -83,8 +83,10 @@ export default class Stub extends rpc.RemoteObject {
                     return true;
                 }
                 default:
+                {
                     console.error(logTag +" default case " + code);
                     return super.onRemoteMessageRequest(code, data, reply, option);
+                }
             }
         } catch (error) {
             console.log(logTag +"ERROR: onRemoteMessageRequest: " + error.code + error.message);

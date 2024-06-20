@@ -45,10 +45,8 @@ export default class RemoteHelper{
             let retApiResult = retApi._result;
             console.log(logTag + "***********   read success, results is " + retApiResult + "**************");
             return retApiResult;
-        }
-        catch(err) {
-            console.log(logTag + "***********  catch getReq err.code " + err);
-            console.log(logTag + "***********  catch getReq err.code " + err.code + err.message);
+        } catch(err) {
+            console.error('***********catch getReq err:' + `, error code is ${err.code}, message is ${err.message}`);
             return 411;
         }
     }
@@ -69,10 +67,8 @@ export default class RemoteHelper{
             let retApiResult = retApi._result;
             console.log(logTag + "***********   read success, results is " + retApiResult + "**************");
             return retApiResult;
-        }
-        catch(err) {
-            console.log(logTag + "***********  catch getReq err.code " + err);
-            console.log(logTag + "***********  catch getReq err.code " + err.code + err.message);
+        } catch(err) {
+            console.error('***********catch getReq err:' + `, error code is ${err.code}, message is ${err.message}`);
             return 411;
         }
     }
