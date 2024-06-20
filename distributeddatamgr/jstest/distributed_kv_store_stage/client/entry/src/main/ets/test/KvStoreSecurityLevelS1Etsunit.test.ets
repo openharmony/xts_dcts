@@ -190,6 +190,7 @@ export default function kvSyncTestS1Ets() {
 
             } catch (err) {
                 console.error('catch afterEach err:' + `, error code is ${err.code}, message is ${err.message}`);
+                expect(null).assertFail();
                 done();
             }
 
