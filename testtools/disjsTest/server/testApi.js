@@ -97,7 +97,7 @@ export default class TestApi{
             createIfMissing : true,
             encrypt : false,
             backup : false,
-            autoSync : true,
+            autoSync: false,
             kvStoreType : disData.KVStoreType.SINGLE_VERSION,
             schema : '',
             securityLevel : disData.SecurityLevel.S1,
@@ -149,19 +149,24 @@ export default class TestApi{
             return String(true);
         }).catch((error) => {
             console.error(logTag + "getKVStore fail, error.code=" + error.code + "error.message=" + error.message);
-            return String(err);
+            return String(error);
         });
     }
     async closeKvStore(storeId){
-        await kvManager.closeKVStore(TEST_BUNDLE_NAME,storeId,kvStore).then(async () => {
-            await kvManager.deleteKVStore(TEST_BUNDLE_NAME,storeId).then(() => {
-                console.info(logTag + " Server delete KVStore success, storeId=" + storeId);
+        try{
+        await kvManager.closeKVStore(TEST_BUNDLE_NAME, storeId).then(async () => {
+            await kvManager.deleteKVStore(TEST_BUNDLE_NAME, storeId).then(() => {
+                console.info(logTag + " Server deleteKVStore success, storeId=" + storeId);
                 return String(true);
             })
         }).catch((error) => {
-            console.error(logTag + "closeKvStore fail, error.code=" + error.code + "error.message=" + error.message);
-            return String(err);
+            console.error(logTag + "Server deleteKVStore fail, error.code=" + error.code + "error.message=" + error.message);
+            return String(error);
         });
+        } catch (err) {
+            console.error('catch closeKvStore err:' + `, error code is ${err.code}, message is ${err.message}`);
+            return String(err);
+        }
     }
 
     async kvPut(key,value,valueType){
@@ -188,7 +193,7 @@ export default class TestApi{
             return String(true);
         }).catch((error) => {
             console.error(logTag + " Server  put fail, error.code=" + error.code + "error.message=" + error.message);
-            return String(err);
+            return String(error);
         });
     }
      async kvGet(key,callback){

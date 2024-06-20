@@ -97,7 +97,7 @@ export default class TestApi{
             createIfMissing : true,
             encrypt : false,
             backup : false,
-            autoSync : true,
+            autoSync: false,
             kvStoreType : disData.KVStoreType.SINGLE_VERSION,
             schema : undefined,
             securityLevel : disData.SecurityLevel.S1,
@@ -148,8 +148,9 @@ export default class TestApi{
         });
     }
     async closeKvStore(storeId){
-        await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID).then(async () => {
-            await kvManager.deleteKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID).then(() => {
+        try{
+        await kvManager.closeKVStore(TEST_BUNDLE_NAME, storeId).then(async () => {
+            await kvManager.deleteKVStore(TEST_BUNDLE_NAME, storeId).then(() => {
                 console.info(logTag + " Server deleteKVStore success, storeId=" + storeId);
                 return String(true);
             })
@@ -157,6 +158,10 @@ export default class TestApi{
             console.error(logTag + "Server deleteKVStore fail, error.code=" + error.code + "error.message=" + error.message);
             return String(error);
         });
+        } catch (err) {
+            console.error('catch closeKvStore err:' + `, error code is ${err.code}, message is ${err.message}`);
+            return String(err);
+        }
     }
 
     async kvPut(key,value,valueType){

@@ -76,7 +76,7 @@ async function driveFn() {
         await sleep(2000);
         let button = await driver.findComponent(BY.text('允许'));
         console.info(`button is ${JSON.stringify(button)}`);
-        await sleep(5000);
+        await sleep(2000);
         await button.click();
     } catch (err) {
         console.info('err is ' + err);
@@ -110,7 +110,7 @@ export default function kvSyncTestS1() {
                 console.info(logTag + "flag_41 is: " + flag_41);
             }
             await getPermission();
-            await sleep(5000);
+            await sleep(2000);
             await driveFn();
             await sleep(2000);
 
@@ -161,41 +161,36 @@ export default function kvSyncTestS1() {
 
         beforeEach(async function (done) {
             console.info(logTag + "-----------------beforeEach 0 -----------------");
-
             done();
         })
 
         afterEach(async function (done) {
-            console.info(logTag + '-----------------afterEach begin-----------------');
-            await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID, kvStore, async function () {
-                console.info(logTag + 'CLIENT afterEach closeKVStore success');
-                await kvManager.deleteKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID, function () {
-                    console.info(logTag + 'CLIENT afterEach deleteKVStore success');
+            try{
+                console.info(logTag + '-----------------afterEach begin-----------------');
+                await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID).then(async () => {
+                    console.info(logTag + 'CLIENT afterEach closeKVStore success');
+                    await kvManager.deleteKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID).then(() => {
+                        console.info(logTag + 'CLIENT afterEach deleteKVStore success');
+                    });
                 });
-            });
-            await remoteHelpers.closeKvStore(SERVET_STORE_ID).then(async (ret) => {
-                console.info(logTag + "REMOTE afterEach close server kvStore success: " + ret);
-            })
-            await sleep(2000);
-            kvStore = null;
-            console.info(logTag + '-----------------afterEach end-----------------');
-            done();
+
+                await remoteHelpers.closeKvStore(SERVET_STORE_ID).then(async (ret) => {
+                    console.info(logTag + "REMOTE afterEach close server kvStore success: " + ret);
+                })
+                await sleep(2000);
+                kvStore = null;
+                console.info(logTag + '-----------------afterEach end-----------------');
+                done();
+
+            } catch (err) {
+                console.error('catch afterEach err:' + `, error code is ${err.code}, message is ${err.message}`);
+                done();
+            }
+
         })
 
         afterAll(async function (done) {
-            console.info(logTag + '-----------------afterAll begin-----------------');
-            await kvManager.closeKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID, kvStore, async function () {
-                console.info(logTag + 'CLIENT afterEach closeKVStore success');
-                await kvManager.deleteKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID, function () {
-                    console.info(logTag + 'CLIENT afterEach deleteKVStore success');
-                });
-            });
-            await remoteHelpers.closeKvStore(SERVET_STORE_ID).then(async (ret) => {
-                console.info(logTag + "REMOTE afterEach close server kvStore success: " + ret);
-            })
-            await sleep(5000);
-            kvStore = null;
-            console.info(logTag + '-----------------afterAll end-----------------');
+            console.info(logTag + '-----------------afterAll-----------------');
             done();
         })
 
