@@ -32,11 +32,11 @@ export default class Stub extends rpc.RemoteObject {
 
     onRemoteMessageRequest(code, data, reply, option) {
         try {
-            console.log(logTag +" ===================  onRemoteMessageRequest: code is " + code + "  ===================");
+            console.log(logTag +' ===================  onRemoteMessageRequest: code is " + code + "  ===================');
             switch (code) {
               case CODE_INVOKE:
               {
-                console.info(logTag +" case CODE_INVOKE start");
+                console.info(logTag +' case CODE_INVOKE start');
                 let testBundle = new ApiMessage(null, null, null, null, null, null, null);
                 data.readParcelable(testBundle);
 
@@ -44,7 +44,7 @@ export default class Stub extends rpc.RemoteObject {
                 var resCallApi = -1;
                 const reflectCallApi = new ReflectCallApi();
                 resCallApi = reflectCallApi.call(testBundle);
-                console.log(logTag+"_methodName  call success,result is "+resCallApi);
+                console.log(logTag + '_methodName  call success,result is ' + resCallApi);
                 if (resCallApi === 1)  {
                     resultCall._resultCode = 1;
                     resultCall._result = 1;
@@ -52,17 +52,17 @@ export default class Stub extends rpc.RemoteObject {
                     resultCall._resultCode = -1;
                     resultCall._result = -1;
                 } 
-                console.log(logTag + "The server's writeSequenceable result is " + JSON.stringify(resultCall));
+                console.log(logTag + 'The server's writeSequenceable result is ' + JSON.stringify(resultCall));
 
                 testBundle._apiResult=JSON.stringify(resultCall);
-                console.log(logTag +" The testBundle is " + JSON.stringify(testBundle));
+                console.log(logTag + ' The testBundle is ' + JSON.stringify(testBundle));
                 reply.writeParcelable(testBundle);
 
                 return true;
               }
               case CODE_INVOKE_TESTCASE:
               {
-                console.info(logTag +" ===================  case CODE_INVOKE_TESTCASE start ===================  ");
+                console.info(logTag +' ===================  case CODE_INVOKE_TESTCASE start ===================  ');
                 let testBundle = new ApiMessage(null, null, null, null, null, null, null);
                 data.readSequenceable(testBundle);
 
@@ -75,7 +75,7 @@ export default class Stub extends rpc.RemoteObject {
               }
               case CODE_INVOKE_OSVERSION:
               {
-                console.info(logTag +" ===================  case CODE_INVOKE_OSVERSION start ===================  ");
+                console.info(logTag +' ===================  case CODE_INVOKE_OSVERSION start ===================  ');
                 data.readString();
                 let osFullNameInfo = deviceinfo.osFullName;
                 console.info('the value of the deviceinfo osFullName is :' + osFullNameInfo);
