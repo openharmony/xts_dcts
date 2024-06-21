@@ -30,39 +30,47 @@ export default class RemoteHelper{
     }
 
     async getReq(message) {
-        console.log(logTag + "getReq begin");
-        let messageParcel = rpc.MessageParcel.create();
-        console.log(logTag + "create object successfully.");
-        let messageParcelreply = rpc.MessageParcel.create();
-        let option = new rpc.MessageOption();
-        let writeResult = messageParcel.writeSequenceable(message);
-        await this.gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option);
-        console.log(logTag + "sendRequest got result");
-        let ret = new ApiMessage(null, null, null, null, null, null, null);
-        let dataReply = messageParcelreply.readSequenceable(ret);
-        console.log(logTag + "run readSequenceable success, result is" + dataReply);
-        let retApi = JSON.parse(ret._apiResult);
-        let retApiResult = retApi._result;
-        console.log(logTag + "***********   read success, results is " + retApiResult + "**************");
-        return retApiResult;
+        try {
+            console.log(logTag + "getReq begin");
+            console.log(logTag + "getReq. message= "+ JSON.stringify(message));
+            let data= rpc.MessageSequence.create();
+            let reply = rpc.MessageSequence.create();
+            let option = new rpc.MessageOption();
+            data.writeParcelable(message);
+            await this.gIRemoteObject.sendMessageRequest(CODE_INVOKE, data, reply, option);
+            console.log(logTag + "sendMessageRequest got result");
+            let ret = new ApiMessage(null, null, null, null, null, null, null);
+            reply.readParcelable(ret);
+            let retApi = JSON.parse(ret._apiResult);
+            let retApiResult = retApi._result;
+            console.log(logTag + "***********   read success, results is " + retApiResult + "**************");
+            return retApiResult;
+        } catch(err) {
+            console.error('***********catch getReq err:' + `, error code is ${err.code}, message is ${err.message}`);
+            return 411;
+        }
     }
 
     async getReqTestCase(message) {
-        console.log(logTag + "getReq begin");
-        let messageParcel = rpc.MessageParcel.create();
-        console.log(logTag + "create object successfully.");
-        let messageParcelreply = rpc.MessageParcel.create();
-        let option = new rpc.MessageOption();
-        let writeResult = messageParcel.writeSequenceable(message);
-        await this.gIRemoteObject.sendRequest(CODE_INVOKE_TESTCASE, messageParcel, messageParcelreply, option);
-        console.log(logTag + "sendRequest got result");
-        let ret = new ApiMessage(null, null, null, null, null, null, null);
-        let dataReply = messageParcelreply.readSequenceable(ret);
-        console.log(logTag + "run readSequenceable success, result is" + dataReply);
-        let retApi = JSON.parse(ret._apiResult);
-        let retApiResult = retApi._result;
-        console.log(logTag + "***********   read success, results is " + retApiResult + "**************");
-        return retApiResult;
+        try {
+            console.log(logTag + "getReqTestCase begin");
+            console.log(logTag + "getReqTestCase. message= "+ JSON.stringify(message));
+            let data= rpc.MessageSequence.create();
+            let reply = rpc.MessageSequence.create();
+            let option = new rpc.MessageOption();
+            data.writeParcelable(message);
+            await this.gIRemoteObject.sendMessageRequest(CODE_INVOKE_TESTCASE, data, reply, option);
+            console.log(logTag + "sendMessageRequest got result");
+            let ret = new ApiMessage(null, null, null, null, null, null, null);
+            reply.readParcelable(ret);
+            let retApi = JSON.parse(ret._apiResult);
+            let retApiResult = retApi._result;
+            console.log(logTag + "***********   read success, results is " + retApiResult + "**************");
+            return retApiResult;
+        } catch(err) {
+            console.error('***********catch getReq err:' + `, error code is ${err.code}, message is ${err.message}`);
+            return 411;
+        }
     }
 
     async setTestCaseName(name){

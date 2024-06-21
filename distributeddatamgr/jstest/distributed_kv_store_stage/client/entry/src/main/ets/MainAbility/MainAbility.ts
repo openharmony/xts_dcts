@@ -26,16 +26,16 @@ export class MyMessageAble {
     this.num = num;
     this.str = string;
   }
-  marshalling(messageParcel) {
-    console.log('MyMessageAble messageParcel marshalling' + this.num , + this.str)
-    messageParcel.writeInt(this.num);
-    messageParcel.writeString(this.str);
+  marshalling(MessageSequence) {
+    console.log('MyMessageAble MessageSequence marshalling' + this.num , + this.str)
+    MessageSequence.writeInt(this.num);
+    MessageSequence.writeString(this.str);
     return true;
   }
-  unmarshalling(messageParcel) {
-    console.log('MyMessageAble messageParcel unmarshalling' + this.num , + this.str)
-    this.num = messageParcel.readInt();
-    this.str = messageParcel.readString();
+  unmarshalling(MessageSequence) {
+    console.log('MyMessageAble MessageSequence unmarshalling' + this.num , + this.str)
+    this.num = MessageSequence.readInt();
+    this.str = MessageSequence.readString();
     return true;
   }
 }
@@ -46,9 +46,9 @@ export class StubTest extends rpc.RemoteObject {
         super(descriptor)
     }
 
-    onRemoteRequest(code, data, reply, option) {
+    onRemoteMessageRequest(code, data, reply, option) {
 
-        console.info("onRemoteRequest: " + code)
+        console.info("onRemoteMessageRequest: " + code)
         let tmp1 = data.readInt();
         let tmp2 = data.readInt();
         let tmp3 = tmp1 + tmp2;

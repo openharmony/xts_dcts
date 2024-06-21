@@ -19,8 +19,8 @@ class StubTest extends rpc.RemoteObject {
     constructor(descriptor) {
         super(descriptor);
     }
-    onRemoteRequest(code, data, reply, option) {
-        console.info("onRemoteRequest: " + code)
+    onRemoteMessageRequest(code, data, reply, option) {
+        console.info("onRemoteMessageRequest: " + code)
         let tmp1 = data.readInt()
         let tmp2 = data.readInt()
         let tmp3 = tmp1 + tmp2;

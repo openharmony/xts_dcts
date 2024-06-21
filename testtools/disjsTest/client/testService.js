@@ -47,29 +47,6 @@ export default class TestService {
 
     }
 
-    async invoke(gIRemoteObject,message) {
-            var messageParcel = rpc.MessageParcel.create();
-            console.log(logTag + "create object successfully.");
-            var messageParcelreply = rpc.MessageParcel.create();
-            var option = new rpc.MessageOption();
-            var writeResult = messageParcel.writeSequenceable(message);
-        gIRemoteObject.sendRequest(CODE_INVOKE, messageParcel, messageParcelreply, option).then(function (result) {
-            if (result.errCode === 0) {
-                console.log(logTag + "sendRequest got result");
-                var ret = new ApiMessage(null, null, null, null, null, null,null);
-                var dataReply = result.reply.readSequenceable(ret);
-                 console.log(logTag + "run readSequenceable success, result is" + dataReply);
-                 results = JSON.parse(ret._apiResult);
-                 console.log(logTag + " read success, results is" + results._result);
-                 return results._result;
-            } else {
-                console.log(logTag + "sendRequest failed, errCode: " + errCode);
-            }
-        }).catch(function (e) {
-            console.log(logTag + " sendRequest got exception: " + e.message);
-        });
-    }
-
     getDeviceList(deviceManager) {
         deviceList = deviceManager.getAvailableDeviceListSync();
         console.info(logTag + "getDeviceList success, deviceList id: " + JSON.stringify(deviceList));
