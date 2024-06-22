@@ -1,0 +1,65 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "srcEntrance": "./ets/Application/AbilityStage.ts",
+    "description": "$string:entry_desc",
+    "mainElement": "MainAbility",
+    "deviceTypes": [
+        "default",
+        "tablet",
+        "2in1"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "uiSyntax": "ets",
+    "abilities": [
+      {
+        "name": "com.acts.rpcrequest.test.MainAbility",
+        "srcEntrance": "./ets/MainAbility/MainAbility.ts",
+        "description": "$string:MainAbility_desc",
+        "icon": "$media:app_icon",
+        "label": "$string:MainAbility_label",
+        "startWindowIcon": "$media:app_icon",
+        "startWindowBackground": "$color:white",
+        "visible": true,
+        "launchType": "singleton",
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ]
+      }
+    ],
+    "extensionAbilities": [
+      {
+        "name": "com.acts.rpcrequest.test.ServiceAbility",
+        "srcEntrance": "./ets/serviceability/ServiceAbility.ts",
+        "label": "$string:MainAbility_label",
+        "description": "$string:description_serviceability",
+        "type": "service",
+        "visible": true
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name":"ohos.permission.GET_BUNDLE_INFO"
+      },
+      {
+        "name": "ohos.permission.DISTRIBUTED_DATASYNC"
+      },
+      {
+        "name": "ohos.permission.GET_DISTRIBUTED_DEVICE_INFO"
+      },
+      {
+        "name": "ohos.permission.ACCESS_SERVICE_DM"
+      }
+    ]
+  }
+}

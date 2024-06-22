@@ -1,0 +1,20 @@
+{
+    "description": "Configuration for hjunit demo Tests",
+    "driver": {
+        "type": "OHJSUnitTest",
+        "test-timeout": "180000",
+        "bundle-name": "com.acts.rpcrequest.test",
+	    "module-name": "phone",
+        "testcase-timeout": "60000",
+        "shell-timeout": "1200000"
+    },
+    "kits": [
+        {
+            "test-file-name": [
+                "DctsRpcEtsHapTest.hap"
+            ],
+            "type": "AppInstallKit",
+            "cleanup-apps": true
+        }
+    ] 
+}
