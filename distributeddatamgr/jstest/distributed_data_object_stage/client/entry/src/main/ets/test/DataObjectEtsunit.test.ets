@@ -24,7 +24,10 @@ import { BusinessError } from "@ohos.base";
 import common from '@ohos.app.ability.common';
 import abilityAccessCtrl, { Context, PermissionRequestResult } from '@ohos.abilityAccessCtrl';
 import Want from '@ohos.app.ability.Want';
-
+import UIAbility, { Callee, CalleeCallback, Caller, OnReleaseCallback, OnRemoteStateChangeCallback } from '@ohos.app.ability.UIAbility';
+import promptAction from '@ohos.promptAction';
+import prompt from '@ohos.prompt';
+let caller=undefined;
 
 let localDeviceId = undefined;
 let logTag = '[ObjectEts:  ]';  
@@ -67,7 +70,6 @@ let OSVersion32 = "OpenHarmony-3.2";
 
 
 let atManager = abilityAccessCtrl.createAtManager();
-// let g_context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
 
 export default function dataObjectEtsTest() {
 describe('dataObjectEtsTest', function () {
@@ -112,15 +114,31 @@ describe('dataObjectEtsTest', function () {
             };
     
             let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
-            context.startAbility(wantValue).then(() => {
-                console.info(logTag + ' startAbility success.' );
-            }).catch((err) => {
-                console.info(logTag + ' startAbility err: ' + err.code + err.message);
+            context.startAbilityByCall(wantValue).then((data) => {
+            if (data !== null) {
+            caller = data;
+            console.info(logTag +'get remote caller success')
+            caller.onRelease((msg) => {
+              console.info(logTag + "remote caller onRelease is called ${msg}")
             });
-        }catch(error){
-            console.info(logTag + "beforeAll startAbility:error = " + error);
-        }
+            console.info(logTag + "remote caller register OnRelease succeed")
+            try {
+              caller.onRemoteStateChange((str) => {
+                console.info(logTag + "Remote state changed " + str)
+              })
+            } catch (error) {
+              console.info(logTag + "Caller.onRemoteStateChange catch error, error.code: ${JSON.stringify(error.code)}, error.message: ${JSON.stringify(error.message)}");
+            }
+            console.info(logTag + "startAbilityByCall success.")
+           }
+        }).catch((err) => {
+          console.info(logTag + "startAbilityByCall err: " + err.code + err.message)
+        })
+      }catch(error){
+        console.info(logTag + "beforeAll startAbilityByCall:error = " + error)
+      }
     }
+       
 
     let getDeviceId = async () =>{
         console.info(logTag + 'let getDeviceId is begin...')
@@ -188,6 +206,9 @@ describe('dataObjectEtsTest', function () {
      * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0100
      * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0100
      * @tc.desc: sessionId1 genSessionId, remote join sessionId1, sync success
+     * @tc.level: Level 2
+     * @tc.type: Functiontion
+     * @tc.size: MediumTest
      */
     it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0100", 0, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0100 start *************");
@@ -251,6 +272,9 @@ describe('dataObjectEtsTest', function () {
      * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0200
      * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0200
      * @tc.desc: sessionId1 "abcde", remote join sessionId1, sync success
+     * @tc.level: Level 2
+     * @tc.type: Functiontion
+     * @tc.size: MediumTest
      */
     it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0200", 0, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0200 start *************");
@@ -315,6 +339,9 @@ describe('dataObjectEtsTest', function () {
      * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0300
      * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0300
      * @tc.desc: sessionId1 "123456", remote join sessionId1, sync success
+     * @tc.level: Level 2
+     * @tc.type: Functiontion
+     * @tc.size: MediumTest
      */
     it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0300", 0, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0300 start *************");
@@ -380,6 +407,9 @@ describe('dataObjectEtsTest', function () {
      * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0400
      * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0400
      * @tc.desc: local join sessionId1 , remote join sessionId2, sync fail
+     * @tc.level: Level 3
+     * @tc.type: Functiontion
+     * @tc.size: MediumTest
      */
      it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0400", 0, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0400 start *************");
@@ -448,6 +478,9 @@ describe('dataObjectEtsTest', function () {
      * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0500
      * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0100
      * @tc.desc: local  modify name2 , sync success
+     * @tc.level: Level 2
+     * @tc.type: Functiontion
+     * @tc.size: MediumTest
      */
      it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0100", 0, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0100 start *************");
@@ -528,6 +561,9 @@ describe('dataObjectEtsTest', function () {
      * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0600
      * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0200
      * @tc.desc: local  modify name null, sync success
+     * @tc.level: Level 2
+     * @tc.type: Functiontion
+     * @tc.size: MediumTest
      */
      it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0200", 0, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0200 start *************");
@@ -608,6 +644,9 @@ describe('dataObjectEtsTest', function () {
      * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0700
      * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0300
      * @tc.desc: local  modify name null, sync success
+     * @tc.level: Level 2
+     * @tc.type: Functiontion
+     * @tc.size: MediumTest
      */
      it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0300", 0, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0300 start *************");
@@ -687,6 +726,9 @@ describe('dataObjectEtsTest', function () {
      * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0800
      * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0100
      * @tc.desc: remote  modify name , sync success
+     * @tc.level: Level 2
+     * @tc.type: Functiontion
+     * @tc.size: MediumTest
      */
      it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0100", 0, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0100 start *************");
@@ -757,6 +799,9 @@ describe('dataObjectEtsTest', function () {
      * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_0900
      * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0200
      * @tc.desc: remote  modify number , sync success
+     * @tc.level: Level 2
+     * @tc.type: Functiontion
+     * @tc.size: MediumTest
      */
      it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0200", 0, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0200 start *************");
@@ -827,6 +872,9 @@ describe('dataObjectEtsTest', function () {
      * @tc.number: SUB_DistributedData_DataObject_SDK_SetSessionIdTsAPITest_1000
      * @tc.name: SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0300
      * @tc.desc: remote  modify bool , sync success
+     * @tc.level: Level 2
+     * @tc.type: Functiontion
+     * @tc.size: MediumTest
      */
      it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0300", 0, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0300 start *************");
