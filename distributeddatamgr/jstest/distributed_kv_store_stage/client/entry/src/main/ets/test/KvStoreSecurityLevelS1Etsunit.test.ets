@@ -2628,7 +2628,7 @@ export default function kvSyncTestS1Ets() {
             let result = undefined;
             function call(data) {
                 console.info(logTag + "syncComplete: " + data);
-                kvStore.get(TEST_STRING_KEY, (err, data) => {
+                kvStore.get(TEST_STRING_KEY, async(err, data) => {
                     try {
                         console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
                         if (err != null) {
@@ -2640,12 +2640,18 @@ export default function kvSyncTestS1Ets() {
                         console.info(logTag + " get data finish,result is: " + result);
                         expect(result).assertEqual(TEST_STRING_VALUE);
                         kvStore.off("syncComplete", call);
-                        kvManager.deleteKVStore(TEST_BUNDLE_NAME, "x".repeat(128), (err, data) => {
-                            console.info(logTag + 'afterEach deleteKVStore success');
+
+                        console.info(logTag + " ##### deleteKVStore begin #####" );
+                        await kvManager.closeKVStore(TEST_BUNDLE_NAME, "x".repeat(128)).then(async () => {
+                            console.info(logTag + 'testServerKvStoreId0300 CLIENT  closeKVStore success');
+                            await kvManager.deleteKVStore(TEST_BUNDLE_NAME, "x".repeat(128)).then(() => {
+                                console.info(logTag + 'testServerKvStoreId0300 CLIENT  deleteKVStore success');
+                            });
+                        });
+                        await remoteHelpers.closeKvStore("x".repeat(128)).then(async (ret) => {
+                            console.info(logTag + "testServerKvStoreId0300 remoteHelpers closeKvStore success: " + ret)
                         })
-                        remoteHelpers.closeKvStore("x".repeat(128)).then(async (ret) => {
-                            console.info(logTag + "afterEach close server kvStore success: " + ret)
-                        })
+
                         console.info(logTag + "testServerKvStoreId0300 end");
                         done();
 
@@ -2666,7 +2672,7 @@ export default function kvSyncTestS1Ets() {
         /**
          * @tc.number SUB_DistributedData_KVStore_DistributedSync_SDK_DifferentLevelSyncTestEts_SERVERSTOREID_0400
          * @tc.name testEtsServerKvStoreId0400
-         * @tc.desc Get server kvstore with length of storeId is 128 bit.
+         * @tc.desc Get server kvstore with length of storeId is 128 bit.PUSH_PULL
          * @tc.level: Level 2
          * @tc.type: Functiontion
          * @tc.size: MediumTest
@@ -2692,7 +2698,7 @@ export default function kvSyncTestS1Ets() {
             let result = undefined;
             function call(data) {
                 console.info(logTag + "syncComplete: " + data);
-                kvStore.get(TEST_STRING_KEY, (err, data) => {
+                kvStore.get(TEST_STRING_KEY, async(err, data) => {
                     try {
                         console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
                         if (err != null) {
@@ -2704,12 +2710,18 @@ export default function kvSyncTestS1Ets() {
                         console.info(logTag + " get data finish,result is: " + result);
                         expect(result).assertEqual(TEST_STRING_VALUE);
                         kvStore.off("syncComplete", call);
-                        kvManager.deleteKVStore(TEST_BUNDLE_NAME, "x".repeat(128), (err, data) => {
-                            console.info(logTag + 'afterEach deleteKVStore success');
+
+                        console.info(logTag + " ##### deleteKVStore begin #####" );
+                        await kvManager.closeKVStore(TEST_BUNDLE_NAME, "x".repeat(128)).then(async () => {
+                            console.info(logTag + 'testServerKvStoreId0400 CLIENT  closeKVStore success');
+                            await kvManager.deleteKVStore(TEST_BUNDLE_NAME, "x".repeat(128)).then(() => {
+                                console.info(logTag + 'testServerKvStoreId0400 CLIENT  deleteKVStore success');
+                            });
+                        });
+                        await remoteHelpers.closeKvStore("x".repeat(128)).then(async (ret) => {
+                            console.info(logTag + "testServerKvStoreId0400 remoteHelpers closeKvStore success: " + ret)
                         })
-                        remoteHelpers.closeKvStore("x".repeat(128)).then(async (ret) => {
-                            console.info(logTag + "afterEach close server kvStore success: " + ret)
-                        })
+
                         console.info(logTag + "testServerKvStoreId0400 end");
                         done();
 
@@ -2723,7 +2735,7 @@ export default function kvSyncTestS1Ets() {
             await remoteHelpers.kvPut(TEST_STRING_KEY, TEST_STRING_VALUE, "String");
             await sleep(1000);
             console.info(logTag + "Client sync start");
-            kvStore.sync(syncDeviceIds, PULL);
+            kvStore.sync(syncDeviceIds, PUSH_PULL);
         })
 
         /**
@@ -2754,7 +2766,7 @@ export default function kvSyncTestS1Ets() {
             let result = undefined;
             function call(data) {
                 console.info(logTag + "syncComplete: " + data);
-                kvStore.get(TEST_STRING_KEY, (err, data) => {
+                kvStore.get(TEST_STRING_KEY, async(err, data) => {
                     try {
                         console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
                         if (err != null) {
@@ -2766,7 +2778,11 @@ export default function kvSyncTestS1Ets() {
                         console.info(logTag + " get data finish,result is: " + result);
                         expect(result == undefined).assertTrue();
                         kvStore.off("syncComplete", call);
-                        remoteHelpers.closeKvStore("SERVER_KVSTORE")
+
+                        console.info(logTag + " ##### deleteKVStore begin #####" );
+                        await remoteHelpers.closeKvStore("SERVER_KVSTORE").then(async (ret) => {
+                            console.info(logTag + "testServerKvStoreId0500 remoteHelpers closeKvStore success: " + ret)
+                        })
                         console.info(logTag + "testServerKvStoreId0500 end");
                         done();
 
@@ -2812,7 +2828,7 @@ export default function kvSyncTestS1Ets() {
             let result = undefined;
             function call(data) {
                 console.info(logTag + "syncComplete: " + data);
-                kvStore.get(TEST_STRING_KEY, (err, data) => {
+                kvStore.get(TEST_STRING_KEY, async(err, data) => {
                     try {
                         console.info(logTag + " Sync complete get data,key is " + TEST_STRING_KEY);
                         if (err != null) {
@@ -2824,7 +2840,11 @@ export default function kvSyncTestS1Ets() {
                         console.info(logTag + " get data finish,result is: " + result);
                         expect(result == undefined).assertTrue();
                         kvStore.off("syncComplete", call);
-                        remoteHelpers.closeKvStore("SERVER_KVSTORE")
+
+                        console.info(logTag + " ##### deleteKVStore begin #####" );
+                        await remoteHelpers.closeKvStore("SERVER_KVSTORE").then(async (ret) => {
+                            console.info(logTag + "testServerKvStoreId0600 remoteHelpers closeKvStore success: " + ret)
+                        })
                         console.info(logTag + "testServerKvStoreId0600 end");
                         done();
 
