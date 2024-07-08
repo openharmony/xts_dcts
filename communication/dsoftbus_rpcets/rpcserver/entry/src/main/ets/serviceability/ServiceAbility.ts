@@ -15,6 +15,27 @@
 import ServiceExtension from '@ohos.app.ability.ServiceExtensionAbility';
 import rpc from '@ohos.rpc';
 
+class MySequenceable {
+    num = null;
+    str = null;
+    constructor(num, string) {
+        this.num = num;
+        this.str = string;
+    }
+
+    marshalling(messageParcel) {
+        messageParcel.writeInt(this.num);
+        messageParcel.writeString(this.str);
+        return true;
+    }
+
+    unmarshalling(messageParcel) {
+        this.num = messageParcel.readInt();
+        this.str = messageParcel.readString();
+        return true;
+    }
+}
+
 class Stub extends rpc.RemoteObject {
     constructor(descriptor) {
         super(descriptor);
@@ -96,6 +117,42 @@ class Stub extends rpc.RemoteObject {
                         console.info("The server's readString result is " + tmp1.length);
                         reply.writeString(tmp1);
                         console.info("case 3 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 4:
+                    {
+                        console.info("case 4 start");
+                        let tmp1:number = data.readInt();
+                        console.info("The server's readInt result is " + tmp1);
+                        reply.writeInt(tmp1);
+                        console.info("case 4 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 5:
+                    {
+                        console.info("case 5 start");
+                        let tmp1 = data.readByte();
+                        let tmp2 = data.readShort();
+                        let tmp3 = data.readInt();
+                        let tmp4 = data.readLong();
+                        let tmp5 = data.readFloat();
+                        let tmp6 = data.readDouble();
+                        let tmp7 = data.readBoolean();
+                        let tmp8 = data.readChar();
+                        let tmp9 = data.readString();
+                        let s = new MySequenceable(null, null);
+                        data.readParcelable(s);
+                        reply.writeByte(tmp1);
+                        reply.writeShort(tmp2);
+                        reply.writeInt(tmp3);
+                        reply.writeLong(tmp4);
+                        reply.writeFloat(tmp5);
+                        reply.writeDouble(tmp6);
+                        reply.writeBoolean(tmp7);
+                        reply.writeChar(tmp8);
+                        reply.writeString(tmp9);
+                        reply.writeParcelable(s);
+                        console.info("case 5 onRemoteMessageRequest success");
                         return true;
                     }
                 default:
