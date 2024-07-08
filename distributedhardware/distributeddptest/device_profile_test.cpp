@@ -215,6 +215,7 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_0700, TestSize.Level1)
     serviceProfile10.SetServiceType("serviceType10");
     
     DeviceProfileManager::GetInstance().deviceProfileStore_ = nullptr;
+    DeviceProfileManager::GetInstance().isFirst_.store(true);
     int32_t ret = DeviceProfileManager::GetInstance().PutServiceProfile(serviceProfile10);
     EXPECT_EQ(ret, DP_SUCCESS);
     DeviceProfileManager::GetInstance().Init();
@@ -236,6 +237,7 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_0800, TestSize.Level1)
     serviceProfile11.SetServiceType("serviceType11");
 
     DeviceProfileManager::GetInstance().deviceProfileStore_->UnInit();
+    DeviceProfileManager::GetInstance().isFirst_.store(true);
     int32_t ret = DeviceProfileManager::GetInstance().PutServiceProfile(serviceProfile11);
     EXPECT_EQ(ret, DP_SUCCESS);
     DeviceProfileManager::GetInstance().Init();
@@ -397,6 +399,7 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_1500, TestSize.Level1)
     charProfile11.SetCharacteristicValue("characteristicValue11");
 
     DeviceProfileManager::GetInstance().deviceProfileStore_->UnInit();
+    DeviceProfileManager::GetInstance().isFirst_.store(true);
     int32_t ret = DeviceProfileManager::GetInstance().PutCharacteristicProfile(charProfile11);
     EXPECT_EQ(ret, DP_SUCCESS);
     DeviceProfileManager::GetInstance().Init();

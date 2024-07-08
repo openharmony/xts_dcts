@@ -1,7 +1,7 @@
 {
     "description": "Config for disCamera test cases",
     "driver": {
-        "module-name": "SubDctsdisAudioNewTest",
+        "module-name": "DctsSubdAudioNewTest",
         "native-test-timeout": "120000",
         "native-test-device-path": "/data/local/tmp",
         "runtime-hint": "1s",
@@ -13,7 +13,7 @@
         "chmod -R 777 /data/local/tmp/*"
      ],
         "push": [
-          "SubDctsdisAudioNewTest->/data/local/tmp/SubDctsdisAudioNewTest"
+          "DctsSubdAudioNewTest->/data/local/tmp/DctsSubdAudioNewTest"
 	],
       "type": "PushKit"
        }
