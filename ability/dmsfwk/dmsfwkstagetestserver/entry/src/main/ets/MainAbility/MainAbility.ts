@@ -61,6 +61,9 @@ export default class MainAbility extends Ability {
             console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser')
         })
         this.callee.on('test', funcCallBack);
+	setTimeout(() => {
+            this.context.terminateSelf()
+        }, 30000)
     }
 
     onNewWant(want, launchParam) {
