@@ -16,7 +16,7 @@ import("//test/xts/tools/build/suite.gni")
 
 module_output_path = "dcts/distributedhardware"
 
-ohos_moduletest_suite("SubDctsdisAudioTest") {
+ohos_moduletest_suite("DctsSubAudioTest") {
   module_out_path = module_output_path
   include_dirs = [
     "$base_root/drivers\peripheral\audio\interfaces\include",
@@ -43,7 +43,7 @@ ohos_moduletest_suite("SubDctsdisAudioTest") {
 
   defines = [
     "HI_LOG_ENABLE",
-    "DH_LOG_TAG=\"SubDctsdisAudioTest\"",
+    "DH_LOG_TAG=\"DctsSubAudioTest\"",
     "LOG_DOMAIN=0xD004100",
   ]
 
