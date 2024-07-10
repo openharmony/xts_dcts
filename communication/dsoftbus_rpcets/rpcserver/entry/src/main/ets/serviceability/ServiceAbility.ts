@@ -155,6 +155,32 @@ class Stub extends rpc.RemoteObject {
                         console.info(logTag + "case 7 onRemoteMessageRequest success");
                         return true;
                     }
+                case 8:
+                    {
+                        console.info(logTag + "case 8 start");
+                        let tmp1:number = data.readShort();
+                        console.info(logTag + "The server's readShort result is " + tmp1);
+                        reply.writeShort(tmp1);
+                        console.info(logTag + "case 8 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 9:
+                    {
+                        console.info(logTag + "case 9 start");
+                        let tmp1 = data.readShort();
+                        let tmp2 = data.readShort();
+                        let tmp3 = data.readShort();
+                        let tmp4 = data.readShort();
+                        let tmp5 = data.readShort();
+                        console.info(logTag + "The server's readShort result is " + tmp1 +";"+ tmp2 +";" + tmp3 +";" + tmp4 +";" + tmp5);
+                        reply.writeShort(tmp1);
+                        reply.writeShort(tmp2);
+                        reply.writeShort(tmp3);
+                        reply.writeShort(tmp4);
+                        reply.writeShort(tmp5);
+                        console.info(logTag + "case 9 onRemoteMessageRequest success");
+                        return true;
+                    }
                 default:
                     this.onRemoteMessageRequest(code, data, reply, option);
             }
