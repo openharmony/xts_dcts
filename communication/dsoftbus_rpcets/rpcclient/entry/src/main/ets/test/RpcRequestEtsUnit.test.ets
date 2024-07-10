@@ -16,30 +16,19 @@
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from "@ohos/hypium";
 import deviceManager from '@ohos.distributedDeviceManager';
 import TestService from './testService.ets';
-import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
 import rpc from '@ohos.rpc';
 import { Driver, ON } from '@ohos.UiTest';
 import abilityAccessCtrl, { Context, PermissionRequestResult } from '@ohos.abilityAccessCtrl';
-import AbilityConstant from '@ohos.app.ability.AbilityConstant';
-import { Caller} from '@ohos.app.ability.UIAbility';
 import { BusinessError } from '@ohos.base';
-import bundleManager from '@ohos.bundle.bundleManager';
 import Want from '@ohos.app.ability.Want';
 import common from '@ohos.app.ability.common';
+import fs from '@ohos.file.fs';
 
 
 let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
-let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
 let deviceList: Array<deviceManager.DeviceBasicInfo>;
-let dvId: String;
 let localDeviceId : String;
-let connectId: number;
-let connectId2: number;
-let extensionConnectId: number;
-let extensionConnectId2: number;
-let call: Caller;
 let dmInstance : deviceManager.DeviceManager;
-let TAG: String;
 let deviceId : String
 let syncDeviceIds: String[] = [];
 let logTag = '[RpcClient:]';
@@ -54,38 +43,80 @@ export default function RpcRequestEtsUnitTest() {
         const K = 1024;
         const M = 1024 * 1024;
         const G = 1024 * 1024 * 1024;
-        const CODE_SAME_PROCESS = 1;
         const CODE_WRITE_REMOTEOBJECT = 1;
         const CODE_INTERFACETOKEN = 2;
         const CODE_WRITE_STRING = 3;
         const CODE_WRITE_INT = 4;
         const CODE_ALL_TYPE = 5;
+        const CODE_WRITE_BYTE = 6;
+        const CODE_WRITE_BYTE_MULTI = 7;
         let gIRemoteObject = null;
         let testservice = null;
+
+        class TestAbilityStub extends rpc.RemoteObject {
+            constructor(descriptor) {
+                super(descriptor);
+            }
+            asObject() {
+                return this;
+            }
+            onRemoteMessageRequest(code, data, reply, option) {
+                console.info("TestAbilityStub: onRemoteRequest called, code: " + code);
+                let descriptor = data.readInterfaceToken();
+                if (descriptor !== "TestAbilityStub") {
+                    console.error("received unknown descriptor: " + descriptor);
+                    return false;
+                }
+                switch (code) {
+                    case 1:
+                        {
+                            let tmp1 = data.readByte();
+                            let tmp2 = data.readShort();
+                            let tmp3 = data.readInt();
+                            let tmp4 = data.readLong();
+                            let tmp5 = data.readFloat();
+                            let tmp6 = data.readDouble();
+                            let tmp7 = data.readBoolean();
+                            let tmp8 = data.readChar();
+                            let tmp9 = data.readString();
+                            let s = new MySequenceable(null, null);
+                            data.readSequenceable(s);
+                            reply.writeNoException();
+                            reply.writeByte(tmp1);
+                            reply.writeShort(tmp2);
+                            reply.writeInt(tmp3);
+                            reply.writeLong(tmp4);
+                            reply.writeFloat(tmp5);
+                            reply.writeDouble(tmp6);
+                            reply.writeBoolean(tmp7);
+                            reply.writeChar(tmp8);
+                            reply.writeString(tmp9);
+                            reply.writeSequenceable(s);
+                            return true;
+                        }
+                    default:
+                        {
+                            console.error("default case, code: " + code);
+                            return false;
+                        }
+                }
+            }
+        }
 
         class MySequenceable {
             constructor(num, string) {
                 this.num = num;
                 this.str = string;
             }
-            marshalling(messageParcel) {
-                messageParcel.writeInt(this.num);
-                messageParcel.writeString(this.str);
+            marshalling(MessageSequence) {
+                MessageSequence.writeInt(this.num);
+                MessageSequence.writeString(this.str);
                 return true;
             }
-            unmarshalling(messageParcel) {
-                this.num = messageParcel.readInt();
-                this.str = messageParcel.readString();
+            unmarshalling(MessageSequence) {
+                this.num = MessageSequence.readInt();
+                this.str = MessageSequence.readString();
                 return true;
-            }
-        }
-
-        class TestRemoteObject extends rpc.RemoteObject {
-            constructor(descriptor) {
-                super(descriptor);
-            }
-            asObject() {
-                return this;
             }
         }
 
@@ -111,7 +142,7 @@ export default function RpcRequestEtsUnitTest() {
                 console.info("result:" + result);
                 return result;
             }
-        } 
+        }      
         
         let getDeviceId = async () =>{
             try {
@@ -135,7 +166,7 @@ export default function RpcRequestEtsUnitTest() {
         
         let getPermission = async () =>{
             console.info(logTag +'getPermission is start');
-            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+            let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
             atManager.requestPermissionsFromUser(context,['ohos.permission.DISTRIBUTED_DATASYNC'],(err: BusinessError, data: PermissionRequestResult)  => {
                 console.info(logTag +"request success" + JSON.stringify(data));
             })
@@ -165,7 +196,7 @@ export default function RpcRequestEtsUnitTest() {
                     abilityName: abilityNameRpc,
                     deviceId: deviceId
                 }
-                let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
+                let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
                 context.startAbility(wantValue).then(() => {
                     console.info(logTag + ' startAbility success.' );
                 }).catch((err) => {
@@ -217,13 +248,14 @@ export default function RpcRequestEtsUnitTest() {
             console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_0010---------------------------");
             let data: rpc.MessageSequence = rpc.MessageSequence.create();
             try{
-                let testRemoteObject = new TestRemoteObject("testObject");
-                data.writeRemoteObject(testRemoteObject);
+                let testAbilityStub = new TestAbilityStub("testObject");
+                data.writeRemoteObject(testAbilityStub);
                 expect(data.readRemoteObject() != null).assertTrue();
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0010 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0010---------------------------");
@@ -242,12 +274,13 @@ export default function RpcRequestEtsUnitTest() {
             console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_0020---------------------------");
             let data: rpc.MessageSequence = rpc.MessageSequence.create();
             try{
-                let token = new TestRemoteObject(null);
+                let token = new TestAbilityStub(null);
                 data.writeRemoteObject(token);
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0020 error: " + error);
                 expect(error != null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0020---------------------------");
@@ -267,12 +300,14 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 let token = {};
                 data.writeRemoteObject(token);
+                
             } catch (error) {
                 let errCode = `${rpc.ErrorCode.PROXY_OR_REMOTE_OBJECT_INVALID_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0030: errorMessage " + error.message);
                 expect(error.message != null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0030---------------------------");
@@ -309,6 +344,7 @@ export default function RpcRequestEtsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0040 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
                 reply.reclaim();
                 done();
@@ -328,10 +364,11 @@ export default function RpcRequestEtsUnitTest() {
             console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_0050---------------------------");
             let data = rpc.MessageSequence.create();
             try{
-                let testRemoteObject = new TestRemoteObject("testObject");
-                data.writeRemoteObject(testRemoteObject);
+                let testAbilityStub = new TestAbilityStub("testObject");
+                data.writeRemoteObject(testAbilityStub);
                 data.reclaim();
                 data.readRemoteObject();
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code == errCode).assertTrue();
@@ -352,9 +389,10 @@ export default function RpcRequestEtsUnitTest() {
             console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_0060---------------------------");
             let data = rpc.MessageSequence.create();
             try{
-                let testRemoteObject = new TestRemoteObject("testObject");
+                let testAbilityStub = new TestAbilityStub("testObject");
                 data.reclaim();
-                data.writeRemoteObject(testRemoteObject);
+                data.writeRemoteObject(testAbilityStub);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code == errCode).assertTrue();
@@ -388,6 +426,7 @@ export default function RpcRequestEtsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0070 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
                 reply.reclaim();
                 done();
@@ -424,6 +463,7 @@ export default function RpcRequestEtsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0080 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
                 reply.reclaim();
                 done();
@@ -449,12 +489,14 @@ export default function RpcRequestEtsUnitTest() {
                     token += 'a';
                 }
                 data.writeInterfaceToken(token);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0090 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0090---------------------------");
@@ -475,12 +517,14 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 let token = 123;
                 data.writeInterfaceToken(token);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0100 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0100---------------------------");
@@ -500,12 +544,14 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 let token = null;
                 data.writeInterfaceToken(token);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0110 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code != errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0110---------------------------");
@@ -525,6 +571,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.writeInterfaceToken("rpctest");
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code == errCode).assertTrue();
@@ -548,6 +595,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.writeInterfaceToken("rpctest");
                 data.reclaim();
                 data.readInterfaceToken();
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code == errCode).assertTrue();
@@ -586,6 +634,7 @@ export default function RpcRequestEtsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0140 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
                 reply.reclaim();
                 done();
@@ -623,6 +672,7 @@ export default function RpcRequestEtsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0150 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
                 reply.reclaim();
                 done();
@@ -654,6 +704,7 @@ export default function RpcRequestEtsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0160 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0160---------------------------");
@@ -689,6 +740,7 @@ export default function RpcRequestEtsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0170 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
                 reply.reclaim();
                 done();
@@ -716,6 +768,7 @@ export default function RpcRequestEtsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0180 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
                 done();
             }
@@ -743,6 +796,7 @@ export default function RpcRequestEtsUnitTest() {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0190 error: " + error);
                 expect(error == null).assertTrue();
             } finally{
+                console.info("reclaim done");
                 data.reclaim();
                 done();
             }
@@ -839,6 +893,7 @@ export default function RpcRequestEtsUnitTest() {
                 let getSizedata = data.getSize();
                 data.setCapacity(getSizedata + 1);
                 data.setCapacity(getSizedata);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0220 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
@@ -873,6 +928,7 @@ export default function RpcRequestEtsUnitTest() {
                     expect(result.reply.getCapacity()).assertEqual(("constant".length * 2) + 8);
                     result.reply.setCapacity(getSizeresult + 1);
                     result.reply.setCapacity(getSizeresult);
+                    expect(data.getSize == 0).assertTrue();
                 });
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0230 error: " + error);
@@ -904,6 +960,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.setCapacity(M);
                 expect(data.getCapacity()).assertEqual(M);
                 data.setCapacity(2 * G);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0240 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
@@ -934,6 +991,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.setSize(0);
                 let ret = new MySequenceable(1, "");
                 data.readParcelable(ret);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0250 error: " + error);
                 let errCode = `${rpc.ErrorCode.CALL_JS_METHOD_ERROR}`;
@@ -964,6 +1022,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.setCapacity(0);
                 data.setSize(0);
                 data.readInterfaceToken();
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0260 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
@@ -992,6 +1051,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.setCapacity(0);
                 let token = "hello ruan zong xian";
                 data.writeInterfaceToken(token);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0270 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
@@ -1020,6 +1080,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.setCapacity(true);
                 let token = "hello ruan zong xian";
                 data.writeInterfaceToken(token);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0280 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
@@ -1046,6 +1107,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.setSize(0);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code == errCode).assertTrue();
@@ -1071,6 +1133,7 @@ export default function RpcRequestEtsUnitTest() {
                 let ret = new MySequenceable(0, "");
                 data.setCapacity(0);
                 data.readParcelable(ret);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0300 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
@@ -1542,6 +1605,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.rewindWrite(0);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code == errCode).assertTrue();
@@ -1775,13 +1839,224 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.rewindRead(0);
+                expect(data.getSize == 0).assertTrue();
             } catch (error) {
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
                 expect(error.code == errCode).assertTrue();
                 expect(error.message != null).assertTrue();
             }
             console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0500---------------------------");
-        });        
+        });
+
+        /*
+        * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0510
+        * @tc.name    : test Call the writebyte interface to write data to the MessageSequence instance,
+        *             and call readbyte to read data
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3 
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
+        */
+        it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0510", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_0510---------------------------");
+            let data: rpc.MessageSequence = rpc.MessageSequence.create();
+            let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+            let option: rpc.MessageOption = new rpc.MessageOption();
+            try{
+                let token = 2;
+                data.writeByte(token);
+                expect(gIRemoteObject != undefined).assertTrue();
+                await gIRemoteObject.sendMessageRequest(CODE_WRITE_BYTE, data, reply, option).then((result) => {
+                    expect(result.errCode).assertEqual(0);
+                    expect(result.reply.readByte()).assertEqual(token);
+                });
+            } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0510 error: " + error);
+                expect(error == null).assertTrue();
+            } finally{
+                console.info("reclaim done");
+                data.reclaim();
+                reply.reclaim();
+                done();
+            }
+            console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0510---------------------------");
+        });
+
+        /*
+        * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0520
+        * @tc.name    : test Writebyte interface, boundary value verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
+        */
+        it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0520", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_0520---------------------------");
+            let data: rpc.MessageSequence = rpc.MessageSequence.create();
+            let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+            let option: rpc.MessageOption = new rpc.MessageOption();
+            try{
+                data.writeByte(128);
+                data.writeByte(0);
+                data.writeByte(1);
+                data.writeByte(2);
+                data.writeByte(127);
+                expect(gIRemoteObject != undefined).assertTrue();
+                await gIRemoteObject.sendMessageRequest(CODE_WRITE_BYTE_MULTI, data, reply, option).then((result) => {
+                    expect(result.errCode).assertEqual(0);
+                    expect(reply.readByte()).assertEqual(-128);
+                    expect(reply.readByte()).assertEqual(0);
+                    expect(reply.readByte()).assertEqual(1);
+                    expect(reply.readByte()).assertEqual(2);
+                    expect(reply.readByte()).assertEqual(127);
+                });
+            } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0520 error: " + error);
+                expect(error == null).assertTrue();
+            } finally{
+                console.info("reclaim done");
+                data.reclaim();
+                reply.reclaim();
+                done();
+            }
+            console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0520---------------------------");
+        });
+
+        /*
+        * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0530
+        * @tc.name    : test Writebyte interface, Maximum boundary value verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
+        */
+        it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0530", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_0530---------------------------");
+            let data: rpc.MessageSequence = rpc.MessageSequence.create();
+            let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+            let option: rpc.MessageOption = new rpc.MessageOption();
+            try{
+                data.writeByte(-129);
+                expect(gIRemoteObject != undefined).assertTrue();
+                await gIRemoteObject.sendMessageRequest(CODE_WRITE_BYTE, data, reply, option).then((result) => {
+                    expect(result.errCode).assertEqual(0);
+                    expect(result.reply.readByte()).assertEqual(127);
+                });
+            } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0530 error: " + error);
+                expect(error == null).assertTrue();
+            } finally{
+                console.info("reclaim done");
+                data.reclaim();
+                reply.reclaim();
+                done();
+            }
+            console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0530---------------------------");
+        });
+
+        /*
+        * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0540
+        * @tc.name    : test Writebyte interface, Minimum boundary value verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
+        */
+        it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0540", 0, async function (done) {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_0540---------------------------");
+            let data: rpc.MessageSequence = rpc.MessageSequence.create();
+            let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+            let option: rpc.MessageOption = new rpc.MessageOption();
+            try{
+                data.writeByte(128);
+                expect(gIRemoteObject != undefined).assertTrue();
+                await gIRemoteObject.sendMessageRequest(CODE_WRITE_BYTE, data, reply, option).then((result) => {
+                    expect(result.errCode).assertEqual(0);
+                    expect(result.reply.readByte()).assertEqual(-128);
+                });
+            } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0540 error: " + error);
+                expect(error == null).assertTrue();
+            } finally{
+                console.info("reclaim done");
+                data.reclaim();
+                reply.reclaim();
+                done();
+            }
+            console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0540---------------------------");
+        });
+
+        /*
+        * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0550
+        * @tc.name    : test Writebyte interface, illegal value verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
+        */
+        it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0550", 0, async function () {
+            console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_0550---------------------------");
+            let data: rpc.MessageSequence = rpc.MessageSequence.create();
+            try{
+                data.writeByte("error");
+                expect(data.getSize == 0).assertTrue();
+            } catch (error) {
+                console.info("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0550 error: " + error);
+                let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+                expect(error.code != errCode).assertTrue();
+                expect(error.message != null).assertTrue();
+            } finally{
+                console.info("reclaim done");
+                data.reclaim();
+            }
+            console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0550---------------------------");
+        });
+
+        /*
+        * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0560
+        * @tc.name    : testwriteByte is write data to message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
+        */
+        it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0560", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_0560---------------------------");
+            let data = rpc.MessageSequence.create();
+            try{
+                data.reclaim();
+                data.writeByte(2);
+                expect(data.getSize == 0).assertTrue();
+            } catch (error) {
+                let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+                expect(error.code == errCode).assertTrue();
+                expect(error.message != null).assertTrue();
+            }
+            console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0560---------------------------");
+        });
+
+        /*
+        * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0570
+        * @tc.name    : testreadByte is read data from message sequence failed Error verification
+        * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+        * @tc.level   : 3  
+        * @tc.type    : Compatibility
+        * @tc.size    : MediumTest
+        */
+        it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_0570", 0,async function(){
+            console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_0570---------------------------");
+            let data = rpc.MessageSequence.create();
+            try{
+                data.reclaim();
+                data.readByte();
+                expect(data.getSize == 0).assertTrue();
+            } catch (error) {
+                let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
+                expect(error.code == errCode).assertTrue();
+                expect(error.message != null).assertTrue();
+            }
+            console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_0570---------------------------");
+        });
         console.info(logTag +"-----------------------SUB_DSoftbus_RPC_API_NEW_onRemoteRequest_Test is end-----------------------");
     });
 }

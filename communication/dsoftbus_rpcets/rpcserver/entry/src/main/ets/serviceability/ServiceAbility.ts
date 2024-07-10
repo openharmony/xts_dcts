@@ -15,6 +15,7 @@
 import ServiceExtension from '@ohos.app.ability.ServiceExtensionAbility';
 import rpc from '@ohos.rpc';
 
+let logTag = '[RpcServer:]';
 class MySequenceable {
     num = null;
     str = null;
@@ -40,54 +41,27 @@ class Stub extends rpc.RemoteObject {
     constructor(descriptor) {
         super(descriptor);
     }
-    onRemoteRequest(code, data, reply, option) {
-        try{
-            console.info("onRemoteRequest: " + code);
-            console.info("-----------------syhsyhsysh:" + code);
-            if (code === 37){
-                console.info("case 37 start");
-                let tmp1:string = data.readString();
-                console.info("onRemoteRequest readstring is " + tmp1);
-                reply.writeString("onRemoteRequest invoking");
-                console.info("case 37 onRemoteMessageRequest success");
-                return true;
-            } else if (code === 38){
-                console.info("case 38 start");
-                let tmp1:string = data.readString();
-                console.info("onRemoteRequest readstring is " + tmp1);
-                reply.writeString(tmp1);
-                console.info("case 37 onRemoteMessageRequest success");
-                return true;
-            }else {
-                console.error("default case " + code);
-                return super.onRemoteRequest(code, data, reply, option);
-            }
-        } catch (error) {
-            console.info("onRemoteRequest: " + error);
-        }
-        return false;
-    }
     onRemoteMessageRequest(code, data, reply, option) {
         try{
-            console.info("onRemoteMessageRequest: " + code);
+            console.info(logTag + "onRemoteMessageRequest: " + code);
             switch(code) {
                 case 1:
                     {
-                        console.info("case 1 start");
+                        console.info(logTag + "case 1 start");
                         let listener:any = data.readRemoteObject();
                         let num:number = data.readInt();
                         let str:string = data.readString();
-                        console.info("case 1 num is " + num);
-                        console.info("case 1 str is " + str);
+                        console.info(logTag + "case 1 num is " + num);
+                        console.info(logTag + "case 1 str is " + str);
                         let data2:any = rpc.MessageParcel.create();
                         let reply2:any = rpc.MessageParcel.create();
                         let option2:any = new rpc.MessageOption();
                         data2.writeInt(num);
                         data2.writeString(str);
-                        console.info("case 1 start sendRequest");
+                        console.info(logTag + "case 1 start sendRequest");
                         listener.sendRequest(1, data2, reply2, option2)
                             .then(function(result) {
-                                console.info("send request done, error code: " + result.errCode );
+                                console.info(logTag + "send request done, error code: " + result.errCode );
                             })
                             .catch(function(e) {
                                 console.error("send request got exception: " + e);
@@ -95,42 +69,42 @@ class Stub extends rpc.RemoteObject {
                             .finally(() => {
                                 data2.reclaim();
                                 reply2.reclaim();
-                                console.info("case 1 test done");
+                                console.info(logTag + "case 1 test done");
                             })
                         reply.writeNoException();
-                        console.info("case 1 onRemoteMessageRequest success");
+                        console.info(logTag + "case 1 onRemoteMessageRequest success");
                         return true;
                     }
                 case 2:
                     {
-                        console.info("case 2 start");
+                        console.info(logTag + "case 2 start");
                         let tmp:any = data.readInterfaceToken();
-                        console.info("The server's getSize and readInterfaceToken result is " + tmp.length);
+                        console.info(logTag + "The server's getSize and readInterfaceToken result is " + tmp.length);
                         reply.writeInterfaceToken(tmp);
-                        console.info("case 2 onRemoteMessageRequest success");
+                        console.info(logTag + "case 2 onRemoteMessageRequest success");
                         return true;
                     }
                 case 3:
                     {
-                        console.info("case 3 start");
+                        console.info(logTag + "case 3 start");
                         let tmp1:string = data.readString();
-                        console.info("The server's readString result is " + tmp1.length);
+                        console.info(logTag + "The server's readString result is " + tmp1.length);
                         reply.writeString(tmp1);
-                        console.info("case 3 onRemoteMessageRequest success");
+                        console.info(logTag + "case 3 onRemoteMessageRequest success");
                         return true;
                     }
                 case 4:
                     {
-                        console.info("case 4 start");
+                        console.info(logTag + "case 4 start");
                         let tmp1:number = data.readInt();
-                        console.info("The server's readInt result is " + tmp1);
+                        console.info(logTag + "The server's readInt result is " + tmp1);
                         reply.writeInt(tmp1);
-                        console.info("case 4 onRemoteMessageRequest success");
+                        console.info(logTag + "case 4 onRemoteMessageRequest success");
                         return true;
                     }
                 case 5:
                     {
-                        console.info("case 5 start");
+                        console.info(logTag + "case 5 start");
                         let tmp1 = data.readByte();
                         let tmp2 = data.readShort();
                         let tmp3 = data.readInt();
@@ -152,14 +126,40 @@ class Stub extends rpc.RemoteObject {
                         reply.writeChar(tmp8);
                         reply.writeString(tmp9);
                         reply.writeParcelable(s);
-                        console.info("case 5 onRemoteMessageRequest success");
+                        console.info(logTag + "case 5 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 6:
+                    {
+                        console.info(logTag + "case 6 start");
+                        let tmp1:number = data.readByte();
+                        console.info(logTag + "The server's readByte result is " + tmp1);
+                        reply.writeByte(tmp1);
+                        console.info(logTag + "case 6 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 7:
+                    {
+                        console.info(logTag + "case 7 start");
+                        let tmp1 = data.readByte();
+                        let tmp2 = data.readByte();
+                        let tmp3 = data.readByte();
+                        let tmp4 = data.readByte();
+                        let tmp5 = data.readByte();
+                        console.info(logTag + "The server's readByte result is " + tmp1 +";" + tmp2 +";" + tmp3 +";" + tmp4 +";" + tmp5);
+                        reply.writeByte(tmp1);
+                        reply.writeByte(tmp2);
+                        reply.writeByte(tmp3);
+                        reply.writeByte(tmp4);
+                        reply.writeByte(tmp5);
+                        console.info(logTag + "case 7 onRemoteMessageRequest success");
                         return true;
                     }
                 default:
-                    this.onRemoteRequest(code, data, reply, option);
+                    this.onRemoteMessageRequest(code, data, reply, option);
             }
         } catch (error) {
-            console.info("onRemoteMessageRequest: " + error);
+            console.info(logTag + "onRemoteMessageRequest: " + error);
         }
         return false
     }
@@ -168,27 +168,27 @@ class Stub extends rpc.RemoteObject {
 export default class ServiceAbility extends ServiceExtension {
     onCreate(want) {
         // Called to return a FormBindingData object.
-        console.info("IpcStageServer ServiceAbility onCreate");
+        console.info(logTag + "IpcStageServer ServiceAbility onCreate");
     }
 
     onConnect(want) {
         // Called when the form provider is notified that a temporary form is successfully
-        console.info("IpcStageServer ServiceAbility onConnect");
+        console.info(logTag + "IpcStageServer ServiceAbility onConnect");
         return new Stub("rpcTestAbility");
     }
 
     onDisconnect(want) {
         // Called to notify the form provider to update a specified form.
-        console.info("IpcStageServer ServiceAbility onDisconnect");
+        console.info(logTag + "IpcStageServer ServiceAbility onDisconnect");
     }
 
     onRequest(want, startId){
-        console.info("IpcStageServer ServiceAbility onRequest");
+        console.info(logTag + "IpcStageServer ServiceAbility onRequest");
 
     }
 
     onDestroy() {
         // Called to notify the form provider that a specified form has been destroyed.
-        console.info("IpcStageServer ServiceAbility onCronDestroyeate");
+        console.info(logTag + "IpcStageServer ServiceAbility onCronDestroyeate");
     }
 };
