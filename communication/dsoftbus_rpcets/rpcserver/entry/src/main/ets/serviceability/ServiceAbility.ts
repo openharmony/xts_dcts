@@ -12,10 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ServiceExtension from '@ohos.app.ability.ServiceExtensionAbility';
-import rpc from '@ohos.rpc';
+import ServiceExtension from "@ohos.app.ability.ServiceExtensionAbility";
+import rpc from "@ohos.rpc";
 
-let logTag = '[RpcServer:]';
+let logTag = "[RpcServer:]";
 class MySequenceable {
     num = null;
     str = null;
@@ -79,7 +79,7 @@ class Stub extends rpc.RemoteObject {
                     {
                         console.info(logTag + "case 2 start");
                         let tmp:any = data.readInterfaceToken();
-                        console.info(logTag + "The server's getSize and readInterfaceToken result is " + tmp.length);
+                        console.info(logTag + "The server is getSize and readInterfaceToken result is " + tmp.length);
                         reply.writeInterfaceToken(tmp);
                         console.info(logTag + "case 2 onRemoteMessageRequest success");
                         return true;
@@ -88,7 +88,7 @@ class Stub extends rpc.RemoteObject {
                     {
                         console.info(logTag + "case 3 start");
                         let tmp1:string = data.readString();
-                        console.info(logTag + "The server's readString result is " + tmp1.length);
+                        console.info(logTag + "The server is readString result is " + tmp1.length);
                         reply.writeString(tmp1);
                         console.info(logTag + "case 3 onRemoteMessageRequest success");
                         return true;
@@ -97,7 +97,7 @@ class Stub extends rpc.RemoteObject {
                     {
                         console.info(logTag + "case 4 start");
                         let tmp1:number = data.readInt();
-                        console.info(logTag + "The server's readInt result is " + tmp1);
+                        console.info(logTag + "The server is readInt result is " + tmp1);
                         reply.writeInt(tmp1);
                         console.info(logTag + "case 4 onRemoteMessageRequest success");
                         return true;
@@ -133,7 +133,7 @@ class Stub extends rpc.RemoteObject {
                     {
                         console.info(logTag + "case 6 start");
                         let tmp1:number = data.readByte();
-                        console.info(logTag + "The server's readByte result is " + tmp1);
+                        console.info(logTag + "The server is readByte result is " + tmp1);
                         reply.writeByte(tmp1);
                         console.info(logTag + "case 6 onRemoteMessageRequest success");
                         return true;
@@ -146,7 +146,7 @@ class Stub extends rpc.RemoteObject {
                         let tmp3 = data.readByte();
                         let tmp4 = data.readByte();
                         let tmp5 = data.readByte();
-                        console.info(logTag + "The server's readByte result is " + tmp1 +";" + tmp2 +";" + tmp3 +";" + tmp4 +";" + tmp5);
+                        console.info(logTag + "The server is readByte result is " + tmp1 +";" + tmp2 +";" + tmp3 +";" + tmp4 +";" + tmp5);
                         reply.writeByte(tmp1);
                         reply.writeByte(tmp2);
                         reply.writeByte(tmp3);
@@ -159,7 +159,7 @@ class Stub extends rpc.RemoteObject {
                     {
                         console.info(logTag + "case 8 start");
                         let tmp1:number = data.readShort();
-                        console.info(logTag + "The server's readShort result is " + tmp1);
+                        console.info(logTag + "The server is readShort result is " + tmp1);
                         reply.writeShort(tmp1);
                         console.info(logTag + "case 8 onRemoteMessageRequest success");
                         return true;
@@ -172,13 +172,39 @@ class Stub extends rpc.RemoteObject {
                         let tmp3 = data.readShort();
                         let tmp4 = data.readShort();
                         let tmp5 = data.readShort();
-                        console.info(logTag + "The server's readShort result is " + tmp1 +";"+ tmp2 +";" + tmp3 +";" + tmp4 +";" + tmp5);
+                        console.info(logTag + "The server is readShort result is " + tmp1 +";"+ tmp2 +";" + tmp3 +";" + tmp4 +";" + tmp5);
                         reply.writeShort(tmp1);
                         reply.writeShort(tmp2);
                         reply.writeShort(tmp3);
                         reply.writeShort(tmp4);
                         reply.writeShort(tmp5);
                         console.info(logTag + "case 9 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 10:
+                    {
+                        console.info(logTag + "case 10 start");
+                        let tmp1 = data.readInt();
+                        let tmp2 = data.readInt();
+                        let tmp3 = data.readInt();
+                        let tmp4 = data.readInt();
+                        let tmp5 = data.readInt();
+                        console.info(logTag + "The server is readInt result is " + tmp1 +";" + tmp2 +";" + tmp3 +";" + tmp4 +";" + tmp5);
+                        reply.writeInt(tmp1);
+                        reply.writeInt(tmp2);
+                        reply.writeInt(tmp3);
+                        reply.writeInt(tmp4);
+                        reply.writeInt(tmp5);
+                        console.info(logTag + "case 10 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 11:
+                    {
+                        console.info(logTag + "case 11 start");
+                        let tmp1:number = data.readLong();
+                        console.info(logTag + "The server is readLong result is " + tmp1);
+                        reply.writeLong(tmp1);
+                        console.info(logTag + "case 11 onRemoteMessageRequest success");
                         return true;
                     }
                 default:
