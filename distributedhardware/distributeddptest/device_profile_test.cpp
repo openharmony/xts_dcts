@@ -42,30 +42,34 @@
 
 namespace OHOS {
 namespace DistributedDeviceProfile {
+using namespace OHOS::Security::AccessToken;
 using namespace testing::ext;
 using namespace std;
 
-void AddPermission(void)
-{
-    const int32_t permsNum = 2;
-    const char *perms[permsNum] = {
-        "ohos.permission.DISTRIBUTED_DATASYNC",
-        "ohos.permission.DISTRIBUTED_SOFTBUS_CENTER"
-    };
-    uint64_t tokenId;
-    NativeTokenInfoParams infoInstance = {
-        .dcapsNum = 0,
-        .permsNum = permsNum,
-        .aclsNum = 0,
-        .dcaps = nullptr,
-        .perms = perms,
-        .acls = nullptr,
-        .processName = "deviceprofile",
-        .aplStr = "system_core",
-    };
-    tokenId = GetAccessTokenId(&infoInstance);
-    SetSelfTokenID(tokenId);
-}
+static constexpr int32_t DEFAULT_API_VERSION = 8;
+
+static PermissionStateFull g_testState = {
+    .permissionName = "ohos.permission.DISTRIBUTED_SOFTBUS_CENTER",
+    .isGeneral = true,
+    .resDeviceID = {"local"},
+    .grantStatus = {PermissionState::PERMISSION_GRANTED},
+    .grantFlags = {1}
+};
+
+static PermissionStateFull g_testState1 = {
+    .permissionName = "ohos.permission.DISTRIBUTED_DATASYNC",
+    .isGeneral = true,
+    .resDeviceID = {"local"},
+    .grantStatus = {PermissionState::PERMISSION_GRANTED},
+    .grantFlags = {1}
+};
+
+static HapPolicyParams g_PolicyPramsl = {
+    .apl = APL_NORMAL,
+    .domain = "test.domain.A",
+    .permList = {},
+    .permStateList = {g_testState, g_testState1}
+};
 
 class DeviceProfileManagerTest : public testing::Test {
 public:
@@ -77,10 +81,18 @@ public:
 
 void DeviceProfileManagerTest::SetUpTestCase(void)
 {
-    AddPermission();
-    sleep(1);
-    system("pidof accesstoken_service | xargs kill -9");
-    sleep(1);
+    HapInfoParams info = {
+        .userID = 1,
+        .bundleName = "DctsDpTest",
+        .instIndex = 0,
+        .appIDDesc = "testtesttesttest",
+        .apiVersion = DEFAULT_API_VERSION,
+        .isSystemApp = true
+    };
+    AccessTokenIDEx tokenIdEx = {0};
+    tokenIdEx = AccessTokenKit::AllocHapToken(info, g_PolicyPramsl);
+    SetSelfTokenID(tokenIdEx.tokenIDEx);
+    sleep(NUM_2);
 }
 
 void DeviceProfileManagerTest::TearDownTestCase(void) {
@@ -91,7 +103,9 @@ void DeviceProfileManagerTest::SetUp()
     DeviceProfileManager::GetInstance().Init();
 }
 
-void DeviceProfileManagerTest::TearDown() {
+void DeviceProfileManagerTest::TearDown()
+{
+    DeviceProfileManager::GetInstance().UnInit();
 }
 
 class SyncCallback : public SyncCompletedCallbackStub {
@@ -123,7 +137,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_0200, TestSize.Level1)
 {
     int32_t ret = DeviceProfileManager::GetInstance().UnInit();
     EXPECT_EQ(ret, DP_SUCCESS);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -218,7 +231,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_0700, TestSize.Level1)
     DeviceProfileManager::GetInstance().isFirst_.store(true);
     int32_t ret = DeviceProfileManager::GetInstance().PutServiceProfile(serviceProfile10);
     EXPECT_EQ(ret, DP_SUCCESS);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -240,7 +252,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_0800, TestSize.Level1)
     DeviceProfileManager::GetInstance().isFirst_.store(true);
     int32_t ret = DeviceProfileManager::GetInstance().PutServiceProfile(serviceProfile11);
     EXPECT_EQ(ret, DP_SUCCESS);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -379,7 +390,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_1400, TestSize.Level1)
     DeviceProfileManager::GetInstance().deviceProfileStore_ = nullptr;
     int32_t ret = DeviceProfileManager::GetInstance().PutCharacteristicProfile(charProfile10);
     EXPECT_EQ(ret, DP_INVALID_PARAMS);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -402,7 +412,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_1500, TestSize.Level1)
     DeviceProfileManager::GetInstance().isFirst_.store(true);
     int32_t ret = DeviceProfileManager::GetInstance().PutCharacteristicProfile(charProfile11);
     EXPECT_EQ(ret, DP_SUCCESS);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -531,7 +540,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_2000, TestSize.Level1)
     DeviceProfile outDeviceProfile;
     int32_t ret = DeviceProfileManager::GetInstance().GetDeviceProfile(deviceId, outDeviceProfile);
     EXPECT_EQ(ret, DP_INVALID_PARAMS);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -547,7 +555,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_2100, TestSize.Level1)
     DeviceProfile outDeviceProfile;
     int32_t ret = DeviceProfileManager::GetInstance().GetDeviceProfile(deviceId, outDeviceProfile);
     EXPECT_EQ(ret, DP_INVALID_PARAMS);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -610,7 +617,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_2400, TestSize.Level1)
     ServiceProfile outServiceProfile;
     int32_t ret = DeviceProfileManager::GetInstance().GetServiceProfile(deviceId, serviceName, outServiceProfile);
     EXPECT_EQ(ret, DP_INVALID_PARAMS);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -627,7 +633,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_2500, TestSize.Level1)
     ServiceProfile outServiceProfile;
     int32_t ret = DeviceProfileManager::GetInstance().GetServiceProfile(deviceId, serviceName, outServiceProfile);
     EXPECT_EQ(ret, DP_INVALID_PARAMS);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -700,7 +705,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_2800, TestSize.Level1)
     int32_t ret = DeviceProfileManager::GetInstance().GetCharacteristicProfile(deviceId, serviceName,
         characteristicKey, outCharProfile);
     EXPECT_EQ(ret, DP_INVALID_PARAMS);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -719,7 +723,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_2900, TestSize.Level1)
     int32_t ret = DeviceProfileManager::GetInstance().GetCharacteristicProfile(deviceId, serviceName,
         characteristicKey, outCharProfile);
     EXPECT_EQ(ret, DP_INVALID_PARAMS);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -775,7 +778,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_3200, TestSize.Level1)
     DeviceProfileManager::GetInstance().deviceProfileStore_ = nullptr;
     int32_t ret = DeviceProfileManager::GetInstance().DeleteServiceProfile(deviceId, serviceName);
     EXPECT_EQ(ret, DP_INVALID_PARAMS);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -792,7 +794,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_3300, TestSize.Level1)
     DeviceProfileManager::GetInstance().deviceProfileStore_->UnInit();
     int32_t ret = DeviceProfileManager::GetInstance().DeleteServiceProfile(deviceId, serviceName);
     EXPECT_EQ(ret, DP_DEL_KV_DB_FAIL);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
@@ -857,9 +858,7 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_3600, TestSize.Level1)
     int32_t ret = DeviceProfileManager::GetInstance().DeleteCharacteristicProfile(deviceId, serviceName,
         characteristicKey);
     EXPECT_EQ(ret, DP_INVALID_PARAMS);
-    DeviceProfileManager::GetInstance().Init();
 }
-
 /**
  * @tc.name: SUB_DH_DDp_Dcts_3700
  * @tc.desc: DeleteCharacteristicProfile failed, DeleteServiceProfile fail.
@@ -876,7 +875,6 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_3700, TestSize.Level1)
     int32_t ret = DeviceProfileManager::GetInstance().DeleteCharacteristicProfile(deviceId, serviceName,
         characteristicKey);
     EXPECT_EQ(ret, DP_DEL_KV_DB_FAIL);
-    DeviceProfileManager::GetInstance().Init();
 }
 
 /**
