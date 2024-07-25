@@ -91,7 +91,7 @@ void TransSessionFuncTest::SetUpTestCase()
     LOG("SetUp begin");
     AddPermission();
     sleep(1);
-    system("pidof accesstoken_service | xargs kill -9");
+    OHOS::Security::AccessToken::AccessTokenKit::ReloadNativeTokenInfo();
     sleep(1);
     TestSetUp();
     int ret = RegisterDeviceStateDefCallback();
@@ -158,7 +158,7 @@ HWTEST_F(TransSessionFuncTest, SUB_DSoftbus_Spec_DCTS_OpenSession_0200, TestSize
     int count = MAX_SESSION_NUM / 2;
     int sessionId4Data[count];
     int sessionId4Ctrl[count];
-    char groupId[][4] = { "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8" };
+    char groupId[][4] = { "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8", "g9", "g10" };
     ret = OpenSessionBatch4Data(groupId, sessionId4Data, count);
     EXPECT_EQ(SOFTBUS_OK, ret) << "OpenSessionWithDiffGroupId4Data fail";
     ret = OpenSessionBatch4Ctl(groupId, sessionId4Ctrl, count);
