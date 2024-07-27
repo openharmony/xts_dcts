@@ -282,7 +282,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 let token = new TestAbilityStub(null);
                 data.writeRemoteObject(token);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0020 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
@@ -309,7 +309,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 let token = {};
                 data.writeRemoteObject(token);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0030 error: " + error);
                 let errCode = `${rpc.ErrorCode.PROXY_OR_REMOTE_OBJECT_INVALID_ERROR}`;
@@ -377,7 +377,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.writeRemoteObject(testAbilityStub);
                 data.reclaim();
                 data.readRemoteObject();
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0050 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
@@ -402,7 +402,7 @@ export default function RpcRequestEtsUnitTest() {
                 let testAbilityStub = new TestAbilityStub("testObject");
                 data.reclaim();
                 data.writeRemoteObject(testAbilityStub);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0060 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
@@ -500,7 +500,7 @@ export default function RpcRequestEtsUnitTest() {
                     token += "a";
                 }
                 data.writeInterfaceToken(token);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0090 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
@@ -528,7 +528,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 let token = 123;
                 data.writeInterfaceToken(token);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0100 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
@@ -555,7 +555,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 let token = null;
                 data.writeInterfaceToken(token);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0110 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
@@ -582,7 +582,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.writeInterfaceToken("rpctest");
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0120 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
@@ -607,7 +607,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.writeInterfaceToken("rpctest");
                 data.reclaim();
                 data.readInterfaceToken();
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0130 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
@@ -656,8 +656,7 @@ export default function RpcRequestEtsUnitTest() {
 
         /*
         * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0150
-        * @tc.name    : test SetSize: Increases the value of the data contained in the MessageSequence instance by 1,
-                    Write setSize
+        * @tc.name    : test Set the size of the data contained in the MessageSequence instance to 0
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3 
         * @tc.type    : Compatibility
@@ -710,7 +709,8 @@ export default function RpcRequestEtsUnitTest() {
                 expect(getCapacitydata).assertEqual(64);
                 data.setSize(getCapacitydata);
                 expect(data.getSize()).assertEqual(getCapacitydata);
-                data.setSize(getCapacitydata + 1);
+                data.setSize(getCapacitydata - 1);
+                expect(data.getSize()).assertEqual(getCapacitydata-1);
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0160 error: " + error);
                 expect(error == null).assertTrue();
@@ -745,7 +745,8 @@ export default function RpcRequestEtsUnitTest() {
                     let getCapacityresult = result.reply.getCapacity();
                     result.reply.setSize(getCapacityresult);
                     expect(result.reply.getSize()).assertEqual(getCapacityresult);
-                    result.reply.setSize(getCapacityresult + 1);
+                    result.reply.setSize(getCapacityresult - 1);
+                    expect(result.reply.getSize()).assertEqual(getCapacityresult-1);
                 });
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0170 error: " + error);
@@ -775,9 +776,11 @@ export default function RpcRequestEtsUnitTest() {
                 data.setSize(4 * G);
                 expect(data.getSize()).assertEqual(0);
                 data.setSize(4 * G - 1);
+                expect(data.getSize()).assertEqual(0);
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0180 error: " + error);
-                expect(error == null).assertTrue();
+                let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
+                expect(error.message != null).assertTrue();
             } finally{
                 console.info(logTag + "reclaim done");
                 data.reclaim();
@@ -802,10 +805,12 @@ export default function RpcRequestEtsUnitTest() {
                 expect(data.getSize()).assertEqual(0);
                 data.setSize(2 * 4 * G);
                 expect(data.getSize()).assertEqual(0);
-                data.setSize(2 * G);
+                data.setSize(2 * G + 1);
+                expect(data.getSize()).assertEqual(0);
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0190 error: " + error);
-                expect(error == null).assertTrue();
+                let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
+                expect(error.message != null).assertTrue();
             } finally{
                 console.info(logTag + "reclaim done");
                 data.reclaim();
@@ -853,8 +858,8 @@ export default function RpcRequestEtsUnitTest() {
 
         /*
         * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0210
-        * @tc.name    : test setCapacity Sets the storage capacity of the MessageSequence instance. The getCapacity
-                    obtains the current MessageSequence capacity
+        * @tc.name    : test setCapacity Sets the storage capacity of the MessageSequence instance. After getting the 
+                    MessageSequence instance, get the current MessageSequence capacity
         * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
         * @tc.level   : 3 
         * @tc.type    : Compatibility
@@ -904,7 +909,7 @@ export default function RpcRequestEtsUnitTest() {
                 let getSizedata = data.getSize();
                 data.setCapacity(getSizedata + 1);
                 data.setCapacity(getSizedata);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0220 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
@@ -939,7 +944,7 @@ export default function RpcRequestEtsUnitTest() {
                     expect(result.reply.getCapacity()).assertEqual(("constant".length * 2) + 8);
                     result.reply.setCapacity(getSizeresult + 1);
                     result.reply.setCapacity(getSizeresult);
-                    expect(data.getSize == 0).assertTrue();
+                    expect(data.getSize() == 0).assertTrue();
                 });
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0230 error: " + error);
@@ -971,7 +976,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.setCapacity(M);
                 expect(data.getCapacity()).assertEqual(M);
                 data.setCapacity(2 * G);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0240 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
@@ -1002,7 +1007,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.setSize(0);
                 let ret = new MySequenceable(1, "");
                 data.readParcelable(ret);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0250 error: " + error);
                 let errCode = `${rpc.ErrorCode.CALL_JS_METHOD_ERROR}`;
@@ -1033,7 +1038,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.setCapacity(0);
                 data.setSize(0);
                 data.readInterfaceToken();
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0260 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
@@ -1062,7 +1067,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.setCapacity(0);
                 let token = "hello ruan zong xian";
                 data.writeInterfaceToken(token);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0270 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
@@ -1091,7 +1096,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.setCapacity(true);
                 let token = "hello ruan zong xian";
                 data.writeInterfaceToken(token);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0280 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
@@ -1118,7 +1123,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.setSize(0);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0290 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
@@ -1145,7 +1150,7 @@ export default function RpcRequestEtsUnitTest() {
                 let ret = new MySequenceable(0, "");
                 data.setCapacity(0);
                 data.readParcelable(ret);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0300 error: " + error);
                 let errCode = `${rpc.ErrorCode.PARCEL_MEMORY_ALLOC_ERROR}`;
@@ -1619,7 +1624,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.rewindWrite(0);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0430 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
@@ -1856,7 +1861,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.rewindRead(0);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0500 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
@@ -2017,7 +2022,7 @@ export default function RpcRequestEtsUnitTest() {
             let data: rpc.MessageSequence = rpc.MessageSequence.create();
             try{
                 data.writeByte("error");
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0550 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
@@ -2044,7 +2049,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.writeByte(2);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0560 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
@@ -2068,7 +2073,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.readByte();
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0570 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
@@ -2230,7 +2235,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.writeShort(0);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0620 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
@@ -2255,7 +2260,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.writeShort(0);
                 data.reclaim();
                 data.readShort();
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0630 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
@@ -2416,7 +2421,7 @@ export default function RpcRequestEtsUnitTest() {
             let data: rpc.MessageSequence = rpc.MessageSequence.create();
             try{
                 data.writeInt("error");
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0680 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
@@ -2443,7 +2448,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.writeInt(0);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0690 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
@@ -2468,7 +2473,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.writeInt(0);
                 data.reclaim();
                 data.readInt();
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0700 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
@@ -2627,7 +2632,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.writeLong(0);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0750 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
@@ -2652,7 +2657,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.writeLong(0);
                 data.reclaim();
                 data.readLong();
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0760 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
@@ -2843,7 +2848,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 let token = "a";
                 data.writeFloat(token);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0820 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
@@ -2870,7 +2875,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.writeFloat(1.0);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0830 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
@@ -2895,7 +2900,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.writeFloat(1.0);
                 data.reclaim();
                 data.readFloat();
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0840 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
@@ -3016,7 +3021,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.writeDouble(1.0);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0880 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
@@ -3041,7 +3046,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.writeDouble(1.0);
                 data.reclaim();
                 data.readDouble();
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0890 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
@@ -3132,7 +3137,7 @@ export default function RpcRequestEtsUnitTest() {
             let data: rpc.MessageSequence = rpc.MessageSequence.create();
             try{
                 data.writeBoolean(9);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0920 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
@@ -3159,7 +3164,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 let token = "true";
                 data.writeBoolean(token);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0930 error: " + error);
                 let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
@@ -3186,7 +3191,7 @@ export default function RpcRequestEtsUnitTest() {
             try{
                 data.reclaim();
                 data.writeBoolean(true);
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0940 error: " + error);
                 let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
@@ -3211,7 +3216,7 @@ export default function RpcRequestEtsUnitTest() {
                 data.writeBoolean(true);
                 data.reclaim();
                 data.readBoolean();
-                expect(data.getSize == 0).assertTrue();
+                expect(data.getSize() == 0).assertTrue();
             } catch (error) {
                 console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_0950 error: " + error);
                 let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
