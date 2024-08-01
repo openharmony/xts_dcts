@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Huawei Device Co., Ltd.
+ * Copyright (C) 2023-2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -1756,14 +1756,23 @@ export default function rdbSyncFirstLevelTest(){
             try{
                 let promise = data_Rdb.getRdbStore(context, STORE_CONFIG023);
                 await promise.then(async (rdbStore) => {
-                  rdbSecondStore = rdbStore;
-                  console.info(`testRdbSyncTest0230 Get RdbStore successfully.`);
-                  expect().assertFail();
-                  done();
+                    rdbSecondStore = rdbStore;
+                    console.info(`testRdbSyncStageEtsTest0230 Get RdbStore successfully.`);
+                    expect(rdbSecondStore != null).assertTrue();
                 }).catch((err) => {
-                  console.error(`testRdbSyncTest0230 Get RdbStore failed, code is ${err.code},message is ${err.message}`);
-                  expect(err.code).assertEqual(14800017);
-                  done();
+                    console.error(`testRdbSyncStageEtsTest0230 Get RdbStore failed, code is ${err.code},message is ${err.message}`);
+                    expect().assertFail();
+                })
+                let promise1 = data_Rdb.getRdbStore(context, STORE_CONFIG);
+                await promise1.then(async (rdbStore) => {
+                    rdbSecondStore = rdbStore;
+                    console.info(`testRdbSyncStageEtsTest0230 S1 Get RdbStore successfully.`);
+                    expect().assertFail();
+                    done();
+                }).catch((err) => {
+                    console.error(`testRdbSyncStageEtsTest0230 S1 Get RdbStore failed, code is ${err.code},message is ${err.message}`);
+                    expect(err.code).assertEqual(14800017);
+                    done();
                 })
             }catch(error){
                 console.error(`testRdbSyncTest0230 Get RdbStore failed error, code is ${error.code},message is ${error.message}`);
