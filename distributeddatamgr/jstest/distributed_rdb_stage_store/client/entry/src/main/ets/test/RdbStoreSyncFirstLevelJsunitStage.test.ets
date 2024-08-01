@@ -1776,10 +1776,19 @@ export default function rdbSyncFirstLevelTest(){
                 await promise.then(async (rdbStore) => {
                     rdbSecondStore = rdbStore;
                     console.info(`testRdbSyncStageEtsTest0230 Get RdbStore successfully.`);
+                    expect(rdbSecondStore != null).assertTrue();
+                }).catch((err) => {
+                    console.error(`testRdbSyncStageEtsTest0230 Get RdbStore failed, code is ${err.code},message is ${err.message}`);
+                    expect().assertFail();
+                })
+                let promise1 = data_Rdb.getRdbStore(context, STORE_CONFIG);
+                await promise1.then(async (rdbStore) => {
+                    rdbSecondStore = rdbStore;
+                    console.info(`testRdbSyncStageEtsTest0230 S1 Get RdbStore successfully.`);
                     expect().assertFail();
                     done();
                 }).catch((err) => {
-                    console.error(`testRdbSyncStageEtsTest0230 Get RdbStore failed, code is ${err.code},message is ${err.message}`);
+                    console.error(`testRdbSyncStageEtsTest0230 S1 Get RdbStore failed, code is ${err.code},message is ${err.message}`);
                     expect(err.code).assertEqual(14800017);
                     done();
                 })
