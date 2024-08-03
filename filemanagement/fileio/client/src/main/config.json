@@ -32,8 +32,8 @@
     ],
     "package": "com.acts.fileio.test.server",
     "name": ".entry",
-    "mainAbility":".MainAbility",
-    "srcPath":"",
+    "mainAbility": ".MainAbility",
+    "srcPath": "",
     "deviceType": [
       "phone",
       "tablet",
@@ -69,21 +69,21 @@
         "description": "$string:mainability_description",
         "label": "$string:app_name",
         "type": "page",
-        "visible":true,
+        "visible": true,
         "launchType": "standard"
       },
       {
-          "orientation": "unspecified",
-          "formsEnabled": false,
-          "name": ".TestAbility",
-          "srcLanguage": "js",
-          "srcPath": "TestAbility",
-          "icon": "$media:icon",
-          "description": "$string:TestAbility_desc",
-          "label": "$string:TestAbility_label",
-          "type": "page",
-          "visible": true,
-          "launchType": "standard"
+        "orientation": "unspecified",
+        "formsEnabled": false,
+        "name": ".TestAbility",
+        "srcLanguage": "js",
+        "srcPath": "TestAbility",
+        "icon": "$media:icon",
+        "description": "$string:TestAbility_desc",
+        "label": "$string:TestAbility_label",
+        "type": "page",
+        "visible": true,
+        "launchType": "standard"
       }
     ],
     "js": [
@@ -109,8 +109,8 @@
       }
     ],
     "testRunner": {
-        "name": "OpenHarmonyTestRunner",
-        "srcPath": "TestRunner"
+      "name": "OpenHarmonyTestRunner",
+      "srcPath": "TestRunner"
     }
   }
 }
