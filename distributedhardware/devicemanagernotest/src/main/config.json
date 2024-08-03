@@ -13,8 +13,7 @@
     },
     "deviceConfig": {},
     "module": {
-        "reqPermissions": [
-        ],
+        "reqPermissions": [],
         "package": "com.ohos.distributedjstest",
         "name": ".entry",
         "mainAbility": ".MainAbility",

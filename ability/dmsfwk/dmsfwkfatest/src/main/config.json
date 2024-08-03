@@ -17,11 +17,12 @@
     "package": "com.example.configuration",
     "name": ".entry",
     "mainAbility": ".MainAbility",
-    "srcPath":"",
+    "srcPath": "",
     "deviceType": [
-        "default",
-        "tablet",
-        "2in1"
+      "default",
+      "tablet",
+      "2in1",
+      "wearable"
     ],
     "distro": {
       "deliveryWithInstall": true,
@@ -31,42 +32,42 @@
     },
     "abilities": [
       {
-          "skills": [
-              {
-                  "entities": [
-                      "entity.system.home"
-                  ],
-                  "actions": [
-                      "action.system.home"
-                  ]
-              }
-          ],
-          "orientation": "unspecified",
-          "formsEnabled": false,
-          "name": ".MainAbility",
-          "srcLanguage": "js",
-          "srcPath": "MainAbility",
-          "icon": "$media:icon",
-          "description": "$string:MainAbility_desc",
-          "label": "$string:MainAbility_label",
-          "type": "page",
-          "visible": true,
-          "launchType": "singleton"
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ],
+        "orientation": "unspecified",
+        "formsEnabled": false,
+        "name": ".MainAbility",
+        "srcLanguage": "js",
+        "srcPath": "MainAbility",
+        "icon": "$media:icon",
+        "description": "$string:MainAbility_desc",
+        "label": "$string:MainAbility_label",
+        "type": "page",
+        "visible": true,
+        "launchType": "singleton"
       },
       {
-          "orientation": "unspecified",
-          "formsEnabled": false,
-          "name": ".TestAbility",
-          "srcLanguage": "js",
-          "srcPath": "TestAbility",
-          "icon": "$media:icon",
-          "description": "$string:TestAbility_desc",
-          "label": "$string:TestAbility_label",
-          "type": "page",
-          "visible": true,
-          "launchType": "singleton"
+        "orientation": "unspecified",
+        "formsEnabled": false,
+        "name": ".TestAbility",
+        "srcLanguage": "js",
+        "srcPath": "TestAbility",
+        "icon": "$media:icon",
+        "description": "$string:TestAbility_desc",
+        "label": "$string:TestAbility_label",
+        "type": "page",
+        "visible": true,
+        "launchType": "singleton"
       }
-  ],
+    ],
     "reqPermissions": [
       {
         "name": "ohos.permission.GET_BUNDLE_INFO",
@@ -108,8 +109,8 @@
       }
     ],
     "testRunner": {
-        "name": "OpenHarmonyTestRunner",
-        "srcPath": "TestRunner"
+      "name": "OpenHarmonyTestRunner",
+      "srcPath": "TestRunner"
     }
   }
 }

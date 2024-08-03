@@ -50,10 +50,9 @@
         "visible": true
       }
     ],
-
     "requestPermissions": [
       {
-        "name":"ohos.permission.GET_BUNDLE_INFO"
+        "name": "ohos.permission.GET_BUNDLE_INFO"
       },
       {
         "name": "ohos.permission.DISTRIBUTED_DATASYNC"
@@ -65,7 +64,7 @@
         "name": "ohos.permission.ACCESS_SERVICE_DM"
       },
       {
-        "name":"ohos.permission.KEEP_BACKGROUND_RUNNING"
+        "name": "ohos.permission.KEEP_BACKGROUND_RUNNING"
       }
     ]
   }
