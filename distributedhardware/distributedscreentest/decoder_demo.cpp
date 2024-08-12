@@ -58,10 +58,10 @@ static const int32_t ES_W[183] = {
 };
 
 using namespace OHOS;
-using namespace OHOS::Media;
+using namespace OHOS::MediaAVCodec;
 using namespace std;
 namespace {
-    constexpr uint32_t DEFAULT_FRAME_RATE = 30;
+    constexpr double DEFAULT_FRAME_RATE = 30.0;
     constexpr uint32_t MAX_INPUT_BUFFER_SIZE = 30000;
     constexpr uint32_t FRAME_DURATION_US = 33000;
     constexpr uint32_t VIDEO_DATA_FORMAT_NV12 = 2;
@@ -76,7 +76,7 @@ void VDecDemo::RunCase()
 {
     CheckCodecType();
     CreateVdec();
-    Format format;
+    Media::Format format;
     format.PutIntValue("width", width_);
     format.PutIntValue("height", height_);
     if (isW) {
@@ -84,7 +84,7 @@ void VDecDemo::RunCase()
     } else {
         format.PutIntValue("pixel_format", VIDEO_DATA_FORMAT_RGBA);
     }
-    format.PutIntValue("frame_rate", DEFAULT_FRAME_RATE);
+    format.PutDoubleValue("frame_rate", DEFAULT_FRAME_RATE);
     format.PutIntValue("max_input_size", MAX_INPUT_BUFFER_SIZE);
     Configure(format);
     SetSurface();
@@ -109,7 +109,7 @@ int32_t VDecDemo::CreateVdec()
     return 0;
 }
 
-int32_t VDecDemo::Configure(const Format &format)
+int32_t VDecDemo::Configure(const Media::Format &format)
 {
     return vdec_->Configure(format);
 }
@@ -192,11 +192,14 @@ int32_t VDecDemo::SetSurface()
 void VDecDemo::CheckCodecType()
 {
     std::vector<std::string> localCodecArray;
-    std::shared_ptr<Media::AVCodecList> codecList = Media::AVCodecListFactory::CreateAVCodecList();
-    std::vector<std::shared_ptr<Media::VideoCaps>> caps = codecList->GetVideoEncoderCaps();
-    for (const auto &cap : caps) {
-        std::shared_ptr<Media::AVCodecInfo> codecInfo = cap->GetCodecInfo();
-        localCodecArray.push_back(codecInfo->GetName());
+    std::shared_ptr<MediaAVCodec::AVCodecList> codecList = MediaAVCodec::AVCodecListFactory::CreateAVCodecList();
+    const std::vector<std::string> encoderName = {std::string(MediaAVCodec::CodecMimeType::VIDEO_AVC),
+                                                  std::string(MediaAVCodec::CodecMimeType::VIDEO_HEVC)};
+    for (const auto &coder : encoderName) {
+        MediaAVCodec::CapabilityData *capData = codecList->GetCapability(coder, true,
+            MediaAVCodec::AVCodecCategory::AVCODEC_HARDWARE);
+        std::string mimeType = capData->mimeType;
+        localCodecArray.push_back(mimeType);
     }
 
     if (std::find(localCodecArray.begin(), localCodecArray.end(),
@@ -227,20 +230,17 @@ void VDecDemo::InputFunc()
 {
     const int32_t *frameLen = GetFrameLen();
 
-    while (true) {
-        if (!isRunning_.load()) {
-            break;
-        }
-
+    while (isRunning_.load()) {
         unique_lock<mutex> lock(signal_->inMutex_);
-        signal_->inCond_.wait(lock, [this]() { return signal_->inQueue_.size() > 0; });
+        signal_->inCond_.wait(
+            lock, [this]() { return signal_->inQueue_.size() > 0 && signal_->availableInputBufferQueue_.size() > 0; });
 
         if (!isRunning_.load()) {
             break;
         }
 
         uint32_t index = signal_->inQueue_.front();
-        auto buffer = vdec_->GetInputBuffer(index);
+        std::shared_ptr<Media::AVSharedMemory> buffer = signal_->availableInputBufferQueue_.front();
         if(buffer == nullptr) {
             break;
         }
@@ -274,6 +274,7 @@ void VDecDemo::InputFunc()
         frameLen++;
         timeStamp_ += FRAME_DURATION_US;
         signal_->inQueue_.pop();
+        signal_->availableInputBufferQueue_.pop();
 
         frameCount_++;
         if (frameCount_ == defaultFrameCount_) {
@@ -313,20 +314,22 @@ void VDecDemoCallback::OnError(AVCodecErrorType errorType, int32_t errorCode)
     DHLOGI("Error received, errorType: %s, errorCode: %d", errorType, errorCode);
 }
 
-void VDecDemoCallback::OnOutputFormatChanged(const Format &format)
+void VDecDemoCallback::OnOutputFormatChanged(const Media::Format &format)
 {
     DHLOGI("OnOutputFormatChanged received");
 }
 
-void VDecDemoCallback::OnInputBufferAvailable(uint32_t index)
+void VDecDemoCallback::OnInputBufferAvailable(uint32_t index, std::shared_ptr<Media::AVSharedMemory> buffer)
 {
     DHLOGI("OnInputBufferAvailable received, index: %d", index);
     unique_lock<mutex> lock(signal_->inMutex_);
     signal_->inQueue_.push(index);
+    signal_->availableInputBufferQueue_.push(buffer);
     signal_->inCond_.notify_all();
 }
 
-void VDecDemoCallback::OnOutputBufferAvailable(uint32_t index, AVCodecBufferInfo info, AVCodecBufferFlag flag)
+void VDecDemoCallback::OnOutputBufferAvailable(uint32_t index, AVCodecBufferInfo info, AVCodecBufferFlag flag,
+                                               std::shared_ptr<Media::AVSharedMemory> buffer)
 {
     DHLOGI("OnOutputBufferAvailable received, index: %d", index);
     unique_lock<mutex> lock(signal_->outMutex_);
