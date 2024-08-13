@@ -24,8 +24,8 @@ ohos_js_hap_suite("distributerdbdisets_test") {
   certificate_profile = "signature/openharmony_sx.p7b"
   hap_name = "DctsDistributeRdbStoreDisEtsTest"
 
-  subsystem_name = "ability"
-  part_name = "ability_runtime"
+  subsystem_name = "distributeddatamgr"
+  part_name = "relational_store"
 }
 
 ohos_app_scope("distributerdbdisets_app_profile") {
