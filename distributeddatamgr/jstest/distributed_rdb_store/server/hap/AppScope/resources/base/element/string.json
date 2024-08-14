@@ -2,7 +2,11 @@
  "string":[
     {
       "name":"app_name",
-      "value":"rdbserver"
+      "value":"DctsDistributeRdbDisJsServer"
+    },
+    {
+      "name":"description_application",
+      "value":"DctsDistributeRdbDisJsServer"
     }
   ]
 }      
