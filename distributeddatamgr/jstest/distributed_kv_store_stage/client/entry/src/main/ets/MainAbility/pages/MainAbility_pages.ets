@@ -21,7 +21,7 @@ import testsuite from '../../test/List.test'
 @Entry
 @Component
 struct Index {
-  @State message: string = '2Stage kvclient'
+  @State message: string = 'DctsDistributeKvStoreDisEtsTest'
 
   aboutToAppear() {
     console.info("start run testcase!!!!")
@@ -37,7 +37,7 @@ struct Index {
     Row() {
       Column() {
         Text(this.message)
-          .fontSize(30)
+          .fontSize(20)
       }
       .width('100%')
     }
