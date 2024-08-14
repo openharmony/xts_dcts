@@ -24,8 +24,8 @@ ohos_hap_assist_suite("distributedobjectdists_server") {
   ]
   ets2abc = true
   certificate_profile = "signature/openharmony_sx.p7b"
-  subsystem_name = "ability"
-  part_name = "ability_runtime"
+  subsystem_name = "distributeddatamgr"
+  part_name = "data_object"
 }
 
 ohos_app_scope("distributedobjectdisets_app_profile") {
