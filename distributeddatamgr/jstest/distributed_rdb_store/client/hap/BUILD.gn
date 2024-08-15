@@ -21,6 +21,8 @@ ohos_js_hap_suite("distributerdbdisjs_test") {
   ]
   certificate_profile = "./signature/openharmony_sx.p7b"
   hap_name = "DctsDistributeRdbStoreDisJsTest"
+  subsystem_name = "distributeddatamgr"
+  part_name = "relational_store"
 }
 ohos_js_assets("distributerdbdisjs_assets") {
   js2abc = true
