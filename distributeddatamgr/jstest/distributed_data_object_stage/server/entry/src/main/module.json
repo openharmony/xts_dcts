@@ -19,7 +19,7 @@
     "uiSyntax": "ets",
     "abilities": [
       {
-        "continuable":true,
+        "continuable": true,
         "name": "com.acts.distributedobjectdisets.MainAbility",
         "srcEntrance": "./ets/MainAbility/MainAbility.ts",
         "description": "$string:phone_entry_main",
@@ -51,10 +51,9 @@
         "visible": true
       }
     ],
-
     "requestPermissions": [
       {
-        "name":"ohos.permission.GET_BUNDLE_INFO"
+        "name": "ohos.permission.GET_BUNDLE_INFO"
       },
       {
         "name": "ohos.permission.DISTRIBUTED_DATASYNC"
