@@ -39,11 +39,12 @@ export default function distributedDeviceManager() {
                 let driver = await UiDriver.create();
                 console.info(`come in driveFn`);
                 console.info(`driver is ${JSON.stringify(driver)}`);
-                sleep(2000);
+                await sleep(1000);
                 let button = await driver.findComponent(BY.text('允许'));
                 console.info(`button is ${JSON.stringify(button)}`);
-                sleep(5000);
+                await sleep(1000);
                 await button.click();
+                await sleep(1000);
             } catch (err) {
                 console.info('err is ' + err);
                 return;
@@ -53,9 +54,9 @@ export default function distributedDeviceManager() {
         beforeAll(async function (done) {
             console.info("beforeAll start");
             await getPermission();
-            sleep(5000);
+            await sleep(1000);
             await driveFn();
-            sleep(5000);
+            await sleep(1000);
             console.info("beforeAll done");
             done();
         })
