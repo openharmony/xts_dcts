@@ -2,7 +2,11 @@
  "string":[
     {
       "name":"app_name",
-      "value":"distributerdbdisets"
+      "value":"DctsDistributeRdbStoreDisEtsTest"
+    },
+    {
+      "name":"description_application",
+      "value":"DctsDistributeRdbStoreDisEtsTest"
     }
   ]
 }      

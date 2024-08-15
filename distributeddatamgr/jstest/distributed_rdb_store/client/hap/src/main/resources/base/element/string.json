@@ -2,7 +2,7 @@
   "string": [
     {
       "name": "app_name",
-      "value": "distributerdbdisjs"
+      "value": "DctsDistributeRdbStoreDisJsTest"
     },
     {
       "name": "mainability_description",
@@ -10,11 +10,11 @@
     },
     {
       "name": "MainAbility_desc",
-      "value": "description"
+      "value": "hap sample empty page"
     },
     {
         "name": "MainAbility_label",
-        "value": "label"
+        "value": "DctsDistributeRdbStoreDisJsTest"
     },
     {
         "name": "TestAbility_desc",
