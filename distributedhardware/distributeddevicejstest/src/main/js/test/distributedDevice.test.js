@@ -44,7 +44,7 @@ export default function distributedDeviceManager() {
                 console.info(`button is ${JSON.stringify(button)}`);
                 await sleep(1000);
                 await button.click();
-				await sleep(1000);
+                await sleep(1000);
             } catch (err) {
                 console.info('err is ' + err);
                 return;
