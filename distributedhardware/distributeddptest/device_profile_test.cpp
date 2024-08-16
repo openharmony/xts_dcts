@@ -497,7 +497,7 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_1800, TestSize.Level1)
     string deviceId = "anything2";
     DeviceProfile outDeviceProfile;
     int32_t ret = DeviceProfileManager::GetInstance().GetDeviceProfile(deviceId, outDeviceProfile);
-    EXPECT_EQ(ret, DP_INVALID_PARAMS);
+    EXPECT_EQ(ret, DP_GET_KV_DB_FAIL);
 
     string outDeviceId = outDeviceProfile.GetDeviceId();
     outDeviceProfile.GetDeviceTypeName();
@@ -554,7 +554,7 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_2100, TestSize.Level1)
     DeviceProfileManager::GetInstance().deviceProfileStore_->UnInit();
     DeviceProfile outDeviceProfile;
     int32_t ret = DeviceProfileManager::GetInstance().GetDeviceProfile(deviceId, outDeviceProfile);
-    EXPECT_EQ(ret, DP_INVALID_PARAMS);
+    EXPECT_EQ(ret, DP_GET_KV_DB_FAIL);
 }
 
 /**
@@ -575,7 +575,7 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_2200, TestSize.Level1)
     string serviceName = "serviceName5";
     ServiceProfile outServiceProfile;
     int32_t ret = DeviceProfileManager::GetInstance().GetServiceProfile(deviceId, serviceName, outServiceProfile);
-    EXPECT_EQ(ret, DP_INVALID_PARAMS);
+    EXPECT_EQ(ret, DP_GET_KV_DB_FAIL);
 
     string outDeviceId = outServiceProfile.GetDeviceId();
     outServiceProfile.GetServiceName();
@@ -632,7 +632,7 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_2500, TestSize.Level1)
     DeviceProfileManager::GetInstance().deviceProfileStore_->UnInit();
     ServiceProfile outServiceProfile;
     int32_t ret = DeviceProfileManager::GetInstance().GetServiceProfile(deviceId, serviceName, outServiceProfile);
-    EXPECT_EQ(ret, DP_INVALID_PARAMS);
+    EXPECT_EQ(ret, DP_GET_KV_DB_FAIL);
 }
 
 /**
@@ -656,7 +656,7 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_2600, TestSize.Level1)
     CharacteristicProfile outCharProfile;
     int32_t ret = DeviceProfileManager::GetInstance().GetCharacteristicProfile(deviceId, serviceName,
         characteristicKey, outCharProfile);
-    EXPECT_EQ(ret, DP_INVALID_PARAMS);
+    EXPECT_EQ(ret, DP_GET_KV_DB_FAIL);
     
     string outDeviceId = outCharProfile.GetDeviceId();
     outCharProfile.GetServiceName();
@@ -722,7 +722,7 @@ HWTEST_F(DeviceProfileManagerTest, SUB_DH_DDp_Dcts_2900, TestSize.Level1)
     CharacteristicProfile outCharProfile;
     int32_t ret = DeviceProfileManager::GetInstance().GetCharacteristicProfile(deviceId, serviceName,
         characteristicKey, outCharProfile);
-    EXPECT_EQ(ret, DP_INVALID_PARAMS);
+    EXPECT_EQ(ret, DP_GET_KV_DB_FAIL);
 }
 
 /**
