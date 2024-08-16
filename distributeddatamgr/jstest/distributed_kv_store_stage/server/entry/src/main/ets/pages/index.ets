@@ -15,13 +15,13 @@
 @Entry
 @Component
 struct Index {
-  @State message: string = '2Stage kvserver'
+  @State message: string = 'DctsDistributeKvStoreDisEtsServer'
 
   build() {
     Row() {
       Column() {
         Text(this.message)
-          .fontSize(30)
+          .fontSize(20)
       }
       .width('100%')
     }

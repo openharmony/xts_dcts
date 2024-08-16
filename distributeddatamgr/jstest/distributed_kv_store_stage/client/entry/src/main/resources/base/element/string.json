@@ -10,7 +10,7 @@
       },
       {
           "name": "entry_label",
-          "value": "kvClientStage"
+          "value": "DctsDistributeKvStoreDisEtsTest"
       },
       {
           "name": "form_description",

@@ -2,7 +2,7 @@
   "string": [
     {
       "name": "app_name",
-      "value": "distributekvdisjs"
+      "value": "DctsDistributeKvStoreDisJsTest"
     },
     {
       "name": "mainability_description",
@@ -14,7 +14,7 @@
     },
     {
         "name": "MainAbility_label",
-        "value": "label"
+        "value": "DctsDistributeKvStoreDisJsTest"
     },
     {
         "name": "TestAbility_desc",
