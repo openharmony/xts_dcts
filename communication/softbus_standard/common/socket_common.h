@@ -21,7 +21,6 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <inttypes.h>
-#include "discovery_service.h"
 #include "session.h"
 #include "socket.h"
 #include "softbus_bus_center.h"

@@ -105,7 +105,7 @@ void TransFileFuncTest::SetUpTestCase()
     LOG("SetUp begin");
     AddPermission();
     sleep(1);
-    system("pidof accesstoken_service | xargs kill -9");
+    OHOS::Security::AccessToken::AccessTokenKit::ReloadNativeTokenInfo();
     sleep(1);
     TestSetUp();
     int ret = RegisterDeviceStateDefCallback();

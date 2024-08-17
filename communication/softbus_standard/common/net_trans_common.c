@@ -56,9 +56,6 @@ static IFileReceiveListener* g_fileRecvListener = NULL;
 
 static char g_networkId[NETWORK_ID_BUF_LEN] = { 0 };
 static INodeStateCb g_defNodeStateCallback;
-static ConnectionAddr g_ethAddr = {
-    .type = CONNECTION_ADDR_WLAN,
-};
 
 static int* g_sId4Task2;
 static int* g_sId4Task3;
@@ -68,12 +65,8 @@ static char* g_expectDataContent = NULL;
 static char* g_expectMessageContent = NULL;
 static int32_t g_recvMsgStat4Control[MAX_SESSION_NUM] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 static int32_t g_recvByteStat4Control[MAX_SESSION_NUM] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-static uint64_t g_discoverTimeEnd;
-static uint64_t g_openSessionTimeEnd;
 static uint64_t g_transTimeEnd;
 static pthread_barrier_t* g_barrier = NULL;
-/* discovery */
-static IDiscoveryCallback g_defDiscCallback;
 
 void sleepn(int n)
 {
@@ -242,45 +235,6 @@ static void OnSendFileTransError(int sessionId)
 {
     g_waitFlag = WAIT_FAIL_VALUE;
     LOG("[send file]trans error,sid = %d\n", sessionId);
-}
-
-static void OnDefDeviceFound(const DeviceInfo* device)
-{
-    g_discoverTimeEnd = GetCurrentTimeOfMs();
-
-    if (device == NULL) {
-        LOG("[cb]device found,but is null");
-        g_waitFlag = WAIT_FAIL_VALUE;
-        return;
-    }
-
-    uint16_t port = device->addr[0].info.ip.port;
-    char ipTmp[IP_STR_MAX_LEN];
-    if (strncpy_s(ipTmp, IP_STR_MAX_LEN, device->addr[0].info.ip.ip, strlen(device->addr[0].info.ip.ip)) != 0) {
-        LOG("[cb]device found, strncpy_s ipTmp fail");
-        return;
-    }
-    LOG("[cb]device found, type:%d", device->addr[0].type);
-    LOG("[cb]device found, addr:%s, prot:%d", ipTmp, port);
-
-    g_ethAddr.info.ip.port = port;
-    if (strncpy_s(g_ethAddr.info.ip.ip, IP_STR_MAX_LEN, ipTmp, strlen(ipTmp)) != 0) {
-        LOG("[cb]device found, strncpy_s ip fail");
-        g_waitFlag = WAIT_FAIL_VALUE;
-        return;
-    }
-
-    g_waitFlag = WAIT_SUCCESS_VALUE;
-}
-
-static void OnDefDiscoverFail(int subscribeId, DiscoveryFailReason failReason)
-{
-    LOG("[cb]discover fail, sub id:%d, reason:%d", subscribeId, failReason);
-}
-
-static void OnDefDiscoverSuccess(int subscribeId)
-{
-    LOG("[cb]discover success, sub id:%d", subscribeId);
 }
 
 static void OnDefNodeOnline(NodeBasicInfo* info)
@@ -518,8 +472,6 @@ static void PassiveMessageReceived(int sessionId, const void* data, unsigned int
 
 static int PerfSessionOpened(int sessionId, int result)
 {
-    g_openSessionTimeEnd = GetCurrentTimeOfMs();
-
     if (result == SOFTBUS_OK) {
         g_waitFlag = WAIT_SUCCESS_VALUE;
     } else {
@@ -1206,10 +1158,6 @@ void TestSetUp(void)
     g_defNodeStateCallback.onNodeOffline = OnDefNodeOffline;
     g_defNodeStateCallback.onNodeBasicInfoChanged = OnDefNodeBasicInfoChanged;
     g_defNodeStateCallback.onNodeStatusChanged = onDefNodeStatusChanged;
-    g_defDiscCallback.OnDeviceFound = OnDefDeviceFound;
-    g_defDiscCallback.OnDiscoverFailed = OnDefDiscoverFail;
-    g_defDiscCallback.OnDiscoverySuccess = OnDefDiscoverSuccess;
-
     if (g_sessionlistener4Data == NULL) {
         g_sessionlistener4Data = (ISessionListener*)calloc(1, sizeof(ISessionListener));
         g_sessionlistener4Data->OnSessionOpened = DataSessionOpened;
