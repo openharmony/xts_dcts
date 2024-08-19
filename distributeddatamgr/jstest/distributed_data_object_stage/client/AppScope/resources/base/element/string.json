@@ -2,7 +2,11 @@
  "string":[
     {
       "name":"app_name",
-      "value":"distributedobjectdisets"
+      "value":"DctsDistributedObjectDisEtsTest"
+    },
+    {
+      "name":"description_application",
+      "value":"DctsDistributedObjectDisEtsTest"
     }
   ]
 }      
