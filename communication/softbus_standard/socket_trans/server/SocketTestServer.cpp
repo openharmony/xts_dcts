@@ -46,7 +46,7 @@ void SocketTestServer ::SetUpTestCase()
     LOG("SetUpTestCase");
     AddPermission();
     sleep(ONE_SECOND);
-    system("pidof accesstoken_service | xargs kill -9");
+    OHOS::Security::AccessToken::AccessTokenKit::ReloadNativeTokenInfo();
     sleep(ONE_SECOND);
     TestSetUp();
     SetupCallback();

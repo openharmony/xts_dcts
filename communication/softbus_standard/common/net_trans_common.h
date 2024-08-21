@@ -21,7 +21,6 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include "common_list.h"
-#include "discovery_service.h"
 #include "session.h"
 #include "softbus_bus_center.h"
 #include "softbus_common.h"
