@@ -2216,7 +2216,7 @@ export default function kvSyncTestS1() {
                         await remoteHelpers.closeKvStore("x".repeat(128)).then(async (ret) => {
                             console.info(logTag + "testServerKvStoreId0300 remoteHelpers closeKvStore success: " + ret)
                         })
-
+                        await sleep(2000);
                         console.info(logTag + "testServerKvStoreId0300 end");
                         done();
 
@@ -2286,7 +2286,7 @@ export default function kvSyncTestS1() {
                         await remoteHelpers.closeKvStore("x".repeat(128)).then(async (ret) => {
                             console.info(logTag + "testServerKvStoreId0400 remoteHelpers closeKvStore success: " + ret)
                         })
-
+                        await sleep(2000);
                         console.info(logTag + "testServerKvStoreId0400 end");
                         done();
 
@@ -2348,7 +2348,7 @@ export default function kvSyncTestS1() {
                         await remoteHelpers.closeKvStore("SERVER_KVSTORE").then(async (ret) => {
                             console.info(logTag + "testServerKvStoreId0500 remoteHelpers closeKvStore success: " + ret)
                         })
-
+                        await sleep(2000);
                         console.info(logTag + "testServerKvStoreId0500 end");
                         done();
 
@@ -2411,7 +2411,7 @@ export default function kvSyncTestS1() {
                         await remoteHelpers.closeKvStore("SERVER_KVSTORE").then(async (ret) => {
                             console.info(logTag + "testServerKvStoreId0600 remoteHelpers closeKvStore success: " + ret)
                         })
-
+                        await sleep(2000);
                         console.info(logTag + "testServerKvStoreId0600 end");
                         done();
 
