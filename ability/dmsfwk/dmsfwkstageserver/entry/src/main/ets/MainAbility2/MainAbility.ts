@@ -43,6 +43,9 @@ export default class MainAbility2 extends Ability {
                 }, 2000);
             }
         }
+        setTimeout(()=>{
+            this.context.terminateSelf()
+        },3000)
     }
 
     onDestroy() {
