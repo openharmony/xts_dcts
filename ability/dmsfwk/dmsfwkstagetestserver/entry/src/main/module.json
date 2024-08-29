@@ -22,7 +22,7 @@
         "icon": "$media:icon",
         "label": "$string:entry_label",
         "visible": true,
-        "orientation": "portrait",
+        "orientation": "unspecified",
         "skills": [
           {
             "actions": [
