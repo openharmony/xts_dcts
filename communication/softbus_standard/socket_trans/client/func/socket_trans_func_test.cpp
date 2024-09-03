@@ -121,13 +121,13 @@ SocketInfo socketStreamInfo = {
 QosTV info_wifi[] = {
     {.qos = QOS_TYPE_MIN_BW, .value = 10 * 1024 * 1024, },
     {.qos = QOS_TYPE_MIN_LATENCY, .value = 800, },
-    {.qos = QOS_TYPE_MAX_LATENCY, .value = 800, },
+    {.qos = QOS_TYPE_MAX_LATENCY, .value = 2000, },
 };
 
 QosTV info_p2p[] = {
     {.qos = QOS_TYPE_MIN_BW, .value = 160 * 1024 * 1024, },
-    {.qos = QOS_TYPE_MIN_LATENCY, .value = 1600, },
-    {.qos = QOS_TYPE_MAX_LATENCY, .value = 3000, },
+    {.qos = QOS_TYPE_MIN_LATENCY, .value = 2000, },
+    {.qos = QOS_TYPE_MAX_LATENCY, .value = 10000, },
 };
 
 /**
