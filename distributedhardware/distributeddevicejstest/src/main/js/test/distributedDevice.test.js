@@ -1493,7 +1493,7 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4300 end------------------------");
         })
 		
-		/*
+        /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_4400
          * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
          * use this    instance to call other device management methods, verification deviceID.
