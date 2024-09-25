@@ -11,34 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//test/xts/tools/build/suite.gni")
+import("../../../../../../tools/build/suite.gni")
 
-ohos_hap_assist_suite("distributerdbdisjs_server") {
-  hap_profile = "entry/src/main/module.json"
-  hap_name = "DctsDistributeRdbDisJsServer"
-
+ohos_app_assist_suite("distributerdbdisjs_server") {
   testonly = true
-  deps = [
-    ":distributerdbdisjs_assets",
-    ":distributerdbdisjs_resources",
-  ]
-  ets2abc = true
-  certificate_profile = "signature/openharmony_sx.p7b"
-  subsystem_name = "distributeddatamgr"
+  certificate_profile = "./signature/openharmony_sx.p7b"
+  hap_name = "DctsDistributeRdbDisJsServer"
   part_name = "relational_store"
-}
-
-ohos_app_scope("distributerdbdisjs_app_profile") {
-  app_profile = "AppScope/app.json"
-  sources = [ "AppScope/resources" ]
-}
-
-ohos_js_assets("distributerdbdisjs_assets") {
-  source_dir = "entry/src/main/ets"
-}
-
-ohos_resources("distributerdbdisjs_resources") {
-  sources = [ "entry/src/main/resources" ]
-  deps = [ ":distributerdbdisjs_app_profile" ]
-  hap_profile = "entry/src/main/module.json"
+  subsystem_name = "distributeddatamgr"
 }
