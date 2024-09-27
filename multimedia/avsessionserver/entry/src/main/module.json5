@@ -2,7 +2,7 @@
   "module": {
     "name": "entry",
     "type": "entry",
-    "srcEntrance": "./ets/Application/AbilityStage.ts",
+    "srcEntry": "./ets/Application/AbilityStage.ts",
     "description": "$string:module_desc",
     "mainElement": "MainAbility",
     "deviceTypes": [
@@ -20,12 +20,14 @@
       {
         "continuable": true,
         "name": "MainAbility",
-        "srcEntrance": "./ets/mainAbility/MainAbility.ts",
+        "srcEntry": "./ets/mainAbility/MainAbility.ts",
         "description": "$string:EntryAbility_desc",
         "icon": "$media:icon",
         "label": "$string:EntryAbility_label",
         "visible": true,
         "orientation": "portrait",
+        "startWindowIcon": "$media:app_icon",
+        "startWindowBackground": "$color:white",
         "skills": [
           {
             "actions": [
