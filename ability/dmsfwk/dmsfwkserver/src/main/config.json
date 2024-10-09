@@ -33,7 +33,8 @@
     "deviceType": [
       "tablet",
       "default",
-      "2in1"
+      "2in1",
+      "wearable"
     ],
     "distro": {
       "deliveryWithInstall": true,
@@ -70,7 +71,6 @@
         "name": ".ServiceAbility",
         "icon": "$media:icon",
         "srcLanguage": "js",
-
         "description": "$string:serviceability_description",
         "type": "service",
         "visible": true,
