@@ -58,7 +58,7 @@
       {
         "name": "ohos.permission.GET_BUNDLE_INFO"
       },
-	    {
+      {
         "name": "ohos.permission.KEEP_BACKGROUND_RUNNING"
       },
       {
