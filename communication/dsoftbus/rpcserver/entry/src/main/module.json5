@@ -2,7 +2,7 @@
   "module": {
     "name": "entry",
     "type": "entry",
-    "srcEntrance": "./ets/Application/AbilityStage.ts",
+    "srcEntry": "./ets/Application/AbilityStage.ts",
     "description": "$string:entry_desc",
     "mainElement": "MainAbility",
     "deviceTypes": [
@@ -13,26 +13,28 @@
     ],
     "deliveryWithInstall": true,
     "installationFree": false,
-    "pages": "$profile:main_pages",
     "uiSyntax": "ets",
+    "pages": "$profile:main_pages",
     "abilities": [
       {
+        "continuable": true,
         "name": "com.acts.rpc.test.server.MainAbility",
-        "srcEntrance": "./ets/mainAbility/MainAbility.ts",
+        "srcEntry": "./ets/mainAbility/MainAbility.ts",
         "description": "$string:MainAbility_desc",
         "icon": "$media:app_icon",
         "label": "$string:MainAbility_label",
-        "startWindowIcon": "$media:app_icon",
-        "startWindowBackground": "$color:white",
         "visible": true,
-        "launchType": "singleton",
+        "orientation": "portrait",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:white",
+        "exported": true,
         "skills": [
           {
-            "entities": [
-              "entity.system.home"
-            ],
             "actions": [
               "action.system.home"
+            ],
+            "entities": [
+              "entity.system.home"
             ]
           }
         ]
@@ -41,7 +43,7 @@
     "extensionAbilities": [
       {
         "name": "com.acts.rpc.test.server.ServiceAbility",
-        "srcEntrance": "./ets/serviceability/ServiceAbility.ts",
+        "srcEntry": "./ets/serviceability/ServiceAbility.ts",
         "label": "$string:MainAbility_label",
         "description": "$string:description_serviceability",
         "type": "service",
