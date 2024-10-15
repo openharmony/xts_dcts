@@ -280,6 +280,214 @@ class Stub extends rpc.RemoteObject {
                         console.info(logTag + "case 19 onRemoteMessageRequest success");
                         return true;
                     }
+                case 20:
+                    {
+                        console.info(logTag + "case 20 start");
+                        let tmp1:number[] = data.readLongArray();
+                        console.info(logTag + "The server is readLongArray result is " + tmp1.length);
+                        reply.writeLongArray(tmp1);
+                        console.info(logTag + "case 20 onRemoteMessageRequest success");
+                        return true;
+                    }   
+                case 21:
+                    {
+                        console.info(logTag + "case 21 start");
+                        let tmp1:number[] = data.readFloatArray();
+                        console.info(logTag + "The server is readFloatArray result is " + tmp1.length);
+                        reply.writeFloatArray(tmp1);
+                        console.info(logTag + "case 21 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 22:
+                    {
+                        console.info(logTag + "case 22 start");
+                        let tmp1:number[] = data.readDoubleArray();
+                        console.info(logTag + "The server is readDoubleArray result is " + tmp1.length);
+                        reply.writeDoubleArray(tmp1);
+                        console.info(logTag + "case 22 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 23:
+                    {
+                        console.info(logTag + "case 23 start");
+                        let tmp1:boolean[] = data.readBooleanArray();
+                        console.info(logTag + "The server is readBooleanArray result is " + tmp1.length);
+                        reply.writeBooleanArray(tmp1);
+                        console.info(logTag + "case 23 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 24:
+                    {
+                        console.info(logTag + "case 24 start");
+                        let tmp1:string[] = data.readCharArray();
+                        console.info(logTag + "The server is readCharArray result is " + tmp1.length);
+                        reply.writeCharArray(tmp1);
+                        console.info(logTag + "case 24 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 25:
+                    {
+                        console.info(logTag + "case 25 start");
+                        let tmp1:string[] = data.readStringArray();
+                        console.info(logTag + "The server is readStringArray result is " + tmp1.length);
+                        reply.writeStringArray(tmp1);
+                        console.info(logTag + "case 25 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 26:
+                    {
+                        console.info(logTag + "case 26 start");
+                        data.readException();
+                        console.info(logTag + "readExcepetion ");
+                        let tmp:number = data.readInt();
+                        console.info(logTag + "readInt result is " +tmp);
+                        reply.writeNoException();
+                        console.info(logTag + "writeNoException result is ");
+                        reply.writeInt(tmp);
+                        console.info(logTag + "case 26 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 27:
+                    {
+                        console.info(logTag + "case 27 start");
+                        let s:any = [new MySequenceable(null, null), new MySequenceable(null, null),
+                        new MySequenceable(null, null)];
+                        data.readParcelableArray(s);
+                        console.info(logTag + "readParcelableArray result success");
+                        reply.writeParcelableArray(s);
+                        console.info(logTag + "case 27 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 28:
+                    {
+                        console.info(logTag + "case 28 start");
+                        let tmp1 = data.readByteArray();
+                        let tmp2 = data.readShortArray();
+                        let tmp3 = data.readIntArray();
+                        let tmp4 = data.readLongArray();
+                        let tmp5 = data.readFloatArray();
+                        let tmp6 = data.readDoubleArray();
+                        let tmp7 = data.readBooleanArray();
+                        let tmp8 = data.readCharArray();
+                        let tmp9 = data.readStringArray();
+                        let s = [new MySequenceable(null, null), new MySequenceable(null, null),
+                        new MySequenceable(null, null)];
+                        data.readParcelableArray(s);
+                        reply.writeByteArray(tmp1);
+                        reply.writeShortArray(tmp2);
+                        reply.writeIntArray(tmp3);
+                        reply.writeLongArray(tmp4);
+                        reply.writeFloatArray(tmp5);
+                        reply.writeDoubleArray(tmp6);
+                        reply.writeBooleanArray(tmp7);
+                        reply.writeCharArray(tmp8);
+                        reply.writeStringArray(tmp9);
+                        reply.writeParcelableArray(s);
+                        console.info(logTag + "case 28 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 29:
+                    {
+                        console.info(logTag + "case 29 start");
+                        let listeners:any = data.readRemoteObjectArray();
+                        console.info(logTag + "The server is readRemoteObjectArray result is " + listeners.length);
+                        for (let i = 0; i < listeners.length; i++) {
+                            let option2 = new rpc.MessageOption();
+                            let data2 = rpc.MessageParcel.create();
+                            let reply2 = rpc.MessageParcel.create();
+                            listeners[i].sendRequest(1, data2, reply2, option2)
+                                .then(function(result) {
+                                    console.info(logTag + "send request done, error code: " + result.errCode + ", index: " + i);
+                                })
+                                .catch(function(e) {
+                                    console.error("send request got exception: " + e);
+                                })
+                                .finally(() => {
+                                    data2.reclaim();
+                                    reply2.reclaim();
+                                    console.info(logTag + "case 24 test done");
+                                })
+                        }
+                        console.info(logTag + "case 24 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 30:
+                    {
+                        console.info(logTag + "case 30 start");
+                        let listeners:any = data.readRemoteObjectArray();
+                        console.info(logTag + "The server is readRemoteObjectArray result is " + listeners.length);
+                        let num:number = data.readInt();
+                        let str:string = data.readString();
+                        let len:number = listeners.length;
+                        console.info(logTag + "num is:" + num + "str is:" + str + "len is:" + len);
+                        for (let i = 0; i < len; i++) {
+                            let option2:any = new rpc.MessageOption();
+                            let data2:any = rpc.MessageParcel.create();
+                            let reply2:any = rpc.MessageParcel.create();
+                            data2.writeInt(num);
+                            data2.writeString(str);
+                            console.info(logTag + "case 30 start sendRequest");
+                            listeners[i].sendRequest(1, data2, reply2, option2)
+                                .then(function(result) {
+                                    console.info(logTag + "send request done, error code: " + result.errCode);
+                                    console.info(logTag + "result:" + reply2.readBoolean());
+                                })
+                                .catch(function(e) {
+                                    console.error("send request got exception: " + e);
+                                })
+                                .finally(() => {
+                                    data2.reclaim();
+                                    reply2.reclaim();
+                                    console.info(logTag + "case 30 test done");
+                                })
+                        }
+                        reply.writeNoException();
+                        console.info(logTag + "case 30 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 31:
+                    {
+                        console.info(logTag + "case 31 start");
+                        let listeners:any = new Array(3);
+                        data.readRemoteObjectArray(listeners);
+                        let num:number = data.readInt();
+                        let str:string = data.readString();
+                        for (let i = 0; i < listeners.length; i++) {
+                            let option2:any = new rpc.MessageOption();
+                            let data2:any = rpc.MessageParcel.create();
+                            let reply2:any = rpc.MessageParcel.create();
+                            data2.writeInt(num);
+                            data2.writeString(str);
+                            console.info(logTag + "case 31 start sendRequest");
+                            listeners[i].sendRequest(1, data2, reply2, option2)
+                                .then(function(result) {
+                                    console.info(logTag + "send request done, error code: " + result.errCode + ", index: " + i);
+                                })
+                                .catch(function(e) {
+                                    console.error("send request got exception: " + e);
+                                })
+                                .finally(() => {
+                                    data2.reclaim();
+                                    reply2.reclaim();
+                                    console.info(logTag + "case 31 test done");
+                                })
+                        }
+                        reply.writeNoException();
+                        console.info(logTag + "case 31 onRemoteMessageRequest success");
+                        return true;
+                    }
+                case 32:
+                    {
+                        console.info(logTag + "case 32 start");
+                        let size:number= data.readInt();
+                        console.info(logTag + "The server is readInt result is " + size);
+                        let tmp1:any = data.readRawData(size);
+                        console.info(logTag + "The server is readRawData result is " + tmp1.length);
+                        reply.writeInt(size);
+                        reply.writeRawData(tmp1, tmp1.length);
+                        console.info(logTag + "case 32 onRemoteMessageRequest success");
+                        return true;
+                    }
                 default:
                     this.onRemoteMessageRequest(code, data, reply, option);
             }
