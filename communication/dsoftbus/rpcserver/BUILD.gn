@@ -13,32 +13,10 @@
 
 import("//test/xts/tools/build/suite.gni")
 
-ohos_hap_assist_suite("DctsRpcJsServer") {
-  hap_profile = "entry/src/main/module.json"
-  hap_name = "DctsRpcHapServer"
-
+ohos_app_assist_suite("DctsRpcJsServer") {
   testonly = true
-  deps = [
-    ":rpcstageserver_js_assets",
-    ":rpcstageserver_resources",
-  ]
-  ets2abc = true
-  certificate_profile = "signature/openharmony_sx.p7b"
-  subsystem_name = "ability"
-  part_name = "ability_runtime"
-}
-
-ohos_app_scope("rpcstageserver_app_profile") {
-  app_profile = "AppScope/app.json"
-  sources = [ "AppScope/resources" ]
-}
-
-ohos_js_assets("rpcstageserver_js_assets") {
-  source_dir = "entry/src/main/ets"
-}
-
-ohos_resources("rpcstageserver_resources") {
-  sources = [ "entry/src/main/resources" ]
-  deps = [ ":rpcstageserver_app_profile" ]
-  hap_profile = "entry/src/main/module.json"
+  certificate_profile = "./signature/openharmony_sx.p7b"
+  hap_name = "DctsRpcHapServer"
+  part_name = "ipc"
+  subsystem_name = "communication"
 }
