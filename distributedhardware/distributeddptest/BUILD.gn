@@ -40,9 +40,6 @@ ohos_moduletest_suite("DctsSubDistributedDpTest") {
     "$base_root/foundation/deviceprofile/device_info_manager/common/include/interfaces",
     "$base_root/foundation/deviceprofile/device_info_manager/common/include/utils",
     "$base_root/foundation/deviceprofile/device_info_manager/radar/include",
-    "$base_root/base/security/access_token/interfaces/innerkits/accesstoke/include",
-    "$base_root/base/security/access_token/interfaces/innerkits/nativetoken/include",
-    "$base_root/base/security/access_token/interfaces/innerkits/token_setproc/include",
   ]
 
   sources = [ "device_profile_test.cpp" ]
@@ -59,8 +56,6 @@ ohos_moduletest_suite("DctsSubDistributedDpTest") {
   ]
 
   deps = [
-    "$base_root/base/security/access_token/interfaces/innerkits/nativetoken:libnativetoken",
-    "$base_root/base/security/access_token/interfaces/innerkits/token_setproc:libtoken_setproc",
     "$base_root/foundation/deviceprofile/device_info_manager/common:distributed_device_profile_common",
     "$base_root/foundation/deviceprofile/device_info_manager/interfaces/innerkits/core:distributed_device_profile_sdk",
     "$base_root/foundation/deviceprofile/device_info_manager/services/core:distributed_device_profile_svr",
