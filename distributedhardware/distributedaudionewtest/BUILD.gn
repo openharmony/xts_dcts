@@ -46,8 +46,6 @@ ohos_moduletest_suite("DctsSubdAudioNewTest") {
     "$base_root/foundation/distributedhardware/distributed_audio/services/common/audioeventcallback",
     "$base_root/foundation/distributedhardware/distributed_audio/services/common/audioparam",
     "$base_root/foundation/communication/dsoftbus/dsoftbus_enhance/test/tool/softbus_tool/include",
-    "$base_root/base/security/access_token/interfaces/innerkits/token_setproc/include",
-    "$base_root/base/security/access_token/interfaces/innerkits/accesstoken/include",
     "$base_root/foundation/communication/dsoftbus/interfaces/kits/bus_center",
     "$base_root/third_party/cJSON",
   ]
@@ -58,8 +56,6 @@ ohos_moduletest_suite("DctsSubdAudioNewTest") {
   ]
 
   deps = [
-    "$base_root/base/security/access_token/interfaces/innerkits/nativetoken:libnativetoken",
-    "$base_root/base/security/access_token/interfaces/innerkits/token_setproc:libtoken_setproc",
     "$base_root/drivers/hdf_core/adapter/uhdf2/utils:libhdf_utils",
     "$base_root/foundation/communication/dsoftbus/core/common:softbus_utils",
     "$base_root/foundation/distributedhardware/distributed_audio/services/audiomanager/servicesink:distributed_audio_sink",

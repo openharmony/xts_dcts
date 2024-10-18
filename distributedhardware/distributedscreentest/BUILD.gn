@@ -35,9 +35,6 @@ ohos_moduletest_suite("DctsSubdisScreenTest") {
     "$base_root/foundation/distributedhardware/distributed_screen/common/include",
     "$base_root/foundation/distributedhardware/distributed_hardware_fwk/common/log/include",
     "$base_root/foundation/distributedhardware/distributed_hardware_fwk/utils/include/log",
-    "$base_root/base/security/access_token/interfaces/innerkits/accesstoke/include",
-    "$base_root/base/security/access_token/interfaces/innerkits/nativetoken/include",
-    "$base_root/base/security/access_token/interfaces/innerkits/token_setproc/include",
     "$base_root/foundation/communication/dsoftbus/interfaces/kits/common",
   ]
 
@@ -54,8 +51,6 @@ ohos_moduletest_suite("DctsSubdisScreenTest") {
   ]
 
   deps = [
-    "$base_root/base/security/access_token/interfaces/innerkits/nativetoken:libnativetoken",
-    "$base_root/base/security/access_token/interfaces/innerkits/token_setproc:libtoken_setproc",
     "$base_root/foundation/communication/dsoftbus/sdk:softbus_client",
     "$base_root/foundation/distributedhardware/distributed_screen/common:distributed_screen_utils",
     "$base_root/foundation/distributedhardware/distributed_screen/interfaces/innerkits/native_cpp/screen_sink:distributed_screen_sink_sdk",
