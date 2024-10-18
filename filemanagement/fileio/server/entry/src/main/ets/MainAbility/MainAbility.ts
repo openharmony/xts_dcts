@@ -15,16 +15,12 @@
 
 import Ability from '@ohos.app.ability.UIAbility';
 import AcCtrl from '@ohos.abilityAccessCtrl';
-import {Core} from 'deccjsunit/index';
 
 let AcManager = AcCtrl.createAtManager()
 export default class MainAbility extends Ability {
     onCreate(want, launchParam) {
         console.info('AceApplication onCreate');
-        const core = Core.getInstance()
-        core.init()
-        const configService = core.getDefaultService('config')
-        configService.setConfig(this)
+        
 
         console.info('Calc[IndexPage] grantPermission')
         AcManager.requestPermissionsFromUser(this.context, ['ohos.permission.DISTRIBUTED_DATASYNC'], function (result) {

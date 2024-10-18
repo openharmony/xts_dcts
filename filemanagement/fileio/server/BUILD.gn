@@ -11,34 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//test/xts/tools/build/suite.gni")
+import("../../../../tools/build/suite.gni")
 
-ohos_hap_assist_suite("DctsFileioServer") {
-  hap_profile = "entry/src/main/module.json"
-  hap_name = "DctsFileioServer"
-
+ohos_app_assist_suite("DctsFileioServer") {
   testonly = true
-  deps = [
-    ":fileio_js_assets",
-    ":fileio_js_resources",
-  ]
-  ets2abc = true
-  certificate_profile = "signature/openharmony_sx.p7b"
-  subsystem_name = "ability"
+  certificate_profile = "./signature/openharmony_sx.p7b"
+  hap_name = "DctsFileioServer"
   part_name = "ability_runtime"
-}
-
-ohos_app_scope("fileio_app_profile") {
-  app_profile = "AppScope/app.json"
-  sources = [ "AppScope/resources" ]
-}
-
-ohos_js_assets("fileio_js_assets") {
-  source_dir = "entry/src/main/ets"
-}
-
-ohos_resources("fileio_js_resources") {
-  sources = [ "entry/src/main/resources" ]
-  deps = [ ":fileio_app_profile" ]
-  hap_profile = "entry/src/main/module.json"
+  subsystem_name = "ability"
 }
