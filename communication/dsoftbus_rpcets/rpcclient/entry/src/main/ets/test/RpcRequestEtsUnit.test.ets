@@ -313,7 +313,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0020
     * @tc.name    : test Invoke the writeremoteobject interface to serialize a remote object and transfer the object.
-        *               The object parameter is empty
+    *               The object parameter is empty
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -491,7 +491,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0080
     * @tc.name    : test Call the WriteInterfaceToken interface, write the maximum length interface descriptor, and read
-        *               the InterfaceToken
+    *                the InterfaceToken
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -528,7 +528,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0090
     * @tc.name    : test The WriteInterfaceToken interface is called, the exceeding-length interface descriptor is written,
-        *               and the InterfaceToken is read
+    *                and the InterfaceToken is read
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -559,7 +559,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0100
     * @tc.name    : test Call the writeinterfacetoken interface to write a non string interface descriptor
-        *           and read interfacetoken
+    *            and read interfacetoken
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -1068,7 +1068,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0260
     * @tc.name    : test Invoke the writeinterfacetoken interface, write the interface descriptor, and verify the error
-        *               code that fails to be read from the interfacetoken interface
+    *                code that fails to be read from the interfacetoken interface
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -1919,7 +1919,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0510
     * @tc.name    : test Call the writebyte interface to write data to the MessageSequence instance,
-        *             and call readbyte to read data
+    *              and call readbyte to read data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -2131,7 +2131,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0580
     * @tc.name    : test Call the writeShort interface to write the short integer data to the MessageSequence instance,
-        *             and call readshort to read the data
+    *              and call readshort to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -2318,7 +2318,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0640
     * @tc.name    : test Call the writeint interface to write the data to the MessageSequence instance,
-        *             and call readint to read the data
+    *              and call readint to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -2531,7 +2531,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0710
     * @tc.name    : test Call writelong interface to write long integer data to MessageSequence instance
-        *             and call readlong to read data
+    *              and call readlong to read data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -2715,7 +2715,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0770
     * @tc.name    : test Call the writefloat interface to write data to the MessageSequence instance,
-        *             and call readfloat to read data
+    *              and call readfloat to read data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -3104,7 +3104,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0900
     * @tc.name    : test Invoke the writeboolean interface to write the data true to the MessageSequence
-        *               instance and invoke the readboolean interface to read the data
+    *                instance and invoke the readboolean interface to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -3138,7 +3138,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0910
     * @tc.name    : test Call the writeboolean interface to write the data to the MessageSequence instance,
-        *             and call readboolean to read the data
+    *              and call readboolean to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -3274,7 +3274,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0960
     * @tc.name    : test Call the writechar interface to write the minimum data to the MessageSequence instance,
-        *               and call readchar to read the data
+    *                and call readchar to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -3308,7 +3308,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0970
     * @tc.name    : test Call the writechar interface to write the maximum data to the MessageSequence instance,
-        *              and call readchar to read the data
+    *               and call readchar to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -3342,7 +3342,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0980
     * @tc.name    : test Call the writechar interface to write the minimum out of range data to the MessageSequence instance,
-        *              and call readchar to read the data
+    *               and call readchar to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -3376,7 +3376,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_0990
     * @tc.name    : test Call the writechar interface to write the maximum out of range data to the MessageSequence instance,
-        *              and call readchar to read the data
+    *               and call readchar to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -3486,7 +3486,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1030
     * @tc.name    : test Call the writestring interface to write the data to the MessageSequence instance,
-        *             and call readstring() to read the data
+    *              and call readstring() to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -3629,7 +3629,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1080
     * @tc.name    : test Call the writeParcelable interface to write the custom serialized
-        *             object to the MessageSequence instance
+    *              object to the MessageSequence instance
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -3656,7 +3656,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1090
     * @tc.name    : test Call the writeParcelable interface to write the custom serialized
-        *             object to the MessageSequence instance, Migration to read
+    *              object to the MessageSequence instance, Migration to read
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -3747,7 +3747,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1120
     * @tc.name    : test Call the writeParcelable interface to write the custom serialized object to the
-        *             MessageSequence instance, and call readParcelable to read the data
+    *              MessageSequence instance, and call readParcelable to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -3870,7 +3870,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1160
     * @tc.name    : test Call the writebytearray interface, write the array to the MessageSequence instance,
-        *             and call readbytearray to read the data
+    *              and call readbytearray to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -3905,7 +3905,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1170
     * @tc.name    : test Call the writebytearray interface, write the array to the MessageSequence instance,
-        *             and call readbytearray (datain: number []) to read the data
+    *              and call readbytearray (datain: number []) to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -4100,7 +4100,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1230
     * @tc.name    : test Call the writeshortarray interface, write the array to the MessageSequence instance,
-        *             and call readshortarray to read the data
+    *              and call readshortarray to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -4134,7 +4134,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1240
     * @tc.name    : test Call the writeshortarray interface, write the short integer array to the MessageSequence instance,
-        *             and call readshortarray (datain: number []) to read the data
+    *              and call readshortarray (datain: number []) to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -4322,7 +4322,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1300
     * @tc.name    : test Call the writeintarray interface, write the array to the MessageSequence instance,
-        *             and call readintarray to read the data
+    *              and call readintarray to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -4356,7 +4356,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1310
     * @tc.name    : test Call the writeintarray interface, write the array to the MessageSequence instance,
-        *             and call readintarray (datain: number []) to read the data
+    *              and call readintarray (datain: number []) to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -4580,7 +4580,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1380
     * @tc.name    : test Call the writelongarray interface, write the long integer array to the MessageSequence instance,
-        *             and call readlongarray (datain: number []) to read the data
+    *              and call readlongarray (datain: number []) to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -4736,7 +4736,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1430
     * @tc.name    : test Call the writefloatarray interface, write the array to the MessageSequence instance,
-        *             and call readfloatarray (datain: number []) to read the data
+    *              and call readfloatarray (datain: number []) to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -4959,7 +4959,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1500
     * @tc.name    : test Call the writedoublearray interface, write the array to the MessageSequence instance,
-        *             and call readdoublearra (datain: number []) to read the data
+    *              and call readdoublearra (datain: number []) to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -5114,7 +5114,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1550
     * @tc.name    : test Call the writebooleanarray interface, write the array to the MessageSequence instance,
-        *             and call readbooleanarray to read the data
+    *              and call readbooleanarray to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -5148,7 +5148,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1560
     * @tc.name    : test Call the writebooleanarray interface, write the array to the MessageSequence instance,
-        *             and call readbooleanarray (datain: number []) to read the data
+    *              and call readbooleanarray (datain: number []) to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -5310,7 +5310,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1610
     * @tc.name    : test Call the writechararray interface, write the array to the MessageSequence instance,
-        *             and call readchararray to read the data
+    *              and call readchararray to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -5344,7 +5344,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1620
     * @tc.name    : test Call the writechararray interface, write the array to the MessageSequence instance,
-        *             and call readchararray (datain: number []) to read the data
+    *              and call readchararray (datain: number []) to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -5499,7 +5499,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1670
     * @tc.name    : test Call the writestringarray interface, write the array to the MessageSequence instance,
-        *             and call readstringarray (datain: number []) to read the data
+    *              and call readstringarray (datain: number []) to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -5532,7 +5532,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1680
     * @tc.name    : test Call the writestringarray interface, write the array to the MessageSequence instance,
-        *             and call readstringarray() to read the data
+    *              and call readstringarray() to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -5678,7 +5678,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1730
     * @tc.name    : test After the server finishes processing, write noexception first before writing the result,
-        *             and the client calls readexception to judge whether the server is abnormal
+    *              and the client calls readexception to judge whether the server is abnormal
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -5713,7 +5713,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1740
     * @tc.name    : test If the data on the server is abnormal, the client calls readexception
-        *             to judge whether the server is abnormal
+    *              to judge whether the server is abnormal
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -5796,7 +5796,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1770
     * @tc.name    : test Call the writeParcelablearray interface to write the custom serialized object array (1, 2, 3) to
-        *              the MessageSequence instance, and call readParcelablearray to read the data
+    *               the MessageSequence instance, and call readParcelablearray to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -5837,7 +5837,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1780
     * @tc.name    : test Call the writeParcelablearray interface to write the custom serialized object to the
-        *             MessageSequence instance, and call readParcelablearray to read the data
+    *              MessageSequence instance, and call readParcelablearray to read the data
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -5878,7 +5878,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1790
     * @tc.name    : test Call the writeParcelablearray interface to write the custom
-        *             serialized object to the MessageSequence instance
+    *              serialized object to the MessageSequence instance
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -6012,7 +6012,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1830
     * @tc.name    : test Test the cross process delivery of MessageSequence and receive the reply message
-        *             in the callback function
+    *              in the callback function
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -6070,7 +6070,7 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1840
     * @tc.name    : test Test the cross process transmission of MessageSequence.
-        *             After receiving the reply message in promise, read letious types of arrays in order
+    *              After receiving the reply message in promise, read letious types of arrays in order
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -6128,8 +6128,8 @@ export default function RpcRequestEtsUnitTest() {
     /*
     * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1850
     * @tc.name    : test Test MessageSequence cross process delivery. After receiving the reply message in promise,
-        *             the client constructs an empty array in sequence and reads the data from the reply message
-        *             into the corresponding array
+    *              the client constructs an empty array in sequence and reads the data from the reply message
+    *              into the corresponding array
     * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
     * @tc.level   : 3
     * @tc.type    : Compatibility
@@ -6200,6 +6200,803 @@ export default function RpcRequestEtsUnitTest() {
         done();
       }
       console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1850---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1860
+    * @tc.name    : test Call the writeremoteobjectarray interface to write the object array to the MessageSequence
+    *             instance, and call readremoteobjectarray to read the data
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1860", 0, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1860---------------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+      let option: rpc.MessageOption = new rpc.MessageOption();
+      try {
+        let count = 0;
+        function checkResult(num, str) {
+          expect(num).assertEqual(123);
+          expect(str).assertEqual("rpcListenerTest");
+          count++;
+          console.info("check result done, count: " + count);
+          if (count == 3) {
+            done();
+          };
+        };
+        data.writeInterfaceToken("rpcTestAbility");
+        let listeners = [new TestListener("rpcListener", checkResult),
+          new TestListener("rpcListener2", checkResult),
+          new TestListener("rpcListener3", checkResult)];
+        data.writeRemoteObjectArray(listeners);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECTARRAY, data, reply, option).then((result) => {
+          console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1860: sendMessageRequest is " + result.errCode);
+          expect(result.errCode).assertEqual(0);
+          expect(result.code).assertEqual(CODE_WRITE_REMOTEOBJECTARRAY);
+          expect(result.data).assertEqual(data);
+          expect(result.reply).assertEqual(reply);
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1860 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1860---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1870
+    * @tc.name    : test Call the writeremoteobjectarray interface to write the object array to the MessageSequence instance,
+    *             and call readremoteobjectarray (objects: iremoteobject []) to read the data
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1870", 0, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1870---------------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+      let option: rpc.MessageOption = new rpc.MessageOption();
+      try {
+        let count = 0;
+        function checkResult(num, str) {
+          expect(num).assertEqual(123);
+          expect(str).assertEqual("rpcListenerTest");
+          count++;
+          console.info("check result done, count: " + count);
+          if (count == 3) {
+            done();
+          }
+        }
+        data.writeInterfaceToken("rpcTestAbility");
+        let listeners = [new TestListener("rpcListener", checkResult),
+          new TestListener("rpcListener2", checkResult),
+          new TestListener("rpcListener3", checkResult)];
+        data.writeRemoteObjectArray(listeners);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECTARRAY, data, reply, option).then((result) => {
+          console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1870: sendMessageRequest is " + result.errCode);
+          expect(result.errCode == 0).assertTrue();
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1870 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1870---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1880
+    * @tc.name    : test Test MessageSequence to pass an array of iremoteobject objects across processes
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1880", 0, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1880---------------------------");
+      let count = 0;
+      function checkResult(num, str) {
+        expect(num).assertEqual(123);
+        expect(str).assertEqual("rpcListenerTest");
+        count++;
+        console.info("check result done, count: " + count);
+        if (count == 3) {
+          done();
+        }
+      }
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+      let option: rpc.MessageOption = new rpc.MessageOption();
+      try {
+        let listeners = [new TestListener("rpcListener", checkResult),
+          new TestListener("rpcListener2", checkResult),
+          new TestListener("rpcListener3", checkResult)];
+        data.writeRemoteObjectArray(listeners);
+        data.writeInt(123);
+        data.writeString("rpcListenerTest");
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECTARRAY_1, data, reply, option)
+          .then((result) => {
+            expect(result.errCode).assertEqual(0);
+            result.reply.readException();
+          });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1880 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1880---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1890
+    * @tc.name    : test Test MessageSequence to pass the array of iremoteobject objects across processes. The server
+    *             constructs an empty array in onremoterequest and reads it from MessageSequence
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1890", 0, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1890---------------------------");
+      let count = 0;
+      function checkResult(num, str) {
+        expect(num).assertEqual(123);
+        expect(str).assertEqual("rpcListenerTest");
+        count++;
+        console.info("check result done, count: " + count);
+        if (count == 3) {
+          done();
+        }
+      }
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+      let option: rpc.MessageOption = new rpc.MessageOption();
+      try {
+        let listeners = [new TestListener("rpcListener", checkResult),
+          new TestListener("rpcListener2", checkResult),
+          new TestListener("rpcListener3", checkResult)];
+        data.writeRemoteObjectArray(listeners);
+        data.readRemoteObjectArray();
+        data.writeInt(123);
+        data.writeString("rpcListenerTest");
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECTARRAY_2, data, reply, option)
+          .then((result) => {
+            expect(result.errCode).assertEqual(0);
+            result.reply.readException();
+          });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1890 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1890---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1900
+    * @tc.name    : test WriteRemoteObjectArray is write data to message sequence failed Error verification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1900", 0,async function(){
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1900---------------------------");
+      let data = rpc.MessageSequence.create();
+      try{
+        let count = 0;
+        function checkResult(num, str) {
+          expect(num).assertEqual(123);
+          expect(str).assertEqual("rpcListenerTest");
+          count++;
+          console.info("check result done, count: " + count);
+          if (count == 3) {
+            done();
+          }
+        }
+        let listeners = [new TestListener("rpcListener", checkResult),
+          new TestListener("rpcListener2", checkResult),
+          new TestListener("rpcListener3", checkResult)];
+        data.reclaim();
+        data.writeRemoteObjectArray(listeners);
+        expect(data.getSize() == 0).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1900 error: " + error);
+        let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+        expect(error.code == errCode).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1900---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1910
+    * @tc.name    : test ReadRemoteObjectArray is read data from message sequence failed Error verification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1910", 0,async function(){
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1910---------------------------");
+      let data = rpc.MessageSequence.create();
+      try{
+        let count = 0;
+        function checkResult(num, str) {
+          expect(num).assertEqual(123);
+          expect(str).assertEqual("rpcListenerTest");
+          count++;
+          console.info("check result done, count: " + count);
+          if (count == 3) {
+            done();
+          }
+        }
+        let listeners = [new TestListener("rpcListener", checkResult),
+          new TestListener("rpcListener2", checkResult),
+          new TestListener("rpcListener3", checkResult)];
+        data.writeRemoteObjectArray(listeners);
+        data.reclaim();
+        data.readRemoteObjectArray();
+        expect(data.getSize() == 0).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1910 error: " + error);
+        let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
+        expect(error.code == errCode).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1910 ---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1920
+    * @tc.name    : test dupFileDescriptor is call os dup function failed Error verification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1920", 0,async function(){
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1920---------------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      try{
+        rpc.MessageSequence.dupFileDescriptor(-1);
+        expect(data.getSize() == 0).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1920 error: " + error);
+        let errCode = `${rpc.ErrorCode.OS_DUP_ERROR}`;
+        expect(error.code == errCode).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1920 ---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1930
+    * @tc.name    : test Writes the specified anonymous shared object to this MessageSequence
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1930", 0, function(){
+      console.info("--------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1930--------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      try{
+        let ashmem = rpc.Ashmem.create("ashmem", 1024);
+        data.writeAshmem(ashmem);
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+      } catch (error) {
+        expect(error == null).assertTrue();
+      }finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+      }
+      console.info("--------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1930--------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1940
+    * @tc.name    : test Test the function of serializing the readAshmem interface in MessageSequence mode
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1940", 0, function(){
+      console.info("--------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1940--------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      try{
+        let ashmem = rpc.Ashmem.create("ashmem", 1024);
+        data.writeAshmem(ashmem);
+        let ashmemdata = data.readAshmem();
+        expect(ashmemdata != null).assertTrue();
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+      } catch (error) {
+        expect(error).assertEqual(null);
+      }finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+      }
+      console.info("--------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1940--------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1950
+    * @tc.name    : test To test the function of handling the exception of the writeAshmem interface in MessageSequence mode
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1950", 0, function(){
+      console.info("--------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1950--------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      try{
+        let ashmem = "";
+        data.writeAshmem(ashmem);
+        expect(data.getSize() == 0).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1950 error: " + error);
+        let errCode = `${rpc.ErrorCode.CHECK_PARAM_ERROR}`;
+        expect(error.code == errCode).assertTrue();
+        expect(error.message != null).assertTrue();
+      }finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+      }
+      console.info("--------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1950--------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1960
+    * @tc.name    : test WriteAshmem is write data to message sequence failed Error verification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1960", 0,async function(){
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1960---------------------------");
+      let data = rpc.MessageSequence.create();
+      try{
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", 1024);
+        data.reclaim();
+        data.writeAshmem(ashmem);
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+        expect(data.getSize() == 0).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1960 error: " + error);
+        let errCode = `${rpc.ErrorCode.WRITE_DATA_TO_MESSAGE_SEQUENCE_ERROR}`;
+        expect(error.code == errCode).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1960 ---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1970
+    * @tc.name    : test readAshmem is read data from message sequence failed Error verification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改IPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1970", 0,async function(){
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1970---------------------------");
+      let data = rpc.MessageSequence.create();
+      try{
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", 1024);
+        data.writeAshmem(ashmem);
+        data.reclaim();
+        data.readAshmem();
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+        expect(data.getSize() == 0).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1970 error: " + error);
+        let errCode = `${rpc.ErrorCode.READ_DATA_FROM_MESSAGE_SEQUENCE_ERROR}`;
+        expect(error.code == errCode).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1970 ---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1980
+    * @tc.name    : test Call the getRawDataCapacity interface to get the maximum amount of raw data that a MessageSequence
+    *               can hold
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1980", 0, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1980---------------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+      let option: rpc.MessageOption = new rpc.MessageOption();
+      try{
+        expect(data.getRawDataCapacity()).assertEqual(128 * M);
+        data.writeIntArray([1, 2, 3, 4, 5]);
+        expect(data.getRawDataCapacity()).assertEqual(128 * M);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_INTARRAY, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          expect(result.reply.getRawDataCapacity()).assertEqual(128 * M);
+          expect(result.reply.readIntArray()).assertDeepEquals([1, 2, 3, 4, 5]);
+          expect(result.reply.getRawDataCapacity()).assertEqual(128 * M);
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1980 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1980---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_1990
+    * @tc.name    : test Test MessageSequence to deliver rawdata data
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_1990", 0, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_1990---------------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+      let option: rpc.MessageOption = new rpc.MessageOption();
+      try{
+        let arr = [1, 2, 3, 4, 5];
+        data.writeInt(arr.length);
+        data.writeRawData(arr, arr.length);
+        expect(data.getRawDataCapacity()).assertEqual(128 * M);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_RAWDATA, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          let size = result.reply.readInt();
+          expect(size).assertEqual(arr.length);
+          expect(result.reply.getRawDataCapacity()).assertEqual(128 * M);
+          let newReadResult = result.reply.readRawData(size);
+          expect(newReadResult[0]).assertEqual(arr[0]);
+          expect(newReadResult[1]).assertEqual(arr[1]);
+          expect(newReadResult[2]).assertEqual(arr[2]);
+          expect(newReadResult[3]).assertEqual(arr[3]);
+          expect(newReadResult[4]).assertEqual(arr[4]);
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_1990 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_1990---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_2000
+    * @tc.name    : test Test MessageSequence to pass abnormal rawdata data, and expand the capacity for verification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_2000", 0, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_2000---------------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+      let option: rpc.MessageOption = new rpc.MessageOption();
+      try{
+        let arr = [1, 2, 3, 4, 5];
+        data.writeInt(arr.length + 1);
+        data.writeRawData(arr, (arr.length + 1));
+        expect(data.getRawDataCapacity()).assertEqual(128 * M);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_RAWDATA, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          let size = result.reply.readInt();
+          expect(size).assertEqual(arr.length + 1);
+          expect(result.reply.getRawDataCapacity()).assertEqual(128 * M);
+          let newReadResult = result.reply.readRawData(size);
+          expect(newReadResult[0]).assertEqual(arr[0]);
+          expect(newReadResult[1]).assertEqual(arr[1]);
+          expect(newReadResult[2]).assertEqual(arr[2]);
+          expect(newReadResult[3]).assertEqual(arr[3]);
+          expect(newReadResult[4]).assertEqual(arr[4]);
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_2000 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_2000---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_2010
+    * @tc.name    : test Test MessageSequence to pass exception rawdata data data interception verification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_2010", 0, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_2010---------------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+      let option: rpc.MessageOption = new rpc.MessageOption();
+      try{
+        let arr = [1, 2, 3, 4, 5];
+        data.writeInt(arr.length - 1);
+        data.writeRawData(arr, (arr.length - 1));
+        expect(data.getRawDataCapacity()).assertEqual(128 * M);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_RAWDATA, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          let size = result.reply.readInt();
+          expect(size).assertEqual(arr.length - 1);
+          expect(result.reply.getRawDataCapacity()).assertEqual(128 * M);
+          let newReadResult = result.reply.readRawData(size);
+          expect(newReadResult[0]).assertEqual(arr[0]);
+          expect(newReadResult[1]).assertEqual(arr[1]);
+          expect(newReadResult[2]).assertEqual(arr[2]);
+          expect(newReadResult[3]).assertEqual(arr[3]);
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_2010 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_2010---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_2020
+    * @tc.name    : test Test MessageSequence to deliver out-of-bounds RawData data
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_2020", 0, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_2020---------------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+      let option: rpc.MessageOption = new rpc.MessageOption();
+      try{
+        let arr = [-129, 2, 3, 4, 128];
+        data.writeInt(arr.length);
+        data.writeRawData(arr, arr.length);
+        expect(data.getRawDataCapacity()).assertEqual(128 * M);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_RAWDATA, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          let size = result.reply.readInt();
+          expect(size).assertEqual(arr.length);
+          expect(result.reply.getRawDataCapacity()).assertEqual(128 * M);
+          let newReadResult = result.reply.readRawData(size);
+          expect(newReadResult[0]).assertEqual(arr[0]);
+          expect(newReadResult[1]).assertEqual(arr[1]);
+          expect(newReadResult[2]).assertEqual(arr[2]);
+          expect(newReadResult[3]).assertEqual(arr[3]);
+          expect(newReadResult[4]).assertEqual(arr[4]);
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_2020 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_2020---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_2030
+    * @tc.name    : test Test MessageSequence to deliver illegal RawData data
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_2030", 0, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_2030---------------------------");
+      let data: rpc.MessageSequence = new rpc.MessageSequence();
+      try {
+        let arr = ["aaa", 1, 2, 3];
+        data.writeInt(arr.length);
+        data.writeRawData(arr, arr.length);
+        expect(data.getRawDataCapacity()).assertEqual(128 * M);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_2030 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_2030---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_2040
+    * @tc.name    : test Test fixed MessageSequence space size to pass rawData data
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_2040", 0, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_2040---------------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+      let option: rpc.MessageOption = new rpc.MessageOption();
+      try{
+        expect(data.getRawDataCapacity()).assertEqual(128 * M);
+        let rawdata = [1, 2, 3];
+        data.writeInt(rawdata.length);
+        data.writeRawData(rawdata, rawdata.length);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_RAWDATA, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          let size = result.reply.readInt();
+          expect(result.reply.readRawData(size) != rawdata).assertTrue();
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_2040 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_2040---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_2050
+    * @tc.name    : test Test MessageSequence delivery file descriptor object
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_2050", 0, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_2050---------------------------");
+      try {
+        let testab = new TestProxy(gIRemoteObject).asObject();
+        expect(testab != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_2050 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_2050---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_2060
+    * @tc.name    : test Test that the asObject interface is called by a RemoteObject and returns itself
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_2060", 0, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_2060---------------------------");
+      try {
+        let testAbilityStub = new TestAbilityStub("testObject");
+        expect(testAbilityStub.asObject() != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_2060 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_2060---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageSequence_2070
+    * @tc.name    : test Test the function of the getReadPosition interface
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageSequence_2070", 0, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageSequence_2070---------------------------");
+      let data: rpc.MessageSequence = rpc.MessageSequence.create();
+      let reply: rpc.MessageSequence = rpc.MessageSequence.create();
+      let option: rpc.MessageOption = new rpc.MessageOption();
+      try{
+        data.writeByte(2);
+        data.writeShort(3);
+        data.writeInt(4);
+        data.writeLong(5);
+        data.writeFloat(1.2);
+        data.writeDouble(10.2);
+        data.writeBoolean(true);
+        data.writeChar(97);
+        data.writeString("");
+        data.writeParcelable(new MySequenceable(1, "aaa"));
+        await gIRemoteObject.sendMessageRequest(CODE_ALL_TYPE, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          expect(result.reply.readByte()).assertEqual(2);
+          expect(result.reply.getReadPosition()).assertEqual(4);
+          expect(result.reply.readShort()).assertEqual(3);
+          expect(result.reply.getReadPosition()).assertEqual(4 + 4);
+          expect(result.reply.readInt()).assertEqual(4);
+          expect(result.reply.getReadPosition()).assertEqual((4 + 4) + 4);
+          expect(result.reply.readLong()).assertEqual(5);
+          expect(result.reply.getReadPosition()).assertEqual(((4 + 4) + 4) + 8);
+          expect(result.reply.readFloat()).assertEqual(1.2);
+          expect(result.reply.getReadPosition()).assertEqual((((4 + 4) + 4) + 8) + 8);
+          expect(result.reply.readDouble()).assertEqual(10.2);
+          expect(result.reply.getReadPosition()).assertEqual(((((4 + 4) + 4) + 8) + 8) + 8);
+          expect(result.reply.readBoolean()).assertTrue();
+          expect(result.reply.getReadPosition()).assertEqual((((((4 + 4) + 4) + 8) + 8) + 8) + 4);
+          expect(result.reply.readChar()).assertEqual(97);
+          expect(result.reply.getReadPosition()).assertEqual(((((((4 + 4) + 4) + 8) + 8) + 8) + 4) + 4);
+          expect(result.reply.readString()).assertEqual("");
+          expect(result.reply.getReadPosition()).assertEqual((((((((4 + 4) + 4) + 8) + 8) + 8) + 4) + 4) + 8);
+          let s = new MySequenceable(null, null);
+          result.reply.readParcelable(s);
+          expect(result.reply.getReadPosition()).assertEqual(((((((((4 + 4) + 4) + 8) + 8) + 8) + 4) + 4) + 8) + (12 + 8));
+          expect(s.num).assertEqual(1);
+          expect(s.str).assertEqual("aaa");
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageSequence_2070 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        console.info(logTag + "reclaim done");
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_2070---------------------------");
     });
     console.info("-----------------------SUB_DSoftbus_RPC_API_NEW_onRemoteRequest_Test is end-----------------------");
   });
