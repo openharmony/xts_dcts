@@ -13,32 +13,10 @@
 
 import("../../../../tools/build/suite.gni")
 
-ohos_hap_assist_suite("DctsDmsFwkStageTestServer") {
-  hap_profile = "entry/src/main/module.json"
-  hap_name = "DctsDmsFwkStageTestServer"
-
+ohos_app_assist_suite("DctsDmsFwkStageTestServer") {
   testonly = true
-  deps = [
-    ":dmsfwkstagetestserver_js_assets",
-    ":dmsfwkstagetestserver_resources",
-  ]
-  ets2abc = true
-  certificate_profile = "signature/openharmony_sx.p7b"
-  subsystem_name = "ability"
+  certificate_profile = "./signature/openharmony_sx.p7b"
+  hap_name = "DctsDmsFwkStageTestServer"
   part_name = "ability_runtime"
-}
-
-ohos_app_scope("dmsfwkstagetestserver_app_profile") {
-  app_profile = "AppScope/app.json"
-  sources = [ "AppScope/resources" ]
-}
-
-ohos_js_assets("dmsfwkstagetestserver_js_assets") {
-  source_dir = "entry/src/main/ets"
-}
-
-ohos_resources("dmsfwkstagetestserver_resources") {
-  sources = [ "entry/src/main/resources" ]
-  deps = [ ":dmsfwkstagetestserver_app_profile" ]
-  hap_profile = "entry/src/main/module.json"
+  subsystem_name = "ability"
 }
