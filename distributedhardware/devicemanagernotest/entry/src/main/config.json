@@ -1,7 +1,7 @@
 {
   "app": {
-    "bundleName": "com.ohos.distributedscreenjstest",
-    "vendor": "acts",
+    "bundleName": "com.ohos.distributedjstest",
+    "vendor": "dcts",
     "version": {
       "code": 1000000,
       "name": "1.0.0"
@@ -9,7 +9,7 @@
   },
   "deviceConfig": {},
   "module": {
-    "package": "com.ohos.distributedscreenjstest",
+    "package": "com.ohos.distributedjstest",
     "name": ".entry",
     "mainAbility": ".MainAbility",
     "deviceType": [
@@ -25,14 +25,6 @@
       "installationFree": false
     },
     "reqPermissions": [
-      {
-          "name": "ohos.permission.DISTRIBUTED_DATASYNC",
-          "reason": "need use ohos.permission.DISTRIBUTED_DATASYNC"
-      },
-      {
-          "name": "ohos.permission.ACCESS_SERVICE_DM",
-          "reason": "need use ohos.permission.ACCESS_SERVICE_DM"
-      }
     ],
     "abilities": [
       {
