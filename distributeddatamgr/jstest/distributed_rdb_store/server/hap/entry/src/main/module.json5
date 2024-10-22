@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 {
   "module": {
     "name": "entry",
@@ -21,6 +21,7 @@
     "description": "$string:phone_entry_dsc",
     "mainElement": "MainAbility",
     "deviceTypes": [
+      "phone",
       "tablet",
       "tv",
       "wearable",
