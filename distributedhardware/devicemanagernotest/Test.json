@@ -1,12 +1,12 @@
 {
-    "description": "Configuration for hjunit demo Tests",
+    "description": "Configuration for sensor js api Tests",
     "driver": {
         "type": "OHJSUnitTest",
+        "test-timeout": "160000",
+        "shell-timeout": "160000",
         "bundle-name": "com.ohos.distributedjstest",
         "package-name": "com.ohos.distributedjstest",
-        "test-timeout": "1200000",
-        "testcase-timeout": "6000",
-        "shell-timeout": "1200000"
+        "testcase-timeout": 70000
     },
     "kits": [
         {
