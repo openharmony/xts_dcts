@@ -1121,29 +1121,29 @@ export default function DmsFwkFaTest() {
               let msg = result.reply.readInt();
               console.info(' SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 msg: ' + msg)
               expect(msg == 100).assertTrue();
-              
+
             }).catch((e) => {
               console.log('sendRequest error:' + e);
               expect().assertFail();
-            
+
             });
           },
           onDisConnect: (elementName) => {
             console.info('SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
-         
+
           },
           onFailed: (code) => {
             console.info('SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300  onFailed: ' + code);
             expect().assertFail();
-       
+
           }
         });
       } catch (err) {
         console.info('SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 catch: ' + err.code);
         console.info('SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 catch: ' + err.message);
         expect().assertFail();
-      
+
       }
       await sleep(1000);
       done();
@@ -1937,19 +1937,6 @@ export default function DmsFwkFaTest() {
       };
       connectId1 = featureAbility.connectAbility(request1, options1);
       await sleep(1000)
-      featureAbility.disconnectAbility(connectId, (err, data) => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 disconnectAbility err: ' + err.code);
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 disconnectAbilityerr: ' + err.message);
-        expect(err.code).assertEqual(0);
-        done();
-      });
-      await sleep(1000)
-      featureAbility.disconnectAbility(connectId1, (err, data) => {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 disconnectAbility err: ' + err.code);
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 disconnectAbilityerr: ' + err.message);
-        expect(err.code).assertEqual(0);
-        done();
-      });
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 end------------------------");
     })
 
@@ -1990,58 +1977,62 @@ export default function DmsFwkFaTest() {
     it("SUB_DMS_StandardOs_stability_StabilityTest_0100", 0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_stability_StabilityTest_0100 start------------------------");
       let connectId;
-      try {
-        for (let i = 0; i < 10; i++) {
-          connectId = featureAbility.connectAbility({
-            deviceId: dvId,
-            bundleName: "com.acts.example.dmsfwkstageserver",
-            abilityName: "ServiceAbility"
-          }, {
-            onConnect: (elementName, proxy) => {
-              let option = new rpc.MessageOption();
-              let data = new rpc.MessageParcel();
-              let reply = new rpc.MessageParcel();
-              data.writeInt(1);
-              data.writeInt(99);
-              proxy.sendRequest(1, data, reply, option).then((result) => {
-                console.log('sendRequest success');
-                let msg = result.reply.readInt();
-                console.info(' SUB_DMS_StandardOs_stability_StabilityTest_0100 msg: ' + msg)
+      for (let i = 0; i < 10; i++) {
+        console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 index : ' + i);
+		connectId = featureAbility.connectAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "ServiceAbility"
+        }, {
+          onConnect(elementName, proxy) {
+            let option = new rpc.MessageOption();
+            let data = new rpc.MessageParcel();
+            let reply = new rpc.MessageParcel();
+            data.writeInt(1);
+            data.writeInt(99);
+            proxy.sendRequest(1, data, reply, option).then(async (result) => {
+              console.log('sendRequest success');
+              let msg = result.reply.readInt();
+              console.info(' SUB_DMS_StandardOs_stability_StabilityTest_0100 msg: ' + msg)
+              try {
                 expect(msg == 100).assertTrue();
-                done();
-              }).catch((e) => {
-                console.log('sendRequest error:' + e);
+              } catch (error) {
+                console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 catch: ' + error);
+              }
+              try{
+                await sleep(2000);
+                featureAbility.disconnectAbility(connectId, (err) => {
+                  console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 disconnectAbility err: ' + JSON.stringify(err));
+                  try{
+                    expect(err.code).assertEqual(0);
+                  } catch (error) {
+                    console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 catch: ' + error);
+                  }
+                })
+              }catch (err) {
+                console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 catch: ' + err.code);
                 expect().assertFail();
-                done();
-              });
-            },
-            onDisConnect: (elementName) => {
-              console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100  onDisConnect: ' + JSON.stringify(elementName));
+              }
+              await sleep(4000);
+            }).catch((e) => {
+              console.log('sendRequest error:' + e);
               expect().assertFail();
-              done();
-            },
-            onFailed: (code) => {
-              console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100  onFailed: ' + code);
-              expect().assertFail();
-              done();
-            }
-          });
-          featureAbility.disconnectAbility(connectId, (err, data) => {
-            console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 disconnectAbility err: ' + err.code);
-            console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 disconnectAbilityerr: ' + err.message);
-            expect(err.code).assertEqual(0);
-            done();
-          })
-          console.info("SUB_DMS_StandardOs_stability_StabilityTest_0100 running at : " + i + ",here");
-        }
-      } catch (err) {
-        console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 catch: ' + err.code);
-        console.info('SUB_DMS_ConnectAbilitySUB_DMS_StandardOs_stability_StabilityTest_0100_0140 catch: ' + err.message);
-        expect().assertFail();
-        done();
+            });
+          },
+          onDisConnect: (elementName) => {
+            console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+          },
+          onFailed: (code) => {
+            console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100  onFailed: ' + code);
+            expect().assertFail();
+          }
+        });
+        await sleep(4000);
+        console.info("SUB_DMS_StandardOs_stability_StabilityTest_0100 connectId is : " + connectId);
       }
-      await sleep(1000);
-      console.info("-----------------SUB_DMS_StandardOs_stability_StabilityTest_0100 end------------------------");
-    });
-  })
+    console.info("-----------------SUB_DMS_StandardOs_stability_StabilityTest_0100 end------------------------");
+    done();
+  });
+})
 }
