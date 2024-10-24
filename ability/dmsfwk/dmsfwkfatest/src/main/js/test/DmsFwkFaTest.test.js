@@ -1984,7 +1984,7 @@ export default function DmsFwkFaTest() {
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
         }, {
-          onConnect(elementName, proxy) {
+          onConnect: function(elementName, proxy) {
             let option = new rpc.MessageOption();
             let data = new rpc.MessageParcel();
             let reply = new rpc.MessageParcel();
