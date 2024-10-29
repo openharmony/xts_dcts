@@ -13,20 +13,15 @@
  * limitations under the License.
  */
 
-@Entry
-@Component
-struct Index {
-  aboutToAppear() {
-    console.info('onShow finish')
-  }
-
-  build() {
-    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
-      Text('Rpcrequestserver')
-        .fontSize(50)
-        .fontWeight(FontWeight.Bold)
+{
+  "apiType": 'stageMode',
+  "targets": [
+    {
+      "name": "default",
+      "runtimeOS": "OpenHarmony"
+    },
+    {
+      "name": "ohosTest",
     }
-    .width('100%')
-    .height('100%')
-  }
+  ]
 }
