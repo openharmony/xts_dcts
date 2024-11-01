@@ -13,20 +13,5 @@
  * limitations under the License.
  */
 
-@Entry
-@Component
-struct Index {
-  aboutToAppear() {
-    console.info('onShow finish')
-  }
-
-  build() {
-    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
-      Text('Rpcrequestserver')
-        .fontSize(50)
-        .fontWeight(FontWeight.Bold)
-    }
-    .width('100%')
-    .height('100%')
-  }
-}
+// Script for compiling build behavior. It is built in the build plug-in and cannot be modified currently.
+export { hapTasks } from '@ohos/hvigor-ohos-plugin';
