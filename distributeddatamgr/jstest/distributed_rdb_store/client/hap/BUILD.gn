@@ -13,23 +13,15 @@
 
 import("../../../../../../tools/build/suite.gni")
 
-ohos_js_hap_suite("distributerdbdisjs_test") {
-  hap_profile = "./src/main/config.json"
-  deps = [
-    ":distributerdbdisjs_assets",
-    ":distributerdbdisjs_resources",
-  ]
+ohos_js_app_suite("distributerdbdisjs_test") {
+  test_hap = true
+  testonly = true
   certificate_profile = "./signature/openharmony_sx.p7b"
   hap_name = "DctsDistributeRdbStoreDisJsTest"
-  subsystem_name = "distributeddatamgr"
+
+  # 部件名称，真实数据，需要子系统对应
   part_name = "relational_store"
-}
-ohos_js_assets("distributerdbdisjs_assets") {
-  js2abc = true
-  hap_profile = "./src/main/config.json"
-  source_dir = "./src/main/js"
-}
-ohos_resources("distributerdbdisjs_resources") {
-  sources = [ "./src/main/resources" ]
-  hap_profile = "./src/main/config.json"
+
+  # 子系统名称，真实数据，需要部件对应
+  subsystem_name = "distributeddatamgr"
 }
