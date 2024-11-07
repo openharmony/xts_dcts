@@ -1900,6 +1900,13 @@ export default function DmsFwkFaTest() {
       };
       connectId = featureAbility.connectAbility(request, options);
       await sleep(1000)
+      featureAbility.disconnectAbility(connectId, (err) => {
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0500 disconnectAbility err: ' + err.code);
+        expect(err.code).assertEqual(0);
+        done();
+      });
+      await sleep(1000)
+      console.info("SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0500 connectId is : " + connectId);
       let request1 = {
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstageserver",
@@ -1937,8 +1944,9 @@ export default function DmsFwkFaTest() {
       };
       connectId1 = featureAbility.connectAbility(request1, options1);
       await sleep(1000)
+      console.info("SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0500 connectId1 is : " + connectId1);
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 end------------------------");
-    })
+    });
 
     /*
     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600
@@ -1948,25 +1956,14 @@ export default function DmsFwkFaTest() {
     */
     it('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600', 0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 start------------------------");
-      if (connectId && connectId1 == null) {
-        console.log('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 disconnectAbility is failed')
-      } else {
-        featureAbility.disconnectAbility(connectId, (err) => {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 disconnectAbility err: ' + err.code);
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 disconnectAbilityerr: ' + err.message);
-          expect(err.code).assertEqual(0);
-          done();
-        });
-        await sleep(1000)
-        featureAbility.disconnectAbility(connectId1, (err) => {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 disconnectAbility err: ' + err.code);
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 disconnectAbilityerr: ' + err.message);
-          expect(err.code).assertEqual(0);
-          done();
-        });
-      }
+      featureAbility.disconnectAbility(connectId1, (err) => {
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 disconnectAbility err: ' + err.code);
+        expect(err.code).assertEqual(0);
+      });
+      await sleep(2000)
+      done();
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 end------------------------");
-    })
+    });
 
     /*
     * @tc.number  SUB_DMS_StandardOs_stability_StabilityTest_0100
@@ -1979,12 +1976,12 @@ export default function DmsFwkFaTest() {
       let connectId;
       for (let i = 0; i < 10; i++) {
         console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 index : ' + i);
-		connectId = featureAbility.connectAbility({
+        connectId = featureAbility.connectAbility({
           deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
           abilityName: "ServiceAbility"
         }, {
-          onConnect: function(elementName, proxy) {
+          onConnect: function (elementName, proxy) {
             let option = new rpc.MessageOption();
             let data = new rpc.MessageParcel();
             let reply = new rpc.MessageParcel();
@@ -1999,17 +1996,17 @@ export default function DmsFwkFaTest() {
               } catch (error) {
                 console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 catch: ' + error);
               }
-              try{
+              try {
                 await sleep(2000);
                 featureAbility.disconnectAbility(connectId, (err) => {
                   console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 disconnectAbility err: ' + JSON.stringify(err));
-                  try{
+                  try {
                     expect(err.code).assertEqual(0);
                   } catch (error) {
                     console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 catch: ' + error);
                   }
                 })
-              }catch (err) {
+              } catch (err) {
                 console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 catch: ' + err.code);
                 expect().assertFail();
               }
@@ -2031,8 +2028,8 @@ export default function DmsFwkFaTest() {
         await sleep(4000);
         console.info("SUB_DMS_StandardOs_stability_StabilityTest_0100 connectId is : " + connectId);
       }
-    console.info("-----------------SUB_DMS_StandardOs_stability_StabilityTest_0100 end------------------------");
-    done();
-  });
-})
+      console.info("-----------------SUB_DMS_StandardOs_stability_StabilityTest_0100 end------------------------");
+      done();
+    });
+  })
 }
