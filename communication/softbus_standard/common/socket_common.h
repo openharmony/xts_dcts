@@ -25,7 +25,7 @@
 #include "socket.h"
 #include "softbus_bus_center.h"
 #include "softbus_common.h"
-#include "softbus_errcode.h"
+#include "softbus_error_code.h"
 #include "nativetoken_kit.h"
 #include "token_setproc.h"
 
