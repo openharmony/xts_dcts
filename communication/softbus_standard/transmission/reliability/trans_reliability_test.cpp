@@ -17,7 +17,7 @@
 
 #include "net_trans_common.h"
 #include "wifi_utils.h"
-#include "softbus_errcode.h"
+#include "softbus_error_code.h"
 #include "accesstoken_kit.h"
 
 using namespace testing::ext;
