@@ -74,28 +74,28 @@
     "reqPermissions": [
       {
         "name": "ohos.permission.DISTRIBUTED_DATASYNC",
-        "reason":"perssion_reason",
+        "reason":"$string:perssion_reason",
         "usedScene":{
           "when":"inuse"
         }
       },
       {
         "name": "ohos.permission.GET_DISTRIBUTED_DEVICE_INFO",
-        "reason":"perssion_reason",
+        "reason":"$string:perssion_reason",
         "usedScene":{
           "when":"inuse"
         }
       },
       {
         "name": "ohos.permission.ACCESS_SERVICE_DM",
-        "reason":"perssion_reason",
+        "reason":"$string:perssion_reason",
         "usedScene":{
           "when":"inuse"
         }
       },
       {
         "name": "ohos.permission.GET_BUNDLE_INFO",
-        "reason":"perssion_reason",
+        "reason":"$string:perssion_reason",
         "usedScene":{
           "when":"inuse"
         }
