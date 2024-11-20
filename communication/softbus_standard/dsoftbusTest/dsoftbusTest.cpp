@@ -179,8 +179,6 @@ static void OnDataMessageReceived(int sessionId, const void* data, unsigned int 
         return;
     }
     LOG("[cb][data]mesg received   sid:%d, data-len:%d", sessionId, dataLen);
-    int ret = SendMessage(sessionId, data, dataLen);
-    LOG("[cb][data]mesg received   send back:%d", ret);
 }
 
 /* session callback for control */
@@ -327,8 +325,6 @@ static void OnCtrlMessageReceived(int sessionId, const void* data, unsigned int 
         return;
     }
     LOG("[cb][ctrl]mesg received sid:%d, data-len:%d", sessionId, dataLen);
-    int ret = SendMessage(sessionId, data, dataLen);
-    LOG("[cb][ctrl]mesg received send back:%d", ret);
 
     // operate
     unsigned int maxCtrlLen = 25;
@@ -338,7 +334,7 @@ static void OnCtrlMessageReceived(int sessionId, const void* data, unsigned int 
         LOG("[cb][ctrl]GetCodeByMsg is:%d", *code);
         if (*code != -1) {
             pthread_t ctrlThread;
-            ret = pthread_create(&ctrlThread, nullptr, CtrlOperateTask, code);
+            int ret = pthread_create(&ctrlThread, nullptr, CtrlOperateTask, code);
             LOG("[cb][ctrl]create ctrl thread ret:%d", ret);
         } else {
             free(code);
@@ -376,8 +372,6 @@ static void OnPerfMessageReceived(int sessionId, const void* data, unsigned int 
         return;
     }
     LOG("[cb][perf]mesg received sid:%d, data-len:%d", sessionId, dataLen);
-    int ret = SendMessage(sessionId, data, dataLen);
-    LOG("[cb][perf]mesg received send back:%d", ret);
 }
 
 static int OnPassSessionOpened(int sessionId, int result)
@@ -438,8 +432,6 @@ static void OnProxyMessageReceived(int sessionId, const void* data, unsigned int
         return;
     }
     LOG("[cb][Proxy]mesg received   sid:%d, data-len:%d", sessionId, dataLen);
-    int ret = SendMessage(sessionId, data, dataLen);
-    LOG("[cb][Proxy]mesg received   send back:%d", ret);
 }
 
 /* net state callback */

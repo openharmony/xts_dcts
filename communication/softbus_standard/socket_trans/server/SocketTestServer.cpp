@@ -117,8 +117,6 @@ static void OnMessage(int32_t socket, const void* data, unsigned int dataLen)
         return;
     }
     LOG("[cb][data]mesg received   socket:%d, data-len:%d", socket, dataLen);
-    int ret = SendMessage(socket, data, dataLen);
-    LOG("[cb][data]mesg received   send back:%d", ret);
 }
 
 static void OnStream(int32_t socket, const StreamData *data, const StreamData *ext, const StreamFrameInfo *param)
