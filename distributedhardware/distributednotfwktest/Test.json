@@ -1,0 +1,20 @@
+{
+    "description": "Configuration for distributed_fwk js api Tests",
+    "driver": {
+        "type": "OHJSUnitTest",
+        "test-timeout": "160000",
+        "shell-timeout": "160000",
+        "bundle-name": "com.ohos.distributedfwktest",
+        "package-name": "com.ohos.distributedfwktest",
+        "testcase-timeout": 70000
+    },
+    "kits": [
+        {
+            "test-file-name": [
+                "DctsDistribuedNotFwkTest.hap"
+            ],
+            "type": "AppInstallKit",
+            "cleanup-apps": true
+        }
+    ]
+}
