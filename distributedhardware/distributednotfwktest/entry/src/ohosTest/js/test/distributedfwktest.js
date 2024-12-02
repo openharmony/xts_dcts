@@ -42,10 +42,6 @@ export default function distributedHardware() {
             console.info('afterAll called');
             done();
         })
-        
-        let dmInstance = null;
-        let dmNetworkId = null;
-        let dmDeviceInfo = null;
 		
         /*
          * @tc.number  SUB_DH_HardWareManager_Dcts_0100
@@ -362,7 +358,6 @@ export default function distributedHardware() {
                     done();
                 })
                 console.log('stop SUB_DH_HardWareManager_Dcts_0900 distributed successfully');
-                deviceManager.releaseDeviceManager(dmInstance);
                 expect(true).assertTrue();
                 done();
             } catch (error) {
