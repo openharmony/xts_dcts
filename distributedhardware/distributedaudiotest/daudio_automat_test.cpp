@@ -35,11 +35,20 @@ void DAudioAutomatTest::SetUpTestCase(void){
     int ret = InitTestDemo();
     if (ret != g_audioOk) {
         DHLOGI("demo test:InitTestDemo error");
+        GTEST_SKIP() << "No InitTestDemo Audio Available" << std::endl;
         return;
     }
 }
 void DAudioAutomatTest::TearDownTestCase(void) {}
-void DAudioAutomatTest::SetUp(void) {}
+void DAudioAutomatTest::SetUp(void)
+{
+    int ret = InitTestDemo();
+    if (ret != g_audioOk) {
+        DHLOGI("demo test:InitTestDemo error");
+        GTEST_SKIP() << "No Audio Audio Available" << std::endl;
+        return;
+    }
+}
 void DAudioAutomatTest::TearDown(void) {}
 DAudioAutomatTest::DAudioAutomatTest(void) {}
 

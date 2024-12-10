@@ -52,6 +52,7 @@ void DCameraAutomatTest::TearDownTestCase(void)
 }
 void DCameraAutomatTest::SetUp(void)
 {
+    mainDemo->InitSensors();
     mainDemo->InitDemo();
 }
 void DCameraAutomatTest::TearDown(void) {}
