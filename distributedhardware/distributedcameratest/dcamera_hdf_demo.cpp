@@ -288,6 +288,7 @@ void DcameraHdfDemo::InitSensors()
         demoCameraHost_ = ICameraHost::Get(demoServiceName, false);
         if (demoCameraHost_ == nullptr) {
             DHLOGI("demo test: ICameraHost::Get error");
+            GTEST_SKIP() << "No Camera InitSensors Available" << std::endl;
         } else {
             DHLOGI("demo test: ICameraHost::Get success");
         }

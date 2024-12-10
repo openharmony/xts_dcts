@@ -23,7 +23,6 @@ group("distributedhardware") {
       "distributedcameratest:DctsSubdisCameraTest",
       "distributeddevicejstest:DctsSubdisDeviceJsTest",
       "distributedinputtest:DctsSubDistributedInputTest",
-      "distributednotfwktest:DctsDistribuedNotFwkTest",
       "distributedscreentest:DctsSubdisScreenTest",
     ]
   }

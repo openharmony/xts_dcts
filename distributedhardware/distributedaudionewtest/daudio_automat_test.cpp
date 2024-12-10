@@ -51,12 +51,20 @@ void DAudioAutomatTest::SetUpTestCase(void)
     int ret = InitTestDemo();
     if (ret != g_audioOk) {
         DHLOGI("demo test:InitTestDemo error");
+        GTEST_SKIP() << "No Audio New Available" << std::endl;
         return;
     }
 }
 void DAudioAutomatTest::TearDownTestCase(void) {}
 void DAudioAutomatTest::SetUp(void)
 {
+    int ret = InitTestDemo();
+    if (ret != g_audioOk) {
+        DHLOGI("demo test:InitTestDemo error");
+        GTEST_SKIP() << "No Audio New Available" << std::endl;
+        return;
+    }
+    
     int32_t saId = 6666;
     bool runOnCreate = true;
     std::string params = "params";
