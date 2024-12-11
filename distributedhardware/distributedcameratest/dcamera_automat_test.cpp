@@ -32,6 +32,7 @@ public:
     void SetUp();
     void TearDown();
     DCameraAutomatTest();
+    OHOS::sptr<ICameraHost> demoCamera = nullptr;
 };
 void DCameraAutomatTest::SetUpTestCase(void)
 {
@@ -52,7 +53,13 @@ void DCameraAutomatTest::TearDownTestCase(void)
 }
 void DCameraAutomatTest::SetUp(void)
 {
-    mainDemo->InitSensors();
+    constexpr const char *demoServiceName = "distributed_camera_service";
+    demoCamera = ICameraHost::Get(demoServiceName, false);
+    if (demoCamera == nullptr) {
+        DHLOGI("demo test: ICameraHost::Get error");
+        GTEST_SKIP() << "No Camera Available" << std::endl;
+        return;
+    }
     mainDemo->InitDemo();
 }
 void DCameraAutomatTest::TearDown(void) {}
