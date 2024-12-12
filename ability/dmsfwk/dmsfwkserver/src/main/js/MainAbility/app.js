@@ -30,7 +30,7 @@ export default {
             console.info('Calc[IndexPage] grantPermission,requestPermissionsFromUser,'+result.requestCode)
         })
         setTimeout(()=>{
-            particleAbility.terminateSelf()
+            featureAbility.terminateSelf()
         },2000)
     },
     onDestroy() {
