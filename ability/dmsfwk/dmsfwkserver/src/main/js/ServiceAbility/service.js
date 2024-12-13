@@ -14,12 +14,13 @@
  */
 
 import rpc from "@ohos.rpc";
+import featureAbility from '@ohos.ability.featureAbility';
 
 export default {
     onStart() {
         console.info('DmsServer: onStart')
         setTimeout(()=>{
-            particleAbility.terminateSelf()
+            featureAbility.terminateSelf()
         },2000)
     },
     onStop() {
