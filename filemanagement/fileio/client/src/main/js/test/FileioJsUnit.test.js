@@ -208,9 +208,9 @@ export default function FileioDistributedTest(){
             done();
             console.info("beforeAll done");
         })
-        beforeEach(async function () {
+        beforeEach(function () {
             console.info(('beforeEach called'));
-            await sleep(1500);
+            sleep(1500);
         })
         afterEach(function () {
             console.info('afterEach called');
