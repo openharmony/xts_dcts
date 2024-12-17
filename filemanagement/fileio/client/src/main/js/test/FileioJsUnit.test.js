@@ -179,10 +179,10 @@ export default function FileioDistributedTest(){
                 let driver = await UiDriver.create()
                 console.info(` come in driveFn`)
                 console.info(`driver is ${JSON.stringify(driver)}`)
-                await sleep(1000);
+                await sleep(2000);
                 let button = await driver.findComponent(BY.text('允许'));
                 console.info(`button is ${JSON.stringify(button)}`);
-                await sleep(1000);
+                await sleep(6000);
                 await button.click();
                 await sleep(1000);
             } catch (err) {
@@ -194,9 +194,9 @@ export default function FileioDistributedTest(){
         beforeAll(async function(done) {
             console.info('beforeAll called fileio server');
             await getPermission();
-            await sleep(1000);
+            await sleep(5000);
             await driveFn();
-            await sleep(1000);
+            await sleep(3000);
             devicemanager.DeviceOpenP2PConnection();
             await sleep(1000);
             
@@ -210,7 +210,7 @@ export default function FileioDistributedTest(){
         })
         beforeEach(async function () {
             console.info(('beforeEach called'));
-            await sleep(1000);
+            await sleep(1500);
         })
         afterEach(function () {
             console.info('afterEach called');
@@ -3243,7 +3243,7 @@ export default function FileioDistributedTest(){
                 expect(DISTRIBUTED_FILE_CONTENT === fileContent).assertTrue();
     
                 console.info('------------------- start check server... ');
-                await sleep(1000);
+                sleep(1000);
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
                     console.info("-------------- test_fileio_write_file_000 : getServerFileInfo serverFileContent =" + serverFileContent);
                     expect(serverFileContent).assertEqual(DISTRIBUTED_FILE_CONTENT);
@@ -3617,7 +3617,7 @@ export default function FileioDistributedTest(){
                 expect(DISTRIBUTED_FILE_CONTENT === fileContent).assertTrue();
     
                 console.info('------------------- start check server... ');
-                await sleep(1000);
+                sleep(1000);
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
                     console.info("-------------- test_filefs_write_file_000 : getServerFileInfo serverFileContent =" + serverFileContent);
                     expect(serverFileContent).assertEqual(DISTRIBUTED_FILE_CONTENT);
@@ -3654,7 +3654,7 @@ export default function FileioDistributedTest(){
                 expect(DISTRIBUTED_FILE_CONTENT === fileContent).assertTrue();
     
                 console.info('------------------- start check server... ');
-                await sleep(1000);
+                sleep(1000);
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
                     console.info("-------------- test_filefs_write_file_001 : getServerFileInfo serverFileContent =" + serverFileContent);
                     expect(serverFileContent).assertEqual(DISTRIBUTED_FILE_CONTENT);
@@ -3692,7 +3692,7 @@ export default function FileioDistributedTest(){
                 expect(fileContent.length == DISTRIBUTED_FILE_CONTENT.length + 1).assertTrue();
 
                 console.info('------------------- start check server... ');
-                await sleep(1000);
+                sleep(1000);
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
                     console.info("-------------- test_filefs_write_file_002 : getServerFileInfo serverFileContent =" + serverFileContent);
                     expect(serverFileContent.length).assertEqual(DISTRIBUTED_FILE_CONTENT.length + 1);
@@ -3732,7 +3732,7 @@ export default function FileioDistributedTest(){
                 console.info("-------------- readTextSync success" + fileContent);
 
                 console.info('------------------- start check server... ');
-                await sleep(1000);
+                sleep(1000);
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
                     console.info("-------------- test_filefs_write_file_003 : getServerFileInfo serverFileContent =" + serverFileContent);
                     expect(serverFileContent.length == 1).assertTrue();
@@ -3773,7 +3773,7 @@ export default function FileioDistributedTest(){
                 expect(fileContent.length == DISTRIBUTED_FILE_CONTENT.length).assertTrue();
     
                 console.info('------------------- start check server... ');
-                await sleep(1000);
+                sleep(1000);
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileContent) {
                     console.info("-------------- test_filefs_write_file_004 : getServerFileInfo serverFileContent =" + serverFileContent);
                     expect(serverFileContent.length == DISTRIBUTED_FILE_CONTENT.length).assertTrue();
@@ -3913,7 +3913,7 @@ export default function FileioDistributedTest(){
                 console.info('------ client filefs_read_file success.');
     
                 console.info('------ start check server... ');
-                await sleep(1000);
+                sleep(1000);
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileRead) {
                     console.info("test_filefs_read_file_sync_000 : getServerFileInfo serverFileRead: " + serverFileRead);
                     expect(serverFileRead).assertEqual(DISTRIBUTED_FILE_CONTENT);
@@ -3947,7 +3947,7 @@ export default function FileioDistributedTest(){
                 console.info('------ client filefs_read_file success.');
     
                 console.info('------ start check server... ');
-                await sleep(1000);
+                sleep(1000);
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileRead) {
                     console.info("test_filefs_read_file_async_000 : getServerFileInfo serverFileRead: " + serverFileRead);
                     expect(serverFileRead).assertEqual(DISTRIBUTED_FILE_CONTENT);
@@ -3986,7 +3986,7 @@ export default function FileioDistributedTest(){
                 console.info('------ client filefs_read_file success.');
     
                 console.info('------ start check server... ');
-                await sleep(1000);
+                sleep(1000);
                 await getServerFileInfo(tcNumber, fpath, CODE_GET_FILE_CONTENT, done, function (serverFileRead) {
                     console.info("test_filefs_read_file_async_001 : getServerFileInfo serverFileRead: " + serverFileRead);
                     expect(serverFileRead).assertEqual(DISTRIBUTED_FILE_CONTENT);
