@@ -179,10 +179,10 @@ export default function FileioDistributedTest(){
                 let driver = await UiDriver.create()
                 console.info(` come in driveFn`)
                 console.info(`driver is ${JSON.stringify(driver)}`)
-                await sleep(2000);
+                await sleep(1000);
                 let button = await driver.findComponent(BY.text('允许'));
                 console.info(`button is ${JSON.stringify(button)}`);
-                await sleep(6000);
+                await sleep(1000);
                 await button.click();
                 await sleep(1000);
             } catch (err) {
@@ -194,9 +194,9 @@ export default function FileioDistributedTest(){
         beforeAll(async function(done) {
             console.info('beforeAll called fileio server');
             await getPermission();
-            await sleep(5000);
+            await sleep(1000);
             await driveFn();
-            await sleep(3000);
+            await sleep(1000);
             devicemanager.DeviceOpenP2PConnection();
             await sleep(1000);
             
