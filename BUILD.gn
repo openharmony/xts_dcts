@@ -16,6 +16,7 @@ import("//test/xts/tools/build/suite.gni")
 #import("//hit/build/suite.gni")
 import("test_packages.gni")
 merge_xts_notice("dcts_notice") {
+  target = "dcts"
   deps = selected_packages
 }
 
