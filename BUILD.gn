@@ -13,13 +13,16 @@
 
 #import("//hit/build/suite.gni")
 import("test_packages.gni")
-merge_xts_notice("dcts_notice") {
+merge_xts_notice("dcts_opensource_process") {
   target = "dcts"
   deps = selected_packages
+  if (make_osp) {
+    deps += [ "//build/ohos/packages:open_source_package" ]
+  }
 }
 
 ohos_test_suite("xts_dcts") {
-  deps = [ ":dcts_notice" ]
+  deps = [ ":dcts_opensource_process" ]
 }
 
 ohos_test_suite("dcts_ivi") {
