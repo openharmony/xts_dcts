@@ -244,6 +244,7 @@ void ResetWaitFlag4File(void);
 void ResetwaitCount4Online(void);
 void ResetwaitCount4Offline(void);
 void AddPermission(void);
+uint64_t GetTestTokenId(void);
 
 int SendSocket4Data(DataType type, int size);
 

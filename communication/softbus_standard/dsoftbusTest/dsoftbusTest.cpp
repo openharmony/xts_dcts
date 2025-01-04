@@ -80,6 +80,8 @@ void dsoftbusTest::TearDownTestCase()
 
 static int OnFileSessionOpened(int sessionId, int result)
 {
+    uint64_t tokenId = GetTestTokenId();
+    SetSelfTokenID(tokenId);
     LOG("[cb][file]open session sid[%d],rst[%d]", sessionId, result);
     return SOFTBUS_OK;
 }
@@ -107,6 +109,8 @@ static void OnFileMessageReceived(int sessionId, const void* data, unsigned int 
 
 static int OnStreamSessionOpened(int sessionId, int result)
 {
+    uint64_t tokenId = GetTestTokenId();
+    SetSelfTokenID(tokenId);
     LOG("[cb][stream]open session sid[%d],rst[%d]", sessionId, result);
     return SOFTBUS_OK;
 }
@@ -152,6 +156,8 @@ static void StreamReceived(int sessionId, const StreamData *data, const StreamDa
 /* session callback for data */
 static int OnDataSessionOpened(int sessionId, int result)
 {
+    uint64_t tokenId = GetTestTokenId();
+    SetSelfTokenID(tokenId);
     LOG("[cb][data]session opened  sid:%d,ret:%d", sessionId, result);
     return SOFTBUS_OK;
 }
@@ -298,6 +304,8 @@ void* CtrlOperateTask(void* param)
 
 static int OnCtrlSessionOpened(int sessionId, int result)
 {
+    uint64_t tokenId = GetTestTokenId();
+    SetSelfTokenID(tokenId);
     LOG("[cb][ctrl]session opened sid:%d, ret:%d", sessionId, result);
     return SOFTBUS_OK;
 }
@@ -345,6 +353,8 @@ static void OnCtrlMessageReceived(int sessionId, const void* data, unsigned int 
 /* session callback for performance */
 static int OnPerfSessionOpened(int sessionId, int result)
 {
+    uint64_t tokenId = GetTestTokenId();
+    SetSelfTokenID(tokenId);
     LOG("[cb][perf]session opened sid:%d, ret:%d", sessionId, result);
     return SOFTBUS_OK;
 }
@@ -376,6 +386,8 @@ static void OnPerfMessageReceived(int sessionId, const void* data, unsigned int 
 
 static int OnPassSessionOpened(int sessionId, int result)
 {
+    uint64_t tokenId = GetTestTokenId();
+    SetSelfTokenID(tokenId);
     LOG("[cb][pass]session opened sid:%d, ret:%d", sessionId, result);
     return SOFTBUS_OK;
 }
@@ -405,6 +417,8 @@ static void OnPassMessageReceived(int sessionId, const void* data, unsigned int 
 
 static int OnProxySessionOpened(int sessionId, int result)
 {
+    uint64_t tokenId = GetTestTokenId();
+    SetSelfTokenID(tokenId);
     LOG("[cb][Proxy]session opened sid:%d, ret:%d", sessionId, result);
     return SOFTBUS_OK;
 }

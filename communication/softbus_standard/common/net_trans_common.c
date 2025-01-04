@@ -66,6 +66,7 @@ static char* g_expectMessageContent = NULL;
 static int32_t g_recvMsgStat4Control[MAX_SESSION_NUM] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 static int32_t g_recvByteStat4Control[MAX_SESSION_NUM] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 static uint64_t g_transTimeEnd;
+static uint64_t g_tokenId;
 static pthread_barrier_t* g_barrier = NULL;
 
 void sleepn(int n)
@@ -1151,6 +1152,11 @@ int GetOpenSessionCount4Proxy(void)
     return g_sessionOpenCount4Proxy;
 }
 
+uint64_t GetTestTokenId(void)
+{
+    return g_tokenId;
+}
+
 void TestSetUp(void)
 {
     g_defNodeStateCallback.events = EVENT_NODE_STATE_MASK;
@@ -1333,7 +1339,6 @@ void TestTearDown(void)
 
 void AddPermission(void)
 {
-    uint64_t tokenId;
     const char *perms[2];
     perms[0] = OHOS_PERMISSION_DISTRIBUTED_SOFTBUS_CENTER;
     perms[1] = OHOS_PERMISSION_DISTRIBUTED_DATASYNC;
@@ -1347,6 +1352,6 @@ void AddPermission(void)
         .processName = "dsoftbus_test_service",
         .aplStr = "system_core",
     };
-    tokenId = GetAccessTokenId(&infoTnstance);
-    SetSelfTokenID(tokenId);
+    g_tokenId = GetAccessTokenId(&infoTnstance);
+    SetSelfTokenID(g_tokenId);
 }
