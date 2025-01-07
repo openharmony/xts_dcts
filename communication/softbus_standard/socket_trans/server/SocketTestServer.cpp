@@ -88,8 +88,18 @@ SocketInfo socketInfoStream = {
 };
 
 /* socket callback for data */
+bool OnNegotiate(int32_t socket, PeerSocketInfo info)
+{
+    uint64_t tokenId = GetTestTokenId();
+    SetSelfTokenID(tokenId);
+    LOG("[cb][data]OnNegotiate success  {socket:%d: }", socket);
+    return true;
+}
+
 static void OnBind(int32_t socket, PeerSocketInfo info)
 {
+    uint64_t tokenId = GetTestTokenId();
+    SetSelfTokenID(tokenId);
     LOG("[cb][data]OnBind success  {socket:%d, name:%s, deviceId:%s, pkgName:%s, dataType:%d}", socket,
         info.name, info.networkId, info.pkgName, info.dataType);
 }
@@ -245,6 +255,7 @@ static void SetupCallback(void)
         g_sessionlist4SokectData->OnStream = OnStream;
         g_sessionlist4SokectData->OnFile = OnFile;
         g_sessionlist4SokectData->OnQos = OnQos;
+        g_sessionlist4SokectData->OnNegotiate = OnNegotiate;
     }
 }
 

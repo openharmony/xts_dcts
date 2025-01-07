@@ -30,6 +30,7 @@ static INodeStateCb g_defNodeStateCallback;
 static char g_fillContentChar = 'd';
 static unsigned int g_expectDataSize = 0;
 static char* g_expectDataContent = NULL;
+static uint64_t g_tokenId;
 
 /*reset count*/
 void ResetwaitCount4Online(void)
@@ -573,9 +574,13 @@ void TestTearDown(void)
     }
 }
 
+uint64_t GetTestTokenId(void)
+{
+    return g_tokenId;
+}
+
 void AddPermission(void)
 {
-    uint64_t tokenId;
     const char *perms[2];
     perms[0] = OHOS_PERMISSION_DISTRIBUTED_SOFTBUS_CENTER;
     perms[1] = OHOS_PERMISSION_DISTRIBUTED_DATASYNC;
@@ -589,6 +594,6 @@ void AddPermission(void)
         .processName = "dsoftbus_test_service",
         .aplStr = "system_core",
     };
-    tokenId = GetAccessTokenId(&infoTnstance);
-    SetSelfTokenID(tokenId);
+    g_tokenId = GetAccessTokenId(&infoTnstance);
+    SetSelfTokenID(g_tokenId);
 }

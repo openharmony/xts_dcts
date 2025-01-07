@@ -229,6 +229,7 @@ int CloseSessionAndRemoveSs4Data(void);
 int CloseSessionAndRemoveSs4Ctl(void);
 int CloseSessionAndRemoveSs4Proxy(void);
 void AddPermission(void);
+uint64_t GetTestTokenId(void);
 
 ISessionListener* GetSessionListenser4Data(void);
 ISessionListener* GetSessionListenser4Ctl(void);
