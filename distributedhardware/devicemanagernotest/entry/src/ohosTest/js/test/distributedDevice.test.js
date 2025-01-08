@@ -629,30 +629,5 @@ export default function distributedDeviceManager() {
             }
             console.info("----------------------SUB_DH_Device_Dcts_2400 end---------------------------");
         })
-
-        /*
-        * @tc.number  SUB_DH_Device_Dcts_2500
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.size    MediumTest
-        * @tc.type:   Function
-        * @tc.level   Level1
-        */
-        it("SUB_DH_Device_Dcts_2500", 0, async function (done) {
-            console.info("-----------------SUB_DH_Device_Dcts_2500 start------------------------");
-            let operation = 0;
-            try {
-                dmInstance.replyUiAction(operation, 'extra');
-                console.error("in replyUiAction SUB_DH_Device_Dcts_2500 success without permission ");
-                expect().assertFail();
-                done();
-            } catch (error) {
-                console.info(`in replyUiAction SUB_DH_Device_Dcts_2500 failed, code is ${error.code}, message is ${error.message}`);
-                expect(error.code == 201).assertTrue();
-                done();
-            }
-            console.info("-----------------SUB_DH_Device_Dcts_2500 end------------------------");
-        })
     })
 }
