@@ -479,6 +479,7 @@ std::string OpenMic(std::string devId)
         std::cout << "Mic device is already opened." << std::endl;
         return "true";
     }
+    usleep(200000);
     if (LoadMicDev(devId) != DH_SUCCESS) {
         std::cout << "Load audio device failed." << std::endl;
         return "false";
@@ -494,6 +495,7 @@ std::string OpenMic(std::string devId)
     captureAttr.channelCount = CAPTURE_CHANNEL_MASK;
     captureAttr.sampleRate = AUDIO_SAMPLE_RATE;
     captureAttr.format = AudioFormat::AUDIO_FORMAT_TYPE_PCM_16_BIT;
+    usleep(200000);
     int32_t ret = g_adapter->CreateCapture(captureDesc, captureAttr, g_capture, g_captureId);
     if (ret != DH_SUCCESS || g_capture == nullptr) {
         std::cout << "Open MIC device failed." << std::endl;
