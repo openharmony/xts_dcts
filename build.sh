@@ -109,7 +109,7 @@ do_make()
     fi
     TARGET_APP_ARG=""
     if [ -n "$TARGET_APP_DIR" ]; then
-        TARGET_APP_ARG="--gn-args target_app_dir='$TARGET_APP_DIR'"
+        TARGET_APP_ARG="--gn-args target_app_dir=$TARGET_APP_DIR"
     fi
 
     rm -rf "$BASE_HOME/test/xts/autogen_apiobjs"
