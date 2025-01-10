@@ -108,7 +108,7 @@ do_make()
         OSP_ARG="--gn-args make_osp=true"
     fi
     TARGET_APP_ARG=""
-    if [ -z "$TARGET_APP_DIR" ]; then
+    if [ -n "$TARGET_APP_DIR" ]; then
         TARGET_APP_ARG="--gn-args target_app_dir='$TARGET_APP_DIR'"
     fi
 
