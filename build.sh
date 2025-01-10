@@ -82,6 +82,8 @@ parse_cmdline()
                           ;;
         make_osp)         MAKE_OSP="$PARAM"
                           ;;
+        target_app_dir)   TARGET_APP_DIR="$PARAM"
+                          ;;
         *)   usage
              break;;
         esac
@@ -105,6 +107,10 @@ do_make()
     if [ $MAKE_OSP == true ]; then
         OSP_ARG="--gn-args make_osp=true"
     fi
+    TARGET_APP_ARG=""
+    if [ -z "$TARGET_APP_DIR" ]; then
+        TARGET_APP_ARG="--gn-args target_app_dir='$TARGET_APP_DIR'"
+    fi
 
     rm -rf "$BASE_HOME/test/xts/autogen_apiobjs"
     export XTS_SUITENAME=dcts
@@ -119,7 +125,7 @@ do_make()
 	if [ "$CACHE_TYPE" == "xcache" ];then
             CACHE_ARG="--ccache false --xcache true"
         fi
-       ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true $MUSL_ARGS --target-cpu $TARGET_ARCH --get-warning-list=false --stat-ccache=true --compute-overlap-rate=false --deps-guard=false --generate-ninja-trace=false $CACHE_ARG $OSP_ARG --gn-args skip_generate_module_list_file=true
+       ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target $BUILD_TARGET --build-target "deploy_testtools" --gn-args is_standard_system=true $MUSL_ARGS --target-cpu $TARGET_ARCH --get-warning-list=false --stat-ccache=true --compute-overlap-rate=false --deps-guard=false --generate-ninja-trace=false $CACHE_ARG $OSP_ARG $TARGET_APP_ARG --gn-args skip_generate_module_list_file=true
     else
        if [ "$BUILD_TARGET" = "dcts dcts_ivi dcts_intellitv dcts_wearable" ]; then
          ./build.sh --product-name $PRODUCT_NAME --gn-args build_xts=true --build-target "dcts" --build-target "dcts_ivi" --build-target "dcts_intellitv" --build-target "dcts_wearable" --build-target "deploy_testtools"
