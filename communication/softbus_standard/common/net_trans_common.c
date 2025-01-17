@@ -738,8 +738,8 @@ int SendData4Data(DataType type, int size)
         return SOFTBUS_ERR;
     }
     LOG("[send data]call SendX success");
-    int sleeptime = 15;
-    int timeout = 5;
+    int sleeptime = 90;
+    int timeout = 30;
     if (size > SIZE_1K * SIZE_1K) {
         timeout = sleeptime;
     }

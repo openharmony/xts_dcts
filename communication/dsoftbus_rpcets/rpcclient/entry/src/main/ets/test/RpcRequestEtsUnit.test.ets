@@ -502,6 +502,7 @@ export default function RpcRequestEtsUnitTest() {
       let data: rpc.MessageSequence = rpc.MessageSequence.create();
       let reply: rpc.MessageSequence = rpc.MessageSequence.create();
       let option: rpc.MessageOption = new rpc.MessageOption();
+      option.setWaitTime(130);
       try{
         let token = "";
         for (let i = 0; i < (40 * K - 1); i++) {
@@ -3497,6 +3498,7 @@ export default function RpcRequestEtsUnitTest() {
       let data: rpc.MessageSequence = rpc.MessageSequence.create();
       let reply: rpc.MessageSequence = rpc.MessageSequence.create();
       let option: rpc.MessageOption = new rpc.MessageOption();
+      option.setWaitTime(130);
       try{
         let token = "";
         for (let i = 0; i < (40 * K - 1); i++) {
@@ -3952,6 +3954,7 @@ export default function RpcRequestEtsUnitTest() {
       let data: rpc.MessageSequence = rpc.MessageSequence.create();
       let reply: rpc.MessageSequence = rpc.MessageSequence.create();
       let option: rpc.MessageOption = new rpc.MessageOption();
+      option.setWaitTime(130);
       try{
         let ByteArraylet = [];
         for (let i = 0; i < (50 * K - 1); i++) {
@@ -4145,6 +4148,7 @@ export default function RpcRequestEtsUnitTest() {
       let data: rpc.MessageSequence = rpc.MessageSequence.create();
       let reply: rpc.MessageSequence = rpc.MessageSequence.create();
       let option: rpc.MessageOption = new rpc.MessageOption();
+      option.setWaitTime(130);
       try{
         let wShortArryData: number[] = [];
         for (let i = 0; i < (50 * 1024 - 1); i++) {
@@ -4367,6 +4371,7 @@ export default function RpcRequestEtsUnitTest() {
       let data: rpc.MessageSequence = rpc.MessageSequence.create();
       let reply: rpc.MessageSequence = rpc.MessageSequence.create();
       let option: rpc.MessageOption = new rpc.MessageOption();
+      option.setWaitTime(130);
       try{
         let intArryData = [];
         for (let i = 0; i < (50 * K - 1); i++) {
@@ -4591,6 +4596,7 @@ export default function RpcRequestEtsUnitTest() {
       let data: rpc.MessageSequence = rpc.MessageSequence.create();
       let reply: rpc.MessageSequence = rpc.MessageSequence.create();
       let option: rpc.MessageOption = new rpc.MessageOption();
+      option.setWaitTime(130);
       try{
         let wLongArryData = [];
         for (let i = 0; i < (25 * K - 1); i++) {
@@ -4819,6 +4825,7 @@ export default function RpcRequestEtsUnitTest() {
       let data: rpc.MessageSequence = rpc.MessageSequence.create();
       let reply: rpc.MessageSequence = rpc.MessageSequence.create();
       let option: rpc.MessageOption = new rpc.MessageOption();
+      option.setWaitTime(130);
       try{
         let floatArryData = [];
         for (let i = 0; i < (25 * K - 1); i++) {
@@ -4970,6 +4977,7 @@ export default function RpcRequestEtsUnitTest() {
       let data: rpc.MessageSequence = rpc.MessageSequence.create();
       let reply: rpc.MessageSequence = rpc.MessageSequence.create();
       let option: rpc.MessageOption = new rpc.MessageOption();
+      option.setWaitTime(130);
       try{
         let wDoubleArryData = [];
         for (let i = 0; i < (25 * K - 1); i++) {
@@ -5159,6 +5167,7 @@ export default function RpcRequestEtsUnitTest() {
       let data: rpc.MessageSequence = rpc.MessageSequence.create();
       let reply: rpc.MessageSequence = rpc.MessageSequence.create();
       let option: rpc.MessageOption = new rpc.MessageOption();
+      option.setWaitTime(130);
       try{
         let wBooleanArryData = [];
         for (let i = 0; i < (50 * K - 1); i++) {
@@ -5355,6 +5364,7 @@ export default function RpcRequestEtsUnitTest() {
       let data: rpc.MessageSequence = rpc.MessageSequence.create();
       let reply: rpc.MessageSequence = rpc.MessageSequence.create();
       let option: rpc.MessageOption = new rpc.MessageOption();
+      option.setWaitTime(130);
       try{
         let wCharArryData = [];
         for (let i = 0; i < (50 * K - 1); i++) {
@@ -5543,6 +5553,7 @@ export default function RpcRequestEtsUnitTest() {
       let data: rpc.MessageSequence = rpc.MessageSequence.create();
       let reply: rpc.MessageSequence = rpc.MessageSequence.create();
       let option: rpc.MessageOption = new rpc.MessageOption();
+      option.setWaitTime(130);
       try{
         let wStringArryData = [];
         for (let i = 0; i < (10 * K - 1); i++) {
