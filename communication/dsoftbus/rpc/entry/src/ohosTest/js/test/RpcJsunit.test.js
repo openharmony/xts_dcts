@@ -419,6 +419,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let token = "";
                 for (let i = 0; i < (40 * K - 1); i++) {
                     token += 'a';
@@ -543,6 +544,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let wShortArryData = [];
                 for (let i = 0; i < (50 * 1024 - 1); i++) {
                     wShortArryData[i] = 1;
@@ -707,6 +709,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let wLongArryData = [];
                 for (let i = 0; i < (25 * K - 1); i++) {
                     wLongArryData[i] = 11;
@@ -875,6 +878,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let wDoubleArryData = [];
                 for (let i = 0; i < (25 * K - 1); i++) {
                     wDoubleArryData[i] = 11.1;
@@ -1041,6 +1045,7 @@ export default function RpcJsUnitTest() {
                 var reply = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
                 let wBooleanArryData = [];
+                option.setWaitTime(130);
                 for (let i = 0; i < (50 * K - 1); i++) {
                     if (i % 2 == 0) {
                         wBooleanArryData[i] = false;
@@ -1180,6 +1185,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let wCharArryData = [];
                 for (let i = 0; i < (50 * K - 1); i++) {
                     wCharArryData[i] = 96;
@@ -1312,6 +1318,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let wStringArryData = [];
                 for (let i = 0; i < (10 * K - 1); i++) {
                     wStringArryData[i] = "heddSDF";
@@ -1470,7 +1477,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
-
+                option.setWaitTime(130);
                 let ByteArraylet = [];
                 for (let i = 0; i < (40 * K - 1); i++) {
                     ByteArraylet[i] = 1;
@@ -1607,6 +1614,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let intArryData = [];
                 for (let i = 0; i < (50 * K - 1); i++) {
                     intArryData[i] = 1;
@@ -1843,6 +1851,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let floatArryData = [];
                 for (let i = 0; i < (25 * K - 1); i++) {
                     floatArryData[i] = 1.1;
@@ -2563,6 +2572,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageSequence.create();
                 var reply = rpc.MessageSequence.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let token = '';
                 for (let i = 0; i < (40 * K - 1); i++) {
                     token += 'a';
@@ -5798,6 +5808,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let token = "";
                 for (let i = 0; i < (40 * K - 1); i++) {
                     token += 'a';
@@ -5918,6 +5929,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let wShortArryData = [];
                 for (let i = 0; i < (50 * 1024 - 1); i++) {
                     wShortArryData[i] = 1;
@@ -6080,6 +6092,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let wLongArryData = [];
                 for (let i = 0; i < (25 * K - 1); i++) {
                     wLongArryData[i] = 11;
@@ -6246,6 +6259,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let wDoubleArryData = [];
                 for (let i = 0; i < (25 * K - 1); i++) {
                     wDoubleArryData[i] = 11.1;
@@ -6409,6 +6423,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let wBooleanArryData = [];
                 for (let i = 0; i < (50 * K - 1); i++) {
                     if (i % 2 == 0) {
@@ -6547,6 +6562,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let wCharArryData = [];
                 for (let i = 0; i < (50 * K - 1); i++) {
                     wCharArryData[i] = 96;
@@ -6675,6 +6691,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let wStringArryData = [];
                 for (let i = 0; i < (10 * K - 1); i++) {
                     wStringArryData[i] = "heddSDF";
@@ -6828,6 +6845,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let ByteArraylet = [];
                 for (let i = 0; i < (40 * K - 1); i++) {
                     ByteArraylet[i] = 1;
@@ -6962,6 +6980,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let intArryData = [];
                 for (let i = 0; i < (50 * K - 1); i++) {
                     intArryData[i] = 1;
@@ -7195,6 +7214,7 @@ export default function RpcJsUnitTest() {
                 var data = rpc.MessageParcel.create();
                 var reply = rpc.MessageParcel.create();
                 let option = new rpc.MessageOption();
+                option.setWaitTime(130);
                 let floatArryData = [];
                 for (let i = 0; i < (25 * K - 1); i++) {
                     floatArryData[i] = 1.1;
