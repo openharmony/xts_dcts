@@ -15,11 +15,14 @@
 import FileioDistributedTest from './FileioJsUnit.test.js';
 import EmptyTest from './Empty.test.js';
 import deviceInfo from '@ohos.deviceInfo';
+import devicemanager from 'libdevicemanager.so';
 
 export default function testsuite() {
     let deviceTypeInfo = deviceInfo.deviceType;
     console.info('FileioDistributedTest the deviceType is :' + deviceTypeInfo);
-    if (deviceTypeInfo === 'wearable'){
+    let res = devicemanager.DeviceOpenP2PConnection();
+    console.info("FileioDistributedTest: DeviceOpenP2PConnection is： " + res);
+    if (res !=0 && deviceTypeInfo === 'wearable'){
       EmptyTest()
     }else{
       FileioDistributedTest()
