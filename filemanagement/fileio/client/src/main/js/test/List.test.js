@@ -22,7 +22,7 @@ export default function testsuite() {
     console.info('FileioDistributedTest the deviceType is :' + deviceTypeInfo);
     let res = devicemanager.DeviceOpenP2PConnection();
     console.info("FileioDistributedTest: DeviceOpenP2PConnection is： " + res);
-    if (res !=0 && deviceTypeInfo === 'wearable'){
+    if (res == 4){
       EmptyTest()
     }else{
       FileioDistributedTest()
