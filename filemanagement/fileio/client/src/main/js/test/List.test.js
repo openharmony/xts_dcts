@@ -20,9 +20,10 @@ import devicemanager from 'libdevicemanager.so';
 export default function testsuite() {
     let deviceTypeInfo = deviceInfo.deviceType;
     console.info('FileioDistributedTest the deviceType is :' + deviceTypeInfo);
+    let E_SA_LOAD_FAILED = 4;
     let res = devicemanager.DeviceOpenP2PConnection();
     console.info("FileioDistributedTest: DeviceOpenP2PConnection is： " + res);
-    if (res == 4){
+    if (res == E_SA_LOAD_FAILED){
       EmptyTest()
     }else{
       FileioDistributedTest()
