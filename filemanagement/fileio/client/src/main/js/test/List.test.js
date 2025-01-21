@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (C) 2022-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,8 +12,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import FileioDistributedTest from './FileioJsUnit.test.js'
+import FileioDistributedTest from './FileioJsUnit.test.js';
+import EmptyTest from './Empty.test.js';
+import deviceInfo from '@ohos.deviceInfo';
+import devicemanager from 'libdevicemanager.so';
 
 export default function testsuite() {
-    FileioDistributedTest()
+    let deviceTypeInfo = deviceInfo.deviceType;
+    console.info('FileioDistributedTest the deviceType is :' + deviceTypeInfo);
+    let res = devicemanager.DeviceOpenP2PConnection();
+    console.info("FileioDistributedTest: DeviceOpenP2PConnection is： " + res);
+    if (res !=0 && deviceTypeInfo === 'wearable'){
+      EmptyTest()
+    }else{
+      FileioDistributedTest()
+    }
 }
