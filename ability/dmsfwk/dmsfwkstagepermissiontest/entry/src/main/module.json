@@ -54,9 +54,6 @@
       },
       {
         "name": "ohos.permission.PERMISSION_START_INVISIBLE_ABILITY"
-      },
-      {
-        "name": "ohos.permission.ACCESS_SERVICE_DM"
       }
     ]
   }

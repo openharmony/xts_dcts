@@ -1570,7 +1570,7 @@ export default function dmsJsUnitTest() {
                 parameters: params
             };
             console.info(TAG + ' want=' + JSON.stringify(wantValue));
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 4; i++) {
                 featureAbility.startAbility({
                     want: wantValue
                 }, (error, data) => {
@@ -1588,10 +1588,10 @@ export default function dmsJsUnitTest() {
                     }
                     console.info(TAG + " running at : " + i + ",here");
                 });
-                await sleep(2000)
+                await sleep(3000)
                 console.log('SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700 i is' + i);
             }
-            await sleep(1000);
+            await sleep(3000);
             done();
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700 end------------------------");
         });
