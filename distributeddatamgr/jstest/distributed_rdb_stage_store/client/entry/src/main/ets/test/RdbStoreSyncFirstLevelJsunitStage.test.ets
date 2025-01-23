@@ -220,6 +220,7 @@ export default function rdbSyncFirstLevelTest(){
          */
          it("testRdbSyncStageEtsTest0010", 0, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0010 start");
+            await sleep(3000);
             var u8 = new Uint8Array([1, 2, 3]);
             const valueBucket : data_Rdb.ValuesBucket = {
                 "name": "zhangsan",

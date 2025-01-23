@@ -213,6 +213,7 @@ export default function rdbSyncCustomDirlTest(){
          */
          it("testRdbSyncCustomStageEtsTest0100", 0, async function (done) {
             console.info(logTag + "testRdbSyncCustomStageEtsTest0100 start");
+            await sleep(3000);
             var u8 = new Uint8Array([1, 2, 3]);
             {
                 const valueBucket = {
