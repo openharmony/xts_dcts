@@ -170,6 +170,7 @@ export default function rdbSyncFirstLevelTest(){
          */
          it("testRdbSyncTest0010", 0, async function (done) {
             console.info(logTag + "testRdbSyncTest0010 start");
+            await sleep(3000);
             var u8 = new Uint8Array([1, 2, 3]);
             {
                 const valueBucket = {
