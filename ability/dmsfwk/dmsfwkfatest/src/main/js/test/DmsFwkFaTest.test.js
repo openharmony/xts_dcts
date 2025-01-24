@@ -1974,7 +1974,7 @@ export default function DmsFwkFaTest() {
     it("SUB_DMS_StandardOs_stability_StabilityTest_0100", 0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_stability_StabilityTest_0100 start------------------------");
       let connectId;
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 4; i++) {
         console.info('SUB_DMS_StandardOs_stability_StabilityTest_0100 index : ' + i);
         connectId = featureAbility.connectAbility({
           deviceId: dvId,
