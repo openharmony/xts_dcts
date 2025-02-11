@@ -586,6 +586,11 @@ void ResetWaitFlag4Proxy(void)
     g_waitFlag4Proxy = WAIT_DEF_VALUE;
 }
 
+void ResetWaitFlag4Stream(void)
+{
+    g_waitFlag4Stream = WAIT_DEF_VALUE;
+}
+
 void ResetwaitCount4Online(void)
 {
     g_nodeOnlineCount = 0;
@@ -689,7 +694,7 @@ int CreateSsAndOpenSession4Proxy(void)
     }
 
     int sessionId;
-    ResetWaitFlag();
+    ResetWaitFlag4Proxy();
     sessionId = OpenSession(SESSION_NAME_PROXY, SESSION_NAME_PROXY, g_networkId, DEF_GROUP_ID, g_sessionAttr4Proxy);
     if (sessionId < SESSION_ID_MIN) {
         LOG("call OpenSession[Proxy] fail, ret sid:%d", sessionId);

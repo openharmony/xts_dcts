@@ -20,14 +20,15 @@
 #include "accesstoken_kit.h"
 
 static int g_waitFlag = WAIT_DEF_VALUE;
+static int g_waitFlag4file = WAIT_DEF_VALUE;
 
 static int FileSessionOpened(int sessionId, int result)
 {
     LOG("[cb][file]open session sid[%d],rst[%d]", sessionId, result);
     if (result == SOFTBUS_OK) {
-        g_waitFlag = WAIT_SUCCESS_VALUE;
+        g_waitFlag4file = WAIT_SUCCESS_VALUE;
     } else {
-        g_waitFlag = WAIT_FAIL_VALUE;
+        g_waitFlag4file = WAIT_FAIL_VALUE;
     }
     return SOFTBUS_OK;
 }
@@ -141,15 +142,15 @@ static int WaitFile(int timeout)
     int t = timeout;
     while (t > 0) {
         sleep(1);
-        if (g_waitFlag != WAIT_DEF_VALUE) {
-            LOG("waitfile success[flag:%d][time:%d]", g_waitFlag, count);
+        if (g_waitFlag4file  != WAIT_DEF_VALUE) {
+            LOG("waitfile success[flag:%d][time:%d]", g_waitFlag4file, count);
             break;
         }
         t--;
         count++;
     }
-    if (g_waitFlag != WAIT_SUCCESS_VALUE) {
-        LOG("waitfile fail[exp:%d, real:%d][used time:%d]", WAIT_SUCCESS_VALUE, g_waitFlag, count);
+    if (g_waitFlag4file  != WAIT_SUCCESS_VALUE) {
+        LOG("waitfile fail[exp:%d, real:%d][used time:%d]", WAIT_SUCCESS_VALUE, g_waitFlag4file, count);
         return SOFTBUS_ERR;
     }
     return SOFTBUS_OK;
@@ -168,7 +169,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0100, TestSize.Level
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttr);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -208,7 +209,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0200, TestSize.Level
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttr);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -248,7 +249,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0300, TestSize.Level
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttr);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -282,7 +283,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0400, TestSize.Level
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttr);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -320,7 +321,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0500, TestSize.Level
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttr);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -356,7 +357,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0600, TestSize.Level
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttr);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -396,7 +397,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0700, TestSize.Level
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttr);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -450,7 +451,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0900, TestSize.Level
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttr);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -489,7 +490,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0100, TestSize.L
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -529,7 +530,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0200, TestSize.L
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -569,7 +570,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0300, TestSize.L
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -603,7 +604,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0400, TestSize.L
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -641,7 +642,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0500, TestSize.L
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -677,7 +678,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0600, TestSize.L
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -717,7 +718,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0700, TestSize.L
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
@@ -758,7 +759,7 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0800, TestSize.L
     ret = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE, &g_fileSessionListener);
     EXPECT_EQ(SOFTBUS_OK, ret) << "CreateSS[file] fail";
 
-    g_waitFlag = WAIT_DEF_VALUE;
+    g_waitFlag4file = WAIT_DEF_VALUE;
     int sid = OpenSession(SESSION_NAME_FILE, SESSION_NAME_FILE, GetNetworkId(), DEF_GROUP_ID, &g_fileSessionAttrP2P);
     EXPECT_TRUE(sid >= SESSION_ID_MIN) << "call OpenSession[file] fail, sid=" << sid;
     if (sid >= SESSION_ID_MIN) {
