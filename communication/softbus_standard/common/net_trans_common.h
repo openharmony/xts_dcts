@@ -200,6 +200,7 @@ void ResetWaitFlag(void);
 void ResetWaitFlag4Data(void);
 void ResetWaitFlag4Ctl(void);
 void ResetWaitFlag4Proxy(void);
+void ResetWaitFlag4Stream(void);
 void ResetwaitCount4Online(void);
 void ResetwaitCount4Offline(void);
 

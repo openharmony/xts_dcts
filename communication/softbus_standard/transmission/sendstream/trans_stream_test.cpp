@@ -85,6 +85,7 @@ HWTEST_F(TransStreamTest, SUB_DSoftbus_Spec_DCTS_SendStream_0100, TestSize.Level
     SessionAttribute attr;
     (void)memset_s(&attr, sizeof(attr), 0, sizeof(attr));
     attr.dataType = TYPE_STREAM;
+    ResetWaitFlag4Stream();
     int sessionId = OpenSession(SESSION_NAME_STREAM, SESSION_NAME_STREAM, GetNetworkId(),
                           DEF_GROUP_ID, &attr);
     EXPECT_TRUE(sessionId >= SESSION_ID_MIN) << "call OpenSession[Stream] fail, sessionId=" << sessionId;
@@ -93,7 +94,7 @@ HWTEST_F(TransStreamTest, SUB_DSoftbus_Spec_DCTS_SendStream_0100, TestSize.Level
         EXPECT_EQ(SOFTBUS_OK, ret) << "wait opensession fail[Stream]";
         LOG("call OpenSession[Stream] success");
     }
-    ResetWaitFlag();
+    ResetWaitFlag4Stream();
     ret = SendStream(sessionId, &streamData, &extStreamData, &frame);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SendStream fail";
     
@@ -132,7 +133,7 @@ HWTEST_F(TransStreamTest, SUB_DSoftbus_Spec_DCTS_SendStream_P2P_0100, TestSize.L
     attr.dataType = TYPE_STREAM;
     attr.linkTypeNum = 1;
     attr.linkType[0] = LINK_TYPE_WIFI_P2P;
-
+    ResetWaitFlag4Stream();
     int sessionId = OpenSession(SESSION_NAME_STREAM, SESSION_NAME_STREAM, GetNetworkId(),
                           DEF_GROUP_ID, &attr);
     EXPECT_TRUE(sessionId >= SESSION_ID_MIN) << "call OpenSession[Stream] fail, sessionId=" << sessionId;
@@ -141,7 +142,7 @@ HWTEST_F(TransStreamTest, SUB_DSoftbus_Spec_DCTS_SendStream_P2P_0100, TestSize.L
         EXPECT_EQ(SOFTBUS_OK, ret) << "wait opensession fail[Stream]";
         LOG("call OpenSession[Stream] success");
     }
-    ResetWaitFlag();
+    ResetWaitFlag4Stream();
     ret = SendStream(sessionId, &streamData, &extStreamData, &frame);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SendStream fail";
     
