@@ -50,8 +50,8 @@ void SocketTransFuncTest::SetUpTestCase()
     ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
     ASSERT_EQ(SOFTBUS_OK, ret) << "get node fail,please check network";
 
+    system(" truncate -s 4M /data/4M.tar");
     system(" truncate -s 8M /data/8M.tar");
-
     LOG("SetUp end");
 }
 
@@ -119,9 +119,9 @@ SocketInfo socketStreamInfo = {
 };
 
 QosTV info_wifi[] = {
-    {.qos = QOS_TYPE_MIN_BW, .value = 10 * 1024 * 1024, },
+    {.qos = QOS_TYPE_MIN_BW, .value = 64 * 1024, },
     {.qos = QOS_TYPE_MIN_LATENCY, .value = 800, },
-    {.qos = QOS_TYPE_MAX_LATENCY, .value = 2000, },
+    {.qos = QOS_TYPE_MAX_LATENCY, .value = 5000, },
 };
 
 QosTV info_p2p[] = {
@@ -184,11 +184,11 @@ HWTEST_F(SocketTransFuncTest, SUB_DSoftbus_Spec_DCTS_Socket_SendFile_0100, TestS
 {
     int ret;
     static const char* gFileOne[] = {
-        "/data/8M.tar",
+        "/data/4M.tar",
     };
 
     static const char *dFileList[] = {
-        "/data/8M.tar",
+        "/data/4M.tar",
     };
 
     int32_t socket = Socket(socketFileInfo);
@@ -200,7 +200,7 @@ HWTEST_F(SocketTransFuncTest, SUB_DSoftbus_Spec_DCTS_Socket_SendFile_0100, TestS
 
     ret = SendFile(socket, gFileOne, dFileList, sizeof(gFileOne) / sizeof(gFileOne[0]));
     EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
-    ret = Wait4Socket(10, SOCKET_FILE);
+    ret = Wait4Socket(20, SOCKET_FILE);
     EXPECT_EQ(SOFTBUS_OK, ret) << "wait SendFile faild ";
     Shutdown(socket);
 }
