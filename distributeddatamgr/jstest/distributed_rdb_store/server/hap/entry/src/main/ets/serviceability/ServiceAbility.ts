@@ -15,16 +15,8 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
 import rpc from '@ohos.rpc';
 import commonEvent from '@ohos.commonEvent';
-import data_rdb from '@ohos.data.relationalStore';
 // import TestApi from '../../../../../../../../../../../testtools/disjsTest/server/testApi.js';
 
-const CREATE_TABLE_TEST = "CREATE TABLE IF NOT EXISTS test (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
-
-var rdbStore = undefined;
-const STORE_CONFIG = {
-    name: "RemoteRdb.db",
-    securityLevel: data_rdb.SecurityLevel.S1
-};
 class StubTest extends rpc.RemoteObject {
     constructor(descriptor) {
         super(descriptor);
@@ -48,7 +40,6 @@ class StubTest extends rpc.RemoteObject {
 }
 export default class ServiceAbility extends UIAbility {
     onCreate(want) {
-        
         // Called to return a FormBindingData object.
         console.info("RdbStageServer ServiceAbility onCreate")
         if(want.parameters != undefined){
@@ -58,7 +49,6 @@ export default class ServiceAbility extends UIAbility {
                 }, 2000)
             }
         }
-        this.createRDBStore(); 
     }
 
     onConnect(want) {
@@ -91,48 +81,5 @@ export default class ServiceAbility extends UIAbility {
     onDestroy() {
         // Called to notify the form provider that a specified form has been destroyed.
         console.info("RdbStageServer ServiceAbility onCronDestroyeate")
-
-    }
-
-    async createRDBStore(){
-        console.log("first context " + this.context);
-        let promise = data_rdb.getRdbStore(this.context, STORE_CONFIG);
-        promise.then(async (back) => {
-            rdbStore = back;
-            console.log("Get RdbStore successfully rdbStore " + rdbStore);
-        }).catch((err) => {
-            console.log("Get RdbStore failed, err: " + err);
-        })
-        await promise;
-        await rdbStore.executeSql(CREATE_TABLE_TEST, null);
-        this.setDistributedTables();
-    }
-    setDistributedTables(){
-        console.info("setDistributedTables before");
-        let back = rdbStore.setDistributedTables(["test"]);
-        back.then(() => {
-            console.info("SetDistributedTables successfully.");
-            this.insertData();
-        }).catch((err) => {
-            console.info("SetDistributedTables failed, err: " + err.code);
-        })
-    }
-
-    async insertData(){
-        const valueBucket = {
-            "id": 1,
-            "name": "Lisa",
-            "age": 18,
-            "salary": 100.5,
-            "blobType": new Uint8Array([1, 2, 3, 4, 5])
-        }
-        console.log("Insert insertData start.");
-        let promise = rdbStore.insert("test", valueBucket);
-        promise.then((rowId) => {
-            console.log("Insert is successful, rowId = " + rowId);
-        }).catch((err) => {
-            console.log("Insert is failed err: "+err.code+" "+err.message);
-        })
-        await promise;
     }
 };
