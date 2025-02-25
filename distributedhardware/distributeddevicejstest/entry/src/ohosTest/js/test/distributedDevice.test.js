@@ -1451,5 +1451,55 @@ export default function distributedDeviceManager() {
             await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4300 end------------------------");
         })
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_4400
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this    instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_4400", 0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_4400 start------------------------");
+            try {
+                let dmInstanceData = deviceManager.createDeviceManager("");
+                console.info("createDeviceManager value is null errCode:" + JSON.stringify(dmInstanceData));  
+                expect(dmInstanceData !== null).assertTrue();
+                done();
+            } catch(err) {
+                console.error("createDeviceManager 4400 errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 401).assertTrue();
+                done();
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_4400 end------------------------");
+        })
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_4500
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this    instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_4500", 0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_4500 start------------------------");
+            try {
+                dmInstance.stopDiscovering();
+                console.log("stopDiscovering success");
+                expect(true).assertTrue();
+                done();
+            } catch (err) {
+                console.info("stopDiscovering errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 11600101).assertTrue();
+                done();
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_4500 end------------------------");
+        })
     })
 }
