@@ -629,5 +629,54 @@ export default function distributedDeviceManager() {
             }
             console.info("----------------------SUB_DH_Device_Dcts_2400 end---------------------------");
         })
+
+        /*
+         * @tc.number  SUB_DH_Device_Dcts_2500
+         * @tc.name    Get the device name of the local device.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_Device_Dcts_2500", 0, async function (done) {
+            console.info("----------------------SUB_DH_Device_Dcts_2500 begin---------------------------");
+            try {
+                // 设备网络标识，可以从可信设备列表中获取
+                let dmNetworkId = '123456789';
+                let deviceName = dmInstance.getDeviceName(dmNetworkId);
+                console.log('SUB_DH_Device_Dcts_2500 device name: ' + JSON.stringify(deviceName)); 
+                expect(deviceName == null).assertFail();
+                done();
+              } catch (err) {
+                console.info('SUB_DH_Device_Dcts_2500 getDeviceName errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 201).assertTrue();
+                done();
+              }
+            console.info("----------------------SUB_DH_Device_Dcts_2500 end---------------------------");
+        })
+
+        /*
+         * @tc.number  SUB_DH_Device_Dcts_2600
+         * @tc.name    Get the device name of the local device.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_Device_Dcts_2600", 0, async function (done) {
+            console.info("----------------------SUB_DH_Device_Dcts_2600 begin---------------------------");
+            try {
+                let dmNetworkIdType = '123456789';
+                let deviceType = dmInstance.getDeviceType(dmNetworkIdType);
+                console.log('SUB_DH_Device_Dcts_2600 device name: ' + JSON.stringify(deviceType)); 
+                expect(deviceType == null).assertFail();
+                done();
+              } catch (err) {
+                console.info('SUB_DH_Device_Dcts_2500 getDeviceName errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 201).assertTrue();
+                done();
+              }
+            console.info("----------------------SUB_DH_Device_Dcts_2600 end---------------------------");
+        })
     })
 }
