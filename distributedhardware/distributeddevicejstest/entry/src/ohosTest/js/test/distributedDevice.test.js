@@ -1515,7 +1515,7 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4600 start------------------------");
             try {
                 let dmInstanceDevice = null;
-                distributedDeviceManager.releaseDeviceManager(dmInstanceDevice);
+                deviceManager.releaseDeviceManager(dmInstanceDevice);
                 expect(true).assertTrue();
                 done();
               } catch (err) {
