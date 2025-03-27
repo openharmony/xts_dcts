@@ -196,6 +196,146 @@ export default function DmsFwkStageTest() {
     });
 
     /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_on_0500
+    * @tc.name    continueManager.on
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_on_0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_on_0500 is start---------------")
+      TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_on_0500'
+      try {
+        continueManager.on('ssssssssssssss', context, (ContinueResultInfo) => {
+          console.log(TAG + 'continueManager.on is success' + ContinueResultInfo.resultInfo + ContinueResultInfo.resultState)
+          expect().assertFail()
+        })
+      } catch (error) {
+        console.log(TAG + 'continueManager.on is catch' + JSON.stringify(error))
+        expect(error.code == 16300501).assertTrue()
+      }
+      await sleep(1000)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_on_0500 is end---------------")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_off_0600
+    * @tc.name    continueManager.off
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_off_0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_0600 is start---------------")
+      TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_off_0600'
+      try {
+        continueManager.off('dddddddddddddd', context, (err, ContinueResultInfo) => {
+          if (err != undefined) {
+            console.log(TAG + 'continueManager.off is failed' + JSON.stringify(err))
+            expect().assertFail()
+          }
+          console.log(TAG + 'continueManager.off is success' + ContinueResultInfo.resultState + ContinueResultInfo.resultInfo)
+          expect().assertFail()
+        })
+      } catch (error) {
+        console.log(TAG + 'continueManager.off is catch' + JSON.stringify(error))
+        expect(error.code == 16300501).assertTrue()
+      }
+      await sleep(2000)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_0600 is end---------------")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_off_0700
+    * @tc.name    continueManager.off
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_off_0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_0700 is start---------------")
+      TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_off_0700'
+      try {
+        continueManager.off('dddddddddddddd', context)
+        console.log(TAG + 'continueManager.off is success')
+        expect().assertFail()
+      } catch (error) {
+        console.log(TAG + 'continueManager.off is catch' + JSON.stringify(error))
+        expect(error.code == 16300501).assertTrue()
+      }
+      await sleep(2000)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_0700 is end---------------")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_on_0800
+    * @tc.name    continueManager.on
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_on_0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_on_0800 is start---------------")
+      TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_on_0800'
+      try {
+        continueManager.on('prepareContinue', 'context1', (ContinueResultInfo) => {
+          console.log(TAG + 'continueManager.on is success' + ContinueResultInfo)
+          expect().assertFail()
+        })
+      } catch (error) {
+        console.log(TAG + 'continueManager.on is catch' + JSON.stringify(error))
+        expect(error.code == 401).assertTrue()
+      }
+      await sleep(1000)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_on_0800 is end---------------")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_off_0900
+    * @tc.name    continueManager.off
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_off_0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_0900 is start---------------")
+      TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_off_0900'
+      try {
+        continueManager.off('prepareContinue', 'context', () => {
+          console.log(TAG + 'continueManager.off is success')
+          expect().assertFail()
+        })
+      } catch (error) {
+        console.log(TAG + 'continueManager.off is catch' + JSON.stringify(error))
+        expect(error.code == 401).assertTrue()
+      }
+      await sleep(2000)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_0900 is end---------------")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_off_1000
+    * @tc.name    continueManager.off
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_off_1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_1000 is start---------------")
+      TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_off_1000'
+      try {
+        continueManager.off('prepareContinue', 'context')
+        console.log(TAG + 'continueManager.off is success')
+        expect().assertFail()
+      } catch (error) {
+        console.log(TAG + 'continueManager.off is catch' + JSON.stringify(error))
+        expect(error.code == 401).assertTrue()
+      }
+      await sleep(2000)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_1000 is end---------------")
+      done();
+    });
+
+    /*
     * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_connect_0100
     * @tc.name    abilityConnectionManager.connect
     * @tc.desc    Function test
