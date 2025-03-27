@@ -1,0 +1,5 @@
+[
+  "test/xts/xts_dcts/notification:notification",
+  "test/xts/xts_dcts/notification/dcts_standard:dcts_standard",
+  "test/xts/xts_dcts/notification/dcts_standard/dctsnotificationtest:DctsNotificationTest"
+]
