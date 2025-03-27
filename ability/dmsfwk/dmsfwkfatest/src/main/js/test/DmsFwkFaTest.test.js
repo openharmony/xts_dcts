@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, TestType, Size, Level } from '@ohos/hypium';
 import rpc from "@ohos.rpc";
 import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from "@ohos.ability.featureAbility";
@@ -129,7 +129,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2800", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2800 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -166,7 +166,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2600", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2600 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -203,7 +203,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -239,7 +239,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2500", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2500 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -276,7 +276,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2700", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2700 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -313,7 +313,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2300", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2300 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -350,7 +350,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1600", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1600 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -386,7 +386,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2200", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2200 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -423,7 +423,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2400", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2400 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -460,7 +460,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2000", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2000 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -497,7 +497,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1500", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1500 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -534,7 +534,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1900", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1900 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -571,7 +571,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2100", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_2100 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -608,7 +608,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1800", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1800 is start---------------");
       try {
         featureAbility.startAbilityForResult({
@@ -639,7 +639,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1400", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1400 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_1400';
       let wantValue = {
@@ -677,7 +677,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0100", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0100 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0100';
       let wantValue = {
@@ -710,7 +710,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0200", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0200 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0200';
       let wantValue = {
@@ -743,7 +743,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0300", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0300 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0300';
       let wantValue = {
@@ -777,7 +777,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0400", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0400 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0400';
       let wantValue = {
@@ -804,7 +804,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0500", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0500 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0500';
       let wantValue = {
@@ -837,7 +837,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0600", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0600 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0600';
       let wantValue = {
@@ -870,7 +870,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0700", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0700 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0700';
       let wantValue = {
@@ -903,7 +903,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0800", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0800 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0800';
       let wantValue = {
@@ -936,7 +936,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0900", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0900 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_0900';
       let wantValue = {
@@ -969,7 +969,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1000", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1000 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1000';
       let wantValue = {
@@ -1002,7 +1002,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1100", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1100 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1100';
       let wantValue = {
@@ -1035,7 +1035,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1200", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1200 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1200';
       let wantValue = {
@@ -1068,7 +1068,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1300", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1300 is start---------------");
       let TAG = 'SUB_DMS_StandardOs_collaboration_Startability_StartAbilityForResult_callback_1300';
       let wantValue = {
@@ -1101,7 +1101,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connetability_connectRemoteAbility_1300 start------------------------");
       let connectId;
       try {
@@ -1156,7 +1156,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200 start------------------------");
       let connectId;
       try {
@@ -1210,7 +1210,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_1900 start------------------------");
       let connectId;
       try {
@@ -1269,7 +1269,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100 start------------------------");
       let connectId;
       try {
@@ -1323,7 +1323,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0800", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0800 start------------------------");
       let connectId;
       try {
@@ -1377,7 +1377,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2600", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2600 start------------------------");
       let connectId;
       try {
@@ -1431,7 +1431,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0200 start------------------------");
       let connectId;
       try {
@@ -1484,7 +1484,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0700", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0700 start------------------------");
       let connectId;
       try {
@@ -1538,7 +1538,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2700", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2700 start------------------------");
       let connectId;
       try {
@@ -1592,7 +1592,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0100 start------------------------");
       let connectId;
       try {
@@ -1645,7 +1645,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2800", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2800 start------------------------");
       let connectId;
       try {
@@ -1699,7 +1699,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2900", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_2900 start------------------------");
       let connectId;
       try {
@@ -1753,7 +1753,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0300 start------------------------");
       let connectId;
       try {
@@ -1806,7 +1806,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400", 0, async function (done) {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0400 start------------------------");
       let connectId;
       try {
@@ -1861,7 +1861,7 @@ export default function DmsFwkFaTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500', 0, async function (done) {
+    it('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteAbility_0500 start------------------------");
       let request = {
         deviceId: dvId,
@@ -1954,7 +1954,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600', 0, async function (done) {
+    it('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 start------------------------");
       featureAbility.disconnectAbility(connectId1, (err) => {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_disconnectAbility_0600 disconnectAbility err: ' + err.code);
@@ -1971,7 +1971,7 @@ export default function DmsFwkFaTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_stability_StabilityTest_0100", 0, async function (done) {
+    it("SUB_DMS_StandardOs_stability_StabilityTest_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
       console.info("-----------------SUB_DMS_StandardOs_stability_StabilityTest_0100 start------------------------");
       let connectId;
       for (let i = 0; i < 4; i++) {

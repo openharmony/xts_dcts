@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from "@ohos/hypium"
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, TestType, Size, Level } from "@ohos/hypium"
 import deviceManager from '@ohos.distributedDeviceManager';
 import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
 import rpc from '@ohos.rpc';
@@ -139,7 +139,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -187,7 +187,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.log("------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 start-------------");
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -273,7 +273,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.log("------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200 start-------------");
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1200";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -322,7 +322,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.log("------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100 start-------------");
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1100";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -406,7 +406,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0500";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -443,7 +443,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -480,7 +480,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -516,7 +516,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700";
       abilityDelegator.executeShellCommand("pidof softbus_server", (err, data) => {
@@ -571,7 +571,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600";
       abilityDelegator.executeShellCommand("pidof distributedsche", (err, data) => {
@@ -626,7 +626,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0100";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -675,7 +675,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0200";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -740,7 +740,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0400";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -794,7 +794,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -835,7 +835,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -888,7 +888,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0100";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -918,7 +918,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0200";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -948,7 +948,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0300";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -978,7 +978,7 @@ export default function DmsFwkStageTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_StartAbility_StartControl_0400";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1008,7 +1008,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0100", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0100 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0100";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1055,7 +1055,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0200", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.log("------------SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0200 start-------------");
       TAG = "SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0200";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1136,7 +1136,7 @@ export default function DmsFwkStageTest() {
     * @tc.desc    Function test
     * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0300", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.log("------------SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0300 start-------------");
       TAG = "SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0300";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1183,7 +1183,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0400", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.log("------------SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0400 start-------------");
       TAG = "SUB_DMS_StandardOs_collaboration_ServiceExtension_ConnecAbility_0400";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1263,7 +1263,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1298,7 +1298,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1332,7 +1332,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700";
       abilityDelegator.executeShellCommand("pidof softbus_server", (err, data) => {
@@ -1385,7 +1385,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600";
       abilityDelegator.executeShellCommand("pidof distributedsche", (err, data) => {
@@ -1438,7 +1438,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1000";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1485,7 +1485,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1400";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1550,7 +1550,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1500";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1602,7 +1602,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1641,7 +1641,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1693,7 +1693,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_Extension_StartAbility_0300", 0, async (done: Function) => {
+    it("SUB_DMS_StartControl_Extension_StartAbility_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0300 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0300";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1722,7 +1722,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_Extension_StartAbility_0400", 0, async (done: Function) => {
+    it("SUB_DMS_StartControl_Extension_StartAbility_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0400 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0400";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1751,7 +1751,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_Extension_StartAbility_0500", 0, async (done: Function) => {
+    it("SUB_DMS_StartControl_Extension_StartAbility_0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0500 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0500";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1780,7 +1780,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_Extension_StartAbility_0600", 0, async (done: Function) => {
+    it("SUB_DMS_StartControl_Extension_StartAbility_0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0600 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0600";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1809,7 +1809,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_Extension_StartAbility_0700", 0, async (done: Function) => {
+    it("SUB_DMS_StartControl_Extension_StartAbility_0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0700 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0700";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1839,7 +1839,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_Extension_StartAbility_0800", 0, async (done: Function) => {
+    it("SUB_DMS_StartControl_Extension_StartAbility_0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0800 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0800";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1869,7 +1869,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_Extension_StartAbility_0900", 0, async (done: Function) => {
+    it("SUB_DMS_StartControl_Extension_StartAbility_0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_0900 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_0900";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1899,7 +1899,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_Extension_StartAbility_1000", 0, async (done: Function) => {
+    it("SUB_DMS_StartControl_Extension_StartAbility_1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StartControl_Extension_StartAbility_1000 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_StartAbility_1000";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1929,7 +1929,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StartControl_Extension_startAbilityForResult_1100", 0, async (done: Function) => {
+    it("SUB_DMS_StartControl_Extension_startAbilityForResult_1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StartControl_Extension_startAbilityForResult_1100 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_startAbilityForResult_1100";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1959,7 +1959,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_StartControl_Extension_startAbilityForResult_1200", 0, async (done: Function) => {
+    it("SUB_DMS_StartControl_Extension_startAbilityForResult_1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("---------------SUB_DMS_StartControl_Extension_startAbilityForResult_1200 is start---------------")
       TAG = "SUB_DMS_StartControl_Extension_startAbilityForResult_1200";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1989,7 +1989,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200 start------------------------");
       let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1200";
       let param = AbilityConstant.ContinueState.INACTIVE;
@@ -2021,7 +2021,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
     */
-    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300 start------------------------");
       let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_1300";
       let param = AbilityConstant.ContinueState.ACTIVE;
@@ -2053,7 +2053,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900 start------------------------");
       let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0900";
       let param = AbilityConstant.ContinueState.INACTIVE;
@@ -2085,7 +2085,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800", 0, async (done: Function) => {
+    it("SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800 start------------------------");
       let TAG = "SUB_DMS_StandardOs_supportContinueAbility_continueAbility_ComponentTransfer_0800";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -2117,7 +2117,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0100', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0100', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0100 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       try {
@@ -2152,7 +2152,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0200', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0200', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0200 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       try {
@@ -2187,7 +2187,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0300', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0300', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0300 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       try {
@@ -2221,7 +2221,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0400', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0400', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0400 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       try {
@@ -2256,7 +2256,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0500', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0500', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0500 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       try {
@@ -2290,7 +2290,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0600', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0600', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0600 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       try {
@@ -2324,7 +2324,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0700', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0700', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0700 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       try {
@@ -2359,7 +2359,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0800', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0800', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0800 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       try {
@@ -2393,7 +2393,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1200 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
       let caller
@@ -2431,7 +2431,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0900', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0900', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_0900 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       try {
@@ -2471,7 +2471,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1300 start------------------------");
       if (typeof call === 'object' && call != null) {
         console.log('call call.callWithResult() begin');
@@ -2501,7 +2501,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1000', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1000', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1000 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       let caller
@@ -2543,7 +2543,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1100', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1100', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1100 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext;
       let caller
@@ -2581,7 +2581,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1400', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1400', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1400 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       for (let i = 0; i < 10; i++) {
@@ -2615,7 +2615,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1500', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1500', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1500 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       for (let i = 0; i < 10; i++) {
@@ -2650,7 +2650,7 @@ export default function DmsFwkStageTest() {
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600', 0, async (done: Function) => {
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600 start------------------------");
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       context.startAbilityByCall({
