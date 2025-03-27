@@ -4932,5 +4932,52 @@ export default function kvSyncTestS1Ets() {
             done();
         }) 
 
+        /**
+     * @tc.name test_SUB_DDM_DKV_SINGLEKVSTORE_ERRCODE_0010
+     * @tc.number SUB_DDM_DKV_SINGLEKVSTORE_ERRCODE_0010
+     * @tc.desc distributedKVStore sync errcode 15100004
+     * @tc.size MediumTest
+     * @tc.type Function
+     * @tc.level Level 2
+     */
+    it('SUB_DDM_DKV_SINGLEKVSTORE_ERRCODE_0010', 0, async (done) => {
+        console.info('SUB_DDM_DKV_SINGLEKVSTORE_ERRCODE_0010 start');
+        try {
+          await kvManager?.deleteKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID);
+          console.info('Succeeded in deleteKVStore');
+          kvStore?.sync(syncDeviceIds, factory.SyncMode.PULL_ONLY);
+          console.info(`Succeeded in sync `);
+          expect().assertFail();
+        } catch (err) {
+          console.error(`Failed to sync.code is ${err.code},message is ${err.message}`);
+          expect(err.code).assertEqual(15100004);
+        };
+        done();
+      });
+  
+      /**
+       * @tc.name test_SUB_DDM_DKV_SINGLEKVSTORE_ERRCODE_0020
+       * @tc.number SUB_DDM_DKV_SINGLEKVSTORE_ERRCODE_0020
+       * @tc.desc distributedKVStore sync errcode 15100004 
+       * @tc.size MediumTest
+       * @tc.type Function
+       * @tc.level Level 2
+       */
+      it('SUB_DDM_DKV_SINGLEKVSTORE_ERRCODE_0020', 0, async (done) => {
+        console.info('SUB_DDM_DKV_SINGLEKVSTORE_ERRCODE_0020 start');
+        try {
+          let query: factory.Query | null = new factory.Query();
+          await kvManager?.deleteKVStore(TEST_BUNDLE_NAME, TEST_STORE_ID);
+          console.info('Succeeded in deleteKVStore');
+          kvStore?.sync(syncDeviceIds, query, factory.SyncMode.PULL_ONLY);
+          console.info(`Succeeded in sync `);
+          expect().assertFail();
+        } catch (err) {
+          console.error(`Failed to sync.code is ${err.code},message is ${err.message}`);
+          expect(err.code).assertEqual(15100004);
+        };
+        done();
+      });
+
     })
 }
