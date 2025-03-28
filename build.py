@@ -129,7 +129,7 @@ class XtsBuild:
     def do_make(self):
         os.environ['XTS_SUITENAME'] = 'dcts'
         # 精准编译重新计算要编译的目标
-        # self._build_target = self.get_accurate_targets()
+        self._build_target = self.get_accurate_targets()
         if len(self._build_target) == 0:
             logging.info("Info: accurate targets list is null, no need to compile")
             return 0
