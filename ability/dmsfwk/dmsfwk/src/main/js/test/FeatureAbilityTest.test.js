@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, TestType, Size, Level } from '@ohos/hypium';
 import rpc from "@ohos.rpc";
 import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from "@ohos.ability.featureAbility";
@@ -136,7 +136,7 @@ export default function dmsJsUnitTest() {
         * @tc.desc    Function test
         * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2800 dvList:" + dvList.length);
@@ -181,7 +181,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2600 dvList:" + dvList.length);
@@ -226,7 +226,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2700 dvList:" + dvList.length);
@@ -271,7 +271,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1900 dvList:" + dvList.length);
@@ -315,7 +315,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2500 dvList:" + dvList.length);
@@ -360,7 +360,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2300 dvList:" + dvList.length);
@@ -405,7 +405,7 @@ export default function dmsJsUnitTest() {
         * @tc.desc    Function test
         * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2400 dvList:" + dvList.length);
@@ -450,7 +450,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1800 dvList:" + dvList.length);
@@ -494,7 +494,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2900 dvList:" + dvList.length);
@@ -539,7 +539,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2000 dvList:" + dvList.length);
@@ -583,7 +583,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3100 dvList:" + dvList.length);
@@ -628,7 +628,7 @@ export default function dmsJsUnitTest() {
         * @tc.desc    Function test
         * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3000 dvList:" + dvList.length);
@@ -672,7 +672,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3200 dvList:" + dvList.length);
@@ -712,7 +712,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2100 dvList:" + dvList.length);
@@ -752,7 +752,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3300 dvList:" + dvList.length);
@@ -792,7 +792,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3600 dvList:" + dvList.length);
@@ -838,7 +838,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_2200 dvList:" + dvList.length);
@@ -884,7 +884,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3500 dvList:" + dvList.length);
@@ -934,7 +934,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400 start------------------------");
             try {
                 console.info("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_3400 dvList:" + dvList.length);
@@ -984,7 +984,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1100", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1100 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1100";
             let params;
@@ -1023,7 +1023,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0900", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0900 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0900";
             let params;
@@ -1062,7 +1062,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1000", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1000 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1000";
             let params;
@@ -1101,7 +1101,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0200", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0200 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0200";
             let params;
@@ -1139,7 +1139,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0800", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0800 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0800";
             let params;
@@ -1178,7 +1178,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0600", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0600 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0600";
             let params;
@@ -1217,7 +1217,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0700", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0700 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0700";
             let params;
@@ -1256,7 +1256,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0100", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0100 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0100";
             let params;
@@ -1294,7 +1294,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1200", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1200 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1200";
             let params;
@@ -1333,7 +1333,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0300", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0300 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0300";
             let params;
@@ -1371,7 +1371,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1400", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1400 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1400";
             let params;
@@ -1410,7 +1410,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1300", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1300 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1300";
             console.info(TAG + " dvList:" + dvList.length);
@@ -1454,7 +1454,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1500", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1500 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1500";
             let wantValue = undefined;
@@ -1487,7 +1487,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0400", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0400 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0400";
             let wantValue = {};
@@ -1520,7 +1520,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1600", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1600 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1600";
             let wantValue = "";
@@ -1553,7 +1553,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_1700";
             console.info(TAG + " dvList:" + dvList.length);
@@ -1602,7 +1602,7 @@ export default function dmsJsUnitTest() {
          * @tc.desc    Function test
          * @tc.level   0
         */
-        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0500", 0, async function (done) {
+        it("SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0500 start------------------------");
             let TAG = "SUB_DMS_StandardOs_collaboration_Startability_StartRemoteAbility_0500";
             console.info(TAG + " dvList:" + dvList.length);
