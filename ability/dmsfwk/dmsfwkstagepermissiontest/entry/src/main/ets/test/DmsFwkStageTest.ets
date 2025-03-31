@@ -706,16 +706,37 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_getPeerInfoById_1800 is start---------------")
       let TAG = 'SUB_DMS_StandardOs_collaboration_abilityConnectionManager_getPeerInfoById_1800'
       try {
-        abilityConnectionManager.getPeerInfoById(10).then((data) => {
-          console.log(`${TAG} abilityConnectionManager.getPeerInfoById is succcess`)
-          expect().assertFail()
-        })
+        let peerInfo = abilityConnectionManager.getPeerInfoById(10)
+        console.log(`${TAG} abilityConnectionManager.getPeerInfoById is succcess`)
+        expect(peerInfo == undefined).assertTrue()
+      } catch (error) {
+        console.log(`${TAG} abilityConnectionManager.getPeerInfoById error.code is ${error.code}`)
+        expect().assertFail()
+      }
+      await sleep(2000)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_getPeerInfoById_1800 is end--------------- ")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_getPeerInfoById_1900
+    * @tc.name     abilityConnectionManager.getPeerInfoById
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_abilityConnectionManager_getPeerInfoById_1900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_getPeerInfoById_1900 is start---------------")
+      let TAG = 'SUB_DMS_StandardOs_collaboration_abilityConnectionManager_getPeerInfoById_1900'
+      try {
+        let peerInfo = abilityConnectionManager.getPeerInfoById('10', true)
+        console.log(`${TAG} abilityConnectionManager.getPeerInfoById is succcess`)
+         expect().assertFail()
       } catch (error) {
         console.log(`${TAG} abilityConnectionManager.getPeerInfoById error.code is ${error.code}`)
         expect(error.code == 401).assertTrue()
       }
       await sleep(2000)
-      console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_getPeerInfoById_1800 is end--------------- ")
+      console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_getPeerInfoById_1900 is end--------------- ")
       done();
     });
 
