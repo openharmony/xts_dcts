@@ -54,6 +54,15 @@
       },
       {
         "name": "ohos.permission.PERMISSION_START_INVISIBLE_ABILITY"
+      },
+      {
+        "name": "ohos.permission.INTERNET"
+      },
+      {
+        "name": "ohos.permission.GET_NETWORK_INFO"
+      },
+      {
+        "name": "ohos.permission.SET_NETWORK_INFO"
       }
     ]
   }
