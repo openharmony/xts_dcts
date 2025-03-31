@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '@ohos/hypium';
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, Level, Size, TestType } from "@ohos/hypium";
 import deviceManager from '@ohos.distributedDeviceManager';
 import TestService from '../../../../../../../../../testtools/disetsTest/client/testService.ets';
 import RemoteHelper from '../../../../../../../../../testtools/disetsTest/client/remoteHelper.ets';
@@ -210,7 +210,7 @@ describe('dataObjectEtsTest', function () {
      * @tc.type: Functiontion
      * @tc.size: MediumTest
      */
-    it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0100", 0, async function(done){
+    it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0100 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
@@ -276,7 +276,7 @@ describe('dataObjectEtsTest', function () {
      * @tc.type: Functiontion
      * @tc.size: MediumTest
      */
-    it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0200", 0, async function(done){
+    it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0200 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
@@ -343,7 +343,7 @@ describe('dataObjectEtsTest', function () {
      * @tc.type: Functiontion
      * @tc.size: MediumTest
      */
-    it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0300", 0, async function(done){
+    it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0300 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
@@ -411,7 +411,7 @@ describe('dataObjectEtsTest', function () {
      * @tc.type: Functiontion
      * @tc.size: MediumTest
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0400", 0, async function(done){
+     it("SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_SetSessionId_Ets_0400 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
@@ -482,7 +482,7 @@ describe('dataObjectEtsTest', function () {
      * @tc.type: Functiontion
      * @tc.size: MediumTest
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0100", 0, async function(done){
+     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0100 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
@@ -565,7 +565,7 @@ describe('dataObjectEtsTest', function () {
      * @tc.type: Functiontion
      * @tc.size: MediumTest
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0200", 0, async function(done){
+     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0200 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
@@ -648,7 +648,7 @@ describe('dataObjectEtsTest', function () {
      * @tc.type: Functiontion
      * @tc.size: MediumTest
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0300", 0, async function(done){
+     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Local_Ets_0300 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
@@ -730,7 +730,7 @@ describe('dataObjectEtsTest', function () {
      * @tc.type: Functiontion
      * @tc.size: MediumTest
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0100", 0, async function(done){
+     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_0100 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
@@ -803,7 +803,7 @@ describe('dataObjectEtsTest', function () {
      * @tc.type: Functiontion
      * @tc.size: MediumTest
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0200", 0, async function(done){
+     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0200 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {
@@ -876,7 +876,7 @@ describe('dataObjectEtsTest', function () {
      * @tc.type: Functiontion
      * @tc.size: MediumTest
      */
-     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0300", 0, async function(done){
+     it("SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function(done){
         console.info(logTag + "************* SUB_DDM_DISTRIBUTEDOBJECT_Modify_Server_Ets_0300 start *************");
         console.info(logTag + "flag_32Rlease is: " + flag_32Rlease);
         if (flag_32Rlease == 0) {

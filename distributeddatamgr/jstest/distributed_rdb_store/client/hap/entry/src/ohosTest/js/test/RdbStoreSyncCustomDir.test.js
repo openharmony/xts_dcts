@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '@ohos/hypium';
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, Level, Size, TestType } from "@ohos/hypium";
 import deviceManager from '@ohos.distributedDeviceManager';
 import TestService from '../../../../../../../../../../testtools/disjsTest/client/testService.js';
 import RemoteHelper from '../../../../../../../../../../testtools/disjsTest/client/remoteHelper.js';
@@ -169,7 +169,7 @@ export default function rdbSyncCustomDirlTest(){
          * @tc.type Function
          * @tc.level Level 3
          */
-         it("testRdbSyncCustomTest0100", 0, async function (done) {
+         it("testRdbSyncCustomTest0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
             console.info(logTag + "testRdbSyncCustomTest0100 start");
             await sleep(3000);
             var u8 = new Uint8Array([1, 2, 3]);
@@ -226,7 +226,7 @@ export default function rdbSyncCustomDirlTest(){
          * @tc.type Function
          * @tc.level Level 3
          */
-        it("testRdbSyncCustomTest0200", 0, async function (done) {
+        it("testRdbSyncCustomTest0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
             console.info(logTag + "testRdbSyncCustomTest0200 start");
             //push data to remote device
             var u8 = new Uint8Array([1, 2, 3]);
@@ -305,7 +305,7 @@ export default function rdbSyncCustomDirlTest(){
         * @tc.type Function
         * @tc.level Level 3
         */
-        it("testRdbSyncCustomTest0300", 0, async function (done) {
+        it("testRdbSyncCustomTest0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
             console.info(logTag + "testRdbSyncCustomTest0300 start");
     
             //push data to remote device
@@ -384,7 +384,7 @@ export default function rdbSyncCustomDirlTest(){
         * @tc.type Function
         * @tc.level Level 3
         */
-        it("testRdbSyncCustomTest0400", 0, async function (done) {
+        it("testRdbSyncCustomTest0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
             console.info(logTag + "testRdbSyncCustomTest0400 start");
     
             //push data to remote device
@@ -450,7 +450,7 @@ export default function rdbSyncCustomDirlTest(){
         * @tc.type Function
         * @tc.level Level 3
         */
-        it("testRdbSyncCustomTest0500", 0, async function (done) {
+        it("testRdbSyncCustomTest0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
             console.info(logTag + "testRdbSyncCustomTest0500 start");
     
             //push data to remote device

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '@ohos/hypium';
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, Level, Size, TestType } from "@ohos/hypium";
 import deviceManager from '@ohos.distributedDeviceManager';
 import TestService from '../../../../../../../../../testtools/disjsTest/client/testService.js';
 import RemoteHelper from '../../../../../../../../../testtools/disjsTest/client/remoteHelper.js';
@@ -218,7 +218,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-         it("testRdbSyncStageEtsTest0010", 0, async function (done) {
+         it("testRdbSyncStageEtsTest0010", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0010 start");
             await sleep(3000);
             var u8 = new Uint8Array([1, 2, 3]);
@@ -273,7 +273,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-        it("testRdbSyncStageEtsTest0020", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0020", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0020 start");
             //push data to remote device
             var u8 = new Uint8Array([1, 2, 3]);
@@ -348,7 +348,7 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.type Function
         * @tc.level Level 2
         */
-        it("testRdbSyncStageEtsTest0030", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0030", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0030 start");
     
             //push data to remote device
@@ -425,7 +425,7 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.type Function
         * @tc.level Level 2
         */
-        it("testRdbSyncStageEtsTest0040", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0040", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0040 start");
     
             //push data to remote device
@@ -489,7 +489,7 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.type Function
         * @tc.level Level 2
         */
-        it("testRdbSyncStageEtsTest0050", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0050", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0050 start");
     
             //push data to remote device
@@ -557,7 +557,7 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.type Function
         * @tc.level Level 2
         */
-        it("testRdbSyncStageEtsTest0060", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0060", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0060 start");
             //push data to remote device
 
@@ -654,7 +654,7 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.type Function
         * @tc.level Level 2
         */
-         it("testRdbSyncStageEtsTest0070", 0, async function (done) {
+         it("testRdbSyncStageEtsTest0070", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0070 start");
     
             //push data to remote device
@@ -733,7 +733,7 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.type Function
         * @tc.level Level 2
         */
-        it("testRdbSyncStageEtsTest0080", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0080", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0080 start");
     
             //push data to remote device
@@ -844,7 +844,7 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.type Function
         * @tc.level Level 2
         */
-         it("testRdbSyncStageEtsTest0090", 0, async function (done) {
+         it("testRdbSyncStageEtsTest0090", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0090 start");
     
             //push data to remote device
@@ -958,7 +958,7 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.type Function
         * @tc.level Level 2
         */
-        it("testRdbSyncStageEtsTest0100", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0100 start");
     
             //push data to remote device
@@ -1031,7 +1031,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-         it("testRdbSyncStageEtsTest0110", 0, async function (done) {
+         it("testRdbSyncStageEtsTest0110", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0110 start");
             var u8 = new Uint8Array([1, 2, 3]);
             const valueBucket : data_Rdb.ValuesBucket = {
@@ -1085,7 +1085,7 @@ export default function rdbSyncFirstLevelTest(){
         * @tc.type Function
         * @tc.level Level 2
         */
-         it("testRdbSyncStageEtsTest0120", 0, async function (done) {
+         it("testRdbSyncStageEtsTest0120", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0120 start");
     
             //push data to remote device
@@ -1217,7 +1217,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
         */
-        it("testRdbSyncStageEtsTest0130", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0130", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0130 start");
             var u8 = new Uint8Array([1, 2, 3]);
             const valueBucket : data_Rdb.ValuesBucket = {
@@ -1271,7 +1271,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
         */
-         it("testRdbSyncStageEtsTest0140", 0, async function (done) {
+         it("testRdbSyncStageEtsTest0140", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0140 start");
             var u8 = new Uint8Array([1, 2, 3]);
             const valueBucket : data_Rdb.ValuesBucket = {
@@ -1342,7 +1342,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
         */
-        it("testRdbSyncStageEtsTest0160", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0160", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0160 start");
             var u8 = new Uint8Array([1, 2, 3]);
             const valueBucket : data_Rdb.ValuesBucket = {
@@ -1397,7 +1397,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-         it("testRdbSyncStageEtsTest0170", 0, async function (done) {
+         it("testRdbSyncStageEtsTest0170", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0170 start");
             var u8 = new Uint8Array([1, 2, 3]);
             const valueBucket : data_Rdb.ValuesBucket = {
@@ -1456,7 +1456,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
         */
-        it("testRdbSyncStageEtsTest0180", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0180", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0180 start");
             var u8 = new Uint8Array([1, 2, 3]);
             const valueBucket : data_Rdb.ValuesBucket = {
@@ -1515,7 +1515,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-        it("testRdbSyncStageEtsTest0190", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0190", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0190 start");
             const STORE_CONFIGS2 = {
                 name: "RemoteS2Rdb.db",
@@ -1599,7 +1599,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-        it("testRdbSyncStageEtsTest0200", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0200 start");
             const STORE_CONFIGS2 = {
                 name: "RemoteRdbStage.db",
@@ -1681,7 +1681,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-        it("testRdbSyncStageEtsTest0210", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0210", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0210 start");
             var rdbENStore: data_Rdb.RdbStore | undefined = undefined;
             const STORE_CONFIGS3 = {
@@ -1724,7 +1724,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-        it("testRdbSyncStageEtsTest0220", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0220", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0220 start");
             let predicates = new data_Rdb.RdbPredicates('test');
             try {
@@ -1763,7 +1763,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-        it("testRdbSyncStageEtsTest0230", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0230", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0230 start");
             const STORE_CONFIG023 = {
                 name: "RemoteRdbStage.db",
@@ -1809,7 +1809,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-        it("testRdbSyncStageEtsTest0240", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0240", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0240 start");
             let intMaxValue = Number.MAX_VALUE;
             var u8 = new Uint8Array([1, 2, intMaxValue]);
@@ -1864,7 +1864,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-        it("testRdbSyncStageEtsTest0250", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0250", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0250 start");
             let intMinValue = Number.MIN_VALUE;
             var u8 = new Uint8Array([1, 2, intMinValue]);
@@ -1919,7 +1919,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-        it("testRdbSyncStageEtsTest0260", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0260", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0260 start");
             let intNanValue = Number.NaN;
             var u8 = new Uint8Array([1, 2, 3]);
@@ -1973,7 +1973,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-        it("testRdbSyncStageEtsTest0270", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0270", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0270 start");
             let intValue = Number.POSITIVE_INFINITY;
             var u8 = new Uint8Array([1, 2, 3]);
@@ -2027,7 +2027,7 @@ export default function rdbSyncFirstLevelTest(){
          * @tc.type Function
          * @tc.level Level 2
          */
-        it("testRdbSyncStageEtsTest0280", 0, async function (done) {
+        it("testRdbSyncStageEtsTest0280", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testRdbSyncStageEtsTest0280 start");
             let intValue = Number.NEGATIVE_INFINITY;
             var u8 = new Uint8Array([1, 2, 3]);

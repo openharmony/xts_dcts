@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '@ohos/hypium';
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, Level, Size, TestType } from "@ohos/hypium";
 import deviceManager from '@ohos.distributedDeviceManager';
 import TestService from '../../../../../../../../../testtools/disjsTest/client/testService.js';
 import RemoteHelper from '../../../../../../../../../testtools/disjsTest/client/remoteHelper.js';
@@ -211,7 +211,7 @@ export default function rdbSyncCustomDirlTest(){
          * @tc.type Function
          * @tc.level Level 3
          */
-         it("testRdbSyncCustomStageEtsTest0100", 0, async function (done) {
+         it("testRdbSyncCustomStageEtsTest0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
             console.info(logTag + "testRdbSyncCustomStageEtsTest0100 start");
             await sleep(3000);
             var u8 = new Uint8Array([1, 2, 3]);
@@ -268,7 +268,7 @@ export default function rdbSyncCustomDirlTest(){
          * @tc.type Function
          * @tc.level Level 3
          */
-        it("testRdbSyncCustomStageEtsTest0200", 0, async function (done) {
+        it("testRdbSyncCustomStageEtsTest0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
             console.info(logTag + "testRdbSyncCustomStageEtsTest0200 start");
             //push data to remote device
             var u8 = new Uint8Array([1, 2, 3]);
@@ -347,7 +347,7 @@ export default function rdbSyncCustomDirlTest(){
         * @tc.type Function
         * @tc.level Level 3
         */
-        it("testRdbSyncCustomStageEtsTest0300", 0, async function (done) {
+        it("testRdbSyncCustomStageEtsTest0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
             console.info(logTag + "testRdbSyncCustomStageEtsTest0300 start");
     
             //push data to remote device
@@ -426,7 +426,7 @@ export default function rdbSyncCustomDirlTest(){
         * @tc.type Function
         * @tc.level Level 3
         */
-        it("testRdbSyncCustomStageEtsTest0400", 0, async function (done) {
+        it("testRdbSyncCustomStageEtsTest0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
             console.info(logTag + "testRdbSyncCustomStageEtsTest0400 start");
     
             //push data to remote device
@@ -492,7 +492,7 @@ export default function rdbSyncCustomDirlTest(){
         * @tc.type Function
         * @tc.level Level 3
         */
-        it("testRdbSyncCustomStageEtsTest0500", 0, async function (done) {
+        it("testRdbSyncCustomStageEtsTest0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
             console.info(logTag + "testRdbSyncCustomStageEtsTest0500 start");
     
             //push data to remote device
