@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, Level, Size, TestType } from "@ohos/hypium";
 import deviceManager from '@ohos.distributedDeviceManager';
 import TestService from '../../../../../../../../../../testtools/disjsTest/client/testService.js';
 import RemoteHelper from '../../../../../../../../../../testtools/disjsTest/client/remoteHelper.js';
@@ -202,7 +202,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS1Security0500", 0, async function (done) {
+        it("testServerS1Security0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS1Security0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -261,7 +261,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS1Security0600", 0, async function (done) {
+        it("testServerS1Security0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS1Security0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -319,7 +319,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS1Security0700", 0, async function (done) {
+        it("testServerS1Security0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS1Security0700 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -377,7 +377,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS1Security0800", 0, async function (done) {
+        it("testServerS1Security0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS1Security0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -435,7 +435,7 @@ export default function kvSyncTestS1() {
         * @tc.type: Functiontion
         * @tc.size: MediumTest
         */
-        it("testServerS1Security0900", 0, async function (done) {
+        it("testServerS1Security0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS1Security0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -492,7 +492,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS1Security1000", 0, async function (done) {
+        it("testServerS1Security1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS1Security1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -550,7 +550,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS1Security1100", 0, async function (done) {
+        it("testServerS1Security1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS1Security1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -608,7 +608,7 @@ export default function kvSyncTestS1() {
         * @tc.type: Functiontion
         * @tc.size: MediumTest
         */
-        it("testServerS1Security1200", 0, async function (done) {
+        it("testServerS1Security1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS1Security1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -666,7 +666,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security0500", 0, async function (done) {
+        it("testServerS2Security0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS2Security0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
             await sleep(1000);
@@ -724,7 +724,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security0600", 0, async function (done) {
+        it("testServerS2Security0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS2Security0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
             await sleep(1000);
@@ -782,7 +782,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security0700", 0, async function (done) {
+        it("testServerS2Security0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS2Security0700 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -840,7 +840,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security0800", 0, async function (done) {
+        it("testServerS2Security0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS2Security0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -898,7 +898,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security0900", 0, async function (done) {
+        it("testServerS2Security0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS2Security0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
             await sleep(1000);
@@ -956,7 +956,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security1000", 0, async function (done) {
+        it("testServerS2Security1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS2Security1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
             await sleep(1000);
@@ -1014,7 +1014,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security1100", 0, async function (done) {
+        it("testServerS2Security1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS2Security1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
             await sleep(1000);
@@ -1072,7 +1072,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS2Security1200", 0, async function (done) {
+        it("testServerS2Security1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS2Security1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S2", false);
             await sleep(1000);
@@ -1130,7 +1130,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security0500", 0, async function (done) {
+        it("testServerS3Security0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS3Security0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
             await sleep(1000);
@@ -1188,7 +1188,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security0600", 0, async function (done) {
+        it("testServerS3Security0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS3Security0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
             await sleep(1000);
@@ -1246,7 +1246,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security0700", 0, async function (done) {
+        it("testServerS3Security0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS3Security0700 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
             await sleep(1000);
@@ -1304,7 +1304,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security0800", 0, async function (done) {
+        it("testServerS3Security0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS3Security0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
             await sleep(1000);
@@ -1362,7 +1362,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security0900", 0, async function (done) {
+        it("testServerS3Security0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS3Security0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1420,7 +1420,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security1000", 0, async function (done) {
+        it("testServerS3Security1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS3Security1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1478,7 +1478,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security1100", 0, async function (done) {
+        it("testServerS3Security1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS3Security1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
             await sleep(1000);
@@ -1536,7 +1536,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS3Security1200", 0, async function (done) {
+        it("testServerS3Security1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS3Security1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S3", false);
             await sleep(1000);
@@ -1594,7 +1594,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security0500", 0, async function (done) {
+        it("testServerS4Security0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS4Security0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1652,7 +1652,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security0600", 0, async function (done) {
+        it("testServerS4Security0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS4Security0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1710,7 +1710,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security0700", 0, async function (done) {
+        it("testServerS4Security0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS4Security0700 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1768,7 +1768,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security0800", 0, async function (done) {
+        it("testServerS4Security0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS4Security0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1826,7 +1826,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security0900", 0, async function (done) {
+        it("testServerS4Security0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS4Security0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1884,7 +1884,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security1000", 0, async function (done) {
+        it("testServerS4Security1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS4Security1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -1942,7 +1942,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security1100", 0, async function (done) {
+        it("testServerS4Security1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS4Security1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -2000,7 +2000,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerS4Security1200", 0, async function (done) {
+        it("testServerS4Security1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerS4Security1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S4", false);
             await sleep(1000);
@@ -2058,7 +2058,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerKvStoreId0100", 0, async function (done) {
+        it("testServerKvStoreId0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerKvStoreId0100 start");
             await remoteHelpers.getKvStore("x".repeat(129), "S1", false);
             await sleep(1000);
@@ -2115,7 +2115,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerKvStoreId0200", 0, async function (done) {
+        it("testServerKvStoreId0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerKvStoreId0200 start");
             await remoteHelpers.getKvStore("x".repeat(129), "S1", false);
             await sleep(1000);
@@ -2172,7 +2172,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerKvStoreId0300", 0, async function (done) {
+        it("testServerKvStoreId0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerKvStoreId0300 start");
             await remoteHelpers.getKvStore("x".repeat(128), "S1", false);
             await sleep(1000);
@@ -2242,7 +2242,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerKvStoreId0400", 0, async function (done) {
+        it("testServerKvStoreId0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerKvStoreId0400 start");
             await remoteHelpers.getKvStore("x".repeat(128), "S1", false);
             await sleep(1000);
@@ -2311,7 +2311,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerKvStoreId0500", 0, async function (done) {
+        it("testServerKvStoreId0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerKvStoreId0500 start");
             await remoteHelpers.getKvStore("SERVER_KVSTORE", "S1", false);
             await sleep(1000);
@@ -2374,7 +2374,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerKvStoreId0600", 0, async function (done) {
+        it("testServerKvStoreId0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerKvStoreId0600 start");
             await remoteHelpers.getKvStore("SERVER_KVSTORE", "S1", false);
             await sleep(1000);
@@ -2437,7 +2437,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerEncryptKVStore0100", 0, async function (done) {
+        it("testServerEncryptKVStore0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", true);
             await sleep(1000);
@@ -2494,7 +2494,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerEncryptKVStore0200", 0, async function (done) {
+        it("testServerEncryptKVStore0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", true);
             await sleep(1000);
@@ -2551,7 +2551,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerEncryptKVStore0300", 0, async function (done) {
+        it("testServerEncryptKVStore0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0300 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", true);
             await sleep(1000);
@@ -2608,7 +2608,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerEncryptKVStore0400", 0, async function (done) {
+        it("testServerEncryptKVStore0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0400 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", true);
             await sleep(1000);
@@ -2665,7 +2665,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerEncryptKVStore0500", 0, async function (done) {
+        it("testServerEncryptKVStore0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -2722,7 +2722,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerEncryptKVStore0600", 0, async function (done) {
+        it("testServerEncryptKVStore0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerEncryptKVStore0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -2779,7 +2779,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerMaxKeyLength0100", 0, async function (done) {
+        it("testServerMaxKeyLength0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerMaxKeyLength0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -2836,7 +2836,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerMaxKeyLength0200", 0, async function (done) {
+        it("testServerMaxKeyLength0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerMaxKeyLength0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -2893,7 +2893,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerMaxKeyLength0300", 0, async function (done) {
+        it("testServerMaxKeyLength0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerMaxKeyLength0300 start");
             const KEY = "x".repeat(1024)
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
@@ -2951,7 +2951,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testServerMaxKeyLength0400", 0, async function (done) {
+        it("testServerMaxKeyLength0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testServerMaxKeyLength0400 start");
             const KEY = "x".repeat(1024)
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
@@ -3009,7 +3009,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncStringType0100", 0, async function (done) {
+        it("testSyncStringType0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncStringType0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3066,7 +3066,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncStringType0200", 0, async function (done) {
+        it("testSyncStringType0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncStringType0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3123,7 +3123,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0100", 0, async function (done) {
+        it("testSyncIntType0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3180,7 +3180,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0200", 0, async function (done) {
+        it("testSyncIntType0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3238,7 +3238,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0300", 0, async function (done) {
+        it("testSyncIntType0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType0300 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3297,7 +3297,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0400", 0, async function (done) {
+        it("testSyncIntType0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType0400 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3357,7 +3357,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0500", 0, async function (done) {
+        it("testSyncIntType0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType0500 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3417,7 +3417,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0600", 0, async function (done) {
+        it("testSyncIntType0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType0600 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3477,7 +3477,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0700", 0, async function (done) {
+        it("testSyncIntType0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType0700 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3536,7 +3536,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0800", 0, async function (done) {
+        it("testSyncIntType0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType0800 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3595,7 +3595,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType0900", 0, async function (done) {
+        it("testSyncIntType0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType0900 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3654,7 +3654,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType1000", 0, async function (done) {
+        it("testSyncIntType1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType1000 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3714,7 +3714,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType1100", 0, async function (done) {
+        it("testSyncIntType1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType1100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3773,7 +3773,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncIntType1200", 0, async function (done) {
+        it("testSyncIntType1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType1200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3832,7 +3832,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-         it("testSyncIntType1300", 0, async function (done) {
+         it("testSyncIntType1300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType1300 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3891,7 +3891,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-         it("testSyncIntType1400", 0, async function (done) {
+         it("testSyncIntType1400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncIntType1400 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -3950,7 +3950,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncFloatType0100", 0, async function (done) {
+        it("testSyncFloatType0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncFloatType0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -4006,7 +4006,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncFloatType0200", 0, async function (done) {
+        it("testSyncFloatType0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncFloatType0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -4063,7 +4063,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncMultipleData0100", 0, async function (done) {
+        it("testSyncMultipleData0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncMultipleData0100 start");
             let value1 = undefined;
             let value2 = undefined;
@@ -4134,7 +4134,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncMultipleData0200", 0, async function (done) {
+        it("testSyncMultipleData0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncMultipleData0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -4204,7 +4204,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncDeleteSync0100", 0, async function (done) {
+        it("testSyncDeleteSync0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncDeleteSync0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -4270,7 +4270,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncDeleteSync0200", 0, async function (done) {
+        it("testSyncDeleteSync0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncDeleteSync0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -4335,7 +4335,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncModifySync0100", 0, async function (done) {
+        it("testSyncModifySync0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncModifySync0100 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -4399,7 +4399,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncModifySync0200", 0, async function (done) {
+        it("testSyncModifySync0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncModifySync0200 start");
             await remoteHelpers.getKvStore(TEST_STORE_ID, "S1", false);
             await sleep(1000);
@@ -4464,7 +4464,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncSchema0100", 0, async function (done) {
+        it("testSyncSchema0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncSchema0100 start");
             
             let options = {
@@ -4563,7 +4563,7 @@ export default function kvSyncTestS1() {
          * @tc.type: Functiontion
          * @tc.size: MediumTest
          */
-        it("testSyncSchema0200", 0, async function (done) {
+        it("testSyncSchema0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async function (done) {
             console.info(logTag + "testSyncSchema0200 start");
             
             let options = {
