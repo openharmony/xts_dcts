@@ -19,7 +19,7 @@ import fs from '@ohos.file.fs';
 import featureAbility from "@ohos.ability.featureAbility";
 import securityLabel from '@ohos.file.securityLabel';
 import TestService from "./testService"
-import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect} from '@ohos/hypium';
+import {describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, Level } from '@ohos/hypium';
 import {UiDriver, BY} from '@ohos.UiTest';
 import devicemanager from 'libdevicemanager.so';
 
@@ -225,7 +225,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface without the mode parameter
          * @tc.level   0
          */
-        it('test_fileio_create_dir_sync_000', 0, async function (done) {
+        it('test_fileio_create_dir_sync_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_000--------");
             let tcNumber = 'test_fileio_create_dir_sync_000';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -256,7 +256,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o700
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_001', 3, async function (done) {
+        it('test_fileio_create_dir_sync_001', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_001--------");
             let tcNumber = 'test_fileio_create_dir_sync_001';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -288,7 +288,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o600
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_002', 3, async function (done) {
+        it('test_fileio_create_dir_sync_002', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_002--------");
             let tcNumber = 'test_fileio_create_dir_sync_002';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -320,7 +320,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o500
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_003', 3, async function (done) {
+        it('test_fileio_create_dir_sync_003', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_003--------");
             let tcNumber = 'test_fileio_create_dir_sync_003';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -352,7 +352,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o400
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_004', 3, async function (done) {
+        it('test_fileio_create_dir_sync_004', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_004--------");
             let tcNumber = 'test_fileio_create_dir_sync_004';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -383,7 +383,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o300
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_005', 3, async function (done) {
+        it('test_fileio_create_dir_sync_005', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_005--------");
             let tcNumber = 'test_fileio_create_dir_sync_005';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -415,7 +415,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o200
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_006', 3, async function (done) {
+        it('test_fileio_create_dir_sync_006', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_006--------");
             let tcNumber = 'test_fileio_create_dir_sync_006';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -446,7 +446,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o100
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_007', 3, async function (done) {
+        it('test_fileio_create_dir_sync_007', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_007--------");
             let tcNumber = 'test_fileio_create_dir_sync_007';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -478,7 +478,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o070
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_008', 3, async function (done) {
+        it('test_fileio_create_dir_sync_008', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_008--------");
             let tcNumber = 'test_fileio_create_dir_sync_008';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -509,7 +509,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o060
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_009', 3, async function (done) {
+        it('test_fileio_create_dir_sync_009', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_009--------");
             let tcNumber = 'test_fileio_create_dir_sync_009';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -540,7 +540,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o050
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_010', 3, async function (done) {
+        it('test_fileio_create_dir_sync_010', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_010--------");
             let tcNumber = 'test_fileio_create_dir_sync_010';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -571,7 +571,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o040
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_011', 3, async function (done) {
+        it('test_fileio_create_dir_sync_011', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_011--------");
             let tcNumber = 'test_fileio_create_dir_sync_011';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -602,7 +602,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o030
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_012', 3, async function (done) {
+        it('test_fileio_create_dir_sync_012', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_012--------");
             let tcNumber = 'test_fileio_create_dir_sync_012';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -633,7 +633,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o020
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_013', 3, async function (done) {
+        it('test_fileio_create_dir_sync_013', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_013--------");
             let tcNumber = 'test_fileio_create_dir_sync_013';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -664,7 +664,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o010
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_014', 3, async function (done) {
+        it('test_fileio_create_dir_sync_014', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_014--------");
             let tcNumber = 'test_fileio_create_dir_sync_014';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -695,7 +695,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o007
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_015', 3, async function (done) {
+        it('test_fileio_create_dir_sync_015', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_015--------");
             let tcNumber = 'test_fileio_create_dir_sync_015';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -726,7 +726,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o006
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_016', 3, async function (done) {
+        it('test_fileio_create_dir_sync_016', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_016--------");
             let tcNumber = 'test_fileio_create_dir_sync_016';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -757,7 +757,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o005
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_017', 3, async function (done) {
+        it('test_fileio_create_dir_sync_017', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_017--------");
             let tcNumber = 'test_fileio_create_dir_sync_017';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -788,7 +788,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o004
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_018', 3, async function (done) {
+        it('test_fileio_create_dir_sync_018', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_018--------");
             let tcNumber = 'test_fileio_create_dir_sync_018';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -819,7 +819,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o003
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_019', 3, async function (done) {
+        it('test_fileio_create_dir_sync_019', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_019--------");
             let tcNumber = 'test_fileio_create_dir_sync_019';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -850,7 +850,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o002
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_020', 3, async function (done) {
+        it('test_fileio_create_dir_sync_020', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_020--------");
             let tcNumber = 'test_fileio_create_dir_sync_020';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -881,7 +881,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o001
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_021', 3, async function (done) {
+        it('test_fileio_create_dir_sync_021', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_021--------");
             let tcNumber = 'test_fileio_create_dir_sync_021';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -912,7 +912,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o777
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_022', 3, async function (done) {
+        it('test_fileio_create_dir_sync_022', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_022--------");
             let tcNumber = 'test_fileio_create_dir_sync_022';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -943,7 +943,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o766
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_023', 3, async function (done) {
+        it('test_fileio_create_dir_sync_023', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_023--------");
             let tcNumber = 'test_fileio_create_dir_sync_023';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -974,7 +974,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o755
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_024', 3, async function (done) {
+        it('test_fileio_create_dir_sync_024', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_024--------");
             let tcNumber = 'test_fileio_create_dir_sync_024';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1005,7 +1005,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o744
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_025', 3, async function (done) {
+        it('test_fileio_create_dir_sync_025', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_025--------");
             let tcNumber = 'test_fileio_create_dir_sync_025';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1036,7 +1036,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o733
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_026', 3, async function (done) {
+        it('test_fileio_create_dir_sync_026', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_026--------");
             let tcNumber = 'test_fileio_create_dir_sync_026';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1067,7 +1067,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o722
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_027', 3, async function (done) {
+        it('test_fileio_create_dir_sync_027', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_027--------");
             let tcNumber = 'test_fileio_create_dir_sync_027';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1098,7 +1098,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o711
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_028', 3, async function (done) {
+        it('test_fileio_create_dir_sync_028', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_028--------");
             let tcNumber = 'test_fileio_create_dir_sync_028';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1130,7 +1130,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o676
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_029', 3, async function (done) {
+        it('test_fileio_create_dir_sync_029', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_029--------");
             let tcNumber = 'test_fileio_create_dir_sync_029';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1161,7 +1161,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o667
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_030', 3, async function (done) {
+        it('test_fileio_create_dir_sync_030', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_030--------");
             let tcNumber = 'test_fileio_create_dir_sync_030';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1192,7 +1192,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o654
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_031', 3, async function (done) {
+        it('test_fileio_create_dir_sync_031', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_031--------");
             let tcNumber = 'test_fileio_create_dir_sync_031';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1223,7 +1223,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o645
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_032', 3, async function (done) {
+        it('test_fileio_create_dir_sync_032', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_032--------");
             let tcNumber = 'test_fileio_create_dir_sync_032';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1254,7 +1254,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o632
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_033', 3, async function (done) {
+        it('test_fileio_create_dir_sync_033', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_033--------");
             let tcNumber = 'test_fileio_create_dir_sync_033';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1285,7 +1285,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o623
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_034', 3, async function (done) {
+        it('test_fileio_create_dir_sync_034', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_034--------");
             let tcNumber = 'test_fileio_create_dir_sync_034';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1316,7 +1316,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o617
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_035', 3, async function (done) {
+        it('test_fileio_create_dir_sync_035', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_035--------");
             let tcNumber = 'test_fileio_create_dir_sync_035';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1348,7 +1348,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o575
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_036', 3, async function (done) {
+        it('test_fileio_create_dir_sync_036', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_036--------");
             let tcNumber = 'test_fileio_create_dir_sync_036';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1379,7 +1379,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o564
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_037', 3, async function (done) {
+        it('test_fileio_create_dir_sync_037', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_037--------");
             let tcNumber = 'test_fileio_create_dir_sync_037';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1410,7 +1410,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o557
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_038', 3, async function (done) {
+        it('test_fileio_create_dir_sync_038', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_038--------");
             let tcNumber = 'test_fileio_create_dir_sync_038';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1441,7 +1441,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o546
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_039', 3, async function (done) {
+        it('test_fileio_create_dir_sync_039', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_039--------");
             let tcNumber = 'test_fileio_create_dir_sync_039';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1472,7 +1472,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o531
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_040', 3, async function (done) {
+        it('test_fileio_create_dir_sync_040', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_040--------");
             let tcNumber = 'test_fileio_create_dir_sync_040';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1503,7 +1503,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o527
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_041', 3, async function (done) {
+        it('test_fileio_create_dir_sync_041', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_041--------");
             let tcNumber = 'test_fileio_create_dir_sync_041';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1534,7 +1534,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o513
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_042', 3, async function (done) {
+        it('test_fileio_create_dir_sync_042', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_042--------");
             let tcNumber = 'test_fileio_create_dir_sync_042';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1565,7 +1565,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o474
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_043', 3, async function (done) {
+        it('test_fileio_create_dir_sync_043', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_043--------");
             let tcNumber = 'test_fileio_create_dir_sync_043';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1596,7 +1596,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o465
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_044', 3, async function (done) {
+        it('test_fileio_create_dir_sync_044', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_044--------");
             let tcNumber = 'test_fileio_create_dir_sync_044';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1627,7 +1627,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o456
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_045', 3, async function (done) {
+        it('test_fileio_create_dir_sync_045', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_045--------");
             let tcNumber = 'test_fileio_create_dir_sync_045';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1658,7 +1658,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o447
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_046', 3, async function (done) {
+        it('test_fileio_create_dir_sync_046', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_046--------");
             let tcNumber = 'test_fileio_create_dir_sync_046';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1689,7 +1689,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o437
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_047', 3, async function (done) {
+        it('test_fileio_create_dir_sync_047', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_047--------");
             let tcNumber = 'test_fileio_create_dir_sync_047';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1720,7 +1720,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o421
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_048', 3, async function (done) {
+        it('test_fileio_create_dir_sync_048', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_048--------");
             let tcNumber = 'test_fileio_create_dir_sync_048';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1751,7 +1751,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o412
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_049', 3, async function (done) {
+        it('test_fileio_create_dir_sync_049', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_049--------");
             let tcNumber = 'test_fileio_create_dir_sync_049';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1782,7 +1782,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o373
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_050', 3, async function (done) {
+        it('test_fileio_create_dir_sync_050', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_050--------");
             let tcNumber = 'test_fileio_create_dir_sync_050';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1813,7 +1813,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o362
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_051', 3, async function (done) {
+        it('test_fileio_create_dir_sync_051', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_051--------");
             let tcNumber = 'test_fileio_create_dir_sync_051';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1844,7 +1844,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o351
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_052', 3, async function (done) {
+        it('test_fileio_create_dir_sync_052', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_052--------");
             let tcNumber = 'test_fileio_create_dir_sync_052';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1875,7 +1875,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o347
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_053', 3, async function (done) {
+        it('test_fileio_create_dir_sync_053', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_053--------");
             let tcNumber = 'test_fileio_create_dir_sync_053';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1906,7 +1906,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o336
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_054', 3, async function (done) {
+        it('test_fileio_create_dir_sync_054', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_054--------");
             let tcNumber = 'test_fileio_create_dir_sync_054';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1937,7 +1937,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o325
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_055', 3, async function (done) {
+        it('test_fileio_create_dir_sync_055', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_055--------");
             let tcNumber = 'test_fileio_create_dir_sync_055';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1968,7 +1968,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o314
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_056', 3, async function (done) {
+        it('test_fileio_create_dir_sync_056', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_056--------");
             let tcNumber = 'test_fileio_create_dir_sync_056';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -1999,7 +1999,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o272
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_057', 3, async function (done) {
+        it('test_fileio_create_dir_sync_057', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_057--------");
             let tcNumber = 'test_fileio_create_dir_sync_057';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2030,7 +2030,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o263
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_058', 3, async function (done) {
+        it('test_fileio_create_dir_sync_058', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_058--------");
             let tcNumber = 'test_fileio_create_dir_sync_058';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2061,7 +2061,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o257
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_059', 3, async function (done) {
+        it('test_fileio_create_dir_sync_059', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_059--------");
             let tcNumber = 'test_fileio_create_dir_sync_059';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2092,7 +2092,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o241
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_060', 3, async function (done) {
+        it('test_fileio_create_dir_sync_060', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_060--------");
             let tcNumber = 'test_fileio_create_dir_sync_060';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2123,7 +2123,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o235
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_061', 3, async function (done) {
+        it('test_fileio_create_dir_sync_061', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_061--------");
             let tcNumber = 'test_fileio_create_dir_sync_061';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2154,7 +2154,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o226
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_062', 3, async function (done) {
+        it('test_fileio_create_dir_sync_062', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_062--------");
             let tcNumber = 'test_fileio_create_dir_sync_062';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2185,7 +2185,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o216
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_063', 3, async function (done) {
+        it('test_fileio_create_dir_sync_063', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_063--------");
             let tcNumber = 'test_fileio_create_dir_sync_063';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2216,7 +2216,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o171
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_064', 3, async function (done) {
+        it('test_fileio_create_dir_sync_064', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_064--------");
             let tcNumber = 'test_fileio_create_dir_sync_064';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2247,7 +2247,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o167
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_065', 3, async function (done) {
+        it('test_fileio_create_dir_sync_065', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_065--------");
             let tcNumber = 'test_fileio_create_dir_sync_065';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2278,7 +2278,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o153
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_066', 3, async function (done) {
+        it('test_fileio_create_dir_sync_066', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_066--------");
             let tcNumber = 'test_fileio_create_dir_sync_066';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2309,7 +2309,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o142
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_067', 3, async function (done) {
+        it('test_fileio_create_dir_sync_067', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_067--------");
             let tcNumber = 'test_fileio_create_dir_sync_067';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2340,7 +2340,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o134
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_068', 3, async function (done) {
+        it('test_fileio_create_dir_sync_068', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_068--------");
             let tcNumber = 'test_fileio_create_dir_sync_068';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2371,7 +2371,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o126
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_069', 3, async function (done) {
+        it('test_fileio_create_dir_sync_069', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_069--------");
             let tcNumber = 'test_fileio_create_dir_sync_069';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2402,7 +2402,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o115
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_070', 3, async function (done) {
+        it('test_fileio_create_dir_sync_070', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_070--------");
             let tcNumber = 'test_fileio_create_dir_sync_070';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2433,7 +2433,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o661
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_071', 3, async function (done) {
+        it('test_fileio_create_dir_sync_071', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_071--------");
             let tcNumber = 'test_fileio_create_dir_sync_071';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2464,7 +2464,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o552
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_072', 3, async function (done) {
+        it('test_fileio_create_dir_sync_072', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_072--------");
             let tcNumber = 'test_fileio_create_dir_sync_072';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2495,7 +2495,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o443
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_073', 3, async function (done) {
+        it('test_fileio_create_dir_sync_073', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_073--------");
             let tcNumber = 'test_fileio_create_dir_sync_073';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2526,7 +2526,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface with mode=0o224
          * @tc.level   3
          */
-        it('test_fileio_create_dir_sync_074', 3, async function (done) {
+        it('test_fileio_create_dir_sync_074', Level.LEVEL3, async function (done) {
             console.info("--------start test_fileio_create_dir_sync_074--------");
             let tcNumber = 'test_fileio_create_dir_sync_074';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2557,7 +2557,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, test the rmdirSync() interface.
          * @tc.level   0
          */
-        it('test_fileio_delete_dir_sync_000', 0, async function (done) {
+        it('test_fileio_delete_dir_sync_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_delete_dir_sync_000--------");
             let tcNumber = 'test_fileio_delete_dir_sync_000';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -2601,7 +2601,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o777
          * @tc.level   0
          */
-        it('test_fileio_create_file_sync_000', 0, async function (done) {
+        it('test_fileio_create_file_sync_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_000--------");
             let tcNumber = 'test_fileio_create_file_sync_000';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -2633,7 +2633,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o101. mode=0o777
          * @tc.level   0
          */
-        it('test_fileio_create_file_sync_001', 0, async function (done) {
+        it('test_fileio_create_file_sync_001', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_001--------");
             let tcNumber = 'test_fileio_create_file_sync_001';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -2665,7 +2665,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o102. mode=0o777
          * @tc.level   0
          */
-        it('test_fileio_create_file_sync_002', 0, async function (done) {
+        it('test_fileio_create_file_sync_002', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_002--------");
             let tcNumber = 'test_fileio_create_file_sync_002';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -2697,7 +2697,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o744
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_003', 0, async function (done) {
+        it('test_fileio_create_file_sync_003', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_003--------");
             let tcNumber = 'test_fileio_create_file_sync_003';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -2729,7 +2729,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o722
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_004', 0, async function (done) {
+        it('test_fileio_create_file_sync_004', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_004--------");
             let tcNumber = 'test_fileio_create_file_sync_004';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -2761,7 +2761,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o711
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_005', 0, async function (done) {
+        it('test_fileio_create_file_sync_005', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_005--------");
             let tcNumber = 'test_fileio_create_file_sync_005';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -2793,7 +2793,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o474
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_006', 0, async function (done) {
+        it('test_fileio_create_file_sync_006', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_006--------");
             let tcNumber = 'test_fileio_create_file_sync_006';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -2825,7 +2825,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o447
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_007', 0, async function (done) {
+        it('test_fileio_create_file_sync_007', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_007--------");
             let tcNumber = 'test_fileio_create_file_sync_007';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -2857,7 +2857,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o421
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_008', 0, async function (done) {
+        it('test_fileio_create_file_sync_008', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_008--------");
             let tcNumber = 'test_fileio_create_file_sync_008';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -2889,7 +2889,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o412
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_009', 0, async function (done) {
+        it('test_fileio_create_file_sync_009', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_009--------");
             let tcNumber = 'test_fileio_create_file_sync_009';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -2921,7 +2921,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o272
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_010', 0, async function (done) {
+        it('test_fileio_create_file_sync_010', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_010--------");
             let tcNumber = 'test_fileio_create_file_sync_010';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -2953,7 +2953,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o241
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_011', 0, async function (done) {
+        it('test_fileio_create_file_sync_011', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_011--------");
             let tcNumber = 'test_fileio_create_file_sync_011';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -2985,7 +2985,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o227
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_012', 0, async function (done) {
+        it('test_fileio_create_file_sync_012', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_012--------");
             let tcNumber = 'test_fileio_create_file_sync_012';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3017,7 +3017,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o214
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_013', 0, async function (done) {
+        it('test_fileio_create_file_sync_013', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_013--------");
             let tcNumber = 'test_fileio_create_file_sync_013';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3049,7 +3049,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o171
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_014', 0, async function (done) {
+        it('test_fileio_create_file_sync_014', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_014--------");
             let tcNumber = 'test_fileio_create_file_sync_014';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3081,7 +3081,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o142
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_015', 0, async function (done) {
+        it('test_fileio_create_file_sync_015', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_015--------");
             let tcNumber = 'test_fileio_create_file_sync_015';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3113,7 +3113,7 @@ export default function FileioDistributedTest(){
         * @tc.desc    Function of API, flags=0o100. mode=0o124
         * @tc.level   3
         */
-        it('test_fileio_create_file_sync_016', 0, async function (done) {
+        it('test_fileio_create_file_sync_016', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_016--------");
             let tcNumber = 'test_fileio_create_file_sync_016';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3145,7 +3145,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, flags=0o100. mode=0o117
          * @tc.level   3
          */
-        it('test_fileio_create_file_sync_017', 0, async function (done) {
+        it('test_fileio_create_file_sync_017', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_create_file_sync_017--------");
             let tcNumber = 'test_fileio_create_file_sync_017';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3177,7 +3177,7 @@ export default function FileioDistributedTest(){
          * @tc.desc     Function of API, unlinkSync()
          * @tc.level    0
          */
-        it('test_fileio_delete_file_sync_000', 0, async function (done) {
+        it('test_fileio_delete_file_sync_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_delete_file_sync_000--------");
             let tcNumber = 'test_fileio_delete_file_sync_000';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3228,7 +3228,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API,test writeSync() interface
          * @tc.level   0
          */
-        it('test_fileio_write_file_000', 0, async function (done) {
+        it('test_fileio_write_file_000', Level.LEVEL0, async function (done) {
             console.info("---------------------start test_fileio_write_file_000---------------------------");
             let tcNumber = 'test_fileio_write_file_000';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3265,7 +3265,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, Test the renameSync interface, rename the file.
          * @tc.level   0
          */
-        it('test_fileio_rename_file_sync_000', 0, async function (done) {
+        it('test_fileio_rename_file_sync_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_rename_file_sync_000--------");
             let tcNumber = 'test_fileio_rename_file_sync_000';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3315,7 +3315,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API,Test the renameSync interface, rename the directory.
          * @tc.level   0
          */
-        it('test_fileio_rename_dir_sync_000', 0, async function (done) {
+        it('test_fileio_rename_dir_sync_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_rename_dir_sync_000--------");
             let tcNumber = 'test_fileio_rename_dir_sync_000';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -3365,7 +3365,7 @@ export default function FileioDistributedTest(){
         * @tc.desc    Function of API, Test the copyFileSync interface, copy the file.
         * @tc.level   0
         */
-        it('test_fileio_copy_file_sync_000', 0, async function (done) {
+        it('test_fileio_copy_file_sync_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_fileio_copy_file_sync_000--------");
             let tcNumber = 'test_fileio_copy_file_sync_000';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3416,7 +3416,7 @@ export default function FileioDistributedTest(){
          * @tc.desc     Function of API,test statSync() interface
          * @tc.level   0
          */
-        it('test_fileio_file_statSync_000', 0, async function (done) {
+        it('test_fileio_file_statSync_000', Level.LEVEL0, async function (done) {
             console.info("---------------------start test_fileio_file_statSync_000---------------------------");
             let tcNumber = 'test_fileio_file_statSync_000'
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3448,7 +3448,7 @@ export default function FileioDistributedTest(){
         * @tc.desc     Function of API,test fstatSync() interface
         * @tc.level   0
         */
-        it('test_fileio_file_fstatSync_000', 0, async function (done) {
+        it('test_fileio_file_fstatSync_000', Level.LEVEL0, async function (done) {
             console.info("---------------------start test_fileio_file_fstatSync_000---------------------------");
             let tcNumber = 'test_fileio_file_fstatSync_000'
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3480,7 +3480,7 @@ export default function FileioDistributedTest(){
          * @tc.desc     Function of API,test fsyncSync() interface
          * @tc.level   0
          */
-        it('test_fileio_file_fsyncSync_000', 0, async function (done) {
+        it('test_fileio_file_fsyncSync_000', Level.LEVEL0, async function (done) {
             console.info("---------------------start test_fileio_file_fsyncSync_000---------------------------");
             let tcNumber = 'test_fileio_file_fsyncSync_000'
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3509,7 +3509,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, mode=OpenMode.READ_ONLY(0o0)
          * @tc.level   0
          */
-        it('test_filefs_create_file_sync_000', 0, async function (done) {
+        it('test_filefs_create_file_sync_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_create_file_sync_000--------");
             let tcNumber = 'test_filefs_create_file_sync_000';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3541,7 +3541,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, mode=OpenMode.WRITE_ONLY(0o1)
          * @tc.level   0
          */
-         it('test_filefs_create_file_sync_001', 0, async function (done) {
+         it('test_filefs_create_file_sync_001', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_create_file_sync_001--------");
             let tcNumber = 'test_filefs_create_file_sync_001';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3571,7 +3571,7 @@ export default function FileioDistributedTest(){
          * @tc.name    test_filefs_create_file_sync_002
          * @tc.desc    Function of API, mode=OpenMode.READ_WRITE(0o2)
          */
-         it('test_filefs_create_file_sync_002', 0, async function (done) {
+         it('test_filefs_create_file_sync_002', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_create_file_sync_002--------");
             let tcNumber = 'test_filefs_create_file_sync_002';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3602,7 +3602,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API,test writeSync() interface,default write from current offset
          * @tc.level   0
          */
-         it('test_filefs_write_file_000', 0, async function (done) {
+         it('test_filefs_write_file_000', Level.LEVEL0, async function (done) {
             console.info("---------------------start test_filefs_write_file_000---------------------------");
             let tcNumber = 'test_filefs_write_file_000';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3639,7 +3639,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API,test writeSync() interface,mode=WRITE_ONLY ,encoding = 'utf-8'.
          * @tc.level   0
          */
-         it('test_filefs_write_file_001', 0, async function (done) {
+         it('test_filefs_write_file_001', Level.LEVEL0, async function (done) {
             console.info("---------------------start test_filefs_write_file_001---------------------------");
             let tcNumber = 'test_filefs_write_file_001';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3676,7 +3676,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API,test writeSync() interface,mode=WRITE_ONLY, offset(option): 1.
          * @tc.level   0
          */
-         it('test_filefs_write_file_002', 0, async function (done) {
+         it('test_filefs_write_file_002', Level.LEVEL0, async function (done) {
             console.info("---------------------start test_filefs_write_file_002---------------------------");
             let tcNumber = 'test_filefs_write_file_002';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3714,7 +3714,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API,test writeSync() interface,mode=WRITE_ONLY, length(position) = 1.
          * @tc.level   0
          */
-         it('test_filefs_write_file_003', 0, async function (done) {
+         it('test_filefs_write_file_003', Level.LEVEL0, async function (done) {
             console.info("---------------------start test_filefs_write_file_003---------------------------");
             let tcNumber = 'test_filefs_write_file_003';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3754,7 +3754,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API,test writeSync() interface ,mode=WRITE_ONLY, length(position) = 1, offset(position) = 1.
          * @tc.level   0
          */
-        it('test_filefs_write_file_004', 0, async function (done) {
+        it('test_filefs_write_file_004', Level.LEVEL0, async function (done) {
             console.info("---------------------start test_filefs_write_file_004---------------------------");
             let tcNumber = 'test_filefs_write_file_004';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3795,7 +3795,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, Test the renameSync interface, rename the file.
          * @tc.level   0
          */
-         it('test_filefs_rename_file_sync_000', 0, async function (done) {
+         it('test_filefs_rename_file_sync_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_rename_file_sync_000--------");
             let tcNumber = 'test_filefs_rename_file_sync_000';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3846,7 +3846,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, Test the renameSync interface, rename the file across directory.
          * @tc.level   0
          */
-         it('test_filefs_rename_file_sync_001', 0, async function (done) {
+         it('test_filefs_rename_file_sync_001', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_rename_file_sync_001--------");
             let tcNumber = 'test_filefs_rename_file_sync_001';
             let dpath = await getDistributedFilePath(tcNumber);
@@ -3900,7 +3900,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file readSync interface
          * @tc.level   0
          */
-        it('test_filefs_read_file_sync_000', 0, async function (done) {
+        it('test_filefs_read_file_sync_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_read_file_sync_000--------");
             let tcNumber = 'test_filefs_read_file_sync_000';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3935,7 +3935,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file read interface Promise.
          * @tc.level   0
          */
-        it('test_filefs_read_file_async_000', 0, async function (done) {
+        it('test_filefs_read_file_async_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_read_file_async_000--------");
             let tcNumber = 'test_filefs_read_file_async_000';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -3969,7 +3969,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file read interface Callback.
          * @tc.level   0
          */
-        it('test_filefs_read_file_async_001', 0, async function (done) {
+        it('test_filefs_read_file_async_001', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_read_file_async_001--------");
             let tcNumber = 'test_filefs_read_file_async_001';
             let fpath = await getDistributedFilePath(tcNumber);
@@ -4008,7 +4008,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Test the distributed file mkdirSync interface
          * @tc.level   0
          */
-        it('test_filefs_create_dir_sync_000', 0, async function (done) {
+        it('test_filefs_create_dir_sync_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_create_dir_sync_000--------");
             let tcNumber = 'test_filefs_create_dir_sync_000';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -4039,7 +4039,7 @@ export default function FileioDistributedTest(){
          * Create a directory, verify normal function.
          * @tc.level   0
          */
-        it('test_filefs_create_dir_async_000', 0, async function (done) {
+        it('test_filefs_create_dir_async_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_create_dir_async_000--------");
             let tcNumber = 'test_filefs_create_dir_async_000';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -4070,7 +4070,7 @@ export default function FileioDistributedTest(){
          * Create a directory, verify normal function.
          * @tc.level   0
          */
-        it('test_filefs_create_dir_async_001', 0, async function (done) {
+        it('test_filefs_create_dir_async_001', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_create_dir_async_001--------");
             let tcNumber = 'test_filefs_create_dir_async_001';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -4105,7 +4105,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, test the distributed file rmdirSync() interface.
          * @tc.level   0
          */
-        it('test_filefs_delete_dir_sync_000', 0, async function (done) {
+        it('test_filefs_delete_dir_sync_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_delete_dir_sync_000--------");
             let tcNumber = 'test_filefs_delete_dir_sync_000';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -4145,7 +4145,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, test the distributed file rmdir() interface. Promise.
          * @tc.level   0
          */
-        it('test_filefs_delete_dir_async_000', 0, async function (done) {
+        it('test_filefs_delete_dir_async_000', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_delete_dir_async_000--------");
             let tcNumber = 'test_filefs_delete_dir_async_000';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';
@@ -4185,7 +4185,7 @@ export default function FileioDistributedTest(){
          * @tc.desc    Function of API, test the distributed file rmdir() interface. Callback.
          * @tc.level   0
          */
-        it('test_filefs_delete_dir_async_001', 0, async function (done) {
+        it('test_filefs_delete_dir_async_001', Level.LEVEL0, async function (done) {
             console.info("--------start test_filefs_delete_dir_async_001--------");
             let tcNumber = 'test_filefs_delete_dir_async_001';
             let dpath = await getDistributedFilePath(tcNumber) + 'd';

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { describe, it, expect } from '@ohos/hypium'
+import { describe, it, expect, Level } from '@ohos/hypium'
 
 export default function EmptyTest() {
   describe('EmptyTest', () => {
@@ -25,7 +25,7 @@ export default function EmptyTest() {
       * @tc.type  : Function
       * @tc.level : Level 3
       */
-    it('test_fileio_create_dir_sync_000', 3, async (done) => {
+    it('test_fileio_create_dir_sync_000', Level.LEVEL3, async (done) => {
       let a = 1;
       let b = 2;
       expect(a+b).assertEqual(3);
