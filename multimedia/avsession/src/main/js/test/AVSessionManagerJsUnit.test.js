@@ -89,7 +89,7 @@ export default function AVSessionManagerJsUnit() {
             await sleep(500);
 
             try {
-                dmInstance = deviceManager.createDeviceManager('com.example.myapplication');
+                dmInstance = deviceManager.createDeviceManager('com.acts.avsession.test');
                 if (dmInstance) {
                     console.info("Client ceate device manager success");
                     localDeviceId = dmInstance.getLocalDeviceId();

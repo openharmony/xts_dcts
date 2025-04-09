@@ -38,7 +38,7 @@ export default class TestService {
         console.info("avsessionClient: toConnectAbility")
         return new Promise(resolve=>{
             let self = this;
-            dmInstance = deviceManager.createDeviceManager('com.example.myapplication');
+            dmInstance = deviceManager.createDeviceManager('com.acts.avsession.test');
             if (dmInstance) {
                 self.getDeviceList(dmInstance);
                 console.info("avsessionClient:  got dmInstance: " + dmInstance)
