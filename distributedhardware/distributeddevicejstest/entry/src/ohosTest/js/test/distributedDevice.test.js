@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, TestType, Size, Level } from '@ohos/hypium'
 import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from "@ohos.ability.featureAbility";
 import { UiDriver, BY } from '@ohos.UiTest';
@@ -30,7 +30,7 @@ export default function distributedDeviceManager() {
             let permissions = ['ohos.permission.DISTRIBUTED_DATASYNC'];
             let context = featureAbility.getContext();
             context.requestPermissionsFromUser(permissions, 666, (data) => {
-                console.info("request success" + JSON.stringify(data));
+                console.info("request success" + JSON.stringify(data)); 
             })
         }
 
@@ -89,7 +89,7 @@ export default function distributedDeviceManager() {
         * @tc.type:   Function
         * @tc.level   Level1
         */
-        it("SUB_DH_DeviceManager_Dcts_0100", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0100 start------------------------");
             try {
                 dmInstance = deviceManager.createDeviceManager("com.ohos.distributedscreenjstest");
@@ -123,7 +123,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_0200", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0200 start------------------------");
             var discoverParam  = {
                 "discoverTargetType":1
@@ -155,7 +155,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_0300", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0300 start------------------------");
             try {
                 dmNetworkId = dmInstance.getLocalDeviceNetworkId();
@@ -182,7 +182,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_0400", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0400 start------------------------");
             try {
                 dmDeviceInfo = dmInstance.getAvailableDeviceListSync();
@@ -210,7 +210,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_0500", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0500 start------------------------");
             try {
                 dmInstance.getAvailableDeviceList((err, data) => {
@@ -238,7 +238,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_0600", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0600 start------------------------");
             dmInstance.getAvailableDeviceList().then((data) => { 
                 console.log('getAvailableDeviceList info: ' + JSON.stringify(data));
@@ -261,7 +261,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_0700", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0700 start------------------------");
             let bindParam = {
                 "bindType" : 1,
@@ -303,7 +303,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_0800", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0800 start------------------------");
             try {
                 let lDeviceName = dmInstance.getLocalDeviceName();
@@ -330,7 +330,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_0900", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0900 start------------------------");
             try {
                 let lDeviceType = dmInstance.getLocalDeviceType();
@@ -357,7 +357,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_1000", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1000 start------------------------");
             try {
                 let lDeviceId = dmInstance.getLocalDeviceId();
@@ -384,7 +384,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_1100", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1100 start------------------------");
             try {
                 let deviceName = dmInstance.getDeviceName(dmNetworkId);
@@ -411,7 +411,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_1200", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1200 start------------------------");
             try {
                 let deviceType = dmInstance.getDeviceType(dmNetworkId);
@@ -438,7 +438,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-       it("SUB_DH_DeviceManager_Dcts_1300", 0, async function (done) {
+       it("SUB_DH_DeviceManager_Dcts_1300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
         console.info("-----------------SUB_DH_DeviceManager_Dcts_1300 start------------------------");
         try {
             if (deviceId !== null) {
@@ -468,7 +468,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-       it("SUB_DH_DeviceManager_Dcts_1400", 0, async function (done) {
+       it("SUB_DH_DeviceManager_Dcts_1400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
         console.info("-----------------SUB_DH_DeviceManager_Dcts_1400 start------------------------");
         try {
             dmInstance.stopDiscovering();
@@ -492,7 +492,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_1500", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1500 start------------------------");
             var mFilterOption = {
                 targetPkgName: "com.ohos.distributedscreenjstest",
@@ -530,7 +530,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_1600", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1600 start------------------------");
             var mFilterOption = {
                 targetPkgName: "com.ohos.distributedscreenjstest",
@@ -569,7 +569,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_1700", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1700 start------------------------");
             let deviceInfoList = null;
             try {
@@ -611,7 +611,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_1800", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1800 start------------------------");
             let deviceInfoList = null;
             try {
@@ -655,7 +655,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_1900", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_1900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1900 start------------------------");
             let deviceInfoList = null;
             try {
@@ -694,7 +694,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_2000", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_2000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2000 start------------------------");
             let deviceNetworkId = null;
             try {
@@ -741,7 +741,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_2100", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_2100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2100 start------------------------");
             let deviceName = null;
             try {
@@ -786,7 +786,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_2200", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_2200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2200 start------------------------");
             let deviceType = null;
             try {
@@ -831,7 +831,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_2300", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_2300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2300 start------------------------");
             let deviceId = null;
             try {
@@ -876,7 +876,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_2400", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_2400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2400 start------------------------");
             let deviceName = null;
             try {
@@ -918,7 +918,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_2500", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_2500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2500 start------------------------");
             let deviceType = null;
             try {
@@ -960,7 +960,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_2600", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_2600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2600 start------------------------");
             let deviceType = null;
             try {
@@ -1001,7 +1001,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_2700", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_2700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2700 start------------------------");
             let deviceType = null;
             try {
@@ -1055,7 +1055,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_2800", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_2800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2800 start------------------------");
             let deviceType = null;
             try {
@@ -1096,7 +1096,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_3000", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_3000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3000 start------------------------");
             
             try {
@@ -1123,7 +1123,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_3100", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_3100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3100 start------------------------");
             try {
                 dmInstance.off('replyResult', (data) => {
@@ -1149,7 +1149,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_3200", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_3200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3200 start------------------------");
             try {
                 dmInstance.on('deviceStateChange', (data) => {
@@ -1175,7 +1175,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_3300", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_3300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3300 start------------------------");
             try {
                 dmInstance.off('deviceStateChange', (data) => {
@@ -1201,7 +1201,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_3400", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_3400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3400 start------------------------");
             try {
                 dmInstance.on('discoverSuccess', (data) => {
@@ -1227,7 +1227,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_3500", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_3500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3500 start------------------------");
             try {
                 dmInstance.off('discoverSuccess', (data) => {
@@ -1253,7 +1253,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_3600", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_3600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3600 start------------------------");
             try {
                 dmInstance.on('deviceNameChange', (data) => {
@@ -1279,7 +1279,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_3700", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_3700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3700 start------------------------");
             try {
                 dmInstance.off('deviceNameChange', (data) => {
@@ -1305,7 +1305,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_3800", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_3800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3800 start------------------------");
             try {
                 dmInstance.on('discoverFailure', (data) => {
@@ -1331,7 +1331,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_3900", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_3900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3900 start------------------------");
             try {
                 dmInstance.off('discoverFailure', (data) => {
@@ -1357,7 +1357,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_4000", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_4000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4000 start------------------------");
             try {
                 dmInstance.on("serviceDie", (data) => {
@@ -1383,7 +1383,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_4100", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_4100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4100 start------------------------");
             try {
                 dmInstance.off("serviceDie", (data) => {
@@ -1409,7 +1409,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_4200", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_4200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4200 start------------------------");
             try {
                 dmInstance.on('deviceStateChange', (data) => {
@@ -1435,7 +1435,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_4300", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_4300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4300 start------------------------");
             try {
                 dmInstance.on('deviceStateChange', (data) => {
@@ -1461,7 +1461,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_4400", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_4400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4400 start------------------------");
             try {
                 let dmInstanceData = deviceManager.createDeviceManager("");
@@ -1486,7 +1486,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_4500", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_4500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4500 start------------------------");
             try {
                 dmInstance.stopDiscovering();
@@ -1511,7 +1511,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_4600", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_4600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4600 start------------------------");
             try {
                 let dmInstanceDevice = null;
@@ -1536,7 +1536,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_4700", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_4700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4700 start------------------------");
             try {
                 dmInstance = deviceManager.createDeviceManager("com.ohos.distributedscreenjstest");
@@ -1570,7 +1570,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_4800", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_4800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4800 start------------------------");
             try {
                 let networkIdType = null;
@@ -1599,7 +1599,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_4900", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_4900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4900 start------------------------");
             let discoverParam = null;
               let filterOptions = {
@@ -1628,7 +1628,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_5000", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_5000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5000 start------------------------");
             let deviceIdBind = null;
             let bindParam = {};
@@ -1660,7 +1660,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_5100", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_5100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5100 start------------------------");
             try {
                 let unDeviceId = '';
@@ -1686,7 +1686,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_5200", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_5200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5200 start------------------------");
             try {
                 dmInstance.on(null, (data) => {
@@ -1712,7 +1712,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_5300", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_5300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5300 start------------------------");
             try {
                 dmInstance.off(null, (data) => {
@@ -1738,7 +1738,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_5400", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_5400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5400 start------------------------");
             try {
                 dmInstance.on('deviceStateChange', null);
@@ -1762,7 +1762,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_5500", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_5500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5500 start------------------------");
             try {
                 dmInstance.off('deviceStateChange', null);
@@ -1786,7 +1786,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_5600", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_5600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5600 start------------------------");
             try {
                 dmInstance.on('discoverSuccess', null);
@@ -1810,7 +1810,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_5700", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_5700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5700 start------------------------");
             try {
                 dmInstance.off('discoverSuccess', null);
@@ -1834,7 +1834,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_5800", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_5800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5800 start------------------------");
             try {
                 dmInstance.on('deviceNameChange', null);
@@ -1858,7 +1858,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_5900", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_5900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5900 start------------------------");
             try {
                 dmInstance.off('deviceNameChange', null);
@@ -1882,7 +1882,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_6000", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_6000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6000 start------------------------");
             try {
                 dmInstance.on('discoverFailure', null);
@@ -1906,7 +1906,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_6100", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_6100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6100 start------------------------");
             try {
                 dmInstance.off('discoverFailure', null);
@@ -1930,7 +1930,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_6200", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_6200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6200 start------------------------");
             try {
                 dmInstance.on('serviceDie', null);
@@ -1954,7 +1954,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_6300", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_6300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6300 start------------------------");
             try {
                 dmInstance.off('serviceDie', null);
@@ -1978,7 +1978,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_6400", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_6400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6400 start------------------------");
               try {
                 let discoverParam = {
@@ -2014,7 +2014,7 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-        it("SUB_DH_DeviceManager_Dcts_6500", 0, async function (done) {
+        it("SUB_DH_DeviceManager_Dcts_6500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6500 start------------------------");
             dmInstance = deviceManager.createDeviceManager("com.ohos.distributedscreenjstest");
             if (!dmInstance) { 
