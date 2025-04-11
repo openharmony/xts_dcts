@@ -13,35 +13,20 @@
  * limitations under the License.
  */
 
-#include <gtest/gtest.h>
-
 #include "socket_common.h"
 #include "socket.h"
 #include "accesstoken_kit.h"
 
 using namespace std;
-using namespace testing::ext;
-
 
 static INodeStateCb* g_nodeStateCallback = NULL;
 static ISocketListener* g_sessionlist4SokectData  = NULL;
+const int ONE_MINUTE = 60;
 
 static void SetupCallback(void);
 static void TeardownCallback(void);
 
-class SocketTestServer : public testing::Test {
-public:
-    static void SetUpTestCase();
-    static void TearDownTestCase();
-    void SetUp();
-    void TearDown();
-};
-
-void SocketTestServer ::SetUp() {}
-
-void SocketTestServer ::TearDown() {}
-
-void SocketTestServer ::SetUpTestCase()
+void SetUpTestCase()
 {
     LOG("SetUpTestCase");
     AddPermission();
@@ -51,14 +36,18 @@ void SocketTestServer ::SetUpTestCase()
     TestSetUp();
     SetupCallback();
     int ret = RegNodeDeviceStateCb(DEF_PKG_NAME, g_nodeStateCallback);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "call reg node state callback fail";
+    if (SOFTBUS_OK != ret) {
+        LOG("call reg node state callback fail");
+    }
 }
 
-void SocketTestServer::TearDownTestCase()
+void TearDownTestCase()
 {
     LOG("TearDownTestCase");
     int ret = UnregNodeDeviceStateCb(g_nodeStateCallback);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
+    if (SOFTBUS_OK != ret) {
+        LOG("call unReg node state callback fail");
+    }
     TeardownCallback();
     TestTearDown();
 }
@@ -147,7 +136,6 @@ static void OnStream(int32_t socket, const StreamData *data, const StreamData *e
         LOG("[cb][data]OnStream socket id[%d], param is nullptr", socket);
         return;
     }
-
     LOG("[cb][data]OnStream Success socket:%d,", socket);
     LOG("[cb][data]OnStream Success buf:%s,", (data->buf != NULL ? data->buf : "null"));
     LOG("[cb][data]OnStream Success buflen:%d", data->bufLen);
@@ -204,7 +192,6 @@ static void OnNodeOnline(NodeBasicInfo* info)
     if (info == NULL) {
         LOG("[cb]Online: info is null");
     }
-
     LOG("[cb]Online id:%s, name:%s ,type id:%u", info->networkId, info->deviceName, info->deviceTypeId);
 }
 
@@ -214,7 +201,6 @@ static void OnNodeOffline(NodeBasicInfo* info)
         LOG("[cb]Offline: info is null");
         return;
     }
-
     LOG("[cb]Offline id:%s, name:%s ,type id:%u", info->networkId, info->deviceName, info->deviceTypeId);
 }
 
@@ -271,21 +257,14 @@ static void TeardownCallback(void)
     }
 }
 
-/**
- * @tc.number : SUB_Softbus_Trans_SelfNet_0100
- * @tc.name     : 创建SS，等待opensession和消息传输
- * @tc.desc       : 测试自组网下传输功能，模拟服务端
- * @tc.type       : FUNC
- * @tc.size        : MediumTest
- */
-HWTEST_F(SocketTestServer, test_create_ss, TestSize.Level3)
+int main()
 {
+    SetUpTestCase();
     int runtime = 0;
     /*socket server*/
     QosTV info[] = {
         {.qos = QOS_TYPE_MIN_BW, .value = 2000}
     };
-
     int32_t socketByte = Socket(socketInfoByte);
     LOG("Create socket [data] ret:%d", socketByte);
     int32_t socketMessage = Socket(socketInfoMessage);
@@ -298,7 +277,6 @@ HWTEST_F(SocketTestServer, test_create_ss, TestSize.Level3)
         == SOFTBUS_OK && socketFile == SOFTBUS_OK && socketStream == SOFTBUS_OK) {
         LOG("Create socket ok");
     }
-
     /*create Listener*/
     int32_t byteListenRet = Listen(socketByte, info, sizeof(info)/sizeof(info[0]), g_sessionlist4SokectData);
     LOG("Create Listen [data] ret:%d", byteListenRet);
@@ -312,12 +290,12 @@ HWTEST_F(SocketTestServer, test_create_ss, TestSize.Level3)
         == SOFTBUS_OK && fileListenRet == SOFTBUS_OK && streamListenRet == SOFTBUS_OK) {
         LOG("Create socket ok");
     }
-
     while (true) {
         sleep(ONE_SECOND);
         runtime += 1;
-        if (runtime % 60 == 0) {
+        if (runtime % ONE_MINUTE == 0) {
             LOG("### test run:%d s", runtime);
         }
     }
+    TearDownTestCase();
 }
