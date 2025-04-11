@@ -13,16 +13,15 @@
 
 import("../../../../../tools/build/suite.gni")
 
-module_output_path = "dcts/softbus_base/dsoftbusTest"
 dsoftbus_root_path = "../../../../../../../foundation/communication/dsoftbus"
 
-ohos_moduletest_suite("socketdsoftbusTest") {
+ohos_executable("socketdsoftbusTest") {
   sanitize = {
     cfi = true
     cfi_cross_dso = true
     debug = true
   }
-  module_out_path = module_output_path
+
   sources = [
     "../../common/socket_common.c",
     "./SocketTestServer.cpp",
@@ -38,7 +37,6 @@ ohos_moduletest_suite("socketdsoftbusTest") {
     "$dsoftbus_root_path/interfaces/kits/transport",
   ]
 
-  deps = [ "//third_party/googletest:gtest_main" ]
   external_deps = [
     "access_token:libaccesstoken_sdk",
     "access_token:libnativetoken",
@@ -49,6 +47,26 @@ ohos_moduletest_suite("socketdsoftbusTest") {
     "ipc:ipc_core",
     "wifi:wifi_sdk",
   ]
-  subsystem_name = "communication"
-  part_name = "dsoftbus"
+  subsystem_name = "xts"
+  part_name = "dcts"
+}
+
+ohos_copy("cpdsocketdsoftbusTest") {
+  sources = [ "$root_out_dir/xts/dcts/socketdsoftbusTest" ]
+  outputs =
+      [ "$root_out_dir/suites/${XTS_SUITENAME}/testcases/socketdsoftbusTest" ]
+
+  deps = [ ":socketdsoftbusTest" ]
+  subsystem_name = "xts"
+  part_name = "dcts"
+}
+
+group("SocketTestServer") {
+  testonly = true
+  if (is_standard_system) {
+    deps = [
+      ":cpdsocketdsoftbusTest",
+      ":socketdsoftbusTest",
+    ]
+  }
 }
