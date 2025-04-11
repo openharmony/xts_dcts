@@ -259,43 +259,43 @@ static void TeardownCallback(void)
 
 int main()
 {
-   SetUpTestCase();
-   int runtime = 0;
-   /*socket server*/
-   QosTV info[] = {
-       {.qos = QOS_TYPE_MIN_BW, .value = 2000}
-   };
-   int32_t socketByte = Socket(socketInfoByte);
-   LOG("Create socket [data] ret:%d", socketByte);
-   int32_t socketMessage = Socket(socketInfoMessage);
-   LOG("Create socket [data] ret:%d", socketMessage);
-   int32_t socketFile = Socket(socketInfoFile);
-   LOG("Create socket [data] ret:%d", socketFile);
-   int32_t socketStream = Socket(socketInfoStream);
-   LOG("Create socket [data] ret:%d", socketStream);
-   if (socketByte == SOFTBUS_OK && socketMessage
-       == SOFTBUS_OK && socketFile == SOFTBUS_OK && socketStream == SOFTBUS_OK) {
-       LOG("Create socket ok");
-   }
-   /*create Listener*/
-   int32_t byteListenRet = Listen(socketByte, info, sizeof(info)/sizeof(info[0]), g_sessionlist4SokectData);
-   LOG("Create Listen [data] ret:%d", byteListenRet);
-   int32_t messageListenRet = Listen(socketMessage, info, sizeof(info)/sizeof(info[0]), g_sessionlist4SokectData);
-   LOG("Create Listen [data] ret:%d", messageListenRet);
-   int32_t fileListenRet = Listen(socketFile, info, sizeof(info)/sizeof(info[0]), g_sessionlist4SokectData);
-   LOG("Create Listen [data] ret:%d", fileListenRet);
-   int32_t streamListenRet = Listen(socketStream, info, sizeof(info)/sizeof(info[0]), g_sessionlist4SokectData);
-   LOG("Create Listen [data] ret:%d", socketStream);
-   if (byteListenRet == SOFTBUS_OK && messageListenRet
-       == SOFTBUS_OK && fileListenRet == SOFTBUS_OK && streamListenRet == SOFTBUS_OK) {
-       LOG("Create socket ok");
-   }
-   while (true) {
-       sleep(ONE_SECOND);
-       runtime += 1;
-       if (runtime % ONE_MINUTE == 0) {
-           LOG("### test run:%d s", runtime);
-       }
-   }
-   TearDownTestCase();
+    SetUpTestCase();
+    int runtime = 0;
+    /*socket server*/
+    QosTV info[] = {
+        {.qos = QOS_TYPE_MIN_BW, .value = 2000}
+    };
+    int32_t socketByte = Socket(socketInfoByte);
+    LOG("Create socket [data] ret:%d", socketByte);
+    int32_t socketMessage = Socket(socketInfoMessage);
+    LOG("Create socket [data] ret:%d", socketMessage);
+    int32_t socketFile = Socket(socketInfoFile);
+    LOG("Create socket [data] ret:%d", socketFile);
+    int32_t socketStream = Socket(socketInfoStream);
+    LOG("Create socket [data] ret:%d", socketStream);
+    if (socketByte == SOFTBUS_OK && socketMessage
+        == SOFTBUS_OK && socketFile == SOFTBUS_OK && socketStream == SOFTBUS_OK) {
+        LOG("Create socket ok");
+    }
+    /*create Listener*/
+    int32_t byteListenRet = Listen(socketByte, info, sizeof(info)/sizeof(info[0]), g_sessionlist4SokectData);
+    LOG("Create Listen [data] ret:%d", byteListenRet);
+    int32_t messageListenRet = Listen(socketMessage, info, sizeof(info)/sizeof(info[0]), g_sessionlist4SokectData);
+    LOG("Create Listen [data] ret:%d", messageListenRet);
+    int32_t fileListenRet = Listen(socketFile, info, sizeof(info)/sizeof(info[0]), g_sessionlist4SokectData);
+    LOG("Create Listen [data] ret:%d", fileListenRet);
+    int32_t streamListenRet = Listen(socketStream, info, sizeof(info)/sizeof(info[0]), g_sessionlist4SokectData);
+    LOG("Create Listen [data] ret:%d", socketStream);
+    if (byteListenRet == SOFTBUS_OK && messageListenRet
+        == SOFTBUS_OK && fileListenRet == SOFTBUS_OK && streamListenRet == SOFTBUS_OK) {
+        LOG("Create socket ok");
+    }
+    while (true) {
+        sleep(ONE_SECOND);
+        runtime += 1;
+        if (runtime % ONE_MINUTE == 0) {
+            LOG("### test run:%d s", runtime);
+        }
+    }
+    TearDownTestCase();
 }
