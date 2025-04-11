@@ -26,6 +26,7 @@ static ISessionListener* g_sessionlist4Pass = NULL;
 static ISessionListener* g_sessionlist4File = NULL;
 static ISessionListener* g_sessionlist4Proxy = NULL;
 static ISessionListener  *g_sessionlist4Stream  = NULL;
+const int ONE_MINUTE = 60;
 
 static uint64_t g_transTimeEnd;
 
@@ -600,7 +601,7 @@ static void TeardownCallback(void)
     while (1) {
         sleep(1);
         runtime += 1;
-        if (runtime % 60 == 0) {
+        if (runtime % ONE_MINUTE == 0) {
             LOG("### test run:%d s", runtime);
         }
     }
