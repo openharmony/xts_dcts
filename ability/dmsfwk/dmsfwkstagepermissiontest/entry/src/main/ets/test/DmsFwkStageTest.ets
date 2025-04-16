@@ -1467,6 +1467,30 @@ export default function DmsFwkStageTest() {
     });
 
     /*
+     * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_sendData_5500
+     * @tc.name    Get abilityConnectionManager sendData
+     * @tc.desc    Function test
+     * @tc.level   3
+     */
+    it("SUB_DMS_StandardOs_collaboration_abilityConnectionManager_sendData_5500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_sendData_5500 is start---------------")
+      let TAG = "SUB_DMS_StandardOs_collaboration_abilityConnectionManager_sendData_5500";
+      let sessionId = 0;
+      let textEncoder = util.textEncoder.create("utf-8");
+      let arrayBuffer = textEncoder.encodeInto("data send succcess")
+      abilityConnectionManager.sendData(sessionId, arrayBuffer.buffer).then(() => {
+        console.log(TAG + 'abilityConnectionManager.sendData is succcess')
+        expect().assertFail()
+      }).catch ((err) =>{
+        console.log(TAG + 'abilityConnectionManager.sendMessage is failed' + err.code)
+        expect(error.code == 401).assertTrue()
+      })
+      await sleep(1000)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_sendData_5500 is end---------------")
+      done();
+    });
+
+    /*
      * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100
      * @tc.name    Connec the remote Ability.
      * @tc.desc    Function test
