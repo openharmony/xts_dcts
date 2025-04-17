@@ -18,7 +18,14 @@
         "rom": "0",
         "ram": "0",
         "deps": {
-            "components": [],
+            "components": [
+                "access_token",
+                "c_utils",
+                "dsoftbus",
+                "hilog",
+                "ipc",
+                "wifi"
+            ],
             "third_party": []
         },
         "build": {
