@@ -18,7 +18,7 @@ import TestService from "./testService";
 import fileio from '@ohos.fileio';
 import FA from '@ohos.ability.featureAbility';
 import featureAbility from '@ohos.ability.featureAbility';
-import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, TestType, Size, Level } from '@ohos/hypium';
 import { UiDriver, BY } from '@ohos.UiTest'
 export default function RpcRequestJsUnitTest() {
 
@@ -164,7 +164,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */       
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0100", 0, async function(done){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0100--------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -195,7 +195,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0200", 0, async function(done){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0200--------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -227,7 +227,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0300", 0, async function(done){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0300--------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -259,7 +259,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0400", 0, async function(done){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0400--------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -290,7 +290,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0500", 0, async function(done){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0500--------------------");
             try{
                 var data = rpc.MessageParcel.create();
@@ -323,7 +323,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0600", 0, async function(done){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0600--------------------");
             try{
                 var data = rpc.MessageParcel.create();
@@ -356,7 +356,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0700", 0, async function(done){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0700--------------------");
             try{
                 var data = rpc.MessageParcel.create();
@@ -390,7 +390,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0800", 0, async function(done){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0800--------------------");
             try{
                 var data = rpc.MessageParcel.create();
@@ -422,7 +422,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0900", 0, function(done){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_0900--------------------");
             try{
                 function sendMessageRequestCallback(result) {
@@ -458,7 +458,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1000", 0, function(done){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function(done){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1000--------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -494,7 +494,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1100", 0, function(){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function(){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1100--------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -518,7 +518,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1200", 0, function(){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function(){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1200--------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -544,7 +544,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1300", 0, function(){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function(){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1300--------------------");
             try{
                 var data = rpc.MessageParcel.create();
@@ -569,7 +569,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1400", 0, function(){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function(){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1400--------------------");
             try{
                 var data = rpc.MessageParcel.create();
@@ -596,7 +596,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1500", 0, function(){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function(){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1500--------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -622,7 +622,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */   
-        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1600", 0, function(){
+        it("SUB_DSoftbus_RPC_API_OnRemoteRequest_1600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function(){
             console.info("--------------------start SUB_DSoftbus_RPC_API_OnRemoteRequest_1600--------------------");
             try{
                 var data = rpc.MessageParcel.create();
@@ -645,7 +645,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_0100", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0100---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -668,7 +668,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_0200", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0200---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -692,7 +692,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_0300", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0300---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -715,7 +715,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_0400", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0400---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -737,7 +737,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_0500", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_0500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0500---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -760,7 +760,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_0600", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0600---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -782,7 +782,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_0700", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0700---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -804,7 +804,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_0800", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0800---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -826,7 +826,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_0900", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_0900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_0900---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -848,7 +848,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_1000", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_1000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1000---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -870,7 +870,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_1100", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1100---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -892,7 +892,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_1200", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1200---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -914,7 +914,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_1300", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_1300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1300---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -937,7 +937,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_1400", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_1400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1400---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -959,7 +959,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_1500", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_1500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1500---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -982,7 +982,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_1600", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_1600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1600---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1004,7 +1004,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_1700", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_1700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1700---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1027,7 +1027,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_1800", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_1800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1800---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1049,7 +1049,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_1900", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_1900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_1900---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1072,7 +1072,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_2000", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_2000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2000---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1094,7 +1094,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_2100", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_2100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2100---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1117,7 +1117,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_2200", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_2200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2200---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1139,7 +1139,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_2300", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_2300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2300---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1162,7 +1162,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_2400", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_2400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2400---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1184,7 +1184,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_2500", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_2500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2500---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1207,7 +1207,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_2600", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_2600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2600---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1229,7 +1229,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_2700", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_2700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2700---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1252,7 +1252,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_2800", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_2800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2800---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1275,7 +1275,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_2900", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_2900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_2900---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1300,7 +1300,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_3000", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_3000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3000---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1323,7 +1323,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_3100", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_3100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3100---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1347,7 +1347,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_3200", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_3200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3200---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1370,7 +1370,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_3300", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_3300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3300---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1394,7 +1394,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_3400", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_3400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3400---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1417,7 +1417,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_3500", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_3500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3500---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1441,7 +1441,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_3600", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_3600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3600---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1464,7 +1464,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_3700", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_3700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3700---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1488,7 +1488,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_3800", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_3800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3800---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1511,7 +1511,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_3900", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_3900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_3900---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1535,7 +1535,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_4000", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_4000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4000---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1558,7 +1558,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_4100", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_4100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4100---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1582,7 +1582,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_4200", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_4200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4200---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1605,7 +1605,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_4300", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_4300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4300---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1629,7 +1629,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_4400", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_4400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4400---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1652,7 +1652,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_4500", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_4500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4500---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1676,7 +1676,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_4600", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_4600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4600---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1699,7 +1699,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_4700", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_4700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4700---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1723,7 +1723,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_4800", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_4800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4800---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1745,7 +1745,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_4900", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_4900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_4900---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1767,7 +1767,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_5000", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_5000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5000---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1791,7 +1791,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_5100", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_5100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5100---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1817,7 +1817,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_5200", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_5200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5200---------------------------");
             try{
                 let count = 0;
@@ -1852,7 +1852,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_5300", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_5300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5300---------------------------");
             try{
                 let count = 0;
@@ -1888,7 +1888,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_5400", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_5400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5400---------------------------");
             try{
                 rpc.MessageSequence.dupFileDescriptor(-1);
@@ -1908,7 +1908,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_5500", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_5500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5500---------------------------");
             try{
                 let context = FA.getContext();
@@ -1937,7 +1937,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_5600", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_5600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5600---------------------------");
             try{
                 let context = FA.getContext();
@@ -1967,7 +1967,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_5700", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_5700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5700---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -1992,7 +1992,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_5800", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_5800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5800---------------------------");
             try{
                 var data = rpc.MessageSequence.create();
@@ -2018,7 +2018,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_5900", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_5900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_5900---------------------------");
             try{
                 var data = new rpc.MessageSequence();
@@ -2041,7 +2041,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_6000", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_6000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6000---------------------------");
             try{
                 var data = new rpc.MessageSequence();
@@ -2065,7 +2065,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_6100", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_6100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6100---------------------------");
             try{
                 let recipient = new TestAbilityStub("Test1223");
@@ -2088,7 +2088,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_6200", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_6200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6200---------------------------");
             try{
                 let recipient = new TestAbilityStub("Test1223");
@@ -2111,7 +2111,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_6300", 0,async function(){
+        it("SUB_DSoftbus_RPC_API_Errorcode_6300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,async function(){
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6300---------------------------");
             try{
                 let ashmem = rpc.Ashmem.create("ashmem", 4);
@@ -2136,7 +2136,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_6400", 0, async function () {
+        it("SUB_DSoftbus_RPC_API_Errorcode_6400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6400---------------------------");
             try {
                 gIRemoteObject.getLocalInterface('Test2');
@@ -2156,7 +2156,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_6500", 0, async function () {
+        it("SUB_DSoftbus_RPC_API_Errorcode_6500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6500---------------------------");
             try {
                 let recipient = new MyDeathRecipient();
@@ -2177,7 +2177,7 @@ export default function RpcRequestJsUnitTest() {
         * @tc.type    : Compatibility
         * @tc.size    : MediumTest
         */
-        it("SUB_DSoftbus_RPC_API_Errorcode_6600", 0, async function () {
+        it("SUB_DSoftbus_RPC_API_Errorcode_6600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
             console.info("---------------------start SUB_DSoftbus_RPC_API_Errorcode_6600---------------------------");
             try {
                 let recipient = new MyDeathRecipient();
