@@ -314,12 +314,15 @@ class Stub extends rpc.RemoteObject {
                 case 24:
                     {
                         console.info("case 24 start");
+                        let InterfaceToken = data.readInterfaceToken();
                         let listeners = data.readRemoteObjectArray();
-                        console.info("The server's readRemoteObjectArray result is " + listeners.length);
+                        console.info("readRemoteObjectArray is " + listeners.length + "readInterfaceToken: " + InterfaceToken);
                         for (let i = 0; i < listeners.length; i++) {
                             let option2 = new rpc.MessageOption();
                             let data2 = rpc.MessageParcel.create();
                             let reply2 = rpc.MessageParcel.create();
+                            data2.writeInt(123);
+                            data2.writeString("rpcListenerTest");
                             listeners[i].sendRequest(1, data2, reply2, option2)
                                 .then(function(result) {
                                     console.info("send request done, error code: " + result.errCode + ", index: " + i);

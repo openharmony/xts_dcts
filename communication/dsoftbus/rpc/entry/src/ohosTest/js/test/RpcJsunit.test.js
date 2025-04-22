@@ -4257,7 +4257,6 @@ export default function RpcJsUnitTest() {
                 new TestListener("rpcListener2", checkResult),
                 new TestListener("rpcListener3", checkResult)];
                 data.writeRemoteObjectArray(listeners);
-                data.readRemoteObjectArray();
                 data.writeInt(123);
                 data.writeString("rpcListenerTest");
                 await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECTARRAY_2, data, reply, option)
@@ -9590,7 +9589,6 @@ export default function RpcJsUnitTest() {
                 new TestListener("rpcListener2", checkResult),
                 new TestListener("rpcListener3", checkResult)]
                 expect(data.writeRemoteObjectArray(listeners)).assertTrue();
-                data.readRemoteObjectArray();
                 expect(data.writeInt(123)).assertTrue();
                 expect(data.writeString("rpcListenerTest")).assertTrue();
                 await gIRemoteObject.sendRequest(CODE_WRITE_REMOTEOBJECTARRAY_2, data, reply, option)
