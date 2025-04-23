@@ -6386,7 +6386,6 @@ export default function RpcRequestEtsUnitTest() {
           new TestListener("rpcListener2", checkResult),
           new TestListener("rpcListener3", checkResult)];
         data.writeRemoteObjectArray(listeners);
-        data.readRemoteObjectArray();
         data.writeInt(123);
         data.writeString("rpcListenerTest");
         await gIRemoteObject.sendMessageRequest(CODE_WRITE_REMOTEOBJECTARRAY_2, data, reply, option)
