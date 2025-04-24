@@ -30,8 +30,8 @@ let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
 let dvList: Array<deviceManager.DeviceBasicInfo>;
 let dvId: string;
 let localDeviceId: string;
-let dmInstance : deviceManager.DeviceManager
-let TAG:string;
+let dmInstance: deviceManager.DeviceManager
+let TAG: string;
 
 export default function DmsFwkStageTest() {
 
@@ -39,55 +39,55 @@ export default function DmsFwkStageTest() {
     async function getDeviceId() {
       console.log('getDeviceId is begin')
       try {
-          dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstageserver');
-          console.log('get deviceManager is success')
+        dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstageserver');
+        console.log('get deviceManager is success')
       } catch (error) {
-          console.log('get deviceManager is failed' + JSON.stringify(error))
+        console.log('get deviceManager is failed' + JSON.stringify(error))
       }
       localDeviceId = dmInstance.getLocalDeviceNetworkId();
       console.info("local device id is: " + localDeviceId);
-      let deviceList : Array<deviceManager.DeviceBasicInfo> = dmInstance.getAvailableDeviceListSync();
-      dvList= deviceList;
-      let deviceId : string= deviceList[0].networkId;
+      let deviceList: Array<deviceManager.DeviceBasicInfo> = dmInstance.getAvailableDeviceListSync();
+      dvList = deviceList;
+      let deviceId: string = deviceList[0].networkId;
       dvId = deviceId;
       console.info("deviceid is: " + deviceId);
       console.info("deviceList is: " + JSON.stringify(deviceList));
     }
 
     function sleep(ms) {
-		  return new Promise(resolve => setTimeout(resolve, ms));
-	  }
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     async function getPermission() {
-		  console.info('getPermission is start');
-		  atManager.requestPermissionsFromUser(globalThis.abilityContext, ['ohos.permission.DISTRIBUTED_DATASYNC'], (data) => {
-		  console.info("request success" + JSON.stringify(data));
-		  })
-	  }
+      console.info('getPermission is start');
+      atManager.requestPermissionsFromUser(globalThis.abilityContext, ['ohos.permission.DISTRIBUTED_DATASYNC'], (data) => {
+        console.info("request success" + JSON.stringify(data));
+      })
+    }
 
     async function driveFn() {
-		  try {
-			  let driver = await UiDriver.create()
-			  console.info('come in driveFn')
-			  console.info('driver is ${JSON.stringify(driver)}')
-			  await sleep(1000);
-			  let button = await driver.findComponent(BY.text('允许'));
-			  console.info('button is ${JSON.stringify(button)}');
-			  await sleep(1000);
-			  await button.click();
+      try {
+        let driver = await UiDriver.create()
+        console.info('come in driveFn')
+        console.info('driver is ${JSON.stringify(driver)}')
         await sleep(1000);
-		  } catch (err) {
-			  console.info('err is ' + err);
-			  return;
-		  }
-	  }
+        let button = await driver.findComponent(BY.text('允许'));
+        console.info('button is ${JSON.stringify(button)}');
+        await sleep(1000);
+        await button.click();
+        await sleep(1000);
+      } catch (err) {
+        console.info('err is ' + err);
+        return;
+      }
+    }
 
     beforeAll(async function (done) {
       console.log('DMS before began')
       await getPermission();
-	    await sleep(1000);
-	    await driveFn();
-	    await sleep(1000);
+      await sleep(1000);
+      await driveFn();
+      await sleep(1000);
       await getDeviceId();
       await sleep(1000);
       done()
@@ -730,7 +730,7 @@ export default function DmsFwkStageTest() {
       try {
         let peerInfo = abilityConnectionManager.getPeerInfoById('10', true)
         console.log(`${TAG} abilityConnectionManager.getPeerInfoById is succcess`)
-         expect().assertFail()
+        expect().assertFail()
       } catch (error) {
         console.log(`${TAG} abilityConnectionManager.getPeerInfoById error.code is ${error.code}`)
         expect(error.code == 401).assertTrue()
@@ -1482,12 +1482,80 @@ export default function DmsFwkStageTest() {
         console.log(TAG + 'abilityConnectionManager.sendData is success')
         expect().assertFail()
       }).catch((err) => {
-        console.log(TAG + 'abilityConnectionManager.sendData is failed'+err.code)
+        console.log(TAG + 'abilityConnectionManager.sendData is failed' + err.code)
         expect(err.code == 401).assertTrue()
       })
       await sleep(1000)
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_abilityConnectionManager_sendData_5500 end------------------------");
       done()
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_5600
+    * @tc.name    abilityConnectionManager.on receiveData
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_5600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_5600 is start---------------")
+      let TAG = 'SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_5600';
+      try {
+        abilityConnectionManager.on("receiveData", 10, (callbackInfo) => {
+          console.log(TAG + 'abilityConnectionManager.on is success' + callbackInfo)
+          expect().assertFail()
+        });
+      } catch (error) {
+        console.log(`${TAG} abilityConnectionManager.on error is ${error.code}`)
+        expect(error.code == 401).assertTrue()
+      }
+      await sleep(2000)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_5600 is end--------------- ")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_off_5700
+    * @tc.name    abilityConnectionManager.off receiveData
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_abilityConnectionManager_off_5700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_off_5700 is start---------------")
+      let TAG = 'SUB_DMS_StandardOs_collaboration_abilityConnectionManager_off_5700';
+      try {
+        abilityConnectionManager.off("receiveData", 10, (callbackInfo) => {
+          console.log(TAG + 'abilityConnectionManager.off is success' + callbackInfo)
+          expect().assertFail()
+        });
+      } catch (error) {
+        console.log(`${TAG} abilityConnectionManager.off receiveData error is ${error.code}`)
+        expect(error.code == 401).assertTrue()
+      }
+      await sleep(2000)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_off_5700 is end--------------- ")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_off_5800
+    * @tc.name    abilityConnectionManager.off receiveData
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_abilityConnectionManager_off_5800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_off_5800 is start---------------")
+      let TAG = 'SUB_DMS_StandardOs_collaboration_abilityConnectionManager_off_5800';
+      try {
+        abilityConnectionManager.off("receiveData", 10);
+        console.log(`${TAG} abilityConnectionManager.off is success`)
+        expect().assertFail()
+      } catch (error) {
+        console.log(`${TAG} abilityConnectionManager.off receiveData error is ${error.code}`)
+        expect(error.code == 401).assertTrue()
+      }
+      await sleep(1000)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_off_5800 is end--------------- ")
+      done();
     });
 
     /*
@@ -1499,29 +1567,29 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100";
-      try{
+      try {
         globalThis.abilityContext.connectServiceExtensionAbility({
-          deviceId:dvId,
+          deviceId: dvId,
           bundleName: "com.ohos.dmstest",
           abilityName: "com.ohos.dmstest.ServiceAbility"
         }, {
-          onConnect: (elementName, proxy)=>{
+          onConnect: (elementName, proxy) => {
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100  onConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
-          onDisConnect: (elementName)=>{
+          onDisConnect: (elementName) => {
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100  onDisConnect: ' + JSON.stringify(elementName));
             expect().assertFail();
             done();
           },
-          onFailed: (code)=>{
+          onFailed: (code) => {
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100  onFailed: ' + code);
             expect(code).assertEqual(16000050)
             done();
           }
         });
-      }catch(err){
+      } catch (err) {
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100  catch: ' + err.code);
         console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100  catch: ' + err.message);
         expect().assertFail();
@@ -1529,6 +1597,6 @@ export default function DmsFwkStageTest() {
       }
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100 is end---------------")
     });
-    
+
   })
 }
