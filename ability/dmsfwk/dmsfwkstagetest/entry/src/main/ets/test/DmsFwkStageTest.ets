@@ -1951,6 +1951,7 @@ export default function DmsFwkStageTest() {
       }
       await sleep(2000);
       console.info("---------------SUB_DMS_StartControl_Extension_startAbilityForResult_1100 is end---------------")
+      done()
     });
 
     /*
@@ -1981,6 +1982,7 @@ export default function DmsFwkStageTest() {
       }
       await sleep(2000);
       console.info("---------------SUB_DMS_StartControl_Extension_startAbilityForResult_1200 is end---------------")
+      done()
     });
 
     /*
