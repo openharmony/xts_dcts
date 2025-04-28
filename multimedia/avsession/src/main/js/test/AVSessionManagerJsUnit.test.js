@@ -21,7 +21,7 @@ import process from "@ohos.process";
 import audio from "@ohos.multimedia.audio";
 import TestService from "./testService";
 import "./testService";
-import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, TestType, Size, Level } from '@ohos/hypium';
 import { UiDriver, BY } from '@ohos.UiTest'
 
 export default function AVSessionManagerJsUnit() {
