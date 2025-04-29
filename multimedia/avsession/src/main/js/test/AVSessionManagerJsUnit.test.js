@@ -21,7 +21,7 @@ import process from "@ohos.process";
 import audio from "@ohos.multimedia.audio";
 import TestService from "./testService";
 import "./testService";
-import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
+import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, TestType, Size, Level } from '@ohos/hypium';
 import { UiDriver, BY } from '@ohos.UiTest'
 
 export default function AVSessionManagerJsUnit() {
@@ -179,7 +179,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_CALLBACK_0100", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_CALLBACK_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -237,7 +237,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_PROMISE_0100", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_PROMISE_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -296,7 +296,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_CALLBACK_0200", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_CALLBACK_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -354,7 +354,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_PROMISE_0200", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_PROMISE_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -413,7 +413,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_PROMISE_0300", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_PROMISE_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -458,7 +458,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_CALLBACK_0300", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_CAST_AUDIO_CALLBACK_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -508,7 +508,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_ONOUTPUTDEVICE_CHANGE_0100", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_ONOUTPUTDEVICE_CHANGE_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -555,7 +555,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_OFFOUTPUTDEVICE_CHANGE_0100", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_OFFOUTPUTDEVICE_CHANGE_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -614,7 +614,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_OFFOUTPUTDEVICE_CHANGE_0200", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_OFFOUTPUTDEVICE_CHANGE_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -674,7 +674,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_ONOUTPUTDEVICE_CHANGE_0200", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_ONOUTPUTDEVICE_CHANGE_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -726,7 +726,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_OFFOUTPUTDEVICE_CHANGE_0300", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_OFFOUTPUTDEVICE_CHANGE_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -793,7 +793,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_OFFOUTPUTDEVICE_CHANGE_0400", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_OFFOUTPUTDEVICE_CHANGE_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -861,7 +861,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_GETCONTROLLER_PROMISE_0100", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_GETCONTROLLER_PROMISE_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -899,7 +899,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_PROMISE_0100", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_PROMISE_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -942,7 +942,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_PROMISE_0200", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_PROMISE_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -984,7 +984,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_PROMISE_0300", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_PROMISE_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -1035,7 +1035,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_PROMISE_0400", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_PROMISE_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -1088,7 +1088,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_CALLBACK_0100", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_CALLBACK_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -1118,7 +1118,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_CALLBACK_0200", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_CALLBACK_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -1161,7 +1161,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_CALLBACK_0300", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_CALLBACK_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
@@ -1213,7 +1213,7 @@ export default function AVSessionManagerJsUnit() {
          * @tc.type      : Function
          * @tc.level     : Level2
          */
-        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_CALLBACK_0400", 0, async function (done) {
+        it("SUB_MULTIMEDIA_AVSESSION_GETOUTPUTDEVICE_CALLBACK_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             if (Object.keys(audioDevices).length === 0) {
                 expect(true).assertTrue();
                 done();
