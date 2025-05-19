@@ -62,6 +62,7 @@ ohos_moduletest_suite("DctsSubdisCameraTest") {
     "drivers_interface_camera:libcamera_proxy_1.0",
     "drivers_interface_camera:metadata",
     "drivers_interface_display:libdisplay_composer_proxy_1.0",
+    "drivers_interface_display:libhdifd_parcelable",
     "graphic_surface:surface",
     "hdf_core:libhdf_ipc_adapter",
     "hdf_core:libhdf_utils",
