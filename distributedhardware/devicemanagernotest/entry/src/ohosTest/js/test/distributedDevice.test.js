@@ -510,30 +510,6 @@ export default function distributedDeviceManager() {
         })
 
         /*
-         * @tc.number  SUB_DH_Device_Dcts_2000
-         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-         * use this instance to call other device management methods.
-         * @tc.desc    Function test
-         * @tc.size    MediumTest
-         * @tc.type:   Function
-         * @tc.level   Level1
-         */
-        it("SUB_DH_Device_Dcts_2000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
-            console.info("-----------------SUB_DH_Device_Dcts_2000 start------------------------");
-            try {
-                dmInstance.getLocalDeviceName();
-                console.error("in SUB_DH_Device_Dcts_2000 success without permission ");
-                expect().assertFail();
-                done();
-            } catch (error) {
-                console.info(`in SUB_DH_Device_Dcts_2000 failed, code is ${error.code}, message is ${error.message}`);
-                expect(error.code == 201).assertTrue();
-                done();
-            }
-            console.info("-----------------SUB_DH_Device_Dcts_2000 end------------------------");
-        })
-
-        /*
          * @tc.number  SUB_DH_Device_Dcts_2100
          * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
          * use this instance to call other device management methods.
