@@ -7008,6 +7008,1322 @@ export default function RpcRequestEtsUnitTest() {
       }
       console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageSequence_2070---------------------------");
     });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0010
+    * @tc.name    : test getLocalInterface 1900005 searches for objects based on descriptors
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0010", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0010---------------------------");
+      try {
+        let result = rpc.IRemoteObject.isObjectDead();
+        expect(result).assertEqual(false);
+        rpc.IRemoteObject.modifyLocalInterface(rpc.IRemoteObject, "Test2");
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0010: run modifyLocalInterface success");
+        rpc.IRemoteObject.getLocalInterface(null);
+        expect(data.getSize() == 0).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0010 error: " + error);
+        expect(error.code != 1900005).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0010---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0020
+    * @tc.name    : test Iremoteobject, register death notification verification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0020", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0020---------------------------");
+      try {
+        let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
+        gIRemoteObject.registerDeathRecipient(recipient, 0);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0020 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0020---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0030
+    * @tc.name    : test Iremoteobject, register death notification verification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0030", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0030---------------------------");
+      try {
+        let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
+        gIRemoteObject.registerDeathRecipient(recipient, 0);
+        gIRemoteObject.unregisterDeathRecipient(recipient, 0);
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0030:run unregisterDeathRecipient is done");
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0030 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0030---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0040
+    * @tc.name    : test RemoteObject, registerDeathRecipient notification verification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0040", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0040---------------------------");
+      try {
+        let object = new TestAbilityStub("Test1");
+        object.registerDeathRecipient(null, 0);
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0040:run registerDeathRecipient is done");
+        expect(object != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0040 error: " + error);
+        expect(error.code == 1900005).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0040---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0050
+    * @tc.name    : test getDescriptor to get the object interface description
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0050", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0050---------------------------");
+      try {
+        let object = new TestAbilityStub("Test0300");
+        let result = object.getDescriptor();
+        expect(result).assertEqual("Test0300");
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0050 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_IRemoteObject_0050---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0010
+    * @tc.name    : test getLocalInterface searches for objects based on descriptors
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0010", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0010---------------------------");
+      try {
+        let object = new TestAbilityStub("Test0400");
+        let result = object.isObjectDead();
+        expect(result).assertEqual(false);
+        object.modifyLocalInterface(object, "Test2");
+        let res2 = object.getLocalInterface("Test2");
+        expect(res2 != null).assertTrue();
+        let resultDescrip = object.getDescriptor();
+        expect(resultDescrip != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0010 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0010---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0020
+    * @tc.name    : test getLocalInterface 1900005 searches for objects based on descriptors
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0020", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0020---------------------------");
+      try {
+        let object = new TestAbilityStub("Test0400");
+        let result = object.isObjectDead();
+        expect(result).assertEqual(false);
+        object.modifyLocalInterface(object, "Test2");
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0020: run modifyLocalInterface success");
+        object.getLocalInterface(null);
+        expect(data.getSize() == 0).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0020 error: " + error);
+        expect(error.code != 1900005).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0020---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0030
+    * @tc.name    : test Call isobjectdead to check whether the object is dead
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0030", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0030---------------------------");
+      try {
+        let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
+        let isDead = gIRemoteObject.isObjectDead();
+        expect(isDead == false).assertTrue();
+        gIRemoteObject.registerDeathRecipient(recipient, 0);
+        let isDead1 = gIRemoteObject.isObjectDead();
+        expect(isDead1 == false).assertTrue();
+        gIRemoteObject.unregisterDeathRecipient(recipient, 0);
+        gIRemoteObject.registerDeathRecipient(recipient, 0);
+        gIRemoteObject.unregisterDeathRecipient(recipient, 0);
+        gIRemoteObject.unregisterDeathRecipient(recipient, 0);
+        let isDead2 = gIRemoteObject.isObjectDead();
+        expect(isDead2 == false).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0030 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0030---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0040
+    * @tc.name    : test Call registerDeathRecipient to register the death notification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0040", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0040---------------------------");
+      try {
+        let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
+        gIRemoteObject.registerDeathRecipient(recipient, 0);
+        gIRemoteObject.registerDeathRecipient(recipient, 0);
+        gIRemoteObject.unregisterDeathRecipient(recipient, 0);
+        gIRemoteObject.unregisterDeathRecipient(recipient, 0);
+        gIRemoteObject.unregisterDeathRecipient(recipient, 0);
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0040: unregisterDeathRecipient2 is success");
+        expect(recipient != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0040 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0040---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0050
+    * @tc.name    : test registerDeathRecipient Validates the interface flags input parameter boundary value
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0050", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0050---------------------------");
+      try {
+        let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
+        gIRemoteObject.registerDeathRecipient(recipient, -(2 * G));
+        gIRemoteObject.unregisterDeathRecipient(recipient, -(2 * G));
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0050: unregisterDeathRecipient2 is success");
+        expect(recipient != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0050 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0050---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0060
+    * @tc.name    : test registerDeathRecipient Validates the interface flags input parameter boundary value
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0060", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0060---------------------------");
+      try {
+        let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
+        gIRemoteObject.registerDeathRecipient(recipient, (2 * G - 1));
+        gIRemoteObject.unregisterDeathRecipient(recipient, (2 * G - 1));
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0060: unregisterDeathRecipient2 is success");
+        expect(recipient != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0060 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0060---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0070
+    * @tc.name    : test registerDeathRecipient Validates the interface flags input parameter boundary value
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0070", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0070---------------------------");
+      try {
+        let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
+        gIRemoteObject.registerDeathRecipient(recipient, 2 * G);
+        gIRemoteObject.unregisterDeathRecipient(recipient, 2 * G);
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0070: unregisterDeathRecipient2 is success");
+        expect(recipient != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0070 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0070---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0080
+    * @tc.name    : test registerDeathRecipient Validates the interface flags input parameter boundary value
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0080", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0080---------------------------");
+      try {
+        let recipient = new MyregisterDeathRecipient(gIRemoteObject, null);
+        gIRemoteObject.registerDeathRecipient(recipient, -(2 * G + 1));
+        gIRemoteObject.unregisterDeathRecipient(recipient, -(2 * G + 1));
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0080: unregisterDeathRecipient is success");
+        expect(recipient != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0080 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0080---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0090
+    * @tc.name    : test getDescriptor to get the object interface description
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0090", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0090---------------------------");
+      try {
+        let object = new TestAbilityStub("Test0300");
+        let result = object.getDescriptor();
+        expect(result).assertEqual("Test0300");
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0090 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0090---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0100
+    * @tc.name    : test Transaction constant validation
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("----------------------------SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0100 is starting-------------");
+      try {
+        expect(rpc.RemoteProxy.PING_TRANSACTION).assertEqual(1599098439);
+        expect(rpc.RemoteProxy.DUMP_TRANSACTION).assertEqual(1598311760);
+        expect(rpc.RemoteProxy.INTERFACE_TRANSACTION).assertEqual(1598968902);
+        expect(rpc.RemoteProxy.MIN_TRANSACTION_ID).assertEqual(0x1);
+        expect(rpc.RemoteProxy.MAX_TRANSACTION_ID).assertEqual(0x00FFFFFF);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0100 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteProxy_0100---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0010
+    * @tc.name    : test MessageOption sendMessageRequest test
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0010", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0010---------------------------");
+      try {
+        var data = rpc.MessageSequence.create();
+        var reply = rpc.MessageSequence.create();
+        let option = new rpc.MessageOption();
+        let token = "option";
+        data.writeString(token);
+        expect(option.isAsync()).assertEqual(false);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_STRING, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          expect(option.isAsync()).assertEqual(false);
+          expect(result.reply.readString()).assertEqual(token);
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0010 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0010---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0020
+    * @tc.name    : test MessageOption setAsync is true test
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0020", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0020---------------------------");
+      try {
+        var data = rpc.MessageSequence.create();
+        var reply = rpc.MessageSequence.create();
+        let option = new rpc.MessageOption();
+        option.setAsync(true);
+        let token = "option";
+        data.writeString(token);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_STRING, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          expect(option.isAsync()).assertTrue();
+          expect(result.reply.readString()).assertEqual("");
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0020 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0020---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0030
+    * @tc.name    : test setAsync is false sendMessageRequest test
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0030", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0030---------------------------");
+      try {
+        var data = rpc.MessageSequence.create();
+        var reply = rpc.MessageSequence.create();
+        let option = new rpc.MessageOption();
+        option.setAsync(false);
+        let token = "option";
+        data.writeString(token);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_STRING, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          expect(option.isAsync()).assertEqual(false);
+          expect(result.reply.readString()).assertEqual(token);
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0030 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0030---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0040
+    * @tc.name    : test setAsync sendMessageRequest test
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0040", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0040---------------------------");
+      try {
+        let option = new rpc.MessageOption();
+        option.setAsync(3);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0040 error: " + error);
+        expect(error.code != 401).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      done();
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0040---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0060
+    * @tc.name    : test Test the getflags basic method of messageoption
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0060", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0060---------------------------");
+      try {
+        let option = new rpc.MessageOption();
+        expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_SYNC);
+        option.setFlags(1);
+        expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_ASYNC);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0060 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0060---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0070
+    * @tc.name    : test Test the setflags basic method of messageoption
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0070", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0070---------------------------");
+      try {
+        let option = new rpc.MessageOption();
+        expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_SYNC);
+        option.setFlags(1);
+        expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_ASYNC);
+        option.setFlags(0);
+        expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_ASYNC);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0070 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0070---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0080
+    * @tc.name    : test Test the setflags exception value of messageoption
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0080", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0080---------------------------");
+      try {
+        let option = new rpc.MessageOption();
+        expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_SYNC);
+        option.setFlags(-1);
+        expect(option.getFlags()).assertEqual(-1);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0080 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0080---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0090
+    * @tc.name    : test Test the unqualified value of setflags of messageoption
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0090", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0090---------------------------");
+      try {
+        let option = new rpc.MessageOption();
+        expect(option.getFlags()).assertEqual(rpc.MessageOption.TF_SYNC);
+        option.setFlags(3);
+        expect(option.getFlags()).assertEqual(3);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0090 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0090---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0100
+    * @tc.name    : test Basic method of testing messageoption
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0100---------------------------");
+      try {
+
+        var data = rpc.MessageParcel.create();
+        var reply = rpc.MessageParcel.create();
+        let option = new rpc.MessageOption();
+        option.setWaitTime(20);
+        option.setFlags(0);
+        let token = "option";
+        expect(data.writeString(token)).assertTrue();
+        expect(option.getFlags()).assertEqual(0);
+        expect(option.getWaitTime()).assertEqual(20);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_STRING, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          expect(result.reply.readString()).assertEqual(token);
+          expect(option.getFlags()).assertEqual(0);
+          expect(option.getWaitTime()).assertEqual(20);
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0100 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0100---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0110
+    * @tc.name    : test Test the setflags of messageoption asynchronously and the sendMessageRequest callback result
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0110", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0110---------------------------");
+      try {
+        var data = rpc.MessageParcel.create();
+        var reply = rpc.MessageParcel.create();
+        let option = new rpc.MessageOption();
+        option.setFlags(1);
+        let token = "option";
+        expect(data.writeString(token)).assertTrue();
+        expect(option.getFlags()).assertEqual(1);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_STRING, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          expect(result.reply.readString()).assertEqual("");
+          expect(option.getFlags()).assertEqual(1);
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0110 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0110---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0120
+    * @tc.name    : test MessageOption sendMessageRequest test
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0120", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0120---------------------------");
+      try {
+        var data = rpc.MessageSequence.create();
+        var reply = rpc.MessageSequence.create();
+        let option = new rpc.MessageOption();
+        option.setFlags(1);
+        data.writeString("option");
+        expect(option.getFlags()).assertEqual(1);
+        expect(gIRemoteObject != undefined).assertTrue();
+        await gIRemoteObject.sendMessageRequest(CODE_WRITE_STRING, data, reply, option).then((result) => {
+          expect(result.errCode).assertEqual(0);
+          expect(result.reply.readString()).assertEqual("");
+          expect(option.getFlags()).assertEqual(1);
+
+        });
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0120 error: " + error);
+        expect(error == null).assertTrue();
+      } finally{
+        data.reclaim();
+        reply.reclaim();
+        done();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0120---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0130
+    * @tc.name    : test Test the getwaittime basic method of messageoption
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0130", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0130---------------------------");
+      try {
+        let option = new rpc.MessageOption();
+        expect(option.getWaitTime()).assertEqual(rpc.MessageOption.TF_WAIT_TIME);
+        option.setWaitTime(16);
+        expect(option.getWaitTime()).assertEqual(16);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0130 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0130---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0140
+    * @tc.name    : test Test the getwaittime boundary value of messageoption
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0140", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0140---------------------------");
+      try {
+        let option = new rpc.MessageOption();
+        expect(option.getWaitTime()).assertEqual(rpc.MessageOption.TF_WAIT_TIME);
+        option.setWaitTime(0);
+        expect(option.getWaitTime()).assertEqual(rpc.MessageOption.TF_WAIT_TIME);
+        option.setWaitTime(60);
+        expect(option.getWaitTime()).assertEqual(60);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0140 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0140---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0150
+    * @tc.name    : test Test the getwaittime minimum out of range value of messageoption
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0150", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0150---------------------------");
+      try {
+        let option = new rpc.MessageOption();
+        expect(option.getWaitTime()).assertEqual(rpc.MessageOption.TF_WAIT_TIME);
+        option.setWaitTime(-1);
+        expect(option.getWaitTime()).assertEqual(rpc.MessageOption.TF_WAIT_TIME);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0150 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0150---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0160
+    * @tc.name    : test Test the getwaittime maxmum out of range value of messageoption
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0160", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0160---------------------------");
+      try {
+        let option = new rpc.MessageOption();
+        expect(option.getWaitTime()).assertEqual(rpc.MessageOption.TF_WAIT_TIME);
+        option.setWaitTime(61);
+        expect(option.getWaitTime()).assertEqual(61);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0160 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0160---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_MessageOption_0170
+    * @tc.name    : test Test constant value detection of messageoption
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_MessageOption_0170", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_MessageOption_0170---------------------------");
+      try {
+        expect(rpc.MessageOption.TF_SYNC).assertEqual(0);
+        expect(rpc.MessageOption.TF_ASYNC).assertEqual(1);
+        expect(rpc.MessageOption.TF_WAIT_TIME).assertEqual(8);
+        expect(rpc.MessageOption.TF_ACCEPT_FDS).assertEqual(0x10);
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_MessageOption_0170 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_MessageOption_0170---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0010
+    * @tc.name    : test Create object, getDescriptor interface function verification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0010", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0010---------------------------");
+      try {
+        let samgr = rpc.IPCSkeleton.getContextObject();
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0010: is success"+samgr);
+        expect(samgr != null).assertTrue();
+      }catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0010 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0010---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0020
+    * @tc.name    : test Basic method of testing ipcskeleton Communication failed
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0020", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0020---------------------------");
+      try {
+        let object = rpc.IPCSkeleton.getContextObject();
+        let descriptor = object.getDescriptor();
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0020: is success"+descriptor);
+        expect(data.getSize() == 0).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0020 error: " + error);
+        expect(error.code == 1900007).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0020---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0030
+    * @tc.name    : test Call getCallingPid, getCallingUid to get the local value
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0030", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0030---------------------------");
+      try {
+        expect(rpc.IPCSkeleton.getCallingPid() != null).assertTrue();
+        expect(rpc.IPCSkeleton.getCallingUid() != null).assertTrue();
+      }
+      catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0030 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0030---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0040
+    * @tc.name    : test Do not get the server agent, do not create a remoteobject instance, and directly getcallingpid,
+    *             getcallingpid, getcallingdeviceid, getlocaldeviceid
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0040", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0040---------------------------");
+      try {
+        expect(rpc.IPCSkeleton.getCallingTokenId() != null).assertTrue();
+        expect(rpc.IPCSkeleton.getLocalDeviceID() != null).assertTrue();
+        expect(rpc.IPCSkeleton.getCallingDeviceID() != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0040 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_IPCSkeleton_0040---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteObject_0010
+    * @tc.name    : test Obtains the process Uid of the peer end
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteObject_0010", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteObject_0010---------------------------");
+      try {
+        let testAbilityStub = new TestAbilityStub("testObject");
+        let callingUid:number = testAbilityStub.getCallingUid();
+        console.info(logTag+"RemoteObject is getCallingUid" + callingUid);
+        expect(callingUid != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteObject_0010 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteObject_0010---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteObject_0020
+    * @tc.name    : test Obtains the process Pid of the peer end
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteObject_0020", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteObject_0020---------------------------");
+      try {
+        let testAbilityStub = new TestAbilityStub("testObject");
+        let callingPid:number = testAbilityStub.getCallingPid();
+        console.info(logTag+"RemoteObject is getCallingPid" + callingPid);
+        expect(callingPid != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteObject_0020 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteObject_0020---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteObject_0030
+    * @tc.name    : test Obtains the process localInterface of the peer end
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteObject_0030", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteObject_0030---------------------------");
+      try {
+        let testAbilityStub = new TestAbilityStub("testObject");
+        let result = testAbilityStub.isObjectDead();
+        expect(result).assertEqual(false);
+        testAbilityStub.modifyLocalInterface(testAbilityStub, "Test2");
+        let  localInterface = testAbilityStub.getLocalInterface("testObject");
+        console.info(logTag+"RemoteObject is getLocalInterface" + localInterface);
+        expect(localInterface == null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteObject_0030 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteObject_0030---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_RemoteObject_0040
+    * @tc.name    : test Obtains the process getDescriptor of the peer end
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_RemoteObject_0040", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_RemoteObject_0040---------------------------");
+      try {
+        let testAbilityStub = new TestAbilityStub("testObject");
+        let  descriptor = testAbilityStub.getDescriptor();
+        expect(descriptor != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_RemoteObject_0040 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_RemoteObject_0040---------------------------");
+    });
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0010
+    * @tc.name    : test Call the getashmemsize interface to get the size of the maximum shared memory object
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0010", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0010---------------------------");
+      try {
+        let mapSize = 2 * G - 1;
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", mapSize);
+        expect(ashmem != null).assertTrue();
+        expect(ashmem.getAshmemSize()).assertEqual(mapSize);
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0010 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0010---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0020
+    * @tc.name    : test Call the getashmemsize interface to obtain the maximum size of the out of bounds shared memory object
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0020", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0020---------------------------");
+      try {
+        let mapSize = 2 * G;
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", mapSize);
+        expect(ashmem == undefined).assertTrue();
+        expect(ashmem.getAshmemSize()).assertEqual(mapSize);
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0020 error: " + error);
+        expect(error.code == 401).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0020---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0030
+    * @tc.name    : test Copy the file descriptor (fd) of an existing Ashmem object to create an Ashmem object
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0030", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0030---------------------------");
+      try {
+        let mapSize = 2*M;
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", mapSize);
+        expect(ashmem != null).assertTrue();
+        expect(ashmem.getAshmemSize()).assertEqual(mapSize);
+        let ashmem2 = rpc.Ashmem.create(ashmem);
+        expect(ashmem2 != null).assertTrue();
+        expect(ashmem2.getAshmemSize()).assertEqual(mapSize);
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+        ashmem2.unmapAshmem();
+        ashmem2.closeAshmem();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0030 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0030---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0040
+    * @tc.name    : test Copy the file descriptor (fd) of an existing Ashmem object to create an Ashmem object
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0040", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0040---------------------------");
+      try {
+        let mapSize = G;
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", mapSize);
+        expect(ashmem != null).assertTrue();
+        expect(ashmem.getAshmemSize()).assertEqual(mapSize);
+        let ashmem2 = rpc.Ashmem.create(ashmem);
+        expect(ashmem2 != null).assertTrue();
+        expect(ashmem2.getAshmemSize()).assertEqual(mapSize);
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+        ashmem2.unmapAshmem();
+        ashmem2.closeAshmem();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0040 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0040---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0050
+    * @tc.name    : test Copy create copies the ashmem object description and creates a new object
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0050", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0050---------------------------");
+      try {
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", 4096);
+        ashmem.mapReadWriteAshmem();
+        let buffer = new ArrayBuffer(1024);
+        let int32View = new Int32Array(buffer);
+        for (let i = 0; i < int32View.length; i++) {
+          int32View[i] = i * 2 + 1;
+        }
+        let size = buffer.byteLength;
+        ashmem.writeDataToAshmem(buffer, size, 1);
+        let newashmem = rpc.Ashmem.create(ashmem);
+        newashmem.mapReadWriteAshmem();
+        let resultRead = newashmem.readDataFromAshmem(size, 1);
+        for (let i = 0; i < resultRead.length; i++) {
+          expect(resultRead[i]).assertEqual(buffer[i]);
+        }
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+        newashmem.unmapAshmem();
+        newashmem.closeAshmem();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0050 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0050---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0060
+    * @tc.name    : test mapTypedAshmem interface creates shared file mappings
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0060", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0060---------------------------");
+      try {
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", 4 * K);
+        expect(ashmem != null).assertTrue();
+        ashmem.mapTypedAshmem(ashmem.PROT_READ | ashmem.PROT_WRITE);
+        expect(ashmem.getAshmemSize() != null).assertTrue();
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0060 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0060---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0070
+    * @tc.name    : test mapTypedAshmem exception validation
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0070", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0070---------------------------");
+      try {
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", (2 * G - 1));
+        expect(ashmem != null).assertTrue();
+        ashmem.mapTypedAshmem(999);
+        expect(ashmem.getAshmemSize() != null).assertTrue();
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0070 error: " + error);
+        expect(error.code == 401).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0070---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0080
+    * @tc.name    : test mapTypedAshmem exception errorcode validation
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0080", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0080---------------------------");
+      try {
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", (2 * G));
+        expect(ashmem != null).assertTrue();
+        ashmem.mapTypedAshmem(ashmem.PROT_READ | ashmem.PROT_WRITE);
+        expect(ashmem.getAshmemSize() != null).assertTrue();
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0080 error: " + error);
+        expect(error.code == 401).assertTrue();
+        expect(error.message != null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0080---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0090
+    * @tc.name    : test mapReadWriteAshmem exception validation
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0090", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0090---------------------------");
+      try {
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", 4096);
+        expect(ashmem != null).assertTrue();
+        ashmem.mapTypedAshmem(rpc.Ashmem.PROT_READ);
+        ashmem.unmapAshmem();
+        ashmem.mapReadWriteAshmem();
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0090: run mapReadWriteAshmem is success");
+        expect(ashmem.getAshmemSize() != null).assertTrue();
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0090 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0090---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0100
+    * @tc.name    : test mapReadWriteAshmem interface creates a shared file map with the protection level of read-write
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0100---------------------------");
+      try {
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", K);
+        ashmem.mapReadWriteAshmem();
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0100: run mapReadWriteAshmem is success");
+        expect(ashmem.getAshmemSize() != null).assertTrue();
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0100 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0100---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0110
+    * @tc.name    : test MapReadWriteAshmem level setting, exception verification
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0110", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0110---------------------------");
+      try {
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", K);
+        ashmem.setProtectionType(rpc.Ashmem.PROT_WRITE);
+        ashmem.setProtectionType(rpc.Ashmem.PROT_READ);
+        ashmem.mapReadWriteAshmem();
+        ashmem.setProtectionType(rpc.Ashmem.PROT_NONE);
+        ashmem.setProtectionType(rpc.Ashmem.PROT_READ);
+        ashmem.mapReadWriteAshmem();
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0110: run is success");
+        expect(ashmem.getAshmemSize() != null).assertTrue();
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0110 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0110---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0120
+    * @tc.name    : test mapReadonlyAshmem interface create a shared file map with the protection level of read-write
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0120", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0120---------------------------");
+      try {
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", 4096);
+        expect(ashmem != null).assertTrue();
+        ashmem.mapReadonlyAshmem();
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0120: run mapReadonlyAshmem is success");
+        expect(ashmem.getAshmemSize() != null).assertTrue();
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0120 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0120---------------------------");
+    })
+
+    /*
+    * @tc.number  : SUB_DSoftbus_RPC_API_NEW_Ashmem_0130
+    * @tc.name    : test mapReadonlyAshmem exception validation
+    * @tc.desc    : [G-DISTRIBUTED-0212]禁止修改RPC中定义的数据结构和接口，并提供对应完整实现
+    * @tc.level   : 3
+    * @tc.type    : Compatibility
+    * @tc.size    : MediumTest
+    */
+    it("SUB_DSoftbus_RPC_API_NEW_Ashmem_0130", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, function () {
+      console.info("---------------------start SUB_DSoftbus_RPC_API_NEW_Ashmem_0130---------------------------");
+      try {
+        let ashmem = rpc.Ashmem.create("JsAshmemTest", 1024);
+        expect(ashmem != null).assertTrue();
+        ashmem.mapTypedAshmem(rpc.Ashmem.PROT_WRITE);
+        ashmem.unmapAshmem();
+        ashmem.closeAshmem();
+        ashmem.mapReadonlyAshmem();
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0120: run mapReadonlyAshmem is success");
+        expect(ashmem.getAshmemSize() != null).assertTrue();
+      } catch (error) {
+        console.info(logTag + "SUB_DSoftbus_RPC_API_NEW_Ashmem_0130 error: " + error);
+        expect(error == null).assertTrue();
+      }
+      console.info("---------------------end SUB_DSoftbus_RPC_API_NEW_Ashmem_0130---------------------------");
+    })
     console.info("-----------------------SUB_DSoftbus_RPC_API_NEW_onRemoteRequest_Test is end-----------------------");
   });
 }
