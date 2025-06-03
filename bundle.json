@@ -24,6 +24,7 @@
                 "dsoftbus",
                 "hilog",
                 "ipc",
+                "samgr",
                 "wifi"
             ],
             "third_party": []
