@@ -51,6 +51,7 @@ ohos_executable("dsoftbusTest") {
     "dsoftbus:softbus_client",
     "hilog:libhilog",
     "ipc:ipc_core",
+    "samgr:samgr_proxy",
     "wifi:wifi_sdk",
   ]
   subsystem_name = "xts"

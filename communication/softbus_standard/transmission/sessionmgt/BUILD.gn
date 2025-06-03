@@ -54,6 +54,7 @@ ohos_moduletest_suite("DctsSoftBusTransSessionFunTest") {
     "dsoftbus:softbus_client",
     "hilog:libhilog",
     "ipc:ipc_core",
+    "samgr:samgr_proxy",
     "wifi:wifi_sdk",
   ]
   subsystem_name = "communication"
