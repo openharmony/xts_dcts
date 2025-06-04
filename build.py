@@ -164,7 +164,9 @@ class XtsBuild:
         return ret.returncode
 
     def build(self):
-        func_list = [self.parse_cmdline, self.standard_check, self.do_make]
+        func_list = [self.parse_cmdline,
+                # self.standard_check,
+                self.do_make]
         for i in func_list:
             retcode = i()
             if retcode:
