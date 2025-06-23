@@ -5,8 +5,8 @@
         "test-timeout": "900000",
         "shell-timeout": "900000",
         "testcase-timeout": "60000",
-        "package-name": "com.ohos.rpcrequesttest",
-	    "bundle-name": "com.ohos.rpcrequesttest"
+        "package-name": "com.acts.rpc.request.test.server",
+	    "bundle-name": "com.acts.rpc.request.test.server"
 
     },
     "kits": [
@@ -16,6 +16,13 @@
             ],
             "type": "AppInstallKit",
             "cleanup-apps": true
+        },{
+            "type": "ShellKit",
+            "run-command": [
+                "power-shell wakeup",
+                "power-shell setmode 602",
+                "hidumper -s 3301 -a -t"
+            ]
         }
     ]
 

@@ -18,8 +18,17 @@ import TestService from "./testService";
 import fileio from '@ohos.fileio';
 import FA from '@ohos.ability.featureAbility';
 import featureAbility from '@ohos.ability.featureAbility';
+import deviceManager from "@ohos.distributedDeviceManager";
+
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, TestType, Size, Level } from '@ohos/hypium';
 import { UiDriver, BY } from '@ohos.UiTest'
+
+let bundleNameRpc = "com.acts.rpc.request.test.server";
+
+async function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 export default function RpcRequestJsUnitTest() {
 
     describe('RpcRequestJsUnitTest', function () {
@@ -29,17 +38,6 @@ export default function RpcRequestJsUnitTest() {
         const CODE_ONREMOTE_ASYNC_ONREMOTEMESSAGE = 2;
         let gIRemoteObject = null;
         var testservice = null
-
-        function sleep(numberMillis)
-        {
-            var now = new Date();
-            var exitTime = now.getTime() + numberMillis;
-            while (true) {
-                now = new Date();
-                if (now.getTime() > exitTime)
-                    return;
-            }
-        }
 
         class MyDeathRecipient  {
             onRemoteDied() {
@@ -121,24 +119,54 @@ export default function RpcRequestJsUnitTest() {
                 let driver = await UiDriver.create()
                 console.info(` come in driveFn`)
                 console.info(`driver is ${JSON.stringify(driver)}`)
-                sleep(2000);
+                await sleep(2000);
                 let button = await driver.findComponent(BY.text('允许'));
                 console.info(`button is ${JSON.stringify(button)}`);
-                sleep(2000);
+                await sleep(2000);
                 await button.click();
             } catch (err) {
                 console.info('err is ' + err);
                 return;
             }
         }
+        //检查当前应用是否有可信的设备
+        async function checkAvailableDevice()
+        {
+            console.info("checkAvailableDevice in "); 
+            let dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
+            console.info("checkAvailableDevice createDeviceManager success " );
+            let deviceInfoList = dmInstance.getAvailableDeviceListSync();
+            console.info("checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
+            if (deviceInfoList.length != 0) {
+                return false;
+            } else{
+                return true;
+            }
+        }
 
         beforeAll(async function (done) {
             console.info('beforeAll called rpc');
+            testservice = new TestService;
             await getPermission();           
-            sleep(2000);
+            await sleep(2000);
             await driveFn();
-            sleep(2000);
-            testservice = new TestService
+            await sleep(1000);
+            //环境初始化
+            let checkResult = await checkAvailableDevice();
+            if (!checkResult) {
+                testservice.unbindStub();
+            }
+            await sleep(500);
+            let checkResult1 = await checkAvailableDevice();
+            //如果有可信的设备 就不需要再通过PIN码bind
+            if (checkResult1) {
+               testservice.startDiscovering();
+               await sleep(2000);
+               testservice.bindStub();
+               await sleep(20000);
+               testservice.stopDiscovering();
+               await sleep(3000);
+            }
             await testservice.toConnectAbility().then(data => {
                 gIRemoteObject = data;
                 console.info("RpcClient: toConnectAbility data is:" + data);
@@ -152,8 +180,17 @@ export default function RpcRequestJsUnitTest() {
         afterEach(function () {
             console.info('afterEach called');
         })
-        afterAll(function () {
+        afterAll(async function (done) {
             console.info('afterAll called');
+            testservice = new TestService;
+            await sleep(500);
+            let checkResult = await checkAvailableDevice();
+            if (!checkResult) {
+                testservice.unbindStub();
+             }
+            done();
+            await sleep(1000);
+            console.info("afterAll done");
         })
 
         /*

@@ -33,6 +33,24 @@ let logTag = "[RpcClient:]";
 const TEST_BUNDLE_NAME = "com.acts.rpcrequest.test";
 let bundleNameRpc: String = "com.acts.rpcrequest.test";
 let abilityNameRpc: String = "com.acts.rpcrequest.test.MainAbility";
+
+async function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+//检查当前应用是否有可信的设备
+async function checkAvailableDevice() {
+  console.info(logTag + "checkAvailableDevice in "); 
+  let dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
+  let deviceInfoList: Array<deviceManager.DeviceBasicInfo>  = dmInstance.getAvailableDeviceListSync();
+  console.info(logTag + "checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
+  if (deviceInfoList.length != 0) {
+    return false;
+  } else{
+    return true;
+  }
+}
+
 export default function RpcRequestEtsUnitTest() {
   describe("RpcRequestEtsUnitTest", function () {
     console.info("-----------------------SUB_DSoftbus_RPC_API_NEW_onRemoteRequest_Test is starting-----------------------");
@@ -194,22 +212,16 @@ export default function RpcRequestEtsUnitTest() {
 
     let getDeviceId = async () =>{
       try {
-        dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+        dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
         console.info(logTag + "get deviceManager is success")
+        deviceList = dmInstance.getAvailableDeviceListSync();
+        deviceId = deviceList[0].networkId;
+        syncDeviceIds = [deviceId];
+        console.info(logTag + "deviceid is: " + deviceId);
+        console.info(logTag + "syncDeviceIds is: " + JSON.stringify(syncDeviceIds));
       } catch (error) {
         console.info(logTag + "get deviceManager is failed" + JSON.stringify(error))
       }
-      localDeviceId = dmInstance.getLocalDeviceNetworkId();
-      console.info(logTag + "local device id is: " + localDeviceId);
-      deviceList = dmInstance.getAvailableDeviceListSync();
-      deviceId = deviceList[0].networkId;
-      syncDeviceIds = [deviceId];
-      console.info(logTag + "deviceid is: " + deviceId);
-      console.info(logTag + "syncDeviceIds is: " + JSON.stringify(syncDeviceIds));
-    }
-
-    let sleep = (ms:number) =>{
-      return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     let getPermission = async () =>{
@@ -219,6 +231,7 @@ export default function RpcRequestEtsUnitTest() {
         console.info(logTag +"request success" + JSON.stringify(data));
       })
     }
+
     async function driveFn(){
       try {
         let driver: Driver = await Driver.create();
@@ -236,6 +249,7 @@ export default function RpcRequestEtsUnitTest() {
         return;
       }
     }
+
     let startAbility = async () =>{
       try{
         console.info(logTag + "let startAbility begin...");
@@ -255,17 +269,35 @@ export default function RpcRequestEtsUnitTest() {
       }
     }
 
+
     beforeAll(async (done: Function) => {
       console.info(logTag +"beforeAll called rpc");
-      await getPermission();
-      await sleep(5000);
-      await driveFn();
-      await sleep(100);
-      await getDeviceId();
-      await sleep(3000);
-      await startAbility();
-      await sleep(2000);
       let testservice = new TestService();
+      await getPermission();
+      await sleep(900);
+      await driveFn();
+      await sleep(900);
+      //环境初始化
+      let checkResult = await checkAvailableDevice();
+      if (!checkResult) {
+        testservice.unbindStub();
+      }
+      await sleep(500);
+      let checkResult1 = await checkAvailableDevice();
+      //如果有可信的设备 就不需要再通过PIN码bind
+      if (checkResult1) {
+        testservice.startDiscovering();
+        await sleep(3000);
+        testservice.bindStub();
+        await sleep(20000);
+        testservice.stopDiscovering();
+        await sleep(3000);
+      }
+      await getDeviceId();
+      await sleep(1000);
+      await startAbility();
+      await sleep(900);
+      
       await testservice.toConnectAbility().then(data => {
         gIRemoteObject = data;
         console.info(logTag + "toConnectAbility data is" + data);
@@ -281,8 +313,18 @@ export default function RpcRequestEtsUnitTest() {
 
       console.info(logTag +"afterEach called");
     })
-    afterAll(function () {
+    afterAll(async (done: Function) => {
       console.info(logTag +"afterAll called");
+      let testservice = new TestService();
+      await sleep(1000);
+      // 删除当前应用的可信设备
+      let checkResult = await checkAvailableDevice();
+      if (!checkResult) {
+          testservice.unbindStub();
+      }
+      await sleep(1000);
+      done();
+       console.info(logTag +"afterAll done");
     })
 
     /*

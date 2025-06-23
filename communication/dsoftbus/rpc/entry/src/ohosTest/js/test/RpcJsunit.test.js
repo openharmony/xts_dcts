@@ -16,8 +16,11 @@
 import rpc from "@ohos.rpc";
 import TestService from "./testService";
 import featureAbility from '@ohos.ability.featureAbility';
+import deviceManager from "@ohos.distributedDeviceManager";
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, TestType, Size, Level } from '@ohos/hypium';
 import { UiDriver, BY } from '@ohos.UiTest';
+
+let bundleNameRpc = "com.acts.rpc.test.server";
 
 export default function RpcJsUnitTest() {
 
@@ -294,21 +297,34 @@ export default function RpcJsUnitTest() {
             })
         }
 
+        //检查当前应用是否有可信的设备
+        async function checkAvailableDevice()
+        {
+            console.info("checkAvailableDevice in "); 
+            let dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
+            let deviceInfoList = dmInstance.getAvailableDeviceListSync();
+            console.info("checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
+            if (deviceInfoList.length != 0) {
+                return false;
+            } else{
+                return true;
+            }
+        }
+
         async function driveFn() {
             try {
                 let driver = await UiDriver.create();
                 console.info(` come in driveFn`);
                 console.info(`driver is ${JSON.stringify(driver)}`);
-                await sleep(2000);
+                await sleep(1000);
                 let button = await driver.findComponent(BY.text('允许'));
                 console.info(`button is ${JSON.stringify(button)}`);
-                await sleep(2000);
+                await sleep(1000);
                 await button.click();
             } catch (err) {
                 console.info('err is ' + err);
                 return;
             }
-
         }
 
         beforeAll(async function (done) {
@@ -318,8 +334,24 @@ export default function RpcJsUnitTest() {
             await sleep(900);
             await driveFn();
             await sleep(900);
+            //环境初始化
+            let checkResult = await checkAvailableDevice();
+            if (!checkResult) {
+                testservice.unbindStub();
+            }
+            await sleep(500);
+            //如果有可信的设备 不需要再通过PIN码bind
+            let checkResult1 = await checkAvailableDevice();
+            if (checkResult1) {
+               testservice.startDiscovering();
+               await sleep(2000);
+               testservice.bindStub();
+               await sleep(20000);
+               testservice.stopDiscovering();
+               await sleep(3000);
+            }
             testservice.toStartAbility();
-            sleep(2000);
+            sleep(500);
             await testservice.toConnectAbility().then(data => {
                 gIRemoteObject = data;
                 console.info("RpcClient: toConnectAbility data is: " + data);
@@ -333,8 +365,18 @@ export default function RpcJsUnitTest() {
         afterEach(function () {
             console.info('afterEach called');
         })
-        afterAll(function () {
+        afterAll(async function (done) {
             console.info('afterAll called');
+            testservice = new TestService;
+            await sleep(1000);
+            // 删除当前应用的可信设备
+            let checkResult = await checkAvailableDevice();
+            if (!checkResult) {
+                testservice.unbindStub();
+             }
+            await sleep(1000);
+            done();
+            console.info("afterAll done");
         })
 
         /*
