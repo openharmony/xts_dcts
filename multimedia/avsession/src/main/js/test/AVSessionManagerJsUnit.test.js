@@ -56,6 +56,18 @@ export default function AVSessionManagerJsUnit() {
             return new Promise(resolve => setTimeout(resolve, time));
         }
 
+        async function checkAvailableDevice() {
+            console.info(logTag + "checkAvailableDevice in "); 
+            let dmInstance = deviceManager.createDeviceManager("com.acts.avsessionserver");
+            let deviceInfoList = dmInstance.getAvailableDeviceListSync();
+            console.info(logTag + "checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
+            if (deviceInfoList.length != 0) {
+                return false;
+            } else{
+                return true;
+  }
+}
+
         async function getPermission() {
             console.info(`getPermission is start`);
             let permissions = ['ohos.permission.DISTRIBUTED_DATASYNC'];
@@ -83,13 +95,31 @@ export default function AVSessionManagerJsUnit() {
 
         beforeAll(async function (done) {
             console.info('beforeAll called avsession server');
+            testservice = new TestService
             await getPermission();
             sleep(5000);
             await driveFn();
             await sleep(500);
 
+            //环境初始化
+            let checkResult = await checkAvailableDevice();
+            if (!checkResult) {
+                testservice.unbindStub();
+            }
+            await sleep(500);
+            let checkResult1 = await checkAvailableDevice();
+            //如果有可信的设备 就不需要再通过PIN码bind
+            if (checkResult1) {
+                testservice.startDiscovering();
+                await sleep(3000);
+                testservice.bindStub();
+                await sleep(20000);
+                testservice.stopDiscovering();
+                await sleep(3000);
+            }
+
             try {
-                dmInstance = deviceManager.createDeviceManager('com.acts.avsession.test');
+                dmInstance = deviceManager.createDeviceManager("com.acts.avsessionserver");
                 if (dmInstance) {
                     console.info("Client ceate device manager success");
                     localDeviceId = dmInstance.getLocalDeviceId();
@@ -119,7 +149,7 @@ export default function AVSessionManagerJsUnit() {
             });
 
             sleep(1500);
-            testservice = new TestService
+            
             await testservice.toConnectAbility().then(data => {
                 gIRemoteObject = data;
                 console.info("toConnectAbility data is:" + data);
@@ -168,7 +198,16 @@ export default function AVSessionManagerJsUnit() {
 
         afterAll(async function (done) {
             console.info('afterAll called');
+            testservice = new TestService;
+            await sleep(1000);
+            // 删除当前应用的可信设备
+            let checkResult = await checkAvailableDevice();
+            if (!checkResult) {
+                testservice.unbindStub();
+            }
+            await sleep(1000);
             done();
+            console.info("afterAll done");
         })
 
         /**
