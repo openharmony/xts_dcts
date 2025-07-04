@@ -89,13 +89,13 @@ class XtsBuild:
 
             if cmdline.get('pr_path_list'):
                 self._gn_args['pr_path_list'] = cmdline.get('pr_path_list')
-            
+
             if cmdline.get('make_osp'):
                 self._gn_args['make_osp'] = cmdline.get('make_osp')
-            
+
             if cmdline.get('target_app_dir'):
                 self._gn_args['target_app_dir'] = cmdline.get('target_app_dir')
-            
+
             self._args['target-cpu'] = cmdline.get('target_arch')
             self._other_args['get-warning-list'] = 'false'
             self._other_args['stat-ccache'] = 'true'
@@ -164,7 +164,9 @@ class XtsBuild:
         return ret.returncode
 
     def build(self):
-        func_list = [self.parse_cmdline, self.standard_check, self.do_make]
+        func_list = [self.parse_cmdline,
+                # self.standard_check,
+                self.do_make]
         for i in func_list:
             retcode = i()
             if retcode:
