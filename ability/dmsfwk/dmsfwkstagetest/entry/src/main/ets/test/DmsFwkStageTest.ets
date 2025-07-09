@@ -1258,14 +1258,14 @@ export default function DmsFwkStageTest() {
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1300
      * @tc.name    ServiceExtension Connect the remote Ability with wrong abilityName.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300", 0, async (done: Function) => {
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300 is start---------------")
-      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1300", 0, async (done: Function) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1300 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1300";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       extensionConnectId = context.connectServiceExtensionAbility({
         deviceId: dvId,
@@ -1273,34 +1273,34 @@ export default function DmsFwkStageTest() {
         abilityName: "WrongServiceAbility"
       }, {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300  onConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1300  onConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1300  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed(code: number) {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1300  onFailed: ' + code);
           expect(code).assertEqual(401);
           done();
         }
       });
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0300 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1300 is end---------------" + extensionConnectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1600
      * @tc.name    ServiceExtension Connect the remote Ability with error bundle.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400", 0, async (done: Function) => {
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400 is start---------------")
-      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1600", 0, async (done: Function) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1600 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1600";
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       extensionConnectId = context.connectServiceExtensionAbility({
         deviceId: dvId,
@@ -1312,33 +1312,33 @@ export default function DmsFwkStageTest() {
           done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1600  onDisConnect: ' + JSON.stringify(elementName));
           expect().assertFail();
           done();
         },
         onFailed(code: number) {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1600  onFailed: ' + code);
           expect(code).assertEqual(401)
           done();
         }
       });
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0400 is end---------------" + extensionConnectId)
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1600 is end---------------" + extensionConnectId)
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1900
      * @tc.name    ServiceExtension Connect the remote Ability after kill process of softbus_server.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700", 0, async (done: Function) => {
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 is start---------------")
-      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1900", 0, async (done: Function) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1900 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1900";
       abilityDelegator.executeShellCommand("pidof softbus_server", (err, data) => {
-        console.info("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700:" + data.stdResult)
+        console.info("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1900:" + data.stdResult)
         abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
-          console.info("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700:" + data.stdResult)
+          console.info("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1900:" + data.stdResult)
         })
       })
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -1358,36 +1358,36 @@ export default function DmsFwkStageTest() {
           data.writeInt(99);
           remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
             let msg = await result.reply.readInt();
-            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 sendRequest success');
-            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 onConnectRemoteService001 msg: ' + msg);
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1900 sendRequest success');
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1900 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
           })
           done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1900  onDisConnect: ' + JSON.stringify(elementName));
           expect(elementName != null).assertTrue();
           done();
         },
         onFailed(code: number) {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1900  onFailed: ' + code);
           expect().assertFail();
           done();
         }
       });
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0700 is end---------------" + extensionConnectId);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1900 is end---------------" + extensionConnectId);
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_2000
      * @tc.name    ServiceExtension Connect the remote Ability after kill process of distributedsche.
      * @tc.desc    Function test
      * @tc.level   0
      */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600", 0, async (done: Function) => {
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is start---------------")
-      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600";
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_2000", 0, async (done: Function) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_2000 is start---------------")
+      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_2000";
       abilityDelegator.executeShellCommand("pidof distributedsche", (err, data) => {
         console.info("SUB_DMS_Extension_ConnectAbility_0900:" + data.stdResult)
         abilityDelegator.executeShellCommand("kill -9 " + data.stdResult, (err, data) => {
@@ -1411,25 +1411,25 @@ export default function DmsFwkStageTest() {
           data.writeInt(99);
           remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
             let msg = await result.reply.readInt();
-            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 sendRequest success');
-            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 onConnectRemoteService001 msg: ' + msg);
+            console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_2000 sendRequest success');
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_2000 onConnectRemoteService001 msg: ' + msg);
             expect(msg == 100).assertTrue();
           })
           done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600  onDisConnect: ' + JSON.stringify(elementName));
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_2000  onDisConnect: ' + JSON.stringify(elementName));
           expect(elementName != null).assertTrue();
           done();
         },
         onFailed(code: number) {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600  onFailed: ' + code);
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_2000  onFailed: ' + code);
           expect().assertFail();
           done();
         }
       });
       await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0600 is end---------------" + extensionConnectId);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_2000 is end---------------" + extensionConnectId);
     });
 
     /*
