@@ -176,9 +176,9 @@ export default class TestService {
                 tempData = data;
                 console.info(logTag + "tempData is: " + JSON.stringify(tempData));
             }
-           })
+           });
            dmInstance.on('discoverFailure', (data) => {
-            console.info(logTag + "startDiscovering failed into discoverFailure: " + JSON.stringify(data));
+            console.info(logTag + 'startDiscovering failed into discoverFailure: ' + JSON.stringify(data));
            });
            //设备发现时 进入discoverSuccess回调
            dmInstance.startDiscovering(discoverParam, filterOptions);
@@ -213,7 +213,7 @@ export default class TestService {
             };
             dmInstance.bindTarget(deviceId, bindParam, (err, data) => {
                 if (err) {
-                   console.error(logTag + "bindTarget error errCode: " + error.code + "errMessage: " + error.message);
+                   console.error(logTag + 'bindTarget error errCode: ' + error.code + 'errMessage: ' + error.message);
                    return;
                 }
                 console.info(logTag + 'bindTarget  result is: ' + JSON.stringify(tempData));
