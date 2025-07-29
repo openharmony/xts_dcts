@@ -183,7 +183,7 @@ export default class TestService {
            //设备发现时 进入discoverSuccess回调
            dmInstance.startDiscovering(discoverParam, filterOptions);
         } catch(error) {
-            console.error(logTag + "startDiscovering error errCode: " + error.code + "errMessage: " + error.message);
+            console.error(logTag + 'startDiscovering error errCode: ' + error.code + 'errMessage: ' + error.message);
         }
     }
 
@@ -193,7 +193,7 @@ export default class TestService {
             console.info(logTag + 'stopDiscovering  get deviceManager is success');
             dmInstance.stopDiscovering();
         } catch(error) {
-            console.error(logTag + "stopDiscovering error errCode: " + error.code + "errMessage: " + error.message);
+            console.error(logTag + 'stopDiscovering error errCode: ' + error.code + 'errMessage: ' + error.message);
         }
     }
 
@@ -219,7 +219,7 @@ export default class TestService {
                 console.info(logTag + 'bindTarget  result is: ' + JSON.stringify(tempData));
             })
         } catch(error) {
-            console.error(logTag + "bindStub error errCode: " + error.code + "errMessage: " + error.message);
+            console.error(logTag + 'bindStub error errCode: ' + error.code + 'errMessage: ' + error.message);
         }
     }
 
@@ -227,13 +227,13 @@ export default class TestService {
         try {
             let dmInstance = deviceManager.createDeviceManager(bundleName);
             console.info(logTag + 'unbindStub  get deviceManager is success');
-            let deviceInfoList: Array<deviceManager.DeviceBasicInfo> = dmInstance.getAvailableDeviceListSync();
+            let deviceInfoList: deviceManager.DeviceBasicInfo[] = dmInstance.getAvailableDeviceListSync();
             console.info(logTag + 'unbindStub  deviceInfoList.length: ' +  deviceInfoList.length);
             for (let i = 0 ; i < deviceInfoList.length; i++) {
                 dmInstance.unbindTarget(deviceInfoList[i].deviceId);
             }
         } catch(error) {
-            console.error(logTag + "unbindStub error errCode: " + error.code + "errMessage: " + error.message);
+            console.error(logTag + 'unbindStub error errCode: ' + error.code + 'errMessage: ' + error.message);
         }
     }
 
