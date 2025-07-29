@@ -52,7 +52,7 @@ function sleep(ms) {
 async function checkAvailableDevice()
 {
     console.info("checkAvailableDevice in "); 
-    let dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
+    let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
     let deviceInfoList = dmInstance.getAvailableDeviceListSync();
     console.info("checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
     if (deviceInfoList.length != 0) {
@@ -92,6 +92,7 @@ export default function rdbSyncCustomDirlTest(){
     describe('rdbSyncCustomDirlTest', function () {
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
+            testservice = new TestService;
             await getPermission();
             await sleep(5000);
             await driveFn();
