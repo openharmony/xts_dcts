@@ -113,6 +113,7 @@ export default function rdbSyncFirstLevelTest(){
 
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
+            let testservice = new TestService();
             await getPermission();
             await sleep(5000);
             await driveFn();
