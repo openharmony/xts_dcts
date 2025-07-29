@@ -83,7 +83,22 @@ export default function rdbSyncFirstLevelTest(){
             await sleep(5000);
             await driveFn();
             await sleep(100);
-
+              //环境初始化
+              let checkResult = await checkAvailableDevice();
+              if (!checkResult) {
+                  testservice.unbindStub(TEST_BUNDLE_NAME);
+              }
+              await sleep(500);
+              //如果有可信的设备 不需要再通过PIN码bind
+              let checkResult1 = await checkAvailableDevice();
+              if (checkResult1) {
+                 testservice.startDiscovering(TEST_BUNDLE_NAME);
+                 await sleep(2000);
+                 testservice.bindStub(TEST_BUNDLE_NAME);
+                 await sleep(20000);
+                 testservice.stopDiscovering(TEST_BUNDLE_NAME);
+                 await sleep(3000);
+              }
             let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
             deviceList = dmInstance.getAvailableDeviceListSync();
             deviceId = deviceList[0].networkId;
@@ -156,8 +171,16 @@ export default function rdbSyncFirstLevelTest(){
                 console.info(logTag + "delete RemoteS2Rdb success");
             });
             await sleep(50);
-            console.info(logTag + '-----------------afterAll end-----------------');
+            testservice = new TestService;
+            await sleep(1000);
+            // 删除当前应用的可信设备
+            let checkResult = await checkAvailableDevice();
+            if (!checkResult) {
+                testservice.unbindStub(TEST_BUNDLE_NAME);
+             }
+            await sleep(1000);
             done();
+            console.info(logTag + '-----------------afterAll end-----------------');
         })
     
         /**
