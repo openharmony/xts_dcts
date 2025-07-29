@@ -48,7 +48,19 @@ const TEST_BUNDLE_NAME = 'com.acts.distributerdbdisjs';
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
+//检查当前应用是否有可信的设备
+async function checkAvailableDevice()
+{
+    console.info("checkAvailableDevice in "); 
+    let dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
+    let deviceInfoList = dmInstance.getAvailableDeviceListSync();
+    console.info("checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
+    if (deviceInfoList.length != 0) {
+        return false;
+    } else{
+        return true;
+    }
+}
 async function getPermission() {
     console.info(`getPermission is start`);
     let permissions = ['ohos.permission.DISTRIBUTED_DATASYNC'];
@@ -84,7 +96,22 @@ export default function rdbSyncCustomDirlTest(){
             await sleep(5000);
             await driveFn();
             await sleep(100);
-
+            //环境初始化
+            let checkResult = await checkAvailableDevice();
+            if (!checkResult) {
+                testservice.unbindStub(TEST_BUNDLE_NAME);
+            }
+            await sleep(500);
+            //如果有可信的设备 不需要再通过PIN码bind
+            let checkResult1 = await checkAvailableDevice();
+            if (checkResult1) {
+               testservice.startDiscovering(TEST_BUNDLE_NAME);
+               await sleep(2000);
+               testservice.bindStub(TEST_BUNDLE_NAME);
+               await sleep(20000);
+               testservice.stopDiscovering(TEST_BUNDLE_NAME);
+               await sleep(3000);
+            }
             let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
             deviceList = dmInstance.getAvailableDeviceListSync();
             deviceId = deviceList[0].networkId;                                                                                                                                                                  
@@ -157,6 +184,14 @@ export default function rdbSyncCustomDirlTest(){
                 console.info(logTag + "delete RemoteS2Rdb success");
             });
             await sleep(50);
+            testservice = new TestService;
+            await sleep(1000);
+            // 删除当前应用的可信设备
+            let checkResult = await checkAvailableDevice();
+            if (!checkResult) {
+                testservice.unbindStub(TEST_BUNDLE_NAME);
+             }
+            await sleep(1000);
             console.info(logTag + '-----------------afterAll end-----------------');
             done();
         })
