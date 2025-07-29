@@ -47,9 +47,6 @@ let deviceList = undefined;
 let connection: number;
 const TEST_BUNDLE_NAME = 'com.acts.distributerdbdisets';
 let atManager = abilityAccessCtrl.createAtManager();
-async function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 //检查当前应用是否有可信的设备
 async function checkAvailableDevice() {
