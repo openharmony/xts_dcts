@@ -47,6 +47,22 @@ let deviceList = undefined;
 let connection: number;
 const TEST_BUNDLE_NAME = 'com.acts.distributerdbdisets';
 let atManager = abilityAccessCtrl.createAtManager();
+async function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+//检查当前应用是否有可信的设备
+async function checkAvailableDevice() {
+  console.info(logTag + "checkAvailableDevice in "); 
+  let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+  let deviceInfoList: Array<deviceManager.DeviceBasicInfo>  = dmInstance.getAvailableDeviceListSync();
+  console.info(logTag + "checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
+  if (deviceInfoList.length != 0) {
+    return false;
+  } else{
+    return true;
+  }
+}
 
 export default function rdbSyncCustomDirlTest(){
     describe('rdbSyncCustomDirlTest', function () {
@@ -100,11 +116,27 @@ export default function rdbSyncCustomDirlTest(){
         }
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
+            let testservice = new TestService();
             await getPermission();
             await sleep(5000);
             await driveFn();
             await sleep(100);
-
+         //环境初始化
+        let checkResult = await checkAvailableDevice();
+        if (!checkResult) {
+            testservice.unbindStub(TEST_BUNDLE_NAME);
+        }
+        await sleep(500);
+        let checkResult1 = await checkAvailableDevice();
+        //如果有可信的设备 就不需要再通过PIN码bind
+        if (checkResult1) {
+        testservice.startDiscovering(TEST_BUNDLE_NAME);
+        await sleep(3000);
+        testservice.bindStub(TEST_BUNDLE_NAME);
+        await sleep(20000);
+        testservice.stopDiscovering(TEST_BUNDLE_NAME);
+        await sleep(3000);
+        }           
             let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
             deviceList = dmInstance.getAvailableDeviceListSync();
             deviceId = deviceList[0].networkId;                                                                                                                                                                  
@@ -199,8 +231,16 @@ export default function rdbSyncCustomDirlTest(){
                 console.info(logTag + "delete RemoteS2Rdb success");
             });
             await sleep(50);
-            console.info(logTag + '-----------------afterAll end-----------------');
-            done();
+            let testservice = new TestService();
+            await sleep(1000);
+            // 删除当前应用的可信设备
+            let checkResult = await checkAvailableDevice();
+            if (!checkResult) {
+              testservice.unbindStub(TEST_BUNDLE_NAME);
+            }
+           await sleep(1000);
+           done();
+           console.info(logTag + '-----------------afterAll end-----------------');
         })
     
         /**
