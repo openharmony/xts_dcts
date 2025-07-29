@@ -47,7 +47,19 @@ const TEST_BUNDLE_NAME = 'com.acts.distributerdbdisjs';
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
+//检查当前应用是否有可信的设备
+async function checkAvailableDevice()
+{
+    console.info("checkAvailableDevice in "); 
+    let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+    let deviceInfoList = dmInstance.getAvailableDeviceListSync();
+    console.info("checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
+    if (deviceInfoList.length != 0) {
+        return false;
+    } else{
+        return true;
+    }
+}
 async function getPermission() {
     console.info(`getPermission is start`);
     let permissions = ['ohos.permission.DISTRIBUTED_DATASYNC'];
@@ -79,6 +91,7 @@ export default function rdbSyncFirstLevelTest(){
     describe('rdbSyncFirstLevelTest', function () {
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
+            testservice = new TestService;
             await getPermission();
             await sleep(5000);
             await driveFn();
