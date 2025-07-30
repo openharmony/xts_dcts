@@ -171,15 +171,15 @@ export default class TestService {
              promptAction.showToast({
                 message: `discoverSuccess:  ${JSON.stringify(data.device.deviceName)}`,
                 duration: 1000
-             })
-            if (tempData == undefined) {
+             });
+            if (tempData === undefined) {
                 tempData = data;
                 console.info(logTag + 'tempData is: ' + JSON.stringify(tempData));
             }
-           })
+           });
            dmInstance.on('discoverFailure', (data) => {
             console.info(logTag + 'startDiscovering failed into discoverFailure: ' + JSON.stringify(data));
-           })
+           });
            //设备发现时 进入discoverSuccess回调
            dmInstance.startDiscovering(discoverParam, filterOptions);
         } catch(error) {
@@ -192,7 +192,7 @@ export default class TestService {
             let dmInstance = deviceManager.createDeviceManager(bundleName);
             console.info(logTag + 'stopDiscovering  get deviceManager is success');
             dmInstance.stopDiscovering();
-        } catch(error) {
+        } catch (error) {
             console.error(logTag + 'stopDiscovering error errCode: ' + error.code + 'errMessage: ' + error.message);
         }
     }
@@ -203,7 +203,7 @@ export default class TestService {
         try {
             let dmInstance = deviceManager.createDeviceManager(bundleName);
             console.info(logTag + 'bindStub  get deviceManager is success');
-            console.info(logTag + "tempData is: " + JSON.stringify(tempData));
+            console.info(logTag + 'tempData is: ' + JSON.stringify(tempData));
             deviceId = tempData.device.deviceId;
             console.info(logTag + 'bindStub  get deviceId is: ' + deviceId);
             let bindParam = {
@@ -217,7 +217,7 @@ export default class TestService {
                    return;
                 }
                 console.info(logTag + 'bindTarget  result is: ' + JSON.stringify(tempData));
-            })
+            });
         } catch(error) {
             console.error(logTag + 'bindStub error errCode: ' + error.code + 'errMessage: ' + error.message);
         }

@@ -171,7 +171,7 @@ export default class TestService {
              promptAction.showToast({
                 message: `discoverSuccess:  ${JSON.stringify(data.device.deviceName)}`,
                 duration: 1000
-             })
+             });
             if (tempData === undefined) {
                 tempData = data;
                 console.info(logTag + 'tempData is: ' + JSON.stringify(tempData));
@@ -203,7 +203,7 @@ export default class TestService {
         try {
             let dmInstance = deviceManager.createDeviceManager(bundleName);
             console.info(logTag + 'bindStub  get deviceManager is success');
-            console.info(logTag + "tempData is: " + JSON.stringify(tempData));
+            console.info(logTag + 'tempData is: ' + JSON.stringify(tempData));
             deviceId = tempData.device.deviceId;
             console.info(logTag + 'bindStub  get deviceId is: ' + deviceId);
             let bindParam = {
