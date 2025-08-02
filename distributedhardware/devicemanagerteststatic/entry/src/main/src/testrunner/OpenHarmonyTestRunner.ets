@@ -38,38 +38,11 @@ export class OpenHarmonyTestRunner implements TestRunner {
   onRun() {
     hilog.info(domain, tag, '%{public}s', 'OpenHarmonyTestRunner onRun');
 
-    // abilityDelegatorArguments = abilityDelegatorRegistry.getArguments();
-    // if (abilityDelegatorArguments != undefined) {
-    //   hilog.info(domain, tag, 'abilityDelegatorArguments is not undefined1');
-    //   Hypium.set('abilityDelegatorArguments', abilityDelegatorArguments);
-    //   let temp: abilityDelegatorRegistry.AbilityDelegatorArgs = Hypium.get('abilityDelegatorArguments') as abilityDelegatorRegistry.AbilityDelegatorArgs;
-    //   if (temp != undefined) {
-    //     hilog.info(0x0000, 'testTag', 'temp is not undefined');
-    //   } else {
-    //     hilog.info(0x0000, 'testTag', 'temp is undefined');
-    //   }
-    //
-    // } else {
-    //   hilog.info(domain, tag, 'abilityDelegatorArguments is undefined');
-    // }
-
     abilityDelegatorArguments = abilityDelegatorRegistry.getArguments();
     abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
     hilog.info(domain, tag, '%{public}s', 'start run testcase!!!');
 
     Hypium.hypiumTest(abilityDelegator, abilityDelegatorArguments, testsuite);
     hilog.info(domain, tag, '%{public}s', 'OpenHarmonyTestRunner onRun end');
-
-    // abilityDelegator.addAbilityMonitor({
-    //   abilityName: 'EntryAbility',
-    //   moduleName: 'entry',
-    // }, (err : BusinessError<void> | null) : void => {
-    //   if (err != null ) {
-    //     hilog.info(domain, tag, '%{public}s', '-----'+ err?.code);
-    //   }
-    //   hilog.info(domain, tag, '%{public}s', 'BusinessError  end');
-    // });
-    // abilityDelegator.executeShellCommand('aa start -a EntryAbility -b com.acts.device.manager.static')
-    // hilog.info(domain, tag, 'onRun end');
   }
 }
