@@ -102,7 +102,7 @@ export default function rdbSyncCustomDirlTest(){
             testservice.unbindStub(TEST_BUNDLE_NAME);
            }
            await sleep(500);
-           //如果有可信的设备 就不需要再通过PIN码bind
+           //如果无可信的设备 需要再通过PIN码bind
            if (checkResult) {
             testservice.startDiscovering(TEST_BUNDLE_NAME);
             await sleep(3000);
@@ -112,7 +112,7 @@ export default function rdbSyncCustomDirlTest(){
             await sleep(3000);
            }
            let checkResult1 = await checkAvailableDevice();
-           //如果有可信的设备 就不需要再通过PIN码bind
+           //如果有可信的设备，获取可信设备deviceId
            if (checkResult1 === false) {
             deviceId = deviceList[0].networkId;                                                                                                                                                                  
             console.info(logTag + "deviceId is: " + deviceId);
