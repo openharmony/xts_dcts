@@ -49,17 +49,16 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 //检查当前应用是否有可信的设备
-async function checkAvailableDevice()
-{
-    console.info("checkAvailableDevice in "); 
-    let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-    let deviceInfoList = dmInstance.getAvailableDeviceListSync();
-    console.info("checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
-    if (deviceInfoList.length != 0) {
-        return false;
-    } else{
-        return true;
-    }
+async function checkAvailableDevice() {
+  console.info(logTag + "checkAvailableDevice in "); 
+  dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+  deviceList: Array<deviceManager.DeviceBasicInfo>  = dmInstance.getAvailableDeviceListSync();
+  console.info(logTag + "checkAvailableDevice get deviceList " + JSON.stringify(deviceList));
+  if (deviceInfoList.length != 0) {
+    return false;
+  } else{
+    return true;
+  }
 }
 async function getPermission() {
     console.info(`getPermission is start`);
@@ -98,26 +97,28 @@ export default function rdbSyncCustomDirlTest(){
             await driveFn();
             await sleep(100);
             //环境初始化
-            let checkResult = await checkAvailableDevice();
-            if (!checkResult) {
-                testservice.unbindStub(TEST_BUNDLE_NAME);
-            }
-            await sleep(500);
-            //如果有可信的设备 不需要再通过PIN码bind
-            let checkResult1 = await checkAvailableDevice();
-            if (checkResult1) {
-               testservice.startDiscovering(TEST_BUNDLE_NAME);
-               await sleep(2000);
-               testservice.bindStub(TEST_BUNDLE_NAME);
-               await sleep(20000);
-               testservice.stopDiscovering(TEST_BUNDLE_NAME);
-               await sleep(3000);
-            }
-            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-            deviceList = dmInstance.getAvailableDeviceListSync();
+           let checkResult = await checkAvailableDevice();
+           if (!checkResult) {
+            testservice.unbindStub(TEST_BUNDLE_NAME);
+           }
+           await sleep(500);
+           //如果有可信的设备 就不需要再通过PIN码bind
+           if (checkResult) {
+            testservice.startDiscovering(TEST_BUNDLE_NAME);
+            await sleep(3000);
+            testservice.bindStub(TEST_BUNDLE_NAME);
+            await sleep(20000);
+            testservice.stopDiscovering(TEST_BUNDLE_NAME);
+            await sleep(3000);
+           }
+           let checkResult1 = await checkAvailableDevice();
+           //如果有可信的设备 就不需要再通过PIN码bind
+           if (checkResult1 === false) {
             deviceId = deviceList[0].networkId;                                                                                                                                                                  
             console.info(logTag + "deviceId is: " + deviceId);
             syncDeviceIds = [deviceId];
+            console.info(logTag + "syncDeviceIds: " + syncDeviceIds);
+           }
 
             testservice = new TestService();
             await testservice.toConnectRdbAbility().then(data => {
