@@ -67,8 +67,10 @@ async function checkAvailableDevice() {
     let deviceInfoList = dmInstance.getAvailableDeviceListSync();
     console.info(logTag + "checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
     if (deviceInfoList.length != 0) {
+      console.info(logTag + "return false "); 
       return false;
     } else{
+      console.info(logTag + "return true "); 
       return true;
     }
 }
@@ -131,12 +133,14 @@ export default function kvSyncTestS1() {
             testservice = new TestService();
             //环境初始化
             let checkResult = await checkAvailableDevice();
+            console.info(logTag + ' ========== checkResult' + checkResult);
             if (!checkResult) {
                 console.info(logTag + ' ========== unbindStub');
                 testservice.unbindStub(TEST_BUNDLE_NAME);
             }
             await sleep(500);
             let checkResult1 = await checkAvailableDevice();
+            console.info(logTag + ' ========== checkResult1' + checkResult1);
             //如果有可信的设备 就不需要再通过PIN码bind
             if (checkResult1) {
                 console.info(logTag + ' ========== startDiscovering');
