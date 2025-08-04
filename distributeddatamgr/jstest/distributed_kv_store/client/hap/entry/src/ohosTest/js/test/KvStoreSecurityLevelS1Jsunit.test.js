@@ -35,6 +35,8 @@ let kvManager = null;
 let kvStore = null;
 let syncDeviceIds = undefined;
 let deviceList = undefined;
+let dmInstance = undefined;
+
 const PULL = factory.SyncMode.PULL_ONLY;
 const PUSH = factory.SyncMode.PUSH_ONLY;
 const PUSH_PULL = factory.SyncMode.PUSH_PULL;
@@ -63,10 +65,10 @@ function sleep(ms) {
 //检查当前应用是否有可信的设备
 async function checkAvailableDevice() {
     console.info(logTag + "checkAvailableDevice in "); 
-    let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-    let deviceInfoList = dmInstance.getAvailableDeviceListSync();
-    console.info(logTag + "checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
-    if (deviceInfoList.length != 0) {
+    dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+    deviceList = dmInstance.getAvailableDeviceListSync();
+    console.info(logTag + "checkAvailableDevice get deviceList " + JSON.stringify(deviceList));
+    if (deviceList.length != 0) {
       console.info(logTag + "return false "); 
       return false;
     } else{
@@ -134,28 +136,29 @@ export default function kvSyncTestS1() {
             //环境初始化
             let checkResult = await checkAvailableDevice();
             console.info(logTag + ' ========== checkResult' + checkResult);
+            //如果有可信的设备 就unbindStub
             if (!checkResult) {
-                console.info(logTag + ' ========== unbindStub');
+                console.info(logTag + ' ==========checkResult unbindStub');
                 testservice.unbindStub(TEST_BUNDLE_NAME);
             }
-            await sleep(500);
+            await sleep(1000);
             let checkResult1 = await checkAvailableDevice();
             console.info(logTag + ' ========== checkResult1' + checkResult1);
-            //如果有可信的设备 就不需要再通过PIN码bind
+            //如果没有可信的设备 需要通过PIN码bind
             if (checkResult1) {
-                console.info(logTag + ' ========== startDiscovering');
+                console.info(logTag + ' ==========checkResult1 startDiscovering');
                 testservice.startDiscovering(TEST_BUNDLE_NAME);
                 await sleep(3000);
-                console.info(logTag + ' ========== bindStub');
+                console.info(logTag + ' ==========checkResult1 bindStub');
                 testservice.bindStub(TEST_BUNDLE_NAME);
                 await sleep(20000);
-                console.info(logTag + ' ========== stopDiscovering');
+                console.info(logTag + ' ==========checkResult1 stopDiscovering');
                 testservice.stopDiscovering(TEST_BUNDLE_NAME);
                 await sleep(3000);
             }
 
             console.info(logTag + ' ========== createDeviceManager');
-            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+            dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
             deviceList = dmInstance.getAvailableDeviceListSync();
             console.info(logTag + "deviceList.length is: " + deviceList.length);
             deviceId = deviceList[0].networkId;
@@ -193,8 +196,6 @@ export default function kvSyncTestS1() {
             await remoteHelpers.createKvManager().then(async (data) => {
                 console.info(logTag + "REMOTE create KvManager success,ret: " + data);
             })
-
-
 
             console.info(logTag + '-----------------beforeAll end-----------------');
             done();
