@@ -52,9 +52,9 @@ function sleep(ms) {
 async function checkAvailableDevice() {
   console.info(logTag + "checkAvailableDevice in "); 
   dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-  deviceList: Array<deviceManager.DeviceBasicInfo>  = dmInstance.getAvailableDeviceListSync();
+  deviceList = dmInstance.getAvailableDeviceListSync();
   console.info(logTag + "checkAvailableDevice get deviceList " + JSON.stringify(deviceList));
-  if (deviceInfoList.length != 0) {
+  if (deviceList.length != 0) {
     return false;
   } else{
     return true;
@@ -112,7 +112,7 @@ export default function rdbSyncCustomDirlTest(){
             await sleep(3000);
            }
            let checkResult1 = await checkAvailableDevice();
-           //如果有可信的设备，获取可信设备deviceId
+           //如果有可信的设备 获取可信设备deviceId
            if (checkResult1 === false) {
             deviceId = deviceList[0].networkId;                                                                                                                                                                  
             console.info(logTag + "deviceId is: " + deviceId);
@@ -190,6 +190,7 @@ export default function rdbSyncCustomDirlTest(){
             await sleep(1000);
             // 删除当前应用的可信设备
             let checkResult = await checkAvailableDevice();
+            console.info(logTag + "checkResult " + checkResult);
             if (!checkResult) {
                 testservice.unbindStub(TEST_BUNDLE_NAME);
              }
