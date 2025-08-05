@@ -233,6 +233,7 @@ export default function rdbSyncCustomDirlTest(){
             await sleep(1000);
             // 删除当前应用的可信设备
             let checkResult = await checkAvailableDevice();
+            console.info(logTag + "checkResult " + checkResult);
             if (!checkResult) {
               testservice.unbindStub(TEST_BUNDLE_NAME);
             }
