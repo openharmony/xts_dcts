@@ -52,9 +52,9 @@ let atManager = abilityAccessCtrl.createAtManager();
 async function checkAvailableDevice() {
   console.info(logTag + "checkAvailableDevice in "); 
   dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-  deviceList: Array<deviceManager.DeviceBasicInfo>  = dmInstance.getAvailableDeviceListSync();
+  deviceList = dmInstance.getAvailableDeviceListSync();
   console.info(logTag + "checkAvailableDevice get deviceList " + JSON.stringify(deviceList));
-  if (deviceInfoList.length != 0) {
+  if (deviceList.length != 0) {
     return false;
   } else{
     return true;
