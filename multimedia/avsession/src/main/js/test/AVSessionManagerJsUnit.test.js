@@ -51,6 +51,8 @@ export default function AVSessionManagerJsUnit() {
         let dvList = [];
         let dvId = null;
         let dmInstance;
+        let logTag = "DctsAvsession"
+
 
         function sleep(time) {
             return new Promise(resolve => setTimeout(resolve, time));

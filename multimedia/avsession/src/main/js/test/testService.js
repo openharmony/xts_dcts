@@ -25,6 +25,7 @@ var deviceList;
 var dmInstance;
 let CODE_INVOKE = 1;
 let tempData = undefined;
+let logTag = "DctsAvsession"
 
 export default class TestService {
 
@@ -106,7 +107,7 @@ export default class TestService {
 
     stopDiscovering() {
         try {
-            let dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
+            let dmInstance = deviceManager.createDeviceManager(bundleName);
             console.info(logTag + 'stopDiscovering  get deviceManager is success');
             dmInstance.stopDiscovering();
         } catch(error) {
@@ -118,19 +119,19 @@ export default class TestService {
     bindStub() {
         let deviceId = undefined;
         try {
-            let dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
+            let dmInstance = deviceManager.createDeviceManager(bundleName);
             console.info(logTag + 'bindStub  get deviceManager is success');
             console.info(logTag + "tempData is: " + JSON.stringify(tempData));
             deviceId = tempData.device.deviceId;
             console.info(logTag + 'bindStub  get deviceId is: ' + deviceId);
             let bindParam = {
                 'bindType': 1, //无账号PIN码bind
-                'targetPkgName': bundleNameRpc, //远端应用包名
-                'appName': bundleNameRpc,
+                'targetPkgName': bundleName, //远端应用包名
+                'appName': bundleName,
             };
             dmInstance.bindTarget(deviceId, bindParam, (err, data) => {
                 if (err) {
-                   console.error(logTag + "bindTarget error errCode: " + error.code + "errMessage: " + error.message);
+                   console.error(logTag + "bindTarget error errCode: " + err.code + "errMessage: " + err.message);
                    return;
                 }
                 console.info(logTag + 'bindTarget  result is: ' + JSON.stringify(tempData));
@@ -142,7 +143,7 @@ export default class TestService {
 
     unbindStub() {
         try {
-            let dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
+            let dmInstance = deviceManager.createDeviceManager(bundleName);
             console.info(logTag + 'unbindStub  get deviceManager is success');
             let deviceInfoList = dmInstance.getAvailableDeviceListSync();
             console.info(logTag + 'unbindStub  deviceInfoList.length: ' +  deviceInfoList.length);
