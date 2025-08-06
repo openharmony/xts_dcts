@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.acts.avsession.test",
+    "bundleName": "com.acts.avsessionserver",
     "vendor": "example",
     "version": {
       "code": 1000000,
@@ -30,7 +30,7 @@
         "name": "ohos.permission.ACCESS_SERVICE_DM"
       }
     ],
-    "package": "com.acts.avsession.test",
+    "package": "com.acts.avsessionserver",
     "name": ".entry",
     "mainAbility": ".MainAbility",
     "srcPath": "",
