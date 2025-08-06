@@ -115,23 +115,23 @@ export default function rdbSyncCustomDirlTest(){
             console.info(logTag + '-----------------beforeAll begin-----------------');
             let testservice = new TestService();
             await getPermission();
-            await sleep(5000);
+            await sleep(6000);
             await driveFn();
-            await sleep(100);
+            await sleep(200);
             //环境初始化
            let checkResult = await checkAvailableDevice();
            if (!checkResult) {
             testservice.unbindStub(TEST_BUNDLE_NAME);
            }
-           await sleep(500);
+           await sleep(700);
            //如果无可信的设备 需要通过PIN码bind
            if (checkResult) {
             testservice.startDiscovering(TEST_BUNDLE_NAME);
-            await sleep(3000);
+            await sleep(4000);
             testservice.bindStub(TEST_BUNDLE_NAME);
-            await sleep(20000);
+            await sleep(30000);
             testservice.stopDiscovering(TEST_BUNDLE_NAME);
-            await sleep(3000);
+            await sleep(4000);
            }
            let checkResult1 = await checkAvailableDevice();
            //如果有可信的设备，获取可信设备deviceId
@@ -230,14 +230,14 @@ export default function rdbSyncCustomDirlTest(){
             });
             await sleep(50);
             let testservice = new TestService();
-            await sleep(1000);
+            await sleep(2000);
             // 删除当前应用的可信设备
             let checkResult = await checkAvailableDevice();
             console.info(logTag + "checkResult " + checkResult);
             if (!checkResult) {
               testservice.unbindStub(TEST_BUNDLE_NAME);
             }
-           await sleep(1000);
+           await sleep(2000);
            done();
            console.info(logTag + '-----------------afterAll end-----------------');
         })
