@@ -55,9 +55,9 @@ export default function distributedDeviceManager() {
         */
         it("SUB_DH_Device_Dcts_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_Device_Dcts_0100 start------------------------");
-            
+
             dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-            if (!dmInstance) { 
+            if (!dmInstance) {
                 console.error("createDeviceManager errCode:" + err.code + ",errMessage:" + err.message);
                 expect().assertFail();
                 done();
@@ -68,22 +68,22 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_Device_Dcts_0100 end------------------------");
         })
 
-       /*
-        * @tc.number  SUB_DH_Device_Dcts_0200
-        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
-        * use this instance to call other device management methods.
-        * @tc.desc    Function test
-        * @tc.size    MediumTest
-        * @tc.type:   Function
-        * @tc.level   Level1
-        */
+        /*
+         * @tc.number  SUB_DH_Device_Dcts_0200
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
         it("SUB_DH_Device_Dcts_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("----------------------SUB_DH_Device_Dcts_0200 begin---------------------------");
             try {
                 dmInstance.on("serviceDie", (data) => {
-                console.error("in SUB_DH_Device_Dcts_0200 deviceManager.on success without permission , data:" + JSON.stringify(data));
-                expect().assertFail();
-                done();
+                    console.error("in SUB_DH_Device_Dcts_0200 deviceManager.on success without permission , data:" + JSON.stringify(data));
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_0200 deviceManager.on failed, code is ${error.code}, message is ${error.message}`);
@@ -92,7 +92,7 @@ export default function distributedDeviceManager() {
             }
             console.info("-----------------SUB_DH_Device_Dcts_0200 end------------------------");
         })
-        
+
         /*
          * @tc.number  SUB_DH_Device_Dcts_0300
          * @tc.name    Start to discover nearby devices.
@@ -105,9 +105,9 @@ export default function distributedDeviceManager() {
             console.info("----------------------SUB_DH_Device_Dcts_0300 begin---------------------------");
             try {
                 dmInstance.on("discoverFailure", (data) => {
-                console.error("in SUB_DH_Device_Dcts_0300 deviceManager.on success without permission , data:" + JSON.stringify(data));
-                expect().assertFail();
-                done();
+                    console.error("in SUB_DH_Device_Dcts_0300 deviceManager.on success without permission , data:" + JSON.stringify(data));
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_0300 deviceManager.on failed, code is ${error.code}, message is ${error.message}`);
@@ -129,9 +129,9 @@ export default function distributedDeviceManager() {
             console.info("----------------------SUB_DH_Device_Dcts_0400 begin---------------------------");
             try {
                 dmInstance.on("deviceNameChange", (data) => {
-                console.error("in SUB_DH_Device_Dcts_0400 deviceManager.on success without permission , data:" + JSON.stringify(data));
-                expect().assertFail();
-                done();
+                    console.error("in SUB_DH_Device_Dcts_0400 deviceManager.on success without permission , data:" + JSON.stringify(data));
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_0400 deviceManager.on failed, code is ${error.code}, message is ${error.message}`);
@@ -153,9 +153,9 @@ export default function distributedDeviceManager() {
             console.info("----------------------SUB_DH_Device_Dcts_0500 begin---------------------------");
             try {
                 dmInstance.on("discoverSuccess", (data) => {
-                console.error("in SUB_DH_Device_Dcts_0500 deviceManager.on success without permission , data:" + JSON.stringify(data));
-                expect().assertFail();
-                done();
+                    console.error("in SUB_DH_Device_Dcts_0500 deviceManager.on success without permission , data:" + JSON.stringify(data));
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_0500 deviceManager.on failed, code is ${error.code}, message is ${error.message}`);
@@ -177,9 +177,9 @@ export default function distributedDeviceManager() {
             console.info("----------------------SUB_DH_Device_Dcts_0600 begin---------------------------");
             try {
                 dmInstance.on("deviceStateChange", (data) => {
-                console.error("in SUB_DH_Device_Dcts_0600 deviceManager.on success without permission , data:" + JSON.stringify(data));
-                expect().assertFail();
-                done();
+                    console.error("in SUB_DH_Device_Dcts_0600 deviceManager.on success without permission , data:" + JSON.stringify(data));
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_0600 deviceManager.on failed, code is ${error.code}, message is ${error.message}`);
@@ -201,9 +201,9 @@ export default function distributedDeviceManager() {
             console.info("----------------------SUB_DH_Device_Dcts_0700 begin---------------------------");
             try {
                 dmInstance.off("serviceDie", (data) => {
-                console.error("in SUB_DH_Device_Dcts_0700 deviceManager.off success without permission , data:" + JSON.stringify(data));
-                expect().assertFail();
-                done();
+                    console.error("in SUB_DH_Device_Dcts_0700 deviceManager.off success without permission , data:" + JSON.stringify(data));
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_0700 deviceManager.off failed, code is ${error.code}, message is ${error.message}`);
@@ -225,9 +225,9 @@ export default function distributedDeviceManager() {
             console.info("----------------------SUB_DH_Device_Dcts_0800 begin---------------------------");
             try {
                 dmInstance.off("discoverFailure", (data) => {
-                console.error("in SUB_DH_Device_Dcts_0800 deviceManager.off success without permission , data:" + JSON.stringify(data));
-                expect().assertFail();
-                done();
+                    console.error("in SUB_DH_Device_Dcts_0800 deviceManager.off success without permission , data:" + JSON.stringify(data));
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_0800 deviceManager.off failed, code is ${error.code}, message is ${error.message}`);
@@ -249,9 +249,9 @@ export default function distributedDeviceManager() {
             console.info("----------------------SUB_DH_Device_Dcts_0900 begin---------------------------");
             try {
                 dmInstance.off("deviceNameChange", (data) => {
-                console.error("in SUB_DH_Device_Dcts_0900 deviceManager.off success without permission , data:" + JSON.stringify(data));
-                expect().assertFail();
-                done();
+                    console.error("in SUB_DH_Device_Dcts_0900 deviceManager.off success without permission , data:" + JSON.stringify(data));
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_0900 deviceManager.off failed, code is ${error.code}, message is ${error.message}`);
@@ -273,9 +273,9 @@ export default function distributedDeviceManager() {
             console.info("----------------------SUB_DH_Device_Dcts_1000 begin---------------------------");
             try {
                 dmInstance.off("discoverSuccess", (data) => {
-                console.error("in SUB_DH_Device_Dcts_1000 deviceManager.off success without permission , data:" + JSON.stringify(data));
-                expect().assertFail();
-                done();
+                    console.error("in SUB_DH_Device_Dcts_1000 deviceManager.off success without permission , data:" + JSON.stringify(data));
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_1000 deviceManager.off failed, code is ${error.code}, message is ${error.message}`);
@@ -297,9 +297,9 @@ export default function distributedDeviceManager() {
             console.info("----------------------SUB_DH_Device_Dcts_1100 begin---------------------------");
             try {
                 dmInstance.off("deviceStateChange", (data) => {
-                console.error("in SUB_DH_Device_Dcts_1100 deviceManager.off success without permission , data:" + JSON.stringify(data));
-                expect().assertFail();
-                done();
+                    console.error("in SUB_DH_Device_Dcts_1100 deviceManager.off success without permission , data:" + JSON.stringify(data));
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_1100 deviceManager.off failed, code is ${error.code}, message is ${error.message}`);
@@ -344,9 +344,9 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_Device_Dcts_1300 start------------------------");
             try {
                 dmInstance.getAvailableDeviceList((error, data) => {
-                console.info("in SUB_DH_Device_Dcts_1300 success without permission");
-                expect().assertFail();
-                done();
+                    console.info("in SUB_DH_Device_Dcts_1300 success without permission");
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info("in SUB_DH_Device_Dcts_1300 failed, code is ${error.code}, message is ${error.message}");
@@ -364,25 +364,25 @@ export default function distributedDeviceManager() {
          * @tc.type:   Function
          * @tc.level   Level1
          */
-       it("SUB_DH_Device_Dcts_1400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+        it("SUB_DH_Device_Dcts_1400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_Device_Dcts_1400 start------------------------");
             try {
                 dmInstance.bindTarget("deviceId", {
-                "bindType" : 1,
-                "targetPkgName" : "com.ohos.distributedDeviceManager",
-                "appName" : "SubDctsDeviceJsTest",
-                "appOperation": "想要连接本机。",
-                "customDescription": "device manager"
+                    "bindType": 1,
+                    "targetPkgName": "com.ohos.distributedDeviceManager",
+                    "appName": "SubDctsDeviceJsTest",
+                    "appOperation": "想要连接本机。",
+                    "customDescription": "device manager"
                 }, (error, data) => {
-                if (error) {
-                    console.info("in SUB_DH_Device_Dcts_1400 failed, code is ${error.code}, message is ${error.message}");
-                    expect(error.code == 201).assertTrue();
-                    done();
-                } else {
-                    console.error("in SUB_DH_Device_Dcts_1400 success without permission, data:" + JSON.stringify(data));
-                    expect().assertFail();
-                    done();
-                }
+                    if (error) {
+                        console.info("in SUB_DH_Device_Dcts_1400 failed, code is ${error.code}, message is ${error.message}");
+                        expect(error.code == 201).assertTrue();
+                        done();
+                    } else {
+                        console.error("in SUB_DH_Device_Dcts_1400 success without permission, data:" + JSON.stringify(data));
+                        expect().assertFail();
+                        done();
+                    }
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_1400 failed, code is ${error.code}, message is ${error.message}`);
@@ -392,15 +392,15 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_Device_Dcts_1400 end------------------------");
         })
 
-       /*
-         * @tc.number  SUB_DH_Device_Dcts_1500
-         * @tc.name    Stop discovering nearby devices.
-         * @tc.desc    Function test
-         * @tc.size    MediumTest
-         * @tc.type:   Function
-         * @tc.level   Level1
-         */
-       it("SUB_DH_Device_Dcts_1500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+        /*
+          * @tc.number  SUB_DH_Device_Dcts_1500
+          * @tc.name    Stop discovering nearby devices.
+          * @tc.desc    Function test
+          * @tc.size    MediumTest
+          * @tc.type:   Function
+          * @tc.level   Level1
+          */
+        it("SUB_DH_Device_Dcts_1500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_Device_Dcts_1500 start------------------------");
             try {
                 dmInstance.unbindTarget("deviceId");
@@ -414,7 +414,7 @@ export default function distributedDeviceManager() {
             }
             console.info("-----------------SUB_DH_Device_Dcts_1500 end------------------------");
         })
-		
+
         /*
          * @tc.number  SUB_DH_Device_Dcts_1600
          * @tc.name    Releases the {@code DeviceManager} instance that is no longer used.
@@ -426,7 +426,7 @@ export default function distributedDeviceManager() {
         it("SUB_DH_Device_Dcts_1600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_Device_Dcts_1600 start------------------------");
             try {
-                dmInstance.startDiscovering({"discoverTargetType":1});
+                dmInstance.startDiscovering({ "discoverTargetType": 1 });
                 console.error("in SUB_DH_Device_Dcts_1600 success without permission ");
                 expect().assertFail();
                 done();
@@ -570,9 +570,9 @@ export default function distributedDeviceManager() {
             console.info("----------------------SUB_DH_Device_Dcts_2300 begin---------------------------");
             try {
                 dmInstance.on("replyResult", (data) => {
-                console.error("in SUB_DH_Device_Dcts_2300 replyResult.on success without permission , data:" + JSON.stringify(data));
-                expect().assertFail();
-                done();
+                    console.error("in SUB_DH_Device_Dcts_2300 replyResult.on success without permission , data:" + JSON.stringify(data));
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_2300 replyResult.on failed, code is ${error.code}, message is ${error.message}`);
@@ -594,9 +594,9 @@ export default function distributedDeviceManager() {
             console.info("----------------------SUB_DH_Device_Dcts_2400 begin---------------------------");
             try {
                 dmInstance.off("replyResult", (data) => {
-                console.error("in SUB_DH_Device_Dcts_2400 replyResult.off success without permission , data:" + JSON.stringify(data));
-                expect().assertFail();
-                done();
+                    console.error("in SUB_DH_Device_Dcts_2400 replyResult.off success without permission , data:" + JSON.stringify(data));
+                    expect().assertFail();
+                    done();
                 });
             } catch (error) {
                 console.info(`in SUB_DH_Device_Dcts_2400 replyResult.off failed, code is ${error.code}, message is ${error.message}`);
@@ -620,14 +620,14 @@ export default function distributedDeviceManager() {
                 // 设备网络标识，可以从可信设备列表中获取
                 let dmNetworkId = '123456789';
                 let deviceName = dmInstance.getDeviceName(dmNetworkId);
-                console.log('SUB_DH_Device_Dcts_2500 device name: ' + JSON.stringify(deviceName)); 
+                console.log('SUB_DH_Device_Dcts_2500 device name: ' + JSON.stringify(deviceName));
                 expect(deviceName == null).assertFail();
                 done();
-              } catch (err) {
+            } catch (err) {
                 console.info('SUB_DH_Device_Dcts_2500 getDeviceName errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 201).assertTrue();
                 done();
-              }
+            }
             console.info("----------------------SUB_DH_Device_Dcts_2500 end---------------------------");
         })
 
@@ -644,15 +644,38 @@ export default function distributedDeviceManager() {
             try {
                 let dmNetworkIdType = '123456789';
                 let deviceType = dmInstance.getDeviceType(dmNetworkIdType);
-                console.log('SUB_DH_Device_Dcts_2600 device name: ' + JSON.stringify(deviceType)); 
+                console.log('SUB_DH_Device_Dcts_2600 device name: ' + JSON.stringify(deviceType));
                 expect(deviceType == null).assertFail();
                 done();
-              } catch (err) {
-                console.info('SUB_DH_Device_Dcts_2500 getDeviceName errCode:' + err.code + ',errMessage:' + err.message);
+            } catch (err) {
+                console.info('SUB_DH_Device_Dcts_2600 getDeviceName errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 201).assertTrue();
                 done();
-              }
+            }
             console.info("----------------------SUB_DH_Device_Dcts_2600 end---------------------------");
+        })
+
+        /*
+        * @tc.number  SUB_DH_Device_Dcts_2700
+        * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+        * use this instance to call other device management methods.
+        * @tc.desc    Function test
+        * @tc.size    MediumTest
+        * @tc.type:   Function
+        * @tc.level   Level1
+        */
+        it("SUB_DH_Device_Dcts_2700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_Device_Dcts_2700 start------------------------");
+            try {
+                dmInstance.getLocalDeviceName()
+                console.log('SUB_DH_Device_Dcts_2700 get getLocalDeviceName is success')
+                expect().assertFail();
+            } catch (error) {
+                console.info('SUB_DH_Device_Dcts_2700 getLocalDeviceName errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 201).assertTrue();
+            }
+            console.info("-----------------SUB_DH_Device_Dcts_2700 end------------------------");
+            done();
         })
     })
 }
