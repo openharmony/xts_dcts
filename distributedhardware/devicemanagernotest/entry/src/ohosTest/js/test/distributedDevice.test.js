@@ -671,8 +671,8 @@ export default function distributedDeviceManager() {
                 console.log('SUB_DH_Device_Dcts_2700 get getLocalDeviceName is success')
                 expect().assertFail();
             } catch (error) {
-                console.info('SUB_DH_Device_Dcts_2700 getLocalDeviceName errCode:' + err.code + ',errMessage:' + err.message);
-                expect(err.code == 201).assertTrue();
+                console.info('SUB_DH_Device_Dcts_2700 getLocalDeviceName errCode:' + error.code + ',errMessage:' + error.message);
+                expect(error.code == 201).assertTrue();
             }
             console.info("-----------------SUB_DH_Device_Dcts_2700 end------------------------");
             done();
