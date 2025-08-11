@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.ohos.rpcrequesttest",
+    "bundleName": "com.acts.rpc.request.test.server",
     "vendor": "example",
     "version": {
       "code": 1000000,
@@ -24,8 +24,8 @@
         "name": "ohos.permission.GET_BUNDLE_INFO"
       }
     ],
-    "package": "com.ohos.rpcrequesttest",
-    "name": "com.ohos.rpcrequesttest.MyApplication",
+    "package": "com.acts.rpc.request.test.server",
+    "name": "com.acts.rpc.request.test.server.MyApplication",
     "deviceType": [
       "tablet",
       "default",
