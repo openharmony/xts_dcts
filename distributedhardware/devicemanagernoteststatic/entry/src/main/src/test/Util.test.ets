@@ -1,9 +1,7 @@
 import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
-import { loadAndSetUpUiTest } from '@ohos.UiTest'
 import hilog from '@ohos.hilog'
 
 export default class Utils{
-  static isLoadAndSetupUiTest = false;
 
   static async msSleep(count:int) : Promise<int> {
     return new Promise<int>((resolve, reject) => {
@@ -40,24 +38,6 @@ export default class Utils{
       let data = context.filesDir;
       let BASE_PATH = data + '/';
       resolve(BASE_PATH + testName);
-    })
-  }
-
-  static async loadAndSetupUiTest(): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
-      hilog.info(0x0000, "testTag",
-        `loadAndSetupUiTest, isLoadAndSetupUiTest: ${JSON.stringify(Utils.isLoadAndSetupUiTest)}`);
-      try {
-        if (!Utils.isLoadAndSetupUiTest) {
-          loadAndSetUpUiTest();
-          hilog.info(0x0000, "testTag", `loadAndSetupUiTest, success`);
-          Utils.isLoadAndSetupUiTest = true;
-        }
-        resolve(true)
-      } catch (error: Error) {
-        hilog.info(0x0000, "testTag", `UiTestCase, start abilityFailed: ${JSON.stringify(error)}`);
-        reject(error)
-      }
     })
   }
 }
