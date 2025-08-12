@@ -67,7 +67,7 @@ ohos_copy("cpdsoftbusTest") {
   part_name = "dcts"
 }
 
-group("Softbustestserver") {
+ohos_xts_group("Softbustestserver") {
   testonly = true
   if (is_standard_system) {
     deps = [
