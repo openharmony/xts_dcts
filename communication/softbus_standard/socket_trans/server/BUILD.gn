@@ -61,7 +61,7 @@ ohos_copy("cpdsocketdsoftbusTest") {
   part_name = "dcts"
 }
 
-group("SocketTestServer") {
+ohos_xts_group("SocketTestServer") {
   testonly = true
   if (is_standard_system) {
     deps = [
