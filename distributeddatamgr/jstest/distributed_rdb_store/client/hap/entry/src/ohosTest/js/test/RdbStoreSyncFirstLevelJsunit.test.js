@@ -47,7 +47,18 @@ const TEST_BUNDLE_NAME = 'com.acts.distributerdbdisjs';
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
+//检查当前应用是否有可信的设备
+async function checkAvailableDevice() {
+  console.info(logTag + "checkAvailableDevice in "); 
+  dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+  deviceList = dmInstance.getAvailableDeviceListSync();
+  console.info(logTag + "checkAvailableDevice get deviceList " + JSON.stringify(deviceList));
+  if (deviceList.length != 0) {
+    return false;
+  } else{
+    return true;
+  }
+}
 async function getPermission() {
     console.info(`getPermission is start`);
     let permissions = ['ohos.permission.DISTRIBUTED_DATASYNC'];
@@ -79,17 +90,34 @@ export default function rdbSyncFirstLevelTest(){
     describe('rdbSyncFirstLevelTest', function () {
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
+            testservice = new TestService;
             await getPermission();
             await sleep(5000);
             await driveFn();
             await sleep(100);
-
-            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-            deviceList = dmInstance.getAvailableDeviceListSync();
-            deviceId = deviceList[0].networkId;
+            //环境初始化
+           let checkResult = await checkAvailableDevice();
+           if (!checkResult) {
+            testservice.unbindStub(TEST_BUNDLE_NAME);
+           }
+           await sleep(500);
+           //如果无可信的设备 需要通过PIN码bind
+           if (checkResult) {
+            testservice.startDiscovering(TEST_BUNDLE_NAME);
+            await sleep(3000);
+            testservice.bindStub(TEST_BUNDLE_NAME);
+            await sleep(20000);
+            testservice.stopDiscovering(TEST_BUNDLE_NAME);
+            await sleep(3000);
+           }
+           let checkResult1 = await checkAvailableDevice();
+           //如果有可信的设备，获取可信设备deviceId
+           if (checkResult1 === false) {
+            deviceId = deviceList[0].networkId;                                                                                                                                                                  
             console.info(logTag + "deviceId is: " + deviceId);
             syncDeviceIds = [deviceId];
-
+            console.info(logTag + "syncDeviceIds: " + syncDeviceIds);
+           }
             testservice = new TestService();
             await testservice.toConnectRdbAbility().then(data => {
                 gIRemoteObject = data;
@@ -156,8 +184,17 @@ export default function rdbSyncFirstLevelTest(){
                 console.info(logTag + "delete RemoteS2Rdb success");
             });
             await sleep(50);
-            console.info(logTag + '-----------------afterAll end-----------------');
+            testservice = new TestService;
+            await sleep(1000);
+            // 删除当前应用的可信设备
+            let checkResult = await checkAvailableDevice();
+            console.info(logTag + "checkResult " + checkResult);
+            if (!checkResult) {
+                testservice.unbindStub(TEST_BUNDLE_NAME);
+             }
+            await sleep(1000);
             done();
+            console.info(logTag + '-----------------afterAll end-----------------');
         })
     
         /**
