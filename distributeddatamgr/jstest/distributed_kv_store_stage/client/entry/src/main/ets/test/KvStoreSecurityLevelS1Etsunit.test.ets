@@ -177,7 +177,7 @@ export default function kvSyncTestS1Ets() {
                 await sleep(3000);
                 console.info(logTag + ' ==========checkResult1  bindStub');
                 testservice.bindStub(TEST_BUNDLE_NAME);
-                await sleep(3000);
+                await sleep(20000);
                 console.info(logTag + ' ==========checkResult1  stopDiscovering');
                 testservice.stopDiscovering(TEST_BUNDLE_NAME);
                 await sleep(3000);
