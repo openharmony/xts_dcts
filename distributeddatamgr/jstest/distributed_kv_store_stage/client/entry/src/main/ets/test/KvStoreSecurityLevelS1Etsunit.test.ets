@@ -63,22 +63,36 @@ const config = {
   bundleName: TEST_BUNDLE_NAME,
 }
 
+//检查当前应用是否有可信的设备
+async function checkAvailableDevice() {
+    console.info(logTag + "checkAvailableDevice in "); 
+    dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+    deviceList = dmInstance.getAvailableDeviceListSync();
+    console.info(logTag + "checkAvailableDevice get deviceList " + JSON.stringify(deviceList));
+    if (deviceList.length != 0) {
+      console.info(logTag + "return false "); 
+      return false;
+    } else{
+      console.info(logTag + "return true "); 
+      return true;
+    }
+}
+
 let getDeviceId = async () =>{
     console.info(logTag + 'let getDeviceId is begin...')
     try {
         dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+        console.info(logTag + "get deviceManager is success")
+        deviceList = dmInstance.getAvailableDeviceListSync();
+        console.info(logTag + "deviceList.length is: " + deviceList.length);
+        deviceId = deviceList[0].networkId;
+        syncDeviceIds = [deviceId];
+        console.info(logTag + "deviceid is: " + deviceId);
+        console.info(logTag + "syncDeviceIds is: " + JSON.stringify(syncDeviceIds));
         console.info(logTag + 'get deviceManager is success')
     } catch (error) {
         console.info(logTag + 'get deviceManager is failed' + JSON.stringify(error))
     }
-    localDeviceId = dmInstance.getLocalDeviceNetworkId();
-    console.info(logTag + "local device id is: " + localDeviceId);
-    deviceList = dmInstance.getAvailableDeviceListSync();
-    console.info(logTag + "deviceList.length is: " + deviceList.length);
-    deviceId = deviceList[0].networkId;
-    syncDeviceIds = [deviceId];
-    console.info(logTag + "deviceid is: " + deviceId);
-    console.info(logTag + "syncDeviceIds is: " + JSON.stringify(syncDeviceIds));
 }
 
 
@@ -137,17 +151,42 @@ export default function kvSyncTestS1Ets() {
     describe('kvSyncTestS1Ets', function () {
         beforeAll(async function (done) {
             console.info(logTag + '-----------------beforeAll begin-----------------');
-
             await getPermission();
             await sleep(2000);
             await driveFn();
             await sleep(1000);
+
+            let testservice = new TestService();
+            await sleep(1000);
+
+            //环境初始化
+            let checkResult = await checkAvailableDevice();
+            console.info(logTag + ' ========== checkResult' + checkResult);
+            //如果有可信的设备 就unbindStub
+            if (!checkResult) {
+                console.info(logTag + ' ==========checkResult  unbindStub');
+                testservice.unbindStub(TEST_BUNDLE_NAME);
+            }
+            await sleep(1000);
+            let checkResult1 = await checkAvailableDevice();
+            console.info(logTag + ' ========== checkResult1' + checkResult1);
+            //如果没有可信的设备 就需要再通过PIN码bind
+            if (checkResult1) {
+                console.info(logTag + ' ==========checkResult1  startDiscovering');
+                testservice.startDiscovering(TEST_BUNDLE_NAME);
+                await sleep(3000);
+                console.info(logTag + ' ==========checkResult1  bindStub');
+                testservice.bindStub(TEST_BUNDLE_NAME);
+                await sleep(20000);
+                console.info(logTag + ' ==========checkResult1  stopDiscovering');
+                testservice.stopDiscovering(TEST_BUNDLE_NAME);
+                await sleep(3000);
+            }
+
             await getDeviceId();
             await sleep(1000);
             await startAbility();
             await sleep(2000);
-
-            let testservice = new TestService();
 
             kvManager = factory.createKVManager(config);
             console.info(logTag + "CLIENT create kvManager success, kvManager=" + kvManager);
@@ -198,6 +237,15 @@ export default function kvSyncTestS1Ets() {
 
         afterAll(async function (done) {
             console.info(logTag + '-----------------afterAll -----------------');
+            let testservice = new TestService();
+            await sleep(1000);
+            // 删除当前应用的可信设备
+            let checkResult = await checkAvailableDevice();
+            if (!checkResult) {
+                testservice.unbindStub();
+            }
+            await sleep(1000);
+            console.info(logTag +"afterAll done");
             done();
         })
 
@@ -4528,7 +4576,7 @@ export default function kvSyncTestS1Ets() {
                 })
             }
             kvStore.sync(syncDeviceIds, PUSH);
-            await sleep(2000);
+            await sleep(3000);
 
             kvStore.on("syncComplete", call);
             await remoteHelpers.kvDelete("key1");
@@ -4594,7 +4642,7 @@ export default function kvSyncTestS1Ets() {
                 })
             }
             kvStore.sync(syncDeviceIds, PUSH_PULL);
-            await sleep(2000);
+            await sleep(3000);
             kvStore.on("syncComplete", call);
             await remoteHelpers.kvDelete("key1");
             kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, (data) => {
@@ -4659,7 +4707,7 @@ export default function kvSyncTestS1Ets() {
                 })
             }
             kvStore.sync(syncDeviceIds, PUSH);
-            await sleep(2000);
+            await sleep(3000);
             kvStore.on("syncComplete", call);
             await remoteHelpers.kvPut("key1", "value2", "String");
             kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, (data) => {
@@ -4722,7 +4770,7 @@ export default function kvSyncTestS1Ets() {
                 })
             }
             kvStore.sync(syncDeviceIds, PUSH_PULL);
-            await sleep(2000);
+            await sleep(3000);
             kvStore.on("syncComplete", call);
             await remoteHelpers.kvPut("key1", "value2", "String");
             kvStore.on('dataChange', factory.SubscribeType.SUBSCRIBE_TYPE_LOCAL, (data) => {
@@ -4798,7 +4846,7 @@ export default function kvSyncTestS1Ets() {
             const query = new factory.Query();
             query.prefixKey("test_");          
             kvStore.sync(syncDeviceIds, query, PULL, 1000);
-            await sleep(4000);
+            await sleep(5000);
 
             await kvStore.get(schemaKey, (err, data) => {
                 try {
@@ -4897,7 +4945,7 @@ export default function kvSyncTestS1Ets() {
             const query = new factory.Query();
             query.prefixKey("test_");          
             kvStore.sync(syncDeviceIds, query, PUSH_PULL, 1000);
-            await sleep(4000);
+            await sleep(5000);
 
             await kvStore.get(schemaKey, (err, data) => {
                 try {
