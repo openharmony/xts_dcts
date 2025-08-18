@@ -373,9 +373,9 @@ export default function RpcJsUnitTest() {
             let checkResult = await checkAvailableDevice();
             if (!checkResult) {
                 testservice.unbindStub();
-             }
-            await sleep(1000);
+            }
             done();
+            await sleep(1000);
             console.info("afterAll done");
         })
 

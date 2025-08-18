@@ -322,9 +322,9 @@ export default function RpcRequestEtsUnitTest() {
       if (!checkResult) {
           testservice.unbindStub();
       }
-      await sleep(1000);
       done();
-       console.info(logTag +"afterAll done");
+      await sleep(1000);
+      console.info(logTag +"afterAll done");
     })
 
     /*
