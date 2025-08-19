@@ -74,6 +74,22 @@ let atManager = abilityAccessCtrl.createAtManager();
 export default function dataObjectEtsTest() {
 describe('dataObjectEtsTest', function () {
 
+    //检查当前应用是否有可信的设备
+    async function checkAvailableDevice() 
+    {
+        console.info(logTag + "checkAvailableDevice in "); 
+        dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+        deviceList = dmInstance.getAvailableDeviceListSync();
+        console.info(logTag + "checkAvailableDevice get deviceList " + JSON.stringify(deviceList));
+        if (deviceList.length != 0) {
+        console.info(logTag + "return false "); 
+        return false;
+        } else{
+        console.info(logTag + "return true "); 
+        return true;
+        }
+    }
+
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -144,17 +160,17 @@ describe('dataObjectEtsTest', function () {
         console.info(logTag + 'let getDeviceId is begin...')
         try {
             dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+            console.info(logTag + "get deviceManager is success")
+            deviceList = dmInstance.getAvailableDeviceListSync();
+            console.info(logTag + "deviceList.length is: " + deviceList.length);
+            deviceId = deviceList[0].networkId;
+            syncDeviceIds = [deviceId];
+            console.info(logTag + "deviceid is: " + deviceId);
+            console.info(logTag + "syncDeviceIds is: " + JSON.stringify(syncDeviceIds));
             console.info(logTag + 'get deviceManager is success')
         } catch (error) {
             console.info(logTag + 'get deviceManager is failed' + JSON.stringify(error))
         }
-        localDeviceId = dmInstance.getLocalDeviceNetworkId();
-        console.info(logTag + "local device id is: " + localDeviceId);
-        deviceList = dmInstance.getAvailableDeviceListSync();
-        deviceId = deviceList[0].networkId;
-        syncDeviceIds = [deviceId];
-        console.info(logTag + "deviceid is: " + deviceId);
-        console.info(logTag + "syncDeviceIds is: " + JSON.stringify(syncDeviceIds));
     }
 
     beforeAll(async function (done) {
@@ -162,13 +178,39 @@ describe('dataObjectEtsTest', function () {
         await getPermission();
         await sleep(5000);
         await driveFn();
-        await sleep(100);
+        await sleep(1000);
+
+        testservice = new TestService();
+        await sleep(1000);
+
+        //环境初始化
+        let checkResult = await checkAvailableDevice();
+        console.info(logTag + ' ========== checkResult' + checkResult);
+        //如果有可信的设备 就unbindStub
+        if (!checkResult) {
+            console.info(logTag + ' ==========checkResult  unbindStub');
+            testservice.unbindStub(TEST_BUNDLE_NAME);
+        }
+        await sleep(1000);
+        let checkResult1 = await checkAvailableDevice();
+        console.info(logTag + ' ========== checkResult1' + checkResult1);
+        //如果没有可信的设备 就需要再通过PIN码bind
+        if (checkResult1) {
+            console.info(logTag + ' ==========checkResult1  startDiscovering');
+            testservice.startDiscovering(TEST_BUNDLE_NAME);
+            await sleep(3000);
+            console.info(logTag + ' ==========checkResult1  bindStub');
+            testservice.bindStub(TEST_BUNDLE_NAME);
+            await sleep(20000);
+            console.info(logTag + ' ==========checkResult1  stopDiscovering');
+            testservice.stopDiscovering(TEST_BUNDLE_NAME);
+            await sleep(3000);
+        }
+
         await getDeviceId();
         await sleep(1000);
         await startAbility();
         await sleep(2000);
-
-        testservice = new TestService();
 
        let osReleaseTypeInfo = deviceinfo.osReleaseType;
        console.info('the value of the deviceinfo osReleaseType is :' + osReleaseTypeInfo);
@@ -197,6 +239,15 @@ describe('dataObjectEtsTest', function () {
     })
 
     afterAll(async function (done){
+        testservice = new TestService();
+        await sleep(1000);
+        // 删除当前应用的可信设备
+        let checkResult = await checkAvailableDevice();
+        if (!checkResult) {
+            testservice.unbindStub();
+        }
+        await sleep(1000);
+        console.info(logTag +"afterAll done");
         console.info(logTag + '-----------------afterAll -----------------');
         flag_32Rlease = 1;
         done();
