@@ -123,7 +123,10 @@ class XtsBuild:
         accurate_dir = "{}/test/xts/tools/ci".format(self._code_root_dir)
         sys.path.append(accurate_dir)
         import generate_accurate_targets as gat
-        retcode, accurate_target = gat.generate(self._xts_root_dir, self._change_list_file, self._build_target)
+        retcode, accurate_target = gat.generate(self._xts_root_dir,
+                                                self._change_list_file,
+                                                self._build_target,
+                                                os.environ['XTS_SUITETYPE'])
         if retcode:
             sys.exit(-1)
         return accurate_target
