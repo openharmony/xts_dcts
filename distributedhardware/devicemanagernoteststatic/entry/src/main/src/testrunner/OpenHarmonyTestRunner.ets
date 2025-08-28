@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
-
+import { BusinessError } from '@ohos.base';
 import { TestRunner } from '@kit.TestKit';
-
+import UIAbility from '@ohos.app.ability.UIAbility';
 import hilog from '@ohos.hilog';
-
 import { Hypium } from '../../../hypium/index';
 import testsuite from '../test/List.test';
-import { BusinessError } from '@ohos.base';
+import { ShellCmdResult } from 'application.shellCmdResult';
+
 let abilityDelegator: abilityDelegatorRegistry.AbilityDelegator;
 let abilityDelegatorArguments: abilityDelegatorRegistry.AbilityDelegatorArgs;
 
@@ -41,8 +41,24 @@ export class OpenHarmonyTestRunner implements TestRunner {
     abilityDelegatorArguments = abilityDelegatorRegistry.getArguments();
     abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
     hilog.info(domain, tag, '%{public}s', 'start run testcase!!!');
+    hilog.info(domain, tag, 'bundleName = %{public}s', abilityDelegatorArguments.bundleName);
+    let cmd = 'aa start -d 0 -a EntryAbility' + ' -b com.dcts.device.manager.static';
+    let debug = abilityDelegatorArguments.parameters['-D'];
+    if (debug == 'true') {
+      cmd += ' -D';
+    }
 
-    Hypium.hypiumTest(abilityDelegator, abilityDelegatorArguments, testsuite);
+    setTimeout(() => {
+      hilog.info(domain, tag, 'hypiumTest start');
+      Hypium.hypiumTest(abilityDelegator, abilityDelegatorArguments, testsuite);
+      hilog.info(domain, tag, 'hypiumTest end');
+    }, 5000);
+
+    abilityDelegator.executeShellCommand(cmd, (err: BusinessError<void> | null, d: ShellCmdResult | undefined) => {
+      hilog.info(domain, tag, 'executeShellCommand : err : %{public}s', JSON.stringify(err) ?? '');
+      hilog.info(domain, tag, 'executeShellCommand : data : %{public}s', d?.stdResult ?? '');
+      hilog.info(domain, tag, 'executeShellCommand : data : %{public}s', d?.exitCode ?? '');
+    })
     hilog.info(domain, tag, '%{public}s', 'OpenHarmonyTestRunner onRun end');
   }
 }

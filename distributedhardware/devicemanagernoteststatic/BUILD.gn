@@ -13,11 +13,11 @@
 
 import("//test/xts/tools/build/suite.gni")
 
-ohos_js_app_static_suite("device_manager_test_static") {
+ohos_js_app_static_suite("DctsDeviceManagerTestStatic") {
   # test_hap = true
   testonly = true
   certificate_profile = "./signature/openharmony_sx.p7b"
-  hap_name = "ActsDeviceManagerStaticTest"
+  hap_name = "DctsDeviceManagerStaticTest"
   part_name = "device_manager"
   subsystem_name = "distributedhardware"
 }
