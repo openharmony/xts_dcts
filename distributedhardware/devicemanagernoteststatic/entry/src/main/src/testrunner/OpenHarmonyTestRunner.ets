@@ -42,7 +42,7 @@ export class OpenHarmonyTestRunner implements TestRunner {
     abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
     hilog.info(domain, tag, '%{public}s', 'start run testcase!!!');
     hilog.info(domain, tag, 'bundleName = %{public}s', abilityDelegatorArguments.bundleName);
-    let cmd = 'aa start -d 0 -a EntryAbility' + ' -b com.dcts.device.manager.static';
+    let cmd = 'aa start -d 0 -a EntryAbility' + ' -b com.acts.device.manager.static';
     let debug = abilityDelegatorArguments.parameters['-D'];
     if (debug == 'true') {
       cmd += ' -D';

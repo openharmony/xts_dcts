@@ -15,7 +15,7 @@
 
 {
   "app": {
-    "bundleName": "com.dcts.device.manager.static",
+    "bundleName": "com.acts.device.manager.static",
     "vendor": "example",
     "versionCode": 1000000,
     "versionName": "1.0.0",
