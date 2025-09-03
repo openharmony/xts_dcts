@@ -238,7 +238,6 @@ void VDecDemo::InputFunc()
             return !signal_->inQueue_.empty() && !signal_->availableInputBufferQueue_.empty();
         });
 
-
         if (!isRunning_.load()) {
             break;
         }
