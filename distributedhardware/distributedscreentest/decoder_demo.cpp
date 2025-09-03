@@ -234,9 +234,10 @@ void VDecDemo::InputFunc()
     while (isRunning_.load()) {
         unique_lock<mutex> lock(signal_->inMutex_);
         auto timeout = std::chrono::seconds(3);
-	signal_->inCond_.wait_for( lock, timeout, [this]() {
-             return !signal_->inQueue_.empty() && !signal_->availableInputBufferQueue_.empty();
-	}); 
+        signal_->inCond_.wait_for(lock, timeout, [this]() {
+            return !signal_->inQueue_.empty() && !signal_->availableInputBufferQueue_.empty();
+        });
+
 
         if (!isRunning_.load()) {
             break;
