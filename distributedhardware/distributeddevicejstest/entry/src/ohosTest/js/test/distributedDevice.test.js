@@ -80,7 +80,7 @@ export default function distributedDeviceManager() {
         //检查当前应用是否有可信的设备
         async function checkAvailableDevice() {
             console.info(TAG + "checkAvailableDevice begin");
-            let dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstageserver');
+            let dmInstance = deviceManager.createDeviceManager('com.ohos.distributedscreenjstest');
             let deviceInfoList = dmInstance.getAvailableDeviceListSync();
             console.info(TAG + "checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
             if (deviceInfoList.length != 0) {
@@ -333,48 +333,6 @@ export default function distributedDeviceManager() {
         })
 
         /*
-         * @tc.number  SUB_DH_DeviceManager_Dcts_0700
-         * @tc.name    Get the device name of the local device.
-         * @tc.desc    Function test
-         * @tc.size    MediumTest
-         * @tc.type:   Function
-         * @tc.level   Level1
-         */
-        it("SUB_DH_DeviceManager_Dcts_0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
-            console.info("-----------------SUB_DH_DeviceManager_Dcts_0700 start------------------------");
-            let bindParam = {
-                "bindType": 1,
-                "targetPkgName": "com.ohos.distributedDeviceManager",
-                "appName": "SubDctsdisDeviceJsTest",
-                "appOperation": "想要连接本机。",
-                "customDescription": "device manager"
-            };
-            try {
-                if (deviceId !== null) {
-                    dmInstance.bindTarget(deviceId, bindParam, (err, data) => {
-                        if (err) {
-                            console.info("bindTarget fail errCode:" + err.code + ",errMessage:" + err.message);
-                        }
-                        console.log("bindTarget:" + JSON.stringify(data));
-                        expect(data != null).assertTrue();
-                        done();
-                    })
-                } else {
-                    console.log("bindTarget deviceId is null");
-                    expect(true).assertTrue();
-                    done();
-                }
-
-            } catch (err) {
-                console.info("bindTarget errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
-                done();
-            }
-            await sleep(1000);
-            console.info("-----------------SUB_DH_DeviceManager_Dcts_0700 end------------------------");
-        })
-
-        /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_0800
          * @tc.name    Get the device name of the local device.
          * @tc.desc    Function test
@@ -507,36 +465,6 @@ export default function distributedDeviceManager() {
             }
             await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1200 end------------------------");
-        })
-
-        /*
-         * @tc.number  SUB_DH_DeviceManager_Dcts_1300
-         * @tc.name    Unbind the specified target.
-         * @tc.desc    Function test
-         * @tc.size    MediumTest
-         * @tc.type:   Function
-         * @tc.level   Level1
-         */
-        it("SUB_DH_DeviceManager_Dcts_1300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
-            console.info("-----------------SUB_DH_DeviceManager_Dcts_1300 start------------------------");
-            try {
-                if (deviceId !== null) {
-                    dmInstance.unbindTarget(deviceId);
-                    console.log("unbindTarget success");
-                    expect(true).assertTrue();
-                    done();
-                } else {
-                    console.log("unbindTarget deviceId is null");
-                    expect(true).assertTrue();
-                    done();
-                }
-            } catch (err) {
-                console.info("unbindTarget errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
-                done();
-            }
-            await sleep(1000);
-            console.info("-----------------SUB_DH_DeviceManager_Dcts_1300 end------------------------");
         })
 
         /*
