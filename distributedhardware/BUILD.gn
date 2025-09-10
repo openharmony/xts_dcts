@@ -21,6 +21,7 @@ group("distributedhardware") {
       "distributedaudionewtest:DctsSubdAudioNewTest",
       "distributedaudiotest:DctsSubAudioTest",
       "distributedcameratest:DctsSubdisCameraTest",
+      "distributeddevicejstestservice:DctsSubdisDeviceJsTestserver",
       "distributeddevicejstest:DctsSubdisDeviceJsTest",
       "distributedinputtest:DctsSubDistributedInputTest",
       "distributedscreentest:DctsSubdisScreenTest",
