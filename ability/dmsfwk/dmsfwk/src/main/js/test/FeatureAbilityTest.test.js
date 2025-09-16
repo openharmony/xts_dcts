@@ -18,16 +18,17 @@ import rpc from "@ohos.rpc";
 import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from "@ohos.ability.featureAbility";
 import { UiDriver, BY } from '@ohos.UiTest';
-import TestService from "./testService";
+import TestService from "./TestService.test";
 import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
 
 let dvList = [];
 let dvId = null;
 let gIRemoteObject = null;
-let testservice = null;
 let localDeviceId = undefined;
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
 let dmInstance
+let testservice = new TestService();
+let TAG = 'dmsfwk'
 
 
 export default function dmsJsUnitTest() {
@@ -37,7 +38,7 @@ export default function dmsJsUnitTest() {
         async function getDeviceId() {
             console.log('get deviceManager is begin')
             try {
-                dmInstance = deviceManager.createDeviceManager('ohos.dms.test');
+                dmInstance = deviceManager.createDeviceManager('com.ohos.dmstest');
                 console.log('get deviceManager is success')
             } catch (error) {
                 console.log('get deviceManager is failed' + JSON.stringify(error))
@@ -99,12 +100,54 @@ export default function dmsJsUnitTest() {
             }
         }
 
+        //检查当前应用是否有可信的设备
+        async function checkAvailableDevice() {
+            console.info(TAG + "checkAvailableDevice begin");
+            let dmInstance = deviceManager.createDeviceManager('com.ohos.dmstest');
+            let deviceInfoList = dmInstance.getAvailableDeviceListSync();
+            console.info(TAG + "checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
+            if (deviceInfoList.length != 0) {
+                console.info(TAG + "false deviceInfoList.length is" + JSON.stringify(deviceInfoList));
+                return false;
+            } else {
+                console.info(TAG + "true deviceInfoList.length  is" + JSON.stringify(deviceInfoList));
+                return true;
+            }
+        }
+
+        async function checkResult() {
+            console.info(TAG + "checkResult begin");
+            try {
+                let checkResult = await checkAvailableDevice();
+                console.info(TAG + "checkResult is" + checkResult);
+                if (!checkResult) {
+                    testservice.unbindStub();
+                }
+                await sleep(500);
+                let checkResult1 = await checkAvailableDevice();
+                //如果有可信的设备 就不需要再通过PIN码bind
+                if (checkResult1) {
+                    testservice.startDiscovering();
+                    await sleep(3000);
+                    testservice.bindStub();
+                    await sleep(20000);
+                    testservice.stopDiscovering();
+                    await sleep(3000);
+                }
+            } catch (err) {
+                console.info('err is ' + err);
+                return;
+            }
+        }
+
         beforeAll(async function (done) {
             console.info('beforeAll called dms');
             await getPermission();
             await sleep(1000);
             await driveFn();
             await sleep(1000);
+            await checkResult()
+            await sleep(3000);
             await getDeviceId();
             await sleep(1000);
             console.info("beforeAll done");
@@ -123,10 +166,18 @@ export default function dmsJsUnitTest() {
         })
 
         afterAll(async function (done) {
+            console.info('afterAll start');
+            // 删除当前应用的可信设备
+            let checkResult = await checkAvailableDevice();
+            console.info('afterAll checkResult is ' + checkResult);
+            if (!checkResult) {
+                console.info('checkResult is ' + checkResult);
+                testservice.unbindStub();
+            }
+            await sleep(2000);
             await driveClick();
             await sleep(1000);
-
-            console.info('afterAll called');
+            console.info('afterAll start');
             done();
         })
 

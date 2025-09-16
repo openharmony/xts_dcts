@@ -22,6 +22,11 @@ import abilityConnectionManager from '@ohos.distributedsched.abilityConnectionMa
 import { BusinessError } from '@ohos.base';
 import common from '@ohos.app.ability.common';
 import util from '@ohos.util';
+import { Caller } from '@ohos.app.ability.UIAbility';
+import rpc from '@ohos.rpc';
+import bundleManager from '@ohos.bundle.bundleManager';
+import Want from '@ohos.app.ability.Want';
+import TestService from "./testService.ets";
 
 let sessionId: number;
 let context = getContext(this) as common.UIAbilityContext;
@@ -31,7 +36,10 @@ let dvList: Array<deviceManager.DeviceBasicInfo>;
 let dvId: string;
 let localDeviceId: string;
 let dmInstance: deviceManager.DeviceManager
-let TAG: string;
+let TAG: string = 'dmsfwkstagepermissiontest'
+let call: Caller;
+let extensionConnectId: number;
+let connectId: number;
 
 export default function DmsFwkStageTest() {
 
@@ -82,12 +90,55 @@ export default function DmsFwkStageTest() {
       }
     }
 
+    //检查当前应用是否有可信的设备
+    let checkAvailableDevice = async () => {
+      console.info(TAG + "checkAvailableDevice begin");
+      let dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstageserver');
+      let deviceInfoList: Array<deviceManager.DeviceBasicInfo> = dmInstance.getAvailableDeviceListSync();
+      console.info(TAG + "checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
+      if (deviceInfoList.length != 0) {
+        console.info(TAG + "false deviceInfoList.length is" + JSON.stringify(deviceInfoList));
+        return false;
+      } else {
+        console.info(TAG + "true deviceInfoList.length  is" + JSON.stringify(deviceInfoList));
+        return true;
+      }
+    }
+
+    let checkResult = async () => {
+      console.info(TAG + "checkResult begin");
+      let testservice = new TestService();
+      try {
+        let checkResult = await checkAvailableDevice();
+        console.info(TAG + "checkResult is" + checkResult);
+        if (!checkResult) {
+          testservice.unbindStub();
+        }
+        await sleep(500);
+        let checkResult1 = await checkAvailableDevice();
+        //如果有可信的设备 就不需要再通过PIN码bind
+        if (checkResult1) {
+          testservice.startDiscovering();
+          await sleep(3000);
+          testservice.bindStub();
+          await sleep(20000);
+          testservice.stopDiscovering();
+          await sleep(3000);
+        }
+      } catch (err) {
+        console.info('err is ' + err);
+        return;
+      }
+    }
+
     beforeAll(async function (done) {
       console.log('DMS before began')
       await getPermission();
       await sleep(1000);
       await driveFn();
       await sleep(1000);
+      await checkResult()
+      await sleep(3000);
       await getDeviceId();
       await sleep(1000);
       done()
@@ -102,6 +153,22 @@ export default function DmsFwkStageTest() {
     afterEach(async function (done) {
       console.info('LifeCycleTest after each called');
       await sleep(1000);
+      done();
+    });
+
+    afterAll(async function (done) {
+      console.info('LifeCycleTest after each called');
+      console.info('afterAll start');
+      let testservice = new TestService();
+      // 删除当前应用的可信设备
+      let checkResult = await checkAvailableDevice();
+      console.info('afterAll checkResult is ' + checkResult);
+      if (!checkResult) {
+        console.info('checkResult is ' + checkResult);
+        testservice.unbindStub();
+      }
+      await sleep(2000);
+      console.info('afterAll start');
       done();
     });
 
@@ -1559,23 +1626,22 @@ export default function DmsFwkStageTest() {
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100
-     * @tc.name    Connec the remote Ability.
-     * @tc.desc    Function test
-     * @tc.level   3
-     */
+    * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100
+    * @tc.name    Connec the remote Ability.
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
     it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100 is start---------------")
       TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100";
       try {
-        globalThis.abilityContext.connectServiceExtensionAbility({
+        connectId = context.connectServiceExtensionAbility({
           deviceId: dvId,
-          bundleName: "com.ohos.dmstest",
-          abilityName: "com.ohos.dmstest.ServiceAbility"
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "ServiceAbility"
         }, {
           onConnect: (elementName, proxy) => {
-            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100  onConnect: ' + JSON.stringify(elementName));
-            expect().assertFail();
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100  onConnect: ' + JSON.stringify(connectId));
             done();
           },
           onDisConnect: (elementName) => {
@@ -1598,5 +1664,104 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100 is end---------------")
     });
 
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200
+    * @tc.name    Filed connect remote invisible service without permission.
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 is start---------------")
+      let want: Want = {
+        deviceId: dvId,
+        bundleName: "com.acts.example.dmsfwkstageserver",
+        abilityName: "ServiceAbility"
+      };
+      let options: common.ConnectOptions = {
+        onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
+          done();
+        },
+        onDisconnect(elementName: bundleManager.ElementName) {
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
+          expect().assertFail();
+          done();
+        },
+        onFailed(code: number) {
+          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200  onFailed: ' + code);
+          expect(code == 16000050).assertTrue()
+          done();
+        }
+      }
+      try {
+        connectId = context.connectServiceExtensionAbility(want, options);
+      } catch (err) {
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 catch: ' + err.message);
+      }
+      await sleep(2000);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 is end---------------" + connectId)
+    });
+
+    /*
+     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700
+     * @tc.name    ServiceExtension Filed connect remote invisible service without permission.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 is start---------------")
+      try {
+        extensionConnectId = context.connectServiceExtensionAbility({
+          deviceId: dvId,
+          bundleName: "com.acts.example.dmsfwkstageserver",
+          abilityName: "ServiceAbility"
+        }, {
+          onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
+            done();
+          },
+          onDisconnect(elementName: bundleManager.ElementName) {
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700  onDisConnect: ' + JSON.stringify(elementName));
+            expect().assertFail();
+            done();
+          },
+          onFailed(code: number) {
+            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700  onFailed: ' + code);
+            expect(code == 16000050).assertTrue();
+            done();
+          }
+        });
+      } catch (err) {
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 catch: ' + err.code);
+        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 catch: ' + err.message);
+      }
+      await sleep(2000);
+      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 is end---------------" + extensionConnectId)
+    });
+
+    /*
+     * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600
+     * @tc.name    Get call various applications
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600 start------------------------");
+      context.startAbilityByCall({
+        bundleName: 'com.acts.example.dmsfwkstageserver',
+        abilityName: '',
+        deviceId: dvId
+      })
+        .then((data: Caller) => {
+          call = data;
+          console.log('get caller is success caller is ' + call)
+          expect().assertFail()
+        }).catch((err: BusinessError) => {
+          console.log('get caller is failed err is ' + JSON.stringify(err))
+          expect(err.code == 16000050).assertTrue()
+        })
+      await sleep(2000)
+      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600 end------------------------");
+      done()
+    });
   })
 }

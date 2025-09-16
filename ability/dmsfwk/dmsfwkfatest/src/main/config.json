@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.example.configuration",
+    "bundleName": "com.acts.example.dmsfwkstageserver",
     "vendor": "example",
     "version": {
       "code": 1,
@@ -14,7 +14,7 @@
   },
   "deviceConfig": {},
   "module": {
-    "package": "com.example.configuration",
+    "package": "com.acts.example.dmsfwkstageserver",
     "name": ".entry",
     "mainAbility": ".MainAbility",
     "srcPath": "",

@@ -3,10 +3,10 @@
     "driver": {
         "type": "OHJSUnitTest",
         "test-timeout": "300000",
-        "bundle-name": "com.example.configuration",
-        "package-name": "com.example.configuration",
+        "bundle-name": "com.acts.example.dmsfwkstageserver",
+        "package-name": "com.acts.example.dmsfwkstageserver",
         "shell-timeout": "600000",
-		"testcase-timeout": 70000
+        "testcase-timeout": 70000
     },
     "kits": [
         {
@@ -15,6 +15,14 @@
             ],
             "type": "AppInstallKit",
             "cleanup-apps": true
+        },
+        {
+            "type": "ShellKit",
+            "run-command": [
+                "power-shell wakeup",
+                "power-shell setmode 602",
+                "hidumper -s 3301 -a -t"
+            ]
         }
     ]
 }
