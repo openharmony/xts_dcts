@@ -19,6 +19,7 @@ import deviceManager from '@ohos.distributedDeviceManager';
 import featureAbility from "@ohos.ability.featureAbility";
 import { UiDriver, BY } from '@ohos.UiTest';
 import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
+import TestService from "./TestService.test";
 
 let connectId = null;
 let connectId1 = null;
@@ -27,13 +28,16 @@ let dvId = null;
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
 let dmInstance
 let localDeviceId
+let testservice = new TestService();
+let TAG = 'DmsFwkFaTest'
+
 export default function DmsFwkFaTest() {
 
   describe('DmsFwkFaTest', function () {
     async function getDeviceId() {
       console.log('getDeviceId is begin')
       try {
-        dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstageservert');
+        dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstageserver');
         console.log('get deviceManager is success')
       } catch (error) {
         console.log('get deviceManager is failed' + JSON.stringify(error))
@@ -94,6 +98,46 @@ export default function DmsFwkFaTest() {
       }
     }
 
+    //检查当前应用是否有可信的设备
+    async function checkAvailableDevice() {
+      console.info(TAG + "checkAvailableDevice begin");
+      let dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstageserver');
+      let deviceInfoList = dmInstance.getAvailableDeviceListSync();
+      console.info(TAG + "checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
+      if (deviceInfoList.length != 0) {
+        console.info(TAG + "false deviceInfoList.length is" + JSON.stringify(deviceInfoList));
+        return false;
+      } else {
+        console.info(TAG + "true deviceInfoList.length  is" + JSON.stringify(deviceInfoList));
+        return true;
+      }
+    }
+
+    async function checkResult() {
+      console.info(TAG + "checkResult begin");
+      try {
+        let checkResult = await checkAvailableDevice();
+        console.info(TAG + "checkResult is" + checkResult);
+        if (!checkResult) {
+          testservice.unbindStub();
+        }
+        await sleep(500);
+        let checkResult1 = await checkAvailableDevice();
+        //如果有可信的设备 就不需要再通过PIN码bind
+        if (checkResult1) {
+          testservice.startDiscovering();
+          await sleep(3000);
+          testservice.bindStub();
+          await sleep(20000);
+          testservice.stopDiscovering();
+          await sleep(3000);
+        }
+      } catch (err) {
+        console.info('err is ' + err);
+        return;
+      }
+    }
+
     beforeAll(async function (done) {
       console.info('beforeAll called dms')
       getDeviceId()
@@ -101,6 +145,8 @@ export default function DmsFwkFaTest() {
       await sleep(1000);
       await driveFn();
       await sleep(1000);
+      await checkResult()
+      await sleep(3000);
       await getDeviceId()
       await sleep(1000);
       done()
@@ -117,10 +163,19 @@ export default function DmsFwkFaTest() {
     })
 
     afterAll(async function (done) {
-      console.info('afterAll called')
+      console.info('afterAll start');
+      // 删除当前应用的可信设备
+      let checkResult = await checkAvailableDevice();
+      console.info('afterAll checkResult is ' + checkResult);
+      if (!checkResult) {
+        console.info('checkResult is ' + checkResult);
+        testservice.unbindStub();
+      }
+      await sleep(2000);
       await driveClick();
-      sleep(5000);
-      done()
+      await sleep(1000);
+      console.info('afterAll start');
+      done();
     })
 
     /*
