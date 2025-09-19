@@ -19,33 +19,33 @@ export default class MainAbility2 extends Ability {
     onCreate(want, launchParam) {
         console.log("[Demo] MainAbility onCreate:" + JSON.stringify(want))
         globalThis.abilityWant = want;
-        if(want.parameters != undefined){
-            if(want.parameters.startReason == "terminateSelf"){
+        if (want.parameters != undefined) {
+            if (want.parameters.startReason == "terminateSelf") {
                 setTimeout(() => {
                     console.log("[Demo] MainAbility terminateSelf")
-                    this.context.terminateSelf((err, data)=>{
+                    this.context.terminateSelf((err, data) => {
                         console.log("[Demo] MainAbility terminateSelf " + JSON.stringify(err))
                     })
                 }, 2000);
             }
-            if(want.parameters.startReason == "terminateSelfWithResult"){
+            if (want.parameters.startReason == "terminateSelfWithResult") {
                 setTimeout(() => {
                     console.log("[Demo] MainAbility terminateSelfWithResult")
                     this.context.terminateSelfWithResult({
-                        resultCode:100,
-                        want:{
-                            bundleName:"com.example.configuration",
-                            abilityName:"com.example.configuration.MainAbility"
+                        resultCode: 100,
+                        want: {
+                            bundleName: "com.acts.example.dmsfwkstageserver",
+                            abilityName: "com.acts.example.dmsfwkstageserver.MainAbility"
                         }
-                    }, (err, data)=>{
+                    }, (err, data) => {
                         console.log("[Demo] MainAbility terminateSelfWithResult " + JSON.stringify(err))
                     })
                 }, 2000);
             }
         }
-        setTimeout(()=>{
+        setTimeout(() => {
             this.context.terminateSelf()
-        },5000)
+        }, 5000)
     }
 
     onDestroy() {

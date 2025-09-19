@@ -31,7 +31,7 @@ export default {
         })
         setTimeout(()=>{
             featureAbility.terminateSelf()
-        },2000)
+        },3000)
     },
     onDestroy() {
         console.info('AceApplication onDestroy');

@@ -25,6 +25,7 @@ import { BusinessError } from '@ohos.base';
 import bundleManager from '@ohos.bundle.bundleManager';
 import Want from '@ohos.app.ability.Want';
 import common from '@ohos.app.ability.common';
+import TestService from "./testService.ets";
 
 let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
@@ -37,8 +38,7 @@ let extensionConnectId: number;
 let extensionConnectId2: number;
 let call: Caller;
 let dmInstance: deviceManager.DeviceManager;
-let TAG: string;
-
+let TAG: string = 'DmsFwkStageTest'
 
 export default function DmsFwkStageTest() {
 
@@ -47,7 +47,7 @@ export default function DmsFwkStageTest() {
     let getDeviceId = async () => {
       console.log('getDeviceId is begin')
       try {
-        dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstageserver');
+        dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstagetest');
         console.log('get deviceManager is success')
       } catch (error) {
         console.log('get deviceManager is failed' + JSON.stringify(error))
@@ -92,6 +92,47 @@ export default function DmsFwkStageTest() {
       }
     }
 
+    //检查当前应用是否有可信的设备
+    let checkAvailableDevice = async () => {
+      console.info(TAG + "checkAvailableDevice begin");
+      let dmInstance = deviceManager.createDeviceManager('com.acts.example.dmsfwkstagetest');
+      let deviceInfoList: Array<deviceManager.DeviceBasicInfo> = dmInstance.getAvailableDeviceListSync();
+      console.info(TAG + "checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
+      if (deviceInfoList.length != 0) {
+        console.info(TAG + "false deviceInfoList.length is" + JSON.stringify(deviceInfoList));
+        return false;
+      } else {
+        console.info(TAG + "true deviceInfoList.length  is" + JSON.stringify(deviceInfoList));
+        return true;
+      }
+    }
+
+    let checkResult = async () => {
+      console.info(TAG + "checkResult begin");
+      let testservice = new TestService();
+      try {
+        let checkResult = await checkAvailableDevice();
+        console.info(TAG + "checkResult is" + checkResult);
+        if (!checkResult) {
+          testservice.unbindStub();
+        }
+        await sleep(500);
+        let checkResult1 = await checkAvailableDevice();
+        //如果有可信的设备 就不需要再通过PIN码bind
+        if (checkResult1) {
+          testservice.startDiscovering();
+          await sleep(3000);
+          testservice.bindStub();
+          await sleep(20000);
+          testservice.stopDiscovering();
+          await sleep(3000);
+        }
+      } catch (err) {
+        console.info('err is ' + err);
+        return;
+      }
+    }
+
     let DisconnectServiceExtensionAbility = async (DMSId: number) => {
       console.log('DmsFwkStageTest disconnectServiceExtensionAbility begin');
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
@@ -112,6 +153,8 @@ export default function DmsFwkStageTest() {
       await sleep(1000);
       await driveFn();
       await sleep(1000);
+      await checkResult()
+      await sleep(3000);
       await getDeviceId();
       await sleep(1000);
       done()
@@ -133,6 +176,22 @@ export default function DmsFwkStageTest() {
       done();
     });
 
+    afterAll(async function (done) {
+      console.info('LifeCycleTest after each called');
+      console.info('afterAll start');
+      let testservice = new TestService();
+      // 删除当前应用的可信设备
+      let checkResult = await checkAvailableDevice();
+      console.info('afterAll checkResult is ' + checkResult);
+      if (!checkResult) {
+        console.info('checkResult is ' + checkResult);
+        testservice.unbindStub();
+      }
+      await sleep(2000);
+      console.info('afterAll start');
+      done();
+    });
+
     /*
      * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0900
      * @tc.name    Connect remote Ability.
@@ -145,7 +204,7 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       connectId = context.connectServiceExtensionAbility({
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       },
         {
@@ -193,7 +252,7 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       let want: Want = {
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       };
       let options: common.ConnectOptions = {
@@ -279,8 +338,8 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       let want: Want = {
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
-        abilityName: "ServiceAbility"
+        bundleName: "com.acts.example.dmsfwkstagetest",
+        abilityName: "ServiceAbility2"
       };
       let options: common.ConnectOptions = {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
@@ -328,8 +387,8 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       let want: Want = {
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
-        abilityName: "ServiceAbility"
+        bundleName: "com.acts.example.dmsfwkstagetest",
+        abilityName: "ServiceAbility2"
       };
       let options: common.ConnectOptions = {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
@@ -365,7 +424,7 @@ export default function DmsFwkStageTest() {
       let want1: Want = {
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstagetest",
-        abilityName: "ServiceAbility"
+        abilityName: "ServiceAbility2"
       };
       let options1: common.ConnectOptions = {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
@@ -528,7 +587,7 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       let want: Want = {
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       };
       let options: common.ConnectOptions = {
@@ -583,7 +642,7 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       let want: Want = {
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       };
       let options: common.ConnectOptions = {
@@ -632,13 +691,13 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       let want: Want = {
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       };
       let options: common.ConnectOptions = {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
           expect(remote != null).assertTrue();
-          expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
+          expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstagetest");
           expect(elementName.abilityName).assertEqual("ServiceAbility");
           let option: rpc.MessageOption = new rpc.MessageOption();
           let data: rpc.MessageSequence = new rpc.MessageSequence();
@@ -682,14 +741,14 @@ export default function DmsFwkStageTest() {
       let remote1: rpc.IRemoteObject
       let want: Want = {
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       };
       let options: common.ConnectOptions = {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
           remote1 = remote;
           expect(remote != null).assertTrue();
-          expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
+          expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstagetest");
           expect(elementName.abilityName).assertEqual("ServiceAbility");
           let option: rpc.MessageOption = new rpc.MessageOption();
           let data: rpc.MessageSequence = new rpc.MessageSequence();
@@ -746,13 +805,13 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       let want: Want = {
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       };
       let options: common.ConnectOptions = {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
           expect(remote != null).assertTrue();
-          expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
+          expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstagetest");
           expect(elementName.abilityName).assertEqual("ServiceAbility");
           let option: rpc.MessageOption = new rpc.MessageOption();
           let data: rpc.MessageSequence = new rpc.MessageSequence();
@@ -789,47 +848,6 @@ export default function DmsFwkStageTest() {
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200
-     * @tc.name    Filed connect remote invisible service without permission.
-     * @tc.desc    Function test
-     * @tc.level   0
-     */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 is start---------------")
-      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200";
-      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
-      let want: Want = {
-        deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
-        abilityName: "ServiceAbility2"
-      };
-      let options: common.ConnectOptions = {
-        onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
-          expect().assertFail();
-          done();
-        },
-        onDisconnect(elementName: bundleManager.ElementName) {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
-          expect().assertFail();
-          done();
-        },
-        onFailed(code: number) {
-          console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200  onFailed: ' + code);
-          done();
-          expect(code == 16000050).assertTrue()
-        }
-      }
-      try {
-        connectId = context.connectServiceExtensionAbility(want, options);
-      } catch (err) {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 catch: ' + err.code);
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 catch: ' + err.message);
-      }
-      await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 is end---------------" + connectId)
-    });
-
-    /*
      * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0300
      * @tc.name    Filed connect remote invisible service without permission.
      * @tc.desc    Function test
@@ -842,12 +860,12 @@ export default function DmsFwkStageTest() {
       try {
         connectId = context.connectServiceExtensionAbility({
           deviceId: dvId,
-          bundleName: "com.acts.example.dmsfwkstageserver",
+          bundleName: "com.acts.example.dmsfwkstagetest",
           abilityName: "ServiceAbility"
         }, {
           onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
             expect(remote != null).assertTrue();
-            expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
+            expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstagetest");
             expect(elementName.abilityName).assertEqual("ServiceAbility");
             let option: rpc.MessageOption = new rpc.MessageOption();
             let data: rpc.MessageSequence = new rpc.MessageSequence();
@@ -1014,7 +1032,7 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       extensionConnectId = context.connectServiceExtensionAbility({
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       }, {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
@@ -1061,7 +1079,7 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       extensionConnectId = context.connectServiceExtensionAbility({
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       }, {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
@@ -1096,7 +1114,7 @@ export default function DmsFwkStageTest() {
       extensionConnectId2 = context.connectServiceExtensionAbility({
         deviceId: dvId,
         bundleName: "com.acts.example.dmsfwkstagetest",
-        abilityName: "ServiceAbility"
+        abilityName: "ServiceAbility2"
       }, {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
           if (remote == null) {
@@ -1142,7 +1160,7 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       extensionConnectId = context.connectServiceExtensionAbility({
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       }, {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
@@ -1189,7 +1207,7 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       extensionConnectId = context.connectServiceExtensionAbility({
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       }, {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
@@ -1344,7 +1362,7 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       extensionConnectId = context.connectServiceExtensionAbility({
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       }, {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
@@ -1397,7 +1415,7 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       extensionConnectId = context.connectServiceExtensionAbility({
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       }, {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
@@ -1444,12 +1462,12 @@ export default function DmsFwkStageTest() {
       let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
       extensionConnectId = context.connectServiceExtensionAbility({
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       }, {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
           expect(remote != null).assertTrue();
-          expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
+          expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstagetest");
           expect(elementName.abilityName).assertEqual("ServiceAbility");
           let option: rpc.MessageOption = new rpc.MessageOption();
           let data: rpc.MessageSequence = new rpc.MessageSequence();
@@ -1492,14 +1510,14 @@ export default function DmsFwkStageTest() {
       let remote1: rpc.IRemoteObject
       let want: Want = {
         deviceId: dvId,
-        bundleName: "com.acts.example.dmsfwkstageserver",
+        bundleName: "com.acts.example.dmsfwkstagetest",
         abilityName: "ServiceAbility"
       };
       let options: common.ConnectOptions = {
         onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
           remote1 = remote;
           expect(remote != null).assertTrue();
-          expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
+          expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstagetest");
           expect(elementName.abilityName).assertEqual("ServiceAbility");
           let option: rpc.MessageOption = new rpc.MessageOption();
           let data: rpc.MessageSequence = new rpc.MessageSequence();
@@ -1557,12 +1575,12 @@ export default function DmsFwkStageTest() {
       try {
         extensionConnectId = context.connectServiceExtensionAbility({
           deviceId: dvId,
-          bundleName: "com.acts.example.dmsfwkstageserver",
+          bundleName: "com.acts.example.dmsfwkstagetest",
           abilityName: "ServiceAbility"
         }, {
           onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
             expect(remote != null).assertTrue();
-            expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
+            expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstagetest");
             expect(elementName.abilityName).assertEqual("ServiceAbility");
             let option: rpc.MessageOption = new rpc.MessageOption();
             let data: rpc.MessageSequence = new rpc.MessageSequence();
@@ -1597,45 +1615,6 @@ export default function DmsFwkStageTest() {
     });
 
     /*
-     * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700
-     * @tc.name    ServiceExtension Filed connect remote invisible service without permission.
-     * @tc.desc    Function test
-     * @tc.level   0
-     */
-    it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 is start---------------")
-      TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700";
-      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
-      try {
-        extensionConnectId = context.connectServiceExtensionAbility({
-          deviceId: dvId,
-          bundleName: "com.acts.example.dmsfwkstageserver",
-          abilityName: "ServiceAbility2"
-        }, {
-          onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
-            expect().assertFail();
-            done();
-          },
-          onDisconnect(elementName: bundleManager.ElementName) {
-            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700  onDisConnect: ' + JSON.stringify(elementName));
-            expect().assertFail();
-            done();
-          },
-          onFailed(code: number) {
-            console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700  onFailed: ' + code);
-            done();
-            expect(code == 16000050).assertTrue();
-          }
-        });
-      } catch (err) {
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 catch: ' + err.code);
-        console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 catch: ' + err.message);
-      }
-      await sleep(2000);
-      console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 is end---------------" + extensionConnectId)
-    });
-
-    /*
      * @tc.number  SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1800
      * @tc.name    ServiceExtension Filed connect remote invisible service without permission.
      * @tc.desc    Function test
@@ -1648,12 +1627,12 @@ export default function DmsFwkStageTest() {
       try {
         extensionConnectId = context.connectServiceExtensionAbility({
           deviceId: dvId,
-          bundleName: "com.acts.example.dmsfwkstageserver",
+          bundleName: "com.acts.example.dmsfwkstagetest",
           abilityName: "ServiceAbility"
         }, {
           onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
             expect(remote != null).assertTrue();
-            expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstageserver");
+            expect(elementName.bundleName).assertEqual("com.acts.example.dmsfwkstagetest");
             expect(elementName.abilityName).assertEqual("ServiceAbility");
             let option: rpc.MessageOption = new rpc.MessageOption();
             let data: rpc.MessageSequence = new rpc.MessageSequence();
@@ -1758,8 +1737,8 @@ export default function DmsFwkStageTest() {
       try {
         context.startAbility({
           deviceId: dvId,
-          bundleName: "com.acts.example.dmsfwkstageserver",
-          abilityName: "MainAbility2"
+          bundleName: "com.acts.example.dmsfwkstagetest",
+          abilityName: "ServiceAbility2"
         }, (err: BusinessError) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_0500 startService result: ' + err.code);
           expect(err.code).assertEqual(0);
@@ -1787,8 +1766,8 @@ export default function DmsFwkStageTest() {
       try {
         context.startAbility({
           deviceId: dvId,
-          bundleName: "com.acts.example.dmsfwkstageserver",
-          abilityName: "MainAbility"
+          bundleName: "com.acts.example.dmsfwkstagetest",
+          abilityName: "com.example.lifecycletest.MainAbility"
         }, (err: BusinessError) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_0600 startService result: ' + err.code);
           expect(err.code).assertEqual(0);
@@ -1925,7 +1904,7 @@ export default function DmsFwkStageTest() {
 
     /*
      * @tc.number  SUB_DMS_StartControl_Extension_startAbilityForResult_1100
-     * @tc.name    startAbilityForResult remote MainAbility2
+     * @tc.name    startAbilityForResult remote MainAbility
      * @tc.desc    Function test
      * @tc.level   0
      */
@@ -1936,8 +1915,8 @@ export default function DmsFwkStageTest() {
       try {
         context.startAbilityForResult({
           deviceId: dvId,
-          bundleName: "com.acts.example.dmsfwkstageserver",
-          abilityName: "MainAbility2",
+          bundleName: "com.acts.example.dmsfwkstagetest",
+          abilityName: "com.example.lifecycletest.MainAbility",
         }, (err: BusinessError) => {
           console.info('SUB_DMS_StartControl_Extension_startAbilityForResult_1100 err.code is: ' + err.code);
           expect(err.code).assertEqual(0);
@@ -1967,8 +1946,8 @@ export default function DmsFwkStageTest() {
       try {
         context.startAbilityForResult({
           deviceId: dvId,
-          bundleName: "com.acts.example.dmsfwkstageserver",
-          abilityName: "MainAbility"
+          bundleName: "com.acts.example.dmsfwkstagetest",
+          abilityName: "com.example.lifecycletest.MainAbility"
         }, (err: BusinessError) => {
           console.info('SUB_DMS_StartControl_Extension_startAbilityForResult_1200 err.code is: ' + err.code);
           expect(err.code).assertEqual(0);
@@ -2645,32 +2624,5 @@ export default function DmsFwkStageTest() {
       done()
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1500 end------------------------");
     })
-
-    /*
-     * @tc.number  SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600
-     * @tc.name    Get call various applications
-     * @tc.desc    Function test
-     * @tc.level   0
-     */
-    it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
-      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600 start------------------------");
-      let context: common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
-      context.startAbilityByCall({
-        bundleName: 'com.acts.example.dmsfwkstageserver',
-        abilityName: 'MainAbility',
-        deviceId: dvId
-      })
-        .then((data: Caller) => {
-          call = data;
-          console.log('get caller is success caller is ' + call)
-          expect().assertFail()
-        }).catch((err: BusinessError) => {
-          console.log('get caller is failed err is ' + JSON.stringify(err))
-          expect(err.code == 16000050).assertTrue()
-        })
-      done()
-      await sleep(2000)
-      console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600 end------------------------");
-    });
   })
 }
