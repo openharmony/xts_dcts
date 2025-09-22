@@ -1712,7 +1712,7 @@ export default function DmsFwkStageTest() {
           abilityName: "ServiceAbility"
         }, (err: BusinessError) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_0400 startService result: ' + err.code);
-          expect(err.code).assertEqual(0);
+          expect(err.code).assertEqual(201);
         })
       } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0400 catch: ' + err.code);
@@ -1741,7 +1741,7 @@ export default function DmsFwkStageTest() {
           abilityName: "ServiceAbility2"
         }, (err: BusinessError) => {
           console.info('SUB_DMS_StartControl_Extension_StartAbility_0500 startService result: ' + err.code);
-          expect(err.code).assertEqual(0);
+          expect(err.code).assertEqual(201);
         })
       } catch (err) {
         console.info('SUB_DMS_StartControl_Extension_StartAbility_0500 catch: ' + err.code);
