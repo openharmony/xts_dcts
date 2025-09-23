@@ -191,6 +191,7 @@ static void OnNodeOnline(NodeBasicInfo* info)
 {
     if (info == NULL) {
         LOG("[cb]Online: info is null");
+        return;
     }
     LOG("[cb]Online id:%s, name:%s ,type id:%u", info->networkId, info->deviceName, info->deviceTypeId);
 }
