@@ -21,10 +21,10 @@ export default function testsuite() {
     let deviceTypeInfo = deviceInfo.deviceType;
     console.info('FileioDistributedTest the deviceType is :' + deviceTypeInfo);
     let E_SA_LOAD_FAILED = 4;
-    let DEVICE_FAILED = 2;
+    let E_INVAL_ARG = 2;
     let res = devicemanager.DeviceOpenP2PConnection();
     console.info("FileioDistributedTest: DeviceOpenP2PConnection is： " + res);
-    if (res == E_SA_LOAD_FAILED || res == DEVICE_FAILED){
+    if (res == E_SA_LOAD_FAILED || res == E_INVAL_ARG){
       EmptyTest()
     }else{
       FileioDistributedTest()
