@@ -38,6 +38,7 @@ static const int three_seconds = 3;
 static const int six_seconds = 6;
 static const int ten_seconds = 10;
 
+
 static void SetupCallback(void);
 static void TeardownCallback(void);
 
@@ -126,20 +127,18 @@ static inline int GetNumberInStreamData(const char *streamData)
 static void StreamReceived(int sessionId, const StreamData *data, const StreamData *ext, const StreamFrameInfo *frame)
 {
     g_transTimeEnd = GetCurrentTimeOfMs();
-    int i = GetNumberInStreamData((const char *)data->buf);
-    if (i < 0) {
-        return;
-    }
-    if (i % 60 == 0)
-    {
-        LOG("### RECV counts = %d ", i );
-    } else
-    {
-        LOG("### RECV counts = %d ", i );
-    } 
-    if (data != NULL) {
+    if (data != nullptr) {
+        int i = GetNumberInStreamData((const char *)data->buf);
+        if (i < 0) {
+            return;
+        }
+        if (i % ONE_MINUTE == 0) {
+            LOG("### RECV counts = %d (every 60th count)", i);
+        } else {
+            LOG("### RECV counts = %d ", i);
+        }
         LOG("[cb][stream]Rec sid:%d, data= %.*s.\n", sessionId, data->bufLen, data->buf);
-    } 
+    }
 }
 
 /* session callback for data */
@@ -441,6 +440,7 @@ static void OnNodeOnline(NodeBasicInfo* info)
 {
     if (info == NULL) {
         LOG("[cb]Online: info is null");
+        return;
     }
     LOG("[cb]Online id:%s, name:%s ,type id:%u", info->networkId, info->deviceName, info->deviceTypeId);
 }

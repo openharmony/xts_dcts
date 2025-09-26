@@ -217,10 +217,10 @@ HWTEST_F(SocketTransFuncTest, SUB_DSoftbus_Spec_DCTS_Socket_SendStream_0100, Tes
     int ret;
     char *sendIFrame = (char *)malloc(I_FRAME_SIZE3);
     EXPECT_NE(sendIFrame, nullptr);
-    (void)memset_s(sendIFrame, sizeof(sendIFrame), 0, I_FRAME_SIZE3);
+    (void)memset_s(sendIFrame, I_FRAME_SIZE3, 0, I_FRAME_SIZE3);
     char *sendPFrame = (char *)malloc(P_FRAME_SIZE3);
     EXPECT_NE(sendPFrame, nullptr);
-    (void)memset_s(sendPFrame, sizeof(sendPFrame), 0, P_FRAME_SIZE3);
+    (void)memset_s(sendPFrame, P_FRAME_SIZE3, 0, P_FRAME_SIZE3);
   
     StreamData extStreamData = {0};
     StreamData streamIData = {
@@ -359,10 +359,10 @@ HWTEST_F(SocketTransFuncTest, SUB_DSoftbus_Spec_DCTS_Socket_SendStream_P2P_0100,
     int ret;
     char *sendIFrame = (char *)malloc(I_FRAME_SIZE3);
     EXPECT_NE(sendIFrame, nullptr);
-    (void)memset_s(sendIFrame, sizeof(sendIFrame), 0, I_FRAME_SIZE3);
+    (void)memset_s(sendIFrame, I_FRAME_SIZE3, 0, I_FRAME_SIZE3);
     char *sendPFrame = (char *)malloc(P_FRAME_SIZE3);
     EXPECT_NE(sendPFrame, nullptr);
-    (void)memset_s(sendPFrame, sizeof(sendPFrame), 0, P_FRAME_SIZE3);
+    (void)memset_s(sendPFrame, P_FRAME_SIZE3, 0, P_FRAME_SIZE3);
   
     StreamData extStreamData = {0};
     StreamData streamIData = {
