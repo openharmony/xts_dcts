@@ -173,8 +173,9 @@ class XtsBuild:
     def build(self):
         func_list = [
             self.parse_cmdline,
-            # self.standard_check,
-            self.do_make]
+            self.standard_check,
+            self.do_make
+        ]
         for i in func_list:
             retcode = i()
             if retcode:
