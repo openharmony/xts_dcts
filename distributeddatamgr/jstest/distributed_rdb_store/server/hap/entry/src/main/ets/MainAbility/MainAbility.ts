@@ -27,7 +27,7 @@ const STORE_CONFIG = {
     securityLevel: data_rdb.SecurityLevel.S1
 };
 const STORE_CONFIG1 = {
-    name: "RemoteRdb.db",
+    name: "RemoteRdb1.db",
 };
 export default class MainAbility3 extends Ability {
     onCreate(want, launchParam) {
