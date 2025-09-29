@@ -15,6 +15,7 @@
 import Ability from '@ohos.app.ability.UIAbility'
 import AcCtrl from '@ohos.abilityAccessCtrl'
 import data_rdb from '@ohos.data.relationalStore';
+let AcManager = AcCtrl.createAtManager()
 import datardb from from '@ohos.data.rdb';
 const CREATE_TABLE_TEST = "CREATE TABLE IF NOT EXISTS test (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
 
