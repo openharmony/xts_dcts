@@ -80,7 +80,7 @@ export default class MainAbility3 extends Ability {
         this.setDistributedTables();
 
 
-        let promise1 = datardb.getRdbStore(context, STORE_CONFIG1);
+        let promise1 = datardb.getRdbStore(context, STORE_CONFIG1,1);
         promise1.then(async (back) => {
             rdbStore1 = back;
             console.log("Get RdbStore successfully rdbStore1 " + rdbStore1);
