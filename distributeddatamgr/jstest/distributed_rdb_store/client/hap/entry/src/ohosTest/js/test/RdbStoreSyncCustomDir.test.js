@@ -132,7 +132,7 @@ export default function rdbSyncCustomDirlTest(){
                 remoteHelpers = new RemoteHelper(testservice,gIRemoteObject);
             })
             rdbStore = await data_Rdb.getRdbStore(context, STORE_CONFIG);
-            rdbStore1 = await datardb.getRdbStore(context, STORE_CONFIG1);
+            rdbStore1 = await datardb.getRdbStore(context, STORE_CONFIG1,1);
             console.info(logTag + "create RemoteRdb.db success");
             await rdbStore.executeSql(CREATE_TABLE_TEST, null);
             console.info(logTag + "create  remote RemoteRdb.db success");
