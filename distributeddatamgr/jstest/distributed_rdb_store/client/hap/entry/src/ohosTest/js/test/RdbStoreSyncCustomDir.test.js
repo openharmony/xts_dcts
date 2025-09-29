@@ -21,6 +21,7 @@ import factory from '@ohos.data.distributedData';
 import { UiDriver, BY } from '@ohos.UiTest'
 import data_Rdb from '@ohos.data.relationalStore';
 import featureAbility from '@ohos.ability.featureAbility';
+import datardb from '@ohos.data.rdb';
 
 var context = featureAbility.getContext();
 const CREATE_TABLE_TEST = "CREATE TABLE IF NOT EXISTS test (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
@@ -30,8 +31,12 @@ const STORE_CONFIG = {
     securityLevel: data_Rdb.SecurityLevel.S1,
     customDir:"data/app/el2/100/database/bundleName/rdb"
 }
+const STORE_CONFIG1 = {
+    name: "RemoteRdb1.db",
+}
 
 var rdbStore = undefined;
+var rdbStore1 = undefined;
 var resultSet = undefined;
 let dmInstance = null;
 let localDeviceId = undefined;
@@ -127,9 +132,12 @@ export default function rdbSyncCustomDirlTest(){
                 remoteHelpers = new RemoteHelper(testservice,gIRemoteObject);
             })
             rdbStore = await data_Rdb.getRdbStore(context, STORE_CONFIG);
+            rdbStore1 = await datardb.getRdbStore(context, STORE_CONFIG1);
             console.info(logTag + "create RemoteRdb.db success");
             await rdbStore.executeSql(CREATE_TABLE_TEST, null);
             console.info(logTag + "create  remote RemoteRdb.db success");
+            await rdbStore1.executeSql(CREATE_TABLE_TEST, null);
+            console.info(logTag + "create  remote RemoteRdb1.db success");
             //setDistributedTables
             let back = rdbStore.setDistributedTables(["test"]);
             back.then(() => {
@@ -138,7 +146,13 @@ export default function rdbSyncCustomDirlTest(){
                 console.info("SetDistributedTables failed, err: " + err.code);
             })
             await back;
-    
+            let back1 = rdbStore1.setDistributedTables(["test"]);
+            back1.then(() => {
+                console.info("SetDistributedTables1 successfully.");
+            }).catch((err) => {
+                console.info("SetDistributedTables1 failed, err: " + err.code);
+            })
+            await back1;
 
             dmInstance.on("deviceStateChange", (data) => {
                 console.log("deviceStateChange: " + JSON.stringify(data));
@@ -153,6 +167,12 @@ export default function rdbSyncCustomDirlTest(){
                 rdbStore.on('dataChange', data_Rdb.SubscribeType.SUBSCRIBE_TYPE_REMOTE, storeObserver);
             } catch (err) {
                 console.log('Register observer failed'); 
+            }
+
+            try {
+                rdbStore1.on('dataChange', datardb.SubscribeType.SUBSCRIBE_TYPE_REMOTE, storeObserver);
+            } catch (err) {
+                console.log('Register observer1 failed'); 
             }
             console.info(logTag + '-----------------beforeAll end-----------------');
             done();
@@ -169,6 +189,9 @@ export default function rdbSyncCustomDirlTest(){
                 let deleletPre = new data_Rdb.RdbPredicates("test");
                 await rdbStore.delete(deleletPre);
                 console.info(logTag + "REMOTE afterEach delete rdbStore success");
+                let deleletPre1 = new datardb.RdbPredicates("test");
+                await rdbStore1.delete(deleletPre1);
+                console.info(logTag + "REMOTE1 afterEach delete rdbStore success");
             } catch (error) {
                 console.info(logTag + "REMOTE afterEach delete rdbStore error: " + error.message);
             }
@@ -179,11 +202,15 @@ export default function rdbSyncCustomDirlTest(){
         afterAll(async function (done){
             console.info(logTag + '-----------------afterAll begin-----------------');
             rdbStore = null;
+            rdbStore1 = null;
             await data_Rdb.deleteRdbStore(context, "RemoteRdb.db").then(() => {
                 console.info(logTag + "delete RemoteRdb success");
             });
             await data_Rdb.deleteRdbStore(context, "RemoteS2Rdb.db").then(() => {
                 console.info(logTag + "delete RemoteS2Rdb success");
+            });
+            await datardb.deleteRdbStore(context, "RemoteRdb1.db").then(() => {
+                console.info(logTag + "delete RemoteRdb1 success");
             });
             await sleep(50);
             testservice = new TestService;
@@ -547,6 +574,121 @@ export default function rdbSyncCustomDirlTest(){
             await promise;
             done();
             console.info(logTag + "************* testRdbSyncCustomTest0500 end *************");
+        })
+        /**
+        * @tc.number SUB_DistributedData_RelationalStore_CrossDevice_SDK_RemoteQueryJsAPITest_3300
+        * @tc.name testRdbSyncCustomTest0600
+        * @tc.desc Server rdbStore batchInsert sync
+		* @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 3
+        */
+        it("testRdbSyncCustomTest0600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+            console.info(logTag + "testRdbSyncCustomTest0600 start");
+    
+            //push data to remote device
+            {
+                var u8 = new Uint8Array([1, 2, 3])
+                const valueBucket1 = {
+                    "name": "zhangsan",
+                    "age": 18,
+                    "salary": 100.5,
+                    "blobType": u8
+                }
+                const valueBucket2 = {
+                    "name": "lisi",
+                    "age": 23,
+                    "salary": 200,
+                    "blobType": u8
+                }
+                const valueBucket3 = {
+                    "name": "wangwu",
+                    "age": 20,
+                    "salary": 100.5,
+                    "blobType": u8
+                }
+                const valueBuckets = [valueBucket1, valueBucket2, valueBucket3];
+                await rdbStore1.batchInsert("test", valueBuckets).then((number) => {
+                    console.info(logTag + "testRdbSyncCustomTest0500 batchInsert");
+                    expect(3).assertEqual(number);
+                }).catch((err) =>{
+                    console.info(logTag + "testRdbSyncCustomTest0500 err: " + err.message);
+                    expect().assertFalse();
+                })
+            }
+    
+            let predicates = new datardb.RdbPredicates('test');
+            let resultSet = await rdbStore1.query(predicates);
+            try {
+                console.info(logTag + "testRdbSyncCustomTest0600 resultSet.rowCount: "+ resultSet.rowCount);
+                expect(3).assertEqual(resultSet.rowCount);
+            } catch (e) {
+                console.info("testRdbSyncCustomTest0600 query error " + e);
+                expect().assertFail();
+            }
+            predicates.inDevices(syncDeviceIds);
+            let promise = await rdbStore1.sync(datardb.SyncMode.SYNC_MODE_PUSH, predicates);
+            promise.then((result) => {
+                console.log('testRdbSyncCustomTest0600 sync done.');
+                for (let i = 0; i < result.length; i++) {
+                    console.log('testRdbSyncCustomTest0600 device=' + result[i][0] + ' status=' + result[i][1]);
+                    let status = result[i][1];
+                    expect(status == 0).assertTrue();
+                }
+            }).catch((err) => {
+                console.log('testRdbSyncCustomTest0600 sync failed' + err.code);
+                expect().assertFalse();
+            })
+            await promise;
+            done();
+            console.info(logTag + "************* testRdbSyncCustomTest0600 end *************");
+        })
+        /**
+        * @tc.number SUB_DistributedData_RelationalStore_CrossDevice_SDK_RemoteQueryJsAPITest_3400
+        * @tc.name testRdbSyncCustomTest0700
+        * @tc.desc obtainDistributedTableName callback
+		* @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 3
+        */
+        it("testRdbSyncCustomTest0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+            console.info(logTag + "testRdbSyncCustomTest0700 start");
+            rdbStore1.obtainDistributedTableName(deviceId, "test", (err, tableName) => {
+                if (err) {
+                  console.info('ObtainDistributedTableName failed, err: ' + err)
+                  expect().assertFail();
+                  done();
+                }
+                else
+                {
+                    console.info('ObtainDistributedTableName successfully, tableName=.' + tableName);
+                    expect(tableName).assertEqual("test");
+                    done();
+                }
+                
+              })
+            console.info(logTag + "************* testRdbSyncCustomTest0700 end *************");
+        })
+        /**
+        * @tc.number SUB_DistributedData_RelationalStore_CrossDevice_SDK_RemoteQueryJsAPITest_3500
+        * @tc.name testRdbSyncCustomTest0800
+        * @tc.desc obtainDistributedTableName promise
+		* @tc.size MediumTest
+        * @tc.type Function
+        * @tc.level Level 3
+        */
+        it("testRdbSyncCustomTest0800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async function (done) {
+            console.info(logTag + "testRdbSyncCustomTest0800 start");
+            rdbStore1.obtainDistributedTableName(deviceId, "test").then((tableName) =>{
+                console.info('ObtainDistributedTableName successfully, tableName=.' + tableName);
+                expect(tableName).assertEqual("test");
+                done();    
+              }).catch((err)=>{
+                console.info('ObtainDistributedTableName failed, err: ' + err)
+                expect().assertFail();
+                done();
+              })
+            console.info(logTag + "************* testRdbSyncCustomTest0800 end *************");
         })
     })
 }
