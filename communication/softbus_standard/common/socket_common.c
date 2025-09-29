@@ -1,17 +1,17 @@
 /*
- * Copyright (c) 2024  Huawei Device Co., Ltd.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright (c) 2024  Huawei Device Co., Ltd.
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
 #include "socket_common.h"
 
@@ -177,7 +177,7 @@ static void OnBindData(int32_t socket, PeerSocketInfo info)
 {
     int successcount = 0;
     LOG("[cb][Ctrl]OnBind success  {socket:%d, name:%s, deviceId:%s, pkgName:%s, dataType:%d}", socket,
-       info.name, info.networkId, info.pkgName, info.dataType);
+        info.name, info.networkId, info.pkgName, info.dataType);
     if (strcmp(info.networkId, g_networkId) != 0)
     {
         LOG("PeerSocket Info peer deviceId and check remote networkId are diff");
@@ -195,9 +195,9 @@ static void OnBindData(int32_t socket, PeerSocketInfo info)
     }
     if(successcount == 3)
     {
-       g_waitFlag = WAIT_SUCCESS_VALUE;
+        g_waitFlag = WAIT_SUCCESS_VALUE;
     }else{
-       g_waitFlag = WAIT_FAIL_VALUE;
+        g_waitFlag = WAIT_FAIL_VALUE;
     }
 }
 
@@ -220,8 +220,8 @@ static int CheckReceiveSocketData(int socket, const void *data, unsigned int dat
     }else
     {
         LOG("[check]socket/size failed socket :%d, expectsocket:%d, size:%d, expectsize:%d",
-         socket, g_currentSocket4Data, dataLen, g_expectDataSize);
-         return SOFTBUS_ERR;
+        socket, g_currentSocket4Data, dataLen, g_expectDataSize);
+        return SOFTBUS_ERR;
     }
     if (g_expectDataContent == NULL)
     {
@@ -231,11 +231,11 @@ static int CheckReceiveSocketData(int socket, const void *data, unsigned int dat
     {
         int cmpRst = strncmp(g_expectDataContent, (char*)data, dataLen);
         if (cmpRst == 0) {
-           LOG("[check] cmp content ok");
-           return SOFTBUS_OK;
+            LOG("[check] cmp content ok");
+            return SOFTBUS_OK;
         } else {
-           LOG("[check] cmp content fail[exp:%s,real:%s]", g_expectDataContent, (char*)data);
-           return SOFTBUS_ERR;
+            LOG("[check] cmp content fail[exp:%s,real:%s]", g_expectDataContent, (char*)data);
+            return SOFTBUS_ERR;
         }
     }
 }
@@ -336,6 +336,9 @@ static void OnFileData(int32_t socket, FileEvent *event)
 
 static void OnQosData(int32_t socket, QoSEvent eventId, const QosTV *qos, uint32_t qosCunt)
 {
+    if (qos == NULL || qosCunt == 0) {
+        LOG("[cb][data] OnQos Invalid qos data or count");
+    }
     LOG("[cb][data] OnQos {socket:%d, event:%d}", socket, eventId);
 }
 
@@ -405,13 +408,13 @@ int Wait4Socket(int timeout, WaitSocketType type)
                 return SOFTBUS_ERR;
             }
             break;
-         case SOCKET_STREAM:
+        case SOCKET_STREAM:
             if (g_waitFlagStream != WAIT_SUCCESS_VALUE) {
                 LOG("Wait4socket[Stream] fail[exp:%d, real:%d]", WAIT_SUCCESS_VALUE, g_waitFlagStream);
                 return SOFTBUS_ERR;
             }
             break;
-         case SOCKET_SHUTDOWN:
+        case SOCKET_SHUTDOWN:
             if (g_waitFlag4Shutdown != WAIT_SUCCESS_VALUE) {
                 LOG("Wait4socket[SHUTDOWN] fail[exp:%d, real:%d]", WAIT_SUCCESS_VALUE, g_waitFlag4Shutdown);
                 return SOFTBUS_ERR;
@@ -468,7 +471,6 @@ int SendSocket4Data(DataType type, int size)
         free(g_expectDataContent);
         return SOFTBUS_ERR;
     }
-   
     LOG("[send data]call SendX success");
     free(g_expectDataContent);
     g_expectDataContent = NULL;
@@ -567,7 +569,6 @@ void TestSetUp(void)
 
 void TestTearDown(void)
 {
-   
     if (g_socketlistenerdata != NULL) {
         free(g_socketlistenerdata);
         g_socketlistenerdata = NULL;

@@ -32,7 +32,10 @@ public:
     void TearDown();
 };
 
-void TransFuncTest::SetUp() {}
+void TransFuncTest::SetUp()
+{
+    LOG("SetUp done");
+}
 
 void TransFuncTest::TearDown()
 {
@@ -41,7 +44,7 @@ void TransFuncTest::TearDown()
 
 void TransFuncTest::SetUpTestCase()
 {
-    LOG("SetUp begin");
+    LOG("SetUpTestCase begin");
     AddPermission();
     sleep(1);
     OHOS::Security::AccessToken::AccessTokenKit::ReloadNativeTokenInfo();
@@ -52,7 +55,7 @@ void TransFuncTest::SetUpTestCase()
     ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
     ASSERT_EQ(SOFTBUS_OK, ret) << "get node fail,please check network";
 
-    LOG("SetUp end");
+    LOG("SetUpTestCase end");
 }
 
 void TransFuncTest::TearDownTestCase()
