@@ -15,13 +15,17 @@
 import Ability from '@ohos.app.ability.UIAbility'
 import AcCtrl from '@ohos.abilityAccessCtrl'
 import data_rdb from '@ohos.data.relationalStore';
-let AcManager = AcCtrl.createAtManager()
+import datardb from from '@ohos.data.rdb';
 const CREATE_TABLE_TEST = "CREATE TABLE IF NOT EXISTS test (" + "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "name TEXT NOT NULL, " + "age INTEGER, " + "salary REAL, " + "blobType BLOB)";
 
 var rdbStore = undefined;
+var rdbStore1 = undefined;
 const STORE_CONFIG = {
     name: "RemoteRdb.db",
     securityLevel: data_rdb.SecurityLevel.S1
+};
+const STORE_CONFIG1 = {
+    name: "RemoteRdb.db",
 };
 export default class MainAbility3 extends Ability {
     onCreate(want, launchParam) {
@@ -72,6 +76,33 @@ export default class MainAbility3 extends Ability {
         await promise;
         await rdbStore.executeSql(CREATE_TABLE_TEST, null);
         this.setDistributedTables();
+
+
+        let promise1 = datardb.getRdbStore(context, STORE_CONFIG1);
+        promise1.then(async (back) => {
+            rdbStore1 = back;
+            console.log("Get RdbStore successfully rdbStore1 " + rdbStore1);
+        }).catch((err) => {
+            console.log("Get RdbStore1 failed, err: " + err);
+        })
+        await promise1;
+        await rdbStore1.executeSql(CREATE_TABLE_TEST, null);
+        await rdbStore1.setDistributedTables(["test"]);
+        console.info("SetDistributedTables1 successfully.");
+        const valueBucket = {
+            "id": 1,
+            "name": "Lisa",
+            "age": 18,
+            "salary": 100.5,
+            "blobType": new Uint8Array([1, 2, 3, 4, 5])
+        }
+        console.log("Insert insertData start1.");
+        try{
+            let rowId = await rdbStore1.insert("test", valueBucket);
+            console.log("Insert1 is successful, rowId = " + rowId);
+        }catch(err){
+            console.log("Insert1 is failed err: "+err.code+" "+err.message);
+        }
     }
     setDistributedTables(){
         console.info("setDistributedTables before");
