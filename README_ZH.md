@@ -555,7 +555,7 @@ pip install setuptools==50.0.0
 
 ## 相关仓<a name="section1371113476307"></a>
 
-xts\_dcts
+[xts\_acts](https://gitcode.com/openharmony/xts_acts)
 
-xts\_tools
+[xts\_tools](https://gitcode.com/openharmony/xts_tools)
 
