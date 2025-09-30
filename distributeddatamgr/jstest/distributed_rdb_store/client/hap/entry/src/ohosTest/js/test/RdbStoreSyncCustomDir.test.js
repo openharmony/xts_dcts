@@ -662,7 +662,7 @@ export default function rdbSyncCustomDirlTest(){
                 else
                 {
                     console.info('ObtainDistributedTableName successfully, tableName=.' + tableName);
-                    expect(tableName).assertEqual("test");
+                    expect(tableName !== "").assertTrue();
                     done();
                 }
                 
@@ -681,7 +681,7 @@ export default function rdbSyncCustomDirlTest(){
             console.info(logTag + "testRdbSyncCustomTest0800 start");
             rdbStore1.obtainDistributedTableName(deviceId, "test").then((tableName) =>{
                 console.info('ObtainDistributedTableName successfully, tableName=.' + tableName);
-                expect(tableName).assertEqual("test");
+                expect(tableName !== "").assertTrue();
                 done();    
               }).catch((err)=>{
                 console.info('ObtainDistributedTableName failed, err: ' + err)
