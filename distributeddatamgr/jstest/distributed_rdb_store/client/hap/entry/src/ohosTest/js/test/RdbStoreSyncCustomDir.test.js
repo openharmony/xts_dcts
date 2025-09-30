@@ -639,19 +639,6 @@ export default function rdbSyncCustomDirlTest(){
                 console.log('testRdbSyncCustomTest0600 sync failed' + err.code);
                 expect().assertFalse();
             }
-            //let promise = await rdbStore1.sync(datardb.SyncMode.SYNC_MODE_PUSH, predicates);
-            // promise.then((result) => {
-            //     console.log('testRdbSyncCustomTest0600 sync done.');
-            //     for (let i = 0; i < result.length; i++) {
-            //         console.log('testRdbSyncCustomTest0600 device=' + result[i][0] + ' status=' + result[i][1]);
-            //         let status = result[i][1];
-            //         expect(status == 0).assertTrue();
-            //     }
-            // }).catch((err) => {
-            //     console.log('testRdbSyncCustomTest0600 sync failed' + err.code);
-            //     expect().assertFalse();
-            // })
-            // await promise;
             done();
             console.info(logTag + "************* testRdbSyncCustomTest0600 end *************");
         })
