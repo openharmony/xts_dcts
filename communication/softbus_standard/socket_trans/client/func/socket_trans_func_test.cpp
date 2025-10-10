@@ -32,13 +32,19 @@ public:
     void TearDown();
 };
 
-void SocketTransFuncTest::SetUp() {}
+void SocketTransFuncTest::SetUp()
+{
+    LOG("SetUp done");
+}
 
-void SocketTransFuncTest::TearDown() {}
+void SocketTransFuncTest::TearDown()
+{
+    LOG("TearDown done");
+}
 
 void SocketTransFuncTest::SetUpTestCase()
 {
-    LOG("SetUp begin");
+    LOG("SetUpTestCase begin");
     AddPermission();
     sleep(1);
     OHOS::Security::AccessToken::AccessTokenKit::ReloadNativeTokenInfo();
@@ -52,7 +58,7 @@ void SocketTransFuncTest::SetUpTestCase()
 
     system(" truncate -s 4M /data/4M.tar");
     system(" truncate -s 8M /data/8M.tar");
-    LOG("SetUp end");
+    LOG("SetUpTestCase end");
 }
 
 void SocketTransFuncTest::TearDownTestCase()

@@ -38,7 +38,6 @@ static const int three_seconds = 3;
 static const int six_seconds = 6;
 static const int ten_seconds = 10;
 
-
 static void SetupCallback(void);
 static void TeardownCallback(void);
 
@@ -172,6 +171,7 @@ static void OnDataMessageReceived(int sessionId, const void* data, unsigned int 
         LOG("[cb][data]mesg received   invalid session id[%d]", sessionId);
         return;
     }
+    (void)data;
     LOG("[cb][data]mesg received   sid:%d, data-len:%d", sessionId, dataLen);
 }
 
@@ -368,6 +368,7 @@ static void OnPerfMessageReceived(int sessionId, const void* data, unsigned int 
         LOG("[cb][perf]mesg received invalid session id[%d]", sessionId);
         return;
     }
+    (void)data;
     LOG("[cb][perf]mesg received sid:%d, data-len:%d", sessionId, dataLen);
 }
 
@@ -390,6 +391,7 @@ static void OnPassBytesReceived(int sessionId, const void* data, unsigned int da
         LOG("[cb][pass]byte received invalid session id[%d]", sessionId);
         return;
     }
+    (void)data;
     LOG("[cb][pass]byte received sid:%d, data-len:%d", sessionId, dataLen);
 }
 
@@ -399,6 +401,7 @@ static void OnPassMessageReceived(int sessionId, const void* data, unsigned int 
         LOG("[cb][pass]mesg received invalid session id[%d]", sessionId);
         return;
     }
+    (void)data;
     LOG("[cb][pass]mesg received sid:%d, data-len:%d", sessionId, dataLen);
 }
 
@@ -432,6 +435,7 @@ static void OnProxyMessageReceived(int sessionId, const void* data, unsigned int
         LOG("[cb][Proxy]mesg received   invalid session id[%d]", sessionId);
         return;
     }
+    (void)data;
     LOG("[cb][Proxy]mesg received   sid:%d, data-len:%d", sessionId, dataLen);
 }
 

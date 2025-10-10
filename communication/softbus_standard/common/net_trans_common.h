@@ -16,6 +16,7 @@
 #ifndef NET_TRANS_COMMON_H
 #define NET_TRANS_COMMON_H
 
+#include <math.h>
 #include <pthread.h>
 #include <securec.h>
 #include <sys/time.h>
@@ -214,8 +215,8 @@ int OpenSessionBatch4Data(char groupId[][GROUP_ID_LEN], int* sessionId, int coun
 int OpenSessionBatch4Ctl(char groupId[][GROUP_ID_LEN], int* sessionId, int count);
 int OpenSession4DataByP2p(void);
 int OpenSession4ProxyByP2p(void);
-int CloseSessionBatch4Data(int* sessionId, int count);
-int CloseSessionBatch4Ctl(int* sessionId, int count);
+int CloseSessionBatch4Data(const int* sessionId, int count);
+int CloseSessionBatch4Ctl(const int* sessionId, int count);
 int GetCurrentSessionId4Data(void);
 int GetCurrentSessionId4Ctl(void);
 int GetCurrentSessionId4Proxy(void);

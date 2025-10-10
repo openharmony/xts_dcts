@@ -91,7 +91,8 @@ public:
     void TearDown();
 };
 
-void TransFileFuncTest::SetUp() {
+void TransFileFuncTest::SetUp()
+{
     // set listener
     int ret = SetFileSendListener(DEF_PKG_NAME, SESSION_NAME_FILE, GetSendFileListener());
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
@@ -99,11 +100,14 @@ void TransFileFuncTest::SetUp() {
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SetFileSendListener fail";
 }
 
-void TransFileFuncTest::TearDown() {}
+void TransFileFuncTest::TearDown()
+{
+    LOG("TearDown done");
+}
 
 void TransFileFuncTest::SetUpTestCase()
 {
-    LOG("SetUp begin");
+    LOG("SetUpTestCase begin");
     AddPermission();
     sleep(1);
     OHOS::Security::AccessToken::AccessTokenKit::ReloadNativeTokenInfo();
@@ -124,7 +128,7 @@ void TransFileFuncTest::SetUpTestCase()
     system(" truncate -s 3M /data/richu-002.jpg");
     system(" truncate -s 10M /data/richu-003.jpg");
 
-    LOG("SetUp end");
+    LOG("SetUpTestCase end");
 }
 
 void TransFileFuncTest::TearDownTestCase()

@@ -68,6 +68,7 @@ static int32_t g_recvByteStat4Control[MAX_SESSION_NUM] = { 0, 0, 0, 0, 0, 0, 0, 
 static uint64_t g_transTimeEnd;
 static uint64_t g_tokenId;
 static pthread_barrier_t* g_barrier = NULL;
+const double COMPLETE_PROGRESS = 100.0;
 
 void sleepn(int n)
 {
@@ -201,18 +202,27 @@ char* GetSoftbusPid(void)
 
 static int OnReceiveFileStarted(int sessionId, const char* files, int fileCnt)
 {
-    LOG("[recv file]start,sid:%d, fileCnt:%d", sessionId, fileCnt);
+    LOG("[recv file]start,sid:%d, file: %s, fileCnt:%d", sessionId, files, fileCnt);
     return 0;
 }
 
 static int OnReceiveFileProcess(int sessionId, const char* firstFile, uint64_t bytesUpload, uint64_t bytesTotal)
 {
+    double progress = (bytesTotal == 0) ? 0.0 : (bytesUpload / (double)bytesTotal) * COMPLETE_PROGRESS;
+    progress = round(progress);
+    if (progress == 0.0) {
+        LOG("########## Session %d: Start Receive: %s\n", sessionId, firstFile);
+    } else if (progress == COMPLETE_PROGRESS) {
+        LOG("########## Session %d: file %s Upload finish\n", sessionId, firstFile);
+    } else {
+        LOG("########## Session %d: file %s Upload %.2f%%\n", sessionId, firstFile, progress);
+    }
     return 0;
 }
 
 static void OnReceiveFileFinished(int sessionId, const char* files, int fileCnt)
 {
-    LOG("[recv file]finish,sid:%d, fileCnt:%d", sessionId, fileCnt);
+    LOG("[recv file]finish,sid:%d, file: %s, fileCnt:%d", sessionId, files, fileCnt);
 }
 
 static void OnRecvFileTransError(int sessionId)
@@ -222,6 +232,15 @@ static void OnRecvFileTransError(int sessionId)
 
 static int OnSendFileProcess(int sessionId, uint64_t bytesUpload, uint64_t bytesTotal)
 {
+    double progress = (bytesTotal == 0) ? 0.0 : (bytesUpload / (double)bytesTotal) * COMPLETE_PROGRESS;
+    progress = round(progress);
+    if (progress == 0.0) {
+        LOG("########## Session %d: Start send file\n", sessionId);
+    } else if (progress == COMPLETE_PROGRESS) {
+        LOG("########## Session %d: file send finish\n", sessionId);
+    } else {
+        LOG("########## Session %d: file send %.2f%%\n", sessionId, progress);
+    }
     return 0;
 }
 
@@ -474,6 +493,7 @@ static void PassiveMessageReceived(int sessionId, const void* data, unsigned int
 static int PerfSessionOpened(int sessionId, int result)
 {
     if (result == SOFTBUS_OK) {
+        LOG("[cb][perf]open session result success, sid: %d, ret:%d", sessionId, result);
         g_waitFlag = WAIT_SUCCESS_VALUE;
     } else {
         LOG("[cb][perf]open session result fail, ret:%d", result);
@@ -490,13 +510,18 @@ static void PerfSessionClosed(int sessionId)
 static void PerfBytesReceived(int sessionId, const void* data, unsigned int dataLen)
 {
     g_transTimeEnd = GetCurrentTimeOfMs();
-
-    LOG("[cb][perf]Byte recv");
-    g_waitFlag = WAIT_SUCCESS_VALUE;
+    LOG("[cb][proxy]ByteRec sid:%d, data len:%u", sessionId, dataLen);
+    if (data == NULL) {
+        LOG("[cb][proxy]ByteRec invalid data=null sid:[%d]", sessionId);
+        g_waitFlag4Proxy = WAIT_FAIL_VALUE;
+    } else {
+        g_waitFlag4Proxy = WAIT_SUCCESS_VALUE;
+    }
 }
 
 static void PerfMessageReceived(int sessionId, const void* data, unsigned int dataLen)
 {
+    (void)data;
     LOG("[cb][perf]Message recv");
 }
 
@@ -950,7 +975,7 @@ int OpenSessionBatch4Ctl(char groupId[][GROUP_ID_LEN], int* sessionId, int count
     return rstFlag;
 }
 
-int CloseSessionBatch4Data(int* sessionId, int count)
+int CloseSessionBatch4Data(const int* sessionId, int count)
 {
     for (int i = 0; i < count; i++) {
         int sid = *(sessionId + i);
@@ -962,7 +987,7 @@ int CloseSessionBatch4Data(int* sessionId, int count)
     return SOFTBUS_OK;
 }
 
-int CloseSessionBatch4Ctl(int* sessionId, int count)
+int CloseSessionBatch4Ctl(const int* sessionId, int count)
 {
     for (int i = 0; i < count; i++) {
         int sid = *(sessionId + i);

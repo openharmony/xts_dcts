@@ -31,13 +31,19 @@ class TransStreamTest : public testing::Test {
     void TearDown();
 };
 
-void TransStreamTest::SetUp() {}
+void TransStreamTest::SetUp()
+{
+    LOG("SetUp done");
+}
 
-void TransStreamTest::TearDown() {}
+void TransStreamTest::TearDown()
+{
+    LOG("TearDown done");
+}
 
 void TransStreamTest::SetUpTestCase()
 {
-    LOG("SetUp begin");
+    LOG("SetUpTestCase begin");
     AddPermission();
     sleep(1);
     OHOS::Security::AccessToken::AccessTokenKit::ReloadNativeTokenInfo();
@@ -47,6 +53,7 @@ void TransStreamTest::SetUpTestCase()
     EXPECT_EQ(SOFTBUS_OK, ret) << "call reg node state callback fail";
     ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
     ASSERT_EQ(SOFTBUS_OK, ret) << "get node fail,please check network";
+    LOG("SetUpTestCase end");
 }
 
 void TransStreamTest::TearDownTestCase()

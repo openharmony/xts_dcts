@@ -115,6 +115,7 @@ static void OnMessage(int32_t socket, const void* data, unsigned int dataLen)
         LOG("[cb][data]mesg received   invalid socket id[%d]", socket);
         return;
     }
+    (void)data;
     LOG("[cb][data]mesg received   socket:%d, data-len:%d", socket, dataLen);
 }
 
