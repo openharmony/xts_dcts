@@ -82,13 +82,19 @@ public:
     void TearDown();
 };
 
-void TransSessionFuncTest::SetUp() {}
+void TransSessionFuncTest::SetUp()
+{
+    LOG("SetUp begin");
+}
 
-void TransSessionFuncTest::TearDown() {}
+void TransSessionFuncTest::TearDown()
+{
+    LOG("TearDown begin");
+}
 
 void TransSessionFuncTest::SetUpTestCase()
 {
-    LOG("SetUp begin");
+    LOG("SetUpTestCase begin");
     AddPermission();
     sleep(1);
     OHOS::Security::AccessToken::AccessTokenKit::ReloadNativeTokenInfo();
@@ -99,7 +105,7 @@ void TransSessionFuncTest::SetUpTestCase()
     ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
     ASSERT_EQ(SOFTBUS_OK, ret) << "get node fail,please check network";
     system(" truncate -s 8M /data/8M.tar");
-    LOG("SetUp end");
+    LOG("SetUpTestCase end");
 }
 
 void TransSessionFuncTest::TearDownTestCase()

@@ -126,20 +126,18 @@ static inline int GetNumberInStreamData(const char *streamData)
 static void StreamReceived(int sessionId, const StreamData *data, const StreamData *ext, const StreamFrameInfo *frame)
 {
     g_transTimeEnd = GetCurrentTimeOfMs();
-    int i = GetNumberInStreamData((const char *)data->buf);
-    if (i < 0) {
-        return;
-    }
-    if (i % 60 == 0)
-    {
-        LOG("### RECV counts = %d ", i );
-    } else
-    {
-        LOG("### RECV counts = %d ", i );
-    } 
-    if (data != NULL) {
+    if (data != nullptr) {
+        int i = GetNumberInStreamData((const char *)data->buf);
+        if (i < 0) {
+            return;
+        }
+        if (i % ONE_MINUTE == 0) {
+            LOG("### RECV counts = %d (every 60th count)", i);
+        } else {
+            LOG("### RECV counts = %d ", i);
+        }
         LOG("[cb][stream]Rec sid:%d, data= %.*s.\n", sessionId, data->bufLen, data->buf);
-    } 
+    }
 }
 
 /* session callback for data */
@@ -173,6 +171,7 @@ static void OnDataMessageReceived(int sessionId, const void* data, unsigned int 
         LOG("[cb][data]mesg received   invalid session id[%d]", sessionId);
         return;
     }
+    (void)data;
     LOG("[cb][data]mesg received   sid:%d, data-len:%d", sessionId, dataLen);
 }
 
@@ -369,6 +368,7 @@ static void OnPerfMessageReceived(int sessionId, const void* data, unsigned int 
         LOG("[cb][perf]mesg received invalid session id[%d]", sessionId);
         return;
     }
+    (void)data;
     LOG("[cb][perf]mesg received sid:%d, data-len:%d", sessionId, dataLen);
 }
 
@@ -391,6 +391,7 @@ static void OnPassBytesReceived(int sessionId, const void* data, unsigned int da
         LOG("[cb][pass]byte received invalid session id[%d]", sessionId);
         return;
     }
+    (void)data;
     LOG("[cb][pass]byte received sid:%d, data-len:%d", sessionId, dataLen);
 }
 
@@ -400,6 +401,7 @@ static void OnPassMessageReceived(int sessionId, const void* data, unsigned int 
         LOG("[cb][pass]mesg received invalid session id[%d]", sessionId);
         return;
     }
+    (void)data;
     LOG("[cb][pass]mesg received sid:%d, data-len:%d", sessionId, dataLen);
 }
 
@@ -433,6 +435,7 @@ static void OnProxyMessageReceived(int sessionId, const void* data, unsigned int
         LOG("[cb][Proxy]mesg received   invalid session id[%d]", sessionId);
         return;
     }
+    (void)data;
     LOG("[cb][Proxy]mesg received   sid:%d, data-len:%d", sessionId, dataLen);
 }
 
@@ -441,6 +444,7 @@ static void OnNodeOnline(NodeBasicInfo* info)
 {
     if (info == NULL) {
         LOG("[cb]Online: info is null");
+        return;
     }
     LOG("[cb]Online id:%s, name:%s ,type id:%u", info->networkId, info->deviceName, info->deviceTypeId);
 }
