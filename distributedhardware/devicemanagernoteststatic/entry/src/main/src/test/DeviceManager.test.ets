@@ -314,7 +314,7 @@ export default function DeviceManager_test() {
           const e = err as BusinessError;
           hilog.error(domain, tag,
             'unbindTarget test FAILED: Code = %{public}d, Msg = %{public}s', e.code, e.message);
-          if (e.code === 11600101) {
+          if (e.code === 401) {
             hilog.info(domain, tag, 'invalid input param ');
             expect(true).assertTrue();
           }
