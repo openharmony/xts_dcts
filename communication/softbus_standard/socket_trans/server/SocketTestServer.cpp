@@ -115,6 +115,7 @@ static void OnMessage(int32_t socket, const void* data, unsigned int dataLen)
         LOG("[cb][data]mesg received   invalid socket id[%d]", socket);
         return;
     }
+    (void)data;
     LOG("[cb][data]mesg received   socket:%d, data-len:%d", socket, dataLen);
 }
 
@@ -191,6 +192,7 @@ static void OnNodeOnline(NodeBasicInfo* info)
 {
     if (info == NULL) {
         LOG("[cb]Online: info is null");
+        return;
     }
     LOG("[cb]Online id:%s, name:%s ,type id:%u", info->networkId, info->deviceName, info->deviceTypeId);
 }

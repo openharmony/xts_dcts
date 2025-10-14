@@ -32,13 +32,19 @@ public:
     void TearDown();
 };
 
-void SocketTransFuncTest::SetUp() {}
+void SocketTransFuncTest::SetUp()
+{
+    LOG("SetUp done");
+}
 
-void SocketTransFuncTest::TearDown() {}
+void SocketTransFuncTest::TearDown()
+{
+    LOG("TearDown done");
+}
 
 void SocketTransFuncTest::SetUpTestCase()
 {
-    LOG("SetUp begin");
+    LOG("SetUpTestCase begin");
     AddPermission();
     sleep(1);
     OHOS::Security::AccessToken::AccessTokenKit::ReloadNativeTokenInfo();
@@ -52,7 +58,7 @@ void SocketTransFuncTest::SetUpTestCase()
 
     system(" truncate -s 4M /data/4M.tar");
     system(" truncate -s 8M /data/8M.tar");
-    LOG("SetUp end");
+    LOG("SetUpTestCase end");
 }
 
 void SocketTransFuncTest::TearDownTestCase()
@@ -217,10 +223,10 @@ HWTEST_F(SocketTransFuncTest, SUB_DSoftbus_Spec_DCTS_Socket_SendStream_0100, Tes
     int ret;
     char *sendIFrame = (char *)malloc(I_FRAME_SIZE3);
     EXPECT_NE(sendIFrame, nullptr);
-    (void)memset_s(sendIFrame, sizeof(sendIFrame), 0, I_FRAME_SIZE3);
+    (void)memset_s(sendIFrame, I_FRAME_SIZE3, 0, I_FRAME_SIZE3);
     char *sendPFrame = (char *)malloc(P_FRAME_SIZE3);
     EXPECT_NE(sendPFrame, nullptr);
-    (void)memset_s(sendPFrame, sizeof(sendPFrame), 0, P_FRAME_SIZE3);
+    (void)memset_s(sendPFrame, P_FRAME_SIZE3, 0, P_FRAME_SIZE3);
   
     StreamData extStreamData = {0};
     StreamData streamIData = {
@@ -359,10 +365,10 @@ HWTEST_F(SocketTransFuncTest, SUB_DSoftbus_Spec_DCTS_Socket_SendStream_P2P_0100,
     int ret;
     char *sendIFrame = (char *)malloc(I_FRAME_SIZE3);
     EXPECT_NE(sendIFrame, nullptr);
-    (void)memset_s(sendIFrame, sizeof(sendIFrame), 0, I_FRAME_SIZE3);
+    (void)memset_s(sendIFrame, I_FRAME_SIZE3, 0, I_FRAME_SIZE3);
     char *sendPFrame = (char *)malloc(P_FRAME_SIZE3);
     EXPECT_NE(sendPFrame, nullptr);
-    (void)memset_s(sendPFrame, sizeof(sendPFrame), 0, P_FRAME_SIZE3);
+    (void)memset_s(sendPFrame, P_FRAME_SIZE3, 0, P_FRAME_SIZE3);
   
     StreamData extStreamData = {0};
     StreamData streamIData = {

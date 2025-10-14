@@ -32,13 +32,19 @@ public:
     void TearDown();
 };
 
-void TransReliabilityTest::SetUp() {}
+void TransReliabilityTest::SetUp()
+{
+    LOG("SetUp begin");
+}
 
-void TransReliabilityTest::TearDown() {}
+void TransReliabilityTest::TearDown()
+{
+    LOG("TearDown begin");
+}
 
 void TransReliabilityTest::SetUpTestCase()
 {
-    LOG("SetUp begin");
+    LOG("SetUpTestCase begin");
     AddPermission();
     sleep(1);
     OHOS::Security::AccessToken::AccessTokenKit::ReloadNativeTokenInfo();
@@ -48,7 +54,7 @@ void TransReliabilityTest::SetUpTestCase()
     EXPECT_EQ(SOFTBUS_OK, ret) << "call reg node state callback fail";
     ret = CheckRemoteDeviceIsNull(BOOL_TRUE);
     ASSERT_EQ(SOFTBUS_OK, ret) << "get node fail,please check network";
-    LOG("SetUp end");
+    LOG("SetUpTestCase end");
 }
 
 void TransReliabilityTest::TearDownTestCase()
