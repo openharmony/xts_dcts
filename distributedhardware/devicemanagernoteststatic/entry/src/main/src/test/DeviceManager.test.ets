@@ -60,13 +60,8 @@ export default function DeviceManager_test() {
         } catch (err) {
           hilog.info(domain, tag, '%{public}s', 'SUB_DH_DeviceManager_Dcts_0100 failed for ' + err);
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_0100 END--------------------------');
       });
@@ -95,13 +90,8 @@ export default function DeviceManager_test() {
           hilog.error(domain, tag,
             'Test failed with error - Code: %{public}d, Msg: %{public}s',
             e.code, e.message);
-          if (e.code === 11600101) {
-            hilog.info(domain, tag, 'invalid input param ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'invalid input param ');
+          expect(e.code === 11600101).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_0200 END--------------------------');
       });
@@ -132,13 +122,8 @@ export default function DeviceManager_test() {
         } catch (err) {
           hilog.info(domain, tag, '%{public}s', 'SUB_DH_DeviceManager_Dcts_0300 failed for ' + err);
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_0300 END--------------------------');
       });
@@ -163,23 +148,13 @@ export default function DeviceManager_test() {
           hilog.info(domain, tag, 'getLocalDeviceNetworkId: %{public}s', dmNetworkId);
           expect(dmNetworkId.length > 0).assertTrue();
           const deviceName = dmInstance.getDeviceName(dmNetworkId);
-          if (deviceName === null || deviceName === undefined) {
-            hilog.warn(domain, tag, 'getDeviceName failed for networkId: %{public}s', dmNetworkId);
-            expect(false).assertTrue();
-          } else {
-            hilog.info(domain, tag, 'Device Name: %{public}s', deviceName);
-            hilog.info(domain, tag, `Device Name Length: ${deviceName.length}`);
-            expect(deviceName.length > 0).assertTrue();
-          }
+          hilog.info(domain, tag, 'Device Name: %{public}s', deviceName);
+          hilog.info(domain, tag, `Device Name Length: ${deviceName.length}`);
+          expect(deviceName.length > 0).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_0400 END--------------------------');
       })
@@ -207,13 +182,8 @@ export default function DeviceManager_test() {
           hilog.error(domain, tag,
             'Test failed with error - Code: %{public}d, Msg: %{public}s',
             e.code, e.message);
-          if (e.code === 11600101) {
-            hilog.info(domain, tag, 'invalid input param ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'invalid input param ');
+          expect(e.code === 11600101).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_0500 END--------------------------');
       });
@@ -239,13 +209,8 @@ export default function DeviceManager_test() {
           expect(dmNetworkId.length > 0).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_0600 END--------------------------');
       });
@@ -277,16 +242,8 @@ export default function DeviceManager_test() {
           const e = err as BusinessError;
           hilog.error(domain, tag,
             'unbindTarget test FAILED: Code = %{public}d, Msg = %{public}s', e.code, e.message);
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }else if (e.code === 11600101) {
-            hilog.info(domain, tag, 'UnbindTarget for failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'UnbindTarget for failed ');
+          expect(e.code === 11600101).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_0700 END------------------------');
       })
@@ -314,13 +271,8 @@ export default function DeviceManager_test() {
           const e = err as BusinessError;
           hilog.error(domain, tag,
             'unbindTarget test FAILED: Code = %{public}d, Msg = %{public}s', e.code, e.message);
-          if (e.code === 401) {
-            hilog.info(domain, tag, 'invalid input param ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'invalid input param ');
+          expect(e.code === 401).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_0800 END--------------------------');
       });
@@ -348,13 +300,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_0900 END--------------------------');
       });
@@ -380,13 +327,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1000 END--------------------------');
       });
@@ -414,13 +356,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1100 END--------------------------');
       });
@@ -448,13 +385,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1200 END--------------------------');
       });
@@ -482,13 +414,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1300 END--------------------------');
       });
@@ -516,13 +443,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1400 END--------------------------');
       });
@@ -549,13 +471,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
       });
 
@@ -582,13 +499,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1600 END--------------------------');
       });
@@ -616,13 +528,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1700 END--------------------------');
       });
@@ -650,13 +557,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1800 END--------------------------');
       });
@@ -684,13 +586,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1900 END--------------------------');
       });
@@ -718,13 +615,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_2000 END--------------------------');
       });
@@ -752,13 +644,8 @@ export default function DeviceManager_test() {
           expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
-          if (e.code === 96929750) {
-            hilog.info(domain, tag, 'check permission failed ');
-            expect(true).assertTrue();
-          }
-          else {
-            expect(false).assertTrue();
-          }
+          hilog.info(domain, tag, 'check permission failed ');
+          expect(e.code === 96929750).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_2100 END--------------------------');
       });
