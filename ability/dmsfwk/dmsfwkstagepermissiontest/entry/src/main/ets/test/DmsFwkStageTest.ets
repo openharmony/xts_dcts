@@ -775,7 +775,7 @@ export default function DmsFwkStageTest() {
       try {
         let peerInfo = abilityConnectionManager.getPeerInfoById(10)
         console.log(`${TAG} abilityConnectionManager.getPeerInfoById is succcess`)
-        expect(peerInfo == undefined).assertTrue()
+        expect(peerInfo).assertEqual(undefined)
       } catch (error) {
         console.log(`${TAG} abilityConnectionManager.getPeerInfoById error.code is ${error.code}`)
         expect().assertFail()
