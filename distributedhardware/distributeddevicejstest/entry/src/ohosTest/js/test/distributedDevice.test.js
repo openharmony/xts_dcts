@@ -333,6 +333,85 @@ export default function distributedDeviceManager() {
         })
 
         /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_0700
+         * @tc.name    Get a list of available devices. This interface query all authorized and connectable devices.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_0700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_0700 start------------------------");
+            try {
+                dmDeviceInfo = dmInstance.getAvailableDeviceListSync();
+                if (dmDeviceInfo === null) {
+                    console.log('getAvailableDeviceListSync info fail');
+                }
+                console.log('getAvailableDeviceListSync info:' + dmDeviceInfo);
+                console.log('getAvailableDeviceListSync info:' + JSON.stringify(dmDeviceInfo[0]["deviceId"]));
+                expect(dmDeviceInfo[0]!=null).assertTrue();
+                done();
+            } catch (err) {
+                console.error("getAvailableDeviceListSync errCode:" + err.code + ",errMessage:" + err.message);
+                expect(false).assertFail();
+                done();
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_0700 end------------------------");
+        })
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_2900
+         * @tc.name    Get a list of available devices. This interface query all authorized and connectable devices.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_2900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_2900 start------------------------");
+            try {
+                dmInstance.getAvailableDeviceList((err, data) => {
+                    if (err) {
+                        console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
+                    }
+                    console.log('getAvailableDeviceList info: ' + JSON.stringify(data));
+                    expect(data[0]!=null).assertTrue();
+                    done();
+                });
+            } catch (err) {
+                console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
+                expect(false).assertFail();
+                done();
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_2900 end------------------------");
+        })
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_6700
+         * @tc.name    Get a list of available devices. This interface query all authorized and connectable devices.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_6700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_6700 start------------------------");
+            dmInstance.getAvailableDeviceList().then((data) => {
+                console.log('getAvailableDeviceList info: ' + JSON.stringify(data));
+                expect(data[0]!==null).assertTrue();
+                done();
+            }).catch((err) => {
+                console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
+                expect(false).assertFail();
+                done();
+            })
+            await sleep(1000);
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_6700 end------------------------");
+        })
+
+        /*
          * @tc.number  SUB_DH_DeviceManager_Dcts_0800
          * @tc.name    Get the device name of the local device.
          * @tc.desc    Function test
@@ -2069,6 +2148,130 @@ export default function distributedDeviceManager() {
             }
             await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6500 end------------------------");
+        })
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_1300
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_1300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_1300 start------------------------");
+            let deviceInfoList = null;
+            try {
+                dmInstance = deviceManager.createDeviceManager("com.ohos.distributedscreenjstest");
+                if (!dmInstance) {
+                    console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_1300 fail");
+                }
+                console.info("createDeviceManager SUB_DH_DeviceManager_Dcts_1300 success");
+
+                try {
+                    deviceManager.releaseDeviceManager(dmInstance);
+                    console.info("SUB_DH_DeviceManager_Dcts_1300 releaseDeviceManager success");
+                    deviceInfoList = dmInstance.getAvailableDeviceListSync();
+                    if (!deviceInfoList) {
+                        console.log("getAvailableDeviceListSync three errCode:" + err.code + ",errMessage:" + err.message);
+                    }
+                    expect(deviceInfoList.length).assertEqual(0);
+                    done();
+                } catch (err) {
+                    console.log("getAvailableDeviceListSync SUB_DH_DeviceManager_Dcts_1300 errCode:" + err.code + ",errMessage:" + err.message);
+                    expect(err.code == 11600101).assertTrue();
+                    done();
+                }
+            } catch (err) {
+                console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_1300 four errCode:" + err.code + ",errMessage:" + err.message);
+                expect(false).assertFail();
+                done();
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_1300 end------------------------");
+        })
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_6600
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_6600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_6600 start------------------------");
+            let deviceInfoList = null;
+            try {
+                dmInstance = deviceManager.createDeviceManager("com.ohos.distributedscreenjstest");
+                if (!dmInstance) {
+                    console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_6600 fail");
+                }
+                console.info("createDeviceManager SUB_DH_DeviceManager_Dcts_6600 success");
+
+                try {
+                    deviceManager.releaseDeviceManager(dmInstance);
+                    console.info("SUB_DH_DeviceManager_Dcts_6600 releaseDeviceManager success");
+                    dmInstance.getAvailableDeviceList((err, data) => {
+                    console.log('getAvailableDeviceList info: ' + JSON.stringify(data));
+                    expect(data.length).assertEqual(0);
+                    done();
+                });
+            } catch (err) {
+                console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 11600101).assertTrue();
+                done();
+            }
+            } catch (err) {
+                console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_6600 four errCode:" + err.code + ",errMessage:" + err.message);
+                expect(false).assertFail();
+                done();
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_6600 end------------------------");
+        })
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_6800
+         * @tc.name    To manage devices, you must first call this method to obtain a {@code DeviceManager} instance and then
+         * use this instance to call other device management methods.
+         * @tc.desc    Function test
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_6800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_6800 start------------------------");
+            let deviceInfoList = null;
+            try {
+                dmInstance = deviceManager.createDeviceManager("com.ohos.distributedscreenjstest");
+                if (!dmInstance) {
+                    console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_6800 fail");
+                }
+                console.info("createDeviceManager SUB_DH_DeviceManager_Dcts_6800 success");
+
+                try {
+                    deviceManager.releaseDeviceManager(dmInstance);
+                    console.info("SUB_DH_DeviceManager_Dcts_6800 releaseDeviceManager success");
+                    dmInstance.getAvailableDeviceList().then((data) => {
+                        console.log('getAvailableDeviceList info: ' + JSON.stringify(data));
+                        expect(data.length).assertEqual(0);
+                        done();
+                    });
+                }catch(err) {
+                console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 11600101).assertTrue();
+                done();
+            }
+            } catch (err) {
+                console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_6800 four errCode:" + err.code + ",errMessage:" + err.message);
+                expect(false).assertFail();
+                done();
+            }
+            await sleep(1000);
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_6800 end------------------------");
         })
     })
 }
