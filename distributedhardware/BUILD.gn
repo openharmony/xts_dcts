@@ -25,6 +25,7 @@ group("distributedhardware") {
       "distributedinputtest:DctsSubDistributedInputTest",
       "distributedscreentest:DctsSubdisScreenTest",
       "devicemanagernoteststatic:DctsDeviceManagerTestStatic",
+      "devicemanagerteststatic:DctsDeviceManagerAPITestStatic",
       "hardwaremanagernoteststatic:DctsHardwareManagerTestStatic",
     ]
   }
