@@ -85,13 +85,14 @@ export default function DeviceManager_test() {
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
           const deviceType = dmInstance.getDeviceType(dmNetworkIdNull);
           hilog.info(domain, tag, `Device type: ${deviceType}`);
+          expect(deviceType !== null).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.error(domain, tag,
             'Test failed with error - Code: %{public}d, Msg: %{public}s',
             e.code, e.message);
           hilog.info(domain, tag, 'invalid input param ');
-          expect(e.code == 11600101).assertTrue();
+          expect(e.code == 401).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_0200 END--------------------------');
       });
@@ -177,13 +178,14 @@ export default function DeviceManager_test() {
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
           const deviceName = dmInstance.getDeviceName(dmNetworkIdNull);
           hilog.info(domain, tag, 'Device Name: %{public}s', deviceName);
+          expect(deviceName !== null).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.error(domain, tag,
             'Test failed with error - Code: %{public}d, Msg: %{public}s',
             e.code, e.message);
           hilog.info(domain, tag, 'invalid input param ');
-          expect(e.code === 11600101).assertTrue();
+          expect(e.code == 401).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_0500 END--------------------------');
       });
@@ -1106,13 +1108,40 @@ export default function DeviceManager_test() {
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
           dmInstance.startDiscovering(discoverParam, filterOptions);
           hilog.info(domain, tag, 'startDiscovering successfully.');
-          expect().assertTrue();
+          expect(true).assertTrue();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
           expect(e.code == 201).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_3800 END--------------------------');
+        done();
+      });
+
+    /**
+     * @tc.number SUB_DH_DeviceManager_Dcts_4000
+     * @tc.name SUB_DH_DeviceManager_Dcts_4000
+     * @tc.desc Test stopDiscovering interfaces
+     * @tc.size MEDIUM
+     * @tc.type Function
+     * @tc.level Level 0
+     * @tc.require
+     */
+    it('SUB_DH_DeviceManager_Dcts_4000',
+      TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
+        hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_4000 START------------------------');
+        try {
+          let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+          expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
+          dmInstance.stopDiscovering();
+          hilog.info(domain, tag, 'stopDiscovering successfully.');
+          expect(true).assertTrue();
+        } catch (err) {
+          const e = err as BusinessError;
+          hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
+          expect(e.code == 201).assertTrue();
+        }
+        hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_4000 END--------------------------');
         done();
       });
 
@@ -1143,33 +1172,6 @@ export default function DeviceManager_test() {
           expect(e.code == 201).assertTrue();
         }
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_3900 END--------------------------');
-        done();
-      });
-
-    /**
-     * @tc.number SUB_DH_DeviceManager_Dcts_4000
-     * @tc.name SUB_DH_DeviceManager_Dcts_4000
-     * @tc.desc Test stopDiscovering interfaces
-     * @tc.size MEDIUM
-     * @tc.type Function
-     * @tc.level Level 0
-     * @tc.require
-     */
-    it('SUB_DH_DeviceManager_Dcts_4000',
-      TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
-        hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_4000 START------------------------');
-        try {
-          let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-          expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
-          dmInstance.stopDiscovering();
-          hilog.info(domain, tag, 'stopDiscovering successfully.');
-          expect().assertTrue();
-        } catch (err) {
-          const e = err as BusinessError;
-          hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
-          expect(e.code == 201).assertTrue();
-        }
-        hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_4000 END--------------------------');
         done();
       });
 
