@@ -85,6 +85,7 @@ export default function DeviceManager_test() {
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
           const deviceType = dmInstance.getDeviceType(dmNetworkIdNull);
           hilog.info(domain, tag, `Device type: ${deviceType}`);
+          expect(deviceType !== null).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.error(domain, tag,
@@ -177,6 +178,7 @@ export default function DeviceManager_test() {
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
           const deviceName = dmInstance.getDeviceName(dmNetworkIdNull);
           hilog.info(domain, tag, 'Device Name: %{public}s', deviceName);
+          expect(deviceName !== null).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.error(domain, tag,
