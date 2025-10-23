@@ -1233,7 +1233,7 @@ export default function DeviceManagerAPI_test() {
         try {
           let DeviceBasicInfo: Array<distributedDeviceManager.DeviceBasicInfo> = dmInstance.getAvailableDeviceListSync();
           hilog.info(domain, tag, 'get deviceInfoList is' + JSON.stringify(DeviceBasicInfo));
-          deviceId = DeviceBasicInfo[1].deviceId
+          deviceId = DeviceBasicInfo[0].deviceId
           hilog.info(domain, tag, 'get deviceId is' + deviceId);
           dmInstance.bindTarget(deviceId, bindParam, (err: BusinessError<void> | null, data: distributedDeviceManager.BindTargetResult | undefined) => {
             if (err) {
@@ -1298,6 +1298,7 @@ export default function DeviceManagerAPI_test() {
         let networkIdName = '';
         const deviceName = dmInstance.getDeviceName(networkIdName);
         hilog.info(domain, tag, 'Device Name: %{public}s', deviceName);
+        expect().assertFail();
       } catch (err) {
         const e = err as BusinessError;
         hilog.error(domain, tag, 'Test failed with error - Code: %{public}d, Msg: %{public}s', e.code, e.message);
@@ -1321,10 +1322,11 @@ export default function DeviceManagerAPI_test() {
       try {
         let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
         expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
-        let networkIdType = "123d";
-        const getDeviceType = dmInstance.getDeviceType(networkIdType);
-        hilog.info(domain, tag, 'Device Name: %{public}s', getDeviceType);
-        expect(true).assertTrue();
+        const dmNetworkId: String = dmInstance.getLocalDeviceNetworkId();
+        hilog.info(domain, tag, 'dmNetworkId: %{public}s', dmNetworkId);
+        const deviceType = dmInstance.getDeviceType(dmNetworkId);
+        hilog.info(domain, tag, 'Device Name: %{public}s', deviceType);
+        expect(deviceType !== null).assertTrue();
       } catch (err) {
         const e = err as BusinessError;
         hilog.error(domain, tag, 'Test failed with error - Code: %{public}d, Msg: %{public}s', e.code, e.message);
