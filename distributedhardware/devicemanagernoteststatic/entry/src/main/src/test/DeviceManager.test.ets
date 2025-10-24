@@ -1023,30 +1023,30 @@ export default function DeviceManager_test() {
       });
 
     /**
-* @tc.number SUB_DH_DeviceManager_Dcts_3600
-* @tc.name SUB_DH_DeviceManager_Dcts_3600
-* @tc.desc Test getAvailableDeviceList interfaces
-* @tc.size MEDIUM
-* @tc.type Function
-* @tc.level Level 0
-* @tc.require
-*/
-it('SUB_DH_DeviceManager_Dcts_3600',
-TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
-  hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_3600 start------------------------');
-  const dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
-  dmInstance.getAvailableDeviceList((err, data) => {
-    if (err) {
-      const e = err as BusinessError;
-      hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
-      expect(e.code).assertEqual(201);
-    } else {
-      expect().assertFail();
-    }
-    done();
-  });
-  hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_3600 end------------------------');
-});
+     * @tc.number SUB_DH_DeviceManager_Dcts_3600
+     * @tc.name SUB_DH_DeviceManager_Dcts_3600
+     * @tc.desc Test getAvailableDeviceList interfaces
+     * @tc.size MEDIUM
+     * @tc.type Function
+     * @tc.level Level 0
+     * @tc.require
+     */
+    it('SUB_DH_DeviceManager_Dcts_3600',
+      TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
+        hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_3600 start------------------------');
+        const dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+        dmInstance.getAvailableDeviceList((err, data) => {
+          if (err) {
+            const e = err as BusinessError;
+            hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
+            expect(e.code).assertEqual(201);
+          } else {
+            expect().assertFail();
+          }
+          done();
+        });
+        hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_3600 end------------------------');
+      });
 
     /**
      * @tc.number SUB_DH_DeviceManager_Dcts_3700
