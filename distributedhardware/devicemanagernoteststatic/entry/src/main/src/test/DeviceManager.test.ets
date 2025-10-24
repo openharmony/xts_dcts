@@ -1108,7 +1108,7 @@ export default function DeviceManager_test() {
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
           dmInstance.startDiscovering(discoverParam, filterOptions);
           hilog.info(domain, tag, 'startDiscovering successfully.');
-          expect(true).assertTrue();
+          expect().assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -1165,7 +1165,7 @@ export default function DeviceManager_test() {
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
           dmInstance.startDiscovering(discoverParam);
           hilog.info(domain, tag, 'startDiscovering successfully.');
-          expect().assertTrue();
+          expect().assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
