@@ -34,7 +34,7 @@ static napi_value DeviceOpenP2PConnection(napi_env env, napi_callback_info info)
     std::vector<OHOS::DistributedHardware::DmDeviceInfo> deviceList;
     deviceManager.GetTrustedDeviceList("com.acts.fileio.test.server", "", deviceList);
     auto &dfsmanager = OHOS::Storage::DistributedFile::DistributedFileDaemonManager::GetInstance();
-    int32_t ret = dfsmanager.OpenP2PConnection(deviceList[0]);
+    int32_t ret = dfsmanager.ConnectDfs(deviceList[0].networkId);
     napi_value result = nullptr;
     napi_create_int32(env, ret, &result);
     return result;
