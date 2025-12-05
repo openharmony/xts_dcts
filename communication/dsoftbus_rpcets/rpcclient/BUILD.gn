@@ -12,33 +12,11 @@
 # limitations under the License.
 
 import("//test/xts/tools/build/suite.gni")
-
-ohos_js_hap_suite("DctsRpcEtsTest") {
-  hap_profile = "entry/src/main/module.json"
-  js_build_mode = "debug"
-  deps = [
-    ":rpcstagetest_js_assets",
-    ":rpcstagetest_resources",
-  ]
-  ets2abc = true
-  certificate_profile = "signature/openharmony_sx.p7b"
+ohos_js_app_suite("DctsRpcEtsTest") {
+  test_hap = true
+  testonly = true
+  certificate_profile = "./signature/openharmony_sx.p7b"
   hap_name = "DctsRpcEtsHapTest"
-
   subsystem_name = "communication"
   part_name = "ipc"
-}
-
-ohos_app_scope("rpctest_app_profile") {
-  app_profile = "AppScope/app.json"
-  sources = [ "AppScope/resources" ]
-}
-
-ohos_js_assets("rpcstagetest_js_assets") {
-  source_dir = "entry/src/main/ets"
-}
-
-ohos_resources("rpcstagetest_resources") {
-  sources = [ "entry/src/main/resources" ]
-  deps = [ ":rpctest_app_profile" ]
-  hap_profile = "entry/src/main/module.json"
 }
