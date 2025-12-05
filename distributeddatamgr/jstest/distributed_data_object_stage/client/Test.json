@@ -3,9 +3,9 @@
     "driver": {
         "type": "OHJSUnitTest",
         "test-timeout": "180000",
-        "bundle-name": "com.acts.distributedobjectdisets",
-        "module-name": "phone",
         "shell-timeout": "600000",
+        "bundle-name": "com.acts.distributedobjectdisets",
+        "module-name": "entry_test",
         "testcase-timeout": 70000
     },
     "kits": [
@@ -15,14 +15,13 @@
             ],
             "type": "AppInstallKit",
             "cleanup-apps": true
-        },
-        {
+        },{
             "type": "ShellKit",
             "run-command": [
                 "power-shell wakeup",
-                "power-shell setmode 602",
-                "hidumper -s 3301 -a -t"
+				"uinput -T -g 500 1200 500 700",
+                "power-shell setmode 602"
             ]
-        }   
-    ] 
+        }
+    ]
 }

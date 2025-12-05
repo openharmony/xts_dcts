@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Huawei Device Co., Ltd.
+ * Copyright (C) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,8 +15,8 @@
 
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, Level, Size, TestType } from "@ohos/hypium";
 import deviceManager from '@ohos.distributedDeviceManager';
-import TestService from '../../../../../../../../../testtools/disetsTest/client/testService.ets';
-import RemoteHelper from '../../../../../../../../../testtools/disetsTest/client/remoteHelper.ets';
+import TestService from './testService.ets';
+import RemoteHelper from './remoteHelper.ets';
 import { UiDriver, BY } from '@ohos.UiTest'
 import distributedObject from '@ohos.data.distributedDataObject';
 import deviceinfo from '@ohos.deviceInfo'
