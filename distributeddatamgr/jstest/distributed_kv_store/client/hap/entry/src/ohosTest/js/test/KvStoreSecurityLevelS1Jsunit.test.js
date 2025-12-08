@@ -15,8 +15,8 @@
 
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect, Level, Size, TestType } from "@ohos/hypium";
 import deviceManager from '@ohos.distributedDeviceManager';
-import TestService from '../../../../../../../../../../testtools/disjsTest/client/testService.js';
-import RemoteHelper from '../../../../../../../../../../testtools/disjsTest/client/remoteHelper.js';
+import TestService from './disjsTest/client/testService.js';
+import RemoteHelper from './disjsTest/client/remoteHelper.js';
 import factory from '@ohos.data.distributedKVStore';
 import { UiDriver, BY } from '@ohos.UiTest'
 import featureAbility from '@ohos.ability.featureAbility';
