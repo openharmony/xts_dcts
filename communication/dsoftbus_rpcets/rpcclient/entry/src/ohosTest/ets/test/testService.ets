@@ -17,45 +17,33 @@ import rpc from '@ohos.rpc';
 import process from '@ohos.process';
 import deviceManager from '@ohos.distributedDeviceManager';
 import common from '@ohos.app.ability.common';
+import Want from '@ohos.app.ability.Want';
 import { BusinessError } from '@ohos.base';
 import promptAction from '@ohos.promptAction';
 
 let logTag = "RpcClient_TestService:  ";
 let CODE_INVOKE = 1;
-let results;
+
 let isConnected = false;
 let bundleNameRpc: string = "com.acts.rpcrequest.test";
 let abilityNameRpc: string = "com.acts.rpcrequest.test.ServiceAbility";
 
 let deviceList: Array<deviceManager.DeviceBasicInfo>;
-let dmInstance : deviceManager.DeviceManager;
-let deviceId : string;
-let tempData = undefined;
+let dmInstance: deviceManager.DeviceManager;
+let deviceId: string | undefined = undefined;
+let tempData: Data;
+let proxy: rpc.IRemoteObject;
 
 export default class TestService {
-    callback;
 
-    onCreate() {
-        console.info(logTag + 'AceApplication onCreate');
-    }
-
-    onDestroy() {
-        console.info(logTag + 'AceApplication onDestroy');
-    }
-
-    constructor() {
-
-    }
-
-    getDeviceList(deviceManager) {
+    getDeviceList(deviceManager: deviceManager.DeviceManager) {
         deviceList = deviceManager.getAvailableDeviceListSync();
         console.info(logTag + "getDeviceList success, deviceList id: " + JSON.stringify(deviceList));
     }
 
     toConnectAbility() {
+      return new Promise <rpc.IRemoteObject> (resolve => {
         console.info(logTag + " -----toConnectAbility-----");
-        return new Promise(resolve=>{
-            let self = this;
             console.info(logTag + '-----getDeviceId is begin-----')
             try {
                 dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
@@ -70,20 +58,21 @@ export default class TestService {
             console.info(logTag + '-----connectServiceExtensionAbility is begin-----');
             let context:common.UIAbilityContext | undefined = AppStorage.get('context') as common.UIAbilityContext
 
-            let want = {
+            let want: Want = {
                 deviceId: deviceId,
                 bundleName: bundleNameRpc,
                 abilityName: abilityNameRpc
             };
-            let connect = {
-                onConnect: function (elementName, remoteProxy) {
+            let connect: common.ConnectOptions = {
+                onConnect(elementName, remoteProxy) {
                     console.log(logTag + 'onConnect called, remoteProxy: ' + remoteProxy);
                     resolve(remoteProxy);
+                    proxy = remoteProxy;
                 },
-                onDisconnect: function (elementName) {
+                onDisconnect(elementName) {
                     console.log(logTag + "...onDisconnect...");
                 },
-                onFailed: function () {
+                onFailed(code) {
                     console.log(logTag + "...onFailed...");
                 }
             }
@@ -92,26 +81,30 @@ export default class TestService {
               connection = context.connectServiceExtensionAbility(want, connect);
               console.info(logTag + "connectServiceExtensionAbility success. got id: " + connection);
             } catch (err) {
-              console.info(logTag + "connectServiceExtensionAbility failed. got id: " + connection);
               let code = (err as BusinessError).code;
               let message = (err as BusinessError).message;
               console.error(logTag + ` ***** connectServiceExtensionAbility failed. err code is ${code}, message is ${message}`);
             }
-        })
+      })    
     }
 
+    getRemoteproxy() {
+    console.log(logTag + "getRemoteproxy is " + proxy);
+    return proxy;
+  }
+
     startDiscovering() {
-        let discoverParam = {
+        let discoverParam: Record<string, number> = {
            'discoverTargetType': 1 
         };
-        let filterOptions = {
+        let filterOptions: Record<string, number> = {
             'availableStatus': 0
         };
 
         try {
-           let dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
+           let dmInstance: deviceManager.DeviceManager = deviceManager.createDeviceManager(bundleNameRpc);
            console.info(logTag + 'startDiscovering  get deviceManager is success');
-           dmInstance.on('discoverSuccess', (data) => {
+           dmInstance.on('discoverSuccess', (data: Data) => {
              console.info(logTag + "startDiscovering success: " + JSON.stringify(data));
              promptAction.showToast({
                 message: `discoverSuccess:  ${JSON.stringify(data.device.deviceName)}`,
@@ -122,7 +115,7 @@ export default class TestService {
                 console.info(logTag + "tempData is: " + JSON.stringify(tempData));
             }
            })
-           dmInstance.on('discoverFailure', (data) => {
+           dmInstance.on('discoverFailure', (data: DataF) => {
             console.info(logTag + "startDiscovering failed into discoverFailure: " + JSON.stringify(data));
            })
            //设备发现时 进入discoverSuccess回调
@@ -134,7 +127,7 @@ export default class TestService {
 
     stopDiscovering() {
         try {
-            let dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
+            let dmInstance: deviceManager.DeviceManager = deviceManager.createDeviceManager(bundleNameRpc);
             console.info(logTag + 'stopDiscovering  get deviceManager is success');
             dmInstance.stopDiscovering();
         } catch(error) {
@@ -144,21 +137,20 @@ export default class TestService {
 
     //PIN码bind
     bindStub() {
-        let deviceId = undefined;
         try {
-            let dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
+            let dmInstance: deviceManager.DeviceManager = deviceManager.createDeviceManager(bundleNameRpc);
             console.info(logTag + 'bindStub  get deviceManager is success');
             console.info(logTag + "tempData is: " + JSON.stringify(tempData));
             deviceId = tempData.device.deviceId;
             console.info(logTag + 'bindStub  get deviceId is: ' + deviceId);
-            let bindParam = {
+            let bindParam: Record<string, string | number> = {
                 'bindType': 1, //无账号PIN码bind
                 'targetPkgName': bundleNameRpc, //远端应用包名
                 'appName': bundleNameRpc,
             };
-            dmInstance.bindTarget(deviceId, bindParam, (err, data) => {
+            dmInstance.bindTarget(deviceId, bindParam, (err: BusinessError, data: DataS) => {
                 if (err) {
-                   console.error(logTag + "bindTarget error errCode: " + error.code + "errMessage: " + error.message);
+                   console.error(logTag + "bindTarget error errCode: " + err.code + "errMessage: " + err.message);
                    return;
                 }
                 console.info(logTag + 'bindTarget  result is: ' + JSON.stringify(tempData));
@@ -170,7 +162,7 @@ export default class TestService {
 
     unbindStub() {
         try {
-            let dmInstance = deviceManager.createDeviceManager(bundleNameRpc);
+            let dmInstance: deviceManager.DeviceManager = deviceManager.createDeviceManager(bundleNameRpc);
             console.info(logTag + 'unbindStub  get deviceManager is success');
             let deviceInfoList: Array<deviceManager.DeviceBasicInfo> = dmInstance.getAvailableDeviceListSync();
             console.info(logTag + 'unbindStub  deviceInfoList.length: ' +  deviceInfoList.length);
@@ -181,4 +173,21 @@ export default class TestService {
             console.error(logTag + "unbindStub error errCode: " + error.code + "errMessage: " + error.message);
         }
     }
+}
+
+class Data {
+  device: deviceManager.DeviceBasicInfo = {
+    deviceId: '',
+    deviceName: '',
+    deviceType: '',
+    networkId: ''
+  };
+}
+
+class DataF {
+   reason: number = 0;
+}
+
+class DataS {
+  deviceId: string = '';
 }

@@ -111,13 +111,13 @@ export default class MainAbility extends Ability {
     onWindowStageCreate(windowStage) {
         console.log("[Demo] MainAbility onWindowStageCreate")
         globalThis.abilityContext = this.context;
-        windowStage.setUIContent(this.context, "MainAbility/pages/MainAbility_pages", null)
+        windowStage.setUIContent(this.context, "MainAbility/pages/Index", null)
     }
 
     onWindowStageRestore(windowStage) {
         console.log("[Demo] MainAbility onWindowStageRestore")
         globalThis.abilityContext = this.context;
-        windowStage.setUIContent(this.context, "MainAbility/pages/MainAbility_pages", null)
+        windowStage.setUIContent(this.context, "MainAbility/pages/Index", null)
     }
 
     onWindowStageDestroy() {
