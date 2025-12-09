@@ -16,14 +16,7 @@
     "package": "com.acts.distributekvdisjs",
     "name": ".entry",
     "mainAbility": ".TestAbility",
-    "deviceType": [
-      "phone",
-      "tablet",
-      "tv",
-      "wearable",
-      "default",
-	    "2in1"
-    ],
+    "deviceType": [],
     "distro": {
       "deliveryWithInstall": true,
       "moduleName": "entry",

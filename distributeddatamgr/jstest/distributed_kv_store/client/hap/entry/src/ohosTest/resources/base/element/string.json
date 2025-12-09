@@ -18,11 +18,11 @@
     },
     {
         "name": "TestAbility_desc",
-        "value": "description"
+        "value": "DctsDistributeKvStoreDisJsTest"
     },
     {
         "name": "TestAbility_label",
-        "value": "label"
+        "value": "DctsDistributeKvStoreDisJsTest"
       },
       {
         "name": "perssion_reason",

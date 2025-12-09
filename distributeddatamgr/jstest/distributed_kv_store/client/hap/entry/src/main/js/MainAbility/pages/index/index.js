@@ -20,11 +20,11 @@ injectRef.regeneratorRuntime = require('@babel/runtime/regenerator');
 var logTag = 'RpcClient';
 export default {
   data: {
-    title: '',
+    title: "DctsKvJsClient";
 	  gIRemoteObject: undefined,
   },
   onInit() {
-    this.title = this.$t('strings.world');
+    this.title = "DctsKvJsClient";
   },
   onShow() {
     console.info('onShow finish');

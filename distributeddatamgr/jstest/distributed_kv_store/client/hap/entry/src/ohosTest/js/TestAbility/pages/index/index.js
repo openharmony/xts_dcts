@@ -15,10 +15,10 @@
 
 export default {
     data: {
-        title: ""
+        title: "DctsKvJsClient"
     },
     onInit() {
-        this.title = this.$t('strings.world');
+        this.title = "DctsKvJsClient";
     }
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,14 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import UIAbility from '@ohos.app.ability.UIAbility';
+import ServiceExtension from '@ohos.app.ability.ServiceExtensionAbility';
 import rpc from '@ohos.rpc';
-import commonEvent from '@ohos.commonEventManager';
 
-import Stub from '../../../../../../../../../testtools/disetsTest/server/service.ets'
+import Stub from './disetsTest/server/service'
 let logTag = "[RpcServer_ServiceAbility:  ]";
 
-export default class ServiceAbility extends UIAbility {
+export default class ServiceAbility extends ServiceExtension {
 
     onCreate(want) {
         // Called to return a FormBindingData object.
@@ -29,29 +28,21 @@ export default class ServiceAbility extends UIAbility {
     onConnect(want) {
         // Called when the form provider is notified that a temporary form is successfully
         // converted to a normal form.
+        console.info(logTag + "ServiceAbility onConnect")
         globalThis.extensionContext = this.context;
-        console.info(logTag + "ServiceAbility onConnect, globalThis.extensionContext=" + globalThis.extensionContext);
-        let CommonEventPublishData = {
-            parameters: {
-                "life": "onConnect"
-            }
-        }
-        commonEvent.publish(logTag + "ConnectAbility", CommonEventPublishData, (err, data) => {
-            console.info(logTag + "ConnectAbility onCreate");
-        });
+        console.info(logTag + "ServiceAbility onConnect, extensionContext=" + globalThis.extensionContext);
         return new Stub("diskv");
     }
 
     onDisconnect(want) {
         // Called to notify the form provider to update a specified form.
         console.info(logTag + "ServiceAbility onDisconnect")
-
     }
 
     onRequest(want, startId){
         console.info(logTag + "ServiceAbility onRequest")
         globalThis.extensionContext = this.context
-        console.info(logTag + "ServiceAbility onRequest, globalThis.extensionContext=" + globalThis.extensionContext);
+        console.info(logTag + "ServiceAbility onRequest, extensionContext=" + globalThis.extensionContext);
         globalThis.startAbilityReault = true
     }
 
