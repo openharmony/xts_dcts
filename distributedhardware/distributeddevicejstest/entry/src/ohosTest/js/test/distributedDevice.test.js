@@ -2273,5 +2273,32 @@ export default function distributedDeviceManager() {
             await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6800 end------------------------");
         })
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_6900
+         * @tc.name    SUB_DH_DeviceManager_Dcts_6900
+         * @tc.desc    Test DeviceStateChange enumeration
+         * @tc.size    MEDIUM
+         * @tc.type:   Function
+         * @tc.level   Level 0
+         * @tc.require
+         */
+        it("SUB_DH_DeviceManager_Dcts_6900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_6900 start------------------------");
+            try {
+                dmInstance = deviceManager.createDeviceManager("com.ohos.distributedscreenjstest");
+                console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_6900 get dmInstance is successfully");
+                expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
+                expect(deviceManager.DeviceStateChange.UNKNOWN == 0).assertTrue();
+                expect(deviceManager.DeviceStateChange.AVAILABLE == 1).assertTrue();
+                expect(deviceManager.DeviceStateChange.UNAVAILABLE == 2).assertTrue();
+                console.log('createDeviceManger SUB_DH_DeviceManager_Dcts_6900 successfully');
+            } catch (err) {
+                console.error("createDeviceManger SUB_DH_DeviceManager_Dcts_6900 four errCode:" + err.code + ",errMessage:" + err.message);
+                expect().assertFail();
+            }
+            console.log("-----------------SUB_DH_DeviceManager_Dcts_6900 END------------------------");
+            done();
+        })
     })
 }
