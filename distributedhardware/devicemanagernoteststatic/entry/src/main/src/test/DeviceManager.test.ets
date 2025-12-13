@@ -320,12 +320,13 @@ export default function DeviceManager_test() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0,
       async (): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1000 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
           dmInstance.offReplyResult();
           hilog.info(domain, tag, 'offReplyResult event listener off called successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -347,6 +348,7 @@ export default function DeviceManager_test() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0,
       async (): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1100 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
@@ -354,7 +356,7 @@ export default function DeviceManager_test() {
             hilog.info(domain, tag, 'onDiscoverFailure callback triggered: %{public}s', JSON.stringify(data));
           });
           hilog.info(domain, tag, 'onDiscoverFailure event listener registered successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -376,6 +378,7 @@ export default function DeviceManager_test() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0,
       async (): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1200 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
@@ -383,7 +386,7 @@ export default function DeviceManager_test() {
             hilog.info(domain, tag, 'offDiscoverFailure callback triggered: %{public}s', JSON.stringify(data));
           });
           hilog.info(domain, tag, 'offDiscoverFailure executed successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -405,6 +408,7 @@ export default function DeviceManager_test() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0,
       async (): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1300 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
@@ -412,7 +416,7 @@ export default function DeviceManager_test() {
             hilog.info(domain, tag, 'onDeviceNameChange callback triggered: %{public}s', JSON.stringify(data));
           });
           hilog.info(domain, tag, 'onDeviceNameChange registered successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, 'check permission failed ');
@@ -434,6 +438,7 @@ export default function DeviceManager_test() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0,
       async (): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1400 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
@@ -441,7 +446,7 @@ export default function DeviceManager_test() {
             hilog.info(domain, tag, 'offDeviceNameChange callback triggered: %{public}s', JSON.stringify(data));
           });
           hilog.info(domain, tag, 'offDeviceNameChange executed successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -463,13 +468,14 @@ export default function DeviceManager_test() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0,
       async (): Promise<void> => {
         hilog.info(domain, tag, "-----------------SUB_DH_DeviceManager_Dcts_1500 START------------------------");
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           dmInstance.onDeviceStateChange((data: distributedDeviceManager.DeviceStateChangeResult) => {
             hilog.info(domain, tag, "onDeviceStateChange callback triggered: %{public}s", JSON.stringify(data));
           });
           hilog.info(domain, tag, 'onDeviceStateChange listener registered successfully');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -490,6 +496,7 @@ export default function DeviceManager_test() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0,
       async (): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1600 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
@@ -497,7 +504,7 @@ export default function DeviceManager_test() {
             hilog.info(domain, tag, 'offDeviceStateChange callback triggered: %{public}s', JSON.stringify(data));
           });
           hilog.info(domain, tag, 'offDeviceStateChange executed successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -519,6 +526,7 @@ export default function DeviceManager_test() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0,
       async (): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1700 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
@@ -526,7 +534,7 @@ export default function DeviceManager_test() {
             hilog.info(domain, tag, 'onDiscoverSuccess callback triggered: %{public}s', JSON.stringify(data));
           });
           hilog.info(domain, tag, 'onDiscoverSuccess registered successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -548,6 +556,7 @@ export default function DeviceManager_test() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0,
       async (): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1800 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
@@ -555,7 +564,7 @@ export default function DeviceManager_test() {
             hilog.info(domain, tag, 'offDiscoverSuccess callback triggered: %{public}s', JSON.stringify(data));
           });
           hilog.info(domain, tag, 'offDiscoverSuccess executed successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -577,6 +586,7 @@ export default function DeviceManager_test() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0,
       async (): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_1900 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
@@ -584,7 +594,7 @@ export default function DeviceManager_test() {
             hilog.info(domain, tag, 'onDeviceStateChange callback triggered: %{public}s', JSON.stringify(data));
           });
           hilog.info(domain, tag, 'onDeviceStateChange registered successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -606,6 +616,7 @@ export default function DeviceManager_test() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0,
       async (): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_2100 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
@@ -613,7 +624,7 @@ export default function DeviceManager_test() {
             hilog.info(domain, tag, 'offServiceDie callback triggered.');
           });
           hilog.info(domain, tag, 'offServiceDie executed successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -700,6 +711,7 @@ export default function DeviceManager_test() {
      */
     it('SUB_DH_DeviceManager_Dcts_2400', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
       hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_2400 START------------------------');
+      let flag: int = 0;
       try {
         let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
         hilog.info(domain, tag, 'get dmInstance is successfully');
@@ -707,9 +719,8 @@ export default function DeviceManager_test() {
         dmInstance.onDeviceStateChange((data: distributedDeviceManager.DeviceStateChangeResult) => {
           hilog.info(domain, tag, 'get dmInstance.onDeviceStateChange is successfully data.action is' + data.action);
           hilog.info(domain, tag, 'get dmInstance.onDeviceStateChange is successfully data.device is' + data.device);
-          expect(data.action !== null).assertTrue();
-          expect(data.device !== null).assertTrue();
         });
+        expect(flag === 0).assertFail();
       } catch (err) {
         const e = err as BusinessError;
         hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -730,14 +741,15 @@ export default function DeviceManager_test() {
      */
     it('SUB_DH_DeviceManager_Dcts_2500', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
       hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_2500 START------------------------');
+      let flag: int = 0;
       try {
         let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
         hilog.info(domain, tag, 'get dmInstance is successfully');
         expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
         dmInstance.onDeviceNameChange((data: distributedDeviceManager.DeviceNameChangeResult) => {
           hilog.info(domain, tag, 'get dmInstance.onDeviceNameChange is successfully data.deviceName is' + data.deviceName);
-          expect(typeof (data.deviceName) == 'string').assertTrue();
         });
+        expect(flag === 0).assertFail();
       } catch (err) {
         const e = err as BusinessError;
         hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -758,14 +770,15 @@ export default function DeviceManager_test() {
      */
     it('SUB_DH_DeviceManager_Dcts_2600', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
       hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_2600 START------------------------');
+      let flag: int = 0;
       try {
         let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
         hilog.info(domain, tag, 'get dmInstance is successfully');
         expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
         dmInstance.onDiscoverFailure((data: distributedDeviceManager.DiscoveryFailureResult) => {
           hilog.info(domain, tag, 'get dmInstance.onDiscoverFailure is successfully data.reason is' + data.reason);
-          expect(data.reason > 0).assertTrue();
         });
+        expect(flag === 0).assertFail();
       } catch (err) {
         const e = err as BusinessError;
         hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -786,14 +799,15 @@ export default function DeviceManager_test() {
      */
     it('SUB_DH_DeviceManager_Dcts_2700', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
       hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_2700 START------------------------');
+      let flag: int = 0;
       try {
         let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
         hilog.info(domain, tag, 'get dmInstance is successfully');
         expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
         dmInstance.onDiscoverSuccess((data: distributedDeviceManager.DiscoverySuccessResult) => {
           hilog.info(domain, tag, 'get dmInstance.onDiscoverSuccess is successfully data.device is' + data.device);
-          expect(data.device !== null).assertTrue();
         });
+        expect(flag === 0).assertFail();
       } catch (err) {
         const e = err as BusinessError;
         hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -814,14 +828,15 @@ export default function DeviceManager_test() {
      */
     it('SUB_DH_DeviceManager_Dcts_2900', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
       hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_2900 START------------------------');
+      let flag: int = 0;
       try {
         let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
         hilog.info(domain, tag, 'get dmInstance is successfully');
         expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
         dmInstance.onServiceDie((data: distributedDeviceManager.ServiceDieData) => {
           hilog.info(domain, tag, 'get dmInstance.onServiceDie is successfully');
-          expect().assertTrue();
         });
+        expect(flag === 0).assertFail();
       } catch (err) {
         const e = err as BusinessError;
         hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -842,13 +857,14 @@ export default function DeviceManager_test() {
      */
     it('SUB_DH_DeviceManager_Dcts_3100', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
       hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_3100 START------------------------');
+      let flag: int = 0;
       try {
         let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
         hilog.info(domain, tag, 'get dmInstance is successfully');
         expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
         dmInstance.offServiceDie();
         hilog.info(domain, tag, 'get dmInstance.offServiceDie is successfully');
-        expect().assertTrue();
+        expect(flag === 0).assertFail();
       } catch (err) {
         const e = err as BusinessError;
         hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -870,12 +886,13 @@ export default function DeviceManager_test() {
     it('SUB_DH_DeviceManager_Dcts_3200',
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_3200 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
           dmInstance.offDeviceStateChange();
           hilog.info(domain, tag, 'offDeviceStateChange executed successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -897,12 +914,13 @@ export default function DeviceManager_test() {
     it('SUB_DH_DeviceManager_Dcts_3300',
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_3300 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
           dmInstance.offDiscoverSuccess();
           hilog.info(domain, tag, 'offDiscoverSuccess executed successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -924,12 +942,13 @@ export default function DeviceManager_test() {
     it('SUB_DH_DeviceManager_Dcts_3400',
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_3400 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
           dmInstance.offDeviceNameChange();
           hilog.info(domain, tag, 'offDeviceNameChange executed successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
@@ -951,12 +970,13 @@ export default function DeviceManager_test() {
     it('SUB_DH_DeviceManager_Dcts_3500',
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_3500 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
           dmInstance.offDiscoverFailure();
           hilog.info(domain, tag, 'offDiscoverFailure executed successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
