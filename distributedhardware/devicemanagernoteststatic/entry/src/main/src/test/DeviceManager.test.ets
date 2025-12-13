@@ -291,6 +291,7 @@ export default function DeviceManager_test() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0,
       async (): Promise<void> => {
         hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_0900 START------------------------');
+        let flag: int = 0;
         try {
           let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
           expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
@@ -298,7 +299,7 @@ export default function DeviceManager_test() {
             hilog.info(domain, tag, 'onReplyResult callback triggered: %{public}s', JSON.stringify(data));
           });
           hilog.info(domain, tag, 'onReplyResult event listener registered successfully.');
-          expect(true).assertTrue();
+          expect(flag === 0).assertFail();
         } catch (err) {
           const e = err as BusinessError;
           hilog.info(domain, tag, `check permission failed err.code: ${e.code}`);
