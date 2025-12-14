@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,7 +16,7 @@ import UIAbility from '@ohos.app.ability.UIAbility';
 import rpc from '@ohos.rpc';
 import commonEvent from '@ohos.commonEvent';
 
-import Stub from '../../../../../../../../../testtools/disjsTest/server/service.js'
+import Stub from './disetsTest/server/service'
 
 export default class ServiceAbility extends UIAbility {
     onCreate(want) {

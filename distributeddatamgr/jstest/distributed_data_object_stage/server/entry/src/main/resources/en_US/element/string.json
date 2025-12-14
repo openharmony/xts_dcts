@@ -2,7 +2,7 @@
   "string": [
     {
       "name": "entry_MainAbility",
-      "value": "DctsDistributedObjectDisEtsServer"
+      "value": "DctskvEtsServer"
     },
     {
       "name": "entry_desc",
@@ -14,15 +14,11 @@
     },
     {
       "name": "MainAbility_label",
-      "value": "DctsDistributedObjectDisEtsServer"
+      "value": "DctskvEtsServer"
     },
     {
       "name": "description_serviceability",
-      "value": "DctsDistributedObjectDisEtsServer"
-    },
-    {
-      "name": "reason",
-      "value": "label"
+      "value": "DctskvEtsServer"
     }
   ]
 }

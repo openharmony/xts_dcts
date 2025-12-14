@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (C) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import AbilityStage from "@ohos.app.ability.AbilityStage"
+export default class ApiResult {
+    _resultCode = 0;
+    _result = null;
 
-export default class MyAbilityStage extends AbilityStage {
-    onCreate() {
-        console.info("[Demo] MyAbilityStage onCreate")
-        globalThis.stageOnCreateRun = 1;
-        globalThis.stageContext = this.context;
+    constructor(resultCode, result) {
+        this._resultCode = resultCode;
+        this._result = result;
     }
 }
