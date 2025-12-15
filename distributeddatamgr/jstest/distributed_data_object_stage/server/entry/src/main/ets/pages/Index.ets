@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,12 +13,20 @@
  * limitations under the License.
  */
 
-import AbilityStage from "@ohos.app.ability.AbilityStage"
+@Entry
+@Component
+struct Index {
+  aboutToAppear() {
+    console.info('onShow finish')
+  }
 
-export default class MyAbilityStage extends AbilityStage {
-    onCreate() {
-        console.info("[Demo] MyAbilityStage onCreate")
-        globalThis.stageOnCreateRun = 1;
-        globalThis.stageContext = this.context;
+  build() {
+    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
+      Text('DctsObjectEtsServer')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
     }
+    .width('100%')
+    .height('100%')
+  }
 }
