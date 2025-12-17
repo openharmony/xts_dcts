@@ -1,4 +1,4 @@
-# Copyright (C) 2022 Huawei Device Co., Ltd.
+# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,25 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("../../../../tools/build/suite.gni")
+import("//test/xts/tools/build/suite.gni")
 
-ohos_hap_assist_suite("DctsDmsJsServer") {
-  hap_profile = "./src/main/config.json"
-  deps = [
-    ":dms_js_assets",
-    ":dms_js_resources",
-  ]
-
+ohos_app_assist_suite("DctsDmsJsServer") {
+  testonly = true
   certificate_profile = "./signature/openharmony_sx.p7b"
   hap_name = "DctsDmsHapServer"
-  subsystem_name = "ability"
   part_name = "dmsfwk"
-}
-ohos_js_assets("dms_js_assets") {
-  source_dir = "./src/main/js"
-  hap_profile = "./src/main/config.json"
-}
-ohos_resources("dms_js_resources") {
-  sources = [ "./src/main/resources" ]
-  hap_profile = "./src/main/config.json"
+  subsystem_name = "ability"
 }

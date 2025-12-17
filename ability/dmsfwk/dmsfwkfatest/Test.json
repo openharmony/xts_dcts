@@ -1,11 +1,11 @@
 {
-    "description": "Configuration for hjunit demo Tests",
+    "description": "Configuration for sensor js api Tests",
     "driver": {
         "type": "OHJSUnitTest",
-        "test-timeout": "300000",
+        "test-timeout": "160000",
+        "shell-timeout": "160000",
         "bundle-name": "com.acts.example.dmsfwkstageserver",
         "package-name": "com.acts.example.dmsfwkstageserver",
-        "shell-timeout": "600000",
         "testcase-timeout": 70000
     },
     "kits": [
