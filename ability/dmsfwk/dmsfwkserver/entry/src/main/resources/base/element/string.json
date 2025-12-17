@@ -2,7 +2,7 @@
   "string": [
     {
       "name": "entry_MainAbility",
-      "value": "RpcServer"
+      "value": "DctsDmsJsServer"
     },
     {
       "name": "entry_desc",
@@ -14,11 +14,11 @@
     },
     {
       "name": "MainAbility_label",
-      "value": "RpcServer"
+      "value": "DctsDmsJsServer"
     },
     {
       "name": "description_serviceability",
-      "value": "RpcServer"
+      "value": "DctsDmsJsServer"
     }
   ]
 }

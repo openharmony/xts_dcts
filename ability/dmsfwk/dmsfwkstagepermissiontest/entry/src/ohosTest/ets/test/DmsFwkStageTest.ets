@@ -188,8 +188,7 @@ export default function DmsFwkStageTest() {
         TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_on_0100'
         try {
           continueManager.on('prepareContinue', context, (err, ContinueResultInfo: continueManager.ContinueResultInfo) => {
-            console.log(TAG + 'continueManager.on is success' + ContinueResultInfo.resultInfo +
-              ContinueResultInfo.resultState)
+            console.log(TAG + 'continueManager.on is success' + ContinueResultInfo.resultInfo + ContinueResultInfo.resultState)
             expect().assertTrue()
           })
         } catch (error) {
@@ -258,8 +257,7 @@ export default function DmsFwkStageTest() {
               console.log(TAG + 'continueManager.off is failed' + JSON.stringify(err))
               expect().assertFail()
             }
-            console.log(TAG + 'continueManager.off is success' + ContinueResultInfo.resultState +
-              ContinueResultInfo.resultInfo)
+            console.log(TAG + 'continueManager.off is success' + ContinueResultInfo.resultState + ContinueResultInfo.resultInfo)
             expect(ContinueResultInfo.resultState == 0).assertTrue()
           })
         } catch (error) {

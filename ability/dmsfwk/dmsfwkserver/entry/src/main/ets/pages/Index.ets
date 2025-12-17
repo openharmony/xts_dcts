@@ -22,7 +22,7 @@ struct Index {
 
   build() {
     Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
-      Text('RPC SERVER')
+      Text('DctsDmsJsServer')
         .fontSize(50)
         .fontWeight(FontWeight.Bold)
     }
