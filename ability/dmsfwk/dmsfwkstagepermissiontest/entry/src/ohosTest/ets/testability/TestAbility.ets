@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 import UIAbility from '@ohos.app.ability.UIAbility';
 import AbilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
 import hilog from '@ohos.hilog';
@@ -26,14 +26,14 @@ export default class TestAbility extends UIAbility {
     onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
         hilog.info(0x0000, 'testTag', '%{public}s', 'TestAbility onCreate');
         hilog.info(0x0000, 'testTag', '%{public}s', 'want param:' + JSON.stringify(want) ?? '');
-        hilog.info(0x0000, 'testTag', '%{public}s', 'launchParam:'+ JSON.stringify(launchParam) ?? '');
+        hilog.info(0x0000, 'testTag', '%{public}s', 'launchParam:' + JSON.stringify(launchParam) ?? '');
         let abilityDelegator: AbilityDelegatorRegistry.AbilityDelegator
         abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator()
         let abilityDelegatorArguments: AbilityDelegatorRegistry.AbilityDelegatorArgs
         abilityDelegatorArguments = AbilityDelegatorRegistry.getArguments()
+        AppStorage.SetOrCreate<common.UIAbilityContext>('TestAbilityContext', this.context);
         hilog.info(0x0000, 'testTag', '%{public}s', 'start run testcase!!!');
         Hypium.hypiumTest(abilityDelegator, abilityDelegatorArguments, testsuite);
-        AppStorage.SetOrCreate<common.UIAbilityContext>('TestAbilityContext',this.context);
     }
 
     onDestroy() {

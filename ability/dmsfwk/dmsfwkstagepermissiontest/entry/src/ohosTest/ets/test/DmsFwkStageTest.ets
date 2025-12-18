@@ -30,7 +30,6 @@ import TestService from "./testService.ets";
 
 
 let sessionId: number;
-let context = getContext(this) as common.UIAbilityContext;
 let atManager = abilityAccessCtrl.createAtManager();
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
 let dvList: Array<deviceManager.DeviceBasicInfo>;
@@ -186,6 +185,7 @@ export default function DmsFwkStageTest() {
       async (done: Function) => {
         console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_on_0100 is start---------------")
         TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_on_0100'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
         try {
           continueManager.on('prepareContinue', context, (err, ContinueResultInfo: continueManager.ContinueResultInfo) => {
             console.log(TAG + 'continueManager.on is success' + ContinueResultInfo.resultInfo + ContinueResultInfo.resultState)
@@ -251,6 +251,7 @@ export default function DmsFwkStageTest() {
       async (done: Function) => {
         console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_0400 is start---------------")
         TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_off_0400'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
         try {
           continueManager.off('prepareContinue', context, (err, ContinueResultInfo) => {
             if (err != undefined) {
@@ -279,6 +280,7 @@ export default function DmsFwkStageTest() {
       async (done: Function) => {
         console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_on_0500 is start---------------")
         TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_on_0500'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
         try {
           continueManager.on(null, context, (err, ContinueResultInfo: continueManager.ContinueResultInfo) => {
             console.log(TAG + 'continueManager.on is success' + ContinueResultInfo.resultInfo +
@@ -304,6 +306,7 @@ export default function DmsFwkStageTest() {
       async (done: Function) => {
         console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_0600 is start---------------")
         TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_off_0600'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
         try {
           continueManager.off(null, context,
             (err: BusinessError, ContinueResultInfo: continueManager.ContinueResultInfo) => {
@@ -1104,6 +1107,7 @@ export default function DmsFwkStageTest() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
         console.info("---------------SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3100 is start---------------")
         let TAG = 'SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3100'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
         let peerInfo: abilityConnectionManager.PeerInfo = {
           deviceId: dvId!,
           bundleName: 'com.acts.example.dmsfwkstageserver',
@@ -1825,6 +1829,7 @@ export default function DmsFwkStageTest() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
         console.info("---------------SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_6300 is start---------------")
         let TAG = 'SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_6300'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
         let peerInfo: abilityConnectionManager.PeerInfo = {
           deviceId: '123',
           bundleName: 'com.acts.example.dmsfwkstageserver',
@@ -1873,6 +1878,7 @@ export default function DmsFwkStageTest() {
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
         console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100 is start---------------")
         TAG = "SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0100";
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
         try {
           connectId = context.connectServiceExtensionAbility({
             deviceId: dvId,
@@ -1917,6 +1923,7 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200",
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
         console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_connectRemoteServiceAbility_0200 is start---------------")
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
         let want: Want = {
           deviceId: dvId,
           bundleName: "com.acts.example.dmsfwkstageserver",
@@ -1961,6 +1968,7 @@ export default function DmsFwkStageTest() {
     it("SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700",
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
         console.info("---------------SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_1700 is start---------------")
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
         try {
           extensionConnectId = context.connectServiceExtensionAbility({
             deviceId: dvId,
@@ -2003,6 +2011,7 @@ export default function DmsFwkStageTest() {
     it('SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600',
       TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
         console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1600 start------------------------");
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
         context.startAbilityByCall({
           bundleName: 'com.acts.example.dmsfwkstageserver',
           abilityName: '',
