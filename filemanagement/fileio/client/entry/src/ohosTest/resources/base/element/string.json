@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "FileioClient"
+    },
+    {
+      "name": "mainability_description",
+      "value": "hap sample empty Fileio"
+    },
+    {
+        "name": "MainAbility_desc",
+        "value": "description"
+    },
+    {
+        "name": "MainAbility_label",
+        "value": "FileioClient"
+    },
+    {
+        "name": "TestAbility_desc",
+        "value": "description"
+    },
+    {
+        "name": "TestAbility_label",
+        "value": "FileioClient"
+    }
+  ]
+}
