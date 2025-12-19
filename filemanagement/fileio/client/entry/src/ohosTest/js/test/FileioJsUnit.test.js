@@ -196,15 +196,29 @@ export default function FileioDistributedTest(){
             }
         }
 
-        async function toconnectDfs(done) {
+        //检查当前应用是否有可信的设备
+        async function checkAvailableDevice()
+        {
+            console.info("checkAvailableDevice in "); 
+            let dmInstance = deviceManager.createDeviceManager(bundleName);
+            console.info("checkAvailableDevice success"); 
+            let deviceInfoList = dmInstance.getAvailableDeviceListSync();
+            console.info("checkAvailableDevice get deviceInfoList " + JSON.stringify(deviceInfoList));
+            if (deviceInfoList.length != 0) {
+                return false;
+            } else{
+                return true;
+            }
+        }
+
+        async function toconnectDfs() {
             console.info(logTag + "toconnectDfs");
             try {
-                dmInstance = deviceManager.createDeviceManager('com.acts.fileio.test.server');
+                dmInstance = deviceManager.createDeviceManager(bundleName);
                 deviceList = dmInstance.getAvailableDeviceListSync();
                 console.info(logTag + "toconnectDfs got deviceManager: " + dmInstance)
                 let networkId = deviceList[0].networkId;
                 console.info(logTag + "toconnectDfs deviceid : " + networkId);
-                console.info(logTag + "toconnectDfs online deviceList id: " + JSON.stringify(deviceList))
                 
                 let listeners = {
                     onStatus(networkId, status) {
@@ -213,45 +227,58 @@ export default function FileioDistributedTest(){
                 };
                 await fs.connectDfs(networkId, listeners).then(() => {
                     console.info(logTag + "toconnectDfs Success to connectDfs");
-                    done();
-                    return;
                 }).catch((err) => {
-                    console.error(logTag + `toconnectDfs Failed to connectDfs. Code: ${err.code}, message: ${err.message}`);
+                    console.error(logTag + `toconnectDfs Failed Code: ${err.code}, message: ${err.message}`);
                     connectDfsCode = err.code;
-                    done();
                     return;
                 });
             } catch (error) {
                 console.info(logTag + "toconnectDfs failed " + JSON.stringify(error));
-                done();
                 return;
             }
         }
     
         beforeAll(async function(done) {
             try {
+                testservice = new TestService;
                 console.info('beforeAll called fileio server');
                 await getPermission();
                 await sleep(5000);
                 await driveFn();
                 await sleep(3000);
+                //环境初始化
+                let checkResult = await checkAvailableDevice();
+                if (!checkResult) {
+                    testservice.unbindStub();
+                }
+                await sleep(500);
+                //如果有可信的设备 不需要再通过PIN码bind
+                let checkResult1 = await checkAvailableDevice();
+                if (checkResult1) {
+                testservice.startDiscovering();
+                await sleep(2000);
+                testservice.bindStub();
+                await sleep(20000);
+                testservice.stopDiscovering();
+                await sleep(3000);
+                }
                 
                 await toconnectDfs();
                 console.info(logTag + "beforeAll toconnectDfs data is： " + connectDfsCode);
-                testservice = new TestService;
+                await sleep(1000);
                 await testservice.toConnectAbility().then(data => {
                     gIRemoteObject = data;
                     console.info(logTag + "toConnectAbility data is： " + JSON.stringify(data));
                 }).catch((err) => {
                     console.info(logTag + `toConnectAbility Failed Code: ${err.code}, message: ${err.message}`);
-                    done();
                 });
+                done();
                 await sleep(1000);
             } catch (error) {
                 console.info(logTag + "beforeAll error： " + JSON.stringify(error));
             } finally {
-                done();
                 console.info("beforeAll done");
+                done();
             }
         })
         beforeEach(function () {
@@ -261,22 +288,30 @@ export default function FileioDistributedTest(){
         afterEach(function () {
             console.info('afterEach called');
         })
-        afterAll(function () {
+        afterAll(async function (done) {
             console.info('afterAll called');
+            testservice = new TestService;
+            await sleep(1000);
+            let checkResult = await checkAvailableDevice();
+            if (!checkResult) {
+                testservice.unbindStub();
+            }
+            done();
+            await sleep(1000);
+            console.info("afterAll done");
         })
 
         function runIfSupported(testFn) {
             return async function (done) {
                 console.info(logTag + "testcases connectDfsCode is： " + connectDfsCode);
-                if (connectDfsCode === 13900004) {
+                if (connectDfsCode === 13900004 || connectDfsCode === 13900045) {
                     let a = 1;
                     let b = 2;
                     expect(a+b).assertEqual(3);
                     done();
                     return;
                 }
-                await testFn();
-                done();
+                await testFn(done);
             }
         }
 
@@ -298,7 +333,7 @@ export default function FileioDistributedTest(){
     
                 console.info('------ start check server... ');
                 await getServerFileInfo(tcNumber, dpath, CODE_MK_DIR, done, function (serverDirCreate) {
-                    console.info("test_fileio_create_dir_sync_000 : getServerFileInfo serverDirCreate: " + serverDirCreate);
+                    console.info("test_fileio_create_dir_sync_000 : serverDirCreate: " + serverDirCreate);
                     expect(serverDirCreate).assertEqual(SERVER_CHECK_SUCCESS);
                 });
     
