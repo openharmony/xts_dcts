@@ -35,7 +35,7 @@ export default class MainAbility2 extends Ability {
                         resultCode: 100,
                         want: {
                             bundleName: "com.acts.example.dmsfwkstageserver",
-                            abilityName: "com.acts.example.dmsfwkstageserver.MainAbility"
+                            abilityName: "com.acts.example.dmsfwkstageserver.TestAbility"
                         }
                     }, (err, data) => {
                         console.log("[Demo] MainAbility terminateSelfWithResult " + JSON.stringify(err))
