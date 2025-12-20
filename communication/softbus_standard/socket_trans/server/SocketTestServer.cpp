@@ -1,23 +1,26 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright (c) 2024 Huawei Device Co., Ltd.
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
+#include <gtest/gtest.h>
 
 #include "socket_common.h"
 #include "socket.h"
 #include "accesstoken_kit.h"
 
 using namespace std;
+using namespace testing::ext;
 
 static INodeStateCb* g_nodeStateCallback = NULL;
 static ISocketListener* g_sessionlist4SokectData  = NULL;
@@ -26,7 +29,19 @@ const int ONE_MINUTE = 60;
 static void SetupCallback(void);
 static void TeardownCallback(void);
 
-void SetUpTestCase()
+class SocketTestServer : public testing::Test {
+public:
+    static void SetUpTestCase();
+    static void TearDownTestCase();
+    void SetUp();
+    void TearDown();
+};
+
+void SocketTestServer ::SetUp() {}
+
+void SocketTestServer ::TearDown() {}
+
+void SocketTestServer ::SetUpTestCase()
 {
     LOG("SetUpTestCase");
     AddPermission();
@@ -41,7 +56,7 @@ void SetUpTestCase()
     }
 }
 
-void TearDownTestCase()
+void SocketTestServer::TearDownTestCase()
 {
     LOG("TearDownTestCase");
     int ret = UnregNodeDeviceStateCb(g_nodeStateCallback);
@@ -259,9 +274,15 @@ static void TeardownCallback(void)
     }
 }
 
-int main()
+/**
+* @tc.number    SUB_Softbus_Trans_SelfNet_0100
+* @tc.name      创建SS，等待opensession和消息传输
+* @tc.desc      测试自组网下传输功能，模拟服务端
+* @tc.type      FUNC
+* @tc.size      MediumTest
+*/
+HWTEST_F(SocketTestServer, test_create_ss, TestSize.Level3)
 {
-    SetUpTestCase();
     int runtime = 0;
     /*socket server*/
     QosTV info[] = {
@@ -299,5 +320,4 @@ int main()
             LOG("### test run:%d s", runtime);
         }
     }
-    TearDownTestCase();
 }
