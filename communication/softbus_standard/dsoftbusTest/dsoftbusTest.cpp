@@ -1,22 +1,26 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright (c) 2021 Huawei Device Co., Ltd.
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
+#include <gtest/gtest.h>
+
 #include "net_trans_common.h"
 #include "wifi_utils.h"
 #include "accesstoken_kit.h"
 
 using namespace std;
+using namespace testing::ext;
 
 static INodeStateCb* g_nodeStateCallback = NULL;
 static ISessionListener* g_sessionlist4Data = NULL;
@@ -41,7 +45,19 @@ static const int ten_seconds = 10;
 static void SetupCallback(void);
 static void TeardownCallback(void);
 
-void SetUpTestCase()
+class dsoftbusTest : public testing::Test {
+public:
+    static void SetUpTestCase();
+    static void TearDownTestCase();
+    void SetUp();
+    void TearDown();
+};
+
+void dsoftbusTest ::SetUp() {}
+
+void dsoftbusTest ::TearDown() {}
+
+void dsoftbusTest ::SetUpTestCase()
 {
     LOG("SetUpTestCase");
     AddPermission();
@@ -51,18 +67,14 @@ void SetUpTestCase()
     TestSetUp();
     SetupCallback();
     int ret = RegNodeDeviceStateCb(DEF_PKG_NAME, g_nodeStateCallback);
-    if (SOFTBUS_OK != ret) {
-        LOG("call reg node state callback fail");
-    }
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call reg node state callback fail";
 }
 
-void TearDownTestCase()
+void dsoftbusTest::TearDownTestCase()
 {
     LOG("TearDownTestCase");
     int ret = UnregNodeDeviceStateCb(g_nodeStateCallback);
-    if (SOFTBUS_OK != ret) {
-        LOG("call unReg node state callback fail");
-    }
+    EXPECT_EQ(SOFTBUS_OK, ret) << "call unReg node state callback fail";
     TeardownCallback();
     TestTearDown();
 }
@@ -572,9 +584,15 @@ static void TeardownCallback(void)
     }
 }
 
-int main()
+/**
+* @tc.number    SUB_Softbus_Trans_SelfNet_0100
+* @tc.name      创建SS，等待opensession和消息传输
+* @tc.desc      测试自组网下传输功能，模拟服务端
+* @tc.type      FUNC
+* @tc.size      MediumTest
+*/
+HWTEST_F(dsoftbusTest, test_create_ss, TestSize.Level3)
 {
-    SetUpTestCase();
     int dataRet = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_DATA, g_sessionlist4Data);
     LOG("CreateSs[data] ret:%d", dataRet);
     int ctrlRet = CreateSessionServer(DEF_PKG_NAME, SESSION_NAME_CTL, g_sessionlist4Ctrl);
@@ -623,5 +641,4 @@ int main()
     LOG("RemoveSs[file] ret:%d", ret);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
     LOG("RemoveSs[stram] ret:%d", ret);
-    TearDownTestCase();
 }

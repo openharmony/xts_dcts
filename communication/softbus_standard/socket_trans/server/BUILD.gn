@@ -1,4 +1,4 @@
-# Copyright (C) 2024 Huawei Device Co., Ltd.
+# Copyright (C) 2024-2025 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -13,15 +13,16 @@
 
 import("../../../../../tools/build/suite.gni")
 
+module_output_path = "dcts/softbus_base/dsoftbusTest"
 dsoftbus_root_path = "../../../../../../../foundation/communication/dsoftbus"
 
-ohos_executable("socketdsoftbusTest") {
+ohos_moduletest_suite("socketdsoftbusTest") {
   sanitize = {
     cfi = true
     cfi_cross_dso = true
     debug = true
   }
-
+  module_out_path = module_output_path
   sources = [
     "../../common/socket_common.c",
     "./SocketTestServer.cpp",
@@ -37,6 +38,7 @@ ohos_executable("socketdsoftbusTest") {
     "$dsoftbus_root_path/interfaces/kits/transport",
   ]
 
+  deps = [ "//third_party/googletest:gtest_main" ]
   external_deps = [
     "access_token:libaccesstoken_sdk",
     "access_token:libnativetoken",
@@ -47,26 +49,13 @@ ohos_executable("socketdsoftbusTest") {
     "ipc:ipc_core",
     "wifi:wifi_sdk",
   ]
-  subsystem_name = "xts"
-  part_name = "dcts"
-}
-
-ohos_copy("cpdsocketdsoftbusTest") {
-  sources = [ "$root_out_dir/xts/dcts/socketdsoftbusTest" ]
-  outputs =
-      [ "$root_out_dir/suites/${XTS_SUITENAME}/testcases/socketdsoftbusTest" ]
-
-  deps = [ ":socketdsoftbusTest" ]
-  subsystem_name = "xts"
-  part_name = "dcts"
+  subsystem_name = "communication"
+  part_name = "dsoftbus"
 }
 
 group("SocketTestServer") {
   testonly = true
   if (is_standard_system) {
-    deps = [
-      ":cpdsocketdsoftbusTest",
-      ":socketdsoftbusTest",
-    ]
+    deps = [ ":socketdsoftbusTest" ]
   }
 }
