@@ -2472,7 +2472,7 @@ export default function DmsFwkStageTest() {
       try {
         context.startAbilityByCall({
           bundleName: 'com.acts.example.dmsfwkstagetest',
-          abilityName: 'com.example.lifecycletest.MainAbility',
+          abilityName: 'TestAbility',
           deviceId: localDeviceId
         })
           .then((data: Caller) => {

@@ -337,8 +337,9 @@ export default function DmsFwkStageTest() {
       async (done: Function) => {
         console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_0700 is start---------------")
         TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_off_0700'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
         try {
-          continueManager.off('prepareContinue', null)
+          continueManager.off(null, context)
           console.log(TAG + 'continueManager.off is success')
           expect().assertFail()
         } catch (error) {
@@ -830,7 +831,7 @@ export default function DmsFwkStageTest() {
         console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_getPeerInfoById_1900 is start---------------")
         let TAG = 'SUB_DMS_StandardOs_collaboration_abilityConnectionManager_getPeerInfoById_1900'
         try {
-          let peerInfo = abilityConnectionManager.getPeerInfoById(10)
+          let peerInfo = abilityConnectionManager.getPeerInfoById(undefined)
           console.log(`${TAG} abilityConnectionManager.getPeerInfoById is succcess`)
           expect().assertFail()
         } catch (error) {
@@ -1831,7 +1832,7 @@ export default function DmsFwkStageTest() {
         let TAG = 'SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_6300'
         let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
         let peerInfo: abilityConnectionManager.PeerInfo = {
-          deviceId: '123',
+          deviceId: dvId!,
           bundleName: 'com.acts.example.dmsfwkstageserver',
           moduleName: 'entry',
           abilityName: 'MainAbility',
@@ -1856,7 +1857,7 @@ export default function DmsFwkStageTest() {
 
         try {
           sessionId =
-            abilityConnectionManager.createAbilityConnectionSession("collabTest", context, peerInfo, connectOption);
+            abilityConnectionManager.createAbilityConnectionSession("collabTest", undefined, peerInfo, connectOption);
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession is success ${sessionId}`)
           expect().assertFail()
         } catch (error) {
