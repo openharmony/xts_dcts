@@ -1761,7 +1761,7 @@ export default function DmsFwkStageTest() {
         let textEncoder = util.TextEncoder.create("utf-8");
         let arrayBuffer = textEncoder.encodeInto("data send success");
         try {
-          abilityConnectionManager.sendData(123, arrayBuffer).then(() => {
+          abilityConnectionManager.sendData(123, arrayBuffer.buffer).then(() => {
             console.log(TAG + 'abilityConnectionManager.sendData is success')
             expect().assertFail()
           })
