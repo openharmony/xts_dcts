@@ -20,12 +20,7 @@
     "srcEntry": "./ets/Application/AbilityStage.ts",
     "description": "$string:phone_entry_dsc",
     "mainElement": "MainAbility",
-    "deviceTypes": [
-      "default",
-      "tablet",
-      "2in1",
-      "wearable"
-    ],
+    "deviceTypes": [],
     "deliveryWithInstall": true,
     "installationFree": false,
     "uiSyntax": "ets",
@@ -76,13 +71,34 @@
     ],
     "requestPermissions": [
       {
-        "name": "ohos.permission.GET_BUNDLE_INFO"
+        "name": "ohos.permission.GET_BUNDLE_INFO",
+        "usedScene":{
+          "abilities":[
+            "FormAbility"
+          ],
+          "when":"inuse"
+        },
+        "reason":"$string:reason"
       },
       {
-        "name": "ohos.permission.DISTRIBUTED_DATASYNC"
+        "name": "ohos.permission.DISTRIBUTED_DATASYNC",
+        "usedScene":{
+          "abilities":[
+            "FormAbility"
+          ],
+          "when":"inuse"
+        },
+        "reason":"$string:reason"
       },
       {
-        "name": "ohos.permission.GET_DISTRIBUTED_DEVICE_INFO"
+        "name": "ohos.permission.GET_DISTRIBUTED_DEVICE_INFO",
+        "usedScene":{
+          "abilities":[
+            "FormAbility"
+          ],
+          "when":"inuse"
+        },
+        "reason":"$string:reason"
       }
     ]
   }
