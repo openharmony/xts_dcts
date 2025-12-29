@@ -11,6 +11,10 @@
     {
       "name": "EntryAbility_label",
       "value": "AVSessionServer"
+    },
+    {
+      "name": "reason",
+      "value": "label"
     }
   ]
 }
