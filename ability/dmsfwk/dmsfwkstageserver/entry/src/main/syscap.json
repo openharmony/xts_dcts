@@ -1,0 +1,17 @@
+{
+    "devices": {
+        "general": [],
+        "custom": [
+            {
+                "xts": [
+                    "SystemCapability.Ability.AbilityRuntime.Core",
+                    "SystemCapability.Notification.CommonEvent",
+                    "SystemCapability.Ability.AbilityRuntime.AbilityCore",
+                    "SystemCapability.Security.AccessToken",
+                    "SystemCapability.ArkUI.ArkUI.Full",
+                    "SystemCapability.Communication.IPC.Core"
+                ]
+            }
+        ]
+    }
+}

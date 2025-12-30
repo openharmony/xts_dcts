@@ -60,7 +60,7 @@
         "pages": [
           "pages/index/index"
         ],
-        "name": "default",
+        "name": ".TestAbility",
         "window": {
           "designWidth": 720,
           "autoDesignWidth": false

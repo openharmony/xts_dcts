@@ -1,0 +1,15 @@
+{
+    "devices": {
+        "general": [],
+        "custom": [
+            {
+                "xts": [
+                    "SystemCapability.Communication.IPC.Core",
+                   "SystemCapability.Ability.AbilityRuntime.FAModel",
+                   "SystemCapability.DistributedHardware.DeviceManager",
+                   "SystemCapability.Test.UiTest"
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "devices": {
+        "general": [],
+        "custom": [
+            {
+                "xts": [
+                    "SystemCapability.DistributedHardware.DeviceManager",
+                    "SystemCapability.Test.UiTest",
+                    "SystemCapability.DistributedDataManager.RelationalStore.Core",
+                    "SystemCapability.Ability.AbilityRuntime.FAModel"
+                ]
+            }
+        ]
+    }
+}

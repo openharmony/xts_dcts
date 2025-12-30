@@ -1,0 +1,18 @@
+{
+    "devices": {
+        "general": [],
+        "custom": [
+            {
+                "xts": [
+                    "SystemCapability.Ability.AbilityRuntime.Core",
+                    "SystemCapability.Ability.AbilityRuntime.AbilityCore",
+                    "SystemCapability.Security.AccessToken",
+                    "SystemCapability.Communication.IPC.Core",
+                    "SystemCapability.FileManagement.File.FileIO",
+                    "SystemCapability.Ability.AbilityRuntime.Core",
+                    "SystemCapability.ResourceSchedule.BackgroundTaskManager.TransientTask"
+                ]
+            }
+        ]
+    }
+}
