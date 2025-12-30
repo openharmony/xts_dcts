@@ -67,16 +67,44 @@
     ],
     "requestPermissions": [
       {
-        "name": "ohos.permission.GET_BUNDLE_INFO"
+        "name": "ohos.permission.GET_BUNDLE_INFO",
+        "usedScene":{
+          "abilities":[
+            "FormAbility"
+          ],
+          "when":"inuse"
+        },
+        "reason":"$string:reason"
       },
       {
-        "name": "ohos.permission.DISTRIBUTED_DATASYNC"
+        "name": "ohos.permission.DISTRIBUTED_DATASYNC",
+        "usedScene":{
+          "abilities":[
+            "FormAbility"
+          ],
+          "when":"inuse"
+        },
+        "reason":"$string:reason"
       },
       {
-        "name": "ohos.permission.GET_DISTRIBUTED_DEVICE_INFO"
+        "name": "ohos.permission.GET_DISTRIBUTED_DEVICE_INFO",
+        "usedScene":{
+          "abilities":[
+            "FormAbility"
+          ],
+          "when":"inuse"
+        },
+        "reason":"$string:reason"
       },
       {
-        "name": "ohos.permission.ACCESS_SERVICE_DM"
+        "name": "ohos.permission.ACCESS_SERVICE_DM",
+        "usedScene":{
+          "abilities":[
+            "FormAbility"
+          ],
+          "when":"inuse"
+        },
+        "reason":"$string:reason"
       }
     ]
   }
