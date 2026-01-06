@@ -13,16 +13,16 @@
 
 import("../../../../../tools/build/suite.gni")
 
-module_output_path = "dcts/softbus_base/dsoftbusTest"
 dsoftbus_root_path = "../../../../../../../foundation/communication/dsoftbus"
 
-ohos_moduletest_suite("socketdsoftbusTest") {
+ohos_xts_executable("socketdsoftbusTest") {
+  testonly = true
   sanitize = {
     cfi = true
     cfi_cross_dso = true
     debug = true
   }
-  module_out_path = module_output_path
+
   sources = [
     "../../common/socket_common.c",
     "./SocketTestServer.cpp",

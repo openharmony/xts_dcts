@@ -14,18 +14,17 @@
 import("//build/ohos.gni")
 import("../../../../tools/build/suite.gni")
 
-module_output_path = "dcts/softbus_base/dsoftbusTest"
 dsoftbus_root_path = "../../../../../../foundation/communication/dsoftbus"
 wifi_root_path = "../../../../../../foundation/communication/wifi/wifi"
 
-ohos_moduletest_suite("dsoftbusTest") {
+ohos_xts_executable("dsoftbusTest") {
+  testonly = true
   sanitize = {
     cfi = true
     cfi_cross_dso = true
     debug = true
   }
 
-  module_out_path = module_output_path
   sources = [
     "../common/net_trans_common.c",
     "../common/wifi_utils.cpp",
