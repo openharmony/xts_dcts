@@ -1,4 +1,4 @@
-# Copyright (C) 2024-2025 Huawei Device Co., Ltd.
+# Copyright (C) 2024-2026 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -53,9 +53,19 @@ ohos_xts_executable("socketdsoftbusTest") {
   part_name = "dsoftbus"
 }
 
+ohos_xts_action("cpdsocketdsoftbusTest") {
+  testonly = true
+  script = "cpfile.sh"
+  outputs = [ "${target_out_dir}/cpdsocketdsoftbusTest.log" ]
+  deps = [ ":socketdsoftbusTest" ]
+}
+
 group("SocketTestServer") {
   testonly = true
   if (is_standard_system) {
-    deps = [ ":socketdsoftbusTest" ]
+    deps = [
+      ":cpdsocketdsoftbusTest",
+      ":socketdsoftbusTest",
+    ]
   }
 }
