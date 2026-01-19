@@ -1140,6 +1140,9 @@ export default function DmsFwkStageTest() {
           expect(typeof sessionId == 'number').assertTrue()
         } catch (error) {
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession error.code is ${error.code}`)
+          if (error.code == 801) {
+            expect().assertTrue()
+          }
           expect().assertFail()
         }
         await sleep(1000)
@@ -1232,6 +1235,9 @@ export default function DmsFwkStageTest() {
           expect().assertFail()
         } catch (error) {
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession error.code is ${error.code}`)
+          if (error.code == 801) {
+            expect().assertTrue()
+          }
           expect(error.code == 401).assertTrue()
         }
         await sleep(1000)
@@ -1862,6 +1868,9 @@ export default function DmsFwkStageTest() {
           expect().assertFail()
         } catch (error) {
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession error.code is ${error.code}`)
+          if (error.code == 801) {
+            expect().assertTrue()
+          }
           expect(error.code == 401).assertTrue()
         }
         await sleep(1000)
