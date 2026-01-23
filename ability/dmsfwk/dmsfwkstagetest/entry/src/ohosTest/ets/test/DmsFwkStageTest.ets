@@ -26,6 +26,7 @@ import bundleManager from '@ohos.bundle.bundleManager';
 import Want from '@ohos.app.ability.Want';
 import common from '@ohos.app.ability.common';
 import TestService from "./testService.ets";
+import abilityConnectionManager from '@ohos.distributedsched.abilityConnectionManager';
 
 let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
@@ -2753,5 +2754,54 @@ export default function DmsFwkStageTest() {
       done()
       console.info("-----------------SUB_DMS_StandardOs_Collaboration_Bycall_singletonOncall_1500 end------------------------");
     })
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3100
+    * @tc.name    abilityConnectionManager.createAbilityConnectionSession
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3100",
+      TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
+        console.info("---------------SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3100 is start---------------")
+        let TAG = 'SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3100'
+        let sessionId: number;
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
+        let peerInfo: abilityConnectionManager.PeerInfo = {
+          deviceId: dvId!,
+          bundleName: 'com.acts.example.dmsfwkstagetest',
+          moduleName: 'entry',
+          abilityName: 'com.example.lifecycletest.MainAbility',
+          serviceName: 'collabTest'
+        };
+
+        let myRecord: Record<string, string> = {
+          "newKey1": "value1",
+        };
+
+        let options: Record<string, string> = {
+          'ohos.collabrate.key.start.option': 'ohos.collabrate.value.foreground',
+        };
+
+        let connectOption: abilityConnectionManager.ConnectOptions = {
+          needSendData: true,
+          needSendStream: false,
+          needReceiveStream: false,
+          parameters: myRecord
+        };
+
+        try {
+          sessionId =
+            abilityConnectionManager.createAbilityConnectionSession("collabTest", context, peerInfo, connectOption);
+          console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession is success ${sessionId}`)
+          expect().assertFail()
+        } catch (err: BusinessError) {
+          console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession error.code is ${err.code}`)
+          expect(err.code == 201).assertTrue()
+        }
+        await sleep(1000)
+        console.info("---------------SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3100 is end--------------- ")
+        done();
+      });
   })
 }
