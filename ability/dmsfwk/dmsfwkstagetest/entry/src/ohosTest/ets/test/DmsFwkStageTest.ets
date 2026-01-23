@@ -2795,9 +2795,9 @@ export default function DmsFwkStageTest() {
             abilityConnectionManager.createAbilityConnectionSession("collabTest", context, peerInfo, connectOption);
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession is success ${sessionId}`)
           expect().assertFail()
-        } catch (err: BusinessError) {
-          console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession error.code is ${err.code}`)
-          expect(err.code == 201).assertTrue()
+        } catch (error) {
+          console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession error.code is ${error.code}`)
+          expect(error.code == 201).assertTrue()
         }
         await sleep(1000)
         console.info("---------------SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3100 is end--------------- ")
