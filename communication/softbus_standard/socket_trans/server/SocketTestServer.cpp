@@ -14,7 +14,6 @@
 */
 
 #include <gtest/gtest.h>
-
 #include "socket_common.h"
 #include "socket.h"
 #include "accesstoken_kit.h"
@@ -37,9 +36,15 @@ public:
     void TearDown();
 };
 
-void SocketTestServer ::SetUp() {}
+void SocketTestServer ::SetUp()
+{
+    LOG("SetUp done");
+}
 
-void SocketTestServer ::TearDown() {}
+void SocketTestServer ::TearDown()
+{
+    LOG("TearDown done");
+}
 
 void SocketTestServer ::SetUpTestCase()
 {

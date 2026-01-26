@@ -14,5 +14,9 @@
 # limitations under the License.
 
 set -e
+if [ ! -e "communication/dsoftbus/dsoftbusTest" ]; then
+   echo "communication/dsoftbus/dsoftbusTest : No such file or directory"
+   exit 0
+fi
 mkdir -p "suites/dcts/testcases"
 cp -rf "communication/dsoftbus/dsoftbusTest" "suites/dcts/testcases"
