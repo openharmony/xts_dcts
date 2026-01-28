@@ -153,7 +153,7 @@ export default function DmsFwkStageTestStaticTest() {
         console.info("---------------SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_0100 is start---------------")
         let TAG = 'SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_0100'
         let peerInfo: abilityConnectionManager.PeerInfo = {
-          deviceId: dvId,
+          deviceId: dvId!,
           bundleName: 'com.ohos.dmsfwkstageServer.static',
           moduleName: 'entry',
           abilityName: 'EntryAbility',
@@ -587,7 +587,7 @@ export default function DmsFwkStageTestStaticTest() {
         let TAG = 'SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_1800'
         console.info("---------------SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_1800 get-------------- ")
         let peerInfo: abilityConnectionManager.PeerInfo = {
-          deviceId: dvId,
+          deviceId: dvId!,
           bundleName: 'com.ohos.dmsfwkstageServer.static',
           moduleName: 'entry',
           abilityName: 'EntryAbility',
