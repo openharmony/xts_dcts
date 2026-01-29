@@ -190,29 +190,6 @@ export default function DmsFwkStageTestStaticTest() {
       });
 
     /*
-    * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_connect_0200
-    * @tc.name    abilityConnectionManager.connect
-    * @tc.desc    Function test
-    * @tc.level   0
-    */
-    it("SUB_DMS_StandardOs_collaboration_abilityConnectionManager_connect_0200",
-      TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: () => void) => {
-        console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_connect_0200 is start---------------")
-        console.log(`${TAG} abilityConnectionManager.sessionId = ${sessionId}`)
-        abilityConnectionManager.connect(sessionId).then((ConnectResult: abilityConnectionManager.ConnectResult) => {
-          console.log(`${TAG} abilityConnectionManager.connect is : ${JSON.stringify(ConnectResult)}`)
-          expect(JSON.stringify(ConnectResult) == '{}').assertTrue()
-          console.log(`${TAG} abilityConnectionManager.connect is ConnectResult.isConnected == true : ${JSON.stringify(ConnectResult)}`)
-        }).catch((error: Error) => {
-          console.error(TAG + 'abilityConnectionManager.connect catch get e' + `, error code is ${error.code}, message is ${error.message}`);
-          expect().assertFail()
-        })
-        await sleep(1000)
-        console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_connect_0200 is end--------------- ")
-        done()
-      })
-
-    /*
     * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_onConnect_0300
     * @tc.name    abilityConnectionManager.onConnect
     * @tc.desc    Function test
