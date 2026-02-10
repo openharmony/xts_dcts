@@ -25,6 +25,7 @@ let dmNetworkId = null;
 let dmDeviceInfo = null;
 let deviceId = null;
 let localDeviceId = null;
+const TEST_BUNDLE_NAME = 'com.ohos.distributedscreenjstest';
 let TAG = 'distributedDeviceManager';
 
 export default function distributedDeviceManager() {
@@ -132,13 +133,16 @@ export default function distributedDeviceManager() {
         })
 
         beforeEach(async function (done) {
-            console.info(('beforeEach called'));
+            console.info(TAG + 'beforeEach start');
+            let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+            expect(dmInstance !== null && dmInstance !== undefined).assertTrue();
+            console.info(TAG + 'beforeEach get dmInstance is successfully');
             done();
         })
 
         afterEach(async function (done) {
             console.info('afterEach called');
-            setTimeout(done, 4000);
+            setTimeout(done, 500);
         })
 
         afterAll(async function (done) {
@@ -174,7 +178,7 @@ export default function distributedDeviceManager() {
                 dmInstance = deviceManager.createDeviceManager("com.ohos.distributedscreenjstest");
                 if (!dmInstance) {
                     console.error("createDeviceManager errCode:" + err.code + ",errMessage:" + err.message);
-                    expect(false).assertFail();
+                    expect().assertFail();
                     done();
                 }
                 console.info("createDeviceManager success");
@@ -187,10 +191,9 @@ export default function distributedDeviceManager() {
                 done();
             } catch (err) {
                 console.error("createDeviceManager errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0100 end------------------------");
         })
 
@@ -208,6 +211,7 @@ export default function distributedDeviceManager() {
                 "discoverTargetType": 1
             };
             let data = null;
+            let flag = 0;
             try {
                 dmInstance.on('discoverSuccess', (data) => {
                     console.info("discoverSuccess:" + JSON.stringify(data));
@@ -215,14 +219,13 @@ export default function distributedDeviceManager() {
 
                 dmInstance.startDiscovering(discoverParam);
                 console.log("startDiscovering success");
-                expect(true).assertTrue();
+                expect(flag == 0).assertTrue();
                 done();
             } catch (err) {
                 console.error("startDiscovering errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0200 end------------------------");
         })
 
@@ -246,10 +249,9 @@ export default function distributedDeviceManager() {
                 done();
             } catch (err) {
                 console.error("getLocalDeviceNetworkId errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0300 end------------------------");
         })
 
@@ -274,10 +276,9 @@ export default function distributedDeviceManager() {
                 done();
             } catch (err) {
                 console.error("getAvailableDeviceListSync errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0400 end------------------------");
         })
 
@@ -302,10 +303,9 @@ export default function distributedDeviceManager() {
                 });
             } catch (err) {
                 console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0500 end------------------------");
         })
 
@@ -325,10 +325,9 @@ export default function distributedDeviceManager() {
                 done();
             }).catch((err) => {
                 console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             })
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0600 end------------------------");
         })
 
@@ -349,14 +348,13 @@ export default function distributedDeviceManager() {
                 }
                 console.log('getAvailableDeviceListSync info:' + dmDeviceInfo);
                 console.log('getAvailableDeviceListSync info:' + JSON.stringify(dmDeviceInfo[0]["deviceId"]));
-                expect(dmDeviceInfo[0]!=null).assertTrue();
+                expect(dmDeviceInfo[0] != null).assertTrue();
                 done();
             } catch (err) {
                 console.error("getAvailableDeviceListSync errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0700 end------------------------");
         })
 
@@ -376,15 +374,14 @@ export default function distributedDeviceManager() {
                         console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
                     }
                     console.log('getAvailableDeviceList info: ' + JSON.stringify(data));
-                    expect(data[0]!=null).assertTrue();
+                    expect(data[0] != null).assertTrue();
                     done();
                 });
             } catch (err) {
                 console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2900 end------------------------");
         })
 
@@ -400,14 +397,13 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6700 start------------------------");
             dmInstance.getAvailableDeviceList().then((data) => {
                 console.log('getAvailableDeviceList info: ' + JSON.stringify(data));
-                expect(data[0]!==null).assertTrue();
+                expect(data[0] !== null).assertTrue();
                 done();
             }).catch((err) => {
                 console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             })
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6700 end------------------------");
         })
 
@@ -431,10 +427,9 @@ export default function distributedDeviceManager() {
                 done();
             } catch (err) {
                 console.info("getLocalDeviceName errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0800 end------------------------");
         })
 
@@ -458,10 +453,9 @@ export default function distributedDeviceManager() {
                 done();
             } catch (err) {
                 console.info("getLocalDeviceType errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_0900 end------------------------");
         })
 
@@ -485,10 +479,9 @@ export default function distributedDeviceManager() {
                 done();
             } catch (err) {
                 console.info("getLocalDeviceId errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1000 end------------------------");
         })
 
@@ -512,10 +505,9 @@ export default function distributedDeviceManager() {
                 done();
             } catch (err) {
                 console.info("getDeviceName errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1100 end------------------------");
         })
 
@@ -539,10 +531,9 @@ export default function distributedDeviceManager() {
                 done();
             } catch (err) {
                 console.info("getDeviceType errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1200 end------------------------");
         })
 
@@ -556,17 +547,17 @@ export default function distributedDeviceManager() {
           */
         it("SUB_DH_DeviceManager_Dcts_1400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1400 start------------------------");
+            let flag = 0;
             try {
                 dmInstance.stopDiscovering();
                 console.log("stopDiscovering success");
-                expect(true).assertTrue();
+                expect(flag == 0).assertTrue();
                 done();
             } catch (err) {
                 console.info("stopDiscovering errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1400 end------------------------");
         })
 
@@ -588,6 +579,7 @@ export default function distributedDeviceManager() {
                     value: 0
                 })
             }
+            let flag = 0;
             try {
                 dmInstance.off('replyResult');
                 dmInstance.off('discoverSuccess');
@@ -597,14 +589,13 @@ export default function distributedDeviceManager() {
                 dmInstance.off('deviceNameChange');
                 deviceManager.releaseDeviceManager(dmInstance);
                 console.log("releaseDeviceManager success");
-                expect(true).assertTrue();
+                expect(flag == 0).assertTrue();
                 done();
             } catch (err) {
                 console.info("releaseDeviceManager errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1500 end------------------------");
         })
 
@@ -627,22 +618,21 @@ export default function distributedDeviceManager() {
                 })
             }
             try {
+                deviceManager.releaseDeviceManager(dmInstance);
+                console.log("releaseDeviceManager success");
                 dmInstance.off('replyResult');
                 dmInstance.off('discoverSuccess');
                 dmInstance.off('discoverFail');
                 dmInstance.off('serviceDie');
                 dmInstance.off('deviceStateChange');
                 dmInstance.off('deviceNameChange');
-                deviceManager.releaseDeviceManager(dmInstance);
-                console.log("releaseDeviceManager success");
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.info("releaseDeviceManager errCode:" + err.code + ",errMessage:" + err.message);
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1600 end------------------------");
         })
 
@@ -681,10 +671,9 @@ export default function distributedDeviceManager() {
                 }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_1700 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1700 end------------------------");
         })
 
@@ -725,10 +714,9 @@ export default function distributedDeviceManager() {
                 }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_1800 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1800 end------------------------");
         })
 
@@ -767,7 +755,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1900 end------------------------");
         })
 
@@ -811,10 +798,9 @@ export default function distributedDeviceManager() {
                 }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_2000 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2000 end------------------------");
         })
 
@@ -856,10 +842,9 @@ export default function distributedDeviceManager() {
                 }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_2100 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2100 end------------------------");
         })
 
@@ -901,10 +886,9 @@ export default function distributedDeviceManager() {
                 }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_2200 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2200 end------------------------");
         })
 
@@ -946,10 +930,9 @@ export default function distributedDeviceManager() {
                 }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_2300 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2300 end------------------------");
         })
 
@@ -988,10 +971,9 @@ export default function distributedDeviceManager() {
                 }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_2400 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2400 end------------------------");
         })
 
@@ -1030,10 +1012,9 @@ export default function distributedDeviceManager() {
                 }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_2500 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2500 end------------------------");
         })
 
@@ -1062,7 +1043,7 @@ export default function distributedDeviceManager() {
                     deviceManager.releaseDeviceManager(dmInstance);
                     console.info("SUB_DH_DeviceManager_Dcts_2600 releaseDeviceManager success");
                     dmInstance.startDiscovering(discoverParam);
-                    expect(true).assertTrue();
+                    expect().assertFail();
                     done();
                 } catch (err) {
                     console.log("startDiscovering SUB_DH_DeviceManager_Dcts_2600 errCode:" + err.code + ",errMessage:" + err.message);
@@ -1071,10 +1052,9 @@ export default function distributedDeviceManager() {
                 }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_2600 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2600 end------------------------");
         })
 
@@ -1125,10 +1105,9 @@ export default function distributedDeviceManager() {
                 }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_2700 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2700 end------------------------");
         })
 
@@ -1157,7 +1136,7 @@ export default function distributedDeviceManager() {
                     deviceManager.releaseDeviceManager(dmInstance);
                     console.info("SUB_DH_DeviceManager_Dcts_2800 releaseDeviceManager success");
                     dmInstance.unbindTarget(deviceId);
-                    expect(true).assertTrue();
+                    expect().assertFail();
                     done();
                 } catch (err) {
                     console.log("unbindTarget SUB_DH_DeviceManager_Dcts_2800 errCode:" + err.code + ",errMessage:" + err.message);
@@ -1166,10 +1145,9 @@ export default function distributedDeviceManager() {
                 }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_2800 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_2800 end------------------------");
         })
 
@@ -1196,7 +1174,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3000 end------------------------");
         })
 
@@ -1222,7 +1199,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3100 end------------------------");
         })
 
@@ -1248,7 +1224,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3200 end------------------------");
         })
 
@@ -1274,7 +1249,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3300 end------------------------");
         })
 
@@ -1300,7 +1274,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3400 end------------------------");
         })
 
@@ -1326,7 +1299,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3500 end------------------------");
         })
 
@@ -1352,7 +1324,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3600 end------------------------");
         })
 
@@ -1378,7 +1349,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3700 end------------------------");
         })
 
@@ -1404,7 +1374,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3800 end------------------------");
         })
 
@@ -1430,7 +1399,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_3900 end------------------------");
         })
 
@@ -1456,7 +1424,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4000 end------------------------");
         })
 
@@ -1482,7 +1449,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4100 end------------------------");
         })
 
@@ -1508,7 +1474,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4200 end------------------------");
         })
 
@@ -1534,7 +1499,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4300 end------------------------");
         })
 
@@ -1552,14 +1516,13 @@ export default function distributedDeviceManager() {
             try {
                 let dmInstanceData = deviceManager.createDeviceManager("");
                 console.info("createDeviceManager value is null errCode:" + JSON.stringify(dmInstanceData));
-                expect(dmInstanceData !== null).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.error("createDeviceManager 4400 errCode:" + err.code + ",errMessage:" + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4400 end------------------------");
         })
 
@@ -1577,14 +1540,13 @@ export default function distributedDeviceManager() {
             try {
                 dmInstance.stopDiscovering();
                 console.log("stopDiscovering success");
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.info("stopDiscovering errCode:" + err.code + ",errMessage:" + err.message);
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4500 end------------------------");
         })
 
@@ -1602,14 +1564,13 @@ export default function distributedDeviceManager() {
             try {
                 let dmInstanceDevice = null;
                 deviceManager.releaseDeviceManager(dmInstanceDevice);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('SUB_DH_DeviceManager_Dcts_4600 release device manager errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4600 end------------------------");
         })
 
@@ -1643,7 +1604,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4700 end------------------------");
         })
 
@@ -1672,7 +1632,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4800 end------------------------");
         })
 
@@ -1694,14 +1653,13 @@ export default function distributedDeviceManager() {
             try {
                 dmInstance.startDiscovering(discoverParam, filterOptions);
                 console.log('SUB_DH_DeviceManager_Dcts_4900 startDiscovering success');
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('startDiscovering errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_4900 end------------------------");
         })
 
@@ -1733,7 +1691,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5000 end------------------------");
         })
 
@@ -1752,14 +1709,13 @@ export default function distributedDeviceManager() {
                 let unDeviceId = '';
                 dmInstance.unbindTarget(unDeviceId);
                 console.info('SUB_DH_DeviceManager_Dcts_5100 unbindTarget success');
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('SUB_DH_DeviceManager_Dcts_5100 unbindTarget errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5100 end------------------------");
         })
 
@@ -1785,7 +1741,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5200 end------------------------");
         })
 
@@ -1811,7 +1766,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5300 end------------------------");
         })
 
@@ -1828,14 +1782,13 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5400 start------------------------");
             try {
                 dmInstance.on('deviceStateChange', null);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('SUB_DH_DeviceManager_Dcts_5400 on deviceStateChange errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5400 end------------------------");
         })
 
@@ -1852,14 +1805,13 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5500 start------------------------");
             try {
                 dmInstance.off('deviceStateChange', null);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('SUB_DH_DeviceManager_Dcts_5500 off deviceStateChange errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5500 end------------------------");
         })
 
@@ -1876,14 +1828,13 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5600 start------------------------");
             try {
                 dmInstance.on('discoverSuccess', null);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('SUB_DH_DeviceManager_Dcts_5400 on discoverSuccess errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5600 end------------------------");
         })
 
@@ -1900,14 +1851,13 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5700 start------------------------");
             try {
                 dmInstance.off('discoverSuccess', null);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('SUB_DH_DeviceManager_Dcts_5500 off discoverSuccess errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5700 end------------------------");
         })
 
@@ -1924,14 +1874,13 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5800 start------------------------");
             try {
                 dmInstance.on('deviceNameChange', null);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('SUB_DH_DeviceManager_Dcts_5800 on deviceNameChange errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5800 end------------------------");
         })
 
@@ -1948,14 +1897,13 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5900 start------------------------");
             try {
                 dmInstance.off('deviceNameChange', null);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('SUB_DH_DeviceManager_Dcts_5900 off deviceNameChange errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_5900 end------------------------");
         })
 
@@ -1972,14 +1920,13 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6000 start------------------------");
             try {
                 dmInstance.on('discoverFailure', null);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('SUB_DH_DeviceManager_Dcts_6000 on discoverFailure errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6000 end------------------------");
         })
 
@@ -1996,14 +1943,13 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6100 start------------------------");
             try {
                 dmInstance.off('discoverFailure', null);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('SUB_DH_DeviceManager_Dcts_6100 off discoverFailure errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6100 end------------------------");
         })
 
@@ -2020,14 +1966,13 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6200 start------------------------");
             try {
                 dmInstance.on('serviceDie', null);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('SUB_DH_DeviceManager_Dcts_6200 on serviceDie errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6200 end------------------------");
         })
 
@@ -2044,14 +1989,13 @@ export default function distributedDeviceManager() {
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6300 start------------------------");
             try {
                 dmInstance.off('serviceDie', null);
-                expect(true).assertTrue();
+                expect().assertFail();
                 done();
             } catch (err) {
                 console.log('SUB_DH_DeviceManager_Dcts_6300 off serviceDie errCode:' + err.code + ',errMessage:' + err.message);
                 expect(err.code == 401).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6300 end------------------------");
         })
 
@@ -2075,7 +2019,7 @@ export default function distributedDeviceManager() {
                 try {
                     dmInstance.startDiscovering(discoverParam);
                     console.info('startDiscovering_2 success');
-                    expect(true).assertTrue();
+                    expect().assertFail();
                     done();
                 } catch (err) {
                     console.log('SUB_DH_DeviceManager_Dcts_6400 startDiscovering_2 errCode:' + err.code + ',errMessage:' + err.message);
@@ -2087,7 +2031,6 @@ export default function distributedDeviceManager() {
                 expect(err.code).assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6400 end------------------------");
         })
 
@@ -2146,7 +2089,6 @@ export default function distributedDeviceManager() {
                 expect(err.code == 11600101).assertTrue();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6500 end------------------------");
         })
 
@@ -2185,10 +2127,9 @@ export default function distributedDeviceManager() {
                 }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_1300 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_1300 end------------------------");
         })
 
@@ -2215,21 +2156,20 @@ export default function distributedDeviceManager() {
                     deviceManager.releaseDeviceManager(dmInstance);
                     console.info("SUB_DH_DeviceManager_Dcts_6600 releaseDeviceManager success");
                     dmInstance.getAvailableDeviceList((err, data) => {
-                    console.log('getAvailableDeviceList info: ' + JSON.stringify(data));
-                    expect(data.length).assertEqual(0);
+                        console.log('getAvailableDeviceList info: ' + JSON.stringify(data));
+                        expect(data.length).assertEqual(0);
+                        done();
+                    });
+                } catch (err) {
+                    console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
+                    expect(err.code == 11600101).assertTrue();
                     done();
-                });
-            } catch (err) {
-                console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
-                expect(err.code == 11600101).assertTrue();
-                done();
-            }
+                }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_6600 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6600 end------------------------");
         })
 
@@ -2260,17 +2200,16 @@ export default function distributedDeviceManager() {
                         expect(data.length).assertEqual(0);
                         done();
                     });
-                }catch(err) {
-                console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
-                expect(err.code == 11600101).assertTrue();
-                done();
-            }
+                } catch (err) {
+                    console.error("getAvailableDeviceList errCode:" + err.code + ",errMessage:" + err.message);
+                    expect(err.code == 11600101).assertTrue();
+                    done();
+                }
             } catch (err) {
                 console.log("createDeviceManager SUB_DH_DeviceManager_Dcts_6800 four errCode:" + err.code + ",errMessage:" + err.message);
-                expect(false).assertFail();
+                expect().assertFail();
                 done();
             }
-            await sleep(1000);
             console.info("-----------------SUB_DH_DeviceManager_Dcts_6800 end------------------------");
         })
 
@@ -2299,6 +2238,857 @@ export default function distributedDeviceManager() {
             }
             console.log("-----------------SUB_DH_DeviceManager_Dcts_6900 END------------------------");
             done();
-        })
+        });
+
+        /**
+     * @tc.number SUB_DH_DeviceManager_Dcts_7000
+     * @tc.name SUB_DH_DeviceManager_Dcts_7000
+     * @tc.desc Test getAvailableDeviceListSync interfaces
+     * @tc.size MEDIUM
+     * @tc.type Function
+     * @tc.level Level 2
+     * @tc.require
+     */
+        it('SUB_DH_DeviceManager_Dcts_7000', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + '-----------------SUB_DH_DeviceManager_Dcts_7000 START------------------------');
+            try {
+                let DeviceBasicInfo = dmInstance.getAvailableDeviceListSync();
+                console.info(TAG + 'get deviceInfoList is' + JSON.stringify(DeviceBasicInfo));
+                for (let i = 0; i < DeviceBasicInfo.length; i++) {
+                    console.info(TAG + 'get deviceInfoList deviceId' + JSON.stringify(DeviceBasicInfo[i].deviceId));
+                    console.info(TAG + 'get deviceInfoList deviceName' + JSON.stringify(DeviceBasicInfo[i].deviceName));
+                    console.info(TAG + 'get deviceInfoList deviceType' + JSON.stringify(DeviceBasicInfo[i].deviceType));
+                    console.info(TAG + 'get deviceInfoList networkId' + JSON.stringify(DeviceBasicInfo[i].networkId));
+                    expect(DeviceBasicInfo[i].deviceId != null).assertTrue();
+                    expect(DeviceBasicInfo[i].deviceName != null).assertTrue();
+                    expect(DeviceBasicInfo[i].deviceType != null).assertTrue();
+                    expect(DeviceBasicInfo[i].networkId != null).assertTrue();
+                }
+                console.info(TAG + 'get deviceInfoList successfully');
+                expect(DeviceBasicInfo.length > 0).assertTrue()
+            } catch (err) {
+                console.info(TAG + "get deviceInfoList failed errCode:" + err.code + ",errMessage:" + err.message);
+                expect().assertFail();
+            }
+            console.info(TAG + '-----------------SUB_DH_DeviceManager_Dcts_7000 END--------------------------');
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_7100
+         * @tc.name    SUB_DH_DeviceManager_Dcts_7100
+         * @tc.desc    The parameter of the createDeviceManager interface is null.
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level 2
+         */
+        it("SUB_DH_DeviceManager_Dcts_7100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7100 start------------------------");
+            try {
+                let dmInstanceData = deviceManager.createDeviceManager(null);
+                console.info(TAG + "createDeviceManager value is null errCode:" + JSON.stringify(dmInstanceData));
+                expect().assertFail();
+            } catch (err) {
+                console.error(TAG + "createDeviceManager errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7100 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_7200
+         * @tc.name    SUB_DH_DeviceManager_Dcts_7200
+         * @tc.desc    The parameter of the createDeviceManager interface is undefined.
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level 2
+         */
+        it("SUB_DH_DeviceManager_Dcts_7200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7200 start------------------------");
+            try {
+                let dmInstanceData = deviceManager.createDeviceManager(undefined);
+                console.info(TAG + "createDeviceManager value is null errCode:" + JSON.stringify(dmInstanceData));
+                expect().assertFail();
+            } catch (err) {
+                console.error(TAG + "createDeviceManager errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7200 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_7300
+         * @tc.name    SUB_DH_DeviceManager_Dcts_7300
+         * @tc.desc    The parameter of the releaseDeviceManager interface is empty.
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level 2
+         */
+        it("SUB_DH_DeviceManager_Dcts_7300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7300 start------------------------");
+            try {
+                deviceManager.releaseDeviceManager("");
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'release device manager errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7300 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_7400
+         * @tc.name    SUB_DH_DeviceManager_Dcts_7400
+         * @tc.desc    The parameter of the releaseDeviceManager interface is undefined.
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level 2
+         */
+        it("SUB_DH_DeviceManager_Dcts_7400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7400 start------------------------");
+            try {
+                deviceManager.releaseDeviceManager(undefined);
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'release device manager errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7400 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_7500
+         * @tc.name    SUB_DH_DeviceManager_Dcts_7500
+         * @tc.desc    Get the device name by network id parameter is empty.
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level 2
+         */
+        it("SUB_DH_DeviceManager_Dcts_7500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7500 start------------------------");
+            try {
+                let deviceName = dmInstance.getDeviceName("");
+                console.log(TAG + "get Device Name:" + deviceName);
+                expect().assertFail();
+            } catch (err) {
+                console.info(TAG + "getDeviceName errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7500 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_7600
+         * @tc.name    SUB_DH_DeviceManager_Dcts_7600
+         * @tc.desc    Get the device name by network id parameter is null.
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level 2
+         */
+        it("SUB_DH_DeviceManager_Dcts_7600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7600 start------------------------");
+            try {
+                let deviceName = dmInstance.getDeviceName(null);
+                console.log(TAG + "get Device Name:" + deviceName);
+                expect().assertFail();
+            } catch (err) {
+                console.info(TAG + "getDeviceName errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7600 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_7700
+         * @tc.name    SUB_DH_DeviceManager_Dcts_7700
+         * @tc.desc    Get the device name by network id parameter is undefined.
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level 2
+         */
+        it("SUB_DH_DeviceManager_Dcts_7700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7700 start------------------------");
+            try {
+                let deviceName = dmInstance.getDeviceName(undefined);
+                console.log(TAG + "get Device Name:" + deviceName);
+                expect().assertFail();
+            } catch (err) {
+                console.info(TAG + "getDeviceName errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7700 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_7800
+         * @tc.name    SUB_DH_DeviceManager_Dcts_7800
+         * @tc.desc    Retrieve the device type by specifying its network identifier,parameter is empty
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level 2
+         */
+        it("SUB_DH_DeviceManager_Dcts_7800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7800 start------------------------");
+            try {
+                let deviceType = dmInstance.getDeviceType("");
+                console.log(TAG + 'SUB_DH_DeviceManager_Dcts_7800 device type: ' + JSON.stringify(deviceType));
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'SUB_DH_DeviceManager_Dcts_7800 getDeviceType errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7800 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_7900
+         * @tc.name    SUB_DH_DeviceManager_Dcts_7900
+         * @tc.desc    Retrieve the device type by specifying its network identifier,parameter is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level 2
+         */
+        it("SUB_DH_DeviceManager_Dcts_7900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7900 start------------------------");
+            try {
+                let deviceType = dmInstance.getDeviceType(undefined);
+                console.log(TAG + 'device type: ' + JSON.stringify(deviceType));
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'getDeviceType errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_7900 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_8000
+         * @tc.name    SUB_DH_DeviceManager_Dcts_8000
+         * @tc.desc    Test startDiscovering interface parameter is empty;
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_8000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8000 start------------------------");
+            try {
+                dmInstance.startDiscovering("", "");
+                console.log(TAG + 'startDiscovering success');
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'startDiscovering errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8000 end------------------------");
+            done();
+        });
+
+        /*
+        * @tc.number  SUB_DH_DeviceManager_Dcts_8100
+        * @tc.name    SUB_DH_DeviceManager_Dcts_8100
+        * @tc.desc    Test startDiscovering interface parameter is null;
+        * @tc.size    MediumTest
+        * @tc.type:   Function
+        * @tc.level   Level1
+        */
+        it("SUB_DH_DeviceManager_Dcts_8100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8100 start------------------------");
+            try {
+                dmInstance.startDiscovering(null, null);
+                console.log(TAG + 'startDiscovering success');
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'startDiscovering errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8100 end------------------------");
+            done();
+        });
+
+        /*
+       * @tc.number  SUB_DH_DeviceManager_Dcts_8200
+       * @tc.name    SUB_DH_DeviceManager_Dcts_8200
+       * @tc.desc    Test startDiscovering interface parameter is undefined;
+       * @tc.size    MediumTest
+       * @tc.type:   Function
+       * @tc.level   Level1
+       */
+        it("SUB_DH_DeviceManager_Dcts_8200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8200 start------------------------");
+            try {
+                dmInstance.startDiscovering(undefined, undefined);
+                console.log(TAG + 'startDiscovering success');
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'startDiscovering errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8200 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_8300
+         * @tc.name    SUB_DH_DeviceManager_Dcts_8300
+         * @tc.desc    Test that the first parameter of bindTarget is empty
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_8300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8300 start------------------------");
+            let bindParam = {
+                "bindType": 1,
+                "targetPkgName": "com.ohos.distributedDeviceManager",
+                "appName": "SubDctsdisDeviceJsTest",
+                "appOperation": "想要连接本机。",
+                "customDescription": "device manager"
+            };
+            try {
+                dmInstance.bindTarget("", bindParam, (err, data) => {
+                    if (err) {
+                        console.info(TAG + 'bindTarget 02 errCode:' + err.code + ',errMessage:' + err.message);
+                    }
+                    console.info(TAG + 'bindTarget 02 result:' + JSON.stringify(data));
+                    expect().assertFail();
+                });
+            } catch (err) {
+                console.info(TAG + 'SUB_DH_DeviceManager_Dcts_8300 bindTarget 01 errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8300 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_8400
+         * @tc.name    SUB_DH_DeviceManager_Dcts_8400
+         * @tc.desc    Test that the first parameter of bindTarget is null
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_8400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8400 start------------------------");
+            let bindParam = {
+                "bindType": 1,
+                "targetPkgName": "com.ohos.distributedDeviceManager",
+                "appName": "SubDctsdisDeviceJsTest",
+                "appOperation": "想要连接本机。",
+                "customDescription": "device manager"
+            };
+            try {
+                dmInstance.bindTarget(null, bindParam, (err, data) => {
+                    if (err) {
+                        console.info(TAG + 'bindTarget 02 errCode:' + err.code + ',errMessage:' + err.message);
+                    }
+                    console.info(TAG + 'bindTarget 02 result:' + JSON.stringify(data));
+                    expect().assertFail();
+                });
+            } catch (err) {
+                console.info(TAG + 'SUB_DH_DeviceManager_Dcts_8400 bindTarget 01 errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8400 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_8500
+         * @tc.name    SUB_DH_DeviceManager_Dcts_8500
+         * @tc.desc    Test that the first parameter of bindTarget is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_8500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8500 start------------------------");
+            let bindParam = {
+                "bindType": 1,
+                "targetPkgName": "com.ohos.distributedDeviceManager",
+                "appName": "SubDctsdisDeviceJsTest",
+                "appOperation": "想要连接本机。",
+                "customDescription": "device manager"
+            };
+            try {
+                dmInstance.bindTarget(undefined, bindParam, (err, data) => {
+                    if (err) {
+                        console.info(TAG + 'bindTarget 02 errCode:' + err.code + ',errMessage:' + err.message);
+                    }
+                    console.info(TAG + 'bindTarget 02 result:' + JSON.stringify(data));
+                    expect().assertFail();
+                });
+            } catch (err) {
+                console.info(TAG + 'SUB_DH_DeviceManager_Dcts_8500 bindTarget 01 errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8500 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_8600
+         * @tc.name    SUB_DH_DeviceManager_Dcts_8600
+         * @tc.desc    Test that the second parameter of bindTarget is null
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_8600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8600 start------------------------");
+            deviceId = dmInstance.getLocalDeviceId();
+            try {
+                dmInstance.bindTarget(deviceId, null, (err, data) => {
+                    if (err) {
+                        console.info(TAG + 'bindTarget 02 errCode:' + err.code + ',errMessage:' + err.message);
+                    }
+                    console.info(TAG + 'bindTarget 02 result:' + JSON.stringify(data));
+                    expect().assertFail();
+                });
+            } catch (err) {
+                console.info(TAG + 'SUB_DH_DeviceManager_Dcts_8600 bindTarget 01 errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8600 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_8700
+         * @tc.name    SUB_DH_DeviceManager_Dcts_8700
+         * @tc.desc    Test that the second parameter of bindTarget is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_8700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8700 start------------------------");
+            deviceId = dmInstance.getLocalDeviceId();
+            try {
+                dmInstance.bindTarget(deviceId, undefined, (err, data) => {
+                    if (err) {
+                        console.info(TAG + 'bindTarget 02 errCode:' + err.code + ',errMessage:' + err.message);
+                    }
+                    console.info(TAG + 'bindTarget 02 result:' + JSON.stringify(data));
+                    expect().assertFail();
+                });
+            } catch (err) {
+                console.info(TAG + 'SUB_DH_DeviceManager_Dcts_8700 bindTarget 01 errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8700 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_8800
+         * @tc.name    SUB_DH_DeviceManager_Dcts_8800
+         * @tc.desc    Test that the third parameter of bindTarget is null
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_8800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8800 start------------------------");
+            deviceId = dmInstance.getLocalDeviceId();
+            let bindParam = {
+                "bindType": 1,
+                "targetPkgName": "com.ohos.distributedDeviceManager",
+                "appName": "SubDctsdisDeviceJsTest",
+                "appOperation": "想要连接本机。",
+                "customDescription": "device manager"
+            };
+            try {
+                dmInstance.bindTarget(deviceId, bindParam, null);
+            } catch (err) {
+                console.info(TAG + 'SUB_DH_DeviceManager_Dcts_8800 bindTarget 01 errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8800 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_8900
+         * @tc.name    SUB_DH_DeviceManager_Dcts_8900
+         * @tc.desc    Test that the third parameter of bindTarget is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_8900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8900 start------------------------");
+            deviceId = dmInstance.getLocalDeviceId();
+            let bindParam = {
+                "bindType": 1,
+                "targetPkgName": "com.ohos.distributedDeviceManager",
+                "appName": "SubDctsdisDeviceJsTest",
+                "appOperation": "想要连接本机。",
+                "customDescription": "device manager"
+            };
+            try {
+                dmInstance.bindTarget(deviceId, bindParam, undefined);
+            } catch (err) {
+                console.info(TAG + 'SUB_DH_DeviceManager_Dcts_8900 bindTarget 01 errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_8900 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_9000
+         * @tc.name    SUB_DH_DeviceManager_Dcts_9000
+         * @tc.desc    Test unbindTarget parameter is null
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_9000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9000 start------------------------");
+            try {
+                dmInstance.unbindTarget(null);
+                console.info(TAG + 'unbindTarget success');
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'unbindTarget errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9000 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_9100
+         * @tc.name    SUB_DH_DeviceManager_Dcts_9100
+         * @tc.desc    Test unbindTarget parameter is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_9100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9100 start------------------------");
+            try {
+                dmInstance.unbindTarget(undefined);
+                console.info(TAG + 'unbindTarget success');
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'unbindTarget errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9100 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_9200
+         * @tc.name    SUB_DH_DeviceManager_Dcts_9200
+         * @tc.desc    Test that the second parameter of on_deviceStateChange is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_9200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9200 start------------------------");
+            try {
+                dmInstance.on('deviceStateChange', undefined);
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'on deviceStateChange errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9200 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_9300
+         * @tc.name    SUB_DH_DeviceManager_Dcts_9300
+         * @tc.desc    Test that the second parameter of off_deviceStateChange is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_9300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9300 start------------------------");
+            try {
+                dmInstance.off('deviceStateChange', undefined);
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'on deviceStateChange errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9300 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_9400
+         * @tc.name    SUB_DH_DeviceManager_Dcts_9400
+         * @tc.desc    Test that the first parameter of on is null
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_9400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9400 start------------------------");
+            try {
+                dmInstance.on(null, (data) => {
+                    console.log(TAG + "on_null:" + JSON.stringify(data));
+                    expect().assertFail();
+                });
+            } catch (err) {
+                console.log(TAG + "on_null errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9400 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_9500
+         * @tc.name    SUB_DH_DeviceManager_Dcts_9500
+         * @tc.desc    Test that the first parameter of on is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_9500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9500 start------------------------");
+            try {
+                dmInstance.on(undefined, (data) => {
+                    console.log(TAG + "on_null:" + JSON.stringify(data));
+                    expect().assertFail();
+                });
+            } catch (err) {
+                console.log(TAG + "on_null errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9500 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_9600
+         * @tc.name    SUB_DH_DeviceManager_Dcts_9600
+         * @tc.desc    Test that the first parameter of on is null
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_9600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9600 start------------------------");
+            try {
+                dmInstance.off(null, (data) => {
+                    console.log(TAG + "on_null:" + JSON.stringify(data));
+                    expect().assertFail();
+                });
+            } catch (err) {
+                console.log(TAG + "on_null errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9600 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_9700
+         * @tc.name    SUB_DH_DeviceManager_Dcts_9700
+         * @tc.desc    Test that the first parameter of on is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_9700", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9700 start------------------------");
+            try {
+                dmInstance.off(undefined, (data) => {
+                    console.log(TAG + "on_null:" + JSON.stringify(data));
+                    expect().assertFail();
+                });
+            } catch (err) {
+                console.log(TAG + "on_null errCode:" + err.code + ",errMessage:" + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9700 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_9800
+         * @tc.name    SUB_DH_DeviceManager_Dcts_9800
+         * @tc.desc    Test that the second parameter of on_discoverSuccess is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_9800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9800 start------------------------");
+            try {
+                dmInstance.on('discoverSuccess', undefined);
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'on discoverSuccess errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9800 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_9900
+         * @tc.name    SUB_DH_DeviceManager_Dcts_9900
+         * @tc.desc    Test that the second parameter of off_discoverSuccess is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_9900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9900 start------------------------");
+            try {
+                dmInstance.off('discoverSuccess', undefined);
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'off discoverSuccess errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_9900 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_10000
+         * @tc.name    SUB_DH_DeviceManager_Dcts_10000
+         * @tc.desc    Test that the second parameter of on_deviceNameChange is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_10000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10000 start------------------------");
+            try {
+                dmInstance.on('deviceNameChange', undefined);
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'on deviceNameChange errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10000 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_10100
+         * @tc.name    SUB_DH_DeviceManager_Dcts_10100
+         * @tc.desc    Test that the second parameter of off_deviceNameChange is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_10100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10100 start------------------------");
+            try {
+                dmInstance.off('deviceNameChange', undefined);
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'on deviceNameChange errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10100 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_10200
+         * @tc.name    SUB_DH_DeviceManager_Dcts_10200
+         * @tc.desc    Test that the second parameter of on_discoverFailure is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_10200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10200 start------------------------");
+            try {
+                dmInstance.on('discoverFailure', undefined);
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'on discoverFailure errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10200 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_10300
+         * @tc.name    SUB_DH_DeviceManager_Dcts_10300
+         * @tc.desc    Test that the second parameter of off_discoverFailure is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_10300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10300 start------------------------");
+            try {
+                dmInstance.off('discoverFailure', undefined);
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'off discoverFailure errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10300 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_10400
+         * @tc.name    SUB_DH_DeviceManager_Dcts_10400
+         * @tc.desc    Test that the second parameter of on_serviceDie is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_10400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10400 start------------------------");
+            try {
+                dmInstance.on('serviceDie', undefined);
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'on serviceDie errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10400 end------------------------");
+            done();
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_10500
+         * @tc.name    SUB_DH_DeviceManager_Dcts_10500
+         * @tc.desc    Test that the second parameter of off_serviceDie is undefined
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_10500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10500 start------------------------");
+            try {
+                dmInstance.off('serviceDie', undefined);
+                expect().assertFail();
+            } catch (err) {
+                console.log(TAG + 'off serviceDie errCode:' + err.code + ',errMessage:' + err.message);
+                expect(err.code == 401).assertTrue();
+            }
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10500 end------------------------");
+            done();
+        });
     })
 }
