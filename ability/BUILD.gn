@@ -23,6 +23,7 @@ group("ability") {
       "dmsfwk/dmsfwkstageserver:DctsDmsFwkStageServer",
       "dmsfwk/dmsfwkstagetest:DctsDmsFwkStageTest",
       "dmsfwk/dmsfwkstagetestserver:DctsDmsFwkStageTestServer",
+      "dmsfwk/dmsfwkstageteststatic:DctsDmsFwkStageStaticTest",
     ]
   } else {
     deps = [ "wifi_standard:ActsWifiJSTest" ]
