@@ -19,5 +19,5 @@ ohos_js_app_suite("DctsDmsFaTest") {
   certificate_profile = "./signature/openharmony_sx.p7b"
   hap_name = "DctsDmsFaTest"
   subsystem_name = "ability"
-  part_name = "ability_base"
+  part_name = "dmsfwk"
 }

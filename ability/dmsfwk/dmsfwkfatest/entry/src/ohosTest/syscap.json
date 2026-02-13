@@ -4,8 +4,7 @@
         "custom": [
             {
                 "xts": [
-                    "SystemCapability.Ability.AbilityRuntime.Core",
-                    "SystemCapability.DistributedSched.AppCollaboration"
+                    "SystemCapability.Ability.AbilityRuntime.FAModel"
                 ]
             }
         ]

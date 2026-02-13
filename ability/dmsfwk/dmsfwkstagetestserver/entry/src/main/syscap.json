@@ -4,13 +4,7 @@
         "custom": [
             {
                 "xts": [
-                    "SystemCapability.Ability.AbilityRuntime.Core",
-                    "SystemCapability.ArkUI.ArkUI.Full",
-                    "SystemCapability.Ability.AbilityRuntime.AbilityCore",
-                    "SystemCapability.Security.AccessToken",
-                    "SystemCapability.Ability.AbilityBase",
-                    "SystemCapability.Communication.IPC.Core",
-                    "SystemCapability.Notification.CommonEvent"
+                    "SystemCapability.Ability.AbilityRuntime.Core"
                 ]
             }
         ]
