@@ -18,5 +18,5 @@ ohos_js_app_suite("DctsDmsFwkStagePermissionTest") {
   certificate_profile = "./signature/openharmony_sx.p7b"
   hap_name = "DctsDmsFwkStagePermissionTest"
   subsystem_name = "ability"
-  part_name = "ability_runtime"
+  part_name = "dmsfwk"
 }

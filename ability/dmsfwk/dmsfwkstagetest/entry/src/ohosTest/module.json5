@@ -54,9 +54,6 @@
         "name": "ohos.permission.DISTRIBUTED_DATASYNC"
       },
       {
-        "name": "ohos.permission.GET_DISTRIBUTED_DEVICE_INFO"
-      },
-      {
         "name": "ohos.permission.ACCESS_SERVICE_DM"
       }
     ]

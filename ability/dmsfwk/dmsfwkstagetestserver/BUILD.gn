@@ -17,6 +17,6 @@ ohos_app_assist_suite("DctsDmsFwkStageTestServer") {
   testonly = true
   certificate_profile = "./signature/openharmony_sx.p7b"
   hap_name = "DctsDmsFwkStageTestServer"
-  part_name = "ability_runtime"
+  part_name = "dmsfwk"
   subsystem_name = "ability"
 }
