@@ -187,7 +187,7 @@ export default function DmsFwkStageTest() {
         try {
           continueManager.on('prepareContinue', context, (err, ContinueResultInfo: continueManager.ContinueResultInfo) => {
             console.log(TAG + 'continueManager.on is success' + ContinueResultInfo.resultInfo + ContinueResultInfo.resultState)
-            expect().assertTrue()
+            expect(ContinueResultInfo.resultState == 0).assertTrue()
           })
         } catch (error) {
           console.log(TAG + 'continueManager.on is catch' + JSON.stringify(error))
@@ -3048,11 +3048,11 @@ export default function DmsFwkStageTest() {
           let peerInfo = abilityConnectionManager.getPeerInfoById(sessionId)
           console.log(`${TAG} abilityConnectionManager.getPeerInfoById is succcess` + JSON.stringify(peerInfo))
           expect(typeof(peerInfo)).assertEqual('object')
-          expect(typeof(peerInfo.deviceId)).assertEqual('string')
-          expect(typeof(peerInfo.bundleName)).assertEqual('string')
-          expect(typeof(peerInfo.moduleName)).assertEqual('string')
-          expect(typeof(peerInfo.abilityName)).assertEqual('string')
-          expect(typeof(peerInfo.serviceName)).assertEqual('string')
+          expect(typeof(peerInfo?.deviceId)).assertEqual('string')
+          expect(typeof(peerInfo?.bundleName)).assertEqual('string')
+          expect(typeof(peerInfo?.moduleName)).assertEqual('string')
+          expect(typeof(peerInfo?.abilityName)).assertEqual('string')
+          expect(typeof(peerInfo?.serviceName)).assertEqual('string')
         } catch (error) {
           console.log(`${TAG} abilityConnectionManager.getPeerInfoById error.code is ${error.code}`)
           expect().assertFail()
