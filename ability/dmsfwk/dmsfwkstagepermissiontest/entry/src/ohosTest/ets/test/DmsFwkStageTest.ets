@@ -187,7 +187,7 @@ export default function DmsFwkStageTest() {
         try {
           continueManager.on('prepareContinue', context, (err, ContinueResultInfo: continueManager.ContinueResultInfo) => {
             console.log(TAG + 'continueManager.on is success' + ContinueResultInfo.resultInfo + ContinueResultInfo.resultState)
-            expect().assertTrue()
+            expect(ContinueResultInfo.resultState == 0).assertTrue()
           })
         } catch (error) {
           console.log(TAG + 'continueManager.on is catch' + JSON.stringify(error))
@@ -407,6 +407,160 @@ export default function DmsFwkStageTest() {
       console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_1000 is end---------------")
       done();
     });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_on_1100
+    * @tc.name    continueManager.on
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_on_1100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,
+      async (done: Function) => {
+        console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_on_1100 is start---------------")
+        TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_on_1100'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
+        try {
+          continueManager.on(undefined, context, (err, ContinueResultInfo: continueManager.ContinueResultInfo) => {
+            console.log(TAG + 'continueManager.on is success' + ContinueResultInfo.resultInfo +
+              ContinueResultInfo.resultState)
+            expect().assertFail()
+          })
+        } catch (error) {
+          console.log(TAG + 'continueManager.on is catch' + JSON.stringify(error))
+          expect(error.code == 16300501).assertTrue()
+        }
+        console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_on_1100 is end---------------")
+        done();
+      });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_on_1200
+    * @tc.name    continueManager.on
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_on_1200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,
+      async (done: Function) => {
+        console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_on_1200 is start---------------")
+        TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_on_1200'
+        try {
+          continueManager.on('prepareContinue', undefined, (err, ContinueResultInfo: continueManager.ContinueResultInfo) => {
+            console.log(TAG + 'continueManager.on is success' + ContinueResultInfo)
+            expect().assertFail()
+          })
+        } catch (error) {
+          console.log(TAG + 'continueManager.on is catch' + JSON.stringify(error))
+          expect(error.code == 401).assertTrue()
+        }
+        console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_on_1200 is end---------------")
+        done();
+      });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_off_1300
+    * @tc.name    continueManager.off
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_off_1300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,
+      async (done: Function) => {
+        console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_1300 is start---------------")
+        TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_off_1300'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
+        try {
+          continueManager.off(undefined, context,
+            (err: BusinessError, ContinueResultInfo: continueManager.ContinueResultInfo) => {
+              if (err != undefined) {
+                console.log(TAG + 'continueManager.off is failed' + JSON.stringify(err))
+                expect().assertFail()
+              }
+              console.log(TAG + 'continueManager.off is success' + ContinueResultInfo.resultState +
+                ContinueResultInfo.resultInfo)
+              expect().assertFail()
+            })
+        } catch (error) {
+          console.log(TAG + 'continueManager.off is catch' + JSON.stringify(error))
+          expect(error.code == 16300501).assertTrue()
+        }
+        console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_1300 is end---------------")
+        done();
+      });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_off_1400
+    * @tc.name    continueManager.off
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_off_1400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,
+      async (done: Function) => {
+        console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_1400 is start---------------")
+        TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_off_1400'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
+        try {
+          continueManager.off('prepareContinue', undefined,
+            (err: BusinessError, ContinueResultInfo: continueManager.ContinueResultInfo) => {
+              if (err != undefined) {
+                console.log(TAG + 'continueManager.off is failed' + JSON.stringify(err))
+                expect().assertFail()
+              }
+              console.log(TAG + 'continueManager.off is success' + ContinueResultInfo.resultState +
+                ContinueResultInfo.resultInfo)
+              expect().assertFail()
+            })
+        } catch (error) {
+          console.log(TAG + 'continueManager.off is catch' + JSON.stringify(error))
+          expect(error.code == 401).assertTrue()
+        }
+        console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_1400 is end---------------")
+        done();
+      });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_off_1500
+    * @tc.name    continueManager.off
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_off_1500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,
+      async (done: Function) => {
+        console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_1500 is start---------------")
+        TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_off_1500'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
+        try {
+          continueManager.off(undefined, context)
+          console.log(TAG + 'continueManager.off is success')
+          expect().assertFail()
+        } catch (error) {
+          console.log(TAG + 'continueManager.off is catch' + JSON.stringify(error))
+          expect(error.code == 16300501).assertTrue()
+        }
+        console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_1500 is end---------------")
+        done();
+      });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_off_1600
+    * @tc.name    continueManager.off
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_off_1600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3,
+      async (done: Function) => {
+        console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_1600 is start---------------")
+        TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_off_1600'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
+        try {
+          continueManager.off('prepareContinue', undefined)
+          console.log(TAG + 'continueManager.off is success')
+          expect().assertFail()
+        } catch (error) {
+          console.log(TAG + 'continueManager.off is catch' + JSON.stringify(error))
+          expect(error.code == 401).assertTrue()
+        }
+        console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_off_1600 is end---------------")
+        done();
+      });
 
     /*
     * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_acceptConnect_9300
@@ -1206,7 +1360,7 @@ export default function DmsFwkStageTest() {
         abilityConnectionManager.connect(sessionId).then((ConnectResult) => {
           console.log(`${TAG} abilityConnectionManager.connect is success ${JSON.stringify(ConnectResult)}`)
           expect(ConnectResult.isConnected).assertEqual(false)
-          expect(ConnectResult.errorCode).assertEqual(5)
+          expect(ConnectResult.errorCode).assertEqual(abilityConnectionManager.ConnectErrorCode.SYSTEM_INTERNAL_ERROR)
           expect(ConnectResult.reason).assertEqual("")
         }).catch((error: BusinessError) => {
           console.log(`${TAG} abilityConnectionManager.connect error.code is ${error.code}`)
@@ -2458,7 +2612,7 @@ export default function DmsFwkStageTest() {
           if (error.code == 801) {
             expect().assertTrue()
           }
-          expect(error.code == 401)
+          expect(error.code == 401).assertTrue()
         }
         console.info("---------------SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_10800 is end--------------- ")
         done();
@@ -2822,6 +2976,9 @@ export default function DmsFwkStageTest() {
           abilityConnectionManager.on("disconnect", sessionId, (callbackInfo) => {
             console.log(TAG + 'abilityConnectionManager.on is success' + callbackInfo.reason)
             expect(typeof (callbackInfo.reason)).assertEqual('object')
+            expect(typeof (callbackInfo.sessionId)).assertEqual('number')
+            expect(typeof (callbackInfo.msg)).assertEqual('string')
+            expect(typeof (callbackInfo.data)).assertEqual('ArrayBuffer')
           });
         } catch (error) {
           console.log(`${TAG} abilityConnectionManager.on error is ${error.code}`)
@@ -2843,6 +3000,8 @@ export default function DmsFwkStageTest() {
           abilityConnectionManager.on("receiveMessage", sessionId, (callbackInfo) => {
             console.log(TAG + 'abilityConnectionManager.on is success' + callbackInfo.msg)
             expect(typeof (callbackInfo.msg)).assertEqual('string')
+            expect(typeof (callbackInfo.reason)).assertEqual('object')
+            expect(typeof (callbackInfo.sessionId)).assertEqual('number')
           });
         } catch (error) {
           console.log(`${TAG} abilityConnectionManager.on error is ${error.code}`)
@@ -2864,6 +3023,9 @@ export default function DmsFwkStageTest() {
           abilityConnectionManager.on("receiveData", sessionId, (callbackInfo) => {
             console.log(TAG + 'abilityConnectionManager.on is success' + callbackInfo.data)
             expect(typeof (callbackInfo.data)).assertEqual('ArrayBuffer')
+            expect(typeof (callbackInfo.reason)).assertEqual('object')
+            expect(typeof (callbackInfo.sessionId)).assertEqual('number')
+            expect(typeof (callbackInfo.msg)).assertEqual('string')
           });
         } catch (error) {
           console.log(`${TAG} abilityConnectionManager.on error is ${error.code}`)
@@ -2886,6 +3048,11 @@ export default function DmsFwkStageTest() {
           let peerInfo = abilityConnectionManager.getPeerInfoById(sessionId)
           console.log(`${TAG} abilityConnectionManager.getPeerInfoById is succcess` + JSON.stringify(peerInfo))
           expect(typeof(peerInfo)).assertEqual('object')
+          expect(typeof(peerInfo?.deviceId)).assertEqual('string')
+          expect(typeof(peerInfo?.bundleName)).assertEqual('string')
+          expect(typeof(peerInfo?.moduleName)).assertEqual('string')
+          expect(typeof(peerInfo?.abilityName)).assertEqual('string')
+          expect(typeof(peerInfo?.serviceName)).assertEqual('string')
         } catch (error) {
           console.log(`${TAG} abilityConnectionManager.getPeerInfoById error.code is ${error.code}`)
           expect().assertFail()
