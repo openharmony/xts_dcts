@@ -57,7 +57,7 @@ export default function DmsFwkStageTestStaticTest() {
       try {
         dmInstance = deviceManager.createDeviceManager('com.ohos.dmsfwkstagetest.static');
         console.log('get deviceManager is success')
-      } catch (err: Error) {
+      } catch (err) {
         console.log('get deviceManager is failed' + JSON.stringify(err))
       }
       localDeviceId = dmInstance!.getLocalDeviceNetworkId();
@@ -95,7 +95,7 @@ export default function DmsFwkStageTestStaticTest() {
         await button!.click();
         console.info('driveFn click')
         await sleep(1000);
-      } catch (err: Error) {
+      } catch (err) {
         console.info('err is ' + err);
       }
     }
@@ -113,7 +113,7 @@ export default function DmsFwkStageTestStaticTest() {
         context = AppStorage.get<common.UIAbilityContext>("abilityContextMainAbility2") as common.UIAbilityContext;
         hilog.info(domain, tag, '%{public}s', '================ beforeAll context==========');
         hilog.info(domain, tag, '%{public}s', 'onAbilityCreate enddatabaseDir:' + context!.databaseDir);
-      } catch (e: Error) {
+      } catch (e) {
         hilog.info(domain, tag, '%{public}s', "============beforeAll context e: " + e);
         done();
       }
@@ -181,7 +181,7 @@ export default function DmsFwkStageTestStaticTest() {
             abilityConnectionManager.createAbilityConnectionSession("collabTest", context!, peerInfo, connectOption);
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession is success ${sessionId}`)
           expect(sessionId >= 100).assertTrue()
-        } catch (error: Error) {
+        } catch (error) {
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession error.code is ${error.code}`)
           if(error.code == 801){
             expect().assertTrue()
@@ -240,7 +240,7 @@ export default function DmsFwkStageTestStaticTest() {
             expect(typeof(callbackInfo.msg)).assertEqual('string')
             expect(typeof(callbackInfo.data)).assertEqual('ArrayBuffer')
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.error(TAG + ' abilityConnectionManager.on catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect().assertFail()
         }
@@ -263,7 +263,7 @@ export default function DmsFwkStageTestStaticTest() {
             console.log(TAG + 'abilityConnectionManager.on is success' + callbackInfo.reason)
             expect(typeof(callbackInfo.reason)).assertEqual('object')
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.error(TAG + ' abilityConnectionManager.on catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect().assertFail()
         }
@@ -284,7 +284,7 @@ export default function DmsFwkStageTestStaticTest() {
         try {
           abilityConnectionManager.offConnect(sessionId);
           console.log(TAG + 'abilityConnectionManager.offConnect is success')
-        } catch (error: Error) {
+        } catch (error) {
           console.error(TAG + ' abilityConnectionManager.offConnect catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect().assertFail()
         }
@@ -309,7 +309,7 @@ export default function DmsFwkStageTestStaticTest() {
             expect(typeof(callbackInfo.msg)).assertEqual('string')
             expect(typeof(callbackInfo.data)).assertEqual('ArrayBuffer')
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.log(TAG + ' abilityConnectionManager.on catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect().assertFail()
         }
@@ -332,7 +332,7 @@ export default function DmsFwkStageTestStaticTest() {
           console.log(`${TAG} abilityConnectionManager.off is success`)
           expect().assertFail()
 
-        } catch (error: Error) {
+        } catch (error) {
           console.log(TAG + ' abilityConnectionManager.off get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect(error.code == 401).assertTrue()
         }
@@ -354,7 +354,7 @@ export default function DmsFwkStageTestStaticTest() {
             console.log(TAG + 'abilityConnectionManager.on is success' + callbackInfo)
             expect().assertFail()
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.log(TAG + ' abilityConnectionManager.on catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect(error.code == 401).assertTrue()
         }
@@ -380,7 +380,7 @@ export default function DmsFwkStageTestStaticTest() {
             expect(typeof(callbackInfo.sessionId)).assertEqual('number')
             expect(typeof(callbackInfo.data)).assertEqual('ArrayBuffer')
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.log(TAG + ' abilityConnectionManager.onReceiveMessage catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect().assertFail()
         }
@@ -403,7 +403,7 @@ export default function DmsFwkStageTestStaticTest() {
             console.log(TAG + 'abilityConnectionManager.off is success' + callbackInfo)
             expect().assertFail()
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.log(TAG + ' abilityConnectionManager.off get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect(error.code == 401).assertTrue()
         }
@@ -425,7 +425,7 @@ export default function DmsFwkStageTestStaticTest() {
           abilityConnectionManager.offReceiveMessage(10)
           console.log(TAG + 'abilityConnectionManager.off is success')
           expect().assertFail()
-        } catch (error: Error) {
+        } catch (error) {
           console.log(TAG + ' abilityConnectionManager.on catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect(error.code == 401).assertTrue()
         }
@@ -451,7 +451,7 @@ export default function DmsFwkStageTestStaticTest() {
             expect(typeof(callbackInfo.reason)).assertEqual('object')
             expect(typeof(callbackInfo.sessionId)).assertEqual('number')
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.error(TAG + 'catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect().assertFail()
         }
@@ -474,7 +474,7 @@ export default function DmsFwkStageTestStaticTest() {
             console.log(TAG + 'abilityConnectionManager.offReceiveData is success' + callbackInfo)
             expect().assertFail()
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.log(`${TAG} abilityConnectionManager.offReceiveData receiveData error is ${error.code}`)
           expect(error.code == 401).assertTrue()
         }
@@ -519,7 +519,7 @@ export default function DmsFwkStageTestStaticTest() {
           abilityConnectionManager.offReceiveData(10);
           console.log(TAG + 'abilityConnectionManager.offReceiveData is success')
           expect().assertFail()
-        } catch (error: Error) {
+        } catch (error) {
           console.log(`${TAG} abilityConnectionManager.offReceiveData receiveData error is ${error.code}`)
           expect(error.code == 401).assertTrue()
         }
@@ -566,7 +566,7 @@ export default function DmsFwkStageTestStaticTest() {
             abilityConnectionManager.createAbilityConnectionSession("collabTest", context!, peerInfo, connectOption);
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession is success ${sessionId}`)
           expect().assertFail()
-        } catch (error: Error) {
+        } catch (error) {
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession error.code is ${error.code}`)
           if(error.code == 801){
             expect().assertTrue()
@@ -616,7 +616,7 @@ export default function DmsFwkStageTestStaticTest() {
             abilityConnectionManager.createAbilityConnectionSession("", context!, peerInfo, connectOption);
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession is success ${sessionId}`)
           expect().assertFail()
-        } catch (error: Error) {
+        } catch (error) {
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession error.code is ${error.code}`)
           if(error.code == 801){
             expect().assertTrue()
@@ -641,7 +641,7 @@ export default function DmsFwkStageTestStaticTest() {
           abilityConnectionManager.destroyAbilityConnectionSession(10)
           console.log(`${TAG} abilityConnectionManager.destroyAbilityConnectionSession is success`)
           expect().assertFail()
-        } catch (error: Error) {
+        } catch (error) {
           console.log(`${TAG} abilityConnectionManager.destroyAbilityConnectionSession failed`)
           expect(error.code == 401).assertTrue()
         }
@@ -663,7 +663,7 @@ export default function DmsFwkStageTestStaticTest() {
           let peerInfo = abilityConnectionManager.getPeerInfoById(10)
           console.log(`${TAG} abilityConnectionManager.getPeerInfoById is succcess` + peerInfo)
           expect(peerInfo).assertEqual(null)
-        } catch (error: Error) {
+        } catch (error) {
           console.log(`${TAG} abilityConnectionManager.getPeerInfoById error.code is ${error.code}`)
           expect().assertFail()
         }
@@ -706,7 +706,7 @@ export default function DmsFwkStageTestStaticTest() {
           abilityConnectionManager.disconnect(10)
           console.log(`${TAG} abilityConnectionManager.disconnect is success`)
           expect().assertFail()
-        } catch (error: Error) {
+        } catch (error) {
           console.log(TAG + ' abilityConnectionManager.disconnect catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect(error.code == 401).assertTrue()
         }
@@ -728,7 +728,7 @@ export default function DmsFwkStageTestStaticTest() {
           abilityConnectionManager.reject('123', 'erc@')
           console.log(`${TAG} abilityConnectionManager.reject is succcess`)
           expect().assertFail()
-        } catch (error: Error) {
+        } catch (error) {
           console.log(`${TAG} abilityConnectionManager.reject error.code is ${error.code}`)
           expect(error.code == 401).assertTrue()
         }
@@ -890,7 +890,7 @@ export default function DmsFwkStageTestStaticTest() {
           expect(typeof(peerInfo!.moduleName)).assertEqual('string')
           expect(typeof(peerInfo!.abilityName)).assertEqual('string')
           expect(typeof(peerInfo!.serviceName)).assertEqual('string')
-        } catch (error: Error) {
+        } catch (error) {
           console.log(`${TAG} abilityConnectionManager.getPeerInfoById error.code is ${error.code}`)
           expect().assertFail()
         }
@@ -943,7 +943,7 @@ export default function DmsFwkStageTestStaticTest() {
             console.log(TAG + 'abilityConnectionManager.on is success' + callbackInfo.sessionId)
             expect().assertFail()
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.error(TAG + ' abilityConnectionManager.on catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect(error.code == 401).assertTrue()
         }
@@ -966,7 +966,7 @@ export default function DmsFwkStageTestStaticTest() {
             console.log(TAG + 'abilityConnectionManager.onReceiveMessage is success' + callbackInfo.msg)
             expect().assertFail()
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.log(TAG + ' abilityConnectionManager.onReceiveMessage catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect(error.code == 401).assertTrue()
         }
@@ -989,7 +989,7 @@ export default function DmsFwkStageTestStaticTest() {
             console.log(TAG + 'abilityConnectionManager.offConnect is success' + callbackInfo.reason)
             expect().assertFail()
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.error(TAG + ' abilityConnectionManager.offConnect catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect(error.code == 401).assertTrue()
         }
@@ -1011,7 +1011,7 @@ export default function DmsFwkStageTestStaticTest() {
             console.log(TAG + 'abilityConnectionManager.onDisconnect is success' + callbackInfo.reason)
             expect().assertFail()
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.log(TAG + ' abilityConnectionManager.onDisconnect catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect(error.code == 401).assertTrue()
         }
@@ -1034,7 +1034,7 @@ export default function DmsFwkStageTestStaticTest() {
             console.log(TAG + 'abilityConnectionManager.onReceiveData is success' + callbackInfo.data)
             expect().assertFail()
           });
-        } catch (error: Error) {
+        } catch (error) {
           console.error(TAG + 'catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect(error.code == 401).assertTrue()
         }
@@ -1060,7 +1060,7 @@ export default function DmsFwkStageTestStaticTest() {
             console.log('abilityConnectionManager.connect catch get e' + `, error code is ${err.code}, message is ${err.message}`);
             expect(err.code == 401).assertTrue()
           })
-        } catch (error: Error) {
+        } catch (error) {
           console.log(TAG + 'catch get e' + `, error code is ${error.code}, message is ${error.message}`);
           expect().assertFail()
         }
@@ -1103,7 +1103,7 @@ export default function DmsFwkStageTestStaticTest() {
           abilityConnectionManager.reject('', 'erc@')
           console.log(`${TAG} abilityConnectionManager.reject is succcess`)
           expect().assertFail()
-        } catch (error: Error) {
+        } catch (error) {
           console.log(`${TAG} abilityConnectionManager.reject error.code is ${error.code}`)
           expect(error.code == 401).assertTrue()
         }
@@ -1125,7 +1125,7 @@ export default function DmsFwkStageTestStaticTest() {
           abilityConnectionManager.reject('collabToken', '')
           console.log(`${TAG} abilityConnectionManager.reject is succcess`)
           expect().assertFail()
-        } catch (error: Error) {
+        } catch (error) {
           console.log(`${TAG} abilityConnectionManager.reject error.code is ${error.code}`)
           expect(error.code == 401).assertTrue()
         }
@@ -1173,7 +1173,7 @@ export default function DmsFwkStageTestStaticTest() {
           console.log(TAG + 'continueManager.onPrepareContinue is success' + ContinueResultInfo!.resultState + ContinueResultInfo!.resultInfo)
           expect(ContinueResultInfo!.resultState == 0).assertTrue()
         })
-      } catch (error: Error) {
+      } catch (error) {
         console.log(TAG + ' catch get e' + `, error code is ${error.code}, message is ${error.message}`);
         expect().assertFail()
       }
@@ -1240,7 +1240,7 @@ export default function DmsFwkStageTestStaticTest() {
           console.log(TAG + 'continueManager.offPrepareContinue is success' + ContinueResultInfo!.resultState + ContinueResultInfo!.resultInfo)
           expect(ContinueResultInfo!.resultState == 0).assertTrue()
         })
-      } catch (error: Error) {
+      } catch (error) {
         console.log(TAG + ' catch get e' + `, error code is ${error.code}, message is ${error.message}`);
         expect().assertFail()
       }
