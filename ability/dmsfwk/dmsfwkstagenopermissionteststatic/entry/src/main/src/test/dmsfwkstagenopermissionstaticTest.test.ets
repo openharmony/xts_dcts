@@ -30,11 +30,11 @@ import { Driver, ON } from '@ohos.UiTest';
 
 let domain: int = 0x0000; //日志标识,domain作为测试框架的业务标识
 let tag: string = 'testTag'; //日志标识字符串,作为tag标识当前runner类下的测试行为
-let context: common.UIAbilityContext;
+let context: common.UIAbilityContext|undefined;
 let dvId: string | undefined = undefined;
 let localDeviceId: string;
 let sessionId: int;
-let dmInstance: deviceManager.DeviceManager;
+let dmInstance: deviceManager.DeviceManager|undefined;
 let TAG: string = 'DmsFwkStageTest';
 let deviceId: string | undefined = '';
 let abilityDelegator: abilityDelegatorRegistry.AbilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
@@ -57,12 +57,12 @@ export default function DmsFwkStageNoStaticTest() {
       try {
         dmInstance = deviceManager.createDeviceManager('com.ohos.dmsfwkstagenotest.static');
         console.log('get deviceManager is success')
-      } catch (err: Error) {
+      } catch (err) {
         console.log('get deviceManager is failed' + JSON.stringify(err))
       }
-      localDeviceId = dmInstance.getLocalDeviceNetworkId();
+      localDeviceId = dmInstance!.getLocalDeviceNetworkId();
       console.info("getDeviceId: local device id is: " + localDeviceId);
-      let deviceList: Array<deviceManager.DeviceBasicInfo> = dmInstance.getAvailableDeviceListSync();
+      let deviceList: Array<deviceManager.DeviceBasicInfo> = dmInstance!.getAvailableDeviceListSync();
       if (deviceId !== undefined) {
         console.info("deviceList is: " + deviceList);
         deviceId = deviceList[0].networkId;
@@ -113,7 +113,7 @@ export default function DmsFwkStageNoStaticTest() {
         context = AppStorage.get<common.UIAbilityContext>("abilityContextMainAbility2") as common.UIAbilityContext;
         hilog.info(domain, tag, '%{public}s', '================ beforeAll context==========');
         hilog.info(domain, tag, '%{public}s', 'onAbilityCreate enddatabaseDir:' + context!.databaseDir);
-      } catch (e: Error) {
+      } catch (e) {
         hilog.info(domain, tag, '%{public}s', "============beforeAll context e: " + e);
         done();
       }
@@ -178,10 +178,10 @@ export default function DmsFwkStageNoStaticTest() {
 
         try {
           sessionId =
-            abilityConnectionManager.createAbilityConnectionSession("collabTest", context, peerInfo, connectOption);
+            abilityConnectionManager.createAbilityConnectionSession("collabTest", context!, peerInfo, connectOption);
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession is success ${sessionId}`)
           expect().assertFail()
-        } catch (error: Error) {
+        } catch (error) {
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession error.code is ${error.code}`)
           expect(error.code == 201).assertTrue()
         }
