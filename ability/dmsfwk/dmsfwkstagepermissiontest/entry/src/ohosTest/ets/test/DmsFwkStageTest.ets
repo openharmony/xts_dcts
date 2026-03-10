@@ -188,6 +188,7 @@ export default function DmsFwkStageTest() {
           continueManager.on('prepareContinue', context, (err, ContinueResultInfo: continueManager.ContinueResultInfo) => {
             console.log(TAG + 'continueManager.on is success' + ContinueResultInfo.resultInfo + ContinueResultInfo.resultState)
             expect(ContinueResultInfo.resultState == 0).assertTrue()
+            expect(typeof(ContinueResultInfo.resultInfo) == 'string').assertTrue()
           })
         } catch (error) {
           console.log(TAG + 'continueManager.on is catch' + JSON.stringify(error))
@@ -1361,6 +1362,11 @@ export default function DmsFwkStageTest() {
           console.log(`${TAG} abilityConnectionManager.connect is success ${JSON.stringify(ConnectResult)}`)
           expect(ConnectResult.isConnected).assertEqual(false)
           expect(ConnectResult.errorCode).assertEqual(abilityConnectionManager.ConnectErrorCode.SYSTEM_INTERNAL_ERROR)
+          expect(ConnectResult.errorCode != abilityConnectionManager.ConnectErrorCode.CONNECTED_SESSION_EXISTS).assertTrue()
+          expect(ConnectResult.errorCode != abilityConnectionManager.ConnectErrorCode.PEER_APP_REJECTED).assertTrue()
+          expect(ConnectResult.errorCode != abilityConnectionManager.ConnectErrorCode.LOCAL_WIFI_NOT_OPEN).assertTrue()
+          expect(ConnectResult.errorCode != abilityConnectionManager.ConnectErrorCode.PEER_WIFI_NOT_OPEN).assertTrue()
+          expect(ConnectResult.errorCode != abilityConnectionManager.ConnectErrorCode.PEER_ABILITY_NO_ONCOLLABORATE).assertTrue()
           expect(ConnectResult.reason).assertEqual("")
         }).catch((error: BusinessError) => {
           console.log(`${TAG} abilityConnectionManager.connect error.code is ${error.code}`)
