@@ -188,7 +188,7 @@ export default function DmsFwkStageTest() {
           continueManager.on('prepareContinue', context, (err, ContinueResultInfo: continueManager.ContinueResultInfo) => {
             console.log(TAG + 'continueManager.on is success' + ContinueResultInfo.resultInfo + ContinueResultInfo.resultState)
             expect(ContinueResultInfo.resultState == 0).assertTrue()
-            expect(typeof(ContinueResultInfo.resultState) == 'string').assertTrue()
+            expect(typeof(ContinueResultInfo.resultInfo) == 'string').assertTrue()
           })
         } catch (error) {
           console.log(TAG + 'continueManager.on is catch' + JSON.stringify(error))
