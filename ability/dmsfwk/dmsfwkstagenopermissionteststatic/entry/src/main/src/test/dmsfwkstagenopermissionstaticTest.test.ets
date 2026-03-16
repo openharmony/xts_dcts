@@ -79,7 +79,6 @@ export default function DmsFwkStageNoStaticTest() {
         (err: BusinessError | null, data: PermissionRequestResult | undefined) => {
           console.info("requestPermissionsFromUser success data is" + JSON.stringify(data));
           console.info("requestPermissionsFromUser failed err is" + JSON.stringify(err));
-          console.info(TAG + ' catch get e' + `, error code is ${err!.code}, message is ${err!.message}`);
         })
     }
 

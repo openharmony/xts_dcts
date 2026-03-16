@@ -79,7 +79,6 @@ export default function DmsFwkStageTestStaticTest() {
         (err: BusinessError | null, data: PermissionRequestResult | undefined) => {
           console.info("requestPermissionsFromUser success data is" + JSON.stringify(data));
           console.info("requestPermissionsFromUser failed err is" + JSON.stringify(err));
-          console.info(TAG + ' catch get e' + `, error code is ${err!.code}, message is ${err!.message}`);
         })
     }
 
@@ -1171,7 +1170,8 @@ export default function DmsFwkStageTestStaticTest() {
             expect().assertFail()
           }
           console.log(TAG + 'continueManager.onPrepareContinue is success' + ContinueResultInfo!.resultState + ContinueResultInfo!.resultInfo)
-          expect(ContinueResultInfo!.resultState == 0).assertTrue()
+          expect(ContinueResultInfo!.resultState == continueManager.ContinueStateCode.SUCCESS).assertTrue()
+          expect(typeof(ContinueResultInfo!.resultInfo) == 'string').assertTrue()
         })
       } catch (error) {
         console.log(TAG + ' catch get e' + `, error code is ${error.code}, message is ${error.message}`);
@@ -1245,6 +1245,25 @@ export default function DmsFwkStageTestStaticTest() {
         expect().assertFail()
       }
       console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_offPrepareContinue_00400 is end---------------")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_offPrepareContinue_00500
+    * @tc.name    continueManager.offPrepareContinue no callback
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_offPrepareContinue_00500", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: () => void) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_offPrepareContinue_00500 is start---------------")
+      TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_offPrepareContinue_00500'
+      try {
+        continueManager.offPrepareContinue(context!)
+      } catch (error) {
+        console.log(TAG + ' catch get e' + `, error code is ${error.code}, message is ${error.message}`);
+        expect().assertFail()
+      }
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_offPrepareContinue_00500 is end---------------")
       done();
     });
   })
