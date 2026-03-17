@@ -31,26 +31,26 @@
 
 using namespace OHOS::DistributedHardware;
 
-using OHOS::HDI::DistributedAudio::Audio::V1_0::IAudioAdapter;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioAdapterDescriptor;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioFormat;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioPort;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioPortDirection;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::IAudioManager;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::IAudioRender;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::IAudioCapture;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioSampleAttributes;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioDeviceDescriptor;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioCategory;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioRouteNode;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioExtParamKey;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioRoute;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioSceneDescriptor;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::IAudioCallback;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioPortPin;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioPortType;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioPortRole;
-using OHOS::HDI::DistributedAudio::Audio::V1_0::AudioCallbackType;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::IAudioAdapter;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioAdapterDescriptor;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioFormat;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioPort;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioPortDirection;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::IAudioManager;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::IAudioRender;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::IAudioCapture;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioSampleAttributes;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioDeviceDescriptor;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioCategory;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioRouteNode;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioExtParamKey;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioRoute;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioSceneDescriptor;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::IAudioCallback;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioPortPin;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioPortType;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioPortRole;
+using OHOS::HDI::DistributedAudio::Audio::V2_0::AudioCallbackType;
 int32_t g_volume = 5;
 static int32_t ParamEventCallback(AudioExtParamKey key, const char *condition, const char *value, void *reserved,
     void *cookie);
