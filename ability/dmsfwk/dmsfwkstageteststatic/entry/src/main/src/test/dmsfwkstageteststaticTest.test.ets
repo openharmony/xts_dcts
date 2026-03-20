@@ -26,6 +26,7 @@ import { BusinessError, RecordData } from '@ohos.base';
 import common from '@ohos.app.ability.common';
 import { AppStorage } from '@ohos.arkui.stateManagement';
 import abilityConnectionManager from '@ohos.distributedsched.abilityConnectionManager';
+import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import { Driver, ON } from '@ohos.UiTest';
 
 let domain: int = 0x0000; //日志标识,domain作为测试框架的业务标识
@@ -1264,6 +1265,98 @@ export default function DmsFwkStageTestStaticTest() {
         expect().assertFail()
       }
       console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_offPrepareContinue_00500 is end---------------")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0100
+    * @tc.name    context.setMissionContinueState promise INACTIVE
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: () => void) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0100 is start---------------")
+      TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0100'
+      try {
+        await context!.setMissionContinueState(AbilityConstant.ContinueState.INACTIVE).then(() => {
+          console.log(`${TAG} context.setMissionContinueState is success`)
+        }).catch((error: Error) => {
+          console.log(TAG + ' catch get e' + `, error code is ${error.code}, message is ${error.message}`);
+          expect().assertFail()
+        })
+      } catch (error) {
+        console.log(TAG + ' catch get e' + `, error code is ${error.code}, message is ${error.message}`);
+        expect().assertFail()
+      }
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0100 is end---------------")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0200
+    * @tc.name    context.setMissionContinueState promise ACTIVE
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: () => void) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0200 is start---------------")
+      TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0200'
+      try {
+        await context!.setMissionContinueState(AbilityConstant.ContinueState.ACTIVE).then(() => {
+          console.log(`${TAG} context.setMissionContinueState is success`)
+        }).catch((error: Error) => {
+          console.log(TAG + ' context.setMissionContinueState' + `, error code is ${error.code}, message is ${error.message}`);
+          expect().assertFail()
+        })
+      } catch (error) {
+        console.log(TAG + ' catch get e' + `, error code is ${error.code}, message is ${error.message}`);
+        expect().assertFail()
+      }
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0200 is end---------------")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0300
+    * @tc.name    context.setMissionContinueState callback INACTIVE
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: () => void) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0300 is start---------------")
+      TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0300'
+      try {
+        context!.setMissionContinueState(AbilityConstant.ContinueState.INACTIVE, (err: BusinessError|null, data:string[]|undefined) => {
+          console.log(`${TAG} context.setMissionContinueState is success` + JSON.stringify(err))
+          expect().assertFail()
+        })
+      } catch (error) {
+        console.log(TAG + ' catch get e' + `, error code is ${error.code}`);
+        expect(error.code == 0).assertTrue()
+      }
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0300 is end---------------")
+      done();
+    });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0400
+    * @tc.name    context.setMissionContinueState callback ACTIVE
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: () => void) => {
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0400 is start---------------")
+      TAG = 'SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0400'
+      try {
+        context!.setMissionContinueState(AbilityConstant.ContinueState.ACTIVE, (err: BusinessError|null, data:string[]|undefined) => {
+          console.log(`${TAG} context.setMissionContinueState is success` + JSON.stringify(err))
+          expect().assertFail()
+        })
+      } catch (error) {
+        console.log(TAG + ' catch get e' + `, error code is ${error.code}`);
+        expect(error.code == 0).assertTrue()
+      }
+      console.info("---------------SUB_DMS_StandardOs_collaboration_continueManager_setMissionContinueState_0400 is end---------------")
       done();
     });
   })
