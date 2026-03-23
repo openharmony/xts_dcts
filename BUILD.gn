@@ -11,11 +11,67 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#import("//hit/build/suite.gni")
-import("test_packages.gni")
+import("//test/xts/tools/build/target_filter.gni")
+import("test_targets.gni")
+
+assert(XTS_SUITENAME != "")
+if (build_xts == true && XTS_SUITENAME == "dcts") {
+  _subsystem_conf_path =
+      "${root_build_dir}/build_configs/subsystem_info/src_subsystem_info.json"
+
+  xts_target_filter("build_targets_std") {
+    xts_suite_root_path = DCTS_ROOT
+    build_targets = all_test_targets
+    subsystem_conf_path = _subsystem_conf_path
+    extra_deps = [
+      "${XTS_ROOT}/tools/others/query:libQuery",
+      "testtools:deploy_testtools",
+    ]
+  }
+
+  xts_target_filter("build_targets_ivi") {
+    xts_suite_root_path = DCTS_ROOT
+    build_targets = all_test_targets_ivi
+    subsystem_conf_path = _subsystem_conf_path
+    extra_deps = [ "testtools:deploy_testtools" ]
+  }
+
+  xts_target_filter("build_targets_intellitv") {
+    xts_suite_root_path = DCTS_ROOT
+    build_targets = all_test_targets_intellitv
+    subsystem_conf_path = _subsystem_conf_path
+    extra_deps = [ "testtools:deploy_testtools" ]
+  }
+
+  xts_target_filter("build_targets_wearable") {
+    xts_suite_root_path = DCTS_ROOT
+    build_targets = all_test_targets_wearable
+    subsystem_conf_path = _subsystem_conf_path
+    extra_deps = [ "testtools:deploy_testtools" ]
+  }
+} else {
+  print("DCTS build is not enabled.")
+
+  group("build_targets_std") {
+    deps = []
+  }
+
+  group("build_targets_ivi") {
+    deps = []
+  }
+
+  group("build_targets_intellitv") {
+    deps = []
+  }
+
+  group("build_targets_wearable") {
+    deps = []
+  }
+}
+
 merge_xts_notice("dcts_opensource_process") {
   target = "dcts"
-  deps = selected_packages
+  deps = [ ":build_targets_std" ]
   if (make_osp) {
     deps += [ "//build/ohos/packages:open_source_package" ]
   }
@@ -26,13 +82,13 @@ ohos_test_suite("xts_dcts") {
 }
 
 ohos_test_suite("dcts_ivi") {
-  deps = selected_packages_ivi
+  deps = [ ":build_targets_ivi" ]
 }
 
 ohos_test_suite("dcts_intellitv") {
-  deps = selected_packages_intellitv
+  deps = [ ":build_targets_intellitv" ]
 }
 
 ohos_test_suite("dcts_wearable") {
-  deps = selected_packages_wearable
+  deps = [ ":build_targets_wearable" ]
 }
