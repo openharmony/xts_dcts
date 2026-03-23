@@ -36,7 +36,7 @@ ohos_moduletest_suite("DctsSubAudioTest") {
   external_deps = [
     "c_utils:utils",
     "distributed_hardware_fwk:distributedhardwareutils",
-    "drivers_interface_distributed_audio:libdaudio_proxy_1.0",
+    "drivers_interface_distributed_audio:libdaudio_proxy_2.0",
     "hdf_core:libhdf_utils",
     "hilog:libhilog",
   ]
