@@ -13,7 +13,7 @@
         "name": "dcts",
         "subsystem": "xts",
         "syscap": [],
-        "features": [],
+        "features": ["dcts_feature_dsoftbus_compile_guard"],
         "adapted_system_type": ["standard"],
         "rom": "0",
         "ram": "0",

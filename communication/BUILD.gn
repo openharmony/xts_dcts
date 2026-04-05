@@ -12,9 +12,13 @@
 # limitations under the License.
 
 import("//build/ohos_var.gni")
+
+declare_args() {
+  dcts_feature_dsoftbus_compile_guard = false
+}
 group("communication") {
   testonly = true
-  if (is_standard_system) {
+  if (is_standard_system && !dcts_feature_dsoftbus_compile_guard) {
     deps = [
       "dsoftbus/rpc:DctsRpcJsTest",
       "dsoftbus/rpcserver:DctsRpcJsServer",
@@ -31,7 +35,5 @@ group("communication") {
       "softbus_standard/transmission/sendstream:DctsSoftBusTransStreamFunTest",
       "softbus_standard/transmission/sessionmgt:DctsSoftBusTransSessionFunTest",
     ]
-  } else {
-    deps = [ "wifi_standard:ActsWifiJSTest" ]
   }
 }
