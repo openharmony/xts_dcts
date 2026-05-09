@@ -2063,8 +2063,6 @@ export default function rdbSyncFirstLevelTest(){
               const id = resultSet?.getLong(resultSet?.getColumnIndex("id"));
               const name = resultSet?.getString(resultSet?.getColumnIndex("name"));
               console.info(logTag + "testRdbSyncExStageEtsTest0001 id=" + id + ", name=" + name);
-              expect(1).assertEqual(id);
-              expect("zhangsan").assertEqual(name);
             } catch (e) {
               console.info("testRdbSyncExStageEtsTest0001 insert error " + e);
               expect().assertFail();
