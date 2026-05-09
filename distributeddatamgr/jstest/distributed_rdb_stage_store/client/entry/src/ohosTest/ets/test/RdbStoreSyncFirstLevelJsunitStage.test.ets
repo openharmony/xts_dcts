@@ -2038,7 +2038,7 @@ export default function rdbSyncFirstLevelTest(){
         /**
          * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_SyncExTest_0100
          * @tc.name testRdbSyncExStageEtsTest0001
-         * @tc.desc Server rdbStore Insert first and synchronize, intValue = NEGATIVE_INFINITY
+         * @tc.desc the test of syncEx
          * @tc.size MediumTest
          * @tc.type Function
          * @tc.level Level 2
