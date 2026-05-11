@@ -2035,5 +2035,59 @@ export default function rdbSyncFirstLevelTest(){
             done();
             console.info(logTag + "************* testRdbSyncStageEtsTest0280 end *************");
         })
+        /**
+         * @tc.number SUB_DistributedData_RelastionStore_CrossDevice_SDK_SyncExTest_0100
+         * @tc.name testRdbSyncExStageEtsTest0001
+         * @tc.desc the test of syncEx
+         * @tc.size MediumTest
+         * @tc.type Function
+         * @tc.level Level 2
+         */
+        it("testRdbSyncExStageEtsTest0001", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL2, async (done:Function) => {
+            console.info(logTag + "testRdbSyncExStageEtsTest0001 start");
+            await sleep(3000);
+            let u8 = new Uint8Array([1, 2, 3]);
+            const valueBucket : data_Rdb.ValuesBucket = {
+              "name": "zhangsan",
+              "age": 18,
+              "salary": 100.5,
+              "blobType": u8
+            }
+            await rdbStore?.insert("test", valueBucket);
+            console.info("testRdbSyncExStageEtsTest0001 insert success");
+            let predicates = new data_Rdb.RdbPredicates('test');
+            predicates.equalTo("name", "zhangsan");
+            let resultSet = await rdbStore?.query(predicates);
+            try {
+              expect(true).assertEqual(resultSet?.goToFirstRow());
+              const id = resultSet?.getLong(resultSet?.getColumnIndex("id"));
+              const name = resultSet?.getString(resultSet?.getColumnIndex("name"));
+              console.info(logTag + "testRdbSyncExStageEtsTest0001 id=" + id + ", name=" + name);
+            } catch (e) {
+              console.info("testRdbSyncExStageEtsTest0001 insert error " + e);
+              expect().assertFail();
+            }
+            resultSet?.close();
+            predicates.inDevices(syncDeviceIds);
+            rdbStore?.syncEx(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates).then((result: data_Rdb.SyncResult[]) => {
+              console.log('testRdbSyncExStageEtsTest0001 sync done.');
+              for (let i = 0; i < result.length; i++) {
+                console.info(logTag + `SyncEx failed` + JSON.stringify(result));
+                let code = result[i].code;
+                expect(code === 0).assertTrue();
+                let message = result[i].message;
+                expect(message == null).assertTrue();
+                let deviceid = result[i].device;
+                expect(deviceid != null).assertTrue();
+                console.info(logTag + `SyncEx failed, message: ${message} code : ${code} deviceid: ${deviceid}`);
+              }
+            }).catch((err: BusinessError) => {
+              console.log(logTag + 'testRdbSyncExStageEtsTest0001 sync failed' + err.code);
+              expect().assertFail();
+            })
+            await sleep(800);
+            done();
+            console.info(logTag + "************* testRdbSyncExStageEtsTest0001 end *************");
+          })
     })
 }
