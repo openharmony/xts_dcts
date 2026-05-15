@@ -42,7 +42,7 @@ class XtsBuild:
         self._xts_root_dir = os.path.dirname(os.path.realpath(__file__))
         self._code_root_dir = os.path.realpath(os.path.join(self._xts_root_dir, '../../..'))
         self._change_list_file = "{}/change_info.json".format(self._code_root_dir)
-        self._python_path = "{}/prebuilts/python/linux-x86/3.11.4/bin".format(self._code_root_dir)
+        self._python_path = "{}/prebuilts/python/linux-x86/current/bin".format(self._code_root_dir)
         os.environ['PATH'] = "{}:{}".format(self._python_path, os.environ['PATH'])
         self._commandline = commandline
         self._args = {}
