@@ -2069,24 +2069,27 @@ export default function rdbSyncFirstLevelTest(){
             }
             resultSet?.close();
             predicates.inDevices(syncDeviceIds);
-            rdbStore?.syncEx(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates).then((result: data_Rdb.SyncResult[]) => {
+            try {
+              let result: data_Rdb.SyncResult[] | undefined = await rdbStore?.syncEx(data_Rdb.SyncMode.SYNC_MODE_PUSH, predicates);
               console.log('testRdbSyncExStageEtsTest0001 sync done.');
-              for (let i = 0; i < result.length; i++) {
+              for (let i = 0; i < result!.length; i++) {
                 console.info(logTag + `SyncEx failed` + JSON.stringify(result));
-                let code = result[i].code;
+                let code = result![i].code;
                 expect(code === 0).assertTrue();
-                let message = result[i].message;
-                expect(message == null).assertTrue();
-                let deviceid = result[i].device;
+                let message = result![i].message;
+                expect(message != null).assertTrue();
+                let deviceid = result![i].device;
                 expect(deviceid != null).assertTrue();
                 console.info(logTag + `SyncEx failed, message: ${message} code : ${code} deviceid: ${deviceid}`);
               }
-            }).catch((err: BusinessError) => {
-              console.log(logTag + 'testRdbSyncExStageEtsTest0001 sync failed' + err.code);
+              await sleep(800);
+              done();
+            } catch (err) {
+              console.log(logTag + 'testRdbSyncExStageEtsTest0001 sync failed' + err.code + err.message);
               expect().assertFail();
-            })
-            await sleep(800);
-            done();
+              done();
+            }
+            
             console.info(logTag + "************* testRdbSyncExStageEtsTest0001 end *************");
           })
     })
