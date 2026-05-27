@@ -11,6 +11,14 @@
     {
       "name": "EntryAbility_label",
       "value": "dmsfwkstagetest"
+    },
+    {
+      "name": "DistributedExtAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "DistributedExtAbility_label",
+      "value": "label"
     }
   ]
 }
