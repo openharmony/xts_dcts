@@ -28,7 +28,6 @@ import common from '@ohos.app.ability.common';
 import TestService from "./testService.ets";
 import abilityConnectionManager from '@ohos.distributedsched.abilityConnectionManager';
 import DistributedExtensionContext from '@ohos.application.DistributedExtensionContext';
-import { hilog } from '@kit.PerformanceAnalysisKit';
 
 let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
 let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
@@ -42,7 +41,6 @@ let call: Caller;
 let dmInstance: deviceManager.DeviceManager;
 let TAG: string = 'DmsFwkStageTest'
 let deviceId: string | undefined = '';
-let DOMAIN = 0xFF00;
 
 class MyMessageAble {
   num: number = 0;
@@ -188,15 +186,6 @@ export default function DmsFwkStageTest() {
 
     beforeEach(async (done: Function) => {
       console.info('LifeCycleTest before each called');
-      let want: Want = {
-        bundleName: "com.acts.example.dmsfwkstagetest",
-        abilityName: "DistributedExtAbility"
-      }
-      abilityDelegator.startAbility(want, (err, data) => {
-        console.log('startAbility is ' + err.code)
-        console.log('startAbility is ' + data)
-      })
-      console.info('LifeCycleTest before each end');
       done()
     });
 
@@ -229,12 +218,12 @@ export default function DmsFwkStageTest() {
 
     /*
      * @tc.number  SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0100
-     * @tc.name    Connect remote ServiceExtensionAbility successfully.
+     * @tc.name    Connect localDeviceId ServiceExtensionAbility successfully.
      * @tc.desc    Function test
      * @tc.level   0
      */
     it("SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
-      hilog.info(DOMAIN, TAG, "SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0100 start");
+      console.info("SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0100 start");
       let context: DistributedExtensionContext | undefined = AppStorage.get('TestAbilityContext') as DistributedExtensionContext;
       let want: Want = {
         deviceId: localDeviceId,
@@ -253,52 +242,95 @@ export default function DmsFwkStageTest() {
             data.writeInt(1);
             data.writeInt(99);
             remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
-              let msg = await result.reply.readInt();
-              console.log('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 sendRequest success');
-              console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 onConnectRemoteService001 msg: ' + msg);
-              expect(msg == 100).assertTrue();
+              expect().assertFail()
             })
           } catch (error) {
             console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800 catch: ' + error.code);
+            expect().assertFail()
           }
           done();
         },
         onDisconnect(elementName: bundleManager.ElementName) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800  onDisConnect: ' + JSON.stringify(elementName));
-          expect(elementName != null).assertTrue();
+          expect().assertFail()
           done();
         },
         onFailed(code: number) {
           console.info('SUB_DMS_StandardOs_collaboration_connectAbility_StopConnectServiceExtensionAbility_0800  onFailed: ' + code);
-          expect().assertFail();
+          expect(code == 16000001).assertTrue();
           done();
         }
       }
-      try {
-        connectId = context.connectServiceExtensionAbility(want, options);
-        hilog.info(DOMAIN, TAG, 'connectServiceExtensionAbility called, connectId=' + connectId);
-        expect(connectId > 0).assertTrue();
-        setTimeout(async () => {
-          try {
-            await context.disconnectServiceExtensionAbility(connectId).then(() => {
-              hilog.info(DOMAIN, TAG, 'disconnectServiceExtensionAbility success');
-            }).catch((err: BusinessError) => {
-              hilog.error(DOMAIN, TAG, 'disconnectServiceExtensionAbility failed ' + err.code);
-              expect().assertFail()
-            });
-          } catch (error) {
-            hilog.error(DOMAIN, TAG, 'disconnectServiceExtensionAbility error ' + JSON.stringify(error));
-            expect().assertFail()
+      connectId = context.connectServiceExtensionAbility(want, options);
+      console.info('connectServiceExtensionAbility called, connectId=' + connectId);
+      expect(connectId == 0).assertTrue();
+      await sleep(1000);
+      console.info("SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0100 end");
+    });
+
+    /*
+     * @tc.number  SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0200
+     * @tc.name    Connect remote ServiceExtensionAbility successfully.
+     * @tc.desc    Function test
+     * @tc.level   0
+     */
+    it("SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: Function) => {
+      console.info("---------------SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0200 is start---------------")
+      TAG = "SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0200";
+      let context: DistributedExtensionContext | undefined = AppStorage.get('TestAbilityContext') as DistributedExtensionContext;
+      connectId = context.connectServiceExtensionAbility({
+        deviceId: dvId,
+        bundleName: "com.acts.example.dmsfwkstagetest",
+        abilityName: "ServiceAbility"
+      },
+        {
+          onConnect(elementName: bundleManager.ElementName, remote: rpc.IRemoteObject) {
+            if (remote == null) {
+              return;
+            }
+            let option: rpc.MessageOption = new rpc.MessageOption();
+            let data: rpc.MessageSequence = new rpc.MessageSequence();
+            let reply: rpc.MessageSequence = new rpc.MessageSequence();
+            try {
+              data.writeInt(1);
+              data.writeInt(99);
+              remote.sendMessageRequest(1, data, reply, option).then(async (result: rpc.RequestResult) => {
+                let msg = await result.reply.readInt();
+                console.log('SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0200 sendRequest success');
+                console.info('SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0200 onConnectRemoteService001 msg: ' + msg);
+                expect(msg == 100).assertTrue();
+              })
+            } catch (error) {
+              console.info('SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0200 catch: ' + error.code);
+            }
+            done();
+          },
+          onDisconnect(elementName: bundleManager.ElementName) {
+            console.info('SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0200  onDisConnect: ' + JSON.stringify(elementName));
+            expect(elementName != null).assertTrue();
+            done();
+          },
+          onFailed(code: number) {
+            console.info('SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0200  onFailed: ' + code);
+            expect().assertFail();
+            done();
           }
-        }, 500);
+        });
+      console.info('SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0200 connectId is: ' + connectId);
+      try {
+        await context.disconnectServiceExtensionAbility(connectId).then(() => {
+          console.info('disconnectServiceExtensionAbility success');
+        }).catch((err: BusinessError) => {
+          console.error('disconnectServiceExtensionAbility failed ' + err.code);
+          expect().assertFail()
+          done();
+        });
       } catch (error) {
-        let err = error as BusinessError;
-        hilog.error(DOMAIN, TAG, 'connectServiceExtensionAbility error ' + err.code + ' ' + err.message);
-        expect().assertFail();
+        console.error('disconnectServiceExtensionAbility error ' + JSON.stringify(error));
+        expect().assertFail()
         done();
       }
-      await sleep(2000);
-      hilog.info(DOMAIN, TAG, "SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0100 end");
+      console.info("---------------SUB_DMS_DistributedExtensionContext_connectServiceExtensionAbility_0200 is end--------------- " + connectId)
     });
 
     /*
