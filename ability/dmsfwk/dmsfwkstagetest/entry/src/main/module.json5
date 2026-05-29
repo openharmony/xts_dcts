@@ -43,6 +43,26 @@
             ]
           }
         ]
+      },
+      {
+        "name": "DistributedExtAbility",
+        "srcEntry": "./ets/distributedexability/DistributedExtAbility.ts",
+        "description": "$string:DistributedExtAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:DistributedExtAbility_label",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true
+      }
+    ],
+    "extensionAbilities": [
+      {
+        "name": "ServiceAbility",
+        "srcEntry": "./ets/serviceability/ServiceAbility.ts",
+        "label": "$string:MainAbility_label",
+        "description": "$string:MainAbility_desc",
+        "type": "service",
+        "visible": true
       }
     ],
     "requestPermissions": [
