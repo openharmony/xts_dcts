@@ -24,6 +24,10 @@ import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry
 import abilityAccessCtrl, { Context, PermissionRequestResult } from "@ohos.abilityAccessCtrl";
 import deviceManager from '@ohos.distributedDeviceManager';
 
+let abilityDelegatorArguments = abilityDelegatorRegistry.getArguments();
+
+let user = abilityDelegatorArguments.parameters["-u"];
+
 let domain: int = 0x0000; //日志标识,0x0000作为测试框架的业务标识
 let tag: string = 'testTag'; //日志标识字符串,作为tag标识当前runner类下的测试行为
 let gIRemoteObject: rpc.IRemoteObject | undefined;
@@ -210,7 +214,11 @@ export default function rpcTest() {
     beforeAll(async() => {
       hilog.info(domain, tag, '%{public}s', 'beforeAll in');
       try {
-        await abilityDelegator.executeShellCommand("aa start -a EntryAbility -b com.rpctaihetest.static");
+        let cmd = "aa start -a EntryAbility -b com.rpctaihetest.static";
+        if(user !== undefined){
+            cmd += ' -u ' + user;
+        }
+        await abilityDelegator.executeShellCommand(cmd);
         await Utils.msSleep(6000);
 
         await getPermission();

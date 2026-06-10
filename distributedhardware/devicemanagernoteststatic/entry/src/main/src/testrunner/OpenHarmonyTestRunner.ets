@@ -39,6 +39,7 @@ export class OpenHarmonyTestRunner implements TestRunner {
     hilog.info(domain, tag, '%{public}s', 'OpenHarmonyTestRunner onRun');
 
     abilityDelegatorArguments = abilityDelegatorRegistry.getArguments();
+    let user = abilityDelegatorArguments.parameters["-u"];
     abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
     hilog.info(domain, tag, '%{public}s', 'start run testcase!!!');
     hilog.info(domain, tag, 'bundleName = %{public}s', abilityDelegatorArguments.bundleName);
@@ -54,6 +55,9 @@ export class OpenHarmonyTestRunner implements TestRunner {
       hilog.info(domain, tag, 'hypiumTest end');
     }, 5000);
 
+    if(user !== undefined){
+        cmd += ' -u ' + user;
+    }
     abilityDelegator.executeShellCommand(cmd, (err: BusinessError<void> | null, d: ShellCmdResult | undefined) => {
       hilog.info(domain, tag, 'executeShellCommand : err : %{public}s', JSON.stringify(err) ?? '');
       hilog.info(domain, tag, 'executeShellCommand : data : %{public}s', d?.stdResult ?? '');
