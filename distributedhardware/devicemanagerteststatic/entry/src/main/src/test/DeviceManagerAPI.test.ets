@@ -24,6 +24,10 @@ import { AppStorage } from '@ohos.arkui.stateManagement';
 import abilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry';
 import distributedDeviceManager from '@ohos.distributedDeviceManager';
 
+let abilityDelegatorArguments = abilityDelegatorRegistry.getArguments();
+
+let user = abilityDelegatorArguments.parameters["-u"];
+
 let domain: int = 0x0000; //日志标识,domain作为测试框架的业务标识
 let tag: string = 'testTag'; //日志标识字符串,作为tag标识当前runner类下的测试行为
 const FILE_CONTENT = 'hello world';
@@ -39,7 +43,11 @@ export default function DeviceManagerAPI_test() {
     beforeAll(async (done: () => void): Promise<void> => {
       hilog.info(domain, tag, "====>DeviceManagerAPI_test beforeAll start====");
       let abilityDelegator = abilityDelegatorRegistry.getAbilityDelegator();
-      await abilityDelegator.executeShellCommand("aa start -a EntryAbility -b com.acts.devicemanager.static");
+      let cmd = "aa start -a EntryAbility -b com.acts.devicemanager.static";
+      if(user !== undefined){
+          cmd += ' -u ' + user;
+      }
+      await abilityDelegator.executeShellCommand(cmd);
       await Utils.msSleep(2000);
       try {
         gContext = AppStorage.get<common.UIAbilityContext>('UIAbilityContext') as common.UIAbilityContext;
