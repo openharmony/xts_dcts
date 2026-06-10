@@ -22,10 +22,14 @@ import AbilityDelegatorRegistry from '@ohos.app.ability.abilityDelegatorRegistry
     onRun() {
         hilog.info(0x0000, 'testTag', '%{public}s', 'OpenHarmonyTestRunner onRun run');
         var abilityDelegatorArguments = AbilityDelegatorRegistry.getArguments()
+        var user = abilityDelegatorArguments.parameters["-u"];
         var abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator()
 
         var testAbilityName = abilityDelegatorArguments.parameters['-p'] + '.TestAbility'
         var cmd = 'aa start -d 0 -a ' + testAbilityName + ' -b ' + abilityDelegatorArguments.bundleName
+        if(user !== undefined){
+            cmd += ' -u ' + user;
+        }
         var debug = abilityDelegatorArguments.parameters["-D"]
         if (debug == 'true')
         {

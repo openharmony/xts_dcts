@@ -37,11 +37,15 @@ function translateParamsToString(parameters) {
     onRun() {
         console.log('OpenHarmonyTestRunner onRun run');
         let abilityDelegatorArguments = AbilityDelegatorRegistry.getArguments();
+        var user = abilityDelegatorArguments.parameters["-u"];
         let abilityDelegator = AbilityDelegatorRegistry.getAbilityDelegator();
 
         let testAbilityName = abilityDelegatorArguments.parameters['-p'] + '.TestAbility';
 
         let cmd = 'aa start -d 0 -a ' + testAbilityName + ' -b ' + abilityDelegatorArguments.bundleName;
+        if(user !== undefined){
+            cmd += ' -u ' + user;
+        }
         cmd += ' ' + translateParamsToString(abilityDelegatorArguments.parameters);
         let debug = abilityDelegatorArguments.parameters["-D"];
         console.info('debug value : '+debug);
