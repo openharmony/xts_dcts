@@ -19,7 +19,9 @@ import os
 import sys
 import subprocess
 import shutil
-import logging 
+import logging
+import importlib.util
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -41,6 +43,7 @@ class XtsBuild:
     def __init__(self, commandline):
         self._xts_root_dir = os.path.dirname(os.path.realpath(__file__))
         self._code_root_dir = os.path.realpath(os.path.join(self._xts_root_dir, '../../..'))
+        self._accurate_dir = os.path.join(self._code_root_dir, "test/xts/tools/ci")
         self._change_list_file = "{}/change_info.json".format(self._code_root_dir)
         self._python_path = "{}/prebuilts/python/linux-x86/current/bin".format(self._code_root_dir)
         os.environ['PATH'] = "{}:{}".format(self._python_path, os.environ['PATH'])
@@ -122,8 +125,7 @@ class XtsBuild:
         return ret.returncode
 
     def get_accurate_targets(self):
-        accurate_dir = "{}/test/xts/tools/ci".format(self._code_root_dir)
-        sys.path.append(accurate_dir)
+        sys.path.append(self._accurate_dir)
         import generate_accurate_targets as gat
         retcode, accurate_target = gat.generate(self._xts_root_dir,
                                                 self._change_list_file,
@@ -161,14 +163,20 @@ class XtsBuild:
 
         # 执行编译命令
         os.chdir(self._code_root_dir)
-        ret = subprocess.run(build_command.split())
-        if ret.returncode:
-            logging.info("subprocess.run ret={}".format(ret))
+        if self._accurate_dir not in sys.path:
+            sys.path.append(self._accurate_dir)
+        spec = importlib.util.spec_from_file_location(
+            "xts_accurate_build",
+            os.path.join(self._accurate_dir, "xts_accurate_build.py")
+        )
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        rc = mod.xts_accurate_build(self._code_root_dir, build_command.split())
 
         if os.path.exists(autogen_apiobjs_dir):
             shutil.rmtree(autogen_apiobjs_dir)
 
-        return ret.returncode
+        return rc
 
     def build(self):
         func_list = [
