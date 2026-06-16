@@ -52,6 +52,7 @@ class XtsBuild:
         self._gn_args = {}
         self._other_args = {}
         self._build_target = []
+        self._arkts_static = False
 
     def usage(self):
         print(usage_info)
@@ -79,6 +80,9 @@ class XtsBuild:
             os.environ['XTS_SUITETYPE'] = cmdline.get('xts_suitetype')
         else:
             os.environ['XTS_SUITETYPE'] = "bin,hap_dynamic"
+        _suitetype_list = os.environ['XTS_SUITETYPE'].split(',')
+        if "hap_static" in _suitetype_list:
+            self._arkts_static = True
 
         # print("args_dict = {}".format(cmdline))
         self._gn_args['build_xts'] = 'true'
@@ -159,6 +163,9 @@ class XtsBuild:
             build_command = "{} --build-target {}".format(build_command, i)
         for i in self._other_args:
             build_command = "{} --{}={}".format(build_command, i, self._other_args.get(i))
+        if self._arkts_static:
+            build_command = "{} {}".format(build_command, "--prebuilts-sdk-gn-args sdk_build_arkts=true")
+
         logging.info("build_command: {}".format(build_command))
 
         # 执行编译命令
