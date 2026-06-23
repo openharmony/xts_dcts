@@ -1613,5 +1613,34 @@ export default function DeviceManagerAPI_test() {
       hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_4500 END--------------------------');
       done();
     });
+
+    /**
+     * @tc.number SUB_DH_DeviceManager_Dcts_4800
+     * @tc.name SUB_DH_DeviceManager_Dcts_4800
+     * @tc.desc Test releaseDeviceManager interfaces error code
+     * @tc.size MEDIUM
+     * @tc.type Function
+     * @tc.level Level 0
+     * @tc.require
+     */
+    it('SUB_DH_DeviceManager_Dcts_4800', TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async (done: () => void): Promise<void> => {
+      hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_4800 START------------------------');
+      let flag: int = 0;
+      try {
+        let dmInstance = distributedDeviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+        hilog.info(domain, tag, 'createDeviceManager successfully' + dmInstance);
+        distributedDeviceManager.releaseDeviceManager(dmInstance);
+        hilog.info(domain, tag, 'releaseDeviceManager successfully');
+        distributedDeviceManager.releaseDeviceManager(dmInstance);
+        hilog.info(domain, tag, 'releaseDeviceManager failed');
+        expect(flag == 0).assertFail();
+      } catch (err) {
+        const e = err as BusinessError;
+        hilog.info(domain, tag, `releaseDeviceManager failed err.code: ${e.code}`);
+        expect(e.code == 11600101).assertTrue();
+      }
+      hilog.info(domain, tag, '-----------------SUB_DH_DeviceManager_Dcts_4800 END--------------------------');
+      done();
+    });
   })
 }
