@@ -3240,7 +3240,7 @@ export default function DmsFwkStageTest() {
           if (error.code == 801) {
             expect().assertTrue()
           }
-          expect(error.code).assertTrue()
+          expect(error.code == 401).assertTrue()
         }
         console.info("---------------SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3200 is end--------------- ")
         done();
