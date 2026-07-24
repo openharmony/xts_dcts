@@ -3090,5 +3090,286 @@ export default function distributedDeviceManager() {
             console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10500 end------------------------");
             done();
         });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_10600
+         * @tc.name    SUB_DH_DeviceManager_Dcts_10600
+         * @tc.desc    Register a device status callback to notify the application when the device status changes. Use the callback for asynchronous callback.
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_10600", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10600 start------------------------");
+            try {
+                let dmInstance = deviceManager.createDeviceManager(TEST_BUNDLE_NAME);
+                let callback1 = (action) => {
+                    console.info(TAG + 'callback1 action:' + JSON.stringify(action));
+                    expect(typeof (action)).assertEqual('object');
+                }
+                let callback2 = (action) => {
+                    console.info(TAG + 'callback2 action:' + JSON.stringify(action));
+                    expect(typeof (action)).assertEqual('object');
+                }
+                let callback3 = (action) => {
+                    console.info(TAG + 'callback3 action:' + JSON.stringify(action));
+                    expect(typeof (action)).assertEqual('object');
+                }
+                dmInstance.on('deviceStateChange', callback1);
+                dmInstance.on('deviceStateChange', callback2);
+                dmInstance.on('deviceStateChange', callback3);
+                done();
+            } catch (err) {
+                console.log(TAG + 'on_deviceStateChange errCode:' + err.code + ',errMessage:' + err.message);
+                expect().assertFail();
+            }
+            done();
+            await sleep(500);
+            console.info(TAG + "-----------------SUB_DH_DeviceManager_Dcts_10600 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_10800
+         * @tc.name    SUB_DH_DeviceManager_Dcts_10800
+         * @tc.desc    Test on('deviceNameChange') with multiple callbacks - call three times
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_10800", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_10800 start------------------------");
+            let callback1Count = 0;
+            let callback2Count = 0;
+            let callback3Count = 0;
+            try {
+                dmInstance.on('deviceNameChange', (data) => {
+                    callback1Count++;
+                    console.info("deviceNameChange callback1 count:" + callback1Count + " data:" + JSON.stringify(data));
+                    expect(data.deviceName !== null).assertTrue();
+                });
+
+                dmInstance.on('deviceNameChange', (data) => {
+                    callback2Count++;
+                    console.info("deviceNameChange callback2 count:" + callback2Count + " data:" + JSON.stringify(data));
+                    expect(data.deviceName !== null).assertTrue();
+                });
+
+                dmInstance.on('deviceNameChange', (data) => {
+                    callback3Count++;
+                    console.info("deviceNameChange callback3 count:" + callback3Count + " data:" + JSON.stringify(data));
+                    expect(data.deviceName !== null).assertTrue();
+                });
+
+                await sleep(2000);
+                console.info("callback1Count:" + callback1Count + " callback2Count:" + callback2Count + " callback3Count:" + callback3Count);
+                done();
+            } catch (err) {
+                console.error("deviceNameChange SUB_DH_DeviceManager_Dcts_10800 errCode:" + err.code + ",errMessage:" + err.message);
+                expect().assertFail();
+                done();
+            }
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_10800 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_10900
+         * @tc.name    SUB_DH_DeviceManager_Dcts_10900
+         * @tc.desc    Test on('serviceDie') with multiple callbacks - call three times
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_10900", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_10900 start------------------------");
+            let callback1Count = 0;
+            let callback2Count = 0;
+            let callback3Count = 0;
+            try {
+                dmInstance.on('serviceDie', () => {
+                    callback1Count++;
+                    console.info("serviceDie callback1 count:" + callback1Count);
+                });
+
+                dmInstance.on('serviceDie', () => {
+                    callback2Count++;
+                    console.info("serviceDie callback2 count:" + callback2Count);
+                });
+
+                dmInstance.on('serviceDie', () => {
+                    callback3Count++;
+                    console.info("serviceDie callback3 count:" + callback3Count);
+                });
+
+                await sleep(2000);
+                console.info("callback1Count:" + callback1Count + " callback2Count:" + callback2Count + " callback3Count:" + callback3Count);
+                done();
+            } catch (err) {
+                console.error("serviceDie SUB_DH_DeviceManager_Dcts_10900 errCode:" + err.code + ",errMessage:" + err.message);
+                expect().assertFail();
+                done();
+            }
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_10900 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_11000
+         * @tc.name    SUB_DH_DeviceManager_Dcts_11000
+         * @tc.desc    Test off('discoverSuccess') to cancel multiple callbacks
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_11000", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_11000 start------------------------");
+            let callback1 = (data) => {
+                console.info("discoverSuccess callback1:" + JSON.stringify(data));
+                expect(data !== null).assertTrue();
+            };
+            let callback2 = (data) => {
+                console.info("discoverSuccess callback2:" + JSON.stringify(data));
+                expect(data !== null).assertTrue();
+            };
+            let callback3 = (data) => {
+                console.info("discoverSuccess callback3:" + JSON.stringify(data));
+                expect(data !== null).assertTrue();
+            };
+            try {
+                dmInstance.on('discoverSuccess', callback1);
+                dmInstance.on('discoverSuccess', callback2);
+                dmInstance.on('discoverSuccess', callback3);
+
+                dmInstance.off('discoverSuccess', callback1);
+                dmInstance.off('discoverSuccess', callback2);
+                dmInstance.off('discoverSuccess', callback3);
+
+                console.info("off discoverSuccess success");
+                done();
+            } catch (err) {
+                console.error("off discoverSuccess SUB_DH_DeviceManager_Dcts_11000 errCode:" + err.code + ",errMessage:" + err.message);
+                expect().assertFail();
+                done();
+            }
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_11000 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_11100
+         * @tc.name    SUB_DH_DeviceManager_Dcts_11100
+         * @tc.desc    Test off('deviceNameChange') to cancel multiple callbacks
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_11100", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_11100 start------------------------");
+            let callback1 = (data) => {
+                console.info("deviceNameChange callback1:" + JSON.stringify(data));
+                expect(data.deviceName !== null).assertTrue();
+            };
+            let callback2 = (data) => {
+                console.info("deviceNameChange callback2:" + JSON.stringify(data));
+                expect(data.deviceName !== null).assertTrue();
+            };
+            let callback3 = (data) => {
+                console.info("deviceNameChange callback3:" + JSON.stringify(data));
+                expect(data.deviceName !== null).assertTrue();
+            };
+            try {
+                dmInstance.on('deviceNameChange', callback1);
+                dmInstance.on('deviceNameChange', callback2);
+                dmInstance.on('deviceNameChange', callback3);
+
+                dmInstance.off('deviceNameChange', callback1);
+                dmInstance.off('deviceNameChange', callback2);
+                dmInstance.off('deviceNameChange', callback3);
+
+                console.info("off deviceNameChange success");
+                done();
+            } catch (err) {
+                console.error("off deviceNameChange SUB_DH_DeviceManager_Dcts_11100 errCode:" + err.code + ",errMessage:" + err.message);
+                expect().assertFail();
+                done();
+            }
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_11100 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_11200
+         * @tc.name    SUB_DH_DeviceManager_Dcts_11200
+         * @tc.desc    Test off('discoverFailure') to cancel multiple callbacks
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_11200", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_11200 start------------------------");
+            let callback1 = (data) => {
+                console.info("discoverFailure callback1:" + JSON.stringify(data));
+                expect(data.reason !== null).assertTrue();
+            };
+            let callback2 = (data) => {
+                console.info("discoverFailure callback2:" + JSON.stringify(data));
+                expect(data.reason !== null).assertTrue();
+            };
+            let callback3 = (data) => {
+                console.info("discoverFailure callback3:" + JSON.stringify(data));
+                expect(data.reason !== null).assertTrue();
+            };
+            try {
+                dmInstance.on('discoverFailure', callback1);
+                dmInstance.on('discoverFailure', callback2);
+                dmInstance.on('discoverFailure', callback3);
+
+                dmInstance.off('discoverFailure', callback1);
+                dmInstance.off('discoverFailure', callback2);
+                dmInstance.off('discoverFailure', callback3);
+
+                console.info("off discoverFailure success");
+                done();
+            } catch (err) {
+                console.error("off discoverFailure SUB_DH_DeviceManager_Dcts_11200 errCode:" + err.code + ",errMessage:" + err.message);
+                expect().assertFail();
+                done();
+            }
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_11200 end------------------------");
+        });
+
+        /*
+         * @tc.number  SUB_DH_DeviceManager_Dcts_11300
+         * @tc.name    SUB_DH_DeviceManager_Dcts_11300
+         * @tc.desc    Test off('serviceDie') to cancel multiple callbacks
+         * @tc.size    MediumTest
+         * @tc.type:   Function
+         * @tc.level   Level1
+         */
+        it("SUB_DH_DeviceManager_Dcts_11300", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_11300 start------------------------");
+            let callback1 = () => {
+                console.info("serviceDie callback1");
+            };
+            let callback2 = () => {
+                console.info("serviceDie callback2");
+            };
+            let callback3 = () => {
+                console.info("serviceDie callback3");
+            };
+            try {
+                dmInstance.on('serviceDie', callback1);
+                dmInstance.on('serviceDie', callback2);
+                dmInstance.on('serviceDie', callback3);
+
+                dmInstance.off('serviceDie', callback1);
+                dmInstance.off('serviceDie', callback2);
+                dmInstance.off('serviceDie', callback3);
+
+                console.info("off serviceDie success");
+                done();
+            } catch (err) {
+                console.error("off serviceDie SUB_DH_DeviceManager_Dcts_11300 errCode:" + err.code + ",errMessage:" + err.message);
+                expect().assertFail();
+                done();
+            }
+            console.info("-----------------SUB_DH_DeviceManager_Dcts_11300 end------------------------");
+        });
     })
 }
