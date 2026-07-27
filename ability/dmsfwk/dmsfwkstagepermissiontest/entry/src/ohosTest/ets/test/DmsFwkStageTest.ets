@@ -188,7 +188,7 @@ export default function DmsFwkStageTest() {
           continueManager.on('prepareContinue', context, (err, ContinueResultInfo: continueManager.ContinueResultInfo) => {
             console.log(TAG + 'continueManager.on is success' + ContinueResultInfo.resultInfo + ContinueResultInfo.resultState)
             expect(ContinueResultInfo.resultState == 0).assertTrue()
-            expect(typeof(ContinueResultInfo.resultInfo) == 'string').assertTrue()
+            expect(typeof (ContinueResultInfo.resultInfo) == 'string').assertTrue()
           })
         } catch (error) {
           console.log(TAG + 'continueManager.on is catch' + JSON.stringify(error))
@@ -575,7 +575,7 @@ export default function DmsFwkStageTest() {
         abilityConnectionManager.acceptConnect(sessionId, undefined).then((data) => {
           console.log(`abilityConnectionManager.acceptConnect is success ${data}`)
           expect().assertFail()
-          })
+        })
       } catch (error) {
         console.log(`${TAG} get abilityConnectionManager.connect is failed ${error.code}`)
         expect(error.code == 401).assertTrue()
@@ -596,7 +596,7 @@ export default function DmsFwkStageTest() {
         abilityConnectionManager.acceptConnect(sessionId, null).then((data) => {
           console.log(`abilityConnectionManager.acceptConnect is success ${data}`)
           expect().assertFail()
-          })
+        })
       } catch (error) {
         console.log(`${TAG} get abilityConnectionManager.connect is failed ${error.code}`)
         expect(error.code == 401).assertTrue()
@@ -618,7 +618,7 @@ export default function DmsFwkStageTest() {
           abilityConnectionManager.sendData(sessionId, null).then(() => {
             console.log(TAG + 'abilityConnectionManager.sendData is success')
             expect().assertFail()
-            })
+          })
         } catch (error) {
           console.log(`${TAG} get abilityConnectionManager.sendData is failed ${error.code}`)
           expect(error.code == 401).assertTrue()
@@ -640,7 +640,7 @@ export default function DmsFwkStageTest() {
           abilityConnectionManager.sendData(sessionId, undefined).then(() => {
             console.log(TAG + 'abilityConnectionManager.sendData is success')
             expect().assertFail()
-            })
+          })
         } catch (error) {
           console.log(`${TAG} get abilityConnectionManager.sendData is failed ${error.code}`)
           expect(error.code == 401).assertTrue()
@@ -1373,6 +1373,134 @@ export default function DmsFwkStageTest() {
           expect().assertFail()
         })
         console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_connect_3200 is end--------------- ")
+        done();
+      });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_connect_0100
+    * @tc.name    abilityConnectionManager.on('connect') multiple callbacks
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_connect_0100",
+      TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
+        console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_connect_0100 is start---------------")
+        let TAG = 'SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_connect_0100';
+        try {
+          abilityConnectionManager.on("connect", sessionId, (callbackInfo) => {
+            console.log(TAG + 'abilityConnectionManager.on connect first callback is success' + callbackInfo.sessionId);
+            expect(callbackInfo.sessionId).assertEqual(sessionId);
+          });
+          abilityConnectionManager.on("connect", sessionId, (callbackInfo) => {
+            console.log(TAG + 'abilityConnectionManager.on connect second callback is success' + callbackInfo.sessionId);
+            expect(callbackInfo.sessionId).assertEqual(sessionId);
+          });
+          abilityConnectionManager.on("connect", sessionId, (callbackInfo) => {
+            console.log(TAG + 'abilityConnectionManager.on connect third callback is success' + callbackInfo.sessionId);
+            expect(callbackInfo.sessionId).assertEqual(sessionId);
+          });
+          console.log(TAG + 'abilityConnectionManager.on connect is success');
+        } catch (error) {
+          console.log(`${TAG} abilityConnectionManager.on connect error is ${JSON.stringify(error)}`);
+          expect().assertFail();
+        }
+        console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_connect_0100 is end--------------- ")
+        done();
+      });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_disconnect_0100
+    * @tc.name    abilityConnectionManager.on('disconnect') multiple callbacks
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_disconnect_0100",
+      TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
+        console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_disconnect_0100 is start---------------")
+        let TAG = 'SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_disconnect_0100';
+        try {
+          abilityConnectionManager.on("disconnect", sessionId, (callbackInfo) => {
+            console.log(TAG + 'abilityConnectionManager.on disconnect first callback is success' + callbackInfo.sessionId);
+            expect(callbackInfo.sessionId).assertEqual(sessionId);
+          });
+          abilityConnectionManager.on("disconnect", sessionId, (callbackInfo) => {
+            console.log(TAG + 'abilityConnectionManager.on disconnect second callback is success' + callbackInfo.sessionId);
+            expect(callbackInfo.sessionId).assertEqual(sessionId);
+          });
+          abilityConnectionManager.on("disconnect", sessionId, (callbackInfo) => {
+            console.log(TAG + 'abilityConnectionManager.on disconnect third callback is success' + callbackInfo.sessionId);
+            expect(callbackInfo.sessionId).assertEqual(sessionId);
+          });
+          console.log(TAG + 'abilityConnectionManager.on disconnect is success');
+        } catch (error) {
+          console.log(`${TAG} abilityConnectionManager.on disconnect error is ${JSON.stringify(error)}`);
+          expect().assertFail();
+        }
+        console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_disconnect_0100 is end--------------- ")
+        done();
+      });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_receiveMessage_0100
+    * @tc.name    abilityConnectionManager.on('receiveMessage') multiple callbacks
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_receiveMessage_0100",
+      TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
+        console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_receiveMessage_0100 is start---------------")
+        let TAG = 'SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_receiveMessage_0100';
+        try {
+          abilityConnectionManager.on("receiveMessage", sessionId, (callbackInfo) => {
+            console.log(TAG + 'abilityConnectionManager.on receiveMessage first callback is success' + callbackInfo.sessionId);
+            expect(callbackInfo.sessionId).assertEqual(sessionId);
+          });
+          abilityConnectionManager.on("receiveMessage", sessionId, (callbackInfo) => {
+            console.log(TAG + 'abilityConnectionManager.on receiveMessage second callback is success' + callbackInfo.sessionId);
+            expect(callbackInfo.sessionId).assertEqual(sessionId);
+          });
+          abilityConnectionManager.on("receiveMessage", sessionId, (callbackInfo) => {
+            console.log(TAG + 'abilityConnectionManager.on receiveMessage third callback is success' + callbackInfo.sessionId);
+            expect(callbackInfo.sessionId).assertEqual(sessionId);
+          });
+          console.log(TAG + 'abilityConnectionManager.on receiveMessage is success');
+        } catch (error) {
+          console.log(`${TAG} abilityConnectionManager.on receiveMessage error is ${JSON.stringify(error)}`);
+          expect().assertFail();
+        }
+        console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_receiveMessage_0100 is end--------------- ")
+        done();
+      });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_receiveData_0100
+    * @tc.name    abilityConnectionManager.on('receiveData') multiple callbacks
+    * @tc.desc    Function test
+    * @tc.level   3
+    */
+    it("SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_receiveData_0100",
+      TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
+        console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_receiveData_0100 is start---------------")
+        let TAG = 'SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_receiveData_0100';
+        try {
+          abilityConnectionManager.on("receiveData", sessionId, (callbackInfo) => {
+            console.log(TAG + 'abilityConnectionManager.on receiveData first callback is success' + callbackInfo.sessionId);
+            expect(callbackInfo.sessionId).assertEqual(sessionId);
+          });
+          abilityConnectionManager.on("receiveData", sessionId, (callbackInfo) => {
+            console.log(TAG + 'abilityConnectionManager.on receiveData second callback is success' + callbackInfo.sessionId);
+            expect(callbackInfo.sessionId).assertEqual(sessionId);
+          });
+          abilityConnectionManager.on("receiveData", sessionId, (callbackInfo) => {
+            console.log(TAG + 'abilityConnectionManager.on receiveData third callback is success' + callbackInfo.sessionId);
+            expect(callbackInfo.sessionId).assertEqual(sessionId);
+          });
+          console.log(TAG + 'abilityConnectionManager.on receiveData is success');
+        } catch (error) {
+          console.log(`${TAG} abilityConnectionManager.on receiveData error is ${JSON.stringify(error)}`);
+          expect().assertFail();
+        }
+        console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_on_receiveData_0100 is end--------------- ")
         done();
       });
 
@@ -2302,7 +2430,7 @@ export default function DmsFwkStageTest() {
         abilityConnectionManager.acceptConnect(undefined, "ohos.dms.collabToken").then((data) => {
           console.log(`abilityConnectionManager.acceptConnect is success ${data}`)
           expect().assertFail()
-          })
+        })
       } catch (error) {
         console.log(`${TAG} get abilityConnectionManager.connect is failed ${error.code}`)
         expect(error.code == 401).assertTrue()
@@ -2323,7 +2451,7 @@ export default function DmsFwkStageTest() {
         abilityConnectionManager.acceptConnect(null, "ohos.dms.collabToken").then((data) => {
           console.log(`abilityConnectionManager.acceptConnect is success ${data}`)
           expect().assertFail()
-          })
+        })
       } catch (error) {
         console.log(`${TAG} get abilityConnectionManager.connect is failed ${error.code}`)
         expect(error.code == 401).assertTrue()
@@ -2347,7 +2475,7 @@ export default function DmsFwkStageTest() {
         console.log(`${TAG} abilityConnectionManager.acceptConnect is failed ${error.code}`)
         expect(error.code == 401).assertTrue()
       })
-      await sleep(2000) 
+      await sleep(2000)
       console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_acceptConnect_9200 is end--------------- ")
       done();
     });
@@ -2479,7 +2607,7 @@ export default function DmsFwkStageTest() {
           abilityConnectionManager.sendMessage(undefined, "message send success").then((data) => {
             console.log(`${TAG} abilityConnectionManager.sendMessage is success ${data}`)
             expect().assertFail()
-            })
+          })
         } catch (error) {
           console.log(`${TAG} get abilityConnectionManager.connect is failed ${error.code}`)
           expect(error.code == 401).assertTrue()
@@ -2521,7 +2649,7 @@ export default function DmsFwkStageTest() {
           abilityConnectionManager.sendMessage(sessionId, undefined).then((data) => {
             console.log(`${TAG} abilityConnectionManager.sendMessage is success ${data}`)
             expect().assertFail()
-            })
+          })
         } catch (error) {
           console.log(`${TAG} get abilityConnectionManager.connect is failed ${error.code}`)
           expect(error.code == 401).assertTrue()
@@ -2546,7 +2674,7 @@ export default function DmsFwkStageTest() {
           abilityConnectionManager.sendData(undefined, arrayBuffer.buffer).then(() => {
             console.log(TAG + 'abilityConnectionManager.sendData is success')
             expect().assertFail()
-            })
+          })
         } catch (error) {
           console.log(`${TAG} get abilityConnectionManager.connect is failed ${error.code}`)
           expect(error.code == 401).assertTrue()
@@ -2571,7 +2699,7 @@ export default function DmsFwkStageTest() {
           abilityConnectionManager.sendData(null, arrayBuffer.buffer).then(() => {
             console.log(TAG + 'abilityConnectionManager.sendData is success')
             expect().assertFail()
-            })
+          })
         } catch (error) {
           console.log(`${TAG} get abilityConnectionManager.connect is failed ${error.code}`)
           expect(error.code == 401).assertTrue()
@@ -2936,7 +3064,7 @@ export default function DmsFwkStageTest() {
           console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession is success ${sessionId}`)
           expect().assertFail()
         } catch (error) {
-          console.log(`abilityConnectionManager.createAbilityConnectionSession error.code is ${error.code}` + typeof(error.code))
+          console.log(`abilityConnectionManager.createAbilityConnectionSession error.code is ${error.code}` + typeof (error.code))
           if (error.code == 801) {
             expect().assertTrue()
           }
@@ -3053,17 +3181,68 @@ export default function DmsFwkStageTest() {
         try {
           let peerInfo = abilityConnectionManager.getPeerInfoById(sessionId)
           console.log(`${TAG} abilityConnectionManager.getPeerInfoById is succcess` + JSON.stringify(peerInfo))
-          expect(typeof(peerInfo)).assertEqual('object')
-          expect(typeof(peerInfo?.deviceId)).assertEqual('string')
-          expect(typeof(peerInfo?.bundleName)).assertEqual('string')
-          expect(typeof(peerInfo?.moduleName)).assertEqual('string')
-          expect(typeof(peerInfo?.abilityName)).assertEqual('string')
-          expect(typeof(peerInfo?.serviceName)).assertEqual('string')
+          expect(typeof (peerInfo)).assertEqual('object')
+          expect(typeof (peerInfo?.deviceId)).assertEqual('string')
+          expect(typeof (peerInfo?.bundleName)).assertEqual('string')
+          expect(typeof (peerInfo?.moduleName)).assertEqual('string')
+          expect(typeof (peerInfo?.abilityName)).assertEqual('string')
+          expect(typeof (peerInfo?.serviceName)).assertEqual('string')
         } catch (error) {
           console.log(`${TAG} abilityConnectionManager.getPeerInfoById error.code is ${error.code}`)
           expect().assertFail()
         }
         console.info("---------------SUB_DMS_StandardOs_collaboration_abilityConnectionManager_getPeerInfoById_12900 is end--------------- ")
+        done();
+      });
+
+    /*
+    * @tc.number  SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3200
+    * @tc.name    abilityConnectionManager.createAbilityConnectionSession
+    * @tc.desc    Function test
+    * @tc.level   0
+    */
+    it("SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3200",
+      TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL3, async (done: Function) => {
+        console.info("---------------SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3200 is start---------------")
+        let TAG = 'SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3200'
+        let context: common.UIAbilityContext | undefined = AppStorage.get('TestAbilityContext') as common.UIAbilityContext
+        let peerInfo: abilityConnectionManager.PeerInfo = {
+          deviceId: dvId!,
+          bundleName: 'com.acts.example.dmsfwkstageserver',
+          moduleName: 'entry',
+          abilityName: 'MainAbility',
+          serviceName: 'collabTest'
+        };
+
+        let myRecord: Record<string, string> = {
+          "newKey1": "value1",
+        };
+
+        let options: Record<string, string> = {
+          'ohos.collabrate.key.start.option': 'ohos.collabrate.value.foreground',
+        };
+
+        let connectOption: abilityConnectionManager.ConnectOptions = {
+          needSendData: true,
+          needSendStream: false,
+          needReceiveStream: false,
+          startOptions: -1,
+          parameters: myRecord
+        };
+
+        try {
+          sessionId =
+            abilityConnectionManager.createAbilityConnectionSession("collabTest", context, peerInfo, connectOption);
+          console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession is success ${sessionId}`)
+          expect().assertFail()
+        } catch (error) {
+          console.log(`${TAG} abilityConnectionManager.createAbilityConnectionSession error.code is ${error.code}`)
+          if (error.code == 801) {
+            expect().assertTrue()
+          }
+          expect(error.code == 401).assertTrue()
+        }
+        console.info("---------------SUB_DMS_StandardOs_collaboration_createAbilityConnectionSession_3200 is end--------------- ")
         done();
       });
 
