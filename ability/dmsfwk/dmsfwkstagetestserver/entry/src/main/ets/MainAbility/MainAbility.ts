@@ -16,6 +16,9 @@ import Ability from '@ohos.app.ability.UIAbility';
 import AcCtrl from '@ohos.abilityAccessCtrl';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import wantConstant from '@ohos.app.ability.wantConstant';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import abilityConnectionManager from '@ohos.distributedsched.abilityConnectionManager';
+
 let AcManager = AcCtrl.createAtManager();
 
 class MyMessageAble {
@@ -62,6 +65,68 @@ export default class MainAbility extends Ability {
         })
         this.callee.on('test', funcCallBack);
     }
+
+    onCollaborate(wantParam: Record<string, Object>): AbilityConstant.CollaborateResult {
+        console.log('[demo] on collaborate begin')
+        this.onCollab(wantParam);
+        return 0;
+    }
+
+    onCollab(collabParam: Record<string, Object>) {
+        let sessionId = this.createSessionFromWant(collabParam);
+        console.log('[demo] onCollab this.createSessionFromWant sessionId' + sessionId)
+        if (sessionId == -1) {
+            hilog.info(0x0000, 'testTag', 'Invalid session ID.');
+            console.log('[demo] onCollab session ID ' + sessionId)
+            return;
+        }
+        console.log('[demo] onCollab sessionId' + sessionId);
+        // this.registerSessionEvent(sessionId);
+        let collabToken = collabParam['ohos.extra.param.key.supportCollaborateIndex']['ohos.dms.collabToken'] as string;
+        console.log('[demo] collabToken is' + collabToken)
+        abilityConnectionManager.acceptConnect(sessionId, collabToken).then(() => {
+            console.log('[demo] abilityConnectionManager.acceptConnect success')
+        }).catch(() => {
+            console.log('[demo] abilityConnectionManager.acceptConnect failed')
+        })
+    }
+
+    createSessionFromWant(collabParam: Record<string, Object>): number {
+        console.log('[demo] createSessionFromWant begin')
+        console.log('[demo] createSessionFromWant begin one ' + JSON.stringify(collabParam))
+        console.log('[demo] createSessionFromWant begin tow ' + JSON.stringify(collabParam['ohos.extra.param.key.supportCollaborateIndex']))
+        let sessionId = -1;
+        let peerInfo = collabParam['ohos.extra.param.key.supportCollaborateIndex']['PeerInfo'] as abilityConnectionManager.PeerInfo;
+        console.log('[demo] createSessionFromWant PeerInfo is ' + JSON.stringify(peerInfo))
+        if (peerInfo == undefined) {
+            return sessionId;
+        }
+        console.log('[demo] onCollab begin one ' + JSON.stringify(peerInfo))
+        
+        let options = collabParam['ohos.extra.param.key.supportCollaborateIndex']['ConnectOption']
+        console.log('[demo] createSessionFromWant options is ' + JSON.stringify(options));
+        options.needSendData = true;
+        options.needSendStream = false;
+        options.needReceiveStream = false;
+        console.log('[demo] createSessionFromWant options is ' + JSON.stringify(options));
+        try {
+            sessionId = abilityConnectionManager.createAbilityConnectionSession("collabTest", this.context, peerInfo, options);
+            console.log('[demo] createAbilityConnectionSession sessionId is ' + sessionId);
+        } catch (error) {
+            console.log('[demo] createAbilityConnectionSession sessionId is failed ' + error.code);
+        }
+        return sessionId;
+    }
+
+    // registerSessionEvent(sessionId: number) {
+    //     abilityConnectionManager.on("connect", sessionId, (callbackInfo) => {
+    //         hilog.info(0x0000, 'testTag', 'session connect, sessionId is', callbackInfo.sessionId);
+    //     });
+    //     abilityConnectionManager.on("disconnect", sessionId, (callbackInfo) => {
+    //         hilog.info(0x0000, 'testTag', 'session disconnect, sessionId is', callbackInfo.sessionId);
+    //     });
+
+    // }
 
     onNewWant(want, launchParam) {
         console.log("[Demo] MainAbility onNewWant")

@@ -89,6 +89,15 @@
           "when":"inuse"
         },
         "reason":"$string:reason"
+      },
+      {
+        "name": "ohos.permission.INTERNET",
+      },
+      {
+        "name": "ohos.permission.GET_NETWORK_INFO",
+      },
+      {
+        "name": "ohos.permission.SET_NETWORK_INFO",
       }
     ]
   }
