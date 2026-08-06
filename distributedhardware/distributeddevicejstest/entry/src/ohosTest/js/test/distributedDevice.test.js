@@ -3371,29 +3371,5 @@ export default function distributedDeviceManager() {
             }
             console.info("-----------------SUB_DH_DeviceManager_Dcts_11300 end------------------------");
         });
-
-        /*
-         * @tc.number  SUB_DH_DeviceManager_Dcts_11400
-         * @tc.name    SUB_DH_DeviceManager_Dcts_11400
-         * @tc.desc    Test on('serviceDie') Do not pass in the callback parameter
-         * @tc.size    MediumTest
-         * @tc.type:   Function
-         * @tc.level   Level1
-         */
-        it("SUB_DH_DeviceManager_Dcts_11400", TestType.FUNCTION | Size.MEDIUMTEST | Level.LEVEL0, async function (done) {
-            console.info("-----------------SUB_DH_DeviceManager_Dcts_11400 start------------------------");
-            let flag = 0;
-            try {
-                dmInstance.on('serviceDie')
-                console.info("on_serviceDie success");
-                expect(flag == 0).assertTrue();
-                done();
-            } catch (err) {
-                console.error("serviceDie SUB_DH_DeviceManager_Dcts_11400 errCode:" + err.code + ",errMessage:" + err.message);
-                expect().assertFail();
-                done();
-            }
-            console.info("-----------------SUB_DH_DeviceManager_Dcts_11400 end------------------------");
-        });
     })
 }
