@@ -583,7 +583,7 @@ export default function distributedDeviceManager() {
             try {
                 dmInstance.off('replyResult');
                 dmInstance.off('discoverSuccess');
-                dmInstance.off('discoverFail');
+                dmInstance.off('discoverFailure');
                 dmInstance.off('serviceDie');
                 dmInstance.off('deviceStateChange');
                 dmInstance.off('deviceNameChange');
