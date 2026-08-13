@@ -88,6 +88,7 @@ extern "C" {
 #define WAIT_DEF_VALUE (-1)
 #define WAIT_SUCCESS_VALUE 1
 #define WAIT_FAIL_VALUE 0
+#define FILE_PROGRESS_INVALID (-1)
 #define SESSION_ID_MIN 1
 #define MAX_SESSION_NUM 20
 #define BOOL_TRUE 1
@@ -204,6 +205,9 @@ void ResetWaitFlag4Proxy(void);
 void ResetWaitFlag4Stream(void);
 void ResetwaitCount4Online(void);
 void ResetwaitCount4Offline(void);
+
+void ResetFileProgress(void);
+int WaitWithProgress(void);
 
 int SendData4Data(DataType type, int size);
 int SendData4Message(DataType type, int size);
