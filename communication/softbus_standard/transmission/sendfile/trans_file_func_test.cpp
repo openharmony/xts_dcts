@@ -19,7 +19,6 @@
 #include "wifi_utils.h"
 #include "accesstoken_kit.h"
 
-static int g_waitFlag = WAIT_DEF_VALUE;
 static int g_waitFlag4file = WAIT_DEF_VALUE;
 
 static int FileSessionOpened(int sessionId, int result)
@@ -41,23 +40,11 @@ static void FileSessionClosed(int sessionId)
 static void FileBytesReceived(int sessionId, const void* data, unsigned int dataLen)
 {
     LOG("[cb][file]ByteRec sid:%d, data len:%d", sessionId, dataLen);
-    if (data == NULL) {
-        LOG("[cb][file]ByteRec invalid data=null sid[%d]", sessionId);
-        g_waitFlag = WAIT_FAIL_VALUE;
-    } else {
-        g_waitFlag = WAIT_SUCCESS_VALUE;
-    }
 }
 
 static void FileMessageReceived(int sessionId, const void* data, unsigned int dataLen)
 {
     LOG("[cb][file]MessageRec sid:%d, data len:%d", sessionId, dataLen);
-    if (data == NULL) {
-        LOG("[cb][file]MessageRec invalid data=null sid[%d]", sessionId);
-        g_waitFlag = WAIT_FAIL_VALUE;
-    } else {
-        g_waitFlag = WAIT_SUCCESS_VALUE;
-    }
 }
 
 static SessionAttribute g_fileSessionAttr = {
@@ -190,10 +177,13 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0100, TestSize.Level
     };
 
     ResetWaitFlag();
+    ResetFileProgress();
     ret = SendFile(sid, g_fileOne, dfileList, 1);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
-    ret = Wait(10);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    if (ret == SOFTBUS_OK) {
+        ret = WaitWithProgress();
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    }
 
     CloseSession(sid);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
@@ -230,10 +220,13 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0200, TestSize.Level
     };
 
     ResetWaitFlag();
+    ResetFileProgress();
     ret = SendFile(sid, g_fileOne, dfileList, 1);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
-    ret = Wait(10);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    if (ret == SOFTBUS_OK) {
+        ret = WaitWithProgress();
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    }
 
     CloseSession(sid);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
@@ -338,10 +331,13 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0500, TestSize.Level
     };
 
     ResetWaitFlag();
+    ResetFileProgress();
     ret = SendFile(sid, g_fileOne, NULL, 1);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
-    ret = Wait(15);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    if (ret == SOFTBUS_OK) {
+        ret = WaitWithProgress();
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    }
     
     CloseSession(sid);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
@@ -378,10 +374,13 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0600, TestSize.Level
     };
 
     ResetWaitFlag();
+    ResetFileProgress();
     ret = SendFile(sid, g_fileOne, dfileList, 1);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
-    ret = Wait(15);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    if (ret == SOFTBUS_OK) {
+        ret = WaitWithProgress();
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    }
     
     CloseSession(sid);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
@@ -471,10 +470,13 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_0900, TestSize.Level
     };
 
     ResetWaitFlag();
+    ResetFileProgress();
     ret = SendFile(sid, g_fileOne, NULL, 4);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
-    ret = Wait(350);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    if (ret == SOFTBUS_OK) {
+        ret = WaitWithProgress();
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    }
 
     CloseSession(sid);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
@@ -511,10 +513,13 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0100, TestSize.L
     };
 
     ResetWaitFlag();
+    ResetFileProgress();
     ret = SendFile(sid, g_fileOne, dfileList, 1);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
-    ret = Wait(10);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    if (ret == SOFTBUS_OK) {
+        ret = WaitWithProgress();
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    }
 
     CloseSession(sid);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
@@ -551,10 +556,13 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0200, TestSize.L
     };
 
     ResetWaitFlag();
+    ResetFileProgress();
     ret = SendFile(sid, g_fileOne, dfileList, 1);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
-    ret = Wait(10);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    if (ret == SOFTBUS_OK) {
+        ret = WaitWithProgress();
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    }
 
     CloseSession(sid);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
@@ -659,10 +667,13 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0500, TestSize.L
     };
 
     ResetWaitFlag();
+    ResetFileProgress();
     ret = SendFile(sid, g_fileOne, NULL, 1);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
-    ret = Wait(15);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    if (ret == SOFTBUS_OK) {
+        ret = WaitWithProgress();
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    }
     
     CloseSession(sid);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
@@ -699,10 +710,13 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0600, TestSize.L
     };
 
     ResetWaitFlag();
+    ResetFileProgress();
     ret = SendFile(sid, g_fileOne, dfileList, 1);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
-    ret = Wait(15);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    if (ret == SOFTBUS_OK) {
+        ret = WaitWithProgress();
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    }
     
     CloseSession(sid);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
@@ -779,10 +793,13 @@ HWTEST_F(TransFileFuncTest, SUB_DSoftbus_Spec_DCTS_SendFile_P2P_0800, TestSize.L
     };
 
     ResetWaitFlag();
+    ResetFileProgress();
     ret = SendFile(sid, g_fileOne, NULL, 4);
     EXPECT_EQ(SOFTBUS_OK, ret) << "call SendFile fail";
-    ret = Wait(350);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    if (ret == SOFTBUS_OK) {
+        ret = WaitWithProgress();
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait send fail rst fail";
+    }
 
     CloseSession(sid);
     ret = RemoveSessionServer(DEF_PKG_NAME, SESSION_NAME_FILE);
