@@ -79,6 +79,9 @@ extern "C" {
 #define WAIT_DEF_VALUE (-1)
 #define WAIT_SUCCESS_VALUE 1
 #define WAIT_FAIL_VALUE 0
+#define SOCKET_FILE_EVENT_TYPE_INVALID (-1)
+#define SOCKET_FILE_EVENT_COUNT_NONE 0
+#define SOCKET_FILE_NO_EVENT_TIME 0
 #define SESSION_ID_MIN 1
 #define MAX_SESSION_NUM 16
 #define BOOL_TRUE 1
@@ -243,6 +246,8 @@ void ResetWaitFlag4Stream(void);
 void ResetWaitFlag4File(void);
 void ResetwaitCount4Online(void);
 void ResetwaitCount4Offline(void);
+void ResetSocketFileProgress(void);
+int Wait4SocketWithProgress(int timeout);
 void AddPermission(void);
 uint64_t GetTestTokenId(void);
 

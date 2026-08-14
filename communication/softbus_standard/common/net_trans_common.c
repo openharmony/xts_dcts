@@ -20,6 +20,11 @@ static int32_t g_currentSessionId4Data = -1;
 static int32_t g_currentSessionId4Ctl = -1;
 static int32_t g_currentSessionId4Proxy = -1;
 static int32_t g_waitFlag = WAIT_DEF_VALUE;
+
+static volatile int32_t g_fileProgress = FILE_PROGRESS_INVALID;
+static volatile uint64_t g_fileProgressUpdateTime = 0;
+static volatile uint64_t g_fileTransferredBytes = 0;
+static volatile uint64_t g_fileTotalBytes = 0;
 static int32_t g_waitFlag4Data = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Ctl = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4CtlClose = WAIT_DEF_VALUE;
@@ -69,6 +74,11 @@ static uint64_t g_transTimeEnd;
 static uint64_t g_tokenId;
 static pthread_barrier_t* g_barrier = NULL;
 const double COMPLETE_PROGRESS = 100.0;
+
+#define FILE_STALL_TIMEOUT_SEC 60
+#define FILE_CREEP_WINDOW_SEC 600
+#define FILE_CREEP_MIN_PROGRESS 1
+#define FILE_SAFETY_TIMEOUT_SEC 7200
 
 void sleepn(int n)
 {
@@ -210,12 +220,21 @@ static int OnReceiveFileProcess(int sessionId, const char* firstFile, uint64_t b
 {
     double progress = (bytesTotal == 0) ? 0.0 : (bytesUpload / (double)bytesTotal) * COMPLETE_PROGRESS;
     progress = round(progress);
-    if (progress == 0.0) {
-        LOG("########## Session %d: Start Receive: %s\n", sessionId, firstFile);
-    } else if (progress == COMPLETE_PROGRESS) {
-        LOG("########## Session %d: file %s Upload finish\n", sessionId, firstFile);
+    int progInt = (int)progress;
+
+    g_fileProgress = progInt;
+    g_fileProgressUpdateTime = GetCurrentTimeOfMs();
+    g_fileTransferredBytes = bytesUpload;
+    g_fileTotalBytes = bytesTotal;
+
+    if (progInt == 0) {
+        LOG("########## Session %d: Start Receive: %s, total:%llu bytes", sessionId, firstFile,
+            (unsigned long long)bytesTotal);
+    } else if (progInt == (int)COMPLETE_PROGRESS) {
+        LOG("########## Session %d: file %s Receive finish", sessionId, firstFile);
     } else {
-        LOG("########## Session %d: file %s Upload %.2f%%\n", sessionId, firstFile, progress);
+        LOG("########## Session %d: file %s Receive %d%%, %llu/%llu bytes", sessionId, firstFile, progInt,
+            (unsigned long long)bytesUpload, (unsigned long long)bytesTotal);
     }
     return 0;
 }
@@ -234,12 +253,21 @@ static int OnSendFileProcess(int sessionId, uint64_t bytesUpload, uint64_t bytes
 {
     double progress = (bytesTotal == 0) ? 0.0 : (bytesUpload / (double)bytesTotal) * COMPLETE_PROGRESS;
     progress = round(progress);
-    if (progress == 0.0) {
-        LOG("########## Session %d: Start send file\n", sessionId);
-    } else if (progress == COMPLETE_PROGRESS) {
-        LOG("########## Session %d: file send finish\n", sessionId);
+    int progInt = (int)progress;
+
+    g_fileProgress = progInt;
+    g_fileProgressUpdateTime = GetCurrentTimeOfMs();
+    g_fileTransferredBytes = bytesUpload;
+    g_fileTotalBytes = bytesTotal;
+
+    if (progInt == 0) {
+        LOG("########## Session %d: Start send file, total:%llu bytes", sessionId,
+            (unsigned long long)bytesTotal);
+    } else if (progInt == (int)COMPLETE_PROGRESS) {
+        LOG("########## Session %d: file send finish", sessionId);
     } else {
-        LOG("########## Session %d: file send %.2f%%\n", sessionId, progress);
+        LOG("########## Session %d: file send %d%%, %llu/%llu bytes", sessionId, progInt,
+            (unsigned long long)bytesUpload, (unsigned long long)bytesTotal);
     }
     return 0;
 }
@@ -247,7 +275,9 @@ static int OnSendFileProcess(int sessionId, uint64_t bytesUpload, uint64_t bytes
 static int OnSendFileFinished(int sessionId, const char* firstFile)
 {
     g_waitFlag = WAIT_SUCCESS_VALUE;
-    LOG("[send file]finish,sid:%d, firstFile:%s\n", sessionId, firstFile);
+    g_fileProgress = (int)COMPLETE_PROGRESS;
+    g_fileProgressUpdateTime = GetCurrentTimeOfMs();
+    LOG("[send file]finish,sid:%d, firstFile:%s", sessionId, firstFile);
     return 0;
 }
 
@@ -592,6 +622,77 @@ static void StreamReceived(int sessionId, const StreamData *data, const StreamDa
 void ResetWaitFlag(void)
 {
     g_waitFlag = WAIT_DEF_VALUE;
+}
+
+void ResetFileProgress(void)
+{
+    g_fileProgress = FILE_PROGRESS_INVALID;
+    g_fileProgressUpdateTime = 0;
+    g_fileTransferredBytes = 0;
+    g_fileTotalBytes = 0;
+}
+
+int WaitWithProgress(void)
+{
+    int elapsedSec = 0;
+    int stallSec = 0;
+    int lastProgress = FILE_PROGRESS_INVALID;
+    int windowStartProgress = FILE_PROGRESS_INVALID;
+    int windowStartSec = 0;
+
+    LOG("WaitWithProgress start, safetyTimeout:%ds, stallTimeout:%ds, creepWindow:%ds",
+        FILE_SAFETY_TIMEOUT_SEC, FILE_STALL_TIMEOUT_SEC, FILE_CREEP_WINDOW_SEC);
+
+    while (elapsedSec < FILE_SAFETY_TIMEOUT_SEC) {
+        sleep(1);
+        elapsedSec++;
+
+        if (g_waitFlag == WAIT_SUCCESS_VALUE) {
+            LOG("WaitWithProgress SUCCESS, elapsed:%ds, progress:%d%%, bytes:%llu/%llu",
+                elapsedSec, g_fileProgress,
+                (unsigned long long)g_fileTransferredBytes,
+                (unsigned long long)g_fileTotalBytes);
+            return SOFTBUS_OK;
+        }
+
+        if (g_waitFlag == WAIT_FAIL_VALUE) {
+            LOG("WaitWithProgress FAIL(error), elapsed:%ds, progress:%d%%",
+                elapsedSec, g_fileProgress);
+            return SOFTBUS_ERR;
+        }
+
+        int currentProgress = g_fileProgress;
+        if (currentProgress != lastProgress) {
+            LOG("WaitWithProgress progress: %d%% -> %d%%, elapsed:%ds",
+                lastProgress, currentProgress, elapsedSec);
+            lastProgress = currentProgress;
+            stallSec = 0;
+        } else {
+            stallSec++;
+            if (stallSec >= FILE_STALL_TIMEOUT_SEC) {
+                LOG("WaitWithProgress FAIL(stalled), no progress for %ds, elapsed:%ds",
+                    FILE_STALL_TIMEOUT_SEC, elapsedSec);
+                return SOFTBUS_ERR;
+            }
+        }
+
+        if (elapsedSec - windowStartSec >= FILE_CREEP_WINDOW_SEC) {
+            int progressDelta = currentProgress - windowStartProgress;
+            if (progressDelta < FILE_CREEP_MIN_PROGRESS && windowStartProgress != FILE_PROGRESS_INVALID) {
+                LOG("WaitWithProgress FAIL(creeping), only %d%% in %ds, stuck at %d%%",
+                    progressDelta, FILE_CREEP_WINDOW_SEC, currentProgress);
+                return SOFTBUS_ERR;
+            }
+            LOG("WaitWithProgress creep check: %d%% in %ds, ok", progressDelta, FILE_CREEP_WINDOW_SEC);
+            windowStartProgress = currentProgress;
+            windowStartSec = elapsedSec;
+        }
+    }
+
+    LOG("WaitWithProgress FAIL(safety timeout), elapsed:%ds, progress:%d%%, "
+        "this indicates a code bug, not a slow transfer",
+        elapsedSec, g_fileProgress);
+    return SOFTBUS_ERR;
 }
 
 void ResetWaitFlag4Data(void)
