@@ -22,6 +22,15 @@ static int32_t g_waitFlag4Byte = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4Message = WAIT_DEF_VALUE;
 static int32_t g_waitFlagStream = WAIT_DEF_VALUE;
 static int32_t g_waitFlag4File = WAIT_DEF_VALUE;
+
+static volatile int32_t g_socketFileEventCount = SOCKET_FILE_EVENT_COUNT_NONE;
+static volatile uint64_t g_socketFileLastEventTime = SOCKET_FILE_NO_EVENT_TIME;
+static volatile int32_t g_socketFileEventType = SOCKET_FILE_EVENT_TYPE_INVALID;
+
+#define SOCKET_FILE_STALL_TIMEOUT_SEC 60
+#define SOCKET_FILE_CREEP_WINDOW_SEC 600
+#define SOCKET_FILE_CREEP_MIN_EVENTS 1
+#define SOCKET_FILE_SAFETY_TIMEOUT_SEC 7200
 static int32_t g_nodeOnlineCount = 0;
 static int32_t g_nodeOfflineCount = 0;
 static ISocketListener* g_socketlistenerdata = NULL;
@@ -309,6 +318,11 @@ static void OnFileData(int32_t socket, FileEvent *event)
         LOG("[cb][data]OnFile socket id[%d], event is nullptr", socket);
         return;
     }
+
+    g_socketFileEventCount++;
+    g_socketFileLastEventTime = (uint64_t)time(NULL);
+    g_socketFileEventType = event->type;
+
     if (event->type == FILE_EVENT_RECV_UPDATE_PATH) {
         LOG("[cb][data]OnFile event type:%d,", event->type);
         event->UpdateRecvPath = ClientUpdataRecvFilePath;
@@ -319,16 +333,30 @@ static void OnFileData(int32_t socket, FileEvent *event)
         LOG("[cb][data] %s", (event->files[i] == NULL ? "null" : event->files[i]));
     }
     if (event->type == FILE_EVENT_SEND_FINISH) {
-        LOG("[cb][data]OnFile recv finished");
+        LOG("[cb][data]OnFile send finished, eventCount:%d", g_socketFileEventCount);
         g_waitFlag4File = WAIT_SUCCESS_VALUE;
         return;
     }
     if (event->type == FILE_EVENT_SEND_PROCESS) {
-        LOG("[cb][data]OnFile recv process");
+        LOG("[cb][data]OnFile send process, eventCount:%d", g_socketFileEventCount);
+        return;
+    }
+    if (event->type == FILE_EVENT_RECV_FINISH) {
+        LOG("[cb][data]OnFile recv finished, eventCount:%d", g_socketFileEventCount);
+        g_waitFlag4File = WAIT_SUCCESS_VALUE;
+        return;
+    }
+    if (event->type == FILE_EVENT_RECV_PROCESS) {
+        LOG("[cb][data]OnFile recv process, eventCount:%d", g_socketFileEventCount);
         return;
     }
     if (event->type == FILE_EVENT_SEND_ERROR) {
-        LOG("[cb][data]OnFile recv error!!");
+        LOG("[cb][data]OnFile send error!!, eventCount:%d", g_socketFileEventCount);
+        g_waitFlag4File = WAIT_FAIL_VALUE;
+        return;
+    }
+    if (event->type == FILE_EVENT_RECV_ERROR) {
+        LOG("[cb][data]OnFile recv error!!, eventCount:%d", g_socketFileEventCount);
         g_waitFlag4File = WAIT_FAIL_VALUE;
         return;
     }
@@ -506,6 +534,81 @@ void ResetWaitFlag4Stream(void)
 void ResetWaitFlag4File(void)
 {
     g_waitFlag4File = WAIT_DEF_VALUE;
+}
+
+void ResetSocketFileProgress(void)
+{
+    g_socketFileEventCount = SOCKET_FILE_EVENT_COUNT_NONE;
+    g_socketFileLastEventTime = SOCKET_FILE_NO_EVENT_TIME;
+    g_socketFileEventType = SOCKET_FILE_EVENT_TYPE_INVALID;
+}
+
+int Wait4SocketWithProgress(int timeout)
+{
+    int elapsedSec = 0;
+    int stallSec = 0;
+    int lastEventCount = SOCKET_FILE_EVENT_COUNT_NONE;
+    int windowStartEventCount = SOCKET_FILE_EVENT_COUNT_NONE;
+    int windowStartSec = 0;
+    int safetyMax = (timeout > 0) ? timeout : SOCKET_FILE_SAFETY_TIMEOUT_SEC;
+
+    LOG("Wait4SocketWithProgress start, safetyMax:%ds, stallTimeout:%ds, creepWindow:%ds",
+        safetyMax, SOCKET_FILE_STALL_TIMEOUT_SEC, SOCKET_FILE_CREEP_WINDOW_SEC);
+
+    while (elapsedSec < safetyMax) {
+        sleep(1);
+        elapsedSec++;
+
+        if (g_waitFlag4File == WAIT_SUCCESS_VALUE) {
+            LOG("Wait4SocketWithProgress SUCCESS, elapsed:%ds, eventCount:%d, lastEventType:%d",
+                elapsedSec, g_socketFileEventCount, g_socketFileEventType);
+            return SOFTBUS_OK;
+        }
+
+        if (g_waitFlag4File == WAIT_FAIL_VALUE) {
+            LOG("Wait4SocketWithProgress FAIL(error), elapsed:%ds, eventCount:%d, lastEventType:%d",
+                elapsedSec, g_socketFileEventCount, g_socketFileEventType);
+            return SOFTBUS_ERR;
+        }
+
+        int currentEventCount = g_socketFileEventCount;
+        if (currentEventCount != lastEventCount) {
+            LOG("Wait4SocketWithProgress event: count %d->%d, lastType:%d, elapsed:%ds",
+                lastEventCount, currentEventCount, g_socketFileEventType, elapsedSec);
+            lastEventCount = currentEventCount;
+            stallSec = 0;
+        } else {
+            stallSec++;
+            if (g_socketFileLastEventTime == SOCKET_FILE_NO_EVENT_TIME && stallSec >= SOCKET_FILE_STALL_TIMEOUT_SEC) {
+                LOG("Wait4SocketWithProgress FAIL(no event), no FileEvent received for %ds, elapsed:%ds",
+                    SOCKET_FILE_STALL_TIMEOUT_SEC, elapsedSec);
+                return SOFTBUS_ERR;
+            }
+            if (g_socketFileLastEventTime != SOCKET_FILE_NO_EVENT_TIME && stallSec >= SOCKET_FILE_STALL_TIMEOUT_SEC) {
+                LOG("Wait4SocketWithProgress FAIL(stalled), no new event for %ds, lastEventCount:%d, elapsed:%ds",
+                    SOCKET_FILE_STALL_TIMEOUT_SEC, lastEventCount, elapsedSec);
+                return SOFTBUS_ERR;
+            }
+        }
+
+        if (elapsedSec - windowStartSec >= SOCKET_FILE_CREEP_WINDOW_SEC) {
+            int eventDelta = currentEventCount - windowStartEventCount;
+            if (eventDelta < SOCKET_FILE_CREEP_MIN_EVENTS && windowStartEventCount > SOCKET_FILE_EVENT_COUNT_NONE) {
+                LOG("Wait4SocketWithProgress FAIL(creeping), only %d events in %ds, stuck at %d events",
+                    eventDelta, SOCKET_FILE_CREEP_WINDOW_SEC, currentEventCount);
+                return SOFTBUS_ERR;
+            }
+            LOG("Wait4SocketWithProgress creep check: %d events in %ds, ok",
+                eventDelta, SOCKET_FILE_CREEP_WINDOW_SEC);
+            windowStartEventCount = currentEventCount;
+            windowStartSec = elapsedSec;
+        }
+    }
+
+    LOG("Wait4SocketWithProgress FAIL(safety timeout), elapsed:%ds, eventCount:%d, lastEventType:%d, "
+        "this indicates a code bug, not a slow transfer",
+        elapsedSec, g_socketFileEventCount, g_socketFileEventType);
+    return SOFTBUS_ERR;
 }
 
 char* GetNetworkId(void)

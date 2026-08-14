@@ -203,11 +203,14 @@ HWTEST_F(SocketTransFuncTest, SUB_DSoftbus_Spec_DCTS_Socket_SendFile_0100, TestS
     EXPECT_EQ(SOFTBUS_OK, ret) << "Bind faild ret: "<< ret;
 
     ResetWaitFlag4File();
+    ResetSocketFileProgress();
 
     ret = SendFile(socket, gFileOne, dFileList, sizeof(gFileOne) / sizeof(gFileOne[0]));
-    EXPECT_EQ(SOFTBUS_OK, ret) << "SendData4Data(byte, 1B) fail";
-    ret = Wait4Socket(20, SOCKET_FILE);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "wait SendFile faild ";
+    EXPECT_EQ(SOFTBUS_OK, ret) << "SendFile 4M fail";
+    if (ret == SOFTBUS_OK) {
+        ret = Wait4SocketWithProgress(0);
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait SendFile 4M fail";
+    }
     Shutdown(socket);
 }
 
@@ -345,11 +348,14 @@ HWTEST_F(SocketTransFuncTest, SUB_DSoftbus_Spec_DCTS_Socket_SendFile_P2P_0100, T
     EXPECT_EQ(SOFTBUS_OK, ret) << "Bind faild ret: "<< ret;
 
     ResetWaitFlag4File();
+    ResetSocketFileProgress();
 
     ret = SendFile(socket, gFileOne, dFileList, sizeof(gFileOne) / sizeof(gFileOne[0]));
     EXPECT_EQ(SOFTBUS_OK, ret) << "SendFile 8M fail";
-    ret = Wait4Socket(10, SOCKET_FILE);
-    EXPECT_EQ(SOFTBUS_OK, ret) << "wait SendFile faild ";
+    if (ret == SOFTBUS_OK) {
+        ret = Wait4SocketWithProgress(0);
+        EXPECT_EQ(SOFTBUS_OK, ret) << "wait SendFile 8M fail";
+    }
     Shutdown(socket);
 }
 

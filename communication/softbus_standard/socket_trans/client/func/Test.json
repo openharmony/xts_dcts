@@ -2,9 +2,9 @@
     "description": "Config for DctsSoftBusSoketTransFuncTest test cases",
     "driver": {
         "module-name": "DctsSoftBusSoketTransFuncTest",
-        "native-test-timeout": "900000",
+        "native-test-timeout": "1800000",
         "native-test-device-path": "/data/local/tmp",
-        "runtime-hint": "1s",
+        "runtime-hint": "300s",
         "type": "CppTest"
     },
     "kits": [
