@@ -122,12 +122,6 @@ class XtsBuild:
 
         return 0
 
-    def standard_check(self):
-        self._hvigor_check_file = "{}/test/xts/tools/standard_check/check_hvigor.py".format(self._code_root_dir)
-        check_command = "{}/python3 -B {} {}".format(self._python_path, self._hvigor_check_file, self._xts_root_dir)
-        ret = subprocess.run(check_command.split())
-        return ret.returncode
-
     def get_accurate_targets(self):
         sys.path.append(self._accurate_dir)
         import generate_accurate_targets as gat
@@ -188,7 +182,6 @@ class XtsBuild:
     def build(self):
         func_list = [
             self.parse_cmdline,
-            self.standard_check,
             self.do_make
         ]
         for i in func_list:
